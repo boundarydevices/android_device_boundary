@@ -27,4 +27,5 @@ BOARD_KERNEL_CMDLINE := console=ttymxc1,115200 init=/init video=mxcfb0 video=mxc
 
 TARGET_BOOTLOADER_CONFIG := 6q:nitrogen6x_config 6dl:nitrogen6x_config 6s:nitrogen6x_config
 
+TARGET_TS_CALIBRATION := true
 
