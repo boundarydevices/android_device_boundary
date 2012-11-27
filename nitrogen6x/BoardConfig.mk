@@ -11,7 +11,7 @@ TARGET_KERNEL_DEFCONF := nitrogen6x_defconfig
 
 include device/fsl/imx6/BoardConfigCommon.mk
 
-TARGET_BOOTLOADER_BOARD_NAME := SABRELITE
+TARGET_BOOTLOADER_BOARD_NAME := NITROGEN6X
 PRODUCT_MODEL := NITROGEN6X
 
 # for recovery service
