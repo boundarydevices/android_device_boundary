@@ -1,5 +1,56 @@
-#!/bin/sh
-sfdisk -uM /dev/sdc << EOF
+#!/bin/bash
+if [ $# -ne 1 ]; then
+	echo "Usage: $0 /dev/diskname"
+	exit -1 ;
+fi
+
+removable_disks() {
+	for f in `ls /dev/disk/by-path/* | grep -v part` ; do
+		diskname=$(basename `readlink $f`);
+		type=`cat /sys/class/block/$diskname/device/type` ;
+		size=`cat /sys/class/block/$diskname/size` ;
+		issd=0 ;
+		# echo "checking $diskname/$type/$size" ;
+		if [ $size -ge 3906250 ]; then
+			if [ $size -lt 62500000 ]; then
+				issd=1 ;
+			fi
+		fi
+		if [ "$issd" -eq "1" ]; then
+			echo -n "/dev/$diskname ";
+			# echo "removable disk /dev/$diskname, size $size, type $type" ;
+			#echo -n -e "\tremovable? " ; cat /sys/class/block/$diskname/removable ;
+		fi
+	done
+	echo;
+}
+diskname=$1
+removables=`removable_disks`
+
+for disk in $removables ; do
+   echo "removable disk $disk" ;
+   if [ "$diskname" = "$disk" ]; then
+      matched=1 ;
+      break ;
+   fi
+done
+
+if [ -z "$matched" ]; then
+   echo "Invalid disk $diskname" ;
+   exit -1;
+fi
+
+prefix='';
+
+if [[ "$diskname" =~ "mmcblk" ]]; then
+   prefix=p
+fi
+
+echo "reasonable disk $diskname, partitions ${diskname}${prefix}1..." ;
+umount ${diskname}${prefix}*
+umount gvfs
+
+sfdisk -uM ${diskname} << EOF
 ,20,B,*
 ,20,B
 ,2048,E
@@ -11,28 +62,23 @@ sfdisk -uM /dev/sdc << EOF
 ,10,83
 EOF
 
-mkfs.vfat -n BOOT /dev/sdc1
-mkfs.vfat -n RECOVERY /dev/sdc2
-mkfs.vfat -n MEDIA /dev/sdc4
-mkfs.ext4 -L SYSTEM /dev/sdc5
-mkfs.ext4 -L CACHE /dev/sdc6
-mkfs.ext4 -L DATA /dev/sdc7
-mkfs.ext4 -L VENDOR /dev/sdc8
-mkfs.ext4 -L MISC /dev/sdc9
+mkfs.vfat -n BOOT ${diskname}${prefix}1
+mkfs.vfat -n RECOVER ${diskname}${prefix}2
+mkfs.vfat -n MEDIA ${diskname}${prefix}4
+mkfs.ext4 -L SYSTEM ${diskname}${prefix}5
+mkfs.ext4 -L CACHE ${diskname}${prefix}6
+mkfs.ext4 -L DATA ${diskname}${prefix}7
+mkfs.ext4 -L VENDOR ${diskname}${prefix}8
+mkfs.ext4 -L MISC ${diskname}${prefix}9
 
-echo -n "remove and re-insert SD card here"
-read line
+for n in 1 2 5 7 ; do
+   udisks --mount ${diskname}${prefix}${n}
+done
 
-cp -fv kernel_imx/arch/arm/boot/uImage /media/BOOT/
-mkdir out/target/product/nitrogen6x/boot
-~/bin/make_initramfs out/target/product/nitrogen6x/root uramdisk.img
-cp -fv uramdisk.img /media/BOOT
-cp -fv bootable/bootloader/uboot_imx/u-boot.imx /media/BOOT/
-... copy 6x_android_bootscript to /media/BOOT
-sync && sudo umount /media/BOOT/
-
-cp -ravf out/target/product/nitrogen6x/system/* /media/SYSTEM/
-cp -ravf out/target/product/nitrogen6x/data/* /media/DATA/
-
-
+sudo cp -rafv out/target/product/nitrogen6x/boot/* /media/BOOT/
+sudo cp -rafv out/target/product/nitrogen6x/boot/6x* /media/RECOVER/
+/home/ericn/bin/make_initramfs out/target/product/nitrogen6x/recovery/root/ /media/RECOVER/uramdisk.img
+sudo cp -ravf out/target/product/nitrogen6x/system/* /media/SYSTEM/
+sudo cp -ravf out/target/product/nitrogen6x/data/* /media/DATA/
+sync && sudo umount ${diskname}${prefix}*
 
