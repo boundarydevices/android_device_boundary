@@ -15,6 +15,7 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
+	bootable/bootloader/uboot-imx/u-boot.imx:boot/u-boot.imx \
 
 # GPU files
 
