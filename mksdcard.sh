@@ -77,7 +77,8 @@ done
 
 sudo cp -rafv out/target/product/nitrogen6x/boot/* /media/BOOT/
 sudo cp -rafv out/target/product/nitrogen6x/boot/6x* /media/RECOVER/
-/home/ericn/bin/make_initramfs out/target/product/nitrogen6x/recovery/root/ /media/RECOVER/uramdisk.img
+sudo cp -rafv out/target/product/nitrogen6x/boot/uImage /media/RECOVER/
+sudo cp -rafv out/target/product/nitrogen6x/uramdisk-recovery.img /media/RECOVER/uramdisk.img
 sudo cp -ravf out/target/product/nitrogen6x/system/* /media/SYSTEM/
 sudo cp -ravf out/target/product/nitrogen6x/data/* /media/DATA/
 sync && sudo umount ${diskname}${prefix}*
