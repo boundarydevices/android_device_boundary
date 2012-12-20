@@ -4,9 +4,9 @@ $(RAMDISK_TARGET): $(PRODUCT_OUT)/ramdisk.img
 	mkimage -A arm -O linux -T ramdisk -n "RAM Disk" -d $< $@
 
 RAMDISK_RECOVERY_TARGET := $(PRODUCT_OUT)/uramdisk-recovery.img
-$(RAMDISK_RECOVERY_TARGET): $(PRODUCT_OUT)/ramdisk-recovery.img
+$(RAMDISK_RECOVERY_TARGET): $(PRODUCT_OUT)/recovery.img
 	mkdir -p $(dir $@)
-	mkimage -A arm -O linux -T ramdisk -n "RAM Disk" -d $< $@
+	mkimage -A arm -O linux -T ramdisk -n "RAM Disk" -d $< $(PRODUCT_OUT)/ramdisk-recovery.img
 
 .PHONY: ramdisk
 ramdisk: $(RAMDISK_TARGET) $(RAMDISK_RECOVERY_TARGET)
