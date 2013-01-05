@@ -16,6 +16,15 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	bootable/bootloader/uboot-imx/u-boot.imx:boot/u-boot.imx \
+        frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+        frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+	device/ti/panda/wl12xx/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
+	device/ti/panda/wl12xx/wl1271-fw-2.bin:system/etc/firmware/ti-connectivity/wl1271-fw-2.bin \
+	kernel_imx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko:boot/lib/modules/wl12xx_sdio.ko \
+	external/imx-utils/devregs_imx6x.dat:system/etc/devregs_imx6x.dat
+
+PRODUCT_PROPERTY_OVERRIDES += \
+       wifi.interface=wlan0
 
 # GPU files
 

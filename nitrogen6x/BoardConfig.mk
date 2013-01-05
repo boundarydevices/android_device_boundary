@@ -29,3 +29,9 @@ TARGET_BOOTLOADER_CONFIG := 6q:nitrogen6x_config 6dl:nitrogen6x_config 6s:nitrog
 
 TARGET_TS_CALIBRATION := true
 
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
+BOARD_WLAN_DEVICE                := wl12xx_mac80211
+BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
+WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
