@@ -35,3 +35,5 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_WLAN_DEVICE                := wl12xx_mac80211
 BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
+
+BOARD_USE_AR3K_BLUETOOTH := false
