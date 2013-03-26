@@ -121,7 +121,6 @@ on fs
     # mount ext4 /dev/block/mmcblk0p8 /device ro nosuid nodev
     mkdir  /boot 0770 root root
     mount vfat /dev/block/mmcblk0p1 /boot nosuid nodev
-
     exec /sbin/ts_calibrator
 
 # Daemon processes to be run by init.
@@ -141,3 +140,5 @@ service wpa_supplicant /system/bin/wpa_supplicant -c/data/misc/wifi/wpa_supplica
 
 on property:sys.boot_completed=1
     insmod /boot/lib/modules/wl12xx_sdio.ko
+    exec /system/bin/setwlanmac
+
