@@ -25,7 +25,8 @@ PRODUCT_COPY_FILES += \
 	external/imx-utils/devregs_imx6x.dat:system/etc/devregs_imx6x.dat
 
 PRODUCT_PROPERTY_OVERRIDES += \
-       wifi.interface=wlan0
+       wifi.interface=wlan0 \
+       ro.sf.lcd_density=120
 
 # GPU files
 
