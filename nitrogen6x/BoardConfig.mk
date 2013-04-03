@@ -25,7 +25,7 @@ include device/fsl-proprietary/gpu-viv/fsl-gpu.mk
 
 BOARD_KERNEL_CMDLINE := console=ttymxc1,115200 init=/init video=mxcfb0 video=mxcfb1:off video=mxcfb2:off fbmem=10M vmalloc=400M androidboot.console=ttymxc1
 
-TARGET_BOOTLOADER_CONFIG := 6q:nitrogen6x_config 6dl:nitrogen6x_config 6s:nitrogen6x_config
+TARGET_BOOTLOADER_CONFIG := 6q:nitrogen6q_config 6dl:nitrogen6dl_config 6s:nitrogen6s_config
 
 TARGET_TS_CALIBRATION := true
 
