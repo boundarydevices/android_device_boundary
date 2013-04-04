@@ -140,5 +140,6 @@ service wpa_supplicant /system/bin/wpa_supplicant -c/data/misc/wifi/wpa_supplica
 
 on property:sys.boot_completed=1
     insmod /boot/lib/modules/wl12xx_sdio.ko
+    chmod 777 /system/bin/setwlanmac
     exec /system/bin/setwlanmac
 
