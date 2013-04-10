@@ -1,7 +1,20 @@
 #!/bin/bash
-if [ $# -ne 1 ]; then
-	echo "Usage: $0 /dev/diskname"
+if [ $# -lt 1 ]; then
+	echo "Usage: $0 /dev/diskname [product=nitrogen6x]"
 	exit -1 ;
+fi
+
+if [ $# -ge 2 ]; then
+   product=$2;
+else
+   product=nitrogen6x;
+fi
+
+echo "---------build SD card for product $product";
+
+if ! [ -d out/target/product/$product/data ]; then
+   echo "Missing out/target/product/$product";
+   exit 1;
 fi
 
 removable_disks() {
@@ -75,11 +88,11 @@ for n in 1 2 5 7 ; do
    udisks --mount ${diskname}${prefix}${n}
 done
 
-sudo cp -rafv out/target/product/nitrogen6x/boot/* /media/BOOT/
-sudo cp -rafv out/target/product/nitrogen6x/boot/6x* /media/RECOVER/
-sudo cp -rafv out/target/product/nitrogen6x/boot/uImage /media/RECOVER/
-sudo cp -rafv out/target/product/nitrogen6x/uramdisk-recovery.img /media/RECOVER/uramdisk.img
-sudo cp -ravf out/target/product/nitrogen6x/system/* /media/SYSTEM/
-sudo cp -ravf out/target/product/nitrogen6x/data/* /media/DATA/
+sudo cp -rafv out/target/product/$product/boot/* /media/BOOT/
+sudo cp -rafv out/target/product/$product/boot/6x* /media/RECOVER/
+sudo cp -rafv out/target/product/$product/boot/uImage /media/RECOVER/
+sudo cp -rafv out/target/product/$product/uramdisk-recovery.img /media/RECOVER/uramdisk.img
+sudo cp -ravf out/target/product/$product/system/* /media/SYSTEM/
+sudo cp -ravf out/target/product/$product/data/* /media/DATA/
 sync && sudo umount ${diskname}${prefix}*
 

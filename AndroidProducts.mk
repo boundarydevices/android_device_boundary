@@ -28,4 +28,5 @@
 
 PRODUCT_MAKEFILES += \
   $(LOCAL_DIR)/nitrogen6x/nitrogen6x.mk \
+  $(LOCAL_DIR)/oc/oc.mk \
 
