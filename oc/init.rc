@@ -75,10 +75,10 @@ on boot
     chmod 0660 /sys/devices/system/cpu/cpu3/online
 
     # Default backlight device
-    setprop hw.backlight.dev "pwm-backlight.0"
+    setprop hw.backlight.dev "pwm-backlight.3"
     # Chmod/chown FSL specific sys entry
-    chown system system /sys/class/backlight/pwm-backlight.0/brightness
-    chmod 0660 /sys/class/backlight/pwm-backlight.0/brightness
+    chown system system /sys/class/backlight/pwm-backlight.3/brightness
+    chmod 0660 /sys/class/backlight/pwm-backlight.3/brightness
 
     #
     # expose WL_EN (175) and BT_EN (176) to userspace
