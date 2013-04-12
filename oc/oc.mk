@@ -17,7 +17,7 @@ PRODUCT_COPY_FILES += \
 	bootable/bootloader/uboot-imx/u-boot.imx:boot/u-boot.imx \
         frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
         frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-	kernel_imx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko:boot/lib/modules/wl12xx_sdio.ko \
+	kernel_imx/drivers/net/wireless/bcmdhd/bcmdhd.ko:boot/lib/modules/bcmdhd.ko \
 	external/imx-utils/devregs_imx6x.dat:system/etc/devregs_imx6x.dat
 
 PRODUCT_PROPERTY_OVERRIDES += \
