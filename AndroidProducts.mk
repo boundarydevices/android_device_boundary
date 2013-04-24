@@ -27,6 +27,7 @@
 # Copied from build/target/product/AndroidProducts.mk
 
 PRODUCT_MAKEFILES += \
+  $(LOCAL_DIR)/nit6xlite/nit6xlite.mk \
   $(LOCAL_DIR)/nitrogen6x/nitrogen6x.mk \
   $(LOCAL_DIR)/oc/oc.mk \
 
