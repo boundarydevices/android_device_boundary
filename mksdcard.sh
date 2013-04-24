@@ -84,6 +84,9 @@ mkfs.ext4 -L DATA ${diskname}${prefix}7
 mkfs.ext4 -L VENDOR ${diskname}${prefix}8
 mkfs.ext4 -L MISC ${diskname}${prefix}9
 
+sync
+partprobe
+
 for n in 1 2 5 7 ; do
    udisks --mount ${diskname}${prefix}${n}
 done
