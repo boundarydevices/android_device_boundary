@@ -15,6 +15,7 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	bootable/bootloader/uboot-imx/u-boot.imx:boot/u-boot.imx \
+	external/wpa_supplicant_8/wpa_supplicant/wpa_supplicant.conf:data/misc/wifi/wpa_supplicant.conf \
         frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
         frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	kernel_imx/drivers/net/wireless/bcmdhd/bcmdhd.ko:boot/lib/modules/bcmdhd.ko \
