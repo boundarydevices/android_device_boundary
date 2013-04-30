@@ -121,6 +121,9 @@ on fs
     # mount ext4 /dev/block/mmcblk0p8 /device ro nosuid nodev
     mkdir  /boot 0770 root root
     mount vfat /dev/block/mmcblk0p1 /boot nosuid nodev
+    mkdir /data/data/com.android.browser/cache  system system
+    mount ramfs none /data/data/com.android.browser/cache size=32m
+    chown 10007 10007 /data/data/com.android.browser/cache
     exec /sbin/ts_calibrator
 
 # Daemon processes to be run by init.
