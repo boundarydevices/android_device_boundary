@@ -124,6 +124,7 @@ on fs
     mkdir /data/data/com.android.browser/cache  system system
     mount ramfs none /data/data/com.android.browser/cache size=32m
     chown 10007 10007 /data/data/com.android.browser/cache
+    chmod 0777 /data/data/com.android.browser/cache
     exec /sbin/ts_calibrator
 
 # Daemon processes to be run by init.
