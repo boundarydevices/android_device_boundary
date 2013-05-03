@@ -11,6 +11,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/oc/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/oc/init.rc:root/init.freescale.rc \
 	device/boundary/oc/init.rc:root/init.boundary.rc \
+	device/fsl/imx6/etc/ueventd.freescale.rc:root/ueventd.boundary.rc \
 	device/boundary/oc/vold.fstab:system/etc/vold.fstab \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
