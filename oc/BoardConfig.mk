@@ -13,6 +13,7 @@ include device/fsl/imx6/BoardConfigCommon.mk
 
 TARGET_BOOTLOADER_BOARD_NAME := oc
 PRODUCT_MODEL := OC
+BOARD_HAS_SGTL5000 := true
 
 # for recovery service
 TARGET_SELECT_KEY := 28
