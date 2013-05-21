@@ -63,39 +63,49 @@ echo "reasonable disk $diskname, partitions ${diskname}${prefix}1..." ;
 umount ${diskname}${prefix}*
 umount gvfs
 
-sfdisk -uM ${diskname} << EOF
+dd if=/dev/zero of=${diskname}${prefix} count=1 bs=1024
+
+sudo sfdisk --force -uM ${diskname}${prefix} << EOF
 ,20,B,*
 ,20,B
 ,2048,E
-,,B
+,,83
 ,512,83
-,256,83
-,1024,83
+,512,83
 ,10,83
 ,10,83
 EOF
 
+for n in `seq 1 8` ; do
+   if ! [ -e ${diskname}${prefix}$n ] ; then
+      echo "--------------missing ${diskname}${prefix}$n" ;
+      exit 1;
+   fi
+   sync
+done
+
+echo "all partitions present and accounted for!";
+sync && sudo sfdisk -R ${diskname}${prefix}
+
 mkfs.vfat -n BOOT ${diskname}${prefix}1
 mkfs.vfat -n RECOVER ${diskname}${prefix}2
-mkfs.vfat -n MEDIA ${diskname}${prefix}4
-mkfs.ext4 -L SYSTEM ${diskname}${prefix}5
+mkfs.ext4 -L DATA ${diskname}${prefix}4
 mkfs.ext4 -L CACHE ${diskname}${prefix}6
-mkfs.ext4 -L DATA ${diskname}${prefix}7
-mkfs.ext4 -L VENDOR ${diskname}${prefix}8
-mkfs.ext4 -L MISC ${diskname}${prefix}9
+mkfs.ext4 -L VENDOR ${diskname}${prefix}7
+mkfs.ext4 -L MISC ${diskname}${prefix}8
 
-sync
-partprobe
-
-for n in 1 2 5 7 ; do
+for n in 1 2 4 ; do
    udisks --mount ${diskname}${prefix}${n}
 done
 
-sudo cp -rafv out/target/product/$product/boot/* /media/BOOT/
-sudo cp -rafv out/target/product/$product/boot/6x* /media/RECOVER/
-sudo cp -rafv out/target/product/$product/boot/uImage /media/RECOVER/
-sudo cp -rafv out/target/product/$product/uramdisk-recovery.img /media/RECOVER/uramdisk.img
-sudo cp -ravf out/target/product/$product/system/* /media/SYSTEM/
+sudo cp -rfv out/target/product/$product/boot/* /media/BOOT/
+sudo cp -rfv out/target/product/$product/boot/6x* /media/RECOVER/
+sudo cp -rfv out/target/product/$product/boot/uImage /media/RECOVER/
+sudo cp -rfv out/target/product/$product/uramdisk-recovery.img /media/RECOVER/uramdisk.img
 sudo cp -ravf out/target/product/$product/data/* /media/DATA/
+
+sudo dd if=out/target/product/$product/system.img of=${diskname}${prefix}5
+sudo e2label ${diskname}${prefix}5 SYSTEM
+
 sync && sudo umount ${diskname}${prefix}*
 
