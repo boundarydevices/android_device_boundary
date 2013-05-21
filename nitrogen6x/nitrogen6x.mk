@@ -14,6 +14,7 @@ PRODUCT_COPY_FILES += \
 	device/fsl/imx6/etc/ueventd.freescale.rc:root/ueventd.boundary.rc \
 	device/boundary/nitrogen6x/setwlanmac:system/bin/setwlanmac \
 	device/boundary/nitrogen6x/vold.fstab:system/etc/vold.fstab \
+	device/boundary/nitrogen6x/fstab.boundary:root/fstab.boundary \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \

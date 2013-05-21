@@ -107,4 +107,4 @@ on boot
 
 on fs
 # mount ext4 partitions
-    mount_all /fstab.freescale
+    mount_all /fstab.boundary
