@@ -107,4 +107,6 @@ on boot
 
 on fs
 # mount ext4 partitions
+    mkdir /data/data/ 0771 system system
+    mkdir /data/data/com.android.browser 0777 system system
     mount_all /fstab.boundary
