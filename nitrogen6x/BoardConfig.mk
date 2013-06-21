@@ -7,14 +7,14 @@ export BUILD_ID=1.0.0-rc3
 include device/fsl/imx6/BoardConfigCommon.mk
 TARGET_KERNEL_DEFCONF := nitrogen6x_defconfig
 TARGET_KERNEL_MODULES := \
-    kernel_imx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko:boot/lib/modules/wl12xx_sdio.ko
+    kernel_imx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
 BOARD_HAS_SGTL5000 := true
 BOARD_HAVE_BLUETOOTH := false
 USE_CAMERA_STUB := false
 BOARD_CAMERA_LIBRARIES := libcamera
 
-BOARD_HAVE_WIFI := false
+BOARD_HAVE_WIFI := true
 
 BOARD_HAVE_MODEM := false
 BOARD_HAVE_IMX_CAMERA := true

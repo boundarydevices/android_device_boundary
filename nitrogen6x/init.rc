@@ -105,6 +105,18 @@ on boot
 # mount the debugfs
     mount debugfs none /sys/kernel/debug/
 
+# wpa_supplicant and dhcp daemon
+service wpa_supplicant /system/bin/wpa_supplicant -c/data/misc/wifi/wpa_supplicant.conf -Dnl80211 -iwlan0 -dd
+    class late_start
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    onrestart write /sys/class/gpio/gpio175/value 0
+    oneshot
+
+on property:sys.boot_completed=1
+    insmod /system/lib/modules/wl12xx_sdio.ko
+    exec /system/bin/logwrapper /system/bin/setwlanmac
+
 on fs
 # mount ext4 partitions
     mkdir /data/data/ 0771 system system
