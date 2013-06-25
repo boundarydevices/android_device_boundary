@@ -5,7 +5,13 @@
 include device/fsl/imx6/soc/imx6dq.mk
 export BUILD_ID=1.0.0-rc3
 include device/fsl/imx6/BoardConfigCommon.mk
-TARGET_KERNEL_DEFCONF := nitrogen6x_defconfig
+
+ifneq ($(DEFCONF),)
+TARGET_KERNEL_DEFCONF := $(DEFCONF)
+else
+TARGET_KERNEL_DEFCONF ?= nitrogen6x_defconfig
+endif
+
 TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
