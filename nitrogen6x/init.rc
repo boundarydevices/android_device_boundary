@@ -23,13 +23,23 @@ on boot
     # Set permission for IIM node
     symlink /dev/mxs_viim /dev/mxc_mem
 
-    # Set GPS serial and reset GPIO pin
-    setprop ro.kernel.android.gps /dev/athrnmea
-    setprop persist.gps.oacmode @f
-    symlink /dev/ttymxc2 /dev/gpsdevice
-    write /sys/class/gpio/export 60
-    write /sys/class/gpio/gpio60/direction "out"
-    write /sys/class/gpio/gpio60/value 1
+    #
+    # expose WL_EN (175) and BT_EN (176) to userspace
+    #
+    chmod 0777 /sys/class/gpio
+    chmod 0777 /sys/class/gpio/export
+    write /sys/class/gpio/export 175
+    write /sys/class/gpio/export 176
+    chmod 0777 /sys/class/gpio/gpio175
+    chmod 0777 /sys/class/gpio/gpio176
+    chmod 0777 /sys/class/gpio/gpio175/direction
+    chmod 0777 /sys/class/gpio/gpio176/direction
+    chmod 0777 /sys/class/gpio/gpio175/value
+    chmod 0777 /sys/class/gpio/gpio176/value
+    write /sys/class/gpio/gpio175/direction out
+    write /sys/class/gpio/gpio176/direction out
+    write /sys/class/gpio/gpio175/value 1
+    write /sys/class/gpio/gpio176/value 0
 
     # Enable Tethering in the Settings
     setprop ro.tether.denied false
@@ -101,24 +111,36 @@ on boot
 
     # No bluetooth hardware present
     setprop wlan.interface wlan0
+    setprop wifi.interface wlan0
 
 # mount the debugfs
     mount debugfs none /sys/kernel/debug/
 
 # wpa_supplicant and dhcp daemon
-service wpa_supplicant /system/bin/wpa_supplicant -c/data/misc/wifi/wpa_supplicant.conf -Dnl80211 -iwlan0 -dd
+service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -c/data/misc/wifi/wpa_supplicant.conf -Dnl80211 -iwlan0 -dd
     class late_start
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
-    onrestart write /sys/class/gpio/gpio175/value 0
     oneshot
-
-on property:sys.boot_completed=1
-    insmod /system/lib/modules/wl12xx_sdio.ko
-    exec /system/bin/logwrapper /system/bin/setwlanmac
 
 on fs
 # mount ext4 partitions
     mkdir /data/data/ 0771 system system
     mkdir /data/data/com.android.browser 0777 system system
     mount_all /fstab.boundary
+
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
+    disabled
+    oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    disabled
+    oneshot

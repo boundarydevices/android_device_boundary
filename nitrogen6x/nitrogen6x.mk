@@ -31,3 +31,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/nitrogen6x/overlay
 
+
+PRODUCT_PACKAGES += uim-sysfs \
+        bt_sco_app \
+        BluetoothSCOApp \
+        TIInit_10.6.15.bts \
+        TIInit_7.2.31.bts \
+        TIInit_7.6.15.bts
+
+PRODUCT_PACKAGES += \
+	wl1271-fw-2.bin \
+	wl1271-nvs.bin
