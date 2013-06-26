@@ -32,7 +32,12 @@ else
 fi
 
 if i2c probe 0x48 ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,CLAA-WVGA,if=RGB666 tsdev=tsc2004 calibration
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,CLAA-WVGA,if=RGB666
+	if itest.s "x" -eq "x$calibration" ; then
+		setenv bootargs $bootargs tsc2004.calibration=-67247,-764,272499173,324,69283,-8653010,65536
+	else
+		setenv bootargs $bootargs tsc2004.calibration=$calibration
+	fi
 	if test "0" -eq $nextcon; then
 		setenv fbmem "fbmem=20M";
 	else
