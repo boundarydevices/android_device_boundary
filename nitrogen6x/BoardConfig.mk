@@ -9,7 +9,7 @@ include device/fsl/imx6/BoardConfigCommon.mk
 ifneq ($(DEFCONF),)
 TARGET_KERNEL_DEFCONF := $(DEFCONF)
 else
-TARGET_KERNEL_DEFCONF ?= nitrogen6x_defconfig
+TARGET_KERNEL_DEFCONF := nitrogen6x_defconfig
 endif
 
 TARGET_KERNEL_MODULES := \
