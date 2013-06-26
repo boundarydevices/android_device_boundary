@@ -1,11 +1,17 @@
 #!/bin/bash
 if [ $# -lt 1 ]; then
-	echo "Usage: $0 /dev/diskname [product=nitrogen6x]"
+	echo "Usage: $0 /dev/diskname [product=nitrogen6x] [--force]"
 	exit -1 ;
 fi
 
+force='';
 if [ $# -ge 2 ]; then
    product=$2;
+   if [ $# -ge 3 ]; then
+      if [ "x--force" == "x$3" ]; then
+         force=yes;
+      fi
+   fi
 else
    product=nitrogen6x;
 fi
@@ -48,7 +54,7 @@ for disk in $removables ; do
    fi
 done
 
-if [ -z "$matched" ]; then
+if [ -z "$matched" -a -z "$force" ]; then
    echo "Invalid disk $diskname" ;
    exit -1;
 fi
