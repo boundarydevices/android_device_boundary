@@ -13,21 +13,25 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nit6xlite/init.rc:root/init.boundary.rc \
 	device/fsl/imx6/etc/ueventd.freescale.rc:root/ueventd.boundary.rc \
 	device/boundary/nit6xlite/vold.fstab:system/etc/vold.fstab \
+	device/boundary/nit6xlite/fstab.boundary:root/fstab.boundary \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	bootable/bootloader/uboot-imx/u-boot.imx:boot/u-boot.imx \
-        frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-        frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-	kernel_imx/drivers/net/wireless/bcmdhd/bcmdhd.ko:boot/lib/modules/bcmdhd.ko \
-	external/imx-utils/devregs_imx6x.dat:system/etc/devregs_imx6x.dat
+        frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+        frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
        ro.sf.lcd_density=120
 
-# GPU files
+BOARD_WLAN_DEVICE_REV := bcm4330_b2
+WIFI_BAND             := 802_11_ABG
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/nit6xlite/overlay
 
+PRODUCT_PACKAGES += uim-sysfs \
+		lib_driver_cmd_bcmdhd

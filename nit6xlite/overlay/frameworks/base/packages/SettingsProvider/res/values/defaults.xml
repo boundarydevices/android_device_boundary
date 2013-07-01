@@ -17,5 +17,6 @@
  */
 -->
 <resources>
-    <integer name="def_data_stall_alarm_non_aggressive_delay">36000000</integer>
+    <!-- Default for Settings.Secure.USER_SETUP_COMPLETE -->
+    <bool name="def_user_setup_complete">true</bool>
 </resources>
