@@ -21,6 +21,8 @@ PRODUCT_COPY_FILES += \
 	bootable/bootloader/uboot-imx/u-boot.imx:boot/u-boot.imx \
         frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
         frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+	device/boundary/bcmdhd/bcmdhd.cal:system/etc/firmware/bcmdhd.cal \
+	device/boundary/bcmdhd/fw_bcmdhd.bin:system/etc/firmware/fw_bcmdhd.bin \
 
 
 PRODUCT_PROPERTY_OVERRIDES += \

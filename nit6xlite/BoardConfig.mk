@@ -46,14 +46,22 @@ BOARD_KERNEL_CMDLINE := console=ttymxc1,115200 init=/init video=mxcfb0 video=mxc
 
 TARGET_TS_CALIBRATION := true
 
-BOARD_WPA_SUPPLICANT_DRIVER      := MAC80211
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WLAN_DEVICE                := wl12xx_mac80211
-BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
-WIFI_DRIVER_MODULE_NAME          := "bcmdhd"
-#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-#BOARD_HOSTAPD_PRIVATE_LIB	 := lib_driver_cmd_bcmdhd
-WIFI_DRIVER_MODULE_PATH		 := "/system/lib/modules/bcmdhd.ko"
+# Wifi related defines
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+WPA_SUPPLICANT_VERSION      := VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER        := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE           := bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcmdhd.ko"
+WIFI_DRIVER_MODULE_NAME     := "bcmdhd"
+WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
+WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmwarefw_bcmdhd_apsta.bin"
+
+BOARD_HAVE_BLUETOOTH := true
+# BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_WLAN_DEVICE		 := bcmdhd
 
 BOARD_USE_AR3K_BLUETOOTH := false
