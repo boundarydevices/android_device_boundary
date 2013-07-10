@@ -60,8 +60,9 @@ WIFI_DRIVER_MODULE_NAME     := "bcmdhd"
 #WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
 #WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
 
-BOARD_HAVE_BLUETOOTH := true
-# BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_WLAN_DEVICE		 := bcmdhd
 
-BOARD_USE_AR3K_BLUETOOTH := false
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_USE_AR3K_BLUETOOTH :=
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR=device/boundary/nit6xlite/

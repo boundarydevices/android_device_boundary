@@ -27,16 +27,22 @@ on boot
     #
     chmod 0777 /sys/class/gpio
     chmod 0777 /sys/class/gpio/export
+    write /sys/class/gpio/export 168
     write /sys/class/gpio/export 175
     write /sys/class/gpio/export 176
+    chmod 0777 /sys/class/gpio/gpio168
     chmod 0777 /sys/class/gpio/gpio175
     chmod 0777 /sys/class/gpio/gpio176
+    chmod 0777 /sys/class/gpio/gpio168/direction
     chmod 0777 /sys/class/gpio/gpio175/direction
     chmod 0777 /sys/class/gpio/gpio176/direction
+    chmod 0777 /sys/class/gpio/gpio168/value
     chmod 0777 /sys/class/gpio/gpio175/value
     chmod 0777 /sys/class/gpio/gpio176/value
+    write /sys/class/gpio/gpio168/direction out
     write /sys/class/gpio/gpio175/direction out
     write /sys/class/gpio/gpio176/direction out
+    write /sys/class/gpio/gpio168/value 1
     write /sys/class/gpio/gpio175/value 1
     write /sys/class/gpio/gpio176/value 0
 
@@ -108,7 +114,6 @@ on boot
     setprop ro.hardware.lightsensor "/sys/class/i2c-dev/i2c-2/device/2-0044/"
     setprop ro.lightsensor.threshold  20
 
-    # No bluetooth hardware present
     setprop wlan.interface wlan0
     setprop wifi.interface wlan0
 
