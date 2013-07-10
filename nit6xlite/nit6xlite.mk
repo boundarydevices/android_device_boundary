@@ -24,6 +24,8 @@ PRODUCT_COPY_FILES += \
 	device/boundary/bcmdhd/fw_bcmdhd.bin:system/etc/firmware/fw_bcmdhd.bin \
 	device/boundary/nit6xlite/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nit6xlite/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+	device/boundary/nit6xlite/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
+	device/boundary/nit6xlite/bcm4330.hcd:system/etc/firmware/bcm4330.hcd \
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
