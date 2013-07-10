@@ -22,6 +22,8 @@ PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	device/boundary/bcmdhd/bcmdhd.cal:system/etc/firmware/bcmdhd.cal \
 	device/boundary/bcmdhd/fw_bcmdhd.bin:system/etc/firmware/fw_bcmdhd.bin \
+	device/boundary/nit6xlite/audio_policy.conf:system/etc/audio_policy.conf \
+	device/boundary/nit6xlite/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 
 
 PRODUCT_PROPERTY_OVERRIDES += \

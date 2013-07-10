@@ -11,7 +11,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/oc/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/oc/init.rc:root/init.freescale.rc \
 	device/boundary/oc/init.rc:root/init.boundary.rc \
-	device/boundary/nit6xlite/ueventd.boundary.rc:root/ueventd.freescale.rc \
+	device/boundary/oc/ueventd.boundary.rc:root/ueventd.freescale.rc \
 	device/boundary/oc/vold.fstab:system/etc/vold.fstab \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
@@ -23,6 +23,8 @@ PRODUCT_COPY_FILES += \
 	external/imx-utils/devregs_imx6x.dat:system/etc/devregs_imx6x.dat \
 	device/boundary/bcmdhd/bcmdhd.cal:system/etc/firmware/bcmdhd.cal \
 	device/boundary/bcmdhd/fw_bcmdhd.bin:system/etc/firmware/fw_bcmdhd.bin \
+	device/boundary/oc/audio_policy.conf:system/etc/audio_policy.conf \
+	device/boundary/oc/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
