@@ -40,6 +40,11 @@ if test "x" = "x$panel" ; then
 	if test "0" -eq $nextcon; then
 		echo "Default to wqvga (480x272) display";
 		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,wqvga-lcd,if=RGB24 calibration tsdev=tsc2004
+		if itest.s "x" -eq "x$calibration" ; then
+			setenv bootargs $bootargs tsc2004.calibration=-65527,-139,264481023,4768,-71105,256966332,65536
+		else
+			setenv bootargs $bootargs tsc2004.calibration=$calibration
+		fi
 		setenv fbmem "fbmem=20M";
 		setexpr nextcon $nextcon + 1
 	fi
