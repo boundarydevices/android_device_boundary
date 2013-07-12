@@ -144,3 +144,9 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
 service iprenew_eth0 /system/bin/dhcpcd -n
     disabled
     oneshot
+
+#shared transport user space mgr service for Bluetooth, FM and GPS
+service uim /system/bin/uim-sysfs
+	class core
+	user bluetooth
+	group bluetooth net_bt_admin
