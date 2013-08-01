@@ -82,7 +82,7 @@ else if test "wvga-rgb" = "$panel" ; then
 	setexpr nextcon $nextcon + 1
 fi ; fi ; fi ; fi ; fi ; fi
 
-while test "3" -ne $nextcon ; do
+while test "4" -ne $nextcon ; do
 	setenv bootargs $bootargs video=mxcfb${nextcon}:off ;
 	setexpr nextcon $nextcon + 1 ;
 done
