@@ -1,9 +1,9 @@
 /boot   emmc /dev/block/mmcblk0p1
 /recovery emmc /dev/block/mmcblk0p2
+/data ext4 /dev/block/mmcblk0p4
 /system ext4 /dev/block/mmcblk0p5
 /cache ext4 /dev/block/mmcblk0p6
-/data ext4 /dev/block/mmcblk0p7
-/misc  emmc  /dev/block/mmcblk0p9
+/misc  emmc  /dev/block/mmcblk0p8
 /sdcard vfat /dev/block/mmcblk1p1
 
 # Use below lines if you use NAND:
