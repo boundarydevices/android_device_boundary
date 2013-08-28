@@ -19,8 +19,8 @@ if test -n "$tempfuse" ; then
 fi
 
 i2c dev 2
-if i2c probe 0x04 ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,LDB-XGA,if=RGB666
+if itest.s "x$panel" == "xLG-10.1" ; then
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
 	if test "0" -eq $nextcon; then
 		setenv fbmem "fbmem=20M";
 	else
@@ -28,19 +28,29 @@ if i2c probe 0x04 ; then
 	fi
 	setexpr nextcon $nextcon + 1
 else
-	echo "------ no Freescale display";
-fi
+	if i2c probe 0x04 ; then
+		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,LDB-XGA,if=RGB666
+		if test "0" -eq $nextcon; then
+			setenv fbmem "fbmem=20M";
+		else
+			setenv fbmem ${fbmem},20M
+		fi
+		setexpr nextcon $nextcon + 1
+	else
+		echo "------ no Freescale display";
+	fi
 
-if i2c probe 0x38 ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
-	if test "0" -eq $nextcon; then
-		setenv fbmem "fbmem=20M";
+	if i2c probe 0x38 ; then
+		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
+		if test "0" -eq $nextcon; then
+			setenv fbmem "fbmem=20M";
+		else
+			setenv fbmem ${fbmem},20M
+		fi
+		setexpr nextcon $nextcon + 1
 	else
-		setenv fbmem ${fbmem},20M
+		echo "------ no 1024x600 display";
 	fi
-	setexpr nextcon $nextcon + 1
-else
-	echo "------ no 1024x600 display";
 fi
 
 if i2c probe 0x48 ; then
