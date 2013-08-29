@@ -69,9 +69,9 @@ echo "reasonable disk $diskname, partitions ${diskname}${prefix}1..." ;
 umount ${diskname}${prefix}*
 umount gvfs
 
-dd if=/dev/zero of=${diskname}${prefix} count=1 bs=1024
+dd if=/dev/zero of=${diskname} count=1 bs=1024
 
-sudo sfdisk --force -uM ${diskname}${prefix} << EOF
+sudo sfdisk --force -uM ${diskname} << EOF
 ,20,B,*
 ,20,B
 ,2048,E
