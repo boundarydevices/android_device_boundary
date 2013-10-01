@@ -41,20 +41,27 @@ else
 	fi
 
 	if i2c probe 0x38 ; then
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
+		if itest.s "xLDB-WXGA" == "x$panel"; then
+			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
+		else
+			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
+		fi
 		if test "0" -eq $nextcon; then
 			setenv fbmem "fbmem=20M";
 		else
 			setenv fbmem ${fbmem},20M
 		fi
 		setexpr nextcon $nextcon + 1
+		if itest.s "x" -ne "x$calibration" ; then
+			setenv bootargs $bootargs ft5x06.calibration=$calibration tsdev=ft5x06
+		fi
 	else
 		echo "------ no 1024x600 display";
 	fi
 fi
 
 if i2c probe 0x48 ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,CLAA-WVGA,if=RGB666
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,CLAA-WVGA,if=RGB666 tsdev=tsc2004
 	if itest.s "x" -eq "x$calibration" ; then
 		setenv bootargs $bootargs tsc2004.calibration=-67247,-764,272499173,324,69283,-8653010,65536
 	else
