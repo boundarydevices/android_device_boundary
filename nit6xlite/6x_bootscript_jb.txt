@@ -80,7 +80,14 @@ else if test "wvga-rgb" = "$panel" ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,CLAA-WVGA,if=RGB666 tsdev=tsc2004 calibration
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
-fi ; fi ; fi ; fi ; fi ; fi
+else if test "xLDB-WXGA" == "x$panel"; then
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666 tsdev=ft5x06
+	setenv fbmem "fbmem=20M";
+	setexpr nextcon $nextcon + 1
+	if itest.s "x" -ne "x$calibration" ; then
+		setenv bootargs $bootargs ft5x06.calibration=$calibration
+	fi
+fi ; fi ; fi ; fi ; fi ; fi ; fi
 
 while test "4" -ne $nextcon ; do
 	setenv bootargs $bootargs video=mxcfb${nextcon}:off ;
