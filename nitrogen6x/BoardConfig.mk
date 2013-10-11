@@ -56,6 +56,9 @@ TARGET_BOOTLOADER_CONFIG := 6q:nitrogen6q_config 6dl:nitrogen6dl_config 6s:nitro
 TARGET_TS_CALIBRATION := true
 
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+# wpa_supplicant.conf provided by hardware/ti/wlan
+SKIP_WPA_SUPPLICAN_CONF		 := y
+SKIP_WPA_SUPPLICANT_RTL		 := y
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_WLAN_DEVICE                := wl12xx_mac80211
