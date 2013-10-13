@@ -136,6 +136,7 @@ on fs
     mkdir /data/data/ 0771 system system
     mkdir /data/data/com.android.browser 0777 system system
     mount_all /fstab.boundary
+    chown 10003 10003 /data/data/com.android.browser
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     disabled
