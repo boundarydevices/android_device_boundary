@@ -40,4 +40,5 @@ DEVICE_PACKAGE_OVERLAYS := device/boundary/nit6xlite/overlay
 
 PRODUCT_PACKAGES += uim-sysfs \
 		audio.a2dp.default \
-		lib_driver_cmd_bcmdhd
+		lib_driver_cmd_bcmdhd \
+		brcm_patchram_plus
