@@ -109,9 +109,9 @@ on boot
     chown system system /sys/class/backlight/pwm-backlight.3/brightness
     chmod 0660 /sys/class/backlight/pwm-backlight.3/brightness
 
-    # Set light sensor sysfs path and light sensor threshold lux value
-    setprop ro.hardware.lightsensor "/sys/class/i2c-dev/i2c-2/device/2-0044/"
-    setprop ro.lightsensor.threshold  20
+    # set BT serial port ownership and permissions
+    chown bluetooth bluetooth /dev/ttymxc2
+    chmod 0660 /dev/ttymxc2
 
     # No bluetooth hardware present
     setprop wlan.interface wlan0
