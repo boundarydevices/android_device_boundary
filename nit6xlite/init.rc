@@ -114,9 +114,9 @@ on boot
     chown system system /sys/class/backlight/pwm-backlight.3/brightness
     chmod 0660 /sys/class/backlight/pwm-backlight.3/brightness
 
-    # Set light sensor sysfs path and light sensor threshold lux value
-    setprop ro.hardware.lightsensor "/sys/class/i2c-dev/i2c-2/device/2-0044/"
-    setprop ro.lightsensor.threshold  20
+    # set BT serial port ownership and permissions
+    chown bluetooth bluetooth /dev/ttymxc2
+    chmod 0660 /dev/ttymxc2
 
     setprop wlan.interface wlan0
     setprop wifi.interface wlan0
@@ -137,6 +137,14 @@ on fs
     mkdir /data/data/com.android.browser 0777 system system
     mount_all /fstab.boundary
     chown 10003 10003 /data/data/com.android.browser
+
+service hciattach /system/bin/brcm_patchram_plus -d --enable_hci \
+    --no2bytes --tosleep 20000 \
+    --baudrate 3000000 --patchram system/etc/firmware/bcm4330.hcd /dev/ttymxc2
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     disabled
