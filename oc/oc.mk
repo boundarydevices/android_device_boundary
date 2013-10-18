@@ -34,3 +34,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/oc/overlay
 
+PRODUCT_PACKAGES += lib_driver_cmd_bcmdhd \
+		brcm_patchram_plus
