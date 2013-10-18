@@ -21,7 +21,7 @@ PRODUCT_COPY_FILES += \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	bootable/bootloader/uboot-imx/u-boot.imx:boot/u-boot.imx \
 	device/boundary/nitrogen6x/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
-	device/ti/panda/wl12xx/wl1271-fw-2.bin:system/etc/firmware/ti-connectivity/wl1271-fw-2.bin \
+	device/boundary/wl12xx/wl1271-fw-2.bin:system/etc/firmware/ti-connectivity/wl1271-fw-2.bin \
 	device/boundary/nitrogen6x/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nitrogen6x/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 
