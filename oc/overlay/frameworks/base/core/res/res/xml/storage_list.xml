@@ -33,9 +33,9 @@
 -->
 
 <StorageList xmlns:android="http://schemas.android.com/apk/res/android">
-    <storage android:mountPoint="/mnt/sdcard"
-             android:storageDescription="@string/storage_internal"
+    <storage android:storageDescription="@string/storage_internal"
              android:primary="true"
+             android:emulated="true"
              android:mtpReserve="100" />
     <storage android:mountPoint="/mnt/extsd"
              android:storageDescription="@string/storage_sd_card"
