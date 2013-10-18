@@ -13,18 +13,19 @@ PRODUCT_COPY_FILES += \
 	device/boundary/oc/init.rc:root/init.boundary.rc \
 	device/boundary/oc/ueventd.boundary.rc:root/ueventd.freescale.rc \
 	device/boundary/oc/vold.fstab:system/etc/vold.fstab \
+	device/boundary/oc/fstab.boundary:root/fstab.boundary \
+	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
+	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	bootable/bootloader/uboot-imx/u-boot.imx:boot/u-boot.imx \
-	external/wpa_supplicant_8/wpa_supplicant/wpa_supplicant.conf:data/misc/wifi/wpa_supplicant.conf \
-        frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-        frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-	kernel_imx/drivers/net/wireless/bcmdhd/bcmdhd.ko:boot/lib/modules/bcmdhd.ko \
-	external/imx-utils/devregs_imx6x.dat:system/etc/devregs_imx6x.dat \
+        frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	device/boundary/bcmdhd/bcmdhd.cal:system/etc/firmware/bcmdhd.cal \
 	device/boundary/bcmdhd/fw_bcmdhd.bin:system/etc/firmware/fw_bcmdhd.bin \
 	device/boundary/oc/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/oc/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+	device/boundary/nit6xlite/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
+	device/boundary/nit6xlite/bcm4330.hcd:system/etc/firmware/bcm4330.hcd \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
