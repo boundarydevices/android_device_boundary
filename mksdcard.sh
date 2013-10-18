@@ -91,16 +91,33 @@ for n in `seq 1 8` ; do
 done
 
 echo "all partitions present and accounted for!";
-sync && sudo sfdisk -R ${diskname}${prefix}
+sync && sudo sfdisk -R ${diskname}${prefix} && sleep 1
 
+# make partition 4 1500MB long (to allow smallish 4GB cards)
+sfdisk ${diskname} -N4 -uM  << EOF
+,1500,83
+EOF
+
+sync && sudo sfdisk -R ${diskname}${prefix} && sleep 1
+
+echo "------------------making BOOT partition"
 mkfs.vfat -n BOOT ${diskname}${prefix}1
+echo "------------------making RECOVER partition"
 mkfs.vfat -n RECOVER ${diskname}${prefix}2
+echo "------------------making DATA partition"
 mkfs.ext4 -L DATA ${diskname}${prefix}4
+echo "------------------making CACHE partition"
 mkfs.ext4 -L CACHE ${diskname}${prefix}6
+echo "------------------making VENDOR partition"
 mkfs.ext4 -L VENDOR ${diskname}${prefix}7
+echo "------------------making MISC partition"
 mkfs.ext4 -L MISC ${diskname}${prefix}8
 
+echo "------------------mounting BOOT, RECOVER, DATA partitions"
+sync && sleep 1 && sudo sfdisk -R ${diskname}${prefix} && sleep 1
+
 for n in 1 2 4 ; do
+   echo "--- mounting ${diskname}${prefix}${n}";
    udisks --mount ${diskname}${prefix}${n}
 done
 
@@ -110,8 +127,14 @@ sudo cp -rfv out/target/product/$product/boot/uImage /media/RECOVER/
 sudo cp -rfv out/target/product/$product/uramdisk-recovery.img /media/RECOVER/uramdisk.img
 sudo cp -ravf out/target/product/$product/data/* /media/DATA/
 
-sudo dd if=out/target/product/$product/system.img of=${diskname}${prefix}5
-sudo e2label ${diskname}${prefix}5 SYSTEM
+if [ -e ${diskname}${prefix}5 ]; then
+   sudo dd if=out/target/product/$product/system.img of=${diskname}${prefix}5
+   sudo e2label ${diskname}${prefix}5 SYSTEM
+   sudo e2fsck -f ${diskname}${prefix}5
+   sudo resize2fs ${diskname}${prefix}5
+else
+   echo "-----------missing ${diskname}${prefix}5";
+fi
 
 sync && sudo umount ${diskname}${prefix}*
 
