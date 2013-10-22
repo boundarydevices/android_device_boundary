@@ -15,7 +15,7 @@ fi
 mw.l 0x020cc068 0 1
 
 if test -n "$tempfuse" ; then
-	setenv bootargs $bootargs thermal.fusedata=$tempfuse
+	setenv bootargs $bootargs thermal.fuse_override=$tempfuse
 fi
 
 i2c dev 2
