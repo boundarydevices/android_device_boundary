@@ -101,6 +101,8 @@ bootdev=sdhci-esdhc-imx.2
 setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
 if itest.s "xsata" == "x$dtype" ; then
     bootdev=ahci.0
+elif itest.s "xusb" == "x$dtype" ; then
+    bootdev=fsl-ehci.1
 elif itest.s "xmmc" == "x$dtype" ; then
     if itest 1 == ${disk}; then
 	bootdev=sdhci-esdhc-imx.3
