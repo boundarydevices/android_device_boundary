@@ -59,6 +59,10 @@ else
 			setenv bootargs $bootargs ft5x06.calibration=$calibration
 		fi
 	else
+		if itest.s "xLDB-WXGA" == "x$panel"; then
+			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
+			setexpr nextcon $nextcon + 1
+		fi
 		echo "------ no 1024x600 display";
 	fi
 fi
