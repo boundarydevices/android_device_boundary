@@ -66,7 +66,7 @@ on boot
     #the android before honycomb are all in portrait mode
     setprop back_camera_name ov5640_mipi
     setprop back_camera_orient 0
-    setprop front_camera_name ov5642_camera
+    setprop front_camera_name ov5642_camera,ov5640_camera
     setprop front_camera_orient 0
 
     # Set OpenGLES version
