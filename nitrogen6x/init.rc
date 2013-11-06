@@ -117,6 +117,10 @@ on boot
     setprop wlan.interface wlan0
     setprop wifi.interface wlan0
 
+    # initialize CAN bus
+    ip link set can0 type can bitrate 500000 triple-sampling on
+    ifconfig can0 up
+
 # mount the debugfs
     mount debugfs none /sys/kernel/debug/
 
