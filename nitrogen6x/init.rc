@@ -113,6 +113,9 @@ on boot
     chown bluetooth bluetooth /dev/ttymxc2
     chmod 0660 /dev/ttymxc2
 
+    chmod 0666 /dev/ttymxc0
+    chmod 0666 /dev/ttymxc1
+
     # No bluetooth hardware present
     setprop wlan.interface wlan0
     setprop wifi.interface wlan0
