@@ -124,6 +124,9 @@ on boot
 # mount the debugfs
     mount debugfs none /sys/kernel/debug/
 
+    # emmulate battery property
+    setprop sys.emulated.battery 1
+
 # wpa_supplicant and dhcp daemon
 service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -c/data/misc/wifi/wpa_supplicant.conf -Dnl80211 -iwlan0 -dd
     class late_start

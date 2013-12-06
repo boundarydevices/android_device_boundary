@@ -112,6 +112,9 @@ on boot
     chown wifi wifi /data/misc/wifi
     chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
 
+    # emmulate battery property
+    setprop sys.emulated.battery 1
+
 on fs
 # mount ext4 partitions
     mount ext4 /dev/block/mmcblk0p5 /system
