@@ -44,3 +44,7 @@ PRODUCT_PACKAGES += uim-sysfs \
 PRODUCT_PACKAGES += \
 	wl1271-fw-2.bin \
 	wl1271-nvs.bin
+
+include device/boundary/openssh.mk
+
+PRODUCT_PACKAGES += ethernet
