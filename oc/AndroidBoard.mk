@@ -4,7 +4,7 @@ ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 include device/fsl-proprietary/codec/fsl-codec.mk
 endif
 
-TARGET_BOOTLOADER_DIR=nitrogen6x
+TARGET_BOOTLOADER_DIR=oc
 include device/boundary/bootscript.mk
 include device/boundary/ramdisk.mk
 

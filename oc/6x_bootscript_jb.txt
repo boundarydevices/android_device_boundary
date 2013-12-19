@@ -1,0 +1,62 @@
+setenv bootargs enable_wait_mode=off
+setenv nextcon 0;
+setenv bootargs $bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 ;
+setenv bootpart 1
+
+setexpr rval *0x020CC068 \& 0x180
+if itest.s "x$rval" -eq "x100"; then
+	echo "----------- run fastboot here";
+else
+	if itest.s "x$rval" -eq "x80"; then
+		setenv bootpart 2;
+	fi
+fi
+
+mw.l 0x020cc068 0 1
+
+if test -n "$tempfuse" ; then
+	setenv bootargs $bootargs thermal.fuse_override=$tempfuse
+fi
+
+if test xXGA = "x$panel" ; then
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,LDB-XGA,if=RGB24,bpp=32
+else
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,OC-VGA,if=RGB24,bpp=32
+fi
+
+setenv nextcon 1
+setenv fbmem "fbmem=10M";
+
+if hdmidet ; then
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
+	if test "0" -eq $nextcon; then
+		setenv fbmem "fbmem=48M";
+	else
+		setenv fbmem ${fbmem},48M
+	fi
+	setexpr nextcon $nextcon + 1
+else
+	echo "------ no HDMI monitor";
+fi
+
+while test "4" -ne $nextcon ; do
+	setenv bootargs $bootargs video=mxcfb${nextcon}:off ;
+	setexpr nextcon $nextcon + 1 ;
+done
+
+bootdev=sdhci-esdhc-imx.2
+setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
+if itest.s "xsata" == "x$dtype" ; then
+    bootdev=ahci.0
+elif itest.s "xusb" == "x$dtype" ; then
+    bootdev=fsl-ehci.1
+elif itest.s "xmmc" == "x$dtype" ; then
+    if itest 1 == ${disk}; then
+	bootdev=sdhci-esdhc-imx.3
+    fi
+fi
+
+setenv bootargs $bootargs androidboot.bootdev=$bootdev
+
+${fs}load ${dtype} ${disk}:$bootpart 10800000 uImage && ${fs}load ${dtype} ${disk}:$bootpart 12800000 uramdisk.img && bootm 10800000 12800000
+echo "Error loading kernel image"
