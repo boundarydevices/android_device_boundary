@@ -1,12 +1,12 @@
 RAMDISK_TARGET := $(PRODUCT_OUT)/boot/uramdisk.img
-$(RAMDISK_TARGET): $(PRODUCT_OUT)/ramdisk.img kernelmodules
+$(RAMDISK_TARGET): $(PRODUCT_OUT)/ramdisk.img kernelmodules $(TOPDIR)bootable/bootloader/uboot-imx/tools/mkimage
 	mkdir -p $(dir $@)
-	mkimage -A arm -O linux -T ramdisk -n "RAM Disk" -d $< $@
+	$(abspath bootable/bootloader/uboot-imx/tools)/mkimage -A arm -O linux -T ramdisk -n "RAM Disk" -d $< $@
 
 RAMDISK_RECOVERY_TARGET := $(PRODUCT_OUT)/uramdisk-recovery.img
-$(RAMDISK_RECOVERY_TARGET): $(PRODUCT_OUT)/recovery.img
+$(RAMDISK_RECOVERY_TARGET): $(PRODUCT_OUT)/recovery.img $(TOPDIR)bootable/bootloader/uboot-imx/tools/mkimage
 	mkdir -p $(dir $@)
-	mkimage -A arm -O linux -T ramdisk -n "RAM Disk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $@
+	$(abspath bootable/bootloader/uboot-imx/tools)/mkimage -A arm -O linux -T ramdisk -n "RAM Disk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $@
 
 droidcore: $(RAMDISK_TARGET) $(RAMDISK_RECOVERY_TARGET)
 
