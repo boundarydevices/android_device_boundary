@@ -1,5 +1,5 @@
 BOOTSCRIPT_TARGET := $(PRODUCT_OUT)/boot/6x_bootscript
-$(BOOTSCRIPT_TARGET): device/boundary/$(TARGET_BOOTLOADER_DIR)/6x_bootscript_jb.txt $(TARGET_BOOTLOADER_IMAGE)
+$(BOOTSCRIPT_TARGET): device/boundary/$(TARGET_BOOTLOADER_DIR)/6x_bootscript_jb.txt $(TOPDIR)bootable/bootloader/uboot-imx/tools/mkimage
 	mkdir -p $(dir $@)
 	$(TOPDIR)bootable/bootloader/uboot-imx/tools/mkimage -A arm -O linux -T script -C none -a 0 -e 0 -n "boot script" -d $< $@
 
