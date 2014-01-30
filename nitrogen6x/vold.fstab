@@ -12,8 +12,13 @@
 ## <sysfs_path> - List of sysfs paths to source devices
 ######################
 
-dev_mount udisk /mnt/udisk auto /devices/platform/fsl-ehci.1/usb2
-dev_mount extsd /mnt/extsd auto /devices/platform/sdhci-esdhc-imx.3/mmc_host/mmc0
+# USB controller without hub
+#
+# dev_mount udisk /mnt/udisk auto /devices/platform/fsl-ehci.1/usb2
+
+# top USB port
+dev_mount udisktop /mnt/udisktop auto /devices/platform/fsl-ehci.1/usb2/2-1/2-1.1
+dev_mount udiskbot /mnt/udiskbot auto /devices/platform/fsl-ehci.1/usb2/2-1/2-1.2
 
 #
 # There are three options here: for either SD card or 
