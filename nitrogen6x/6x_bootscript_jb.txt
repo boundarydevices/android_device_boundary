@@ -43,10 +43,10 @@ else
 	if i2c probe 0x38 ; then
 		if itest.s "xLDB-WXGA" == "x$panel"; then
 			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
-                        screenres=1280,800
+			screenres=1280,800
 		else
 			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
-                        screenres=1024,600
+			screenres=1024,600
 		fi
 		if test "0" -eq $nextcon; then
 			setenv fbmem "fbmem=20M";
