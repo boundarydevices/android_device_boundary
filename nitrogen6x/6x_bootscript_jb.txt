@@ -54,7 +54,7 @@ else
 			setenv fbmem ${fbmem},20M
 		fi
 		setexpr nextcon $nextcon + 1
-                setenv bootargs $bootargs ft5x06.screenres=$screenres tsdev=ft5x06
+		setenv bootargs $bootargs ft5x06.screenres=$screenres tsdev=ft5x06
 		if itest.s "x" -ne "x$calibration" ; then
 			setenv bootargs $bootargs ft5x06.calibration=$calibration
 		fi
@@ -104,13 +104,13 @@ done
 bootdev=sdhci-esdhc-imx.2
 setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
 if itest.s "xsata" == "x$dtype" ; then
-    bootdev=ahci.0
+	bootdev=ahci.0
 elif itest.s "xusb" == "x$dtype" ; then
-    bootdev=fsl-ehci.1
+	bootdev=fsl-ehci.1
 elif itest.s "xmmc" == "x$dtype" ; then
-    if itest 1 == ${disk}; then
-	bootdev=sdhci-esdhc-imx.3
-    fi
+	if itest 1 == ${disk}; then
+		bootdev=sdhci-esdhc-imx.3
+	fi
 fi
 
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
