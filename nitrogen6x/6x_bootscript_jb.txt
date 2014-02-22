@@ -84,6 +84,20 @@ else
 	echo "------ no 800x480 display";
 fi
 
+if test "0" -eq $nextcon; then
+	# no LVDS or RGB panel found
+	if itest.s "xLDB-WXGA-S" == "x$panel"; then
+		echo "using WXGA SPWG panel";
+		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,1280x800M@60,if=RGB24
+		setenv fbmem "fbmem=10M";
+		setexpr nextcon $nextcon + 1
+	else
+		echo "----- No LVDS/RGB panels defined: $panel" ;
+	fi
+else
+	echo "------------- have " $nextcon " displays defined";
+fi
+
 if hdmidet ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
 	if test "0" -eq $nextcon; then
