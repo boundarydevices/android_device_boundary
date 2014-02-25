@@ -1,5 +1,7 @@
 import init.${ro.hardware}.usb.rc
 
+import init.superuser.rc
+
 on init
     start watchdogd
 
