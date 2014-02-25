@@ -98,7 +98,8 @@ else
 	echo "------------- have " $nextcon " displays defined";
 fi
 
-if hdmidet ; then
+i2c dev 1 ;
+if i2c probe 0x50 ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
 	if test "0" -eq $nextcon; then
 		setenv fbmem "fbmem=48M";
