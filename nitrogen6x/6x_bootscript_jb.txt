@@ -89,7 +89,20 @@ if itest.s "xsvga" == "x$panel"; then
 	setexpr nextcon $nextcon + 1
 fi
 
-if test "0" -eq $nextcon ; then
+if i2c probe 0x10 ; then
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,fusion7,if=RGB666
+	if test "0" -eq $nextcon; then
+		setenv fbmem "fbmem=10M";
+	else
+		setenv fbmem ${fbmem},10M
+	fi
+	setexpr nextcon $nextcon + 1
+else
+	echo "------ no fusion7 display";
+fi
+
+if test "0" -eq $nextcon; then
+	# no LVDS or RGB panel found
 	if itest.s "xLDB-WXGA-S" == "x$panel"; then
 		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB24
 		setenv bootargs $bootargs usbhid.quirks=0x27c6:0x0004:0x0004
