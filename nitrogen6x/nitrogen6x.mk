@@ -22,6 +22,7 @@ PRODUCT_COPY_FILES += \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	device/boundary/nitrogen6x/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
 	device/boundary/wl12xx/wl1271-fw-2.bin:system/etc/firmware/ti-connectivity/wl1271-fw-2.bin \
+	device/boundary/wl12xx/TIInit_7.6.15.bts:system/etc/firmware/TIInit_7.6.15.bts \
 	device/boundary/nitrogen6x/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nitrogen6x/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 
