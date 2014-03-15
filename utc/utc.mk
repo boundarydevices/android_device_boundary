@@ -23,6 +23,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/wl12xx/wl1271-fw-2.bin:system/etc/firmware/ti-connectivity/wl1271-fw-2.bin \
 	device/boundary/nitrogen6x/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nitrogen6x/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+        frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
