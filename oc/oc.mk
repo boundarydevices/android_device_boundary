@@ -25,6 +25,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/oc/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	device/boundary/nit6xlite/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
 	device/boundary/nit6xlite/bcm4330.hcd:system/etc/firmware/bcm4330.hcd \
+        frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
