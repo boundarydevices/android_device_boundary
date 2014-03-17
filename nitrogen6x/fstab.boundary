@@ -4,6 +4,15 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 $BD1    /mnt/extsd vfat defaults voldmanaged=sdcard:auto
+
+# Comment out the line above and uncomment this to make the bottom slot on Nitrogen6x
+# or top (micro SD) slot on SABRE Lite the "removable" SD card
+# /devices/platform/sdhci-esdhc-imx.3/mmc_host/mmc0 /mnt/extsd vfat defaults voldmanaged=sdcard:auto
+
+# Comment out the line above and uncomment this to make the top slot on Nitrogen6x
+# or bottom (full-size SD) slot on SABRE Lite the "removable" SD card
+# /devices/platform/sdhci-esdhc-imx.2/mmc_host/mmc1 /mnt/extsd vfat defaults voldmanaged=sdcard:auto
+
 /devices/platform/fsl-ehci /mnt/udisk vfat defaults voldmanaged=sdcard:auto
 $BD1    /boot    vfat    noatime,nodiratime,errors=remount-ro                                             wait
 $BD5    /system  ext4    ro                                                                               wait
