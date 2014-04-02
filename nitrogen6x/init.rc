@@ -161,3 +161,9 @@ service uim /system/bin/uim-sysfs
 	class core
 	user bluetooth
 	group bluetooth net_bt_admin
+
+service expose-leds /system/bin/expose-leds
+    oneshot
+
+on property:persist.sys.leds=1
+    start expose-leds
