@@ -115,6 +115,14 @@ if itest.s "xsvga" == "x$panel"; then
 	setexpr nextcon $nextcon + 1
 fi
 
+if test "0" -eq $nextcon ; then
+	if itest.s "xLDB-WXGA-S" == "x$panel"; then
+		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB24
+		setenv bootargs $bootargs usbhid.quirks=0x27c6:0x0004:0x0004
+		setexpr nextcon $nextcon + 1
+	fi
+fi
+
 i2c dev 1 ;
 if i2c probe 0x50 ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
