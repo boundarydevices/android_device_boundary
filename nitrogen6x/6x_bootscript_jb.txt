@@ -84,6 +84,11 @@ else
 	echo "------ no 800x480 display";
 fi
 
+if itest.s "xsvga" == "x$panel"; then
+        setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,800x600MR@60,if=RGB666
+	setexpr nextcon $nextcon + 1
+fi
+
 if hdmidet ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
 	if test "0" -eq $nextcon; then
