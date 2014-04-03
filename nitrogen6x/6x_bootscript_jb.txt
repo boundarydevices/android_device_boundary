@@ -110,6 +110,11 @@ else
 	echo "------------- have " $nextcon " displays defined";
 fi
 
+if itest.s "xsvga" == "x$panel"; then
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,800x600MR@60,if=RGB666
+	setexpr nextcon $nextcon + 1
+fi
+
 i2c dev 1 ;
 if i2c probe 0x50 ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
