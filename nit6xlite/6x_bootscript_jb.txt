@@ -81,7 +81,7 @@ else if test "wvga-rgb" = "$panel" ; then
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
 else if test "xLDB-WXGA" == "x$panel"; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666 tsdev=ft5x06
+	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666 tsdev=ft5x06 ft5x06.screenres=1280,800
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
 	if itest.s "x" -ne "x$calibration" ; then
