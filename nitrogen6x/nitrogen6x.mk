@@ -27,6 +27,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nitrogen6x/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nitrogen6x/audio_effects.conf:system/vendor/etc/audio_effects.conf \
         device/boundary/expose-leds:system/bin/expose-leds \
+        external/koush/Superuser/init.superuser.rc:root/init.superuser.rc \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
