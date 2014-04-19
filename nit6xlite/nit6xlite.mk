@@ -44,4 +44,5 @@ PRODUCT_PACKAGES += uim-sysfs \
 
 include device/boundary/openssh.mk
 
-PRODUCT_PACKAGES += ethernet
+PRODUCT_PACKAGES += ethernet \
+        Superuser
