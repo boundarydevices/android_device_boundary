@@ -15,9 +15,6 @@ endif
 TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/bcmdhd/bcmdhd.ko:system/lib/modules/bcmdhd.ko
 
-TARGET_BOOTLOADER_BOARD_NAME := nit6xlite
-TARGET_BOOTLOADER_CONFIG := 6s:nit6xlite_config
-
 PRODUCT_MODEL := NIT6X
 BOARD_HAS_SGTL5000 := true
 BOARD_HAS_SENSOR := false

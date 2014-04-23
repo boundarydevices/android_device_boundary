@@ -42,7 +42,6 @@ include device/fsl-proprietary/gpu-viv/fsl-gpu.mk
 BUILD_TARGET_FS ?= ext4
 include device/fsl/imx6/imx6_target_fs.mk
 
-TARGET_BOOTLOADER_BOARD_NAME := NITROGEN6X
 PRODUCT_MODEL := NITROGEN6X
 
 # for recovery service
@@ -50,8 +49,6 @@ TARGET_SELECT_KEY := 28
 TARGET_USERIMAGES_USE_EXT4 := true
 
 BOARD_KERNEL_CMDLINE := console=ttymxc1,115200 init=/init video=mxcfb0 video=mxcfb1:off video=mxcfb2:off fbmem=10M vmalloc=400M androidboot.console=ttymxc1
-
-TARGET_BOOTLOADER_CONFIG := 6q:nitrogen6q_config 6dl:nitrogen6dl_config 6s:nitrogen6s_config
 
 TARGET_TS_CALIBRATION := true
 
