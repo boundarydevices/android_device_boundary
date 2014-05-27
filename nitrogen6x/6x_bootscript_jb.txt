@@ -132,6 +132,14 @@ if i2c probe 0x50 ; then
 		setenv fbmem ${fbmem},48M
 	fi
 	setexpr nextcon $nextcon + 1
+
+        if itest.s x == x$allow_noncea ; then
+        	setenv bootargs $bootargs mxc_hdmi.only_cea=1;
+        	echo "only CEA modes allowed on HDMI port";
+        else
+                setenv bootargs $bootargs mxc_hdmi.only_cea=0;
+                echo "non-CEA modes allowed on HDMI, audio may be affected";
+        fi
 else
 	echo "------ no HDMI monitor";
 fi
