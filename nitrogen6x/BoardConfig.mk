@@ -12,6 +12,8 @@ else
 TARGET_KERNEL_DEFCONF := nitrogen6x_defconfig
 endif
 
+TARGET_RECOVERY_FSTAB := device/boundary/nitrogen6x/fstab.boundary
+
 TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
