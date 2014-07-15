@@ -62,8 +62,19 @@ else
 		if itest.s "xLDB-WXGA" == "x$panel"; then
 			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
 			setexpr nextcon $nextcon + 1
+		else
+			echo "------ no focaltech display";
+                fi
+	fi
+	if i2c probe 0x41 ; then
+                echo "found Ilitek touch controller";
+		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
+		if test "0" -eq $nextcon; then
+			setenv fbmem "fbmem=20M";
+		else
+			setenv fbmem ${fbmem},20M
 		fi
-		echo "------ no 1024x600 display";
+		setexpr nextcon $nextcon + 1
 	fi
 fi
 
