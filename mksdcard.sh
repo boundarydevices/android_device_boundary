@@ -114,7 +114,7 @@ echo "------------------making MISC partition"
 mkfs.ext4 -L MISC ${diskname}${prefix}8
 
 echo "------------------mounting BOOT, RECOVER, DATA partitions"
-sync && sleep 1 && sudo sfdisk -R ${diskname}${prefix} && sleep 1
+sync && sleep 5 && sudo sfdisk -R ${diskname}${prefix} && sleep 5
 
 for n in 1 2 4 ; do
    echo "--- mounting ${diskname}${prefix}${n}";
