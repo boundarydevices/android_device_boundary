@@ -179,5 +179,15 @@ fi
 
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
 
-${fs}load ${dtype} ${disk}:$bootpart 10800000 uImage && ${fs}load ${dtype} ${disk}:$bootpart 12800000 uramdisk.img && bootm 10800000 12800000
+kernel=uImage
+ramdisk=uramdisk.img
+
+if kbd ; then
+        if itest.s "xv" == "x$keybd" ; then
+                kernel=uImage-recovery
+                ramdisk=uramdisk-recovery.img
+        fi
+fi
+
+${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && ${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && bootm 10800000 12800000
 echo "Error loading kernel image"
