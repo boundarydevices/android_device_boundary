@@ -132,7 +132,7 @@ if test "0" -eq $nextcon ; then
 		setenv bootargs $bootargs usbhid.quirks=0x27c6:0x0004:0x0004
 		setexpr nextcon $nextcon + 1
 	elif itest.s "x1080P" == "x$panel" ; then
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB24
+		setenv bootargs $bootargs ldb=spl0 video=mxcfb${nextcon}:dev=ldb,bpp=32,1920x1080MR@60,if=RGB24
 		setenv bootargs $bootargs usbhid.quirks=0x27c6:0x0004:0x0004
 		setexpr nextcon $nextcon + 1
 		setenv fbmem ${fbmem},48M
