@@ -179,6 +179,10 @@ fi
 
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
 
+if itest.s "x" != "x$disable_giga" ; then
+        setenv bootargs $bootargs fec.disable_giga=1
+fi
+
 kernel=uImage
 ramdisk=uramdisk.img
 
