@@ -1,0 +1,52 @@
+setenv bootargs enable_wait_mode=off
+setenv nextcon 0;
+setenv bootargs $bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 ;
+setenv bootargs $bootargs tsc2004.calibration=5466,-74,-605024,-14,-4226,16562278,65536,320,240
+setenv bootpart 1
+
+
+setexpr rval *0x020CC068 \& 0x180
+if itest.s "x$rval" -eq "x100"; then
+	echo "----------- run fastboot here";
+else
+	if itest.s "x$rval" -eq "x80"; then
+		setenv bootpart 2;
+	fi
+fi
+
+mw.l 0x020cc068 0 1
+
+if kbd ; then
+        if itest.s x2 == x$keybd ; then
+                if ${fs}load ${dtype} ${disk}:1 10800000 uImage-usbwrite ; then
+                        if ${fs}load ${dtype} ${disk}:1 12800000 uramdisk-usbwrite.img ; then
+                           if itest.s x$havedtb == x ; then
+                                        bootm 10800000 12800000 ;
+                           else
+                                        bootm 10800000 12800000 12000000 ;
+                           fi
+                        fi
+                fi
+        fi
+fi
+
+bootdev=sdhci-esdhc-imx.2
+setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
+if itest.s "xsata" == "x$dtype" ; then
+	bootdev=ahci.0
+elif itest.s "xusb" == "x$dtype" ; then
+	bootdev=fsl-ehci.1
+elif itest.s "xmmc" == "x$dtype" ; then
+	if itest 0 == ${disk}; then
+		bootdev=sdhci-esdhc-imx.3
+        elif itest 1 == ${disk}; then
+		bootdev=sdhci-esdhc-imx.2
+        else
+		bootdev=sdhci-esdhc-imx.1
+	fi
+fi
+
+setenv bootargs $bootargs androidboot.bootdev=$bootdev
+
+${fs}load ${dtype} ${disk}:$bootpart 10800000 uImage && ${fs}load ${dtype} ${disk}:$bootpart 12800000 uramdisk.img && bootm 10800000 12800000
+echo "Error loading kernel image"

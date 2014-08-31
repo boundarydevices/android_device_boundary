@@ -1,0 +1,146 @@
+import init.${ro.hardware}.usb.rc
+
+on init
+    start watchdogd
+
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+    mkdir /boot root root
+
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
+
+    # Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    symlink /fstab.boundary /fstab.freescale
+
+on boot
+
+    # Set permission for IIM node
+    symlink /dev/mxs_viim /dev/mxc_mem
+
+    #
+    # expose WL_EN (175) and BT_EN (176) to userspace
+    #
+    chmod 0777 /sys/class/gpio
+    chmod 0777 /sys/class/gpio/export
+    write /sys/class/gpio/export 175
+    write /sys/class/gpio/export 176
+    chmod 0777 /sys/class/gpio/gpio175
+    chmod 0777 /sys/class/gpio/gpio176
+    chmod 0777 /sys/class/gpio/gpio175/direction
+    chmod 0777 /sys/class/gpio/gpio176/direction
+    chmod 0777 /sys/class/gpio/gpio175/value
+    chmod 0777 /sys/class/gpio/gpio176/value
+    write /sys/class/gpio/gpio175/direction out
+    write /sys/class/gpio/gpio176/direction out
+    write /sys/class/gpio/gpio175/value 1
+    write /sys/class/gpio/gpio176/value 0
+
+    # Enable Tethering in the Settings
+    setprop ro.tether.denied false
+
+    # 3D acceleration property
+    setprop debug.sf.showfps    0
+    setprop debug.sf.enable_hgl 1
+    setprop debug.egl.hw	1
+
+    setprop hwc.stretch.filter  1
+    setprop hwc.enable_dither   1
+
+    # fsl omx graphic manager media framework property
+    setprop media.omxgm.enable-player 1
+    setprop media.omxgm.enable-record 1
+    setprop media.omxgm.enable-scan 1
+    setprop rw.VIDEO_RENDER_NAME video_render.surface
+
+    #Define the config for dual camera
+    setprop camera.disable_zsl_mode 1
+    #For landscape mode, orient is 0
+    #For portrait mode, orient is 90
+    #the android before honycomb are all in portrait mode
+    setprop back_camera_name ov5640_mipi
+    setprop front_camera_name ov5640_mipi
+    setprop front_camera_orient 0
+
+    # Set OpenGLES version
+    setprop ro.opengles.version 131072
+
+    # Set rotation to 270 to cofigure as portrait mode
+    setprop ro.sf.hwrotation 0
+
+    # Set the density to 160dpi, default 128dpi is not good
+    setprop ro.sf.lcd_density 160
+# change for FSL specific service
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+    chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+    chown root system /sys/devices/system/cpu/cpu0/online
+    chmod 0664 /sys/devices/system/cpu/cpu0/online
+    chown root system /sys/devices/system/cpu/cpu1/online
+    chmod 0664 /sys/devices/system/cpu/cpu1/online
+    chown root system /sys/devices/system/cpu/cpu2/online
+    chmod 0664 /sys/devices/system/cpu/cpu2/online
+    chown root system /sys/devices/system/cpu/cpu3/online
+    chmod 0664 /sys/devices/system/cpu/cpu3/online
+
+    # prepare for ril
+    setprop gsm.ril.delay 15
+    setprop ro.ril.wake_lock_timeout 300
+
+    # Default backlight devices
+    setprop hw.backlight.dev "lcd:pwm-backlight.0,ldb:pwm-backlight.3"
+
+    # Chmod/chown FSL specific sys entry
+    chown system system /sys/class/backlight/pwm-backlight.0/brightness
+    chmod 0660 /sys/class/backlight/pwm-backlight.0/brightness
+    chown system system /sys/class/backlight/pwm-backlight.3/brightness
+    chmod 0660 /sys/class/backlight/pwm-backlight.3/brightness
+
+    # set BT serial port ownership and permissions
+    chown bluetooth bluetooth /dev/ttymxc2
+    chmod 0660 /dev/ttymxc2
+
+    chmod 0666 /dev/ttymxc0
+    chmod 0666 /dev/ttymxc1
+
+    # No bluetooth hardware present
+    # No Wifi hardware present
+
+    # emmulate battery property
+    setprop sys.emulated.battery 1
+
+# mount the debugfs
+    mount debugfs none /sys/kernel/debug/
+
+on fs
+# mount ext4 partitions
+    mkdir /data/data/ 0771 system system
+    mkdir /data/data/com.android.browser 0777 system system
+    mount_all /fstab.boundary
+    chown 10003 10003 /data/data/com.android.browser
+
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+service expose-leds /system/bin/expose-leds
+    oneshot
+
+on property:persist.sys.leds=1
+    start expose-leds
