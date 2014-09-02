@@ -38,11 +38,11 @@ elif itest.s "xusb" == "x$dtype" ; then
 	bootdev=fsl-ehci.1
 elif itest.s "xmmc" == "x$dtype" ; then
 	if itest 0 == ${disk}; then
-		bootdev=sdhci-esdhc-imx.3
-        elif itest 1 == ${disk}; then
-		bootdev=sdhci-esdhc-imx.2
-        else
 		bootdev=sdhci-esdhc-imx.1
+        elif itest 1 == ${disk}; then
+		bootdev=sdhci-esdhc-imx.3
+        else
+		bootdev=sdhci-esdhc-imx.2
 	fi
 fi
 
