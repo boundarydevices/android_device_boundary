@@ -78,28 +78,28 @@ else if test "HDMI" = "$panel" ; then
                 setenv bootargs $bootargs mxc_hdmi.only_cea=0;
                 echo "non-CEA modes allowed on HDMI, audio may be affected";
         fi
-else if test "Hannstar-XGA" = "$panel" ; then
+else if itest.s "Hannstar-XGA" == "$panel" ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,LDB-XGA,if=RGB666
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
-else if test "wqvga-rgb" = "$panel" ; then
+else if itest.s "wqvga-rgb" == "$panel" ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,wqvga-lcd,if=RGB24 calibration tsdev=tsc2004
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
-else if test "wsvga-lvds" = "$panel" ; then
+else if itest.s "wsvga-lvds" == "$panel" ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
-else if test "wvga-rgb" = "$panel" ; then
+else if itest.s "wvga-rgb" == "$panel" ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,CLAA-WVGA,if=RGB666 tsdev=tsc2004 calibration
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
-else if test "xLDB-WVGA" == "x$panel"; then
+else if itest.s "xLDB-WVGA" == "x$panel"; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,800x480MR@60,if=RGB666 tsdev=ft5x06 ft5x06.screenres=2048,2048
 	setenv bootargs $bootargs ft5x06.calibration=0,65536,0,65536,0,0,65536
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
-else if test "xLDB-WXGA" == "x$panel"; then
+else if itest.s "xLDB-WXGA" == "x$panel"; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666 tsdev=ft5x06 ft5x06.screenres=1280,800
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
