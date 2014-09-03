@@ -86,6 +86,11 @@ else if itest.s "wqvga-rgb" == "$panel" ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,wqvga-lcd,if=RGB24 calibration tsdev=tsc2004
 	setenv fbmem "fbmem=20M";
 	setexpr nextcon $nextcon + 1
+        if itest.s "x" -eq "x$calibration" ; then
+                setenv bootargs $bootargs tsc2004.calibration=-65527,-139,264481023,4768,-71105,256966332,65536
+        else
+                setenv bootargs $bootargs tsc2004.calibration=$calibration
+        fi
 else if itest.s "wsvga-lvds" == "$panel" ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
 	setenv fbmem "fbmem=20M";
