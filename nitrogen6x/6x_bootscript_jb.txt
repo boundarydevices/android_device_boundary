@@ -136,6 +136,10 @@ if test "0" -eq $nextcon ; then
 		setenv bootargs $bootargs usbhid.quirks=0x27c6:0x0004:0x0004
 		setexpr nextcon $nextcon + 1
 		setenv fbmem ${fbmem},48M
+	elif itest.s "xfusion4" == "x$panel" ; then
+		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,480x272M@60,if=RGB24
+		setexpr nextcon $nextcon + 1
+		setenv fbmem ${fbmem},48M
         fi
 fi
 
