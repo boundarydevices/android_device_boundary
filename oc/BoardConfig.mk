@@ -61,3 +61,6 @@ WIFI_DRIVER_FW_PATH_AP			:= "/vendor/firmware/fw_bcmdhd_apsta.bin"
 BOARD_HAVE_BLUETOOTH 			:= true
 BOARD_HAVE_BLUETOOTH_BCM 		:= true
 BOARD_USE_AR3K_BLUETOOTH		:= 
+
+include sepolicy.mk
+

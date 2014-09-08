@@ -66,3 +66,5 @@ WIFI_DRIVER_MODULE_PATH		 := "/system/lib/modules/wl12xx_sdio.ko"
 BOARD_USE_AR3K_BLUETOOTH := 
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/utc/
 
+include sepolicy.mk
+
