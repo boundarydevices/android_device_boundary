@@ -37,11 +37,11 @@
              android:primary="true"
              android:emulated="true"
              android:mtpReserve="100" />
-    <storage android:mountPoint="/mnt/extsd"
+    <storage android:mountPoint="/storage/extsd"
              android:storageDescription="@string/storage_sd_card"
              android:primary="false"
              android:removable="true" />
-    <storage android:mountPoint="/mnt/udisk"
+    <storage android:mountPoint="/storage/udisk"
              android:storageDescription="@string/storage_usb"
              android:primary="false"
              android:removable="true" />
