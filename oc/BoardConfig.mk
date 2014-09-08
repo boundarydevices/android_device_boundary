@@ -3,7 +3,8 @@
 #
 
 include device/fsl/imx6/soc/imx6dq.mk
-export BUILD_ID=4.3_1.0.0-ga
+export BUILD_ID=4.4.2_1.0.0-ga
+export BUILD_NUMBER=20140908
 include device/fsl/imx6/BoardConfigCommon.mk
 
 TARGET_KERNEL_DEFCONF := oc_defconfig
