@@ -18,6 +18,8 @@ PRODUCT_COPY_FILES += \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	device/boundary/cad/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/cad/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
+	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 	device/boundary/expose-leds:system/bin/expose-leds \
 
