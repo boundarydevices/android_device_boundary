@@ -44,6 +44,7 @@ DEVICE_PACKAGE_OVERLAYS := device/boundary/nitrogen6x/overlay
 PRODUCT_PACKAGES += uim-sysfs \
         bt_sco_app \
         BluetoothSCOApp \
+        memtool \
         TIInit_10.6.15.bts \
         TIInit_7.2.31.bts \
         TIInit_7.6.15.bts
