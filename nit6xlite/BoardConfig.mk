@@ -46,7 +46,6 @@ BOARD_KERNEL_CMDLINE := console=ttymxc1,115200 init=/init video=mxcfb0 video=mxc
 TARGET_TS_CALIBRATION := true
 
 # Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 SKIP_WPA_SUPPLICAN_CONF		 := y
@@ -66,5 +65,5 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_USE_AR3K_BLUETOOTH :=
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR=device/boundary/nit6xlite/
 
-include sepolicy.mk
+include device/boundary/sepolicy.mk
 

@@ -55,5 +55,5 @@ SKIP_WPA_SUPPLICAN_CONF		 := y
 SKIP_WPA_SUPPLICANT_RTL		 := y
 BOARD_WLAN_DEVICE                := none
 
-include sepolicy.mk
+include device/boundary/sepolicy.mk
 
