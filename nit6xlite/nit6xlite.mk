@@ -11,6 +11,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nit6xlite/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nit6xlite/init.rc:root/init.freescale.rc \
 	device/boundary/nit6xlite/init.rc:root/init.boundary.rc \
+        external/koush/Superuser/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nit6xlite/ueventd.boundary.rc:root/ueventd.freescale.rc \
 	device/boundary/nit6xlite/vold.fstab:system/etc/vold.fstab \
 	device/boundary/nit6xlite/fstab.boundary:root/fstab.boundary \
