@@ -11,7 +11,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/med/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/med/init.rc:root/init.freescale.rc \
 	device/boundary/med/init.rc:root/init.boundary.rc \
-        external/koush/Superuser/init.superuser.rc:root/init.superuser.rc \
+        device/boundary/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/med/ueventd.boundary.rc:root/ueventd.freescale.rc \
 	device/boundary/med/vold.fstab:system/etc/vold.fstab \
 	device/boundary/med/fstab.boundary:root/fstab.boundary \
