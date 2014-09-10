@@ -55,6 +55,7 @@ BOARD_KERNEL_CMDLINE := console=ttymxc1,115200 init=/init video=mxcfb0 video=mxc
 
 TARGET_TS_CALIBRATION := true
 
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 # wpa_supplicant.conf provided by hardware/ti/wlan
 SKIP_WPA_SUPPLICAN_CONF		 := y
 SKIP_WPA_SUPPLICANT_RTL		 := y
