@@ -11,7 +11,6 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nitrogen6x/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nitrogen6x/init.rc:root/init.freescale.rc \
 	device/boundary/nitrogen6x/init.rc:root/init.boundary.rc \
-        device/boundary/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nitrogen6x/ueventd.boundary.rc:root/ueventd.freescale.rc \
 	device/boundary/nitrogen6x/setwlanmac:system/bin/setwlanmac \
 	device/boundary/nitrogen6x/vold.fstab:system/etc/vold.fstab \
@@ -55,6 +54,10 @@ PRODUCT_PACKAGES += \
 	wl1271-nvs.bin
 
 include device/boundary/openssh.mk
+
+SUPERUSER_PACKAGE := com.boundary.superuser
+
+SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += ethernet \
         Superuser
