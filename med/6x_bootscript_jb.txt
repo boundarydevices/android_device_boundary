@@ -19,15 +19,8 @@ mw.l 0x020cc068 0 1
 
 if kbd ; then
         if itest.s x2 == x$keybd ; then
-                if ${fs}load ${dtype} ${disk}:1 10800000 uImage-usbwrite ; then
-                        if ${fs}load ${dtype} ${disk}:1 12800000 uramdisk-usbwrite.img ; then
-                           if itest.s x$havedtb == x ; then
-                                        bootm 10800000 12800000 ;
-                           else
-                                        bootm 10800000 12800000 12000000 ;
-                           fi
-                        fi
-                fi
+                echo "starting USB mass storage gadget" ;
+                ums 0 mmc 1 ;
         fi
 fi
 
