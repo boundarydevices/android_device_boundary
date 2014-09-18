@@ -45,6 +45,7 @@ BOARD_KERNEL_CMDLINE := console=ttymxc1,115200 init=/init video=mxcfb0 video=mxc
 
 TARGET_TS_CALIBRATION := true
 
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 # Wifi related defines
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
