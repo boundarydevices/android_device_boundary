@@ -11,7 +11,6 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nit6xlite/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nit6xlite/init.rc:root/init.freescale.rc \
 	device/boundary/nit6xlite/init.rc:root/init.boundary.rc \
-        device/boundary/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nit6xlite/ueventd.boundary.rc:root/ueventd.freescale.rc \
 	device/boundary/nit6xlite/vold.fstab:system/etc/vold.fstab \
 	device/boundary/nit6xlite/fstab.boundary:root/fstab.boundary \
@@ -39,6 +38,9 @@ WIFI_BAND             := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/nit6xlite/overlay
+
+SUPERUSER_PACKAGE := com.boundary.superuser
+SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += uim-sysfs \
 		audio.a2dp.default \
