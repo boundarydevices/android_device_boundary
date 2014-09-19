@@ -33,6 +33,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
        ro.sf.lcd_density=120
 
+LIBBT_VENDORFILE      := device/boundary/nit6xlite/libbt_vnd_nit6xlite.conf
 BOARD_WLAN_DEVICE_REV := bcm4330_b2
 WIFI_BAND             := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
