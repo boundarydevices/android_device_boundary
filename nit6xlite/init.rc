@@ -30,22 +30,16 @@ on boot
     chmod 0777 /sys/class/gpio
     chmod 0777 /sys/class/gpio/export
     write /sys/class/gpio/export 168
-    write /sys/class/gpio/export 175
     write /sys/class/gpio/export 176
     chmod 0777 /sys/class/gpio/gpio168
-    chmod 0777 /sys/class/gpio/gpio175
     chmod 0777 /sys/class/gpio/gpio176
     chmod 0777 /sys/class/gpio/gpio168/direction
-    chmod 0777 /sys/class/gpio/gpio175/direction
     chmod 0777 /sys/class/gpio/gpio176/direction
     chmod 0777 /sys/class/gpio/gpio168/value
-    chmod 0777 /sys/class/gpio/gpio175/value
     chmod 0777 /sys/class/gpio/gpio176/value
     write /sys/class/gpio/gpio168/direction out
-    write /sys/class/gpio/gpio175/direction out
     write /sys/class/gpio/gpio176/direction in
     write /sys/class/gpio/gpio168/value 1
-    write /sys/class/gpio/gpio175/value 1
 
     # Enable Tethering in the Settings
     setprop ro.tether.denied false
