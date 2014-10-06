@@ -40,6 +40,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/nitrogen6x/overlay
 
+PRODUCT_CHARACTERISTICS := tablet
+PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
 PRODUCT_PACKAGES += uim-sysfs \
         bt_sco_app \
