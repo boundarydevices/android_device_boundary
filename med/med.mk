@@ -31,6 +31,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/med/overlay
 
+PRODUCT_CHARACTERISTICS := tablet
+PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
+
 include device/boundary/openssh.mk
 
 PRODUCT_PACKAGES += ethernet
