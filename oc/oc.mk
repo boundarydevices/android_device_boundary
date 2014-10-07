@@ -38,5 +38,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/oc/overlay
 
+PRODUCT_CHARACTERISTICS := tablet
+PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
+
 PRODUCT_PACKAGES += lib_driver_cmd_bcmdhd \
 		brcm_patchram_plus
