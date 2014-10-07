@@ -40,6 +40,9 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/nit6xlite/overlay
 
+PRODUCT_CHARACTERISTICS := tablet
+PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
+
 SUPERUSER_PACKAGE := com.boundary.superuser
 SUPERUSER_EMBEDDED := true
 
