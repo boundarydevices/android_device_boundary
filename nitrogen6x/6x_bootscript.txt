@@ -18,6 +18,10 @@ if test -n "$tempfuse" ; then
 	setenv bootargs $bootargs thermal.fuse_override=$tempfuse
 fi
 
+if itest.s "x" != "x$wlmac" ; then
+        setenv bootargs $bootargs wl12xx.mac=$wlmac
+fi
+
 i2c dev 2
 if itest.s "x$panel" == "xLG-10.1" ; then
 	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
