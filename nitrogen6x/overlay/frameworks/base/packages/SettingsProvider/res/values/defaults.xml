@@ -21,4 +21,6 @@
     <bool name="def_user_setup_complete">true</bool>
     <bool name="def_lockscreen_disabled">true</bool>
     <integer name="def_screen_off_timeout">3600000</integer>
+    <bool name="def_accelerometer_rotation">false</bool>
+    <integer name="def_user_rotation">2</integer> 
 </resources>
