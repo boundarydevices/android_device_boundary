@@ -16,7 +16,9 @@ endif
 TARGET_RECOVERY_FSTAB := device/boundary/nitrogen6x/fstab.boundary
 
 TARGET_KERNEL_MODULES := \
-    kernel_imx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
+    kernel_imx/drivers/net/wireless/ti/wlcore/wlcore_sdio.ko:system/lib/modules/wlcore_sdio.ko \
+    kernel_imx/drivers/net/wireless/ti/wlcore/wlcore.ko:system/lib/modules/wlcore.ko \
+    kernel_imx/drivers/net/wireless/ti/wl12xx/wl12xx.ko:system/lib/modules/wl12xx.ko \
 
 BOARD_HAS_SGTL5000 := true
 BOARD_HAVE_BLUETOOTH := true
