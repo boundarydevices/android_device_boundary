@@ -177,15 +177,15 @@ while test "4" -ne $nextcon ; do
 	setexpr nextcon $nextcon + 1 ;
 done
 
-bootdev=sdhci-esdhc-imx.2
+bootdev=mmcblk2
 setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
 if itest.s "xsata" == "x$dtype" ; then
-	bootdev=ahci.0
+	bootdev=sda
 elif itest.s "xusb" == "x$dtype" ; then
-	bootdev=fsl-ehci.1
+	bootdev=sda
 elif itest.s "xmmc" == "x$dtype" ; then
 	if itest 1 == ${disk}; then
-		bootdev=sdhci-esdhc-imx.3
+		bootdev=mmcblk3
 	fi
 fi
 
@@ -205,5 +205,32 @@ if kbd ; then
         fi
 fi
 
-${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && ${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && bootm 10800000 12800000
+if itest.s x == "x$dtbname" ; then
+	dtbname="imx6";
+	if itest.s x6SOLO == "x$cpu" ; then
+		dtbname=${dtbname}dl-;
+	elif itest.s x6DL == "x$cpu" ; then
+		dtbname=${dtbname}dl-;
+	else
+		dtbname=${dtbname}q-;
+	fi
+
+	if itest.s x == "x$board" ; then
+		board=sabrelite
+	fi
+
+	dtbname=${dtbname}${board}.dtb;
+fi
+
+echo "----------dtb: $dtbname";
+
+setenv stdout serial;
+
+${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && \
+echo "loaded $kernel" && \
+${fs}load ${dtype} ${disk}:$bootpart 13000000 $dtbname && \
+echo "loaded $dtbname" && \
+${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && \
+echo "loaded $ramdisk" && bootm 10800000 12800000 13000000 ;
+
 echo "Error loading kernel image"
