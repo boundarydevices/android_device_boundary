@@ -14,7 +14,7 @@ TARGET_KERNEL_DEFCONF := utc_defconfig
 endif
 
 TARGET_KERNEL_MODULES := \
-    kernel_imx/drivers/net/wireless/wl12xx/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
+    kernel_imx/drivers/net/wireless/wl12xx/wlcore_sdio.ko:system/lib/modules/wlcore_sdio.ko
 
 BOARD_HAS_SGTL5000 := true
 BOARD_HAVE_BLUETOOTH := true
@@ -57,8 +57,8 @@ SKIP_WPA_SUPPLICANT_RTL		 := y
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_WLAN_DEVICE                := wl12xx_mac80211
-WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
-WIFI_DRIVER_MODULE_PATH		 := "/system/lib/modules/wl12xx_sdio.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
+WIFI_DRIVER_MODULE_PATH		 := "/system/lib/modules/wlcore_sdio.ko"
 
 BOARD_USE_AR3K_BLUETOOTH := 
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/utc/
