@@ -108,8 +108,8 @@ while test "4" -ne $nextcon ; do
 done
 
 setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
-setenv bootargs $bootargs $fbmem androidboot.console=ttymxc1
-setenv bootargs $bootargs $fbmem gpumem=33554432	# 32M
+setenv bootargs $bootargs androidboot.console=ttymxc1
+setenv bootargs $bootargs gpumem=33554432	# 32M
 
 ${fs}load ${dtype} ${disk}:1 10800000 uImage && ${fs}load ${dtype} ${disk}:1 12800000 uramdisk.img && bootm 10800000 12800000
 echo "Error loading kernel image"
