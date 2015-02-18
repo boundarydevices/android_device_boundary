@@ -1,0 +1,98 @@
+setenv bootargs enable_wait_mode=off
+setenv nextcon 0;
+setenv bootargs $bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 ;
+setenv bootpart 1
+
+setexpr rval *0x020CC068 \& 0x180
+if itest.s "x$rval" -eq "x100"; then
+	echo "----------- run fastboot here";
+else
+	if itest.s "x$rval" -eq "x80"; then
+		setenv bootpart 2;
+	fi
+fi
+
+mw.l 0x020cc068 0 1
+
+if test -n "$tempfuse" ; then
+	setenv bootargs $bootargs thermal.fuse_override=$tempfuse
+fi
+
+if itest.s "x" != "x$wlmac" ; then
+        setenv bootargs $bootargs wl12xx.mac=$wlmac
+fi
+
+setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
+setenv fbmem "fbmem=28M";
+setexpr nextcon $nextcon + 1
+
+if itest.s x == x$allow_noncea ; then
+	setenv bootargs $bootargs mxc_hdmi.only_cea=1;
+	echo "only CEA modes allowed on HDMI port";
+else
+	setenv bootargs $bootargs mxc_hdmi.only_cea=0;
+	echo "non-CEA modes allowed on HDMI, audio may be affected";
+fi
+
+while test "4" -ne $nextcon ; do
+	setenv bootargs $bootargs video=mxcfb${nextcon}:off ;
+	setexpr nextcon $nextcon + 1 ;
+done
+
+bootdev=mmcblk2
+setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
+if itest.s "xsata" == "x$dtype" ; then
+	bootdev=sda
+elif itest.s "xusb" == "x$dtype" ; then
+	bootdev=sda
+elif itest.s "xmmc" == "x$dtype" ; then
+	if itest 1 == ${disk}; then
+		bootdev=mmcblk3
+	fi
+fi
+
+setenv bootargs $bootargs androidboot.bootdev=$bootdev
+
+if itest.s "x" != "x$disable_giga" ; then
+        setenv bootargs $bootargs fec.disable_giga=1
+fi
+
+kernel=uImage
+ramdisk=uramdisk.img
+
+if kbd ; then
+        if itest.s "xv" == "x$keybd" ; then
+                kernel=uImage-recovery
+                ramdisk=uramdisk-recovery.img
+        fi
+fi
+
+if itest.s x == "x$dtbname" ; then
+	dtbname="imx6";
+	if itest.s x6SOLO == "x$cpu" ; then
+		dtbname=${dtbname}dl-;
+	elif itest.s x6DL == "x$cpu" ; then
+		dtbname=${dtbname}dl-;
+	else
+		dtbname=${dtbname}q-;
+	fi
+
+	if itest.s x == "x$board" ; then
+		board=sabrelite
+	fi
+
+	dtbname=${dtbname}${board}.dtb;
+fi
+
+echo "----------dtb: $dtbname";
+
+setenv stdout serial;
+
+${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && \
+echo "loaded $kernel" && \
+${fs}load ${dtype} ${disk}:$bootpart 13000000 $dtbname && \
+echo "loaded $dtbname" && \
+${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && \
+echo "loaded $ramdisk" && bootm 10800000 12800000 13000000 ;
+
+echo "Error loading kernel image"
