@@ -28,9 +28,6 @@ USE_GPU_ALLOCATOR := true
 # camera hal v2
 IMX_CAMERA_HAL_V2 := true
 
-# define frame buffer count
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-
 include device/fsl-proprietary/gpu-viv/fsl-gpu.mk
 
 BUILD_TARGET_FS ?= ext4
