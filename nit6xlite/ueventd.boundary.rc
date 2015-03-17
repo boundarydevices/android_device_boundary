@@ -23,7 +23,7 @@
 /dev/ttya1                0660   system     gps
 /dev/ptya1                0660   system     gps
 /dev/ion                  0666   media      system
-/dev/graphics/galcore	  0666 	 system     graphics
+/dev/galcore	          0666 	 system     graphics
 /dev/graphics/fb0         0660   system     graphics
 /dev/watchdog             0660   system     root
 
