@@ -14,6 +14,31 @@ fi
 
 mw.l 0x020cc068 0 1
 
+if itest.s x == "x$dtbname" ; then
+	dtbname="imx6";
+	if itest.s x6SOLO == "x$cpu" ; then
+		dtbname=${dtbname}dl-;
+	elif itest.s x6DL == "x$cpu" ; then
+		dtbname=${dtbname}dl-;
+	else
+		dtbname=${dtbname}q-;
+	fi
+
+	if itest.s x == "x$board" ; then
+		board=sabrelite
+	fi
+
+	dtbname=${dtbname}${board}.dtb;
+fi
+
+if ${fs}load ${dtype} ${disk}:$bootpart 13000000 $dtbname ; then
+	echo loaded dtb $dtbname;
+	fdt addr 13000000
+else
+	echo error loading dtb $dtbname;
+	exit;
+fi
+
 if test -n "$tempfuse" ; then
 	setenv bootargs $bootargs thermal.fuse_override=$tempfuse
 fi
@@ -22,68 +47,56 @@ if itest.s "x" != "x$wlmac" ; then
         setenv bootargs $bootargs wl12xx.mac=$wlmac
 fi
 
+setenv have_lvds 0
 i2c dev 2
-if itest.s "x$panel" == "xLG-10.1" ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
+if i2c probe 0x04 ; then
 	if test "0" -eq $nextcon; then
 		setenv fbmem "fbmem=20M";
 	else
 		setenv fbmem ${fbmem},20M
 	fi
 	setexpr nextcon $nextcon + 1
+	setenv have_lvds 1;
 else
-	if i2c probe 0x04 ; then
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,LDB-XGA,if=RGB666
-		if test "0" -eq $nextcon; then
-			setenv fbmem "fbmem=20M";
-		else
-			setenv fbmem ${fbmem},20M
-		fi
-		setexpr nextcon $nextcon + 1
-	else
-		echo "------ no Freescale display";
-	fi
+	fdt rm hannstar
+	echo "------ no Freescale display";
+fi
 
-	if i2c probe 0x38 ; then
-		if itest.s "xLDB-WXGA" == "x$panel"; then
-			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
-			screenres=1280,800
-		else
-			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
-			screenres=1024,600
-		fi
-		if test "0" -eq $nextcon; then
-			setenv fbmem "fbmem=20M";
-		else
-			setenv fbmem ${fbmem},20M
-		fi
-		setexpr nextcon $nextcon + 1
-		setenv bootargs $bootargs ft5x06.screenres=$screenres tsdev=ft5x06
-		if itest.s "x" -ne "x$calibration" ; then
-			setenv bootargs $bootargs ft5x06.calibration=$calibration
-		fi
+if i2c probe 0x38 ; then
+	if itest.s "xLDB-WXGA" == "x$panel"; then
+		screenres=1280,800
+		fdt rm okaya1024x600
 	else
-		if itest.s "xLDB-WXGA" == "x$panel"; then
-			setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666
-			setexpr nextcon $nextcon + 1
-		else
-			echo "------ no focaltech display";
-                fi
+		screenres=1024,600
+		fdt rm lg1280x800
 	fi
-	if i2c probe 0x41 ; then
-                echo "found Ilitek touch controller";
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
-		if test "0" -eq $nextcon; then
-			setenv fbmem "fbmem=20M";
-		else
-			setenv fbmem ${fbmem},20M
-		fi
+	if test "0" -eq $nextcon; then
+		setenv fbmem "fbmem=20M";
+	else
+		setenv fbmem ${fbmem},20M
+	fi
+	setexpr nextcon $nextcon + 1
+	setenv bootargs $bootargs ft5x06.screenres=$screenres tsdev=ft5x06
+	if itest.s "x" -ne "x$calibration" ; then
+		setenv bootargs $bootargs ft5x06.calibration=$calibration
+	fi
+	setenv have_lvds 1;
+else
+	if itest.s "xLDB-WXGA" == "x$panel"; then
 		setexpr nextcon $nextcon + 1
+		setenv have_lvds 1;
+	else
+		echo "------ no focaltech display";
+		fdt rm lg1280x800
 	fi
 fi
 
+if itest $have_lvds -ne 0; then
+	echo "no LVDS display";
+	fdt rm lvds_display;
+fi
+
 if i2c probe 0x48 ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,CLAA-WVGA,if=RGB666 tsdev=tsc2004
 	if itest.s "x" -eq "x$calibration" ; then
 		setenv bootargs $bootargs tsc2004.calibration=-67247,-764,272499173,324,69283,-8653010,65536
 	else
@@ -97,63 +110,11 @@ if i2c probe 0x48 ; then
 	setexpr nextcon $nextcon + 1
 else
 	echo "------ no 800x480 display";
-fi
-
-if i2c probe 0x10 ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,fusion7,if=RGB666
-	if test "0" -eq $nextcon; then
-		setenv fbmem "fbmem=10M";
-	else
-		setenv fbmem ${fbmem},10M
-	fi
-	setexpr nextcon $nextcon + 1
-else
-	echo "------ no fusion7 display";
-fi
-
-if test "0" -eq $nextcon; then
-	# no LVDS or RGB panel found
-	if itest.s "xLDB-WXGA-S" == "x$panel"; then
-		echo "using WXGA SPWG panel";
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,1280x800M@60,if=RGB24
-		setenv fbmem "fbmem=10M";
-		setexpr nextcon $nextcon + 1
-	else
-		echo "----- No LVDS/RGB panels defined: $panel" ;
-	fi
-else
-	echo "------------- have " $nextcon " displays defined";
-fi
-
-if itest.s "xsvga" == "x$panel"; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,800x600MR@60,if=RGB666
-	setexpr nextcon $nextcon + 1
-fi
-
-if test "0" -eq $nextcon ; then
-	if itest.s "xLDB-WXGA-S" == "x$panel"; then
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB24
-		setenv bootargs $bootargs usbhid.quirks=0x27c6:0x0004:0x0004
-		setexpr nextcon $nextcon + 1
-	elif itest.s "x1080P" == "x$panel" ; then
-		setenv bootargs $bootargs ldb=spl0 video=mxcfb${nextcon}:dev=ldb,bpp=32,1920x1080MR@60,if=RGB24
-		setenv bootargs $bootargs usbhid.quirks=0x27c6:0x0004:0x0004
-		setexpr nextcon $nextcon + 1
-		setenv fbmem 28M
-	elif itest.s "xfusion4" == "x$panel" ; then
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,480x272M@60,if=RGB24
-		setexpr nextcon $nextcon + 1
-		setenv fbmem 8M
-        fi
+	fdt rm lcd_display;
 fi
 
 i2c dev 1 ;
 if i2c probe 0x50 ; then
-        if itest.s "x$panel" == "xHDMI-1080P" ; then
-	        setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1920x1080M@60,if=RGB24
-        else
-	        setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
-        fi
         if test "0" -eq $nextcon; then
                 setenv fbmem "fbmem=28M";
         else
@@ -170,12 +131,8 @@ if i2c probe 0x50 ; then
         fi
 else
 	echo "------ no HDMI monitor";
+	fdt rm hdmi_display;
 fi
-
-while test "4" -ne $nextcon ; do
-	setenv bootargs $bootargs video=mxcfb${nextcon}:off ;
-	setexpr nextcon $nextcon + 1 ;
-done
 
 bootdev=mmcblk2
 setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
@@ -205,31 +162,11 @@ if kbd ; then
         fi
 fi
 
-if itest.s x == "x$dtbname" ; then
-	dtbname="imx6";
-	if itest.s x6SOLO == "x$cpu" ; then
-		dtbname=${dtbname}dl-;
-	elif itest.s x6DL == "x$cpu" ; then
-		dtbname=${dtbname}dl-;
-	else
-		dtbname=${dtbname}q-;
-	fi
-
-	if itest.s x == "x$board" ; then
-		board=sabrelite
-	fi
-
-	dtbname=${dtbname}${board}.dtb;
-fi
-
-echo "----------dtb: $dtbname";
 
 setenv stdout serial;
 
 ${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && \
 echo "loaded $kernel" && \
-${fs}load ${dtype} ${disk}:$bootpart 13000000 $dtbname && \
-echo "loaded $dtbname" && \
 ${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && \
 echo "loaded $ramdisk" && bootm 10800000 12800000 13000000 ;
 
