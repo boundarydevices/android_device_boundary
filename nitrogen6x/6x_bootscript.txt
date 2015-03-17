@@ -92,7 +92,7 @@ else
 	fi
 fi
 
-if itest $have_lvds -ne 0; then
+if itest $have_lvds -eq 0; then
 	echo "no LVDS display";
 	fdt rm lvds_display;
 fi
