@@ -32,6 +32,7 @@
     <feature name="android.hardware.screen.landscape" />
     <feature name="android.hardware.usb.accessory" />
     <feature name="android.hardware.usb.host" />
+    <feature name="android.software.app_widgets" />
     <feature name="android.software.live_wallpaper" />
     <feature name="android.software.sip" />
     <feature name="android.software.sip.voip" />
