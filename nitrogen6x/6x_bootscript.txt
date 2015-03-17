@@ -88,6 +88,7 @@ else
 	else
 		echo "------ no focaltech display";
 		fdt rm lg1280x800
+		fdt rm okaya1024x600
 	fi
 fi
 
