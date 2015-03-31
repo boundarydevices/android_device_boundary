@@ -4,6 +4,11 @@ if [ $# -lt 1 ]; then
 	exit -1 ;
 fi
 
+if ! hash udisks; then
+	echo "This script requires udisks utility to be installed"
+	exit -1
+fi
+
 force='';
 if [ $# -ge 2 ]; then
    product=$2;
