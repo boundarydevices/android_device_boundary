@@ -69,7 +69,7 @@ on boot
     setprop front_camera_orient 0
 
     # Set OpenGLES version
-    setprop ro.opengles.version 131072
+    setprop ro.opengles.version 196608
 
     # Set rotation to 270 to cofigure as portrait mode
     setprop ro.sf.hwrotation 0
