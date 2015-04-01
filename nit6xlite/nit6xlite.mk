@@ -12,7 +12,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nit6xlite/init.rc:root/init.freescale.rc \
 	device/boundary/nit6xlite/init.rc:root/init.boundary.rc \
 	device/boundary/nit6xlite/ueventd.freescale.rc:root/ueventd.freescale.rc \
-	device/boundary/nit6xlite/fstab.boundary:root/fstab.boundary \
+	device/boundary/nit6xlite/fstab.freescale:root/fstab.freescale \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \

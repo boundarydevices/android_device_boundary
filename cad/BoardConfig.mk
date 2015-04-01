@@ -13,7 +13,7 @@ else
 TARGET_KERNEL_DEFCONF := cad_defconfig
 endif
 
-TARGET_RECOVERY_FSTAB := device/boundary/cad/fstab.boundary
+TARGET_RECOVERY_FSTAB := device/boundary/cad/fstab.freescale
 
 BOARD_HAS_SGTL5000 := true
 BOARD_HAVE_BLUETOOTH := false

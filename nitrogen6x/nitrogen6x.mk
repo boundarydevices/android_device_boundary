@@ -13,7 +13,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nitrogen6x/init.rc:root/init.boundary.rc \
 	device/boundary/nitrogen6x/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/nitrogen6x/setwlanmac:system/bin/setwlanmac \
-	device/boundary/nitrogen6x/fstab.boundary:root/fstab.boundary \
+	device/boundary/nitrogen6x/fstab.freescale:root/fstab.freescale \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ILI210x_Touchscreen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \

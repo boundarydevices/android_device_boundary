@@ -13,7 +13,7 @@ else
 TARGET_KERNEL_DEFCONF := ls_defconfig
 endif
 
-TARGET_RECOVERY_FSTAB := device/boundary/ls/fstab.boundary
+TARGET_RECOVERY_FSTAB := device/boundary/ls/fstab.freescale
 
 TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/ti/wlcore/wlcore_sdio.ko:system/lib/modules/wlcore_sdio.ko \

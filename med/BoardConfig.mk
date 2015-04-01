@@ -13,7 +13,7 @@ else
 TARGET_KERNEL_DEFCONF := med_defconfig
 endif
 
-TARGET_RECOVERY_FSTAB := device/boundary/med/fstab.boundary
+TARGET_RECOVERY_FSTAB := device/boundary/med/fstab.freescale
 
 BOARD_HAS_SGTL5000 := true
 BOARD_HAVE_BLUETOOTH := false

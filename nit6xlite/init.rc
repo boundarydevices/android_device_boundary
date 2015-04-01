@@ -18,7 +18,6 @@ on init
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    symlink /fstab.boundary /fstab.freescale
 
 on boot
     # Set permission for IIM node
@@ -137,7 +136,7 @@ on fs
 # mount ext4 partitions
     mkdir /data/data/ 0771 system system
     mkdir /data/data/com.android.browser 0777 system system
-    mount_all /fstab.boundary
+    mount_all /fstab.freescale
     chown 10003 10003 /data/data/com.android.browser
 
 service hciattach /system/bin/brcm_patchram_plus -d --enable_hci \
