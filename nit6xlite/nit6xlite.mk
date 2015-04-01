@@ -11,7 +11,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nit6xlite/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nit6xlite/init.rc:root/init.freescale.rc \
 	device/boundary/nit6xlite/init.rc:root/init.boundary.rc \
-	device/boundary/nit6xlite/ueventd.boundary.rc:root/ueventd.freescale.rc \
+	device/boundary/nit6xlite/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/nit6xlite/fstab.boundary:root/fstab.boundary \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \

@@ -12,7 +12,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/cad/init.rc:root/init.freescale.rc \
 	device/boundary/cad/init.rc:root/init.boundary.rc \
         device/boundary/init.superuser.rc:root/init.superuser.rc \
-	device/boundary/cad/ueventd.boundary.rc:root/ueventd.freescale.rc \
+	device/boundary/cad/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/cad/fstab.boundary:root/fstab.boundary \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \

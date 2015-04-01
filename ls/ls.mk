@@ -11,7 +11,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/ls/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/ls/init.rc:root/init.freescale.rc \
 	device/boundary/ls/init.rc:root/init.boundary.rc \
-	device/boundary/ls/ueventd.boundary.rc:root/ueventd.freescale.rc \
+	device/boundary/ls/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/ls/setwlanmac:system/bin/setwlanmac \
 	device/boundary/ls/fstab.boundary:root/fstab.boundary \
 	kernel_imx/arch/arm/boot/uImage:boot/uImage \
