@@ -14,6 +14,11 @@ on init
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
 
+    # This path can be retrieved by applications with
+    # System.getenv("SECONDARY_STORAGE");
+    # Could also be changed to extsd depending on the configuration
+    export SECONDARY_STORAGE /storage/udisk
+
     # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
@@ -119,3 +124,11 @@ service expose-leds /system/bin/expose-leds
 
 on property:persist.sys.leds=1
     start expose-leds
+
+service fuse_extsd /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/extsd /storage/extsd
+    class late_start
+    disabled
+
+service fuse_udisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/udisk /storage/udisk
+    class late_start
+    disabled
