@@ -10,7 +10,6 @@ PRODUCT_MANUFACTURER := boundary
 PRODUCT_COPY_FILES += \
 	device/boundary/cad/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/cad/init.rc:root/init.freescale.rc \
-	device/boundary/cad/init.rc:root/init.boundary.rc \
         device/boundary/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/cad/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/cad/fstab.freescale:root/fstab.freescale \
