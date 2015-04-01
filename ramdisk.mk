@@ -9,4 +9,5 @@ $(RAMDISK_RECOVERY_TARGET): $(PRODUCT_OUT)/recovery.img
 	mkimage -A arm -O linux -T ramdisk -n "RAM Disk" -d $(PRODUCT_OUT)/ramdisk-recovery.img $@
 
 droidcore: $(RAMDISK_TARGET) $(RAMDISK_RECOVERY_TARGET)
+bootimage: $(RAMDISK_TARGET) $(RAMDISK_RECOVERY_TARGET)
 
