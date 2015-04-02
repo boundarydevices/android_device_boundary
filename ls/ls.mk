@@ -13,7 +13,6 @@ PRODUCT_COPY_FILES += \
 	device/boundary/ls/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/ls/setwlanmac:system/bin/setwlanmac \
 	device/boundary/ls/fstab.freescale:root/fstab.freescale \
-	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	device/boundary/ls/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
 	device/boundary/wl12xx/wl127x-fw-5-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-sr.bin \
 	device/boundary/wl12xx/TIInit_7.6.15.bts:system/etc/firmware/TIInit_7.6.15.bts \

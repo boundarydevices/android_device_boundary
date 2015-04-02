@@ -15,7 +15,6 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
-	kernel_imx/arch/arm/boot/uImage:boot/uImage \
         frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	device/boundary/bcmdhd/bcmdhd.cal:system/etc/firmware/bcmdhd.cal \
 	device/boundary/bcmdhd/fw_bcmdhd.bin:system/etc/firmware/fw_bcmdhd.bin \

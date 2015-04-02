@@ -13,7 +13,6 @@ PRODUCT_COPY_FILES += \
 	device/boundary/med/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/med/fstab.freescale:root/fstab.freescale \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
-	kernel_imx/arch/arm/boot/uImage:boot/uImage \
 	device/boundary/med/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/med/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
