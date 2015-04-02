@@ -12,4 +12,5 @@ $(UPGRADE_TARGET): bootable/bootloader/uboot-imx/board/boundary/nitrogen6x/6x_up
 bootscript: $(BOOTSCRIPT_TARGET) $(UPGRADE_TARGET)
 
 droidcore: bootscript
+bootimage: bootscript
 
