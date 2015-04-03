@@ -40,6 +40,7 @@
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_temp 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_2_temp 0660 system system
 
+/sys/devices/soc0/backlight_* brightness 0660 system system
 /sys/devices/platform/mxsdhci.2/mmc_host/mmc0/mmc0:000* boot_bus_config 0660 root root
 /sys/devices/platform/mxsdhci.2/mmc_host/mmc0/mmc0:000* boot_config 0660 root root
 /sys/devices/platform/imx-i2c.2/i2c-2/2-0044 mode 0660 system system
