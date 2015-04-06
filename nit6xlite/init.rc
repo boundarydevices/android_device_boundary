@@ -137,19 +137,3 @@ service hciattach /system/bin/brcm_patchram_plus -d --enable_hci \
     group bluetooth net_bt_admin
     disabled
     oneshot
-
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
-    disabled
-    oneshot
-
-service iprenew_wlan0 /system/bin/dhcpcd -n
-    disabled
-    oneshot
-
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
-    disabled
-    oneshot
-
-service iprenew_eth0 /system/bin/dhcpcd -n
-    disabled
-    oneshot

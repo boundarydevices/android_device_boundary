@@ -113,14 +113,6 @@ on fs
     mount_all /fstab.freescale
     chown 10003 10003 /data/data/com.android.browser
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
-    disabled
-    oneshot
-
-service iprenew_eth0 /system/bin/dhcpcd -n
-    disabled
-    oneshot
-
 service expose-leds /system/bin/expose-leds
     oneshot
 

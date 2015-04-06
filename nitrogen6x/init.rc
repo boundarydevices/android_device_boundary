@@ -136,22 +136,6 @@ on fs
     mount_all /fstab.freescale
     chown 10003 10003 /data/data/com.android.browser
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
-    disabled
-    oneshot
-
-service iprenew_wlan0 /system/bin/dhcpcd -n
-    disabled
-    oneshot
-
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
-    disabled
-    oneshot
-
-service iprenew_eth0 /system/bin/dhcpcd -n
-    disabled
-    oneshot
-
 #shared transport user space mgr service for Bluetooth, FM and GPS
 service uim /system/bin/uim-sysfs
 	class core
