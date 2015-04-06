@@ -40,6 +40,7 @@ PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
 PRODUCT_PACKAGES += uim-sysfs \
         bt_sco_app \
+        libbt-vendor \
         BluetoothSCOApp \
         TIInit_10.6.15.bts \
         TIInit_7.2.31.bts \
