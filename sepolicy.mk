@@ -1,4 +1,5 @@
 BOARD_SEPOLICY_DIRS := \
+       device/boundary/sepolicy \
        device/fsl/sabresd_6dq/sepolicy
 
 BOARD_SEPOLICY_UNION := \
