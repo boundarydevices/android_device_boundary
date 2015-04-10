@@ -110,13 +110,6 @@ on boot
     chown system system /sys/class/backlight/pwm-backlight.3/brightness
     chmod 0660 /sys/class/backlight/pwm-backlight.3/brightness
 
-    # set BT serial port ownership and permissions
-    chown bluetooth bluetooth /dev/ttymxc2
-    chmod 0660 /dev/ttymxc2
-
-    chmod 0666 /dev/ttymxc0
-    chmod 0666 /dev/ttymxc1
-
     # No bluetooth hardware present
     # No Wifi hardware present
 
