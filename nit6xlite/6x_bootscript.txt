@@ -1,113 +1,141 @@
-setenv bootargs enable_wait_mode=off
-setenv nextcon 0;
-setenv bootargs $bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 fec.disable_giga=1;
+setenv bootpart 1
 
-echo "-------------bootargs $bootargs"
+setexpr rval *0x020CC068 \& 0x180
+if itest.s "x$rval" -eq "x100"; then
+	echo "----------- run fastboot here";
+else
+	if itest.s "x$rval" -eq "x80"; then
+		setenv bootpart 2;
+	fi
+fi
+mw.l 0x020cc068 0 1
 
-if test -n "$tempfuse" ; then
-	setenv bootargs $bootargs thermal.fusedata=$tempfuse
+setenv bootargs ''
+
+if ${fs}load ${dtype} ${disk}:1 10800000 uEnv.txt ; then
+    env import -t 10800000 $filesize
 fi
 
-echo "--------- testing panel" ;
+if itest.s "x" == "x$dtbname" ; then
+	dtbname=imx6dl-nit6xlite.dtb;
+fi
 
-if test "x" = "x$panel" ; then
-	echo '-------------no panel set... auto-detect'
-	i2c dev 2
-	if i2c probe 0x04 ; then
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,LDB-XGA,if=RGB666
-		if test "0" -eq $nextcon; then
-			setenv fbmem "fbmem=20M";
-		else
-			setenv fbmem ${fbmem},20M
-		fi
-		setexpr nextcon $nextcon + 1
-	else
-		echo "------ no Freescale display";
-	fi
+setenv fdt_addr 0x12000000
+if ${fs}load ${dtype} ${disk}:1 $fdt_addr ${bootdir}$dtbname ; then
+	fdt addr $fdt_addr
+	setenv fdt_high 0xffffffff
+else
+	echo "!!!! Error loading ${bootdir}$dtbname";
+	exit;
+fi
 
-	if i2c probe 0x38 ; then
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
-		if test "0" -eq $nextcon; then
-			setenv fbmem "fbmem=20M";
-		else
-			setenv fbmem ${fbmem},20M
-		fi
-		setexpr nextcon $nextcon + 1
+# ------------------- HDMI detection
+i2c dev 1 ;
+if i2c probe 0x50 ; then
+	echo "------ have HDMI monitor";
+	if itest.s x == x$allow_noncea ; then
+		setenv bootargs $bootargs mxc_hdmi.only_cea=1;
+		echo "only CEA modes allowed on HDMI port";
 	else
-		echo "------ no 1024x600 display";
+		setenv bootargs $bootargs mxc_hdmi.only_cea=0;
+		echo "non-CEA modes allowed on HDMI, audio may be affected";
 	fi
+else
+	fdt rm hdmi_display
+	echo "------ no HDMI monitor";
+fi
 
-        i2c dev 1
-	if i2c probe 0x50 ; then
-		setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
-		if test "0" -eq $nextcon; then
-			setenv fbmem "fbmem=48M";
-		else
-			setenv fbmem ${fbmem},48M
-		fi
-		setexpr nextcon $nextcon + 1
-                if itest.s x == x$allow_noncea ; then
-                	setenv bootargs $bootargs mxc_hdmi.only_cea=1;
-                	echo "only CEA modes allowed on HDMI port";
-                else
-                        setenv bootargs $bootargs mxc_hdmi.only_cea=0;
-                        echo "non-CEA modes allowed on HDMI, audio may be affected";
-                fi
+# ------------------- LVDS detection
+# -------- LVDS0
+setenv have_lvds
+i2c dev 2
+if i2c probe 0x04 ; then
+	echo "------ have Freescale display";
+	setenv have_lvds 1
+else
+	echo "------ no Freescale display";
+	fdt rm hannstar;
+fi
+
+if i2c probe 0x38 ; then
+	if itest.s "xLDB-WXGA" == "x$panel"; then
+		screenres=1280,800
+		fdt rm okaya1024x600
 	else
-		echo "------ no HDMI monitor";
+		screenres=1024,600
+		fdt rm lg1280x800
 	fi
-else if test "HDMI" = "$panel" ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=hdmi,bpp=32,1280x720M@60,if=RGB24
-	setenv fbmem "fbmem=48M";
-	setexpr nextcon $nextcon + 1
-        if itest.s x == x$allow_noncea ; then
-        	setenv bootargs $bootargs mxc_hdmi.only_cea=1;
-        	echo "only CEA modes allowed on HDMI port";
-        else
-                setenv bootargs $bootargs mxc_hdmi.only_cea=0;
-                echo "non-CEA modes allowed on HDMI, audio may be affected";
-        fi
-else if itest.s "Hannstar-XGA" == "$panel" ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,LDB-XGA,if=RGB666
-	setenv fbmem "fbmem=20M";
-	setexpr nextcon $nextcon + 1
-else if itest.s "wqvga-rgb" == "$panel" ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,wqvga-lcd,if=RGB24 calibration tsdev=tsc2004
-	setenv fbmem "fbmem=20M";
-	setexpr nextcon $nextcon + 1
-        if itest.s "x" -eq "x$calibration" ; then
-                setenv bootargs $bootargs tsc2004.calibration=-65527,-139,264481023,4768,-71105,256966332,65536
-        else
-                setenv bootargs $bootargs tsc2004.calibration=$calibration
-        fi
-else if itest.s "wsvga-lvds" == "$panel" ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1024x600M@60,if=RGB666
-	setenv fbmem "fbmem=20M";
-	setexpr nextcon $nextcon + 1
-else if itest.s "wvga-rgb" == "$panel" ; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=lcd,bpp=32,CLAA-WVGA,if=RGB666 tsdev=tsc2004 calibration
-	setenv fbmem "fbmem=20M";
-	setexpr nextcon $nextcon + 1
-else if itest.s "xLDB-WVGA" == "x$panel"; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,800x480MR@60,if=RGB666 tsdev=ft5x06 ft5x06.screenres=2048,2048
-	setenv bootargs $bootargs ft5x06.calibration=0,65536,0,65536,0,0,65536
-	setenv fbmem "fbmem=20M";
-	setexpr nextcon $nextcon + 1
-else if itest.s "xLDB-WXGA" == "x$panel"; then
-	setenv bootargs $bootargs video=mxcfb${nextcon}:dev=ldb,bpp=32,1280x800MR@60,if=RGB666 tsdev=ft5x06 ft5x06.screenres=1280,800
-	setenv fbmem "fbmem=20M";
-	setexpr nextcon $nextcon + 1
+	setenv have_lvds 1
+	setenv bootargs $bootargs ft5x06_ts.screenres=$screenres
 	if itest.s "x" -ne "x$calibration" ; then
-		setenv bootargs $bootargs ft5x06.calibration=$calibration
+		setenv bootargs $bootargs ft5x06_ts.calibration=$calibration
 	fi
-fi ; fi ; fi ; fi ; fi ; fi ; fi ; fi
+else
+	echo "------ no ft5x06 touch controller";
+	fdt rm okaya1024x600
+	fdt rm lg1280x800
+fi
 
-while test "4" -ne $nextcon ; do
-	setenv bootargs $bootargs video=mxcfb${nextcon}:off ;
-	setexpr nextcon $nextcon + 1 ;
-done
+if itest.s "x" == "x$have_lvds"; then
+	fdt rm lvds_display;
+fi
 
-setenv bootargs $bootargs $fbmem androidboot.hardware=freescale
-${fs}load ${dtype} ${disk}:1 10800000 uImage && ${fs}load ${dtype} ${disk}:1 12800000 uramdisk.img && bootm 10800000 12800000
+# ------------------- LCD detection
+# since the Nitrogen6_Lite board has on-board TSC2004,
+# we can't test for it.
+#
+# set ignore_lcd to 1 to disable the 480x272 display
+#
+if itest.s "x" != "x$ignore_lcd" ; then
+	echo "------ ignoring LCD display";
+	fdt rm lcd_display;
+fi
+
+setenv bootargs "$bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 rootwait"
+
+bootdev=mmcblk2
+setenv bootargs $bootargs androidboot.hardware=freescale
+if itest.s "xsata" == "x$dtype" ; then
+	bootdev=sda
+elif itest.s "xusb" == "x$dtype" ; then
+	bootdev=sda
+elif itest.s "xmmc" == "x$dtype" ; then
+	if itest 1 == ${disk}; then
+		bootdev=mmcblk3
+	fi
+fi
+
+setenv bootargs $bootargs androidboot.bootdev=$bootdev
+
+setenv bootargs $bootargs fec.disable_giga=1
+
+if itest.s "x" != "x$gpumem" ; then
+	setenv bootargs $bootargs galcore.contiguousSize=$gpumem
+fi
+
+if itest.s "x" != "x$show_fdt" ; then
+	fdt print /
+fi
+
+if itest.s "x" != "x$show_env" ; then
+	printenv
+fi
+
+kernel=uImage
+ramdisk=uramdisk.img
+
+if kbd ; then
+        if itest.s "xv" == "x$keybd" ; then
+                kernel=uImage-recovery
+                ramdisk=uramdisk-recovery.img
+        fi
+fi
+
+setenv stdout serial;
+
+${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && \
+echo "loaded $kernel" && \
+${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && \
+echo "loaded $ramdisk" && bootm 10800000 12800000 $fdt_addr ;
+
 echo "Error loading kernel image"
-
