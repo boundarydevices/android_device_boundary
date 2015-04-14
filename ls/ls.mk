@@ -15,12 +15,11 @@ PRODUCT_COPY_FILES += \
 	device/boundary/ls/fstab.freescale:root/fstab.freescale \
 	device/boundary/ls/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
 	device/boundary/wl12xx/wl127x-fw-5-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-sr.bin \
+	device/boundary/wl12xx/wl127x-fw-5-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-mr.bin \
 	device/boundary/wl12xx/TIInit_7.6.15.bts:system/etc/firmware/ti-connectivity/TIInit_7.6.15.bts \
 	device/boundary/wl12xx/TIInit_7.2.31.bts:system/etc/firmware/ti-connectivity/TIInit_7.2.31.bts \
 	device/boundary/ls/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/ls/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-        frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
 
@@ -47,6 +46,12 @@ PRODUCT_PACKAGES += uim-sysfs \
 PRODUCT_PACKAGES += \
 	wl127x-fw-5-sr.bin \
 	wl1271-nvs.bin
+
+# WiFi Direct requirements
+PRODUCT_PACKAGES += \
+    TQS_D_1.7.ini \
+    dhcpcd.conf \
+    hostapd.conf
 
 include device/boundary/openssh.mk
 
