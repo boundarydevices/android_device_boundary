@@ -15,16 +15,14 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
-        frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-	device/boundary/bcmdhd/bcmdhd.cal:system/etc/firmware/bcmdhd.cal \
-	device/boundary/bcmdhd/fw_bcmdhd.bin:system/etc/firmware/fw_bcmdhd.bin \
 	device/boundary/nit6xlite/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nit6xlite/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	device/boundary/nit6xlite/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
 	device/boundary/nit6xlite/bcm4330.hcd:system/etc/firmware/bcm4330.hcd \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
-        frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+	device/boundary/brcm/brcmfmac4330-sdio.bin:system/etc/firmware/brcm/brcmfmac4330-sdio.bin \
+	device/boundary/brcm/brcmfmac4330-sdio.txt:system/etc/firmware/brcm/brcmfmac4330-sdio.txt
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
