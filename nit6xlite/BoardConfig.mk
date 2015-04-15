@@ -48,6 +48,12 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_WLAN_DEVICE           := bcmdhd
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/brcmfmac.ko"
 WIFI_DRIVER_MODULE_NAME     := "brcmfmac"
+WIFI_DRIVER_MODULE_ARG      := "p2pon=1"
+
+# WiFi Direct requirements
+WPA_BUILD_HOSTAPD         := true
+BOARD_HOSTAPD_DRIVER      := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true

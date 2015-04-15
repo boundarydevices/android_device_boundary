@@ -47,6 +47,11 @@ PRODUCT_PACKAGES += uim-sysfs \
 		lib_driver_cmd_bcmdhd \
 		brcm_patchram_plus
 
+# WiFi Direct requirements
+PRODUCT_PACKAGES += \
+    dhcpcd.conf \
+    hostapd.conf
+
 include device/boundary/openssh.mk
 
 PRODUCT_PACKAGES += ethernet
