@@ -15,7 +15,8 @@ endif
 
 TARGET_BOARD_DTS_CONFIG=imx6dl:imx6dl-nit6xlite.dtb
 TARGET_KERNEL_MODULES := \
-    kernel_imx/drivers/net/wireless/bcmdhd/bcmdhd.ko:system/lib/modules/bcmdhd.ko
+    kernel_imx/drivers/net/wireless/brcm80211/brcmutil/brcmutil.ko:system/lib/modules/brcmutil.ko \
+    kernel_imx/drivers/net/wireless/brcm80211/brcmfmac/brcmfmac.ko:system/lib/modules/brcmfmac.ko
 
 PRODUCT_MODEL := NIT6X
 BOARD_HAS_SGTL5000 := true
@@ -44,17 +45,9 @@ BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 # Wifi related defines
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-SKIP_WPA_SUPPLICAN_CONF		 := y
-SKIP_WPA_SUPPLICANT_RTL		 := y
 BOARD_WLAN_DEVICE           := bcmdhd
-#WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcmdhd.ko"
-WIFI_DRIVER_MODULE_NAME     := "bcmdhd"
-#WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcmdhd.bin"
-#WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
-#WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
-
-BOARD_WLAN_DEVICE		 := bcmdhd
+WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/brcmfmac.ko"
+WIFI_DRIVER_MODULE_NAME     := "brcmfmac"
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
