@@ -86,7 +86,7 @@ fi
 #
 # set ignore_lcd to 1 to disable the 480x272 display
 #
-if itest.s "x" != "x$ignore_lcd" ; then
+if itest.s "xRGB-WQVGA" != "x$panel"; then
 	echo "------ ignoring LCD display";
 	fdt rm lcd_display;
 fi
