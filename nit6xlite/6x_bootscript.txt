@@ -84,7 +84,7 @@ fi
 # since the Nitrogen6_Lite board has on-board TSC2004,
 # we can't test for it.
 #
-# set ignore_lcd to 1 to disable the 480x272 display
+# set panel to RGB-WQVGA to enable the 480x272 display
 #
 if itest.s "xRGB-WQVGA" != "x$panel"; then
 	echo "------ ignoring LCD display";
