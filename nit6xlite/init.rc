@@ -146,11 +146,3 @@ on fs
     mkdir /data/data/com.android.browser 0777 system system
     mount_all /fstab.freescale
     chown 10003 10003 /data/data/com.android.browser
-
-service hciattach /system/bin/brcm_patchram_plus -d --enable_hci \
-    --no2bytes --tosleep 20000 \
-    --baudrate 3000000 --patchram system/etc/firmware/bcm4330.hcd /dev/ttymxc2
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
