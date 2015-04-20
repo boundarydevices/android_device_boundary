@@ -84,9 +84,9 @@ fi
 # since the Nitrogen6_Lite board has on-board TSC2004,
 # we can't test for it.
 #
-# set panel to RGB-WQVGA to enable the 480x272 display
+# set panel to wqvga-rgb to enable the 480x272 display
 #
-if itest.s "xRGB-WQVGA" != "x$panel"; then
+if itest.s "xwqvga-rgb" != "x$panel"; then
 	echo "------ ignoring LCD display";
 	fdt rm lcd_display;
 fi
