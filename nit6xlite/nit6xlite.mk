@@ -26,7 +26,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
-       ro.sf.lcd_density=120
+       ro.sf.lcd_density=160
 
 LIBBT_VENDORFILE      := device/boundary/nit6xlite/libbt_vnd_nit6xlite.conf
 BOARD_WLAN_DEVICE_REV := bcm4330_b2
