@@ -11,6 +11,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nit6xlite/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nit6xlite/init.rc:root/init.freescale.rc \
 	device/boundary/nit6xlite/init.rc:root/init.boundary.rc \
+	device/boundary/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nit6xlite/ueventd.boundary.rc:root/ueventd.freescale.rc \
 	device/boundary/nit6xlite/vold.fstab:system/etc/vold.fstab \
 	device/boundary/nit6xlite/fstab.boundary:root/fstab.boundary \
@@ -43,7 +44,7 @@ DEVICE_PACKAGE_OVERLAYS := device/boundary/nit6xlite/overlay
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
-SUPERUSER_PACKAGE := com.boundary.superuser
+SUPERUSER_PACKAGE := .cyanogenmod.superuser
 SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += uim-sysfs \
