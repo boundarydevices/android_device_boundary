@@ -20,9 +20,6 @@ on init
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
 on boot
-    # Set permission for IIM node
-    symlink /dev/mxs_viim /dev/mxc_mem
-
     # Enable Tethering in the Settings
     setprop ro.tether.denied false
 
@@ -66,14 +63,6 @@ on boot
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
     chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
-    chown root system /sys/devices/system/cpu/cpu0/online
-    chmod 0664 /sys/devices/system/cpu/cpu0/online
-    chown root system /sys/devices/system/cpu/cpu1/online
-    chmod 0664 /sys/devices/system/cpu/cpu1/online
-    chown root system /sys/devices/system/cpu/cpu2/online
-    chmod 0664 /sys/devices/system/cpu/cpu2/online
-    chown root system /sys/devices/system/cpu/cpu3/online
-    chmod 0664 /sys/devices/system/cpu/cpu3/online
 
     # prepare for ril
     setprop gsm.ril.delay 15
@@ -119,7 +108,4 @@ service p2p_supplicant /system/bin/logwrapper \
 
 on fs
 # mount ext4 partitions
-    mkdir /data/data/ 0771 system system
-    mkdir /data/data/com.android.browser 0777 system system
     mount_all /fstab.freescale
-    chown 10003 10003 /data/data/com.android.browser
