@@ -24,24 +24,6 @@ on boot
     # Set permission for IIM node
     symlink /dev/mxs_viim /dev/mxc_mem
 
-    #
-    # expose WL_EN (175) and BT_EN (176) to userspace
-    #
-    chmod 0777 /sys/class/gpio
-    chmod 0777 /sys/class/gpio/export
-    write /sys/class/gpio/export 175
-    write /sys/class/gpio/export 176
-    chmod 0777 /sys/class/gpio/gpio175
-    chmod 0777 /sys/class/gpio/gpio176
-    chmod 0777 /sys/class/gpio/gpio175/direction
-    chmod 0777 /sys/class/gpio/gpio176/direction
-    chmod 0777 /sys/class/gpio/gpio175/value
-    chmod 0777 /sys/class/gpio/gpio176/value
-    write /sys/class/gpio/gpio175/direction out
-    write /sys/class/gpio/gpio176/direction out
-    write /sys/class/gpio/gpio175/value 1
-    write /sys/class/gpio/gpio176/value 0
-
     # Enable Tethering in the Settings
     setprop ro.tether.denied false
 
