@@ -31,7 +31,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
-       ro.sf.lcd_density=120
+       ro.sf.lcd_density=160
 
 # GPU files
 
