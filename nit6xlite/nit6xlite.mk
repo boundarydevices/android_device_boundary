@@ -26,6 +26,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
+       ro.config.low_ram=true \
        ro.sf.lcd_density=160
 
 LIBBT_VENDORFILE      := device/boundary/nit6xlite/libbt_vnd_nit6xlite.conf
