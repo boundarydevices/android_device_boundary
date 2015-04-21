@@ -47,3 +47,4 @@
 /sys/devices/soc0/fb.* fsl_disp_property 0660 system graphics
 /sys/devices/soc0/fb.* mode 0660 system graphics
 /sys/devices/soc0/soc.1/busfreq.* enable 0660 system system
+/sys/devices/system/cpu/cpu* online 0664 root system
