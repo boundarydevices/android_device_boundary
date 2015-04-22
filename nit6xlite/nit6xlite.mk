@@ -44,7 +44,7 @@ DEVICE_PACKAGE_OVERLAYS := device/boundary/nit6xlite/overlay
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
-SUPERUSER_PACKAGE := .cyanogenmod.superuser
+SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
 SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += uim-sysfs \
