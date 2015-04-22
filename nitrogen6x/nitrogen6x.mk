@@ -58,7 +58,7 @@ PRODUCT_PACKAGES += \
 
 include device/boundary/openssh.mk
 
-SUPERUSER_PACKAGE := .cyanogenmod.superuser
+SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
 
 SUPERUSER_EMBEDDED := true
 
