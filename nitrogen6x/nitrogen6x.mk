@@ -66,4 +66,5 @@ SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
 SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += ethernet \
-        Superuser
+        Superuser \
+        su
