@@ -11,7 +11,7 @@
 
 # Comment out the line above and uncomment this to make the top slot on Nitrogen6x
 # or bottom (full-size SD) slot on SABRE Lite the "removable" SD card
-# /devices/soc0/soc.1/2100000.aips-bus/2198000.usdhc/mmc_host /mnt/media_rw/extsd vfat defaults voldmanaged=extsd:auto
+/devices/soc0/soc.1/2100000.aips-bus/2198000.usdhc/mmc_host /mnt/media_rw/extsd vfat defaults voldmanaged=extsd:auto
 
 $BD1    /boot    vfat    noatime,nodiratime,errors=remount-ro                                             wait
 $BD5    /system  ext4    ro                                                                               wait
