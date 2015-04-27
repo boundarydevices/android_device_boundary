@@ -79,7 +79,7 @@ dd if=/dev/zero of=${diskname} count=1 bs=1024
 sudo sfdisk --force -uM ${diskname} << EOF
 ,20,B,*
 ,20,B
-,2048,E
+,1148,E
 ,,83
 ,512,83
 ,512,83
@@ -98,9 +98,9 @@ done
 echo "all partitions present and accounted for!";
 sync && sudo sfdisk -R ${diskname}${prefix} && sleep 1
 
-# make partition 4 1500MB long (to allow smallish 4GB cards)
+# make partition 4 2400MB long (to allow smallish 4GB cards)
 sfdisk ${diskname} -N4 -uM  << EOF
-,1500,83
+,2400,83
 EOF
 
 sync && sudo sfdisk -R ${diskname}${prefix} && sleep 1
