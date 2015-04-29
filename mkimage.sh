@@ -54,7 +54,7 @@ VENDEND=1096
 MISCSTART=1100
 MISCEND=1116
 DATASTART=1120
-DATAEND=$outsizemb
+DATAEND=`expr $outsizemb - 4`
 parted $outfilename mklabel msdos
 parted $outfilename unit MiB mkpart primary fat32 $BOOTSTART $BOOTEND
 parted $outfilename unit MiB mkpart primary fat32 $RECOVERSTART $RECOVEREND
