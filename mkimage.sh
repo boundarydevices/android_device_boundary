@@ -107,6 +107,7 @@ if [ -d $mountpoint ]; then
    sudo cp -ravf out/target/product/$product/boot/* $mountpoint/
    sudo cp -rfv out/target/product/$product/uramdisk-recovery.img $mountpoint/uramdisk.img
 fi
+sudo umount $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 4 $DATASTART $DATAEND   
@@ -116,6 +117,7 @@ mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ -d $mountpoint ]; then
    sudo cp -ravf out/target/product/$product/data/* $mountpoint/
 fi
+sudo umount $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 5 $SYSTEMSTART $SYSTEMEND
