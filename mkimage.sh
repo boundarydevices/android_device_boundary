@@ -123,6 +123,9 @@ sudo losetup -d $loopdev
 setuploop $outfilename 5 $SYSTEMSTART $SYSTEMEND
 e2label out/target/product/$product/system.img
 sudo dd if=out/target/product/$product/system.img of=$loopdev
+sudo e2label $loopdev SYSTEM
+sudo e2fsck -f $loopdev
+sudo resize2fs $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 6 $CACHESTART $CACHEEND   
