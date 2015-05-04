@@ -89,6 +89,12 @@ fi
 if itest.s "xwqvga-rgb" != "x$panel"; then
 	echo "------ ignoring LCD display";
 	fdt rm lcd_display;
+else
+	if itest.s "x" -eq "x$tsc_calibration" ; then
+		setenv bootargs $bootargs tsc2004.calibration=-65527,-139,264481023,4768,-71105,256966332,65536
+	else
+		setenv bootargs $bootargs tsc2004.calibration=$tsc_calibration
+	fi
 fi
 
 setenv bootargs "$bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 rootwait"
