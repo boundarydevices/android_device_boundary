@@ -182,6 +182,11 @@ if itest.s "x" != "x$wlmac" ; then
 	setenv bootargs $bootargs wlcore.mac=$wlmac
 fi
 
+# default cma size is 256M
+if itest.s "x" != "x$cma" ; then
+	setenv bootargs $bootargs cma=$cma
+fi
+
 if itest.s "x" != "x$gpumem" ; then
 	setenv bootargs $bootargs galcore.contiguousSize=$gpumem
 fi
