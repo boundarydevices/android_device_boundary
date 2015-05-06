@@ -13,6 +13,8 @@ else
 TARGET_KERNEL_DEFCONF := nit6xlite_defconfig
 endif
 
+TARGET_RECOVERY_FSTAB := device/boundary/nit6xlite/fstab.freescale
+
 TARGET_BOARD_DTS_CONFIG=imx6dl:imx6dl-nit6xlite.dtb
 TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/brcm80211/brcmutil/brcmutil.ko:system/lib/modules/brcmutil.ko \
