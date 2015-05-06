@@ -120,6 +120,11 @@ setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
 
 setenv bootargs $bootargs fec.disable_giga=1
 
+# default cma size is 256M
+if itest.s "x" != "x$cma" ; then
+	setenv bootargs $bootargs cma=$cma
+fi
+
 if itest.s "x" != "x$gpumem" ; then
 	setenv bootargs $bootargs galcore.contiguousSize=$gpumem
 fi
