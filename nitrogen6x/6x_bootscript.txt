@@ -54,6 +54,11 @@ if i2c probe 0x50 ; then
 		setenv bootargs $bootargs mxc_hdmi.only_cea=0;
 		echo "non-CEA modes allowed on HDMI, audio may be affected";
 	fi
+	if itest.s "xHDMI-1080P" == "x$panel"; then
+		echo "HDMI resolution set to 1080p";
+		fdt resize
+		fdt set hdmi_display mode_str "1920x1080M@60"
+	fi
 else
 	fdt rm hdmi_display
 	echo "------ no HDMI monitor";
