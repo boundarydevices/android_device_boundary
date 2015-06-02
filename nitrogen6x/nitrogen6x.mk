@@ -34,8 +34,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
        ro.sf.lcd_density=160
 
-# GPU files
-
 DEVICE_PACKAGE_OVERLAYS := device/boundary/nitrogen6x/overlay
 
 PRODUCT_CHARACTERISTICS := tablet
@@ -66,5 +64,6 @@ SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
 SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += ethernet \
+        CMFileManager \
         Superuser \
         su
