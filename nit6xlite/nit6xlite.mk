@@ -57,5 +57,6 @@ PRODUCT_PACKAGES += \
 include device/boundary/openssh.mk
 
 PRODUCT_PACKAGES += ethernet \
-		su
-
+        CMFileManager \
+        Superuser \
+        su
