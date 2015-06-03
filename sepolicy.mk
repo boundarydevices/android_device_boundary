@@ -1,12 +1,26 @@
 BOARD_SEPOLICY_DIRS := \
        device/boundary/sepolicy \
-       device/fsl/sabresd_6dq/sepolicy
+       device/fsl/imx6/sepolicy
 
 BOARD_SEPOLICY_UNION := \
-       app.te \
-       file_contexts \
-       fs_use \
-       genfs_contexts \
-       netd.te \
+       domain.te \
+       system_app.te \
+       system_server.te \
        untrusted_app.te \
+       sensors.te \
+       init_shell.te \
+       bluetooth.te \
+       kernel.te \
+       mediaserver.te \
+       file_contexts \
+       genfs_contexts \
+       fs_use  \
+       rild.te \
+       init.te \
+       netd.te \
+       bootanim.te \
+       dnsmasq.te \
+       recovery.te \
+       device.te \
+       zygote.te
 
