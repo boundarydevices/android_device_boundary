@@ -28,7 +28,7 @@ BOARD_NOT_HAVE_MODEM := true
 BOARD_HAVE_IMX_CAMERA := true
 BOARD_HAVE_USB_CAMERA := false
 BOARD_HAS_SENSOR := false
-TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
+TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
 USE_ION_ALLOCATOR := false
 USE_GPU_ALLOCATOR := true
@@ -58,7 +58,7 @@ BOARD_WLAN_DEVICE                := wl12xx_mac80211
 WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
 WIFI_DRIVER_MODULE_PATH		 := "/system/lib/modules/wlcore_sdio.ko"
 
-BOARD_USE_AR3K_BLUETOOTH := 
+BOARD_USE_AR3K_BLUETOOTH :=
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/utc/
 
 include device/boundary/sepolicy.mk
