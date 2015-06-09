@@ -22,5 +22,6 @@ BOARD_SEPOLICY_UNION := \
        dnsmasq.te \
        recovery.te \
        device.te \
+       wpa.te \
        zygote.te
 
