@@ -13,8 +13,8 @@
 # or bottom (full-size SD) slot on SABRE Lite the "removable" SD card
 # /devices/soc0/soc.1/2100000.aips-bus/2198000.usdhc/mmc_host /mnt/media_rw/extsd vfat defaults voldmanaged=extsd:auto
 
-$BD1    /boot     vfat    noatime,nodiratime,errors=remount-ro                                             wait
-$BD2    /recovery vfat    noatime,nodiratime,errors=remount-ro                                             wait
+$BD1    /boot     ext4    noatime,nodiratime,errors=remount-ro                                             wait
+$BD2    /recovery ext4    noatime,nodiratime,errors=remount-ro                                             wait
 $BD5    /system   ext4    ro                                                                               wait
 $BD4    /data     ext4    nosuid,nodev,nodiratime,noatime,nomblk_io_submit,noauto_da_alloc,errors=panic    wait
 $BD6    /cache    ext4    nosuid,nodev,nomblk_io_submit                                                    wait

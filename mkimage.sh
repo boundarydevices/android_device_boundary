@@ -89,7 +89,7 @@ setuploop(){
 }
 
 setuploop $outfilename 1 $BOOTSTART $BOOTEND   
-sudo mkfs.vfat -n BOOT $loopdev
+sudo mkfs.ext4 -L BOOT $loopdev
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ -d $mountpoint ]; then
@@ -100,7 +100,7 @@ sudo losetup -d $loopdev
 
 setuploop $outfilename 2 $RECOVERSTART $RECOVEREND   
 sudo cp -rfv out/target/product/$product/boot/6x* /media/RECOVER/
-sudo mkfs.vfat -n RECOVER $loopdev
+sudo mkfs.ext4 -L RECOVER $loopdev
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ -d $mountpoint ]; then

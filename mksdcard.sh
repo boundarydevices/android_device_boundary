@@ -106,9 +106,9 @@ EOF
 sync && sudo sfdisk -R ${diskname}${prefix} && sleep 1
 
 echo "------------------making BOOT partition"
-mkfs.vfat -n BOOT ${diskname}${prefix}1
+mkfs.ext4 -L BOOT ${diskname}${prefix}1
 echo "------------------making RECOVER partition"
-mkfs.vfat -n RECOVER ${diskname}${prefix}2
+mkfs.ext4 -L RECOVER ${diskname}${prefix}2
 echo "------------------making DATA partition"
 mkfs.ext4 -L DATA ${diskname}${prefix}4
 echo "------------------making CACHE partition"
