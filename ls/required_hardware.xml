@@ -20,6 +20,7 @@
     <feature name="android.hardware.camera" />
     <feature name="android.hardware.camera.autofocus" />
     <feature name="android.hardware.camera.flash" />
+    <feature name="android.hardware.ethernet" />
     <feature name="android.hardware.location" />
     <feature name="android.hardware.location.network" />
     <feature name="android.hardware.wifi" />
