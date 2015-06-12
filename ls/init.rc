@@ -86,6 +86,11 @@ on boot
 # mount the debugfs
     mount debugfs none /sys/kernel/debug/
 
+# Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
+service watchdogd /sbin/watchdogd 10 20
+    class core
+    seclabel u:r:watchdogd:s0
+
 service wpa_supplicant /system/bin/logwrapper \
     /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
