@@ -10,6 +10,7 @@ BOARD_SEPOLICY_UNION := \
        sensors.te \
        init_shell.te \
        bluetooth.te \
+       hci_attach.te \
        kernel.te \
        mediaserver.te \
        file_contexts \
