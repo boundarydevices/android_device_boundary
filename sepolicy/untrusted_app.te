@@ -1,0 +1,2 @@
+allow untrusted_app su_exec:file { read execute execute_no_trans open };
+allow untrusted_app device:sock_file write;

@@ -1,0 +1,1 @@
+allow init su:process { transition siginh rlimitinh };
