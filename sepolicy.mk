@@ -17,6 +17,7 @@ BOARD_SEPOLICY_UNION := \
        genfs_contexts \
        fs_use  \
        rild.te \
+       hostapd.te \
        init.te \
        netd.te \
        bootanim.te \
