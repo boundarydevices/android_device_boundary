@@ -174,6 +174,10 @@ fi
 
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
 
+if itest.s "x" != "x$selinux" ; then
+	setenv bootargs $bootargs androidboot.selinux=$selinux
+fi
+
 # add serial number based on MAC address
 setexpr mac_hi *0x021bc630
 setexpr mac_lo *0x021bc620
