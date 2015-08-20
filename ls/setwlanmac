@@ -1,4 +1,0 @@
-#!/system/bin/busybox sh
-mac=`cat /sys/class/net/eth0/address`;
-wlan=${mac:0:9}8${mac:10}
-ifconfig wlan0 hw ether $wlan
