@@ -8,7 +8,7 @@
 /dev/ttyACM*              0640   radio      radio
 /dev/video*               0660   system     camera
 /dev/video16              0660   system     graphics
-/dev/mxc_ipu              0660   graphics   system
+/dev/mxc_ipu              0660   media      system
 /dev/mxc_vpu              0660   media      system
 /dev/uinput               0666   system     input
 /dev/ttya0                0660   system     gps
@@ -20,6 +20,7 @@
 /dev/graphics/fb0         0660   system     graphics
 /dev/watchdog             0660   system     root
 /dev/rfkill               0660   wifi       system
+/dev/caam_kb              0660   system     system
 
 # sysfs properties
 /sys/devices/virtual/input/input*   name        0660  root   input
@@ -34,9 +35,7 @@
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_temp 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_2_temp 0660 system system
 /sys/devices/soc0/backlight_* brightness 0660 system system
-/sys/devices/soc0/soc.1/2100000.aips-bus/* boot_bus_config 0660 root root
-/sys/devices/soc0/soc.1/2100000.aips-bus/* boot_config 0660 root root
 /sys/devices/soc0/fb.* fsl_disp_property 0660 system graphics
 /sys/devices/soc0/fb.* mode 0660 system graphics
-/sys/devices/soc0/soc.1/busfreq.* enable 0660 system system
+/sys/devices/soc0/soc.0/busfreq.* enable 0660 system system
 /sys/devices/system/cpu/cpu* online 0664 root system
