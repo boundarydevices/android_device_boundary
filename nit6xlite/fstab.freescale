@@ -3,7 +3,7 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-/devices/soc0/soc.1/2100000.aips-bus/2184200.usb/ci_hdrc.1 /mnt/media_rw/udisk vfat defaults voldmanaged=udisk:auto
+/devices/soc0/soc.0/2100000.aips-bus/2184200.usb/ci_hdrc.1 /mnt/media_rw/udisk vfat defaults voldmanaged=udisk:auto
 
 $BD1    /boot     ext4    noatime,nodiratime,errors=remount-ro                                             wait
 $BD2    /recovery ext4    noatime,nodiratime,errors=remount-ro                                             wait
