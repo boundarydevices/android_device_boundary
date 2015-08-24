@@ -1,5 +1,6 @@
 import init.${ro.hardware}.usb.rc
 import init.superuser.rc
+import init.bt-wlan.rc
 
 on init
     start watchdogd
@@ -115,13 +116,6 @@ service p2p_supplicant /system/bin/wpa_supplicant \
 on fs
 # mount ext4 partitions
     mount_all /fstab.freescale
-
-#shared transport user space mgr service for Bluetooth, FM and GPS
-service uim /system/bin/uim-sysfs
-    class core
-    user bluetooth
-    group bluetooth net_bt_admin
-    seclabel u:r:hci_attach:s0
 
 service expose-leds /system/bin/expose-leds
     oneshot
