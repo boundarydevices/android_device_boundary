@@ -29,89 +29,59 @@ else
 	exit;
 fi
 
-# ------------------- HDMI detection
-i2c dev 1 ;
-if i2c probe 0x50 ; then
-	echo "------ have HDMI monitor";
-	if itest.s x == x$allow_noncea ; then
-		setenv bootargs $bootargs mxc_hdmi.only_cea=1;
+cmd_xxx_present=
+fdt resize
+if itest.s "x" != "x${cmd_custom}" ; then
+	run cmd_custom
+	cmd_xxx_present=1;
+fi
+
+# ------------------- Displays detection
+if itest.s "x" != "x${cmd_hdmi}" ; then
+	run cmd_hdmi
+	cmd_xxx_present=1;
+	if itest.s x == x${allow_noncea} ; then
+		setenv bootargs ${bootargs} mxc_hdmi.only_cea=1;
 		echo "only CEA modes allowed on HDMI port";
 	else
-		setenv bootargs $bootargs mxc_hdmi.only_cea=0;
+		setenv bootargs ${bootargs} mxc_hdmi.only_cea=0;
 		echo "non-CEA modes allowed on HDMI, audio may be affected";
 	fi
-else
-	fdt rm hdmi_display
-	echo "------ no HDMI monitor";
 fi
-
-# ------------------- LVDS detection
-# -------- LVDS0
-setenv have_lvds
-i2c dev 2
-if i2c probe 0x04 ; then
-	echo "------ have Freescale display";
-	setenv have_lvds 1
-else
-	echo "------ no Freescale display";
-	fdt rm hannstar;
+if itest.s "x" != "x${cmd_lcd}" ; then
+	run cmd_lcd
+	cmd_xxx_present=1;
+	setenv bootargs $bootargs tsc2004.calibration=-65527,-139,264481023,4768,-71105,256966332,65536
 fi
-
-if i2c probe 0x38 ; then
-	if itest.s "xLDB-WXGA" == "x$panel"; then
-		screenres=1280,800
-		fdt rm okaya1024x600
-	else
-		screenres=1024,600
-		fdt rm lg1280x800
-	fi
-	setenv have_lvds 1
-	setenv bootargs $bootargs ft5x06_ts.screenres=$screenres
-	if itest.s "x" -ne "x$calibration" ; then
-		setenv bootargs $bootargs ft5x06_ts.calibration=$calibration
-	fi
-else
-	echo "------ no ft5x06 touch controller";
-	fdt rm okaya1024x600
-	fdt rm lg1280x800
+if itest.s "x" != "x${cmd_lvds}" ; then
+	run cmd_lvds
+	cmd_xxx_present=1;
 fi
-
-if itest.s "x" == "x$have_lvds"; then
-	fdt rm lvds_display;
+if itest.s "x" != "x${cmd_lvds2}" ; then
+	run cmd_lvds2
+	cmd_xxx_present=1;
 fi
-
-# ------------------- LCD detection
-# since the Nitrogen6_Lite board has on-board TSC2004,
-# we can't test for it.
-#
-# set panel to wqvga-rgb to enable the 480x272 display
-#
-if itest.s "xwqvga-rgb" != "x$panel"; then
-	echo "------ ignoring LCD display";
-	fdt rm lcd_display;
-else
-	if itest.s "x" -eq "x$tsc_calibration" ; then
-		setenv bootargs $bootargs tsc2004.calibration=-65527,-139,264481023,4768,-71105,256966332,65536
-	else
-		setenv bootargs $bootargs tsc2004.calibration=$tsc_calibration
-	fi
+if itest.s "x" == "x${cmd_xxx_present}" ; then
+	echo "!!!!!!!!!!!!!!!!"
+	echo "warning: your u-boot may be outdated, please upgrade"
+	echo "!!!!!!!!!!!!!!!!"
 fi
 
 setenv bootargs "$bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 rootwait"
-
-bootdev=mmcblk2
 setenv bootargs $bootargs androidboot.hardware=freescale
+
 if itest.s "xsata" == "x$dtype" ; then
 	bootdev=sda
 elif itest.s "xusb" == "x$dtype" ; then
 	bootdev=sda
-elif itest.s "xmmc" == "x$dtype" ; then
-	if itest 1 == ${disk}; then
-		bootdev=mmcblk3
-	fi
+else
+	bootdev=mmcblk${disk}
 fi
-
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
+
+if itest.s "x" != "x$selinux" ; then
+	setenv bootargs $bootargs androidboot.selinux=$selinux
+fi
 
 # add serial number based on MAC address
 setexpr mac_hi *0x021bc630
@@ -119,10 +89,6 @@ setexpr mac_lo *0x021bc620
 setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
 
 setenv bootargs $bootargs fec.disable_giga=1
-
-if itest.s "x" != "x$selinux" ; then
-	setenv bootargs $bootargs androidboot.selinux=$selinux
-fi
 
 # default cma size is 256M
 if itest.s "x" != "x$cma" ; then
@@ -143,14 +109,6 @@ fi
 
 kernel=uImage
 ramdisk=uramdisk.img
-
-if kbd ; then
-        if itest.s "xv" == "x$keybd" ; then
-                kernel=uImage-recovery
-                ramdisk=uramdisk-recovery.img
-        fi
-fi
-
 setenv stdout serial;
 
 ${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && \
