@@ -27,10 +27,6 @@
 # Copied from build/target/product/AndroidProducts.mk
 
 PRODUCT_MAKEFILES += \
-  $(LOCAL_DIR)/cad/cad.mk \
-  $(LOCAL_DIR)/ls/ls.mk \
-  $(LOCAL_DIR)/med/med.mk \
   $(LOCAL_DIR)/nit6xlite/nit6xlite.mk \
   $(LOCAL_DIR)/nitrogen6x/nitrogen6x.mk \
-  $(LOCAL_DIR)/utc/utc.mk \
 
