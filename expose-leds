@@ -1,9 +1,0 @@
-#!/system/bin/sh
-LEDS="125 126"
-for led in $LEDS ; do
-    echo $led > /sys/class/gpio/export
-    chmod 777 /sys/class/gpio/gpio$led
-    echo out > /sys/class/gpio/gpio$led/direction
-    chmod 666 /sys/class/gpio/gpio$led/value
-done
-chmod 777 /sys/class/gpio

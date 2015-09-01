@@ -23,7 +23,6 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/fusion_F0710A.idc \
 	device/boundary/nitrogen6x/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nitrogen6x/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-	device/boundary/expose-leds:system/bin/expose-leds \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
 

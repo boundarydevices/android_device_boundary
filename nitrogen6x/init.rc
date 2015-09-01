@@ -117,12 +117,6 @@ on fs
 # mount ext4 partitions
     mount_all /fstab.freescale
 
-service expose-leds /system/bin/expose-leds
-    oneshot
-
-on property:persist.sys.leds=1
-    start expose-leds
-
 service fuse_extsd /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/extsd /storage/extsd
     class late_start
     disabled
