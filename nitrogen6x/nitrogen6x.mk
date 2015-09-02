@@ -30,7 +30,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
        ro.sf.lcd_density=160
 
-DEVICE_PACKAGE_OVERLAYS := device/boundary/nitrogen6x/overlay
+DEVICE_PACKAGE_OVERLAYS := \
+	device/boundary/nitrogen6x/overlay \
+	device/boundary/common/overlay
 
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi

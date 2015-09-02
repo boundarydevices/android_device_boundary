@@ -37,7 +37,9 @@ BOARD_WLAN_DEVICE_REV := bcm4330_b2
 WIFI_BAND             := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
-DEVICE_PACKAGE_OVERLAYS := device/boundary/nit6xlite/overlay
+DEVICE_PACKAGE_OVERLAYS := \
+	device/boundary/nit6xlite/overlay \
+	device/boundary/common/overlay
 
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
