@@ -1,0 +1,2 @@
+add_lunch_combo nitrogen6sx-eng
+add_lunch_combo nitrogen6sx-user

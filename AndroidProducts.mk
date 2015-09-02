@@ -28,5 +28,6 @@
 
 PRODUCT_MAKEFILES += \
   $(LOCAL_DIR)/nit6xlite/nit6xlite.mk \
+  $(LOCAL_DIR)/nitrogen6sx/nitrogen6sx.mk \
   $(LOCAL_DIR)/nitrogen6x/nitrogen6x.mk \
 
