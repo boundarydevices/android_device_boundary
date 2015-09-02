@@ -15,7 +15,6 @@ endif
 
 TARGET_RECOVERY_FSTAB := device/boundary/nit6xlite/fstab.freescale
 
-TARGET_BOARD_DTS_CONFIG=imx6dl:imx6dl-nit6xlite.dtb
 TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/brcm80211/brcmutil/brcmutil.ko:system/lib/modules/brcmutil.ko \
     kernel_imx/drivers/net/wireless/brcm80211/brcmfmac/brcmfmac.ko:system/lib/modules/brcmfmac.ko
@@ -41,8 +40,6 @@ include device/fsl-proprietary/gpu-viv/fsl-gpu.mk
 BUILD_TARGET_FS ?= ext4
 include device/fsl/imx6/imx6_target_fs.mk
 
-TARGET_TS_CALIBRATION := true
-
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 # Wifi related defines
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -62,7 +59,6 @@ WIFI_BYPASS_FWRELOAD      := true
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_USE_AR3K_BLUETOOTH :=
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR=device/boundary/nit6xlite/
 
 include device/boundary/sepolicy.mk
