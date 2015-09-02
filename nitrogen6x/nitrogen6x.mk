@@ -14,8 +14,8 @@ PRODUCT_COPY_FILES += \
 	device/boundary/common/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nitrogen6x/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nitrogen6x/ueventd.freescale.rc:root/ueventd.freescale.rc \
-	device/boundary/nitrogen6x/setwlanmac:system/bin/setwlanmac \
 	device/boundary/nitrogen6x/fstab.freescale:root/fstab.freescale \
+	device/boundary/scripts/setwlanmac:system/bin/setwlanmac \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ILI210x_Touchscreen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
