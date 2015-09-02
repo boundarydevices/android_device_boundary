@@ -63,7 +63,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
 	device/boundary/nitrogen6x/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
-	device/boundary/nitrogen6x/bcm43340.hcd:system/etc/firmware/bcm43340.hcd \
+	device/boundary/brcm/bcm43340.hcd:system/etc/firmware/bcm43340.hcd \
 	device/boundary/brcm/brcmfmac43340-sdio.bin:system/etc/firmware/brcm/brcmfmac43340-sdio.bin \
 	device/boundary/brcm/brcmfmac43340-sdio.txt:system/etc/firmware/brcm/brcmfmac43340-sdio.txt
 

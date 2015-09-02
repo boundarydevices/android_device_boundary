@@ -21,9 +21,9 @@ PRODUCT_COPY_FILES += \
 	device/boundary/nit6xlite/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nit6xlite/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	device/boundary/nit6xlite/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
-	device/boundary/nit6xlite/bcm4330.hcd:system/etc/firmware/bcm4330.hcd \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
+	device/boundary/brcm/bcm4330.hcd:system/etc/firmware/bcm4330.hcd \
 	device/boundary/brcm/brcmfmac4330-sdio.bin:system/etc/firmware/brcm/brcmfmac4330-sdio.bin \
 	device/boundary/brcm/brcmfmac4330-sdio.txt:system/etc/firmware/brcm/brcmfmac4330-sdio.txt
 
