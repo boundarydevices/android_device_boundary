@@ -18,8 +18,8 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
-	device/boundary/nit6xlite/audio_policy.conf:system/etc/audio_policy.conf \
-	device/boundary/nit6xlite/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+	device/boundary/common/audio_policy.conf:system/etc/audio_policy.conf \
+	device/boundary/common/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	device/boundary/nit6xlite/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
