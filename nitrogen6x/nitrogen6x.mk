@@ -9,10 +9,10 @@ PRODUCT_BRAND := boundary
 PRODUCT_MANUFACTURER := boundary
 
 PRODUCT_COPY_FILES += \
-	device/boundary/nitrogen6x/init.rc:root/init.freescale.rc \
+	device/boundary/common/init.rc:root/init.freescale.rc \
+	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
+	device/boundary/common/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nitrogen6x/required_hardware.xml:system/etc/permissions/required_hardware.xml \
-	device/boundary/nitrogen6x/init.recovery.rc:root/init.recovery.freescale.rc \
-	device/boundary/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nitrogen6x/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/nitrogen6x/setwlanmac:system/bin/setwlanmac \
 	device/boundary/nitrogen6x/fstab.freescale:root/fstab.freescale \
@@ -48,7 +48,7 @@ PRODUCT_PACKAGES += uim-sysfs \
 	wl1271-nvs.bin
 
 PRODUCT_COPY_FILES += \
-	device/boundary/nitrogen6x/init.ti.rc:root/init.bt-wlan.rc \
+	device/boundary/common/init.ti.rc:root/init.bt-wlan.rc \
 	device/boundary/nitrogen6x/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
 	device/boundary/wl12xx/wl127x-fw-5-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-sr.bin \
 	device/boundary/wl12xx/wl127x-fw-5-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-mr.bin \
@@ -61,7 +61,7 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default
 
 PRODUCT_COPY_FILES += \
-	device/boundary/nitrogen6x/init.bcm.rc:root/init.bt-wlan.rc \
+	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
 	device/boundary/nitrogen6x/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
 	device/boundary/nitrogen6x/bcm43340.hcd:system/etc/firmware/bcm43340.hcd \
 	device/boundary/brcm/brcmfmac43340-sdio.bin:system/etc/firmware/brcm/brcmfmac43340-sdio.bin \
