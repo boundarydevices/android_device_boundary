@@ -28,6 +28,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/brcm/brcmfmac4330-sdio.txt:system/etc/firmware/brcm/brcmfmac4330-sdio.txt
 
 PRODUCT_PROPERTY_OVERRIDES += \
+       dalvik.vm.dex2oat-Xmx=256m \
        wifi.interface=wlan0 \
        ro.config.low_ram=true \
        ro.sf.lcd_density=160
