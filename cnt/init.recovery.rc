@@ -1,0 +1,3 @@
+on init
+    mkdir /boot
+    mkdir /recovery
