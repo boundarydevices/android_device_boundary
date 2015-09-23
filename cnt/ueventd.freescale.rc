@@ -20,6 +20,7 @@
 /dev/graphics/fb0         0660   system     graphics
 /dev/watchdog             0660   system     root
 /dev/rfkill               0660   wifi       system
+/dev/mma8x5x              0660   system     system
 
 # sysfs properties
 /sys/devices/virtual/input/input*   name        0660  root   input

@@ -59,6 +59,7 @@ SUPERUSER_EMBEDDED := true
 PRODUCT_PACKAGES += ethernet \
         CMFileManager \
         mxt-app \
+        sensors.CNT \
         Superuser \
         su
 

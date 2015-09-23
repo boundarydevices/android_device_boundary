@@ -21,7 +21,7 @@ USE_CAMERA_STUB := true
 BOARD_NOT_HAVE_MODEM := true
 BOARD_HAVE_IMX_CAMERA := false
 BOARD_HAVE_USB_CAMERA := false
-BOARD_HAS_SENSOR := false
+BOARD_HAS_SENSOR := true
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
 USE_ION_ALLOCATOR := false
@@ -32,6 +32,7 @@ include device/fsl-proprietary/gpu-viv/fsl-gpu.mk
 BUILD_TARGET_FS ?= ext4
 include device/fsl/imx6/imx6_target_fs.mk
 
+TARGET_BOOTLOADER_BOARD_NAME := CNT
 PRODUCT_MODEL := CNT
 
 # for recovery service
