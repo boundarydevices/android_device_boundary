@@ -58,5 +58,6 @@ SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += ethernet \
         CMFileManager \
+        mxt-app \
         Superuser \
         su
