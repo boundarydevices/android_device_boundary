@@ -26,6 +26,11 @@ on init
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
 on boot
+    # NFC
+    setprop ro.nfc.port "I2C"
+    chmod 0660 /dev/pn544
+    chown nfc nfc /dev/pn544
+
     # Enable Tethering in the Settings
     setprop ro.tether.denied false
 

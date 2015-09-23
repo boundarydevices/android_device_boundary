@@ -61,3 +61,19 @@ PRODUCT_PACKAGES += ethernet \
         mxt-app \
         Superuser \
         su
+
+# NFC configurations and features
+PRODUCT_COPY_FILES += \
+    device/boundary/cnt/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    device/boundary/cnt/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
+    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
+
+# NFC packages
+PRODUCT_PACKAGES += \
+    NfcNci \
+    libnfc-nci \
+    libnfc_nci_jni \
+    nfc_nci.pn54x.default \
+    Tag
