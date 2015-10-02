@@ -1,0 +1,115 @@
+setenv bootpart 1
+
+setexpr rval *0x020CC068 \& 0x180
+if itest.s "x$rval" -eq "x100"; then
+	echo "----------- run fastboot here";
+else
+	if itest.s "x$rval" -eq "x80"; then
+		setenv bootpart 2;
+	fi
+fi
+mw.l 0x020cc068 0 1
+
+setenv bootargs ''
+
+if ${fs}load ${dtype} ${disk}:1 10800000 uEnv.txt ; then
+    env import -t 10800000 $filesize
+fi
+
+
+if itest.s x == "x$dtbname" ; then
+	dtbname="imx6";
+	if itest.s x6SOLO == "x$cpu" ; then
+		dtbname=${dtbname}dl-;
+	elif itest.s x6DL == "x$cpu" ; then
+		dtbname=${dtbname}dl-;
+	else
+		dtbname=${dtbname}q-;
+	fi
+
+	if itest.s x == "x$board" ; then
+		board=sabrelite
+	fi
+
+	dtbname=${dtbname}${board}.dtb;
+fi
+
+setenv fdt_addr 0x12000000
+if ${fs}load ${dtype} ${disk}:1 $fdt_addr ${bootdir}$dtbname ; then
+	fdt addr $fdt_addr
+	setenv fdt_high 0xffffffff
+else
+	echo "!!!! Error loading ${bootdir}$dtbname";
+	exit;
+fi
+
+/* Device tree should have the proper timings, but let U-Boot override if needed */
+if itest.s "x" != "x${cmd_lcd}" ; then
+	run cmd_lcd
+fi
+
+setenv bootargs "$bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 rootwait"
+
+bootdev=mmcblk0
+setenv bootargs $bootargs androidboot.hardware=freescale
+if itest.s "xsata" == "x$dtype" ; then
+	bootdev=sda
+elif itest.s "xusb" == "x$dtype" ; then
+	bootdev=sda
+elif itest.s "xmmc" == "x$dtype" ; then
+	if itest 1 == ${disk}; then
+		bootdev=mmcblk3
+	fi
+fi
+
+setenv bootargs $bootargs androidboot.bootdev=$bootdev
+
+# add serial number based on MAC address
+setexpr mac_hi *0x021bc630
+setexpr mac_lo *0x021bc620
+setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
+
+if itest.s "x" != "x$disable_giga" ; then
+        setenv bootargs $bootargs fec.disable_giga=1
+fi
+
+if itest.s "x" != "x$wlmac" ; then
+	setenv bootargs $bootargs wlcore.mac=$wlmac
+fi
+
+# default cma size is 256M
+if itest.s "x" != "x$cma" ; then
+	setenv bootargs $bootargs cma=$cma
+fi
+
+if itest.s "x" != "x$gpumem" ; then
+	setenv bootargs $bootargs galcore.contiguousSize=$gpumem
+fi
+
+if itest.s "x" != "x$show_fdt" ; then
+	fdt print /
+fi
+
+if itest.s "x" != "x$show_env" ; then
+	printenv
+fi
+
+kernel=uImage
+ramdisk=uramdisk.img
+
+if kbd ; then
+        if itest.s "xv" == "x$keybd" ; then
+                kernel=uImage-recovery
+                ramdisk=uramdisk-recovery.img
+        fi
+fi
+
+
+setenv stdout serial;
+
+${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && \
+echo "loaded $kernel" && \
+${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && \
+echo "loaded $ramdisk" && bootm 10800000 12800000 $fdt_addr ;
+
+echo "Error loading kernel image"
