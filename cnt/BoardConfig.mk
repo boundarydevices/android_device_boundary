@@ -42,30 +42,10 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_TS_CALIBRATION := true
 
 # WiFi/BT common defines
-BOARD_HAVE_WIFI                  := true
-BOARD_HAVE_BLUETOOTH             := true
-WPA_BUILD_HOSTAPD                := true
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-BOARD_HOSTAPD_DRIVER             := NL80211
-
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
-BOARD_WLAN_DEVICE                := wl12xx_mac80211
-WIFI_DRIVER_MODULE_NAME          := "wl12xx"
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx.ko"
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_wl12xx
-BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
-USES_TI_MAC80211                 := true
-COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
-BOARD_HAVE_BLUETOOTH_TI          := true
-TARGET_KERNEL_MODULES := \
-    kernel_imx/drivers/net/wireless/ti/wl12xx/wl12xx.ko:system/lib/modules/wl12xx.ko
-
-# SoftAP workaround
-WIFI_BYPASS_FWRELOAD      := true
-
-BOARD_USE_AR3K_BLUETOOTH :=
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/cnt/
+BOARD_HAVE_WIFI         := false
+BOARD_HAVE_BLUETOOTH    := false
+BOARD_WLAN_DEVICE       := none
+WPA_SUPPLICANT_VERSION  := none
 
 include device/boundary/sepolicy.mk
 

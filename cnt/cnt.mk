@@ -20,7 +20,6 @@ PRODUCT_COPY_FILES += \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
 
 PRODUCT_PROPERTY_OVERRIDES += \
-       wifi.interface=wlan0 \
        ro.sf.lcd_density=160
 
 DEVICE_PACKAGE_OVERLAYS := device/boundary/cnt/overlay
@@ -28,24 +27,8 @@ DEVICE_PACKAGE_OVERLAYS := device/boundary/cnt/overlay
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
-PRODUCT_PACKAGES += uim-sysfs \
-	bt_sco_app \
-	libbt-vendor \
-	BluetoothSCOApp \
-	TIInit_10.6.15.bts \
-	TIInit_7.2.31.bts \
-	TIInit_7.6.15.bts \
-	TQS_D_1.7.ini \
-	wl127x-fw-5-sr.bin \
-	wl1271-nvs.bin
-
 PRODUCT_COPY_FILES += \
-	device/boundary/cnt/init.rc:root/init.freescale.rc \
-	device/boundary/cnt/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
-	device/boundary/wl12xx/wl127x-fw-5-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-sr.bin \
-	device/boundary/wl12xx/wl127x-fw-5-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-mr.bin \
-	device/boundary/wl12xx/TIInit_7.6.15.bts:system/etc/firmware/ti-connectivity/TIInit_7.6.15.bts \
-	device/boundary/wl12xx/TIInit_7.2.31.bts:system/etc/firmware/ti-connectivity/TIInit_7.2.31.bts
+	device/boundary/cnt/init.rc:root/init.freescale.rc
 
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
