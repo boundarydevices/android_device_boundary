@@ -77,8 +77,6 @@
         <item>"ethernet,9,9,2,-1,true"</item>
     </string-array>
 
-    <bool name="config_automatic_brightness_available">true</bool>
-
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 zones as follows:
 
