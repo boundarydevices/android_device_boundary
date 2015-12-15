@@ -16,6 +16,7 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/Atmel_maXTouch_Touchscreen.idc \
 	device/boundary/cnt/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/cnt/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+	device/boundary/cnt/TI768Board.xcfg:system/etc/firmware/TI768Board.xcfg \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
 
