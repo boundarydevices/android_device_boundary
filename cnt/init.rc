@@ -87,3 +87,8 @@ service fuse_extsd /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/e
 service fuse_udisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/udisk /storage/udisk
     class late_start
     disabled
+
+on boot
+service touchscreen /system/bin/touchscreen
+    class main
+    oneshot

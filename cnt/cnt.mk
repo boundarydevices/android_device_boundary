@@ -17,8 +17,9 @@ PRODUCT_COPY_FILES += \
 	device/boundary/cnt/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/cnt/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	device/boundary/cnt/TI768Board.xcfg:system/etc/firmware/TI768Board.xcfg \
+	device/boundary/cnt/touchscreen.sh:system/bin/touchscreen \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
-	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
+	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin
 
 PRODUCT_PROPERTY_OVERRIDES += \
        ro.sf.lcd_density=160
