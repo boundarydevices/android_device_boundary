@@ -20,6 +20,8 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/fusion_F0710A.idc \
+	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/gslx680.idc \
+	device/boundary/common/gsl1680.fw:system/etc/firmware/gsl1680.fw \
 	device/boundary/nitrogen6x/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/nitrogen6x/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	device/boundary/expose-leds:system/bin/expose-leds \
