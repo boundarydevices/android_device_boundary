@@ -86,7 +86,11 @@ fi
 #
 # set panel to wqvga-rgb to enable the 480x272 display
 #
-if itest.s "xwqvga-rgb" != "x$panel"; then
+if i2c probe 0x40 ; then
+	echo "------- found GSLX touch controller";
+	fdt set lcd_display interface_pix_fmt RGB24
+	fdt set lcd_display mode_str ASIT500MA6F5D
+elif itest.s "xwqvga-rgb" != "x$panel"; then
 	echo "------ ignoring LCD display";
 	fdt rm lcd_display;
 else
