@@ -145,6 +145,11 @@ if i2c probe 0x48 ; then
 elif i2c probe 0x4d ; then
 	setenv have_lcd 1;
 	echo "------- found AR1020 touch controller";
+elif i2c probe 0x40 ; then
+	setenv have_lcd 1;
+	echo "------- found GSLX touch controller";
+	fdt set lcd_display interface_pix_fmt RGB24
+	fdt set lcd_display mode_str ASIT500MA6F5D
 fi
 
 if itest.s "x" != "x$ignore_lcd" ; then
