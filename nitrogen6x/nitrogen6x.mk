@@ -80,8 +80,6 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf
 
-include device/boundary/openssh.mk
-
 SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
 SUPERUSER_EMBEDDED := true
 

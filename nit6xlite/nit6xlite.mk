@@ -59,8 +59,6 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf
 
-include device/boundary/openssh.mk
-
 PRODUCT_PACKAGES += ethernet \
         CMFileManager \
         Superuser \
