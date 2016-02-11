@@ -63,3 +63,8 @@ PRODUCT_PACKAGES += \
     libnfc_nci_jni \
     nfc_nci.pn54x.default \
     Tag
+
+# ExFat support
+PRODUCT_PACKAGES += \
+    libfuse \
+    mount.exfat
