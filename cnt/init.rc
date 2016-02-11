@@ -88,7 +88,10 @@ service fuse_udisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/u
     class late_start
     disabled
 
-on boot
 service touchscreen /system/bin/touchscreen
-    class main
+    class late_start
+    disabled
     oneshot
+
+on property:sys.touch.fw.reload=on
+    start touchscreen

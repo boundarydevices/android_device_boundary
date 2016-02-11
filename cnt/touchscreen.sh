@@ -1,8 +1,9 @@
 #!/system/bin/sh
 
-TYPE=`getprop ro.build.type`
+FW_PATH=`getprop sys.touch.fw.path`
 
-if [ "$TYPE" == "eng" ]; then
-	echo "Setting up touchscreen" > /dev/console
-	/system/bin/mxt-app --load /etc/firmware/TI768Board.xcfg
-fi
+echo "Setting up touchscreen with $FW_PATH" > /dev/console
+/system/bin/mxt-app --load $FW_PATH
+
+# changing reload value to show it is done
+setprop sys.touch.fw.reload done
