@@ -34,7 +34,6 @@ removable_disks() {
 		type=`cat /sys/class/block/$diskname/device/type` ;
 		size=`cat /sys/class/block/$diskname/size` ;
 		issd=0 ;
-		# echo "checking $diskname/$type/$size" ;
 		if [ $size -ge 3906250 ]; then
 			if [ $size -lt 62500000 ]; then
 				issd=1 ;
@@ -42,8 +41,6 @@ removable_disks() {
 		fi
 		if [ "$issd" -eq "1" ]; then
 			echo -n "/dev/$diskname ";
-			# echo "removable disk /dev/$diskname, size $size, type $type" ;
-			#echo -n -e "\tremovable? " ; cat /sys/class/block/$diskname/removable ;
 		fi
 	done
 	echo;
@@ -72,20 +69,24 @@ fi
 
 echo "reasonable disk $diskname, partitions ${diskname}${prefix}1..." ;
 umount ${diskname}${prefix}*
-umount gvfs
 
 dd if=/dev/zero of=${diskname} count=1 bs=1024
 
-sudo sfdisk --force -uM ${diskname} << EOF
-,20,B,*
-,20,B
-,1148,E
-,,83
-,512,83
-,512,83
-,10,83
-,10,83
-EOF
+sudo parted -a minimal \
+-s ${diskname} \
+unit MiB \
+mklabel gpt \
+mkpart boot 0% 20 \
+mkpart recovery 20 40 \
+mkpart extended 40 40 \
+mkpart data 1084 100% \
+mkpart system 40.1 552 \
+mkpart cache 552 1064 \
+mkpart vendor 1064 1074 \
+mkpart misc 1074 1084 \
+print
+
+sudo partprobe && sleep 1
 
 for n in `seq 1 8` ; do
    if ! [ -e ${diskname}${prefix}$n ] ; then
@@ -96,45 +97,37 @@ for n in `seq 1 8` ; do
 done
 
 echo "all partitions present and accounted for!";
-sync && sudo sfdisk -R ${diskname}${prefix} && sleep 1
 
-# make partition 4 2400MB long (to allow smallish 4GB cards)
-sfdisk ${diskname} -N4 -uM  << EOF
-,2400,83
-EOF
+echo "------------------making boot partition"
+mkfs.ext4 -L boot ${diskname}${prefix}1
+echo "------------------making recovery partition"
+mkfs.ext4 -L recovery ${diskname}${prefix}2
+echo "------------------making data partition"
+mkfs.ext4 -L data ${diskname}${prefix}4
+echo "------------------making cache partition"
+mkfs.ext4 -L cache ${diskname}${prefix}6
+echo "------------------making vendor partition"
+mkfs.ext4 -L vendor ${diskname}${prefix}7
+echo "------------------making misc partition"
+mkfs.ext4 -L misc ${diskname}${prefix}8
 
-sync && sudo sfdisk -R ${diskname}${prefix} && sleep 1
-
-echo "------------------making BOOT partition"
-mkfs.ext4 -L BOOT ${diskname}${prefix}1
-echo "------------------making RECOVER partition"
-mkfs.ext4 -L RECOVER ${diskname}${prefix}2
-echo "------------------making DATA partition"
-mkfs.ext4 -L DATA ${diskname}${prefix}4
-echo "------------------making CACHE partition"
-mkfs.ext4 -L CACHE ${diskname}${prefix}6
-echo "------------------making VENDOR partition"
-mkfs.ext4 -L VENDOR ${diskname}${prefix}7
-echo "------------------making MISC partition"
-mkfs.ext4 -L MISC ${diskname}${prefix}8
-
-echo "------------------mounting BOOT, RECOVER, DATA partitions"
-sync && sleep 5 && sudo sfdisk -R ${diskname}${prefix} && sleep 5
+echo "------------------mounting boot, recovery, data partitions"
+sync && sudo partprobe && sleep 5
 
 for n in 1 2 4 ; do
    echo "--- mounting ${diskname}${prefix}${n}";
    udisks --mount ${diskname}${prefix}${n}
 done
 
-sudo cp -rfv out/target/product/$product/boot/* /media/BOOT/
-sudo cp -rfv out/target/product/$product/boot/6x* /media/RECOVER/
-sudo cp -rfv out/target/product/$product/boot/uImage /media/RECOVER/
-sudo cp -rfv out/target/product/$product/uramdisk-recovery.img /media/RECOVER/uramdisk.img
-sudo cp -ravf out/target/product/$product/data/* /media/DATA/
+sudo cp -rfv out/target/product/$product/boot/* /media/boot/
+sudo cp -rfv out/target/product/$product/boot/6x* /media/recovery/
+sudo cp -rfv out/target/product/$product/boot/uImage /media/recovery/
+sudo cp -rfv out/target/product/$product/uramdisk-recovery.img /media/recovery/uramdisk.img
+sudo cp -rfv out/target/product/$product/data/* /media/data/
 
 if [ -e ${diskname}${prefix}5 ]; then
    sudo dd if=out/target/product/$product/system.img of=${diskname}${prefix}5
-   sudo e2label ${diskname}${prefix}5 SYSTEM
+   sudo e2label ${diskname}${prefix}5 system
    sudo e2fsck -f ${diskname}${prefix}5
    sudo resize2fs ${diskname}${prefix}5
 else
