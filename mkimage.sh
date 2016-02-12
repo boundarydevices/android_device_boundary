@@ -29,42 +29,28 @@ fi
 #
 # Turkey carving (in MiB):
 #
-# [0     4)          4     partition table, optionally U-Boot
-# [4     24)      1  20    Boot partition
-# [24    44)      2  20    Recovery partition
-# [44    1120)    3  1072  extended
-# [48    560)     5  512   system partition
-# [564   1076)    6  512   cache partition
-# [1080  1096)    7  16    vendor partition   
-# [1100  1116)    8  16    misc partition
-# [1120  outsize) 9  ---   data partition
+# [0     20)      1  20    Boot partition
+# [20    40)      2  20    Recovery partition
+# [40    40)      3  0     Stub/Legacy partition
+# [40    552)     5  512   System partition
+# [552   1064)    6  512   Cache partition
+# [1064  1074)    7  10    Vendor partition
+# [1074  1084)    8  10    Misc partition
+# [1084  outsize) 4  ---   Data partition
 #
-BOOTSTART=4
-BOOTEND=24
-RECOVERSTART=$BOOTEND
-RECOVEREND=44
-EXTSTART=$RECOVEREND
-EXTEND=1120
-SYSTEMSTART=48
-SYSTEMEND=560
-CACHESTART=564
-CACHEEND=1076
-VENDSTART=1080
-VENDEND=1096
-MISCSTART=1100
-MISCEND=1116
-DATASTART=1120
-DATAEND=`expr $outsizemb - 4`
-parted $outfilename mklabel msdos
-parted $outfilename unit MiB mkpart primary fat32 $BOOTSTART $BOOTEND
-parted $outfilename unit MiB mkpart primary fat32 $RECOVERSTART $RECOVEREND
-parted $outfilename unit MiB mkpart extended $EXTSTART $EXTEND
-parted $outfilename unit MiB mkpart logical ext2 $SYSTEMSTART $SYSTEMEND
-parted $outfilename unit MiB mkpart logical ext2 $CACHESTART $CACHEEND
-parted $outfilename unit MiB mkpart logical ext2 $VENDSTART $VENDEND
-parted $outfilename unit MiB mkpart logical ext2 $MISCSTART $MISCEND
-parted $outfilename unit MiB mkpart primary ext2 $DATASTART $DATAEND
-parted $outfilename unit MiB print
+sudo parted -a minimal \
+-s ${diskname} \
+unit MiB \
+mklabel gpt \
+mkpart boot 0% 20 \
+mkpart recovery 20 40 \
+mkpart extended 40 40 \
+mkpart data 1084 100% \
+mkpart system 40.1 552 \
+mkpart cache 552 1064 \
+mkpart vendor 1064 1074 \
+mkpart misc 1074 1084 \
+print
 
 setuploop(){
       path=$1;
