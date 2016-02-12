@@ -11,11 +11,7 @@ include device/boundary/nitrogen6x/wifi_config.mk
 ifneq ($(DEFCONF),)
 TARGET_KERNEL_DEFCONF := $(DEFCONF)
 else
-ifeq ($(BOARD_WLAN_VENDOR),BCM)
-TARGET_KERNEL_DEFCONF := nitrogen6x_bcm_defconfig
-else
-TARGET_KERNEL_DEFCONF := nitrogen6x_defconfig
-endif
+TARGET_KERNEL_DEFCONF := boundary_defconfig
 endif
 
 TARGET_RECOVERY_FSTAB := device/boundary/nitrogen6x/fstab.freescale

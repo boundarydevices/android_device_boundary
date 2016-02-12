@@ -10,7 +10,7 @@ include device/fsl/imx6/BoardConfigCommon.mk
 ifneq ($(DEFCONF),)
 TARGET_KERNEL_DEFCONF := $(DEFCONF)
 else
-TARGET_KERNEL_DEFCONF := nitrogen6x_bcm_defconfig
+TARGET_KERNEL_DEFCONF := boundary_defconfig
 endif
 
 TARGET_RECOVERY_FSTAB := device/boundary/nitrogen6sx/fstab.freescale
