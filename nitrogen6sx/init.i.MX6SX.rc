@@ -1,0 +1,26 @@
+on boot
+
+    # fsl omx graphic manager media framework property
+    setprop media.omxgm.enable-record 0
+
+    # Set OpenGLES version
+    setprop ro.opengles.version 131072
+
+    # Set GPU 3D minimum clock to 8/64
+    write /sys/bus/platform/drivers/galcore/gpu3DMinClock 8
+
+    # set back camera.
+    setprop back_camera_name mx6s-csi
+
+    # set front camera.
+    setprop front_camera_name uvc
+
+service dhcpcd_eth1 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_eth1 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
