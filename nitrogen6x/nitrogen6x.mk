@@ -12,6 +12,9 @@ PRODUCT_COPY_FILES += \
 	device/boundary/common/init.rc:root/init.freescale.rc \
 	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
 	device/boundary/common/init.superuser.rc:root/init.superuser.rc \
+	device/boundary/nitrogen6x/init.i.MX6DL.rc:root/init.freescale.i.MX6DL.rc \
+	device/boundary/nitrogen6x/init.i.MX6Q.rc:root/init.freescale.i.MX6Q.rc \
+	device/boundary/nitrogen6x/init.i.MX6QP.rc:root/init.freescale.i.MX6QP.rc \
 	device/boundary/nitrogen6x/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nitrogen6x/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/nitrogen6x/fstab.freescale:root/fstab.freescale \

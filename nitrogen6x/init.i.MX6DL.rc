@@ -1,0 +1,16 @@
+on boot
+
+    # fsl omx graphic manager media framework property
+    setprop media.omxgm.enable-record 1
+
+    # Set OpenGLES version
+    setprop ro.opengles.version 131072
+
+    # Set GPU 3D minimum clock to 8/64
+    write /sys/bus/platform/drivers/galcore/gpu3DMinClock 8
+
+    # set back camera.
+    setprop back_camera_name ov5640_mipi,tc358743_mipi
+
+    # set front camera.
+    setprop front_camera_name uvc,ov5642_camera,ov5640_camera
