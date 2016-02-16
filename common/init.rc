@@ -128,6 +128,13 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     seclabel u:r:wpa:s0
     oneshot
 
+service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
+    socket hostapd_wlan0 dgram 660 root wifi
+    user root
+    group wifi
+    oneshot
+    disabled
+
 on fs
 # mount ext4 partitions
     mount_all /fstab.freescale
