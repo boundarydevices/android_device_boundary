@@ -12,14 +12,14 @@ mw.l 0x020cc068 0 1
 
 setenv bootargs ''
 
-if ${fs}load ${dtype} ${disk}:1 80008000 uEnv.txt ; then
+if ${fs}load ${dtype} ${disk}:${bootpart} 80008000 uEnv.txt ; then
     env import -t 80008000 $filesize
 fi
 
 dtbname=imx6sx-${board}.dtb;
 
 setenv fdt_addr 0x82000000
-if ${fs}load ${dtype} ${disk}:1 $fdt_addr ${bootdir}$dtbname ; then
+if ${fs}load ${dtype} ${disk}:${bootpart} $fdt_addr ${bootdir}$dtbname ; then
 	fdt addr $fdt_addr
 	setenv fdt_high 0xffffffff
 else
