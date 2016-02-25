@@ -81,6 +81,11 @@ WIFI_BAND             := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 endif
 
+# ExFat support
+PRODUCT_PACKAGES += \
+    libfuse \
+    mount.exfat
+
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf
