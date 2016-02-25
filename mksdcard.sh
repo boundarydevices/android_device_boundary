@@ -120,8 +120,7 @@ for n in 1 2 4 ; do
 done
 
 sudo cp -rfv out/target/product/$product/boot/* /media/boot/
-sudo cp -rfv out/target/product/$product/boot/6x* /media/recovery/
-sudo cp -rfv out/target/product/$product/boot/uImage /media/recovery/
+sudo cp -rfv out/target/product/$product/boot/* /media/recovery/
 sudo cp -rfv out/target/product/$product/uramdisk-recovery.img /media/recovery/uramdisk.img
 sudo cp -rfv out/target/product/$product/data/* /media/data/
 
