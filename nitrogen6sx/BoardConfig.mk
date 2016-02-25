@@ -15,6 +15,12 @@ endif
 
 TARGET_RECOVERY_FSTAB := device/boundary/nitrogen6sx/fstab.freescale
 
+# boot.img & recovery.img creation
+TARGET_BOOTIMAGE_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 20940800
+TARGET_RECOVERYIMAGE_USE_EXT4 := true
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20940800
+
 BOARD_HAS_SGTL5000 := true
 
 BOARD_HAS_SENSOR := false

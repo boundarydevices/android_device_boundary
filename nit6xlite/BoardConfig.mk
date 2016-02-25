@@ -15,6 +15,12 @@ endif
 
 TARGET_RECOVERY_FSTAB := device/boundary/nit6xlite/fstab.freescale
 
+# boot.img & recovery.img creation
+TARGET_BOOTIMAGE_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 20940800
+TARGET_RECOVERYIMAGE_USE_EXT4 := true
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20940800
+
 TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/brcm80211/brcmutil/brcmutil.ko:system/lib/modules/brcmutil.ko \
     kernel_imx/drivers/net/wireless/brcm80211/brcmfmac/brcmfmac.ko:system/lib/modules/brcmfmac.ko
