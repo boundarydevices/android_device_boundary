@@ -39,7 +39,7 @@ fi
 # [1084  outsize) 4  ---   Data partition
 #
 sudo parted -a minimal \
--s ${diskname} \
+-s ${outfilename} \
 unit MiB \
 mklabel gpt \
 mkpart boot 0% 20 \
@@ -55,39 +55,40 @@ print
 setuploop(){
       path=$1;
       partnum=$2;
-      start=$3;
-      end=$4;
-      parts=`fdisk -l $path | grep ^$path | sed s/$path// | grep ^$partnum` ;
-      startb=`expr $start \* 1024 \* 1024`;
-      #starts=`echo $parts | awk '{print $2}'`;
-      #startb2=`expr $starts \* 512`;
-      #echo "$path: start $startb $startb2"
-      #endb=`expr $end \* 1024 \* 1024`;
-      #ends=`echo $parts | awk '{print $3}'`;
-      #endb2=`expr \( $ends \+ 1 \) \* 512`;
-      #echo "$path: end $endb $endb2"
-      sizeb=`expr \( $end - $start \) \* 1024 \* 1024`;
-      #echo "$path: size $sizeb";
+      parts=`fdisk -l $path | grep ^$path | sed s/$path// | grep ^$partnum | sed 's/\\*//'`;
+      starts=`echo $parts | sed 's/*//' | awk '{print $2}'`;
+      startb=`expr $starts \* 512`;
+      ends=`echo $parts | awk '{print $3}'`;
+      endb=`expr \( $ends \+ 1 \) \* 512`;
+      sizeb=`expr $endb - $startb`;
       loopdev=`sudo losetup -f`;
       sudo losetup -o $startb --sizelimit $sizeb $loopdev $path
       export loopdev;
       echo "$path: $loopdev: $sizeb bytes";
 }
 
-setuploop $outfilename 1 $BOOTSTART $BOOTEND   
+setuploop $outfilename 1
 sudo mkfs.ext4 -L BOOT $loopdev
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
+if [ "$mountpoint" == "" ]; then
+	echo "error mountpoint not found"
+	exit 1
+fi
 if [ -d $mountpoint ]; then
    sudo cp -rvf out/target/product/$product/boot/* $mountpoint/
 fi
 sudo umount $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 2 $RECOVERSTART $RECOVEREND   
+setuploop $outfilename 2
 sudo mkfs.ext4 -L RECOVER $loopdev
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
+if [ "$mountpoint" == "" ]; then
+	echo "error mountpoint not found"
+	exit 1
+fi
 if [ -d $mountpoint ]; then
    sudo cp -rvf out/target/product/$product/boot/* $mountpoint/
    sudo cp -rfv out/target/product/$product/uramdisk-recovery.img $mountpoint/uramdisk.img
@@ -95,17 +96,21 @@ fi
 sudo umount $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 4 $DATASTART $DATAEND   
+setuploop $outfilename 4
 sudo mkfs.ext4 -L DATA $loopdev
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
+if [ "$mountpoint" == "" ]; then
+	echo "error mountpoint not found"
+	exit 1
+fi
 if [ -d $mountpoint ]; then
    sudo cp -rvf out/target/product/$product/data/* $mountpoint/
 fi
 sudo umount $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 5 $SYSTEMSTART $SYSTEMEND
+setuploop $outfilename 5
 e2label out/target/product/$product/system.img
 sudo dd if=out/target/product/$product/system.img of=$loopdev
 sudo e2label $loopdev SYSTEM
@@ -113,15 +118,15 @@ sudo e2fsck -f $loopdev
 sudo resize2fs $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 6 $CACHESTART $CACHEEND   
+setuploop $outfilename 6
 sudo mkfs.ext4 -L CACHE $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 7 $VENDSTART $VENDEND   
+setuploop $outfilename 7
 sudo mkfs.ext4 -L VENDOR $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 8 $MISCSTART $MISCEND
+setuploop $outfilename 8
 sudo mkfs.ext4 -L MISC $loopdev
 sudo losetup -d $loopdev
 
