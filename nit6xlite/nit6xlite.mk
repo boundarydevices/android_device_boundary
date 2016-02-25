@@ -51,11 +51,13 @@ PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
 SUPERUSER_EMBEDDED := true
 
-PRODUCT_PACKAGES += uim-sysfs \
-		audio.a2dp.default \
-		memtool \
-		lib_driver_cmd_bcmdhd \
-		brcm_patchram_plus
+PRODUCT_PACKAGES += \
+    audio.a2dp.default
+
+# ExFat support
+PRODUCT_PACKAGES += \
+    libfuse \
+    mount.exfat
 
 # WiFi Direct requirements
 PRODUCT_PACKAGES += \
