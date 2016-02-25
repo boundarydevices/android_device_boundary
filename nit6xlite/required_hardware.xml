@@ -23,6 +23,7 @@
     <feature name="android.hardware.wifi" />
     <feature name="android.hardware.wifi.direct" />
     <feature name="android.hardware.bluetooth" />
+    <feature name="android.hardware.bluetooth_le" />
     <feature name="android.hardware.ethernet" />
     <feature name="android.hardware.faketouch" />
     <feature name="android.hardware.touchscreen" />
