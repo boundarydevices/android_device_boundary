@@ -21,4 +21,5 @@
     <bool name="def_user_setup_complete">true</bool>
     <bool name="def_lockscreen_disabled">true</bool>
     <integer name="def_screen_off_timeout">3600000</integer>
+    <bool name="def_stay_on_while_plugged_in">true</bool>
 </resources>
