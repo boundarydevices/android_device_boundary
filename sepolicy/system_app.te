@@ -1,3 +1,4 @@
 allow system_app dhcp_prop:property_service set;
 allow system_app ctl_default_prop:property_service set;
 allow system_app device:sock_file write;
+allow system_app su_exec:file { read execute open execute_no_trans };
