@@ -68,7 +68,7 @@ setuploop(){
 }
 
 setuploop $outfilename 1
-sudo mkfs.ext4 -L BOOT $loopdev
+sudo mkfs.ext4 -L boot $loopdev
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ "$mountpoint" == "" ]; then
@@ -82,7 +82,7 @@ sudo umount $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 2
-sudo mkfs.ext4 -L RECOVER $loopdev
+sudo mkfs.ext4 -L recovery $loopdev
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ "$mountpoint" == "" ]; then
@@ -97,7 +97,7 @@ sudo umount $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 4
-sudo mkfs.ext4 -L DATA $loopdev
+sudo mkfs.ext4 -L data $loopdev
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ "$mountpoint" == "" ]; then
@@ -113,20 +113,20 @@ sudo losetup -d $loopdev
 setuploop $outfilename 5
 e2label out/target/product/$product/system.img
 sudo dd if=out/target/product/$product/system.img of=$loopdev
-sudo e2label $loopdev SYSTEM
+sudo e2label $loopdev system
 sudo e2fsck -f $loopdev
 sudo resize2fs $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 6
-sudo mkfs.ext4 -L CACHE $loopdev
+sudo mkfs.ext4 -L cache $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 7
-sudo mkfs.ext4 -L VENDOR $loopdev
+sudo mkfs.ext4 -L vendor $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 8
-sudo mkfs.ext4 -L MISC $loopdev
+sudo mkfs.ext4 -L misc $loopdev
 sudo losetup -d $loopdev
 
