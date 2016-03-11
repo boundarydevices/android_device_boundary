@@ -34,6 +34,9 @@ on boot
     # Enable Tethering in the Settings
     setprop ro.tether.denied false
 
+    # Setup ADB for network support
+    setprop service.adb.tcp.port 5555
+
     # 3D acceleration property
     setprop debug.sf.showfps    0
     setprop debug.sf.enable_hgl 1
