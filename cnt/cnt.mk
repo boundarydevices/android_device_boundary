@@ -1,3 +1,6 @@
+PRODUCT_COPY_FILES += \
+	device/boundary/cnt/ota.conf:system/etc/ota.conf
+
 $(call inherit-product, device/fsl/imx6/imx6.mk)
 $(call inherit-product-if-exists,vendor/google/products/gms.mk)
 
