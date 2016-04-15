@@ -126,7 +126,3 @@ setuploop $outfilename 7
 sudo mkfs.ext4 -L vendor $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 8
-sudo mkfs.ext4 -L misc $loopdev
-sudo losetup -d $loopdev
-

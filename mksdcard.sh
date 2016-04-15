@@ -108,8 +108,6 @@ echo "------------------making cache partition"
 mkfs.ext4 -L cache ${diskname}${prefix}6
 echo "------------------making vendor partition"
 mkfs.ext4 -L vendor ${diskname}${prefix}7
-echo "------------------making misc partition"
-mkfs.ext4 -L misc ${diskname}${prefix}8
 
 echo "------------------mounting boot, recovery, data partitions"
 sync && sudo partprobe && sleep 5
