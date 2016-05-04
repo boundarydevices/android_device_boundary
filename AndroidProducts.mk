@@ -29,6 +29,7 @@
 PRODUCT_MAKEFILES += \
   $(LOCAL_DIR)/cad/cad.mk \
   $(LOCAL_DIR)/ls/ls.mk \
+  $(LOCAL_DIR)/lshore/lshore.mk \
   $(LOCAL_DIR)/med/med.mk \
   $(LOCAL_DIR)/nit6xlite/nit6xlite.mk \
   $(LOCAL_DIR)/nitrogen6x/nitrogen6x.mk \
