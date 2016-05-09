@@ -49,9 +49,9 @@ fi
 # ------------------- LCD setup
 if itest.s "x" == "x$panel"; then
 	if itest.s "x" -ne "x$calibration" ; then
-	       setenv bootargs $bootargs ft5x06_ts.calibration=$calibration
+		setenv bootargs $bootargs ft5x06_ts.calibration=$calibration
 	else
-	       setenv bootargs $bootargs ft5x06_ts.calibration=-64521,-3,53224000,173,-62089,32035126,65536
+		setenv bootargs $bootargs ft5x06_ts.calibration=-65074,-501,53115804,-456,-64627,32642180,65536
 	fi
 else
 	fdt rm lcd_display;
