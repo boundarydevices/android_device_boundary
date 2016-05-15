@@ -20,3 +20,6 @@ $BD4    /data     ext4    nosuid,nodev,nodiratime,noatime,noauto_da_alloc,errors
 $BD6    /cache    ext4    nosuid,nodev                                                                     wait
 $BD7    /device   ext4    ro,nosuid,nodev                                                                  wait
 $BD8    /misc     emmc    defaults                                                                         defaults
+
+# ZRAM setup
+/dev/block/zram0    none    swap    defaults                                                               zramsize=314572800
