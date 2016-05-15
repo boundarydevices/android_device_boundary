@@ -11,7 +11,6 @@ PRODUCT_MANUFACTURER := boundary
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.rc:root/init.freescale.rc \
 	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
-	device/boundary/common/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nitrogen6x/init.i.MX6DL.rc:root/init.freescale.i.MX6DL.rc \
 	device/boundary/nitrogen6x/init.i.MX6Q.rc:root/init.freescale.i.MX6Q.rc \
 	device/boundary/nitrogen6x/init.i.MX6QP.rc:root/init.freescale.i.MX6QP.rc \
@@ -89,9 +88,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf
-
-SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
-SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += ethernet \
         BoundaryDemo \

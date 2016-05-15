@@ -10,7 +10,6 @@ PRODUCT_MANUFACTURER := boundary
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.rc:root/init.freescale.rc \
 	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
-	device/boundary/common/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nitrogen6sx/init.i.MX6SX.rc:root/init.freescale.i.MX6SX.rc \
 	device/boundary/nitrogen6sx/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nitrogen6sx/ueventd.freescale.rc:root/ueventd.freescale.rc \
@@ -60,9 +59,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf
-
-SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
-SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += ethernet \
         CMFileManager \

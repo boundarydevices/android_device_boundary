@@ -11,7 +11,6 @@ PRODUCT_COPY_FILES += \
 	device/boundary/common/init.rc:root/init.freescale.rc \
 	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
 	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
-	device/boundary/common/init.superuser.rc:root/init.superuser.rc \
 	device/boundary/nit6xlite/init.i.MX6DL.rc:root/init.freescale.i.MX6DL.rc \
 	device/boundary/nit6xlite/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/nit6xlite/ueventd.freescale.rc:root/ueventd.freescale.rc \
@@ -47,9 +46,6 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
-
-SUPERUSER_PACKAGE_PREFIX := .cyanogenmod.superuser
-SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default

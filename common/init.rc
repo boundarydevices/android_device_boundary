@@ -1,6 +1,5 @@
 import init.${ro.hardware}.usb.rc
 import init.${ro.hardware}.${ro.soc}.rc
-import init.superuser.rc
 import init.bt-wlan.rc
 
 on init
