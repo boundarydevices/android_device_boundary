@@ -83,7 +83,7 @@ if itest.s "x" == "x${cmd_xxx_present}" ; then
 	echo "!!!!!!!!!!!!!!!!"
 fi
 
-setenv bootargs "$bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 rootwait"
+setenv bootargs "$bootargs console=ttymxc1,115200 vmalloc=256M consoleblank=0 rootwait"
 setenv bootargs $bootargs androidboot.hardware=freescale
 
 if itest.s "xsata" == "x$dtype" ; then
