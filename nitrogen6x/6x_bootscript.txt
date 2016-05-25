@@ -129,13 +129,13 @@ if itest.s "x" != "x$show_env" ; then
 	printenv
 fi
 
-kernel=uImage
+kernel=zImage
 ramdisk=uramdisk.img
 setenv stdout serial;
 
 ${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && \
 echo "loaded $kernel" && \
 ${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && \
-echo "loaded $ramdisk" && bootm 10800000 12800000 $fdt_addr ;
+echo "loaded $ramdisk" && bootz 10800000 12800000 $fdt_addr ;
 
 echo "Error loading kernel image"
