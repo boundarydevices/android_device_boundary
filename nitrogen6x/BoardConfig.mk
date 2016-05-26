@@ -35,8 +35,8 @@ TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
 USE_ION_ALLOCATOR := false
 USE_GPU_ALLOCATOR := true
 
-# camera hal v2
-IMX_CAMERA_HAL_V2 := true
+# camera hal v3
+IMX_CAMERA_HAL_V3 := true
 
 include device/fsl-proprietary/gpu-viv/fsl-gpu.mk
 
