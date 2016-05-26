@@ -79,11 +79,11 @@ mklabel gpt \
 mkpart boot 0% 20 \
 mkpart recovery 20 40 \
 mkpart extended 40 40 \
-mkpart data 1084 100% \
-mkpart system 40.1 552 \
-mkpart cache 552 1064 \
-mkpart vendor 1064 1074 \
-mkpart misc 1074 1084 \
+mkpart data 1174 100% \
+mkpart system 40.1 642 \
+mkpart cache 642 1154 \
+mkpart vendor 1154 1164 \
+mkpart misc 1164 1174 \
 print
 
 sudo partprobe && sleep 1
