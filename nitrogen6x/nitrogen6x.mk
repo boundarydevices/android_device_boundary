@@ -31,9 +31,7 @@ PRODUCT_COPY_FILES += \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin      \
 
 PRODUCT_PROPERTY_OVERRIDES += \
-       dalvik.vm.dex2oat-Xmx=320m \
-       wifi.interface=wlan0 \
-       ro.sf.lcd_density=160
+    ro.sf.lcd_density=160
 
 DEVICE_PACKAGE_OVERLAYS := \
 	device/boundary/nitrogen6x/overlay \
