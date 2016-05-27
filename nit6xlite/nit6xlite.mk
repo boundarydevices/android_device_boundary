@@ -30,9 +30,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/brcm/brcmfmac4330-sdio.txt:system/etc/firmware/brcm/brcmfmac4330-sdio.txt
 
 PRODUCT_PROPERTY_OVERRIDES += \
-       dalvik.vm.dex2oat-Xmx=320m \
-       wifi.interface=wlan0 \
-       ro.sf.lcd_density=160
+    ro.sf.lcd_density=160
 
 LIBBT_VENDORFILE      := device/boundary/nit6xlite/libbt_vnd_nit6xlite.conf
 BOARD_WLAN_DEVICE_REV := bcm4330_b2
