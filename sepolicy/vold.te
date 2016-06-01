@@ -1,0 +1,1 @@
+allow vold mnt_media_rw_stub_file:dir { read open };
