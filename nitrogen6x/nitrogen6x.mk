@@ -80,7 +80,9 @@ endif
 
 # ExFat support
 PRODUCT_PACKAGES += \
+    fsck.exfat \
     libfuse \
+    mkfs.exfat \
     mount.exfat
 
 PRODUCT_PACKAGES += \
