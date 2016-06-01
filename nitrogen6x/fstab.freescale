@@ -7,11 +7,11 @@
 
 # Comment out the line above and uncomment this to make the bottom slot on Nitrogen6x
 # or top (micro SD) slot on SABRE Lite the "removable" SD card
-# /devices/soc0/soc.0/2100000.aips-bus/219c000.usdhc/mmc_host* auto auto defaults voldmanaged=sdcard:auto
+# /devices/soc0/soc.0/2100000.aips-bus/219c000.usdhc/mmc_host* auto auto defaults voldmanaged=sdcard:auto,encryptable=userdata
 
 # Comment out the line above and uncomment this to make the top slot on Nitrogen6x
 # or bottom (full-size SD) slot on SABRE Lite the "removable" SD card
-/devices/soc0/soc.0/2100000.aips-bus/2198000.usdhc/mmc_host* auto auto defaults voldmanaged=sdcard:auto
+/devices/soc0/soc.0/2100000.aips-bus/2198000.usdhc/mmc_host* auto auto defaults voldmanaged=sdcard:auto,encryptable=userdata
 
 $BD1    /boot     ext4    noatime,nodiratime,errors=remount-ro                                             wait
 $BD2    /recovery ext4    noatime,nodiratime,errors=remount-ro                                             wait
