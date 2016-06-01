@@ -66,6 +66,9 @@ TARGET_KERNEL_MODULES := \
 # SoftAP workaround
 WIFI_BYPASS_FWRELOAD      := true
 
+# Force BLE host mode
+BOARD_USE_FORCE_BLE := true
+
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/nitrogen6sx/
 
 include device/boundary/sepolicy.mk

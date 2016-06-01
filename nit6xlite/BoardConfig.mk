@@ -63,6 +63,9 @@ BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 # SoftAP workaround
 WIFI_BYPASS_FWRELOAD      := true
 
+# Force BLE host mode
+BOARD_USE_FORCE_BLE := true
+
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR=device/boundary/nit6xlite/

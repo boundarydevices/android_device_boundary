@@ -89,7 +89,9 @@ endif
 # SoftAP workaround
 WIFI_BYPASS_FWRELOAD      := true
 
-BOARD_USE_AR3K_BLUETOOTH :=
+# Force BLE host mode
+BOARD_USE_FORCE_BLE := true
+
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/nitrogen6x/
 
 include device/boundary/sepolicy.mk
