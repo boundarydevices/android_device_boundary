@@ -51,7 +51,9 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330
 
 # ExFat support
 PRODUCT_PACKAGES += \
+    fsck.exfat \
     libfuse \
+    mkfs.exfat \
     mount.exfat
 
 PRODUCT_PACKAGES += \
