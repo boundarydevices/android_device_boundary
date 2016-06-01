@@ -16,7 +16,7 @@
 $BD1    /boot     ext4    noatime,nodiratime,errors=remount-ro                                             wait
 $BD2    /recovery ext4    noatime,nodiratime,errors=remount-ro                                             wait
 $BD5    /system   ext4    ro                                                                               wait
-$BD4    /data     ext4    nosuid,nodev,nodiratime,noatime,noauto_da_alloc,errors=panic                     wait
+$BD4    /data     ext4    nosuid,nodev,nodiratime,noatime,noauto_da_alloc,errors=panic                     wait,encryptable=$BD9
 $BD6    /cache    ext4    nosuid,nodev                                                                     wait
 $BD7    /device   ext4    ro,nosuid,nodev                                                                  wait
 $BD8    /misc     emmc    defaults                                                                         defaults
