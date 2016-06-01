@@ -49,7 +49,9 @@ PRODUCT_PACKAGES += \
 
 # ExFat support
 PRODUCT_PACKAGES += \
+    fsck.exfat \
     libfuse \
+    mkfs.exfat \
     mount.exfat
 
 # WiFi Direct requirements
