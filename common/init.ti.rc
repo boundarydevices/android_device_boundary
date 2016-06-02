@@ -5,3 +5,4 @@ service uim /system/bin/uim-sysfs
     user bluetooth
     group bluetooth net_bt_admin
     seclabel u:r:hci_attach:s0
+    oneshot
