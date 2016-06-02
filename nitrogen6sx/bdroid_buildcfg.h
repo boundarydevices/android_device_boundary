@@ -19,4 +19,6 @@
 
 #define BTM_DEF_LOCAL_NAME   "Boundary Devices Nitrogen6sx"
 
+#define BLE_VND_INCLUDED TRUE
+
 #endif
