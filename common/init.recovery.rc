@@ -1,3 +1,9 @@
 on init
     mkdir /boot
     mkdir /recovery
+
+    # disable cursor blink for fbcon, if no splash screen support
+    write /sys/class/graphics/fbcon/cursor_blink 0
+
+    # deattach the fbcon as hdmi hotplug conflict with fbcon
+    write /sys/class/vtconsole/vtcon1/bind 0
