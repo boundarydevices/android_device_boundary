@@ -2,6 +2,7 @@ setenv bootpart 1
 
 setexpr rval *0x020CC068 \& 0x180
 if itest.s "x$rval" -eq "x100"; then
+	echo "Starting fastboot..."
 	fastboot 0
 else
 	if itest.s "x$rval" -eq "x80"; then
