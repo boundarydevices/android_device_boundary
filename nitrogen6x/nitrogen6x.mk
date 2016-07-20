@@ -89,8 +89,8 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf
 
-PRODUCT_PACKAGES += ethernet \
-        BoundaryDemo \
-        CMFileManager \
-        Superuser \
-        su
+PRODUCT_PACKAGES += \
+	ethernet \
+	BoundaryDemo \
+	CMFileManager \
+	su

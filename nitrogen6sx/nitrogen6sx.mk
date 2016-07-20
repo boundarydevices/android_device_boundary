@@ -60,7 +60,7 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd.conf
 
-PRODUCT_PACKAGES += ethernet \
-        CMFileManager \
-        Superuser \
-        su
+PRODUCT_PACKAGES += \
+	ethernet \
+	CMFileManager \
+	su
