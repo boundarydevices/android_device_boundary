@@ -1,0 +1,29 @@
+on early-init
+    setprop ro.init.skip.text 1
+
+on boot
+    # fsl omx graphic manager media framework property
+    setprop media.omxgm.enable-record 1
+
+    # Set OpenGLES version
+    setprop ro.opengles.version 131072
+
+    # Set GPU 3D minimum clock to 3/64
+    write /sys/bus/platform/drivers/galcore/gpu3DMinClock 3
+
+    start powerfail
+
+service powerfail /system/bin/powerfail 34
+    user root
+    group root
+    disabled
+    oneshot
+
+service bootsound /system/bin/bootsound
+    user media
+    group audio
+    disabled
+    oneshot
+
+on property:init.svc.bootanim=running
+    start bootsound
