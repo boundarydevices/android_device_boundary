@@ -4,6 +4,17 @@ if [ $# -lt 2 ]; then
 	exit -1 ;
 fi
 
+if ! hash udisks 2> /dev/null; then
+	if ! hash udisksctl 2> /dev/null; then
+		echo "This script requires udisks or udisks2 to be installed"
+		exit -1
+	else
+		mount="udisksctl mount -b";
+	fi
+else
+	mount="udisks --mount";
+fi
+
 outfilename=$1
 outsizemb=$2
 
@@ -71,7 +82,7 @@ setuploop(){
 
 setuploop $outfilename 1
 sudo mkfs.ext4 -L boot $loopdev
-udisks --mount $loopdev
+$mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ "$mountpoint" == "" ]; then
 	echo "error mountpoint not found"
@@ -85,7 +96,7 @@ sudo losetup -d $loopdev
 
 setuploop $outfilename 2
 sudo mkfs.ext4 -L recovery $loopdev
-udisks --mount $loopdev
+$mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ "$mountpoint" == "" ]; then
 	echo "error mountpoint not found"
@@ -100,7 +111,7 @@ sudo losetup -d $loopdev
 
 setuploop $outfilename 4
 sudo mkfs.ext4 -L data $loopdev
-udisks --mount $loopdev
+$mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
 if [ "$mountpoint" == "" ]; then
 	echo "error mountpoint not found"
