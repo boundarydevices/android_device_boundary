@@ -118,6 +118,7 @@ service uim /system/bin/uim-sysfs
 	class core
 	user bluetooth
 	group bluetooth net_bt_admin
+	oneshot
 
 service expose-leds /system/bin/expose-leds
     oneshot
