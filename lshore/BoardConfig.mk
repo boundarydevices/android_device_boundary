@@ -3,8 +3,8 @@
 #
 
 include device/fsl/imx6/soc/imx6dq.mk
-export BUILD_ID=4.4.3_2.0.0-ga
-export BUILD_NUMBER=20160504
+export BUILD_ID=2.0.1-ga
+export BUILD_NUMBER=20150610
 include device/fsl/imx6/BoardConfigCommon.mk
 
 ifneq ($(DEFCONF),)
