@@ -18,6 +18,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/dnx/init.i.MX6Q.rc:root/init.freescale.i.MX6Q.rc \
 	device/boundary/dnx/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/boundary/dnx/ueventd.freescale.rc:root/ueventd.freescale.rc \
+	device/boundary/dnx/media/bootanimation.zip:system/media/bootanimation.zip \
 	device/boundary/dnx/media/bootup.wav:system/media/bootup.wav \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin
