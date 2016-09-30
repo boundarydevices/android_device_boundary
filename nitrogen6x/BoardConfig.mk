@@ -86,6 +86,15 @@ TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/brcm80211/brcmfmac/brcmfmac.ko:system/lib/modules/brcmfmac.ko
 endif
 
+ifeq ($(BOARD_WLAN_VENDOR),QCA)
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+BOARD_WLAN_DEVICE                := qcwcn
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/qcacld_wlan.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlan"
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
+BOARD_HAVE_BLUETOOTH_QCOM        := true
+endif
+
 # SoftAP workaround
 WIFI_BYPASS_FWRELOAD      := true
 

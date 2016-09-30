@@ -43,14 +43,8 @@ PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 ifeq ($(BOARD_WLAN_VENDOR),TI)
 PRODUCT_PACKAGES += uim-sysfs \
 	bt_sco_app \
-	libbt-vendor \
 	BluetoothSCOApp \
-	TIInit_10.6.15.bts \
-	TIInit_7.2.31.bts \
-	TIInit_7.6.15.bts \
-	TQS_D_1.7.ini \
-	wl127x-fw-5-sr.bin \
-	wl1271-nvs.bin
+	TQS_D_1.7.ini
 
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.ti.rc:root/init.bt-wlan.rc \
@@ -76,6 +70,25 @@ LIBBT_VENDORFILE      := device/boundary/nitrogen6x/libbt_vnd_nitrogen6x.conf
 BOARD_WLAN_DEVICE_REV := bcm4330_b2
 WIFI_BAND             := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
+endif
+
+ifeq ($(BOARD_WLAN_VENDOR),QCA)
+PRODUCT_PACKAGES += \
+	qcacld_wlan.ko \
+	bdwlan30.bin \
+	otp30.bin \
+	qca/tfbtfw11.tlv \
+	qwlan30.bin \
+	utf30.bin \
+	utfbd30.bin \
+	wlan/cfg.dat \
+	wlan/qcom_cfg.ini
+
+PRODUCT_COPY_FILES += \
+	device/boundary/common/init.qca.rc:root/init.bt-wlan.rc \
+	device/boundary/nitrogen6x/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+
+LIBBT_VENDORFILE      := device/boundary/nitrogen6x/libbt_vnd_nitrogen6x.conf
 endif
 
 # ExFat support
