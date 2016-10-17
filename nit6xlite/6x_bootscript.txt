@@ -124,6 +124,10 @@ setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
 
 setenv bootargs $bootargs fec.disable_giga=1
 
+if itest.s "x" != "x$hwrotation" ; then
+	setenv bootargs $bootargs androidboot.hwrotation=$hwrotation
+fi
+
 if itest.s "x" != "x$selinux" ; then
 	setenv bootargs $bootargs androidboot.selinux=$selinux
 fi
