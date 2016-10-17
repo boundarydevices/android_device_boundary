@@ -87,6 +87,10 @@ setexpr mac_hi *0x021bc630
 setexpr mac_lo *0x021bc620
 setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
 
+if itest.s "x" != "x$hwrotation" ; then
+	setenv bootargs $bootargs androidboot.hwrotation=$hwrotation
+fi
+
 if itest.s "x" != "x$disable_giga" ; then
         setenv bootargs $bootargs fec.disable_giga=1
 fi
