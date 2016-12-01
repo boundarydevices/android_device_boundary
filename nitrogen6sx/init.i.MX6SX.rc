@@ -14,13 +14,3 @@ on boot
 
     # set front camera.
     setprop front_camera_name uvc
-
-service dhcpcd_eth1 /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
-
-service iprenew_eth1 /system/bin/dhcpcd -n
-    class main
-    disabled
-    oneshot
