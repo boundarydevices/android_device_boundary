@@ -83,6 +83,10 @@ setexpr mac_hi *0x021bc630
 setexpr mac_lo *0x021bc620
 setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
 
+if itest.s "x" != "x$wlmac" ; then
+	setenv bootargs $bootargs wlcore.mac=$wlmac
+fi
+
 # default cma size is 256M
 if itest.s "x" != "x$cma" ; then
 	setenv bootargs $bootargs cma=$cma
