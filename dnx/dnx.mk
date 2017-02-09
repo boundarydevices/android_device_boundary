@@ -65,5 +65,4 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	ethernet \
-	CMFileManager \
-	powerfail
+	CMFileManager

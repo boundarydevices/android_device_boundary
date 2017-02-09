@@ -11,14 +11,6 @@ on boot
     # Set GPU 3D minimum clock to 3/64
     write /sys/bus/platform/drivers/galcore/gpu3DMinClock 3
 
-    start powerfail
-
-service powerfail /system/bin/powerfail 34
-    user root
-    group root
-    disabled
-    oneshot
-
 service bootsound /system/bin/bootsound
     user media
     group audio
