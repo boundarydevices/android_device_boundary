@@ -11,6 +11,13 @@ on boot
     # Set GPU 3D minimum clock to 3/64
     write /sys/bus/platform/drivers/galcore/gpu3DMinClock 3
 
+    # Custom HW setup
+    start bootinit
+
+service bootinit /system/bin/bootinit
+    disabled
+    oneshot
+
 service bootsound /system/bin/bootsound
     user media
     group audio
