@@ -14,6 +14,12 @@ on boot
     # Custom HW setup
     start bootinit
 
+    # Root the device
+    start su_daemon
+
+service su_daemon /system/xbin/su --daemon
+    disabled
+
 service bootinit /system/bin/bootinit
     disabled
     oneshot

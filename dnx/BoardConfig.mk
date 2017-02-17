@@ -78,5 +78,8 @@ BOARD_USE_FORCE_BLE := true
 
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/dnx/
 
+# Allow all the apps to use 'su'
+BOARD_SU_ALLOW_ALL := true
+
 include device/boundary/sepolicy.mk
 

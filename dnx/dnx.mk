@@ -66,4 +66,5 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	ethernet \
+	su \
 	CMFileManager
