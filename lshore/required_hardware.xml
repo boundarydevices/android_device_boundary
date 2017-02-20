@@ -30,6 +30,7 @@
     <feature name="android.hardware.touchscreen.multitouch.distinct" />
     <feature name="android.hardware.microphone" />
     <feature name="android.hardware.screen.landscape" />
+    <feature name="android.hardware.sensor.accelerometer" />
     <feature name="android.hardware.usb.accessory" />
     <feature name="android.hardware.usb.host" />
     <feature name="android.software.app_widgets" />

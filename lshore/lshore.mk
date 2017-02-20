@@ -67,5 +67,6 @@ SUPERUSER_EMBEDDED := true
 
 PRODUCT_PACKAGES += ethernet \
         CMFileManager \
+        sensors.imx6 \
         Superuser \
         su
