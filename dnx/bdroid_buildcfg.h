@@ -19,6 +19,4 @@
 
 #define BTM_DEF_LOCAL_NAME   "DNX"
 
-#define BLE_VND_INCLUDED TRUE
-
 #endif
