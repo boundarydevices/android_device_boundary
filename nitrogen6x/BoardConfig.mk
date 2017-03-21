@@ -69,6 +69,7 @@ BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 USES_TI_MAC80211                 := true
 COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
 BOARD_HAVE_BLUETOOTH_TI          := true
+BOARD_USE_FORCE_BLE              := true
 TARGET_KERNEL_MODULES := \
     kernel_imx/drivers/net/wireless/ti/wl12xx/wl12xx.ko:system/lib/modules/wl12xx.ko
 endif
@@ -97,9 +98,6 @@ endif
 
 # SoftAP workaround
 WIFI_BYPASS_FWRELOAD      := true
-
-# Force BLE host mode
-BOARD_USE_FORCE_BLE := true
 
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/nitrogen6x/
 
