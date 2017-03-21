@@ -94,6 +94,7 @@ WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/qcacld_wlan.ko"
 WIFI_DRIVER_MODULE_NAME          := "wlan"
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
 BOARD_HAVE_BLUETOOTH_QCOM        := true
+BOARD_SUPPORTS_BLE_VND           := true
 endif
 
 # SoftAP workaround
