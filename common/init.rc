@@ -13,8 +13,8 @@ on init
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
-    mkdir /boot root root
-    mkdir /recovery root root
+    mkdir /boot 0755 root root
+    mkdir /recovery 0755 root root
 
     # setup the global environment
     export SHM_MOUNTPOINT /mnt/shm
@@ -29,6 +29,12 @@ on init
 
     # deattch the fbcon as hdmi hotplug conflict with fbcon
     write /sys/class/vtconsole/vtcon1/bind 0
+
+    mkdir /device 0771 system system
+
+    # shared memory used by VPU to distinguish VPU instance.
+    mkdir /mnt/shm  0775 media drmrpc
+    mount tmpfs tmpfs /mnt/shm mode=0775,uid=1013,gid=1031,size=1m
 
 on boot
     # Enable Tethering in the Settings
@@ -46,9 +52,10 @@ on boot
     setprop hwc.enable_dither   1
 
     # fsl omx graphic manager media framework property
-    setprop media.omxgm.enable-player 1
-    setprop media.omxgm.enable-scan 1
+    setprop media.omxgm.enable-player 0
+    setprop media.omxgm.enable-scan 0
     setprop rw.VIDEO_RENDER_NAME video_render.surface
+    setprop media.fsl_codec.flag 7
 
     #Define the config for dual camera
     setprop camera.disable_zsl_mode 1
@@ -56,7 +63,7 @@ on boot
     # Set rotation to 270 to cofigure as portrait mode
     setprop ro.sf.hwrotation 0
 
-# change for FSL specific service
+    # change for FSL specific service
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -66,6 +73,9 @@ on boot
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
     chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+
+    # Set tracefs permission to 755
+    chmod 0755 /sys/kernel/debug/tracing
 
     # Tweak the mmc device read ahead buffer size
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
@@ -169,12 +179,12 @@ service dhcpcd_p2p /system/bin/dhcpcd -aABKL
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
     class main
     disabled
     oneshot
 
-service dhcpcd_eth1 /system/bin/dhcpcd -ABKL
+service dhcpcd_eth1 /system/bin/dhcpcd -ABKL eth1
     class main
     disabled
     oneshot
@@ -194,12 +204,12 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service iprenew_eth0 /system/bin/dhcpcd -n
+service iprenew_eth0 /system/bin/dhcpcd -n eth0
     class main
     disabled
     oneshot
 
-service iprenew_eth1 /system/bin/dhcpcd -n
+service iprenew_eth1 /system/bin/dhcpcd -n eth1
     class main
     disabled
     oneshot
@@ -215,3 +225,6 @@ on post-fs
 
     # Swap in only 1 page at a time
     write /proc/sys/vm/page-cluster 0
+
+    # This may have been created by the recovery system with the wrong context.
+    restorecon /cache/recovery

@@ -7,3 +7,7 @@ on init
 
     # deattach the fbcon as hdmi hotplug conflict with fbcon
     write /sys/class/vtconsole/vtcon1/bind 0
+
+on boot
+    # ci_hdrc.0 is the fixed UDC name
+    setprop sys.usb.controller ci_hdrc.0
