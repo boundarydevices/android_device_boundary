@@ -1,1 +1,6 @@
 allow vold mnt_media_rw_stub_file:dir { read open };
+allow vold block_device:blk_file getattr;
+allow vold boot_block_device:blk_file getattr;
+allow vold cache_block_device:blk_file getattr;
+allow vold recovery_block_device:blk_file getattr;
+allow vold system_block_device:blk_file getattr;

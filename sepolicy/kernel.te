@@ -1,0 +1,2 @@
+allow kernel device:chr_file { getattr unlink };
+allow kernel device:dir rmdir;

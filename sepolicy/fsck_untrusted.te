@@ -1,0 +1,7 @@
+allow fsck_untrusted block_device:blk_file getattr;
+allow fsck_untrusted block_device:dir getattr;
+allow fsck_untrusted boot_block_device:blk_file getattr;
+allow fsck_untrusted cache_block_device:blk_file getattr;
+allow fsck_untrusted recovery_block_device:blk_file getattr;
+allow fsck_untrusted system_block_device:blk_file getattr;
+allow fsck_untrusted userdata_block_device:blk_file getattr;

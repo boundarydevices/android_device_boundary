@@ -1,0 +1,2 @@
+allow bluetooth storage_stub_file:dir getattr;
+set_prop(bluetooth, wc_transport_prop)

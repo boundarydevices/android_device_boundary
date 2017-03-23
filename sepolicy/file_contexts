@@ -1,2 +1,5 @@
 /dev/hci_tty                    u:object_r:hci_attach_dev:s0
 /system/bin/uim-sysfs           u:object_r:hci_attach_exec:s0
+/dev/rfkill                     u:object_r:rfkill_device:s0
+/system/bin/fsck\.exfat --      u:object_r:fsck_exec:s0
+/system/bin/fsck\.ntfs  --      u:object_r:fsck_exec:s0

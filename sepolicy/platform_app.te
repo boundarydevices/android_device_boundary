@@ -20,7 +20,6 @@ allow platform_app mtp_exec:file getattr;
 allow platform_app netd_exec:file getattr;
 allow platform_app perfprofd_exec:file getattr;
 allow platform_app ppp_exec:file getattr;
-allow platform_app procrank_exec:file getattr;
 allow platform_app racoon_exec:file getattr;
 allow platform_app sdcardd_exec:file getattr;
 allow platform_app servicemanager_exec:file getattr;
