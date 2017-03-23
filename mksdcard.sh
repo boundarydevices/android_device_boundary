@@ -86,13 +86,13 @@ unit MiB \
 mklabel gpt \
 mkpart boot 0% 20 \
 mkpart recovery 20 40 \
-mkpart extended 40 40 \
-mkpart data 1176 100% \
-mkpart system 40.1 642 \
-mkpart cache 642 1154 \
-mkpart vendor 1154 1164 \
-mkpart misc 1164 1174 \
-mkpart crypt 1174 1176 \
+mkpart extended 40 42 \
+mkpart data 1600 100% \
+mkpart system 42 1066 \
+mkpart cache 1066 1578 \
+mkpart vendor 1578 1588 \
+mkpart misc 1588 1598 \
+mkpart crypt 1598 1600 \
 print
 
 sudo partprobe && sleep 1
@@ -108,15 +108,15 @@ done
 echo "all partitions present and accounted for!";
 
 echo "------------------making boot partition"
-mkfs.ext4 -L boot ${diskname}${prefix}1
+mkfs.ext4 -F -L boot ${diskname}${prefix}1
 echo "------------------making recovery partition"
-mkfs.ext4 -L recovery ${diskname}${prefix}2
+mkfs.ext4 -F -L recovery ${diskname}${prefix}2
 echo "------------------making data partition"
-mkfs.ext4 -L data ${diskname}${prefix}4
+mkfs.ext4 -F -L data ${diskname}${prefix}4
 echo "------------------making cache partition"
-mkfs.ext4 -L cache ${diskname}${prefix}6
+mkfs.ext4 -F -L cache ${diskname}${prefix}6
 echo "------------------making vendor partition"
-mkfs.ext4 -L vendor ${diskname}${prefix}7
+mkfs.ext4 -F -L vendor ${diskname}${prefix}7
 
 echo "------------------mounting boot, recovery, data partitions"
 sync && sudo partprobe && sleep 5
