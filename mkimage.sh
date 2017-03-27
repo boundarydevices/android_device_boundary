@@ -37,32 +37,19 @@ else
    dd if=/dev/zero bs=1M count=$outsizemb of=$outfilename
 fi
 
-#
-# Turkey carving (in MiB):
-#
-# [0     20)      1  20    Boot partition
-# [20    40)      2  20    Recovery partition
-# [40    40)      3  0     Stub/Legacy partition
-# [40    642)     5  600   System partition
-# [642   1154)    6  512   Cache partition
-# [1154  1164)    7  10    Vendor partition
-# [1164  1174)    8  10    Misc partition
-# [1174  1176)    9  2     Crypt partition
-# [1176  outsize) 4  ---   Data partition
-#
 sudo parted -a minimal \
 -s ${outfilename} \
 unit MiB \
 mklabel gpt \
 mkpart boot 0% 20 \
 mkpart recovery 20 40 \
-mkpart extended 40 40 \
-mkpart data 1176 100% \
-mkpart system 40.1 642 \
-mkpart cache 642 1154 \
-mkpart vendor 1154 1164 \
-mkpart misc 1164 1174 \
-mkpart crypt 1174 1176 \
+mkpart extended 40 42 \
+mkpart data 1600 100% \
+mkpart system 42 1066 \
+mkpart cache 1066 1578 \
+mkpart vendor 1578 1588 \
+mkpart misc 1588 1598 \
+mkpart crypt 1598 1600 \
 print
 
 setuploop(){
