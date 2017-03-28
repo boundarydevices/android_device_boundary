@@ -1,6 +1,5 @@
 /dev/pmem_gpu             0660   system     graphics
-/dev/ttymxc0              0666   system     system
-/dev/ttymxc1              0666   system     system
+/dev/ttymxc*              0666   system     system
 /dev/ttymxc2              0660   bluetooth  net_bt_stack
 /dev/hci_tty              0660   bluetooth  net_bt_stack
 /dev/snd/*                0664   system     audio
@@ -8,14 +7,15 @@
 /dev/ttyACM*              0640   radio      radio
 /dev/video*               0660   system     camera
 /dev/video16              0660   system     graphics
-/dev/mxc_ipu              0660   media      system
-/dev/mxc_vpu              0660   media      system
+/dev/mxc_ipu              0660   media      drmrpc
+/dev/mxc_vpu              0660   media      drmrpc
+/dev/pxp_device           0660   media      drmrpc
 /dev/uinput               0666   system     input
 /dev/ttya0                0660   system     gps
 /dev/ptya0                0660   system     gps
 /dev/ttya1                0660   system     gps
 /dev/ptya1                0660   system     gps
-/dev/ion                  0666   media      system
+/dev/ion                  0666   media      drmrpc
 /dev/galcore              0666   system     graphics
 /dev/graphics/fb0         0660   system     graphics
 /dev/watchdog             0660   system     root
@@ -23,6 +23,7 @@
 /dev/caam_kb              0660   system     system
 
 # sysfs properties
+/sys/devices/virtual/bluetooth/hci* state       0660  bluetooth net_bt_stack
 /sys/devices/virtual/input/input*   name        0660  root   input
 /sys/devices/virtual/input/input*   max         0660  root   input
 /sys/devices/virtual/input/input*   min         0660  root   input
@@ -35,8 +36,8 @@
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_temp 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_2_temp 0660 system system
 /sys/devices/soc0/backlight_* brightness 0660 system system
-/sys/devices/soc0/bt_rfkill.* state 0660 bluetooth net_bt_stack
-/sys/devices/soc0/fb.* fsl_disp_property 0660 system graphics
-/sys/devices/soc0/fb.* mode 0660 system graphics
-/sys/devices/soc0/soc.0/busfreq.* enable 0660 system system
+/sys/devices/soc0/bt_rfkill* state 0660 bluetooth net_bt_stack
+/sys/devices/soc0/fb* fsl_disp_property 0660 system graphics
+/sys/devices/soc0/fb* mode 0660 system graphics
+/sys/devices/soc0/soc/soc:busfreq* enable 0660 system system
 /sys/devices/system/cpu/cpu* online 0664 root system
