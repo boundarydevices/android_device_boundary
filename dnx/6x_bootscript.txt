@@ -47,7 +47,7 @@ if itest.s "x" == "x${cmd_xxx_present}" ; then
 	echo "!!!!!!!!!!!!!!!!"
 fi
 
-setenv bootargs "$bootargs quiet console=${console},115200 vmalloc=256M consoleblank=0 rootwait"
+setenv bootargs "$bootargs quiet console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
 setenv bootargs $bootargs androidboot.hardware=freescale
 
 if itest.s "xsata" == "x$dtype" ; then
@@ -75,7 +75,6 @@ if itest.s "x" != "x$wlmac" ; then
 	setenv bootargs $bootargs wlcore.mac=$wlmac
 fi
 
-# default cma size is 320M
 if itest.s "x" != "x$cma" ; then
 	setenv bootargs $bootargs cma=$cma
 fi

@@ -13,18 +13,59 @@ mw.l 0x020cc068 0 1
 
 setenv bootargs ''
 
-if ${fs}load ${dtype} ${disk}:${bootpart} 80008000 uEnv.txt ; then
-    env import -t 80008000 $filesize
+m4=''
+a_base=0x10000000
+if itest.s x51 == "x${cpu}" ; then
+	a_base=0x90000000
+elif itest.s x53 == "x${cpu}"; then
+	a_base=0x70000000
+elif itest.s x6SX == "x${cpu}" || itest.s x7D == "x${cpu}"; then
+	a_base=0x80000000
+	if itest.s "x1" == "x$m4enabled" ; then
+		run m4boot;
+		m4='-m4';
+	fi
 fi
 
-dtbname=imx6sx-${board}.dtb;
+setexpr a_script  ${a_base} + 0x00800000
+setexpr a_zImage  ${a_base} + 0x00800000
+setexpr a_fdt     ${a_base} + 0x03000000
+setexpr a_ramdisk ${a_base} + 0x03800000
 
-setenv fdt_addr 0x82000000
-if ${fs}load ${dtype} ${disk}:${bootpart} $fdt_addr ${bootdir}$dtbname ; then
-	fdt addr $fdt_addr
+if itest.s "x" == "x${board}" ; then
+	echo "!!!! Error: Your u-boot is outdated. Please upgrade.";
+	exit;
+fi
+
+if itest.s "x" == "x${dtbname}" ; then
+	if itest.s x6SOLO == "x${cpu}" ; then
+		dtbname=imx6dl-${board}.dtb;
+	elif itest.s x6DL == "x${cpu}" ; then
+		dtbname=imx6dl-${board}.dtb;
+	elif itest.s x6QP == "x${cpu}" ; then
+		dtbname=imx6qp-${board}.dtb;
+	elif itest.s x6SX == "x${cpu}" ; then
+		dtbname=imx6sx-${board}${m4}.dtb;
+	elif itest.s x7D == "x${cpu}" ; then
+		dtbname=imx7d-${board}${m4}.dtb;
+	elif itest.s x51 == "x${cpu}" ; then
+		dtbname=imx51-${board}${m4}.dtb;
+	elif itest.s x53 == "x${cpu}" ; then
+		dtbname=imx53-${board}${m4}.dtb;
+	else
+		dtbname=imx6q-${board}.dtb;
+	fi
+fi
+
+if load ${dtype} ${disk}:${bootpart} ${a_script} uEnv.txt ; then
+    env import -t ${a_script} ${filesize}
+fi
+
+if load ${dtype} ${disk}:${bootpart} ${a_fdt} ${bootdir}${dtbname} ; then
+	fdt addr ${a_fdt}
 	setenv fdt_high 0xffffffff
 else
-	echo "!!!! Error loading ${bootdir}$dtbname";
+	echo "!!!! Error loading ${bootdir}${dtbname}";
 	exit;
 fi
 
@@ -66,7 +107,7 @@ if itest.s "x" == "x${cmd_xxx_present}" ; then
 	echo "!!!!!!!!!!!!!!!!"
 fi
 
-setenv bootargs "$bootargs console=ttymxc0,115200 vmalloc=256M consoleblank=0 rootwait"
+setenv bootargs "$bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
 setenv bootargs $bootargs androidboot.hardware=freescale
 
 if itest.s "xsata" == "x$dtype" ; then
@@ -99,7 +140,6 @@ if itest.s "x" != "x$wlmac" ; then
 	setenv bootargs $bootargs wlcore.mac=$wlmac
 fi
 
-# default cma size is 320M
 if itest.s "x" != "x$cma" ; then
 	setenv bootargs $bootargs cma=$cma
 fi
@@ -116,13 +156,10 @@ if itest.s "x" != "x$show_env" ; then
 	printenv
 fi
 
-kernel=zImage
-ramdisk=uramdisk.img
-setenv stdout serial;
+if ${fs}load ${dtype} ${disk}:${bootpart} ${a_zImage} zImage ; then
+	if ${fs}load ${dtype} ${disk}:${bootpart} ${a_ramdisk} uramdisk.img ; then
+		bootz ${a_zImage} ${a_ramdisk} ${a_fdt} ;
+	fi
+fi
 
-${fs}load ${dtype} ${disk}:$bootpart 80008000 $kernel && \
-echo "loaded $kernel" && \
-${fs}load ${dtype} ${disk}:$bootpart 82800000 $ramdisk && \
-echo "loaded $ramdisk" && bootz 80008000 82800000 $fdt_addr ;
-
-echo "Error loading kernel image"
+echo "Error loading the OS"
