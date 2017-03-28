@@ -11,10 +11,22 @@ include device/boundary/nitrogen6x/wifi_config.mk
 ifneq ($(DEFCONF),)
 TARGET_KERNEL_DEFCONF := $(DEFCONF)
 else
-TARGET_KERNEL_DEFCONF := boundary_defconfig
+TARGET_KERNEL_DEFCONF := boundary_android_defconfig
 endif
 
 TARGET_RECOVERY_FSTAB := device/boundary/nitrogen6x/fstab.freescale
+
+TARGET_OTA_BLOCK_DISABLED := true
+
+TARGET_COPY_OUT_VENDOR := vendor
+
+# override Freescale partition sizes to match our flashing script
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 2097152000
+BOARD_CACHEIMAGE_PARTITION_SIZE := 536870912
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_PARTITION_SIZE := 10485760
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # boot.img & recovery.img creation
 TARGET_BOOTIMAGE_USE_EXT4 := true
@@ -30,7 +42,7 @@ BOARD_NOT_HAVE_MODEM := true
 BOARD_HAVE_IMX_CAMERA := true
 BOARD_HAVE_USB_CAMERA := false
 BOARD_HAS_SENSOR := false
-TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
+TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
 USE_ION_ALLOCATOR := false
 USE_GPU_ALLOCATOR := true
@@ -38,12 +50,10 @@ USE_GPU_ALLOCATOR := true
 # camera hal v3
 IMX_CAMERA_HAL_V3 := true
 
-include device/fsl-proprietary/gpu-viv/fsl-gpu.mk
-
 BUILD_TARGET_FS ?= ext4
 include device/fsl/imx6/imx6_target_fs.mk
 
-PRODUCT_MODEL := NITROGEN6X
+PRODUCT_MODEL := Nitrogen6x
 
 # for recovery service
 TARGET_SELECT_KEY := 28
@@ -67,7 +77,6 @@ WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx.ko"
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_wl12xx
 BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 USES_TI_MAC80211                 := true
-COMMON_GLOBAL_CFLAGS             += -DUSES_TI_MAC80211
 BOARD_HAVE_BLUETOOTH_TI          := true
 BOARD_USE_FORCE_BLE              := true
 TARGET_KERNEL_MODULES := \
@@ -105,3 +114,6 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/nitrogen6x/
 
 include device/boundary/sepolicy.mk
 
+BOARD_SECCOMP_POLICY += device/boundary/nitrogen6x/seccomp
+
+TARGET_BOARD_KERNEL_HEADERS := device/fsl/common/kernel-headers
