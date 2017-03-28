@@ -111,11 +111,15 @@ sudo umount $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 5
-e2label out/target/product/$product/system.img
-sudo dd if=out/target/product/$product/system.img of=$loopdev
-sudo e2label $loopdev system
+# Check whether system image is sparse or not
+system_img=out/target/product/$product/system.img
+file $system_img | grep sparse > /dev/null
+if [ $? -eq 0 ] ; then
+   sudo ./out/host/linux-x86/bin/simg2img $system_img $loopdev
+else
+   sudo dd if=$system_img of=$loopdev bs=1M
+fi
 sudo e2fsck -f $loopdev
-sudo resize2fs $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 6
