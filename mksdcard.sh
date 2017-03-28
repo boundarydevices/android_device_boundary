@@ -132,10 +132,15 @@ sudo cp -rfv out/target/product/$product/uramdisk-recovery.img ${mountpoint}/rec
 sudo cp -rfv out/target/product/$product/data/* ${mountpoint}/data/
 
 if [ -e ${diskname}${prefix}5 ]; then
-   sudo dd if=out/target/product/$product/system.img of=${diskname}${prefix}5
-   sudo e2label ${diskname}${prefix}5 system
+   # Check whether system image is sparse or not
+   system_img=out/target/product/$product/system.img
+   file $system_img | grep sparse > /dev/null
+   if [ $? -eq 0 ] ; then
+      sudo ./out/host/linux-x86/bin/simg2img $system_img ${diskname}${prefix}5
+   else
+      sudo dd if=$system_img of=${diskname}${prefix}5 bs=1M
+   fi
    sudo e2fsck -f ${diskname}${prefix}5
-   sudo resize2fs ${diskname}${prefix}5
 else
    echo "-----------missing ${diskname}${prefix}5";
 fi
