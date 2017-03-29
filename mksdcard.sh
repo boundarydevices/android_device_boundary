@@ -121,7 +121,7 @@ mkfs.ext4 -F -L vendor ${diskname}${prefix}7
 echo "------------------mounting boot, recovery, data partitions"
 sync && sudo partprobe && sleep 5
 
-for n in 1 2 4 ; do
+for n in 1 2 4 7 ; do
    echo "--- mounting ${diskname}${prefix}${n}";
    ${mount} ${diskname}${prefix}${n}
 done
@@ -130,6 +130,7 @@ sudo cp -rfv out/target/product/$product/boot/* ${mountpoint}/boot/
 sudo cp -rfv out/target/product/$product/boot/* ${mountpoint}/recovery/
 sudo cp -rfv out/target/product/$product/uramdisk-recovery.img ${mountpoint}/recovery/uramdisk.img
 sudo cp -rfv out/target/product/$product/data/* ${mountpoint}/data/
+sudo cp -rfv out/target/product/$product/vendor/* ${mountpoint}/vendor/
 
 if [ -e ${diskname}${prefix}5 ]; then
    # Check whether system image is sparse or not
