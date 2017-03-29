@@ -128,5 +128,15 @@ sudo losetup -d $loopdev
 
 setuploop $outfilename 7
 sudo mkfs.ext4 -L vendor $loopdev
+$mount $loopdev
+mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
+if [ "$mountpoint" == "" ]; then
+	echo "error mountpoint not found"
+	exit 1
+fi
+if [ -d $mountpoint ]; then
+   sudo cp -rvf out/target/product/$product/vendor/* $mountpoint/
+fi
+sudo umount $loopdev
 sudo losetup -d $loopdev
 
