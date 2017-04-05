@@ -138,6 +138,7 @@ fi
 
 if itest.s "x" != "x$wlmac" ; then
 	setenv bootargs $bootargs wlcore.mac=$wlmac
+	setenv bootargs $bootargs androidboot.wlan.mac=$wlmac
 fi
 
 if itest.s "x" != "x$cma" ; then

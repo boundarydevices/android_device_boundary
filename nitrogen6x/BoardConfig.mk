@@ -92,6 +92,7 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
 BOARD_WLAN_DEVICE                := qcwcn
 WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/qcacld_wlan.ko"
 WIFI_DRIVER_MODULE_NAME          := "wlan"
+WIFI_DRIVER_MAC_PROP             := "ro.boot.wlan.mac"
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
 BOARD_HAVE_BLUETOOTH_QCOM        := true
 BOARD_SUPPORTS_BLE_VND           := true
