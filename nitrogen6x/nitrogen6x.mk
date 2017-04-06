@@ -111,7 +111,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	ethernet \
-	BoundaryDemo \
 	CMFileManager \
 	su
 
