@@ -95,6 +95,11 @@ PRODUCT_COPY_FILES += \
 	device/boundary/common/init.qca.rc:root/init.bt-wlan.rc \
 	device/boundary/nitrogen6x/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
+# Specify which rfkill node to use since the first available (rfkill0) is the
+# one from the HCI driver in the kernel (net/bluetooth/hci_core.c).
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bt.rfkill.state=/sys/class/rfkill/rfkill1/state
+
 BOARD_CUSTOM_BT_CONFIG := device/boundary/nitrogen6x/libbt_vnd_nitrogen6x.conf
 endif
 
