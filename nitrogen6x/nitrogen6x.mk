@@ -92,8 +92,7 @@ PRODUCT_PACKAGES += \
 	wlan/qcom_cfg.ini
 
 PRODUCT_COPY_FILES += \
-	device/boundary/common/init.qca.rc:root/init.bt-wlan.rc \
-	device/boundary/nitrogen6x/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+	device/boundary/common/init.qca.rc:root/init.bt-wlan.rc
 
 # Specify which rfkill node to use since the first available (rfkill0) is the
 # one from the HCI driver in the kernel (net/bluetooth/hci_core.c).
