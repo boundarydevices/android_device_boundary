@@ -68,6 +68,9 @@ PRODUCT_PACKAGES += \
 	CMFileManager \
 	su
 
+PRODUCT_PACKAGES += \
+	sensors.cid
+
 PRODUCT_COPY_FILES += \
 	device/fsl-proprietary/gpu-viv/lib/egl/egl.cfg:system/lib/egl/egl.cfg
 

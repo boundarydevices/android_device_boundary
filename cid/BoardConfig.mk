@@ -7,6 +7,7 @@ export BUILD_ID=1.0.0-ga
 export BUILD_NUMBER=20170628
 include device/fsl/imx6/BoardConfigCommon.mk
 
+TARGET_BOOTLOADER_BOARD_NAME := cid
 ifneq ($(DEFCONF),)
 TARGET_KERNEL_DEFCONF := $(DEFCONF)
 else
