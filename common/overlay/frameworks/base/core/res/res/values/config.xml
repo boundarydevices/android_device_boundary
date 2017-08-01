@@ -59,7 +59,6 @@
                       [# simultaneous connection types]"  -->
     <string-array translatable="false" name="radioAttributes">
         <item>"1,1"</item>
-        <item>"13,1"</item>
         <item>"7,1"</item>
         <item>"9,1"</item>
     </string-array>
