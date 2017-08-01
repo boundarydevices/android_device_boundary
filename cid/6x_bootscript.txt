@@ -107,7 +107,7 @@ if itest.s "x" == "x${cmd_xxx_present}" ; then
 	echo "!!!!!!!!!!!!!!!!"
 fi
 
-setenv bootargs "$bootargs console=${console},115200 vmalloc=256M consoleblank=0 rootwait"
+setenv bootargs "$bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
 setenv bootargs $bootargs androidboot.hardware=freescale
 
 if itest.s "xsata" == "x$dtype" ; then
@@ -143,9 +143,10 @@ if itest.s "x" != "x$wlmac" ; then
 	setenv bootargs $bootargs androidboot.btmacaddr=${btmac}
 fi
 
-if itest.s "x" != "x$cma" ; then
-	setenv bootargs $bootargs cma=$cma
+if itest.s "x" == "x$cma" ; then
+	cma=448M
 fi
+setenv bootargs $bootargs cma=$cma
 
 if itest.s "x" != "x$gpumem" ; then
 	setenv bootargs $bootargs galcore.contiguousSize=$gpumem

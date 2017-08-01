@@ -140,9 +140,10 @@ if itest.s "x" != "x$wlmac" ; then
 	setenv bootargs $bootargs wlcore.mac=$wlmac
 fi
 
-if itest.s "x" != "x$cma" ; then
-	setenv bootargs $bootargs cma=$cma
+if itest.s "x" == "x$cma" ; then
+	cma=448M
 fi
+setenv bootargs $bootargs cma=$cma
 
 if itest.s "x" != "x$gpumem" ; then
 	setenv bootargs $bootargs galcore.contiguousSize=$gpumem
