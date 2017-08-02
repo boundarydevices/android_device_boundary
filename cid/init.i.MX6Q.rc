@@ -1,3 +1,5 @@
+import init.sierra.rc
+
 on boot
 
     # fsl omx graphic manager media framework property

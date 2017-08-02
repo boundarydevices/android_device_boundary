@@ -1,4 +1,5 @@
 $(call inherit-product, device/fsl/imx6/imx6.mk)
+$(call inherit-product-if-exists,hardware/sierra/user_tags.mk)
 $(call inherit-product-if-exists,vendor/google/products/gms.mk)
 
 # Overrides
