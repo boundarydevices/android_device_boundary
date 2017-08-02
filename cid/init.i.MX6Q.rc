@@ -15,6 +15,9 @@ on boot
     # set front camera.
     setprop front_camera_name ov5642_camera
 
+    # do not emulate the battery status
+    setprop sys.emulated.battery 0
+
     # Invensense IIO settings
     chown system system /dev/iio:device0
     chown system system /sys/bus/iio/devices/iio:device0/accel_enable
