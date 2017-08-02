@@ -39,5 +39,10 @@
 /sys/devices/soc0/bt_rfkill* state 0660 bluetooth net_bt_stack
 /sys/devices/soc0/fb* fsl_disp_property 0660 system graphics
 /sys/devices/soc0/fb* mode 0660 system graphics
+/sys/devices/soc0/leds/leds/* activate   0660 system system
+/sys/devices/soc0/leds/leds/* brightness 0660 system system
+/sys/devices/soc0/leds/leds/* duration   0660 system system
+/sys/devices/soc0/leds/leds/* state      0660 system system
+/sys/devices/soc0/leds/leds/* trigger    0660 system system
 /sys/devices/soc0/soc/soc:busfreq* enable 0660 system system
 /sys/devices/system/cpu/cpu* online 0664 root system
