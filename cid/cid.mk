@@ -71,6 +71,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	sensors.cid
 
+PRODUCT_PACKAGES += \
+	gps.conf \
+	gps.default \
+	u-blox.conf
+
 PRODUCT_COPY_FILES += \
 	device/fsl-proprietary/gpu-viv/lib/egl/egl.cfg:system/lib/egl/egl.cfg
 
