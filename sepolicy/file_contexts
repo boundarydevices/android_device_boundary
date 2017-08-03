@@ -3,3 +3,4 @@
 /dev/rfkill                     u:object_r:rfkill_device:s0
 /system/bin/fsck\.exfat --      u:object_r:fsck_exec:s0
 /system/bin/fsck\.ntfs  --      u:object_r:fsck_exec:s0
+/system/lib/gps\..*\.so         u:object_r:system_data_file:s0
