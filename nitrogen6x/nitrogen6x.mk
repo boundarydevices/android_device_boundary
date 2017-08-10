@@ -23,8 +23,8 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/fusion_F0710A.idc \
-	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/gslx680.idc \
-	device/boundary/common/gsl1680.fw:system/etc/firmware/gsl1680.fw \
+	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/silead_ts.idc \
+	device/boundary/common/gsl1680.fw:system/etc/firmware/silead/gsl1680.fw \
 	device/boundary/common/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/common/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
