@@ -43,4 +43,6 @@
 /sys/devices/soc0/leds/leds/* state      0660 system system
 /sys/devices/soc0/leds/leds/* trigger    0660 system system
 /sys/devices/soc0/soc/soc:busfreq* enable 0660 system system
+/sys/devices/soc0/soc/2100000.aips-bus/21a8000.i2c/i2c-2/2-0063/leds/* brightness 0660 system camera
+/sys/devices/soc0/soc/2100000.aips-bus/21a8000.i2c/i2c-2/2-0063/leds/* timeout_ms 0660 system camera
 /sys/devices/system/cpu/cpu* online 0664 root system
