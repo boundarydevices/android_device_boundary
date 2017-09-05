@@ -81,6 +81,7 @@ WIFI_BYPASS_FWRELOAD      := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/cid/
 
 include device/boundary/sepolicy.mk
+include hardware/sierra/sepolicy.mk
 
 BOARD_SECCOMP_POLICY += device/boundary/cid/seccomp
 
