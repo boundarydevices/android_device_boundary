@@ -13,6 +13,7 @@ on boot
 
     # set back camera.
     setprop back_camera_name ov5640_mipi
+    setprop back_camera_orient 90
 
     # set front camera.
     setprop front_camera_name ov5642_camera
