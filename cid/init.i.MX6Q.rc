@@ -15,9 +15,6 @@ on boot
     setprop back_camera_name ov5640_mipi
     setprop back_camera_orient 90
 
-    # set front camera.
-    setprop front_camera_name ov5642_camera
-
     # do not emulate the battery status
     setprop sys.emulated.battery 0
 
