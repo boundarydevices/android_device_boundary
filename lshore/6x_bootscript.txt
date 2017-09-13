@@ -28,7 +28,9 @@ else
 fi
 
 # ------------------- LVDS setup
-if itest.s "xhannstar" == "x$panel"; then
+if itest.s "x" != "x${cmd_lvds}" ; then
+	run cmd_lvds
+elif itest.s "xhannstar" == "x$panel"; then
         fdt rm okaya1024x600
 	fdt rm lg1280x800
 elif itest.s "xokaya1024x600" == "x$panel"; then
