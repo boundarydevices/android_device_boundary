@@ -49,14 +49,15 @@ else
 fi
 
 # ------------------- LCD setup
-if itest.s "x" == "x$panel"; then
-	if itest.s "x" -ne "x$calibration" ; then
-		setenv bootargs $bootargs ft5x06_ts.calibration=$calibration
-	else
-		setenv bootargs $bootargs ft5x06_ts.calibration=-66542,1469,52852976,608,-64102,31379036,65536
-	fi
+if itest.s "x" != "x${cmd_lcd}" ; then
+	run cmd_lcd
+fi
+
+# ------------------- Touchscreen setup
+if itest.s "x" -ne "x$calibration" ; then
+	setenv bootargs $bootargs ft5x06_ts.calibration=$calibration
 else
-	fdt rm lcd_display;
+	setenv bootargs $bootargs ft5x06_ts.calibration=-66542,1469,52852976,608,-64102,31379036,65536
 fi
 
 setenv bootargs "$bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 rootwait"
