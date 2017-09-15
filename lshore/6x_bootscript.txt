@@ -49,7 +49,7 @@ else
 fi
 
 # ------------------- LCD setup
-if itest.s "xoff" != "x${fb_lcd}" ; then
+if itest.s "xoff" == "x${fb_lcd}" ; then
 	fdt rm fb_lcd
 elif itest.s "x" != "x${cmd_lcd}" ; then
 	run cmd_lcd
