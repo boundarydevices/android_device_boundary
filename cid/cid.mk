@@ -35,7 +35,6 @@ DEVICE_PACKAGE_OVERLAYS := \
 	device/boundary/cid/overlay \
 	device/boundary/common/overlay
 
-PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
 PRODUCT_PACKAGES += \
