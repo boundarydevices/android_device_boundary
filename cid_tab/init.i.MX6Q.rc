@@ -125,3 +125,13 @@ on boot
     chown system system /sys/bus/iio/devices/iio:device0/three_axes_q_rate
     chown system system /sys/bus/iio/devices/iio:device0/trigger/current_trigger
     chown system system /sys/bus/iio/devices/iio:device0/uevent
+
+    # Light sensor IIO settings
+    setprop ro.hardware.lightsensor /sys/bus/iio/devices/iio:device1
+    chown system system /sys/bus/iio/devices/iio:device1/in_illuminance0_input
+    chown system system /sys/bus/iio/devices/iio:device1/in_intensity0_raw
+    chown system system /sys/bus/iio/devices/iio:device1/in_intensity1_raw
+    chown system system /sys/bus/iio/devices/iio:device1/events/in_intensity0_thresh_falling_en
+    chown system system /sys/bus/iio/devices/iio:device1/events/in_intensity0_thresh_falling_value
+    chown system system /sys/bus/iio/devices/iio:device1/events/in_intensity0_thresh_rising_en
+    chown system system /sys/bus/iio/devices/iio:device1/events/in_intensity0_thresh_rising_value
