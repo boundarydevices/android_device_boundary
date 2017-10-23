@@ -36,6 +36,14 @@ on init
     mkdir /mnt/shm  0775 media drmrpc
     mount tmpfs tmpfs /mnt/shm mode=0775,uid=1013,gid=1031,size=1m
 
+    # add a cpuset for the camera daemon
+    mkdir /dev/cpuset/camera-daemon
+    write /dev/cpuset/camera-daemon/cpus 0
+    write /dev/cpuset/camera-daemon/mems 0
+    chown system system /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon/tasks
+    chmod 0664 /dev/cpuset/camera-daemon/tasks
+
 on boot
     # Enable Tethering in the Settings
     setprop ro.tether.denied false
