@@ -57,6 +57,22 @@ if itest.s "x" == "x${dtbname}" ; then
 	fi
 fi
 
+offset=0x400
+erase_size=0xC0000
+setexpr a_uboot1 ${a_base} + 0x00800000
+setexpr a_uboot2 ${a_base} + 0x01000000
+if ${fs}load ${dtype} ${disk}:1 ${a_uboot1} u-boot.$uboot_defconfig ; then
+	sf probe ;
+	if sf read ${a_uboot2} $offset $filesize ; then
+		if cmp.b ${a_uboot1} ${a_uboot2} $filesize ; then
+		else
+			echo "Updating U-Boot...";
+			sf erase 0 ${erase_size} ;
+			sf write ${a_uboot1} $offset $filesize ;
+		fi
+	fi
+fi
+
 if load ${dtype} ${disk}:${bootpart} ${a_script} uEnv.txt ; then
     env import -t ${a_script} ${filesize}
 fi
