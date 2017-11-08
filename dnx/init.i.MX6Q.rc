@@ -2,6 +2,8 @@ on early-init
     setprop ro.init.skip.text 1
 
 on boot
+    setprop vold.force_fstab_label 1
+
     # fsl omx graphic manager media framework property
     setprop media.omxgm.enable-record 1
 
