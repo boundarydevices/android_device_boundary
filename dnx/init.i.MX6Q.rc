@@ -20,17 +20,24 @@ on boot
     start su_daemon
 
 service su_daemon /system/xbin/su --daemon
+    user root
+    group root
     disabled
+    seclabel u:r:sudaemon:s0
 
 service bootinit /system/bin/bootinit
+    user root
+    group root
     disabled
     oneshot
+    seclabel u:r:bootinit:s0
 
 service bootsound /system/bin/bootsound
     user media
     group audio
     disabled
     oneshot
+    seclabel u:r:bootsound:s0
 
 on property:init.svc.bootanim=running
     start bootsound
