@@ -9,4 +9,5 @@ echo out > /sys/class/gpio/gpio33/direction
 echo out > /sys/class/gpio/gpio36/direction
 echo out > /sys/class/gpio/gpio101/direction
 echo  in > /sys/class/gpio/gpio205/direction
+chmod -R go+w /sys/class/gpio/
 chmod -R go+w /sys/class/gpio/gpio*/
