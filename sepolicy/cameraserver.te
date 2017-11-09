@@ -1,1 +1,2 @@
 allow cameraserver sysfs:file write;
+allow cameraserver proc_net:file { getattr open read };

@@ -1,0 +1,5 @@
+userdebug_or_eng(`
+    allow sudaemon socket_device:dir { add_name create setattr write };
+    allow sudaemon socket_device:sock_file { create setattr };
+    allow sudaemon su_exec:file { entrypoint getattr read };
+')
