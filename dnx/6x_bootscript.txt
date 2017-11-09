@@ -60,7 +60,7 @@ fi
 
 setenv bootargs $bootargs androidboot.console=$console
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
-setenv bootargs $bootargs androidboot.selinux=disabled
+setenv bootargs $bootargs androidboot.selinux=permissive
 
 # add serial number based on MAC address
 setexpr mac_hi *0x021bc630
