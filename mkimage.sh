@@ -90,8 +90,13 @@ setuploop(){
 
 setuploop $outfilename 1 $BOOTSTART $BOOTEND   
 sudo mkfs.vfat -n BOOT $loopdev
+sleep 1
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
+if [ "$mountpoint" == "" ]; then
+	echo "error mountpoint not found"
+	exit 1
+fi
 if [ -d $mountpoint ]; then
    sudo cp -rvf out/target/product/$product/boot/* $mountpoint/
 fi
@@ -100,8 +105,13 @@ sudo losetup -d $loopdev
 
 setuploop $outfilename 2 $RECOVERSTART $RECOVEREND   
 sudo mkfs.vfat -n RECOVER $loopdev
+sleep 1
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
+if [ "$mountpoint" == "" ]; then
+	echo "error mountpoint not found"
+	exit 1
+fi
 if [ -d $mountpoint ]; then
    sudo cp -rvf out/target/product/$product/boot/* $mountpoint/
    sudo cp -rfv out/target/product/$product/uramdisk-recovery.img $mountpoint/uramdisk.img
@@ -111,8 +121,13 @@ sudo losetup -d $loopdev
 
 setuploop $outfilename 4 $DATASTART $DATAEND   
 sudo mkfs.ext4 -L DATA $loopdev
+sleep 1
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
+if [ "$mountpoint" == "" ]; then
+	echo "error mountpoint not found"
+	exit 1
+fi
 if [ -d $mountpoint ]; then
    sudo cp -rvf out/target/product/$product/data/* $mountpoint/
 fi
