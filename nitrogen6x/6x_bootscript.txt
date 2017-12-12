@@ -44,6 +44,9 @@ else
 fi
 
 # ------------------- HDMI detection
+if itest.s "x" != "x${cmd_hdmi}" ; then
+	run cmd_hdmi
+else
 i2c dev 1 ;
 if i2c probe 0x50 ; then
 	echo "------ have HDMI monitor";
@@ -63,8 +66,12 @@ else
 	fdt rm hdmi_display
 	echo "------ no HDMI monitor";
 fi
+fi
 
 # ------------------- LVDS detection
+if itest.s "x" != "x${cmd_lvds}" ; then
+	run cmd_lvds
+else
 if itest.s "x" != "x$lvds_1080p" ; then
 	echo "----- 1080P dual channel LVDS";
 	fdt rm okaya1024x600
@@ -131,8 +138,21 @@ else
 		fdt rm lvds_display_2 ; # ignore errors on boards != 6_max
 	fi
 fi
+fi
+
+if itest.s "x" != "x${cmd_lvds2}" ; then
+	run cmd_lvds2
+fi
 
 # ------------------- LCD detection
+if itest.s "x" != "x${cmd_lcd}" ; then
+	run cmd_lcd
+	if itest.s "x" -eq "x$tsc_calibration" ; then
+		setenv bootargs $bootargs tsc2004.calibration=-67247,-764,272499173,324,69283,-8653010,65536
+	else
+		setenv bootargs $bootargs tsc2004.calibration=$tsc_calibration
+	fi
+else
 setenv have_lcd '';
 if i2c probe 0x48 ; then
 	setenv have_lcd 1;
@@ -161,6 +181,7 @@ if itest.s "x" != "x$have_lcd" ; then
 	echo "----- found LCD display";
 else
 	fdt rm lcd_display;
+fi
 fi
 
 setenv bootargs "$bootargs console=ttymxc1,115200 vmalloc=400M consoleblank=0 rootwait"
