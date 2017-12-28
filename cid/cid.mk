@@ -42,6 +42,7 @@ PRODUCT_PACKAGES += \
 	bdwlan30.bin \
 	otp30.bin \
 	qca/tfbtfw11.tlv \
+	qca/tfbtnv11.bin \
 	qwlan30.bin \
 	utf30.bin \
 	utfbd30.bin \
