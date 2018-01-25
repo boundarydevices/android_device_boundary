@@ -14,6 +14,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/common/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
 	device/boundary/common/init.rc:root/init.freescale.rc \
 	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
+	device/boundary/common/ota.conf:system/etc/ota.conf \
 	device/boundary/dnx/bootinit.sh:system/bin/bootinit \
 	device/boundary/dnx/bootsound.sh:system/bin/bootsound \
 	device/boundary/dnx/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
