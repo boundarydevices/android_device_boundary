@@ -17,6 +17,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/cid_tab/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/boundary/cid_tab/fstab.freescale:root/fstab.freescale \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/Goodix_Capacitive_TouchScreen.idc \
+	device/boundary/common/apns-full-conf.xml:system/etc/apns-conf.xml \
 	device/boundary/common/audio_policy.conf:system/etc/audio_policy.conf \
 	device/boundary/common/audio_effects.conf:vendor/etc/audio_effects.conf \
 	device/boundary/common/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
