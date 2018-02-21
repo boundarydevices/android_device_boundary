@@ -81,6 +81,10 @@ PRODUCT_PACKAGES += \
 	gps.default \
 	u-blox.conf
 
+PRODUCT_PACKAGES += \
+	fs_config_dirs \
+	fs_config_files
+
 PRODUCT_COPY_FILES += \
 	device/fsl-proprietary/gpu-viv/lib/egl/egl.cfg:system/lib/egl/egl.cfg
 
