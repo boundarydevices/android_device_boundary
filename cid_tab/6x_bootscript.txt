@@ -119,14 +119,18 @@ else
 fi
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
 
-if itest.s "x" != "x$selinux" ; then
-	setenv bootargs $bootargs androidboot.selinux=$selinux
+if itest.s "xenforcing" != "x$selinux" ; then
+	setenv bootargs $bootargs androidboot.selinux=permissive
 fi
 
-# add serial number based on MAC address
-setexpr mac_hi *0x021bc630
-setexpr mac_lo *0x021bc620
-setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
+if itest.s "x" != "x${serial#}" ; then
+	setenv bootargs $bootargs androidboot.serialno="${serial#}"
+else
+	# add serial number based on MAC address
+	setexpr mac_hi *0x021bc630
+	setexpr mac_lo *0x021bc620
+	setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
+fi
 
 if itest.s "x" == "x$debug" ; then
 	setenv bootargs $bootargs quiet
