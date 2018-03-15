@@ -89,4 +89,11 @@
 
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
+
+    <!-- Default value for led color when battery is low/medium on charge: RED -->
+    <integer name="config_notificationsBatteryLowARGB">0xFFFF0000</integer>
+    <integer name="config_notificationsBatteryMediumARGB">0xFFFF0000</integer>
+
+    <!-- Default value for led color when battery is fully charged: GREEN -->
+    <integer name="config_notificationsBatteryFullARGB">0xFF00FF00</integer>
 </resources>
