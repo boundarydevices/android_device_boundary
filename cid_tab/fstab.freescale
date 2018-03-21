@@ -6,13 +6,13 @@
 /devices/soc0/soc/2100000.aips-bus/2184000.usb/ci_hdrc.0* auto auto defaults voldmanaged=usb:auto,encryptable=userdata
 /devices/soc0/soc/2100000.aips-bus/2198000.usdhc/mmc_host* auto auto defaults voldmanaged=sdcard:auto,encryptable=userdata
 
-$BD1    /boot     ext4    noatime,nodiratime,errors=remount-ro                                             wait
-$BD2    /recovery ext4    noatime,nodiratime,errors=remount-ro                                             wait
-$BD5    /system   ext4    ro                                                                               wait
-$BD4    /data     ext4    nosuid,nodev,nodiratime,noatime,noauto_da_alloc,errors=panic                     wait,encryptable=$BD9
-$BD6    /cache    ext4    nosuid,nodev                                                                     wait
-$BD7    /vendor   ext4    ro,nosuid,nodev                                                                  wait
-$BD8    /misc     emmc    defaults                                                                         defaults
+/dev/block/bootdevice/by-name/boot     /boot     ext4    noatime,nodiratime,errors=remount-ro                          wait
+/dev/block/bootdevice/by-name/recovery /recovery ext4    noatime,nodiratime,errors=remount-ro                          wait
+/dev/block/bootdevice/by-name/system   /system   ext4    ro,barrier=1                                                  wait
+/dev/block/bootdevice/by-name/data     /data     ext4    nosuid,nodev,nodiratime,noatime,noauto_da_alloc,errors=panic  wait,formattable,encryptable=/dev/block/bootdevice/by-name/crypt,quota
+/dev/block/bootdevice/by-name/cache    /cache    ext4    nosuid,nodev                                                  wait
+/dev/block/bootdevice/by-name/vendor   /vendor   ext4    ro,barrier=1                                                  wait
+/dev/block/bootdevice/by-name/misc     /misc     emmc    defaults                                                      defaults
 
 # ZRAM setup
-/dev/block/zram0    none    swap    defaults                                                               zramsize=314572800
+/dev/block/zram0 none swap defaults zramsize=314572800
