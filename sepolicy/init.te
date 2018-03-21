@@ -1,5 +1,7 @@
 allow init system_file:system module_load;
 allow init self:capability sys_module;
+allow init rootfs:chr_file { read write };
+
 type bootinit, domain;
 type bootsound, domain;
 

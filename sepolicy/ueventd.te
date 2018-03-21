@@ -1,0 +1,2 @@
+allow ueventd kernel:fd use;
+allow ueventd rootfs:chr_file { read write };

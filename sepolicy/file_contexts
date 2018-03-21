@@ -1,6 +1,37 @@
+# i.MX6QDL USDHC3
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/boot        u:object_r:boot_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/cache       u:object_r:cache_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/crypt       u:object_r:metadata_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/data        u:object_r:userdata_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/frp         u:object_r:frp_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/recovery    u:object_r:recovery_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/system      u:object_r:system_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/vendor      u:object_r:system_block_device:s0
+
+# i.MX6QDL USDHC4
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/boot        u:object_r:boot_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/cache       u:object_r:cache_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/crypt       u:object_r:metadata_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/data        u:object_r:userdata_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/frp         u:object_r:frp_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/recovery    u:object_r:recovery_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/system      u:object_r:system_block_device:s0
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/vendor      u:object_r:system_block_device:s0
+
+# devices
 /dev/hci_tty                    u:object_r:hci_attach_dev:s0
-/system/bin/uim-sysfs           u:object_r:hci_attach_exec:s0
 /dev/rfkill                     u:object_r:rfkill_device:s0
+/dev/sda[0-8]*                  u:object_r:fuse:s0
+/dev/ttyGS[0-9]*                u:object_r:tty_device:s0
+/dev/ttymxc[0-9]*               u:object_r:tty_device:s0
+/dev/ttyUSB[0-9]*               u:object_r:tty_device:s0
+
+# apps
 /system/bin/fsck\.exfat --      u:object_r:fsck_exec:s0
 /system/bin/fsck\.ntfs  --      u:object_r:fsck_exec:s0
 /system/lib/gps\..*\.so         u:object_r:system_data_file:s0
+/vendor/bin/uim-sysfs           u:object_r:hci_attach_exec:s0

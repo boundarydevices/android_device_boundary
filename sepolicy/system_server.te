@@ -1,4 +1,5 @@
+allow system_server crash_dump:process getpgid;
 allow system_server init:unix_dgram_socket sendto;
 allow system_server self:capability sys_module;
-allow system_server self:system module_load;
 allow system_server tty_device:chr_file rw_file_perms;
+allow system_server untrusted_app_25:file write;

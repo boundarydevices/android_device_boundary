@@ -1,4 +1,3 @@
-allow shell audioserver_exec:file { execute getattr };
 allow shell init_exec:file getattr;
 allow shell rootfs:file getattr;
 allow shell device:dir read;

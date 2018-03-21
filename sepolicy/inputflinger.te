@@ -1,0 +1,1 @@
+allow inputflinger device:dir { open read };
