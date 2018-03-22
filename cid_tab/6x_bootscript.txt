@@ -132,8 +132,10 @@ else
 	setenv bootargs $bootargs androidboot.serialno="$mac_hi$mac_lo"
 fi
 
-if itest.s "x" == "x$debug" ; then
-	setenv bootargs $bootargs quiet
+if itest.s "x" != "x${loglevel}" ; then
+	setenv bootargs ${bootargs} loglevel=${loglevel}
+else
+	setenv bootargs ${bootargs} quiet
 fi
 
 if itest.s "x" != "x$hwrotation" ; then
