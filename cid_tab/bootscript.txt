@@ -44,6 +44,7 @@ fi
 if itest.s "x" == "x${fdt_file}" ; then
 	if itest.s x6SOLO == "x${cpu}" ; then
 		fdt_file=imx6dl-${board}.dtb;
+		setenv cpu 6DL;
 	elif itest.s x6DL == "x${cpu}" ; then
 		fdt_file=imx6dl-${board}.dtb;
 	elif itest.s x6QP == "x${cpu}" ; then
@@ -108,7 +109,7 @@ if itest.s "x" != "x${cmd_lvds}" ; then
 fi
 
 setenv bootargs "$bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
-setenv bootargs $bootargs androidboot.hardware=freescale
+setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=i.MX${cpu}
 
 if itest.s "xsata" == "x$devtype" ; then
 	bootdev=sda

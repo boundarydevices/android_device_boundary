@@ -48,7 +48,7 @@ if itest.s "x" == "x${cmd_xxx_present}" ; then
 fi
 
 setenv bootargs "$bootargs quiet console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
-setenv bootargs $bootargs androidboot.hardware=freescale
+setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=i.MX${cpu}
 
 if itest.s "xsata" == "x$devtype" ; then
 	bootdev=sda
