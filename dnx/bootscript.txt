@@ -50,16 +50,19 @@ fi
 setenv bootargs "$bootargs quiet console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
 setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=i.MX${cpu}
 
-if itest.s "xsata" == "x$devtype" ; then
-	bootdev=sda
+if itest.s "xmmc" == "x$devtype" ; then
+	if itest.s "x0" == "x$devnum" ; then
+		bootdev=2100000.aips-bus/2198000.usdhc
+	elif itest.s "x1" == "x$devnum" ; then
+		bootdev=2100000.aips-bus/219c000.usdhc
+	fi
 elif itest.s "xusb" == "x$devtype" ; then
-	bootdev=sda
-else
-	bootdev=mmcblk${devnum}
+	bootdev=2100000.aips-bus/2184200.usb/ci_hdrc.1
+elif itest.s "xsata" == "x$devtype" ; then
+	bootdev=2200000.sata
 fi
-
+setenv bootargs $bootargs androidboot.bootdevice=$bootdev
 setenv bootargs $bootargs androidboot.console=$console
-setenv bootargs $bootargs androidboot.bootdev=$bootdev
 setenv bootargs $bootargs androidboot.selinux=permissive
 
 if itest.s "x" != "x${serial#}" ; then
