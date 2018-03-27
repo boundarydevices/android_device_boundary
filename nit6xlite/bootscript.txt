@@ -1,4 +1,4 @@
-setenv bootpart 1
+setenv distro_bootpart 1
 
 setexpr rval *0x020CC068 \& 0x180
 if itest.s "x$rval" -eq "x100"; then
@@ -6,7 +6,7 @@ if itest.s "x$rval" -eq "x100"; then
 	fastboot 0
 else
 	if itest.s "x$rval" -eq "x80"; then
-		setenv bootpart 2;
+		setenv distro_bootpart 2;
 	fi
 fi
 mw.l 0x020cc068 0 1
@@ -37,35 +37,35 @@ if itest.s "x" == "x${board}" ; then
 	exit;
 fi
 
-if itest.s "x" == "x${dtbname}" ; then
+if itest.s "x" == "x${fdt_file}" ; then
 	if itest.s x6SOLO == "x${cpu}" ; then
-		dtbname=imx6dl-${board}.dtb;
+		fdt_file=imx6dl-${board}.dtb;
 	elif itest.s x6DL == "x${cpu}" ; then
-		dtbname=imx6dl-${board}.dtb;
+		fdt_file=imx6dl-${board}.dtb;
 	elif itest.s x6QP == "x${cpu}" ; then
-		dtbname=imx6qp-${board}.dtb;
+		fdt_file=imx6qp-${board}.dtb;
 	elif itest.s x6SX == "x${cpu}" ; then
-		dtbname=imx6sx-${board}${m4}.dtb;
+		fdt_file=imx6sx-${board}${m4}.dtb;
 	elif itest.s x7D == "x${cpu}" ; then
-		dtbname=imx7d-${board}${m4}.dtb;
+		fdt_file=imx7d-${board}${m4}.dtb;
 	elif itest.s x51 == "x${cpu}" ; then
-		dtbname=imx51-${board}${m4}.dtb;
+		fdt_file=imx51-${board}${m4}.dtb;
 	elif itest.s x53 == "x${cpu}" ; then
-		dtbname=imx53-${board}${m4}.dtb;
+		fdt_file=imx53-${board}${m4}.dtb;
 	else
-		dtbname=imx6q-${board}.dtb;
+		fdt_file=imx6q-${board}.dtb;
 	fi
 fi
 
-if load ${dtype} ${disk}:${bootpart} ${a_script} uEnv.txt ; then
+if load ${devtype} ${devnum}:${distro_bootpart} ${a_script} uEnv.txt ; then
     env import -t ${a_script} ${filesize}
 fi
 
-if load ${dtype} ${disk}:${bootpart} ${a_fdt} ${bootdir}${dtbname} ; then
+if load ${devtype} ${devnum}:${distro_bootpart} ${a_fdt} ${prefix}${fdt_file} ; then
 	fdt addr ${a_fdt}
 	setenv fdt_high 0xffffffff
 else
-	echo "!!!! Error loading ${bootdir}${dtbname}";
+	echo "!!!! Error loading ${prefix}${fdt_file}";
 	exit;
 fi
 
@@ -110,12 +110,12 @@ fi
 setenv bootargs "$bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
 setenv bootargs $bootargs androidboot.hardware=freescale
 
-if itest.s "xsata" == "x$dtype" ; then
+if itest.s "xsata" == "x$devtype" ; then
 	bootdev=sda
-elif itest.s "xusb" == "x$dtype" ; then
+elif itest.s "xusb" == "x$devtype" ; then
 	bootdev=sda
 else
-	bootdev=mmcblk${disk}
+	bootdev=mmcblk${devnum}
 fi
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
 
@@ -155,8 +155,8 @@ if itest.s "x" != "x$show_env" ; then
 	printenv
 fi
 
-if ${fs}load ${dtype} ${disk}:${bootpart} ${a_zImage} zImage ; then
-	if ${fs}load ${dtype} ${disk}:${bootpart} ${a_ramdisk} uramdisk.img ; then
+if ${fs}load ${devtype} ${devnum}:${distro_bootpart} ${a_zImage} zImage ; then
+	if ${fs}load ${devtype} ${devnum}:${distro_bootpart} ${a_ramdisk} uramdisk.img ; then
 		bootz ${a_zImage} ${a_ramdisk} ${a_fdt} ;
 	fi
 fi

@@ -1,4 +1,4 @@
-setenv bootpart 1
+setenv distro_bootpart 1
 
 setexpr rval *0x020CC068 \& 0x180
 if itest.s "x$rval" -eq "x100"; then
@@ -6,25 +6,25 @@ if itest.s "x$rval" -eq "x100"; then
 	fastboot 0
 else
 	if itest.s "x$rval" -eq "x80"; then
-		setenv bootpart 2;
+		setenv distro_bootpart 2;
 	fi
 fi
 mw.l 0x020cc068 0 1
 
 setenv bootargs ''
 
-if ${fs}load ${dtype} ${disk}:${bootpart} 10800000 uEnv.txt ; then
+if ${fs}load ${devtype} ${devnum}:${distro_bootpart} 10800000 uEnv.txt ; then
     env import -t 10800000 $filesize
 fi
 
-dtbname=imx6q-dnx.dtb;
+fdt_file=imx6q-dnx.dtb;
 
 setenv fdt_addr 0x12000000
-if ${fs}load ${dtype} ${disk}:${bootpart} $fdt_addr ${bootdir}$dtbname ; then
+if ${fs}load ${devtype} ${devnum}:${distro_bootpart} $fdt_addr ${prefix}$fdt_file ; then
 	fdt addr $fdt_addr
 	setenv fdt_high 0xffffffff
 else
-	echo "!!!! Error loading ${bootdir}$dtbname";
+	echo "!!!! Error loading ${prefix}$fdt_file";
 	exit;
 fi
 
@@ -50,12 +50,12 @@ fi
 setenv bootargs "$bootargs quiet console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
 setenv bootargs $bootargs androidboot.hardware=freescale
 
-if itest.s "xsata" == "x$dtype" ; then
+if itest.s "xsata" == "x$devtype" ; then
 	bootdev=sda
-elif itest.s "xusb" == "x$dtype" ; then
+elif itest.s "xusb" == "x$devtype" ; then
 	bootdev=sda
 else
-	bootdev=mmcblk${disk}
+	bootdev=mmcblk${devnum}
 fi
 
 setenv bootargs $bootargs androidboot.console=$console
@@ -96,9 +96,9 @@ kernel=zImage
 ramdisk=uramdisk.img
 setenv stdout serial;
 
-${fs}load ${dtype} ${disk}:$bootpart 10800000 $kernel && \
+${fs}load ${devtype} ${devnum}:$distro_bootpart 10800000 $kernel && \
 echo "loaded $kernel" && \
-${fs}load ${dtype} ${disk}:$bootpart 12800000 $ramdisk && \
+${fs}load ${devtype} ${devnum}:$distro_bootpart 12800000 $ramdisk && \
 echo "loaded $ramdisk" && bootz 10800000 12800000 $fdt_addr ;
 
 echo "Error loading kernel image"
