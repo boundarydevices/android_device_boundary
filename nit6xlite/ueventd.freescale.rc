@@ -21,6 +21,10 @@
 /dev/rfkill               0660   wifi       system
 /dev/caam_kb              0660   system     system
 
+# partitions properties
+/dev/block/platform/soc0/soc/2100000\.aips-bus/2198000\.usdhc/by-name/frp 0600 system system
+/dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/frp 0600 system system
+
 # sysfs properties
 /sys/devices/virtual/bluetooth/hci* state       0660  bluetooth bluetooth
 /sys/devices/virtual/input/input*   name        0660  root   input
