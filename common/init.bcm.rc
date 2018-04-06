@@ -1,3 +1,2 @@
-on boot
-    # load module needed by brcmfmac driver
-    insmod /system/lib/modules/brcmutil.ko
+on post-fs
+   exec u:r:modprobe:s0 -- /system/bin/modprobe -a -d /vendor/lib/modules brcmfmac p2pon=1
