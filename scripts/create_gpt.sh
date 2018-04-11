@@ -22,13 +22,14 @@ unit MiB \
 mklabel gpt \
 mkpart boot 0% 20 \
 mkpart recovery 20 40 \
-mkpart extended 40 42 \
-mkpart data 1600 100% \
-mkpart system 42 1066 \
-mkpart cache 1066 1578 \
-mkpart vendor 1578 1588 \
-mkpart misc 1588 1598 \
-mkpart crypt 1598 1600 \
+mkpart system 40 1320 \
+mkpart cache 1320 1832 \
+mkpart vendor 1832 1896 \
+mkpart misc 1896 1900 \
+mkpart crypt 1900 1902 \
+mkpart frp 1902 1903 \
+mkpart metadata 1903 1904 \
+mkpart data 1904 100% \
 print
 
 dd if=$OUT/image.img of=$OUT/gpt.img count=64
