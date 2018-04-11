@@ -17,7 +17,7 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "Boundary Nit6x-Lite"
+#define BTM_DEF_LOCAL_NAME   "Nit6x-Lite"
 
 #define BLE_VND_INCLUDED TRUE
 
