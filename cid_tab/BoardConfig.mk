@@ -82,6 +82,8 @@ BOARD_WLAN_DEVICE                := qcwcn
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
 BOARD_HAVE_BLUETOOTH_QCOM        := true
 BOARD_SUPPORTS_BLE_VND           := true
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(TARGET_OUT_INTERMEDIATES)/ETC/qcacld_wlan.ko_intermediates/qcacld_wlan.ko
 
 # SoftAP workaround
 WIFI_BYPASS_FWRELOAD      := true
