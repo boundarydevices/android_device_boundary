@@ -74,8 +74,8 @@ BOARD_WLAN_DEVICE                := bcmdhd
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 BOARD_HAVE_BLUETOOTH_BCM         := true
 BOARD_VENDOR_KERNEL_MODULES += \
-	$(KERNEL_OUT)/drivers/net/wireless/brcm80211/brcmutil/brcmutil.ko \
-	$(KERNEL_OUT)/drivers/net/wireless/brcm80211/brcmfmac/brcmfmac.ko
+	$(KERNEL_OUT)/drivers/net/wireless/broadcom/brcm80211/brcmutil/brcmutil.ko \
+	$(KERNEL_OUT)/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko
 
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR=device/boundary/nit6xlite/
 
