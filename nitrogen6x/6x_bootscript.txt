@@ -38,6 +38,7 @@ setenv fdt_addr 0x12000000
 if ${fs}load ${dtype} ${disk}:1 $fdt_addr ${bootdir}$dtbname ; then
 	fdt addr $fdt_addr
 	setenv fdt_high 0xffffffff
+	fdt resize
 else
 	echo "!!!! Error loading ${bootdir}$dtbname";
 	exit;
@@ -59,7 +60,6 @@ if i2c probe 0x50 ; then
 	fi
 	if itest.s "xHDMI-1080P" == "x$panel"; then
 		echo "HDMI resolution set to 1080p";
-		fdt resize
 		fdt set hdmi_display mode_str "1920x1080M@60"
 	fi
 else
@@ -70,6 +70,7 @@ fi
 
 # ------------------- LVDS detection
 if itest.s "x" != "x${cmd_lvds}" ; then
+	fdt rm ldb split-mode
 	run cmd_lvds
 else
 if itest.s "x" != "x$lvds_1080p" ; then
