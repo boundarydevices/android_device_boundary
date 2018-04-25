@@ -97,7 +97,7 @@ fi
 sudo umount $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 4
+setuploop $outfilename 10
 sudo mkfs.ext4 -L data $loopdev
 $mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
@@ -111,7 +111,7 @@ fi
 sudo umount $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 5
+setuploop $outfilename 3
 # Check whether system image is sparse or not
 system_img=out/target/product/$product/system.img
 file $system_img | grep sparse > /dev/null
@@ -123,11 +123,11 @@ fi
 sudo e2fsck -f $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 6
+setuploop $outfilename 4
 sudo mkfs.ext4 -L cache $loopdev
 sudo losetup -d $loopdev
 
-setuploop $outfilename 7
+setuploop $outfilename 5
 sudo mkfs.ext4 -L vendor $loopdev
 $mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;

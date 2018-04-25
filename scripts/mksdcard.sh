@@ -113,16 +113,16 @@ mkfs.ext4 -F -L boot ${diskname}${prefix}1
 echo "------------------making recovery partition"
 mkfs.ext4 -F -L recovery ${diskname}${prefix}2
 echo "------------------making data partition"
-mkfs.ext4 -F -L data ${diskname}${prefix}4
+mkfs.ext4 -F -L data ${diskname}${prefix}10
 echo "------------------making cache partition"
-mkfs.ext4 -F -L cache ${diskname}${prefix}6
+mkfs.ext4 -F -L cache ${diskname}${prefix}4
 echo "------------------making vendor partition"
-mkfs.ext4 -F -L vendor ${diskname}${prefix}7
+mkfs.ext4 -F -L vendor ${diskname}${prefix}5
 
 echo "------------------mounting boot, recovery, data partitions"
 sync && sudo partprobe && sleep 5
 
-for n in 1 2 4 7 ; do
+for n in 1 2 5 10 ; do
    echo "--- mounting ${diskname}${prefix}${n}";
    ${mount} ${diskname}${prefix}${n}
 done
@@ -133,18 +133,18 @@ sudo cp -rfv out/target/product/$product/uramdisk-recovery.img ${mountpoint}/rec
 sudo cp -rfv out/target/product/$product/data/* ${mountpoint}/data/
 sudo cp -rfv out/target/product/$product/vendor/* ${mountpoint}/vendor/
 
-if [ -e ${diskname}${prefix}5 ]; then
+if [ -e ${diskname}${prefix}3 ]; then
    # Check whether system image is sparse or not
    system_img=out/target/product/$product/system.img
    file $system_img | grep sparse > /dev/null
    if [ $? -eq 0 ] ; then
-      sudo ./out/host/linux-x86/bin/simg2img $system_img ${diskname}${prefix}5
+      sudo ./out/host/linux-x86/bin/simg2img $system_img ${diskname}${prefix}3
    else
-      sudo dd if=$system_img of=${diskname}${prefix}5 bs=1M
+      sudo dd if=$system_img of=${diskname}${prefix}3 bs=1M
    fi
-   sudo e2fsck -f ${diskname}${prefix}5
+   sudo e2fsck -f ${diskname}${prefix}3
 else
-   echo "-----------missing ${diskname}${prefix}5";
+   echo "-----------missing ${diskname}${prefix}3";
 fi
 
 sync && sudo umount ${diskname}${prefix}*
