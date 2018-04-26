@@ -119,7 +119,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/brcm/brcmfmac43340-sdio.bin:vendor/firmware/brcm/brcmfmac43340-sdio.bin \
 	device/boundary/brcm/brcmfmac43340-sdio.txt:vendor/firmware/brcm/brcmfmac43340-sdio.txt
 
-BOARD_CUSTOM_BT_CONFIG := device/boundary/nitrogen6sx/libbt_vnd_nitrogen6sx.conf
+BOARD_CUSTOM_BT_CONFIG := device/boundary/nitrogen6sx/libbt_vnd.conf
 BOARD_WLAN_DEVICE_REV  := bcm4330_b2
 WIFI_BAND              := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)

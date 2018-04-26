@@ -124,7 +124,7 @@ PRODUCT_COPY_FILES += \
 	device/boundary/brcm/brcmfmac4330-sdio.bin:vendor/firmware/brcm/brcmfmac4330-sdio.bin \
 	device/boundary/brcm/brcmfmac4330-sdio.txt:vendor/firmware/brcm/brcmfmac4330-sdio.txt
 
-BOARD_CUSTOM_BT_CONFIG := device/boundary/nit6xlite/libbt_vnd_nit6xlite.conf
+BOARD_CUSTOM_BT_CONFIG := device/boundary/nit6xlite/libbt_vnd.conf
 BOARD_WLAN_DEVICE_REV  := bcm4330_b2
 WIFI_BAND              := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)

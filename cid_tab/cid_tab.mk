@@ -125,7 +125,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.qca.rc:root/init.bt-wlan.rc
 
-BOARD_CUSTOM_BT_CONFIG := device/boundary/cid_tab/libbt_vnd_cid_tab.conf
+BOARD_CUSTOM_BT_CONFIG := device/boundary/cid_tab/libbt_vnd.conf
 
 PRODUCT_PACKAGES += \
 	sensors.cid_tab
