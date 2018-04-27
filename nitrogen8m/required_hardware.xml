@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <feature name="android.software.cts" />
+    <feature name="android.hardware.camera.any" />
+    <feature name="android.software.home_screen" />
+    <feature name="android.software.input_methods" />
+    <feature name="android.hardware.location" />
+    <feature name="android.hardware.location.network" />
+    <feature name="android.hardware.bluetooth" />
+</permissions>
