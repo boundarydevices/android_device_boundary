@@ -1,2 +1,1 @@
 allow bootsound shell_exec:file { getattr read };
-allow bootsound system_file:file { execute_no_trans };

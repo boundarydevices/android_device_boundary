@@ -6,7 +6,6 @@ allow platform_app drmserver_exec:file getattr;
 allow platform_app dumpstate_exec:file getattr;
 allow platform_app fsck_exec:file getattr;
 allow platform_app gatekeeperd_exec:file getattr;
-allow platform_app hci_attach_exec:file getattr;
 allow platform_app hostapd_exec:file getattr;
 allow platform_app installd_exec:file getattr;
 allow platform_app keystore_exec:file getattr;
