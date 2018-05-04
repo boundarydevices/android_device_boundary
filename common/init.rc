@@ -61,7 +61,8 @@ on boot
 
     # fsl omx graphic manager media framework property
     setprop media.omxgm.enable-player 0
-    setprop media.omxgm.enable-scan 0
+    setprop media.omxgm.enable-record 0
+    setprop media.omxgm.enable-scan 1
     setprop rw.VIDEO_RENDER_NAME video_render.surface
     setprop media.fsl_codec.flag 7
 
@@ -151,8 +152,8 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     oneshot
 
 on fs
-    wait /dev/block/platform/soc0/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc0/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    wait /dev/block/platform/${ro.boot.bootdevice}
+    symlink /dev/block/platform/${ro.boot.bootdevice} /dev/block/bootdevice
 
     # mount ext4 partitions
     mount_all /fstab.freescale
