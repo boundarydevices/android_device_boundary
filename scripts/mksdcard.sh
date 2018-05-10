@@ -84,16 +84,16 @@ sudo parted -a minimal \
 -s ${diskname} \
 unit MiB \
 mklabel gpt \
-mkpart boot 0% 20 \
-mkpart recovery 20 40 \
-mkpart system 40 1320 \
-mkpart cache 1320 1832 \
-mkpart vendor 1832 1896 \
-mkpart misc 1896 1900 \
-mkpart crypt 1900 1902 \
-mkpart frp 1902 1903 \
-mkpart metadata 1903 1904 \
-mkpart data 1904 100% \
+mkpart boot 2 34 \
+mkpart recovery 34 66 \
+mkpart system 66 1346 \
+mkpart cache 1346 1858 \
+mkpart vendor 1858 1922 \
+mkpart misc 1922 1924 \
+mkpart crypt 1924 1926 \
+mkpart frp 1926 1927 \
+mkpart metadata 1927 1928 \
+mkpart data 1928 100% \
 print
 
 sudo partprobe && sleep 1
