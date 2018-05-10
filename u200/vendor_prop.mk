@@ -133,9 +133,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 
 #enable/disable afbc
 PRODUCT_PROPERTY_OVERRIDES +=  \
-    osd.afbcd.enable=1 \
-    vendor.sys.sf.debug.nohwc=true
-
+    osd.afbcd.enable=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=0

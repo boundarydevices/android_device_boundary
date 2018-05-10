@@ -92,6 +92,7 @@
 
 #
 /dev/graphics/*           0660   root       graphics
+/dev/display              0660   root       graphics
 
 # For USB Joysticks
 /dev/input/js*            0664   system     system
