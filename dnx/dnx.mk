@@ -118,6 +118,11 @@ PRODUCT_PACKAGES += uim-sysfs \
 	BluetoothSCOApp \
 	TQS_D_1.7.ini
 
+# WLAN driver configuration files
+PRODUCT_COPY_FILES += \
+	device/boundary/common/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf     \
+	device/boundary/common/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf     \
+
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.ti.rc:root/init.bt-wlan.rc \
 	device/boundary/wl12xx/wl127x-nvs.bin:vendor/firmware/ti-connectivity/wl127x-nvs.bin \

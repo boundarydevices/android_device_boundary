@@ -117,6 +117,11 @@ PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 PRODUCT_PACKAGES += \
 	audio.a2dp.default
 
+# WLAN driver configuration files
+PRODUCT_COPY_FILES += \
+	device/boundary/common/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf     \
+	device/boundary/common/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf     \
+
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
 	device/boundary/nit6xlite/bt_vendor.conf:vendor/bluetooth/bt_vendor.conf \
