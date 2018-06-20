@@ -120,6 +120,11 @@ DEVICE_PACKAGE_OVERLAYS := \
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
+# WLAN driver configuration files
+PRODUCT_COPY_FILES += \
+	device/boundary/common/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf     \
+	device/boundary/common/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf     \
+
 ifeq ($(BOARD_WLAN_VENDOR),TI)
 PRODUCT_PACKAGES += uim-sysfs \
 	android.hardware.bluetooth@1.0-service.ti \
