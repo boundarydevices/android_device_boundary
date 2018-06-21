@@ -186,7 +186,6 @@ endif
 
 # Misc packages
 PRODUCT_PACKAGES += \
-	dhcpcd.conf \
 	hostapd.conf \
 	su
 
