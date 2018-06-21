@@ -170,7 +170,6 @@ BOARD_CUSTOM_BT_CONFIG := device/boundary/nitrogen8m/libbt_vnd.conf
 
 # Misc packages
 PRODUCT_PACKAGES += \
-	dhcpcd.conf \
 	hostapd.conf \
 	su
 

@@ -145,7 +145,6 @@ PRODUCT_PACKAGES += \
 
 # Misc packages
 PRODUCT_PACKAGES += \
-	dhcpcd.conf \
 	hostapd.conf \
 	su
 

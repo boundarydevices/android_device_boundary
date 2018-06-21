@@ -133,7 +133,6 @@ PRODUCT_COPY_FILES += \
 
 # Misc packages
 PRODUCT_PACKAGES += \
-	dhcpcd.conf \
 	hostapd.conf \
 	su
 

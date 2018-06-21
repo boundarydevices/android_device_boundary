@@ -131,7 +131,6 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330
 
 # Misc packages
 PRODUCT_PACKAGES += \
-	dhcpcd.conf \
 	hostapd.conf \
 	su
 
