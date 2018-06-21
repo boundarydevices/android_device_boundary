@@ -186,7 +186,6 @@ endif
 
 # Misc packages
 PRODUCT_PACKAGES += \
-	hostapd.conf \
 	su
 
 # GPU packages
