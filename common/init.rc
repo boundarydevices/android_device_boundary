@@ -5,6 +5,7 @@ import init.bt-wlan.rc
 on early-init
     # mount the debugfs
     mount debugfs none /sys/kernel/debug/
+    chmod 0755 /sys/kernel/debug
 
 on init
     start watchdogd
