@@ -62,8 +62,8 @@ if itest.s "x" != "x${cmd_mipi}" ; then
 fi
 
 setenv bootargs $bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait
-setenv bootargs $bootargs androidboot.fbTileSupport=enable androidboot.primary_display=imx-drm
 setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=${soc}
+setenv bootargs $bootargs androidboot.fbTileSupport=enable
 
 if itest.s "xmmc" == "x$devtype" ; then
 	if itest.s "x0" == "x$devnum" ; then
@@ -78,6 +78,12 @@ setenv bootargs $bootargs androidboot.bootdevice=$bootdev
 
 if itest.s "x" != "x$selinux" ; then
 	setenv bootargs $bootargs androidboot.selinux=$selinux
+fi
+
+if itest.s "x" != "x${primary_display}" ; then
+	setenv bootargs $bootargs androidboot.primary_display=${primary_display}
+else
+	setenv bootargs $bootargs androidboot.primary_display=imx-drm
 fi
 
 if itest.s "x" != "x${serial#}" ; then
