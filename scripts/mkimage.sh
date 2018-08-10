@@ -37,20 +37,14 @@ else
    dd if=/dev/zero bs=1M count=$outsizemb of=$outfilename
 fi
 
-sudo parted -a minimal \
+SCRIPT_DIR=`dirname $0`
+source $SCRIPT_DIR/partitions.inc
+
+sudo parted -a optimal \
 -s ${outfilename} \
 unit MiB \
 mklabel gpt \
-mkpart boot 0% 20 \
-mkpart recovery 20 40 \
-mkpart system 40 1320 \
-mkpart cache 1320 1832 \
-mkpart vendor 1832 1896 \
-mkpart misc 1896 1900 \
-mkpart crypt 1900 1902 \
-mkpart frp 1902 1903 \
-mkpart metadata 1903 1904 \
-mkpart data 1904 100% \
+$MKPART_COMMAND \
 print
 
 setuploop(){
