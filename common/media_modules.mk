@@ -7,6 +7,7 @@ DEFAULT_MEDIA_KERNEL_MODULES := \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_avs.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_avs2.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_mpeg12.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_mmpeg12.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_mpeg4.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_mmpeg4.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_h264.ko \
