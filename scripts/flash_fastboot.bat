@@ -7,40 +7,46 @@ IF "%OUT%" == "" (
 	SET OUT=out\target\product\%PRODUCT%
 )
 
-fastboot.exe -i 0x0525 flash gpt %OUT%\gpt.img
+SET VID=0x0525
+fastboot.exe -i %VID% devices | FINDSTR fastboot
+IF %ERRORLEVEL% NEQ 0 (
+	SET VID=0x3016
+)
+
+fastboot.exe -i %VID% flash gpt %OUT%\gpt.img
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash gpt.img
 	GOTO:eof
 )
-fastboot.exe -i 0x0525 flash boot %OUT%\boot.img
+fastboot.exe -i %VID% flash boot %OUT%\boot.img
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash boot.img
 	GOTO:eof
 )
-fastboot.exe -i 0x0525 flash recovery %OUT%\recovery.img
+fastboot.exe -i %VID% flash recovery %OUT%\recovery.img
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash recovery.img
 	GOTO:eof
 )
-fastboot.exe -i 0x0525 flash system %OUT%\system.img
+fastboot.exe -i %VID% flash system %OUT%\system.img
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash system.img
 	GOTO:eof
 )
-fastboot.exe -i 0x0525 flash cache %OUT%\cache.img
+fastboot.exe -i %VID% flash cache %OUT%\cache.img
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash cache.img
 	GOTO:eof
 )
-fastboot.exe -i 0x0525 flash vendor %OUT%\vendor.img
+fastboot.exe -i %VID% flash vendor %OUT%\vendor.img
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash vendor.img
 	GOTO:eof
 )
-fastboot.exe -i 0x0525 flash data %OUT%\userdata.img
+fastboot.exe -i %VID% flash data %OUT%\userdata.img
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash userdata.img
 	GOTO:eof
 )
-fastboot.exe -i 0x0525 continue
+fastboot.exe -i %VID% continue
 ECHO Flashing successful!
