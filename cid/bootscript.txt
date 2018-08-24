@@ -129,14 +129,14 @@ setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=i.MX${c
 
 if itest.s "xmmc" == "x$devtype" ; then
 	if itest.s "x0" == "x$devnum" ; then
-		bootdev=2100000.aips-bus/2198000.usdhc
+		bootdev=/soc0/soc/2100000.aips-bus/2198000.usdhc
 	elif itest.s "x1" == "x$devnum" ; then
-		bootdev=2100000.aips-bus/219c000.usdhc
+		bootdev=/soc0/soc/2100000.aips-bus/219c000.usdhc
 	fi
 elif itest.s "xusb" == "x$devtype" ; then
-	bootdev=2100000.aips-bus/2184200.usb/ci_hdrc.1
+	bootdev=/soc0/soc/2100000.aips-bus/2184200.usb/ci_hdrc.1
 elif itest.s "xsata" == "x$devtype" ; then
-	bootdev=2200000.sata
+	bootdev=/soc0/soc/2200000.sata
 fi
 setenv bootargs $bootargs androidboot.bootdevice=$bootdev
 
