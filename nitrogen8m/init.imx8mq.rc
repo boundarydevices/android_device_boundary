@@ -15,10 +15,10 @@ on boot
     write /sys/bus/platform/drivers/galcore/gpu3DMinClock 3
 
     # set back camera.
-    setprop back_camera_name ov5640_mipi,tc358743_mipi
+    setprop back_camera_name mxc-mipi-csi2.0
 
     # set front camera.
-    setprop front_camera_name ov5640_mipi
+    setprop front_camera_name mxc-mipi-csi2.1
 
     # Set period_us for usb audio
     setprop ro.audio.usb.period_us 20000
