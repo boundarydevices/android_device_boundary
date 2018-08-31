@@ -23,6 +23,7 @@
 /dev/block/platform/soc0/soc/2100000\.aips-bus/219c000\.usdhc/by-name/vendor      u:object_r:system_block_device:s0
 
 # devices
+/dev/dri/card[0-4]              u:object_r:graphics_device:s0
 /dev/hci_tty                    u:object_r:hci_attach_dev:s0
 /dev/rfkill                     u:object_r:rfkill_device:s0
 /dev/sda[0-8]*                  u:object_r:fuse:s0
