@@ -107,6 +107,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sf.lcd_density=160
 
+# SDCardFS
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.sys.sdcardfs=0
+
 DEVICE_PACKAGE_OVERLAYS := \
 	device/boundary/nit6xlite/overlay \
 	device/boundary/common/overlay
