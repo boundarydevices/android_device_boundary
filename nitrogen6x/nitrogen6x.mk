@@ -92,10 +92,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
-# Bluetooth HAL
+# Bluetooth HAL (TI chip requires a custom service)
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service
+    android.hardware.bluetooth@1.0-impl
 
 # WiFi HAL
 PRODUCT_PACKAGES += \
@@ -123,6 +122,7 @@ PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
 ifeq ($(BOARD_WLAN_VENDOR),TI)
 PRODUCT_PACKAGES += uim-sysfs \
+	android.hardware.bluetooth@1.0-service.ti \
 	bt_sco_app \
 	BluetoothSCOApp \
 	TQS_D_1.7.ini
@@ -138,6 +138,7 @@ endif
 
 ifeq ($(BOARD_WLAN_VENDOR),BCM)
 PRODUCT_PACKAGES += \
+	android.hardware.bluetooth@1.0-service \
 	audio.a2dp.default
 
 PRODUCT_COPY_FILES += \
@@ -155,6 +156,7 @@ endif
 
 ifeq ($(BOARD_WLAN_VENDOR),QCA)
 PRODUCT_PACKAGES += \
+	android.hardware.bluetooth@1.0-service \
 	qcacld_wlan.ko \
 	bdwlan30.bin \
 	otp30.bin \
