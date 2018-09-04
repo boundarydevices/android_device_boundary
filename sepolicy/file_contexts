@@ -35,4 +35,7 @@
 /system/bin/fsck\.exfat --      u:object_r:fsck_exec:s0
 /system/bin/fsck\.ntfs  --      u:object_r:fsck_exec:s0
 /system/lib/gps\..*\.so         u:object_r:system_data_file:s0
-/vendor/bin/uim-sysfs           u:object_r:hci_attach_exec:s0
+
+# TI BT
+/(vendor|system/vendor)/bin/uim-sysfs                                         u:object_r:hci_attach_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.bluetooth@1\.0-service\.ti  u:object_r:hal_bluetooth_ti_exec:s0

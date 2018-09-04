@@ -1,0 +1,6 @@
+type hal_bluetooth_ti, domain;
+type hal_bluetooth_ti_exec, exec_type, vendor_file_type, file_type;
+
+hal_server_domain(hal_bluetooth_ti, hal_bluetooth)
+
+init_daemon_domain(hal_bluetooth_ti)
