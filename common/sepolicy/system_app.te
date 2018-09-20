@@ -1,7 +1,8 @@
 allow system_app sysfs_mpgpu_scale:file { read write open };
 allow system_app cache_recovery_file:dir { search read open write add_name remove_name };
-allow system_app cache_recovery_file:file { create getattr open read write unlink  };
-
+allow system_app cache_recovery_file:file { create getattr setattr open read write unlink  };
+allow system_app cache_file:dir {search open read write unlink add_name remove_name};
+allow system_app cache_file:file {create getattr write open unlink read};
 allow system_app update_engine:binder {call transfer};
 
 allow system_app rootfs:dir { getattr };
