@@ -1,0 +1,3 @@
+on boot
+    start bcmdl
+    insmod /vendor/lib/modules/bcmdhd.ko firmware_path=/vendor/etc/wifi/buildin/ nvram_path=/vendor/etc/wifi/buildin/

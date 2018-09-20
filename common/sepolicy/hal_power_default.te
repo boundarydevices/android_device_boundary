@@ -1,0 +1,2 @@
+allow hal_power_default sysfs_mpgpu_cmd:file { read write open };
+allow hal_power_default sysfs_power_trigger:file { read write open };

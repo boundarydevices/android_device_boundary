@@ -1,0 +1,10 @@
+get_prop(mediaextractor, media_prop)
+
+allow mediaextractor vfat:file { read getattr };
+allow mediaextractor fuseblk:file { read getattr };
+allow mediaextractor fuse:file { read getattr };
+allow mediaextractor sdcardfs:file { read getattr };
+allow mediaextractor system_server:fifo_file { write getattr append };
+#allow mediaextractor vendor_file:file { read open getattr execute };
+allow platform_app iso9660:dir { search open read getattr };
+allow platform_app iso9660:file { open read getattr };

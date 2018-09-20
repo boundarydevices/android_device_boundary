@@ -1,0 +1,55 @@
+allow system_app sysfs_mpgpu_scale:file { read write open };
+allow system_app cache_recovery_file:dir { search read open write add_name remove_name };
+allow system_app cache_recovery_file:file { create getattr open read write unlink  };
+
+allow system_app update_engine:binder {call transfer};
+
+allow system_app rootfs:dir { getattr };
+
+#allow system_app vendor_file:file { read open getattr execute };
+
+allow system_app system_app:netlink_kobject_uevent_socket { create };
+
+allow system_app update_data_file:dir search;
+
+allow system_app { pppoe_service subtitle_service }:service_manager { add };
+
+allow system_app system_app:netlink_kobject_uevent_socket { create setopt bind read getopt };
+
+allow system_app mnt_media_rw_file:dir r_dir_perms;
+allow system_app { systemcontrol_hwservice hdmicecd_hwservice }:hwservice_manager { find };
+
+allow system_app { system_control hdmicecd tvserver }:binder { call transfer };
+
+allow system_app { droidvold_hwservice tvserver_hwservice }:hwservice_manager { find };
+allow system_app droidvold:binder { call transfer };
+
+allow system_app droidmount_service:service_manager { add };
+
+allow system_app remotecontrol_hwservice:hwservice_manager { add };
+allow system_app hidl_base_hwservice:hwservice_manager { add };
+
+allow system_app fuseblk:dir create_dir_perms;
+allow system_app fuseblk:file create_file_perms;
+
+allow system_app sysfs_di:dir search;
+
+allow system_app sysfs_video:dir search;
+allow system_app sysfs_video:file { getattr open read };
+
+allow system_app sysfs_clock:file { getattr open read };
+
+allow sysfs_display tmpfs:filesystem associate;
+
+allow system_app sysfs_display:dir search;
+allow system_app sysfs_display:file { read write open getattr };
+
+get_prop(system_app, tv_prop)
+set_prop(system_app, media_prop)
+allow system_app vbi_device:chr_file { read write open ioctl };
+allow system_app vendor_file:file r_file_perms;
+allow system_app sysfs_video:dir { search };
+allow system_app sysfs_video:file r_file_perms;
+allow system_app sysfs_amhdmitx:dir search;
+allow system_app sysfs_amhdmitx:file { getattr open read };
+allow system_app vendor_app_file:file execute;

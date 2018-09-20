@@ -1,0 +1,11 @@
+allow mediaserver system_server:unix_stream_socket { read write setopt };
+allow mediaserver video_device:chr_file rw_file_perms;
+allow mediaserver codec_device:chr_file rw_file_perms;
+
+allow mediaserver  sysfs_mpgpu_scale:file  { open read write};
+
+#allow mediaserver vendor_file:file { read open getattr execute };
+allow mediaserver sysfs_video:file  rw_file_perms;
+allow mediaserver sysfs_audio:file  rw_file_perms;
+
+get_prop(mediaserver, media_prop)

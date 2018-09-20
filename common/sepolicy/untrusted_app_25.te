@@ -1,0 +1,4 @@
+#allow untrusted_app_25 sysfs:file { open read };
+
+allow untrusted_app_25 fuseblk:dir  { search };
+allow untrusted_app_25 fuseblk:file { read open getattr };

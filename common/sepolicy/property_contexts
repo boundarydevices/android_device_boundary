@@ -1,0 +1,9 @@
+media.                  u:object_r:media_prop:s0
+ubootenv.               u:object_r:uboot_prop:s0
+ro.ubootenv.            u:object_r:uboot_prop:s0
+const.filesystem.       u:object_r:aml_display_prop:s0
+snd.                    u:object_r:tv_config_prop:s0
+tv.                     u:object_r:tv_prop:s0
+bcmdl_status            u:object_r:bcmdl_prop:s0
+wc_transport            u:object_r:bluetooth_prop:s0
+rc_hidraw_fd            u:object_r:bluetooth_prop:s0

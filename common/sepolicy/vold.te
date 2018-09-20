@@ -1,0 +1,8 @@
+#allow vold tee_data_file:dir { open read ioctl };
+
+allow vold vold_block_device:blk_file { create write read open getattr ioctl unlink };
+
+allow vold param_tv_file:dir { ioctl open read };
+
+#for hw keymaster
+allow vold drm_device:chr_file  {open read write ioctl};

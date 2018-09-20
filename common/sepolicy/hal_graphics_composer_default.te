@@ -1,0 +1,26 @@
+allow hal_graphics_composer_default vndbinder_device:chr_file { read write open ioctl };
+allow hal_graphics_composer_default hal_graphics_composer_default:netlink_kobject_uevent_socket { create setopt bind read shutdown };
+#allow hal_graphics_composer_default vndservicemanager:file { open read getattr };
+#allow hal_graphics_composer_default vndservicemanager:dir { search };
+allow hal_graphics_composer_default vndservicemanager:binder { call transfer };
+
+allow hal_graphics_composer_default systemcontrol_hwservice:hwservice_manager { find };
+allow hal_graphics_composer_default system_control:binder { call };
+
+allow hal_graphics_composer_default tv_prop:file { getattr open read };
+
+allow hal_graphics_composer_default video_device:chr_file rw_file_perms;
+allow hal_graphics_composer_default graphics_device:chr_file {open read write ioctl};
+allow hal_graphics_composer_default sysfs_video:file rw_file_perms;
+allow hal_graphics_composer_default sysfs:file rw_file_perms;
+
+allow hal_graphics_composer_default sysfs_display:dir search;
+allow hal_graphics_composer_default sysfs_display:lnk_file { open read write ioctl };
+allow hal_graphics_composer_default sysfs_display:file { read write open getattr };
+allow hal_graphics_composer_default sysfs_display:chr_file { ioctl read write open };
+allow hal_graphics_composer_default sysfs_amhdmitx:file { read write open getattr };
+allow hal_graphics_composer_default sysfs_amhdmitx:dir search;
+
+get_prop(hal_graphics_composer_default, tv_prop)
+allow hal_graphics_composer_default sysfs_video:dir { search };
+allow hal_graphics_composer_default sysfs_display:file { read write open getattr };

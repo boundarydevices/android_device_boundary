@@ -1,0 +1,6 @@
+type systemcontrol_hwservice, hwservice_manager_type;
+type hdmicecd_hwservice, hwservice_manager_type;
+type droidvold_hwservice, hwservice_manager_type;
+type tvserver_hwservice, hwservice_manager_type;
+type remotecontrol_hwservice, hwservice_manager_type;
+

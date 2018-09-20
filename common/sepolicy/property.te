@@ -1,0 +1,7 @@
+type media_prop, property_type;
+type uboot_prop, property_type;
+type aml_display_prop, property_type;
+type tv_config_prop, property_type;
+type tv_prop, property_type;
+type bcmdl_prop, property_type;
+type ctl_dhcp_pan_prop, property_type;

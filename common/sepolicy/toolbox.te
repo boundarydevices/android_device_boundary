@@ -1,0 +1,1 @@
+allow toolbox unlabeled:dir getattr;

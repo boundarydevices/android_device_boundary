@@ -1,0 +1,3 @@
+allow wificond kernel:system module_request;
+
+#allow wificond vendor_file:file { read open getattr execute };
