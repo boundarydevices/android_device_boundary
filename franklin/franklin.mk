@@ -363,3 +363,21 @@ endif
 $(call inherit-product, device/amlogic/common/tb_detect.mk)
 
 include device/amlogic/common/gpu/dvalin-user-arm64.mk
+
+#########################################################################
+#
+#                                     Auto Patch
+#                          must put in the end of mk files
+#########################################################################
+AUTO_PATCH_SHELL_FILE := vendor/amlogic/common/tools/auto_patch/auto_patch.sh
+HAVE_WRITED_SHELL_FILE := $(shell test -f $(AUTO_PATCH_SHELL_FILE) && echo yes)
+
+ifneq ($(TARGET_BUILD_LIVETV),true)
+TARGET_BUILD_LIVETV := false
+endif
+ifneq ($(TARGET_BUILD_GOOGLE_ATV),true)
+TARGET_BUILD_GOOGLE_ATV := false
+endif
+ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
+$(warning $(shell ($(AUTO_PATCH_SHELL_FILE) $(TARGET_BUILD_LIVETV) $(TARGET_BUILD_GOOGLE_ATV))))
+endif

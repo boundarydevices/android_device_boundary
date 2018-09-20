@@ -13,13 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-HAVE_WRITED_SHELL_FILE := $(shell test -f vendor/amlogic/common/tools/auto_patch/auto_patch.sh && echo yes)
-ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
-ifeq ($(filter atom beast Beast ,$(TARGET_DEVICE)),)
-$(info $(shell (vendor/amlogic/common/tools/auto_patch/auto_patch.sh)))
-endif
-endif
-
 # "Beast" to be removed later after s/Beast/beast/ gets done.
 ifneq ($(filter ampere braun curie darwin atom beast Beast galilei franklin,$(TARGET_DEVICE)),)
 include $(all-subdir-makefiles)
