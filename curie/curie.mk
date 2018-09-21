@@ -16,7 +16,7 @@
 # This file is the build configuration for a full Android
 # build for Meson reference board.
 #
-
+PRODUCT_DIR := curie
 ANDROID_BUILD_TYPE := 32
 
 # Dynamic enable start/stop zygote_secondary in 64bits
@@ -32,10 +32,11 @@ $(call inherit-product, build/target/product/core_64_bit.mk)
 endif
 endif
 
+$(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/amlogic/common/products/mbox/product_mbox.mk)
-$(call inherit-product, device/amlogic/curie/device.mk)
+$(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
-$(call inherit-product, device/amlogic/curie/vendor_prop.mk)
+
 TARGET_WITH_MEDIA_EXT_LEVEL := 3
 
 #########################################################################
@@ -147,8 +148,8 @@ endif
 
 #########Support compiling out encrypted zip/aml_upgrade_package.img directly
 #PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY := true
-PRODUCT_AML_SECUREBOOT_USERKEY := ./uboot/board/amlogic/gxl_p241_v1/aml-user-key.sig
-PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./uboot/fip/gxl/aml_encrypt_gxl
+PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/gxl_p241_v1/aml-user-key.sig
+PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./bootloader/uboot-repo/fip/gxl/aml_encrypt_gxl
 PRODUCT_AML_SECUREBOOT_SIGNBOOTLOADER := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --bootsig \
 						--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY) \
 						--aeskey enable
@@ -200,7 +201,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/curie/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
+    device/amlogic/$(PRODUCT_DIR)/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
 
 #########################################################################
 #

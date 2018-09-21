@@ -15,11 +15,9 @@
 #
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/common/products/mbox/init.amlogic.system.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.rc
-
-PRODUCT_COPY_FILES += \
-    device/amlogic/curie/init.amlogic.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.usb.rc \
-    device/amlogic/curie/init.amlogic.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.board.rc
+    device/amlogic/common/products/mbox/init.amlogic.system.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.rc \
+    device/amlogic/$(PRODUCT_DIR)/init.amlogic.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.usb.rc \
+    device/amlogic/$(PRODUCT_DIR)/init.amlogic.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.board.rc
 
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
 PRODUCT_COPY_FILES += \
@@ -30,41 +28,41 @@ PRODUCT_COPY_FILES += \
 endif
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/curie/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
-    device/amlogic/curie/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-    device/amlogic/curie/files/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    device/amlogic/curie/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-    device/amlogic/curie/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    device/amlogic/curie/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg \
-    device/amlogic/curie/files/remote.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/remote.cfg \
-    device/amlogic/curie/files/remote.tab1:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab1 \
-    device/amlogic/curie/files/remote.tab2:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab2 \
-    device/amlogic/curie/files/remote.tab3:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab3
+    device/amlogic/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/remote.cfg \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.tab1:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab1 \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.tab2:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab2 \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.tab3:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab3
 
 ifeq ($(USE_XML_AUDIO_POLICY_CONF), 1)
 PRODUCT_COPY_FILES += \
-    device/amlogic/curie/files/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-    device/amlogic/curie/files/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
 else
 PRODUCT_COPY_FILES += \
-    device/amlogic/curie/files/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
 endif
 
 ifeq ($(TARGET_WITH_MEDIA_EXT), true)
 PRODUCT_COPY_FILES += \
-    device/amlogic/curie/files/media_codecs_ext.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_ext.xml
+    device/amlogic/$(PRODUCT_DIR)/files/media_codecs_ext.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_ext.xml
 endif
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/curie/recovery/init.recovery.amlogic.rc:root/init.recovery.amlogic.rc \
-    device/amlogic/curie/recovery/recovery.kl:recovery/root/etc/recovery.kl \
-    device/amlogic/curie/files/mesondisplay.cfg:recovery/root/etc/mesondisplay.cfg \
-    device/amlogic/curie/recovery/remotecfg:recovery/root/sbin/remotecfg \
-    device/amlogic/curie/files/remote.cfg:recovery/root/etc/remote.cfg \
-    device/amlogic/curie/files/remote.tab1:recovery/root/etc/remote.tab1 \
-    device/amlogic/curie/files/remote.tab2:recovery/root/etc/remote.tab2 \
-    device/amlogic/curie/files/remote.tab3:recovery/root/etc/remote.tab3 \
-    device/amlogic/curie/recovery/sh:recovery/root/sbin/sh
+    device/amlogic/$(PRODUCT_DIR)/recovery/init.recovery.amlogic.rc:root/init.recovery.amlogic.rc \
+    device/amlogic/$(PRODUCT_DIR)/recovery/recovery.kl:recovery/root/etc/recovery.kl \
+    device/amlogic/$(PRODUCT_DIR)/files/mesondisplay.cfg:recovery/root/etc/mesondisplay.cfg \
+    device/amlogic/$(PRODUCT_DIR)/recovery/remotecfg:recovery/root/sbin/remotecfg \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.cfg:recovery/root/etc/remote.cfg \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.tab1:recovery/root/etc/remote.tab1 \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.tab2:recovery/root/etc/remote.tab2 \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.tab3:recovery/root/etc/remote.tab3 \
+    device/amlogic/$(PRODUCT_DIR)/recovery/sh:recovery/root/sbin/sh
 
 # remote IME config file
 PRODUCT_COPY_FILES += \
@@ -72,7 +70,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/common/products/mbox/Vendor_1915_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_1915_Product_0001.kl
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_COPY_FILES += \
-    device/amlogic/curie/files/Generic.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
+    device/amlogic/$(PRODUCT_DIR)/files/Generic.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
 else
 PRODUCT_COPY_FILES += \
     device/amlogic/common/Generic.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl

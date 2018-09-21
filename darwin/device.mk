@@ -15,11 +15,9 @@
 #
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/common/products/mbox/init.amlogic.system.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.rc
-
-PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/init.amlogic.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.usb.rc \
-    device/amlogic/darwin/init.amlogic.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.board.rc
+    device/amlogic/common/products/mbox/init.amlogic.system.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.rc \
+    device/amlogic/$(PRODUCT_DIR)/init.amlogic.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.usb.rc \
+    device/amlogic/$(PRODUCT_DIR)/init.amlogic.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.board.rc
 
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
 PRODUCT_COPY_FILES += device/amlogic/common/products/tv/ueventd.amlogic.rc:vendor/ueventd.rc
@@ -29,27 +27,27 @@ endif
 
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
-    device/amlogic/darwin/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-    device/amlogic/darwin/files/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    device/amlogic/darwin/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-    device/amlogic/darwin/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    device/amlogic/darwin/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg
+    device/amlogic/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg
 
 ifeq ($(USE_XML_AUDIO_POLICY_CONF), 1)
 PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/files/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-    device/amlogic/darwin/files/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
 else
 PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/files/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
 endif
 
 # remote IME config file
 PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/files/remote.conf:$(TARGET_COPY_OUT_VENDOR)/etc/remote.conf \
-    device/amlogic/darwin/files/remote.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/remote.cfg \
-    device/amlogic/darwin/files/remote.tab:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.conf:$(TARGET_COPY_OUT_VENDOR)/etc/remote.conf \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/remote.cfg \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.tab:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab \
     device/amlogic/common/products/tv/Vendor_0001_Product_0001.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl \
     device/amlogic/common/products/tv/Vendor_1915_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_1915_Product_0001.kl
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
@@ -62,28 +60,28 @@ endif
 
 # recovery
 PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/recovery/init.recovery.amlogic.rc:root/init.recovery.amlogic.rc \
-    device/amlogic/darwin/recovery/recovery.kl:recovery/root/etc/recovery.kl \
-    device/amlogic/darwin/files/mesondisplay.cfg:recovery/root/etc/mesondisplay.cfg \
-    device/amlogic/darwin/recovery/remotecfg:recovery/root/sbin/remotecfg \
-    device/amlogic/darwin/files/remote.cfg:recovery/root/etc/remote.cfg \
-    device/amlogic/darwin/files/remote.tab:recovery/root/etc/remote.tab \
-    device/amlogic/darwin/recovery/sh:recovery/root/sbin/sh
+    device/amlogic/$(PRODUCT_DIR)/recovery/init.recovery.amlogic.rc:root/init.recovery.amlogic.rc \
+    device/amlogic/$(PRODUCT_DIR)/recovery/recovery.kl:recovery/root/etc/recovery.kl \
+    device/amlogic/$(PRODUCT_DIR)/files/mesondisplay.cfg:recovery/root/etc/mesondisplay.cfg \
+    device/amlogic/$(PRODUCT_DIR)/recovery/remotecfg:recovery/root/sbin/remotecfg \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.cfg:recovery/root/etc/remote.cfg \
+    device/amlogic/$(PRODUCT_DIR)/files/remote.tab:recovery/root/etc/remote.tab \
+    device/amlogic/$(PRODUCT_DIR)/recovery/sh:recovery/root/sbin/sh
 
 # darwin config file
 PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/files/tv/tvconfig.conf:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tvconfig.conf \
-    device/amlogic/darwin/files/tv/tv_default.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_default.cfg \
-    device/amlogic/darwin/files/tv/tv_default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_default.xml \
-    device/amlogic/darwin/files/tv/tv_setting_config.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_setting_config.cfg \
-    device/amlogic/darwin/files/tv/pq.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq.db \
-    device/amlogic/darwin/files/tv/dec:$(TARGET_COPY_OUT_VENDOR)/bin/dec \
-    device/amlogic/darwin/files/tv/port_14.bin:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/hdmi/port_14.bin \
-    device/amlogic/darwin/files/tv/port_20.bin:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/hdmi/port_20.bin \
-    device/amlogic/darwin/files/tv/tv_rrt_define.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_rrt_define.xml
+    device/amlogic/$(PRODUCT_DIR)/files/tv/tvconfig.conf:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tvconfig.conf \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_default.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_default.cfg \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_default.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_setting_config.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_setting_config.cfg \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/pq.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq.db \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/dec:$(TARGET_COPY_OUT_VENDOR)/bin/dec \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/port_14.bin:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/hdmi/port_14.bin \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/port_20.bin:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/hdmi/port_20.bin \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_rrt_define.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_rrt_define.xml
 #darwin tuner
 PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/files/tv/si2151_fe.ko:$(TARGET_COPY_OUT_VENDOR)/lib/si2151_fe.ko
+    device/amlogic/$(PRODUCT_DIR)/files/tv/si2151_fe.ko:$(TARGET_COPY_OUT_VENDOR)/lib/si2151_fe.ko
 
 PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi

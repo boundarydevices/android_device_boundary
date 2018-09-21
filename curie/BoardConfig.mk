@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+PRODUCT_DIR := curie
+
 ifneq ($(ANDROID_BUILD_TYPE), 64)
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -112,12 +115,12 @@ endif
 endif
 
 TARGET_SUPPORT_USB_BURNING_V2 := true
-TARGET_AMLOGIC_RES_PACKAGE := device/amlogic/curie/logo_img_files
+TARGET_AMLOGIC_RES_PACKAGE := device/amlogic/$(PRODUCT_DIR)/logo_img_files
 
 ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE), true)
-TARGET_RECOVERY_FSTAB := device/amlogic/curie/recovery/recovery_system.fstab
+TARGET_RECOVERY_FSTAB := device/amlogic/$(PRODUCT_DIR)/recovery/recovery_system.fstab
 else
-TARGET_RECOVERY_FSTAB := device/amlogic/curie/recovery/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/amlogic/$(PRODUCT_DIR)/recovery/recovery.fstab
 endif
 
 #BOARD_HAL_STATIC_LIBRARIES := libhealthd.mboxdefault
@@ -155,5 +158,5 @@ WITH_DEXPREOPT := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
-DEVICE_MANIFEST_FILE := device/amlogic/curie/manifest.xml
+DEVICE_MANIFEST_FILE := device/amlogic/$(PRODUCT_DIR)/manifest.xml
 #DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml

@@ -17,6 +17,8 @@
 # build for Meson reference board.
 #
 
+PRODUCT_DIR := franklin
+
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
 #TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
@@ -30,9 +32,9 @@ $(call inherit-product, build/target/product/core_64_bit.mk)
 endif
 endif
 
+$(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/amlogic/common/products/mbox/product_mbox.mk)
-$(call inherit-product, device/amlogic/franklin/device.mk)
-$(call inherit-product, device/amlogic/franklin/vendor_prop.mk)
+$(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 
 # franklin:
@@ -169,7 +171,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/franklin/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
+    device/amlogic/$(PRODUCT_DIR)/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
 
 #########################################################################
 #

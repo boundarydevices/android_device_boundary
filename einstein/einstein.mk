@@ -17,6 +17,8 @@
 # build for Meson reference board.
 #
 
+PRODUCT_DIR := einstein
+
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
 #TARGET_DYNAMIC_ZYGOTE_SECONDARY_ENABLE := true
@@ -30,10 +32,10 @@ $(call inherit-product, build/target/product/core_64_bit.mk)
 endif
 endif
 
+$(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/amlogic/common/products/tv/product_tv.mk)
-$(call inherit-product, device/amlogic/einstein/device.mk)
+$(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
-$(call inherit-product, device/amlogic/einstein/vendor_prop.mk)
 TARGET_WITH_MEDIA_EXT_LEVEL := 3
 
 #########################################################################
@@ -142,8 +144,8 @@ endif
 
 #########Support compiling out encrypted zip/aml_upgrade_package.img directly
 #PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY := true
-PRODUCT_AML_SECUREBOOT_USERKEY := ./uboot/board/amlogic/txlx_t962x_r311_v1/aml-user-key.sig
-PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./uboot/fip/txlx/aml_encrypt_txlx
+PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/txlx_t962x_r311_v1/aml-user-key.sig
+PRODUCT_AML_SECUREBOOT_SIGNTOOL := /bootloader/uboot-repo/fip/txlx/aml_encrypt_txlx
 PRODUCT_AML_SECUREBOOT_SIGNBOOTLOADER := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --bootsig \
 						--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY) \
 						--aeskey enable
@@ -205,7 +207,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/einstein/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
+    device/amlogic/$(PRODUCT_DIR)/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
 
 #########################################################################
 #
