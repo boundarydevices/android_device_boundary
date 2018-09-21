@@ -161,7 +161,7 @@ PRODUCT_AML_SECUREBOOT_SIGBIN	:= $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --binsig \
 #                           ATV
 #
 ########################################################################
-ifneq ($(BOARD_COMPILE_ATV),false)
+ifeq ($(BOARD_COMPILE_ATV),true)
 BOARD_COMPILE_CTS := true
 TARGET_BUILD_GOOGLE_ATV:= true
 DONT_DEXPREOPT_PREBUILTS:= true
