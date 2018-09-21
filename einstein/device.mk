@@ -78,11 +78,13 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/tv/tv_default.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_default.cfg \
     device/amlogic/$(PRODUCT_DIR)/files/tv/tv_default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_default.xml \
     device/amlogic/$(PRODUCT_DIR)/files/tv/tv_setting_config.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_setting_config.cfg \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/pq.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq.db \
     device/amlogic/$(PRODUCT_DIR)/files/tv/dec:$(TARGET_COPY_OUT_VENDOR)/bin/dec \
     device/amlogic/$(PRODUCT_DIR)/files/tv/port_14.bin:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/hdmi/port_14.bin \
     device/amlogic/$(PRODUCT_DIR)/files/tv/port_20.bin:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/hdmi/port_20.bin \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_rrt_define.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_rrt_define.xml
+    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_rrt_define.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_rrt_define.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/PQ/pq.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq.db \
+    device/amlogic/$(PRODUCT_DIR)/files/PQ/overscan.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/overscan.db \
+    device/amlogic/$(PRODUCT_DIR)/files/PQ/pq_default.ini:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq_default.ini
 #einstein tuner
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/tv/mxl661_fe.ko:$(TARGET_COPY_OUT_VENDOR)/lib/mxl661_fe.ko

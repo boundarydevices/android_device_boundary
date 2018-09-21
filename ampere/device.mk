@@ -45,7 +45,8 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab1:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab1 \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab2:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab2 \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab3:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab3 \
-    device/amlogic/$(PRODUCT_DIR)/files/pq.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq.db
+    device/amlogic/$(PRODUCT_DIR)/files/PQ/pq.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq.db \
+    device/amlogic/$(PRODUCT_DIR)/files/PQ/pq_default.ini:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq_default.ini
 
 ifeq ($(USE_XML_AUDIO_POLICY_CONF), 1)
 PRODUCT_COPY_FILES += \
