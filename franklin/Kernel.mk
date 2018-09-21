@@ -83,8 +83,6 @@ BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_TB_DETECT_KERNEL_MODULES)
 
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
-PREFIX_CROSS_COMPILE=/opt/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
-
 define cp-modules
 	mkdir -p $(PRODUCT_OUT)/root/boot
 	mkdir -p $(KERNEL_KO_OUT)
