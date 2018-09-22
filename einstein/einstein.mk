@@ -394,13 +394,8 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
 endif
-#########################################################################
-#
-#                               OpenGLES Version
-#
-#########################################################################
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
+
+include device/amlogic/common/gpu/mali450-user-arm64.mk
 
 #########################################################################
 #

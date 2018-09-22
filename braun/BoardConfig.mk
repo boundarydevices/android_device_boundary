@@ -151,7 +151,6 @@ TARGET_RECOVERY_UPDATER_EXTRA_LIBS += libenv libsystemcontrol_static
 endif
 
 include device/amlogic/common/sepolicy.mk
-include device/amlogic/common/gpu/mali450-user-$(TARGET_ARCH).mk
 #MALLOC_IMPL := dlmalloc
 
 WITH_DEXPREOPT := true
