@@ -53,7 +53,6 @@ $(INSTALLED_2NDBOOTLOADER_TARGET): $(INSTALLED_BOARDDTB_TARGET) | $(ACP)
 	$(transform-prebuilt-to-target)
 
 else
--include device/amlogic/common/gpu.mk
 -include device/amlogic/common/media_modules.mk
 -include device/amlogic/common/wifi_modules.mk
 
@@ -69,7 +68,7 @@ INTERMEDIATES_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image.gz
 TARGET_AMLOGIC_INT_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/uImage
 TARGET_AMLOGIC_INT_RECOVERY_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image_recovery
 
-BOARD_VENDOR_KERNEL_MODULES := \
+BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/audio_data.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/ddr_window_64.ko
 
@@ -136,6 +135,8 @@ $(INSTALLED_2NDBOOTLOADER_TARGET): $(PRODUCT_OUT)/dt.img | $(ACP)
 $(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) | $(ACP)
 	@echo "Kernel installed"
 	$(transform-prebuilt-to-target)
+
+-include device/amlogic/common/gpu/mali450-kernel.mk
 
 $(BOARD_VENDOR_KERNEL_MODULES): $(INSTALLED_KERNEL_TARGET)
 	@echo "BOARD_VENDOR_KERNEL_MODULES: $(BOARD_VENDOR_KERNEL_MODULES)"

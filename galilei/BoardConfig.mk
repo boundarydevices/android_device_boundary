@@ -111,7 +111,7 @@ endif
 
 ifeq ($(BOARD_BUILD_DISABLED_VBMETAIMAGE), true)
 ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE), true)
-BOARD_KERNEL_CMDLINE += --cmdline "root=179:18"
+BOARD_KERNEL_CMDLINE += --cmdline "root=/dev/mmcblk0p18"
 endif
 endif
 
