@@ -42,6 +42,7 @@ allow system_app sysfs_clock:file { getattr open read };
 allow sysfs_display tmpfs:filesystem associate;
 
 allow system_app sysfs_display:dir search;
+allow system_app sysfs_display:dir search;
 allow system_app sysfs_display:file { read write open getattr };
 
 get_prop(system_app, tv_prop)
@@ -52,4 +53,9 @@ allow system_app sysfs_video:dir { search };
 allow system_app sysfs_video:file r_file_perms;
 allow system_app sysfs_amhdmitx:dir search;
 allow system_app sysfs_amhdmitx:file { getattr open read };
-allow system_app vendor_app_file:file execute;
+allow system_app vendor_app_file:file { read open getattr execute };
+allow system_app dvb_device:chr_file { open read write ioctl };
+allow system_app codec_device:chr_file { open read write ioctl getattr};
+allow system_app param_tv_file:file { create open read write setattr getattr lock unlink };
+allow system_app param_tv_file:dir { search read open write add_name remove_name getattr };
+

@@ -8,13 +8,7 @@ import /vendor/etc/init/hw/init.amlogic.wifi_buildin.rc
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
 
-
 on init
-
-    # param for tv
-    mkdir /param 0771 system system
-    restorecon_recursive /param
-
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
 
@@ -26,14 +20,10 @@ on init
     chmod 666 /sys/class/audiodsp/codec_fatal_err
     chmod 666 /sys/class/ppmgr/angle
     chmod 666 /sys/class/vfm/map
-    chmod 666 /sys/class/video/video_inuse
     chmod 666 /sys/class/video/axis
     chmod 666 /sys/class/video/disable_video
     chmod 666 /sys/class/tsync/enable
     chmod 666 /sys/class/tsync/pts_pcrscr
-    chmod 666 /sys/class/tsync/pts_audio
-    chmod 666 /sys/class/tsync/firstapts
-    chmod 666 /sys/class/tsync/event
     chmod 666 /sys/class/tsync/av_threshold_min
     chmod 666 /sys/class/video/screen_mode
     chmod 666 /sys/class/vdec/poweron_clock_level
@@ -44,8 +34,6 @@ on init
     chmod 666 /sys/class/video/blackout_policy
     chmod 666 /sys/class/tsync/vpause_flag
     chmod 0666 /dev/amstream_sub_read
-    chmod 0666 /sys/class/gpio/export
-    chmod 0666 /sys/class/gpio/unexport
 
     # for zram
     mkdir /swap_zram0 0700 root root
@@ -64,7 +52,6 @@ on fs
 on post-fs-data
     #create droidota directory for system update
     mkdir /data/droidota 0771 system system
-
     #save log
     mkdir /data/log 0771 log log
     mkdir /data/log/dontpanic 0771 log log
@@ -76,9 +63,6 @@ on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
-
-    # for tuner insmod
-    write /sys/class/amlfe/setting autoload
 
 on boot
     # Set up kernel tracing, but disable it by default
@@ -97,7 +81,7 @@ on boot
     # change back to bluetooth from system
     chown bluetooth bluetooth /data/misc/bluetooth
     insmod /vendor/lib/modules/btusb.ko
-    #mknod btusb0 c 180 194, can not use it from P
+    #mknod btusb0 c 180 194 can not use it from P,fixed in btusb driver
 
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk1/queue/read_ahead_kb 2048
@@ -105,13 +89,12 @@ on boot
     chown system mediadrm /sys/class/amhdmitx/amhdmitx0/aud_ch
     chmod 0664 /sys/class/amhdmitx/amhdmitx0/aud_ch
     insmod  /vendor/lib/modules/aml_thermal.ko
-    insmod  /vendor/lib/modules/ddr_window_64.ko
+    #insmod  /vendor/lib/modules/ddr_window_64.ko
 
     chown media system /sys/class/tsync/pts_video
     chown mediadrm audio /sys/class/tsync/pts_audio
     chown mediadrm audio /sys/class/tsync/pts_pcrscr
     chown mediadrm audio /sys/class/tsync/event
-    chown mediadrm audio /sys/class/tsync/firstapts
     chown media system /sys/class/tsync/mode
     chown media system /sys/class/tsync/enable
     chown media system /sys/class/tsync/av_threshold_min
@@ -165,6 +148,9 @@ on boot
     chmod 666 /sys/class/video/screen_mode
     chmod 666 /sys/class/video/disable_video
     chmod 666 /sys/class/tsync/pts_pcrscr
+    chmod 666 /sys/class/tsync/pts_audio
+    chmod 666 /sys/class/tsync/firstapts
+    chmod 666 /sys/class/tsync/event
     chmod 666 /dev/amstream_abuf
     chmod 666 /dev/amstream_hevc
     chmod 666 /dev/amstream_hevc_frame
@@ -226,7 +212,7 @@ on boot
     chown media system /dev/dvb0.demux2
     chown media system /dev/dvb0.dvr0
     chown media system /dev/dvb0.dvr1
-    chown media system /dev/dvb0.dvr2
+    chmod media system /dev/dvb0.dvr2
 
     chown media system /sys/class/stb/demux0_source
     chown media system /sys/class/stb/demux1_source
@@ -283,14 +269,13 @@ on boot
     chown system system /sys/class/amhdmitx/amhdmitx0/cec_lang_config
     chown system system /sys/class/amhdmitx/amhdmitx0/config
     chown system system /sys/class/amhdmitx/amhdmitx0/avmute
-    chmod 644 /sys/class/amhdmitx/amhdmitx0/avmute
-    chown system mediadrm /sys/class/amhdmitx/amhdmitx0/aud_output_chs
+    chmod 0664 /sys/class/amhdmitx/amhdmitx0/avmute
+    chown mediadrm audio /sys/class/amhdmitx/amhdmitx0/aud_output_chs
     chown media system /sys/class/switch/hdmi/state
     chmod 0660 /sys/class/switch/hdmi/state
     chown media system /sys/devices/virtual/switch/hdmi/state
     chmod 0660 /sys/devices/virtual/switch/hdmi/state
-    chown system system /sys/module/tvin_hdmirx/parameters/hdcp22_kill_esm
-    chmod 666 /sys/module/tvin_hdmirx/parameters/hdcp22_kill_esm
+
     chown media  system /sys/class/vfm/map
 
     # Free scale
@@ -375,8 +360,6 @@ on boot
     write /sys/class/vfm/map "rm default"
     write /sys/class/vfm/map "add default decoder ppmgr deinterlace amvideo"
 
-    write /proc/sys/kernel/dmesg_restrict 0
-
 # virtual sdcard daemon running as media_rw (1023)
 #service sdcard /system/bin/sdcard -u 1023 -g 1023 /data/media /mnt/shell/emulated
 #   class late_start
@@ -438,11 +421,11 @@ service hdcp_rx22 /vendor/bin/hdcp_rx22 \
     oneshot
     seclabel u:r:hdcp_rx22:s0
 
-service ddrtest /vendor/bin/ddrtest.sh
-    class main
-    user root
-    group root
-    oneshot
+#service ddrtest /vendor/bin/ddrtest.sh
+#    class main
+#    user root
+#    group root
+#    oneshot
 
 service factoryreset /vendor/bin/factoryreset.sh
     class main
@@ -450,9 +433,3 @@ service factoryreset /vendor/bin/factoryreset.sh
     group root
     oneshot
     seclabel u:r:install_recovery:s0
-
-service bugreport /system/bin/dumpstate -d -p -B -P -z \
-    -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
-    class main
-    disabled
-    oneshot

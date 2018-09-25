@@ -17,3 +17,4 @@ allow tee unlabeled:file { open read rename write };
 
 allow tee hidraw_device:chr_file { create read open write ioctl };
 allow tee vendor_file:file { read open getattr execute };
+allow tee param_tv_file:dir { search };

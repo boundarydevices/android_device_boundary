@@ -22,7 +22,7 @@ allow system_control vendor_shell_exec:file execute_no_trans;
 allow system_control vendor_file:file execute_no_trans;
 
 allow system_control sysfs_display:dir search;
-
+allow system_control sysfs_di:dir search;
 #unix_socket_connect(system_control, vold, vold);
 #unix_socket_connect(system_control, property, init);
 
@@ -101,7 +101,7 @@ allow system_control appdomain:dir { getattr search };
 allow system_control appdomain:file { r_file_perms };
 allow system_control platform_app:dir { search };
 
-allow system_control param_tv_file:dir  { search read write open add_name remove_name rmdir };
+allow system_control param_tv_file:dir  { search read write open add_name remove_name rmdir create };
 allow system_control param_tv_file:file { create open read write setattr getattr lock unlink };
 
 #allow system_control shell_exec:file { execute_no_trans execute open read getattr };
@@ -122,6 +122,7 @@ allow system_control param_tv_file:dir { write search add_name create };
 allow system_control param_tv_file:file { create read write open getattr };
 allow system_control sysfs_amhdmitx:dir search;
 allow system_control sysfs_amvdec:file { create open read write getattr};
+allow system_control sysfs_xbmc:file { read open };
 
 allow system_control vendor_configs_file:file { ioctl lock };
 allow system_control sysfs_display:lnk_file { read write open getattr };
@@ -130,3 +131,5 @@ allow system_control { sysfs_display sysfs_am_vecm sysfs_display sysfs_amhdmitx 
 allow system_control sysfs_unifykey:dir { search };
 allow system_control sysfs_unifykey:file { read write open };
 allow system_control unlabeled:dir search;
+allow system_control sysfs_mpgpu_scale:file { read write open } ;
+allow system_control hdmirx0_device:chr_file { read write open ioctl getattr };

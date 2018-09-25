@@ -5,6 +5,7 @@ type bootloader_device, dev_type;
 type defendkey_device, dev_type;
 type dtb_device, dev_type;
 type dvb_device, dev_type, mlstrustedobject;
+type frontend_device, dev_type;
 type cec_device, dev_type;
 
 type unify_device, dev_type;

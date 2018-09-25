@@ -14,22 +14,20 @@
 # limitations under the License.
 #
 #
-$(info dvalin kernel begin)
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/mali.ko
 
 GPU_TYPE:=dvalin
 GPU_ARCH:=bifrost
-GPU_DRV_VERSION:=r10p0
-GPU_MODS_OUT?=vendor/lib
+GPU_DRV_VERSION?=r12p0
+GPU_MODS_OUT:=obj/lib_vendor/
 
 CUSTOM_IMAGE_MODULES += mali
 
-$(info dvalin kernel include)
 ifeq ($(wildcard $(BOARD_AML_VENDOR_PATH)/gpu/gpu-v2.mk),)
-ifeq ($(wildcard hardware/arm/gpu/gpu-v2.mk),)
-MESON_GPU_DIR=hardware/arm/gpu
-include hardware/arm/gpu/gpu-v2.mk
+ifeq ($(wildcard vendor/amlogic/gpu/gpu-v2.mk),)
+MESON_GPU_DIR=vendor/amlogic/gpu
+include vendor/amlogic/gpu/gpu-v2.mk
 endif
 else
 MESON_GPU_DIR=$(BOARD_AML_VENDOR_PATH)/gpu

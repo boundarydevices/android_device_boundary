@@ -5,6 +5,7 @@ DEFAULT_MEDIA_KERNEL_MODULES := \
 	$(PRODUCT_OUT)/obj/lib_vendor/decoder_common.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/stream_input.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_avs.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_avs2.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_mpeg12.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_mpeg4.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_mmpeg4.ko \
@@ -18,6 +19,7 @@ DEFAULT_MEDIA_KERNEL_MODULES := \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_vp9.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/amvdec_real.ko \
 	$(PRODUCT_OUT)/obj/lib_vendor/encoder.ko \
-	$(PRODUCT_OUT)/obj/lib_vendor/vpu.ko
+	$(PRODUCT_OUT)/obj/lib_vendor/vpu.ko \
+	$(PRODUCT_OUT)/obj/lib_vendor/aml_hardware_dmx.ko
 
 include hardware/amlogic/media_modules/Media.mk

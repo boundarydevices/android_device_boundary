@@ -13,27 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+#
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/mali.ko
 
-GPU_TARGET_PLATFORM := default_7a
-GPU_TYPE:=dvalin
+GPU_TYPE:=gondul
 GPU_ARCH:=bifrost
-GPU_DRV_VERSION:=r10p0
-GRALLOC_USE_GRALLOC1_API:=1
-GRALLOC_DISABLE_FRAMEBUFFER_HAL:=1
+GPU_DRV_VERSION?=r12p0
+GPU_MODS_OUT:=obj/lib_vendor
 
-ifeq ($(GRALLOC_USE_GRALLOC1_API), 1)
-PRODUCT_PACKAGES += \
-		libamgralloc_ext \
-		libamgralloc_ext_static \
-		libamgralloc_internal_static
+CUSTOM_IMAGE_MODULES += mali
+
+ifeq ($(wildcard $(BOARD_AML_VENDOR_PATH)/gpu/gpu-v2.mk),)
+ifeq ($(wildcard vendor/amlogic/gpu/gpu-v2.mk),)
+MESON_GPU_DIR=vendor/amlogic/gpu
+include vendor/amlogic/gpu/gpu-v2.mk
 endif
-
-# The OpenGL ES API level that is natively supported by this device.
-PRODUCT_PROPERTY_OVERRIDES += \
-		ro.opengles.version=196610
-
-PRODUCT_PROPERTY_OVERRIDES += \
-		debug.hwui.use_buffer_age=true
-
-PRODUCT_COPY_FILES += \
-		frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+else
+MESON_GPU_DIR=$(BOARD_AML_VENDOR_PATH)/gpu
+include $(BOARD_AML_VENDOR_PATH)/gpu/gpu-v2.mk
+endif

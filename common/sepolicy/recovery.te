@@ -62,7 +62,7 @@ allow recovery cache_file:dir mounton;
 allow recovery tmpfs:blk_file write;
 
 allow recovery sysfs:dir { open read };
-allow recovery sysfs_display:file read;
+allow recovery sysfs_display:file { open read write };
 allow recovery sysfs_video:dir search;
 
 allow recovery sysfs_store:file { open read write getattr };

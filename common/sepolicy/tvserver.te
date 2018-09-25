@@ -59,3 +59,14 @@ allow tvserver mnt_vendor_file:file { create open write setattr getattr lock rea
 
 allow tvserver platform_app:binder { call };
 allow tvserver sysfs:file { read write open };
+
+#add for search channel
+allow tvserver dvb_device:chr_file { open read write ioctl };
+allow tvserver frontend_device:chr_file { open read write ioctl };
+allow tvserver priv_app:binder { call };
+allow tvserver codec_device:chr_file { read write open ioctl };
+
+#add for timeshift
+allow tvserver vendor_data_file:dir { search remove_name write add_name create };
+allow tvserver vendor_data_file:file { unlink write create open read getattr };
+

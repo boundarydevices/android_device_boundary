@@ -13,13 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-GPU_MODS_OUT?=vendor/lib
-ifeq ($(wildcard $(BOARD_AML_VENDOR_PATH)/gpu/gpu.mk),)
-ifeq ($(wildcard hardware/arm/gpu/gpu.mk),)
-MESON_GPU_DIR=hardware/arm/gpu
-include hardware/arm/gpu/gpu.mk
+#
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/mali.ko
+
+GPU_TYPE:=mali450
+GPU_ARCH:=utgard
+GPU_DRV_VERSION?=r8p0
+GPU_MODS_OUT:=obj/lib_vendor/
+
+CUSTOM_IMAGE_MODULES += mali
+
+ifeq ($(wildcard $(BOARD_AML_VENDOR_PATH)/gpu/gpu-v2.mk),)
+ifeq ($(wildcard vendor/amlogic/gpu/gpu-v2.mk),)
+MESON_GPU_DIR=vendor/amlogic/gpu
+include vendor/amlogic/gpu/gpu-v2.mk
 endif
 else
 MESON_GPU_DIR=$(BOARD_AML_VENDOR_PATH)/gpu
-include $(BOARD_AML_VENDOR_PATH)/gpu/gpu.mk
+include $(BOARD_AML_VENDOR_PATH)/gpu/gpu-v2.mk
 endif

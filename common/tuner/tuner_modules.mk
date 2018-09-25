@@ -13,13 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-GPU_MODS_OUT?=vendor/lib
-ifeq ($(wildcard $(BOARD_AML_VENDOR_PATH)/gpu/gpu.mk),)
-ifeq ($(wildcard hardware/arm/gpu/gpu.mk),)
-MESON_GPU_DIR=hardware/arm/gpu
-include hardware/arm/gpu/gpu.mk
+
+#t962_p321 tuner
+ifeq ($(PRODUCT_DIR), t962_p321)
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/r842_fe.ko
 endif
-else
-MESON_GPU_DIR=$(BOARD_AML_VENDOR_PATH)/gpu
-include $(BOARD_AML_VENDOR_PATH)/gpu/gpu.mk
+
+#t962e_r321 tuner
+ifeq ($(PRODUCT_DIR), t962e_r321)
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/si2151_fe.ko
+endif
+
+#t962x_r311 tuner
+ifeq ($(PRODUCT_DIR), t962x_r311)
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko
 endif

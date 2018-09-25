@@ -25,10 +25,8 @@ PRODUCT_PACKAGES += \
     droidlogic.tv.software.core.xml \
     TvProvider \
     DroidLogicTvInput \
-    DroidLogicTvSource \
     DroidLogicFactoryMenu \
     libjnidtvsubtitle
-
 
 # DTV
 PRODUCT_PACKAGES += \
@@ -38,7 +36,9 @@ PRODUCT_PACKAGES += \
     libam_sysfs
 
 PRODUCT_PACKAGES += \
-    imageserver
+    imageserver \
+    busybox \
+    utility_busybox
 
 # LiveTv
 PRODUCT_PACKAGES += \
@@ -111,12 +111,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/tv.mp4:$(TARGET_COPY_OUT_VENDOR)/etc/bootvideo
 
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 # default wallpaper for mbox to fix bug 106225
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/default_wallpaper.png:$(TARGET_COPY_OUT_VENDOR)/etc/default_wallpaper.png
 
-#ADDITIONAL_BUILD_PROPERTIES += \
-#    ro.config.wallpaper=$(TARGET_COPY_OUT_VENDOR)/etc/default_wallpaper.png
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.wallpaper=vendor/etc/default_wallpaper.png
+endif
 
 # Include BUILD_NUMBER if defined
 VERSION_ID=$(shell find device/*/$(TARGET_PRODUCT) -name version_id.mk)

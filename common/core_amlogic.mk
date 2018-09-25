@@ -153,21 +153,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     rw.camera.usb.faceback=true
 
-#ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
-#PRODUCT_PACKAGES += \
-#    AppInstaller \
-#    DocumentsUI \
-#    FileBrowser \
-#    RemoteIME \
-#    DeskClock \
-#    Launcher2 \
-#    MusicFX \
-#    Browser2 \
-#    LatinIME \
-#    Settings \
-#    Camera2 \
-#    Music
-#endif
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+PRODUCT_PACKAGES += \
+    AppInstaller \
+    DocumentsUI \
+    FileBrowser \
+    RemoteIME \
+    DeskClock \
+    MusicFX \
+    Browser2 \
+    LatinIME \
+    Camera2 \
+    Music
+endif
 
 ifeq ($(TARGET_BUILD_LIVETV), true)
 PRODUCT_PACKAGES += \
@@ -212,6 +210,9 @@ PRODUCT_PACKAGES += \
     mkfs.exfat \
     mount.exfat \
     fsck.exfat \
+    ntfs-3g \
+    ntfsfix \
+    mkntfs \
     libxml2 \
     libamgralloc_ext \
     gralloc.amlogic \

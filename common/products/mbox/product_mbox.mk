@@ -71,9 +71,6 @@ custom_keylayouts := $(wildcard device/amlogic/common/keyboards/*.kl)
 PRODUCT_COPY_FILES += $(foreach file,$(custom_keylayouts),\
     $(file):$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/$(notdir $(file)))
 
-# hdcp_tx22
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/../../hdcp_tx22/hdcp_tx22:$(TARGET_COPY_OUT_VENDOR)/bin/hdcp_tx22
 
 # bootanimation
 PRODUCT_COPY_FILES += \
