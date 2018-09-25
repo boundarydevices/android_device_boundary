@@ -90,8 +90,8 @@ BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 BUILD_WITH_AVB := true
 
 ifeq ($(BUILD_WITH_AVB),true)
-BOARD_AVB_ENABLE := true
-#BOARD_BUILD_DISABLED_VBMETAIMAGE := true
+#BOARD_AVB_ENABLE := true
+BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 BOARD_AVB_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_KEY_PATH := device/amlogic/common/security/testkey_rsa2048.pem
 BOARD_AVB_ROLLBACK_INDEX := 0
