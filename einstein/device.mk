@@ -15,7 +15,7 @@
 #
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/common/products/mbox/init.amlogic.system.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.rc \
+    device/amlogic/common/products/tv/init.amlogic.system.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.rc \
     device/amlogic/$(PRODUCT_DIR)/init.amlogic.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.usb.rc \
     device/amlogic/$(PRODUCT_DIR)/init.amlogic.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.board.rc
 
@@ -56,17 +56,17 @@ PRODUCT_COPY_FILES += \
     device/amlogic/common/products/tv/Vendor_1915_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_1915_Product_0001.kl
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_COPY_FILES += \
-    device/amlogic/darwin/files/Generic.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
+    device/amlogic/$(PRODUCT_DIR)/files/Generic.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
 else
 PRODUCT_COPY_FILES += \
     device/amlogic/common/Generic.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
 endif
-
 # recovery
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/recovery/init.recovery.amlogic.rc:root/init.recovery.amlogic.rc \
     device/amlogic/$(PRODUCT_DIR)/recovery/recovery.kl:recovery/root/etc/recovery.kl \
     device/amlogic/$(PRODUCT_DIR)/files/mesondisplay.cfg:recovery/root/etc/mesondisplay.cfg \
+    device/amlogic/$(PRODUCT_DIR)/recovery/busybox:recovery/root/sbin/busybox \
     device/amlogic/$(PRODUCT_DIR)/recovery/remotecfg:recovery/root/sbin/remotecfg \
     device/amlogic/$(PRODUCT_DIR)/files/remote.cfg:recovery/root/etc/remote.cfg \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab:recovery/root/etc/remote.tab \
@@ -74,31 +74,38 @@ PRODUCT_COPY_FILES += \
 
 # einstein config file
 PRODUCT_COPY_FILES += \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/tvconfig.conf:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tvconfig.conf \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_default.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_default.cfg \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_default.xml \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_setting_config.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_setting_config.cfg \
+    $(call find-copy-subdir-files,*,device/amlogic/$(PRODUCT_DIR)/files/tv/tvconfig/,/$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig) \
     device/amlogic/$(PRODUCT_DIR)/files/tv/dec:$(TARGET_COPY_OUT_VENDOR)/bin/dec \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/port_14.bin:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/hdmi/port_14.bin \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/port_20.bin:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/hdmi/port_20.bin \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/tv_rrt_define.xml:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/tv_rrt_define.xml \
     device/amlogic/$(PRODUCT_DIR)/files/PQ/pq.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq.db \
     device/amlogic/$(PRODUCT_DIR)/files/PQ/overscan.db:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/overscan.db \
     device/amlogic/$(PRODUCT_DIR)/files/PQ/pq_default.ini:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq_default.ini
-#einstein tuner
-PRODUCT_COPY_FILES += \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/mxl661_fe.ko:$(TARGET_COPY_OUT_VENDOR)/lib/mxl661_fe.ko
 
-PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi
+#t962x_r311 local dimming algorithm
+PRODUCT_COPY_FILES += \
+    device/amlogic/$(PRODUCT_DIR)/files/tv/ldim_alg.ko:$(PRODUCT_OUT)/obj/lib_vendor/ldim_alg.ko
+
+#DNLP ko
+ifeq ($(KERNEL_A32_SUPPORT), true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/video_algorithm/dnlp/dnlp_alg_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/dnlp_alg.ko
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/video_algorithm/dnlp/dnlp_alg_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/dnlp_alg.ko
+endif
+
+PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi tvdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_CHARACTERISTICS := einstein,nosdcard
-
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+DEVICE_PACKAGE_OVERLAYS := \
+    device/amlogic/$(PRODUCT_DIR)/overlay
+endif
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 
 # setup dalvik vm configs.
-$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
 
 # set default USB configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

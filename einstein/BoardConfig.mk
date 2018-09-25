@@ -56,7 +56,7 @@ TARGET_BOOTLOADER_IS_2ND := true
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 MAX_VIRTUAL_DISPLAY_DIMENSION := 1920
-TARGET_APP_LAYER_USE_CONTINUOUS_BUFFER := true
+TARGET_APP_LAYER_USE_CONTINUOUS_BUFFER := false
 TARGET_SUPPORT_SECURE_LAYER := false
 
 # Camera
@@ -110,7 +110,7 @@ endif
 
 ifeq ($(BOARD_BUILD_DISABLED_VBMETAIMAGE), true)
 ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE), true)
-BOARD_KERNEL_CMDLINE += --cmdline "root=179:18"
+BOARD_KERNEL_CMDLINE += --cmdline "root=/dev/mmcblk0p18"
 endif
 endif
 
@@ -153,11 +153,11 @@ endif
 include device/amlogic/common/sepolicy.mk
 #MALLOC_IMPL := dlmalloc
 
-WITH_DEXPREOPT := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 DEVICE_MANIFEST_FILE := device/amlogic/$(PRODUCT_DIR)/manifest.xml
 #DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml
 
-BOARD_HAS_ADTV := false
+BOARD_HAS_ADTV := true
+BOARD_VNDK_VERSION := current

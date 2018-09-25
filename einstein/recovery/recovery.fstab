@@ -5,7 +5,7 @@
 /dev/block/recovery     /recovery   emmc    defaults    defaults
 /dev/block/boot         /boot   emmc    defaults    defaults
 /dev/block/misc         /misc   emmc    defaults    defaults
-/dev/block/system       /system   ext4    defaults    defaults
+/dev/block/system       /system    ext4    defaults    defaults
 /dev/block/vendor       /vendor ext4    defaults    defaults
 /dev/block/odm          /odm    ext4    defaults    defaults
 /dev/block/param        /param    ext4    defaults    defaults

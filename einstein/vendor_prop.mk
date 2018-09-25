@@ -21,11 +21,11 @@
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.platform.has.mbxuimode=true \
     ro.platform.has.tvuimode=true \
-    ro.platform.has.realoutputmode=true \
     ro.platform.customize_tvsetting=true \
+    ro.platform.has.realoutputmode=true
 
 #camera max to 720p
-PRODUCT_PROPERTY_OVERRIDES +=  \
+#PRODUCT_PROPERTY_OVERRIDES += \
     #ro.camera.preview.MaxSize=1280x720 \
     #ro.camera.preview.LimitedRate=1280x720x30,640x480x30,320x240x28
 
@@ -35,14 +35,12 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.camera.preview.LimitedRate=1920x1080x30,1280x720x30,640x480x30,320x240x28 \
     ro.camera.preview.UseMJPEG=1
 
-#if TV SOC as mbox
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    ro.tvsoc.as.mbox=true \
-    ro.config.media_vol_steps=100 \
-
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.radio.noril=false
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.media_vol_steps=100
 
 #if need pppoe
 PRODUCT_PROPERTY_OVERRIDES +=  \
@@ -95,9 +93,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     media.wfd.videoresolution-group=0 \
     media.wfd.videoframerate=24 \
     media.wfd.video-bitrate=2000000 \
-    media.html5videowin.enable=1 \
-    media.decoder.vfm.defmap=decoder ppmgr deinterlace amvideo \
-    media.decoder.vfm.drmmap=decoder amvideo
+    media.html5videowin.enable=1
 
 #platform support dolby vision
 PRODUCT_PROPERTY_OVERRIDES +=  \
@@ -153,3 +149,30 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #adb
 PRODUCT_PROPERTY_OVERRIDES +=  \
     service.adb.tcp.port=5555
+
+# low memory for 1G
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.low_ram=true
+# 1G JIT config
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.jit.codecachesize=0
+# 1G hwui
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hwui.texture_cache_size=40.5f \
+    ro.hwui.layer_cache_size=33.75f
+
+# crypto volume
+PRODUCT_PROPERTY_OVERRIDES +=  \
+    ro.crypto.volume.filenames_mode=aes-256-cts
+
+#this property is used for Android TV audio
+PRODUCT_PROPERTY_OVERRIDES +=  \
+    ro.platform.is.tv=1
+
+#this property is used for timeshift
+PRODUCT_PROPERTY_OVERRIDES +=  \
+    tv.dtv.tf.path=/data/vendor_de/0
+
+#this property is used for DVR
+PRODUCT_PROPERTY_OVERRIDES +=  \
+    tv.dtv.rec.path=/data/vendor_de/0

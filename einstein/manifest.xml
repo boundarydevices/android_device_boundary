@@ -108,6 +108,15 @@
         </interface>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.camera.provider</name>
+        <transport>hwbinder</transport>
+        <version>2.4</version>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>legacy/0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.media.omx</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -145,10 +154,12 @@
         <interface>
             <name>ICryptoFactory</name>
             <instance>default</instance>
+            <instance>widevine</instance>
         </interface>
         <interface>
             <name>IDrmFactory</name>
             <instance>default</instance>
+            <instance>widevine</instance>
         </interface>
         <fqname>@1.1::ICryptoFactory/clearkey</fqname>
         <fqname>@1.1::IDrmFactory/clearkey</fqname>
@@ -191,6 +202,15 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal>
+        <name>vendor.amlogic.hardware.imageserver</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IImageService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl">
         <name>vendor.amlogic.hardware.droidvold</name>
         <transport>hwbinder</transport>
@@ -215,6 +235,15 @@
         <version>1.0</version>
         <interface>
             <name>ITvServer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
+        <name>vendor.amlogic.hardware.remotecontrol</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IRemoteControl</name>
             <instance>default</instance>
         </interface>
     </hal>

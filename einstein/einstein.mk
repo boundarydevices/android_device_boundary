@@ -34,33 +34,11 @@ endif
 
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/amlogic/common/products/tv/product_tv.mk)
+$(call inherit-product, device/amlogic/common/tuner/tuner.mk)
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
-TARGET_WITH_MEDIA_EXT_LEVEL := 3
 
-#########################################################################
-#
-#                     media ext
-#
-#########################################################################
-ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 1)
-    TARGET_WITH_MEDIA_EXT :=true
-    TARGET_WITH_SWCODEC_EXT :=true
-else
-ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 2)
-    TARGET_WITH_MEDIA_EXT :=true
-    TARGET_WITH_CODEC_EXT := true
-else
-ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
-    TARGET_WITH_MEDIA_EXT :=true
-    TARGET_WITH_SWCODEC_EXT := true
-    TARGET_WITH_CODEC_EXT := true
-    TARGET_WITH_PLAYERS_EXT :=true
-endif
-endif
-endif
-
-# einstein:
+# t962x_r311:
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -81,6 +59,7 @@ WITH_LIBPLAYER_MODULE := false
 
 BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
+BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 
 OTA_UP_PART_NUM_CHANGED := true
 
@@ -166,16 +145,6 @@ DONT_DEXPREOPT_PREBUILTS:= true
 endif
 ########################################################################
 
-
-########################################################################
-#
-#                           Live TV
-#
-########################################################################
-ifneq ($(TARGET_BUILD_GOOGLE_ATV),true)
-TARGET_BUILD_LIVETV := true
-endif
-
 ########################################################################
 #
 #                           CTS
@@ -188,6 +157,13 @@ TARGET_BUILD_CTS:= true
 TARGET_BUILD_NETFLIX:= true
 endif
 ########################################################################
+
+########################################################################
+#
+#                           Live TV
+#
+########################################################################
+TARGET_BUILD_LIVETV := true
 
 #########################################################################
 #
@@ -215,6 +191,8 @@ PRODUCT_COPY_FILES += \
 #
 #########################################################################
 
+#WIFI_MODULE := rtl8188eu
+#MULTI_WIFI_SUPPORT = true
 WIFI_MODULE := AP62x8
 WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
@@ -222,6 +200,8 @@ include device/amlogic/common/wifi.mk
 # Change this to match target country
 # 11 North America; 14 Japan; 13 rest of world
 PRODUCT_DEFAULT_WIFI_CHANNELS := 11
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/wifi/config.txt:system/etc/wifi/4354/config.txt
 
 #########################################################################
 #
@@ -230,8 +210,9 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 #########################################################################
 
 BOARD_HAVE_BLUETOOTH := true
-BLUETOOTH_MODULE := AP62x8
 BCM_BLUETOOTH_LPM_ENABLE := true
+BCMBT_SUPPORT := true
+BCM_USB_BT := true
 include device/amlogic/common/bluetooth.mk
 
 
@@ -294,6 +275,13 @@ BUILD_WITH_VIEWRIGHT_WEB := false
 #verimatrix stb
 BUILD_WITH_VIEWRIGHT_STB := false
 #########################################################################
+
+#########################################################################
+#
+#                                               Media extension
+#
+#########################################################################
+TARGET_WITH_MEDIA_EXT_LEVEL := 3
 
 
 #DRM Widevine
@@ -365,9 +353,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
 endif
 
-# hdcp_tx22
-PRODUCT_COPY_FILES += \
-    device/amlogic/common/hdcp_tx22/hdcp_tx22:vendor/bin/hdcp_tx22
 
 #########################################################################
 #
@@ -394,6 +379,13 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
 endif
+
+#########################################################################
+#
+#                                     TB detect
+#
+#########################################################################
+$(call inherit-product, device/amlogic/common/tb_detect.mk)
 
 include device/amlogic/common/gpu/mali450-user-arm64.mk
 
