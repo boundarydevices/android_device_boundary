@@ -49,7 +49,8 @@ PRODUCT_PACKAGES += \
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
-    PhotoTable
+    PhotoTable \
+    OTAUpgrade
 
 PRODUCT_PACKAGES += \
     LiveWallpapers \
@@ -186,7 +187,6 @@ PRODUCT_PACKAGES += \
     vendor.amlogic.hardware.systemcontrol@1.0_vendor
 
 PRODUCT_PACKAGES += \
-    OTAUpgrade \
     VideoPlayer \
     SubTitle    \
     libdig \
