@@ -90,6 +90,10 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # PRODUCT_CHARACTERISTICS := mbx,nosdcard
 
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+DEVICE_PACKAGE_OVERLAYS := \
+    device/amlogic/$(PRODUCT_DIR)/overlay
+endif
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 
