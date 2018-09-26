@@ -48,9 +48,6 @@ PRODUCT_COPY_FILES += \
     hardware/amlogic/bluetooth/broadcom/vendor/data/auto_pairing.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/auto_pairing.conf \
     hardware/amlogic/bluetooth/broadcom/vendor/data/blacklist.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/blacklist.conf
 
-ifneq ($(wildcard device/amlogic/$(TARGET_PRODUCT)/bluetooth),)
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amlogic/$(TARGET_PRODUCT)/bluetooth
-endif
 
 endif
 
