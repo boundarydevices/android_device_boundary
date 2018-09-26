@@ -18,7 +18,7 @@
 #
 
 # Set display related config
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.has.mbxuimode=true \
     ro.platform.has.tvuimode=true \
     ro.platform.customize_tvsetting=true \
@@ -30,20 +30,20 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     #ro.camera.preview.LimitedRate=1280x720x30,640x480x30,320x240x28
 
 #camera max to 1080p
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.preview.MaxSize=1920x1080 \
     ro.camera.preview.LimitedRate=1920x1080x30,1280x720x30,640x480x30,320x240x28 \
     ro.camera.preview.UseMJPEG=1
 
 #if wifi Only
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.noril=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.media_vol_steps=100
 
 #if need pppoe
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.net.pppoe=true
 
 #the prop is used for enable or disable
@@ -51,33 +51,30 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #by default,the force output mode is enabled.
 #Note,please do not set the prop to true by default
 #only for netflix,just disable the feature.so set the prop to true
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.disable.audiorawout=false
 
 #this property is used for Android TV audio
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.is.tv=1
 
 #Dolby DD+ decoder option
 #this prop to for videoplayer display the DD+/DD icon when playback
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.support.dolby=true
-
 #DTS decoder option
 #display dts icon when playback
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.support.dts=true
-
 #DTS-HD support prop
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    #ro.platform.support.dtstrans=true
-
-PRODUCT_PROPERTY_OVERRIDES +=  \
+#PRODUCT_PROPERTY_OVERRIDES += \
+    #ro.platform.support.dtstrans=true \
     #ro.platform.support.dtsmulasset=true
-
 #DTS-HD prop end
 # Enable player buildin
-PRODUCT_PROPERTY_OVERRIDES +=  \
+
+
+PRODUCT_PROPERTY_OVERRIDES += \
     media.amplayer.seekkeyframe=true \
     media.amsuperplayer.enable=true \
     media.amplayer.enable-acodecs=ac3,eac3,rm,dts \
@@ -96,63 +93,66 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     media.html5videowin.enable=1
 
 #platform support dolby vision
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.support.dolbyvision=true
 
 #add for video boot, 1 means use video boot, others not .
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     service.bootvideo=0
 
 # Define drm for this device
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=1
 
 #used forward seek for libplayer
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     media.libplayer.seek.fwdsearch=1
 
 #set memory upper limit for extractor process
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.maxmem=629145600
 
 #fix hls sync
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     libplayer.livets.softdemux=1 \
     libplayer.netts.recalcpts=1
 
 #map volume
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.audio.mapvalue=0,0,0,0
 
 #By default, primary storage is physical
-#ro.vold.primary_physical=true
+#PRODUCT_PROPERTY_OVERRIDES += \
+    #ro.vold.primary_physical=true
+
 #Support storage visible to apps
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.fw.force_adoptable=true
 
 #use sdcardfs
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
 
 #add livhls,libcurl as default hls
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     media.libplayer.curlenable=true \
     media.libplayer.modules=vhls_mod,dash_mod,curl_mod,prhls_mod,vm_mod,bluray_mod
 
 
 #Hdmi In
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.hdmiin.enable=true \
     mbx.hdmiin.switchfull=false \
     mbx.hdmiin.videolayer=false
 
 #adb
-PRODUCT_PROPERTY_OVERRIDES +=  \
+PRODUCT_PROPERTY_OVERRIDES += \
     service.adb.tcp.port=5555
 
 # low memory for 1G
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.low_ram=true
+    ro.config.low_ram=true \
+    ro.config.max_starting_bg=8
 # 1G JIT config
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.jit.codecachesize=0

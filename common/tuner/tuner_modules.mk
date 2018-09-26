@@ -21,13 +21,13 @@ BOARD_VENDOR_KERNEL_MODULES += \
 endif
 
 #t962e_r321 tuner
-ifeq ($(PRODUCT_DIR), t962e_r321)
+ifeq ($(PRODUCT_DIR), darwin)
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/si2151_fe.ko
 endif
 
 #t962x_r311 tuner
-ifeq ($(PRODUCT_DIR), t962x_r311)
+ifeq ($(PRODUCT_DIR), einstein)
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko
 endif

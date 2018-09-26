@@ -38,8 +38,29 @@ $(call inherit-product, device/amlogic/common/tuner/tuner.mk)
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 
-# t962x_r311:
+#TARGET_WITH_MEDIA_EXT_LEVEL := 3
 
+#########################################################################
+#
+#                     media ext
+#
+#########################################################################
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 1)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT :=true
+else
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 2)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_CODEC_EXT := true
+else
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT := true
+    TARGET_WITH_CODEC_EXT := true
+    TARGET_WITH_PLAYERS_EXT :=true
+endif
+endif
+endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
         sys.fb.bits=32 \
@@ -191,9 +212,8 @@ PRODUCT_COPY_FILES += \
 #
 #########################################################################
 
-#WIFI_MODULE := rtl8188eu
-#MULTI_WIFI_SUPPORT = true
-WIFI_MODULE := AP62x8
+#MULTI_WIFI_SUPPORT := true
+WIFI_MODULE := bcm4356
 WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
 
@@ -275,13 +295,6 @@ BUILD_WITH_VIEWRIGHT_WEB := false
 #verimatrix stb
 BUILD_WITH_VIEWRIGHT_STB := false
 #########################################################################
-
-#########################################################################
-#
-#                                               Media extension
-#
-#########################################################################
-TARGET_WITH_MEDIA_EXT_LEVEL := 3
 
 
 #DRM Widevine
