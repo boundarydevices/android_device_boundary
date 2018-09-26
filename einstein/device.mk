@@ -52,7 +52,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/remote.conf:$(TARGET_COPY_OUT_VENDOR)/etc/remote.conf \
     device/amlogic/$(PRODUCT_DIR)/files/remote.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/remote.cfg \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab \
-    device/amlogic/common/products/tv/Vendor_0001_Product_0001.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl \
+    device/amlogic/common/products/tv/Vendor_0001_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl \
     device/amlogic/common/products/tv/Vendor_1915_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_1915_Product_0001.kl
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_COPY_FILES += \

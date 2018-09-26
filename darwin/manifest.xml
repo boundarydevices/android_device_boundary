@@ -108,6 +108,15 @@
         </interface>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.camera.provider</name>
+        <transport>hwbinder</transport>
+        <version>2.4</version>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>legacy/0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.media.omx</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -145,10 +154,12 @@
         <interface>
             <name>ICryptoFactory</name>
             <instance>default</instance>
+            <instance>widevine</instance>
         </interface>
         <interface>
             <name>IDrmFactory</name>
             <instance>default</instance>
+            <instance>widevine</instance>
         </interface>
         <fqname>@1.1::ICryptoFactory/clearkey</fqname>
         <fqname>@1.1::IDrmFactory/clearkey</fqname>
@@ -188,6 +199,15 @@
         <version>1.0</version>
         <interface>
             <name>ISystemControl</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
+        <name>vendor.amlogic.hardware.imageserver</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IImageService</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -261,15 +281,6 @@
         <interface>
             <name>IMediaCasService</name>
             <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.camera.provider</name>
-        <transport>hwbinder</transport>
-        <version>2.4</version>
-        <interface>
-            <name>ICameraProvider</name>
-            <instance>legacy/0</instance>
         </interface>
     </hal>
     <sepolicy>

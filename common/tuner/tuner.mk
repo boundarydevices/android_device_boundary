@@ -26,7 +26,7 @@ endif
 endif
 
 #t962e_r321 tuner
-ifeq ($(PRODUCT_DIR), t962e_r321)
+ifeq ($(PRODUCT_DIR), darwin)
 ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/si2151_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2151_fe.ko
@@ -37,7 +37,7 @@ endif
 endif
 
 #t962x_r311 tuner
-ifeq ($(PRODUCT_DIR), t962x_r311)
+ifeq ($(PRODUCT_DIR), einstein)
 ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/mxl661_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko

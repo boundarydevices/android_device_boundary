@@ -77,26 +77,6 @@ Only the three quirks included above are recognized at this point:
 
 <MediaCodecs>
     <Decoders>
-        <MediaCodec name="OMX.amlogic.dolby-vision.decoder.awesome" type="video/dolby-vision" >
-            <Limit name="size" min="64x64" max="3840x2160" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" min="1" max="972000" />
-            <Limit name="bitrate" range="1-300000000" />
-            <Feature name="adaptive-playback" />
-            <Limit name="concurrent-instances" max="1" />
-        </MediaCodec>
-        <MediaCodec name="OMX.amlogic.dolby-vision.decoder.awesome.secure" type="video/dolby-vision" >
-            <Limit name="size" min="64x64" max="3840x2160" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" min="1" max="972000" />
-            <Limit name="bitrate" range="1-300000000" />
-            <Feature name="adaptive-playback" />
-            <Feature name="secure-playback" required="true" />
-            <Feature name="tunneled-playback" />
-            <Limit name="concurrent-instances" max="1" />
-        </MediaCodec>
         <MediaCodec name="OMX.amlogic.hevc.decoder.awesome" type="video/hevc" >
             <Limit name="size" min="64x64" max="3840x2160" />
             <Limit name="alignment" value="2x2" />
@@ -163,50 +143,6 @@ Only the three quirks included above are recognized at this point:
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="1" />
         </MediaCodec>
-        <MediaCodec name="OMX.amlogic.vc1.decoder.awesome" type="video/vc1" >
-            <Limit name="size" min="64x64" max="1920x1088" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" min="1" max="" />
-            <Limit name="bitrate" range="1-300000000" />
-            <Feature name="adaptive-playback" />
-            <Limit name="concurrent-instances" max="1" />
-        </MediaCodec>
-        <MediaCodec name="OMX.amlogic.wvc1.decoder.awesome" type="video/wvc1" >
-            <Limit name="size" min="64x64" max="1920x1088" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" min="1" max="" />
-            <Limit name="bitrate" range="1-300000000" />
-            <Feature name="adaptive-playback" />
-            <Limit name="concurrent-instances" max="1" />
-        </MediaCodec>
-        <MediaCodec name="OMX.amlogic.wmv3.decoder.awesome" type="video/wmv3" >
-            <Limit name="size" min="64x64" max="1920x1088" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" min="1" max="972000" />
-            <Limit name="bitrate" range="1-300000000" />
-            <Feature name="adaptive-playback" />
-            <Limit name="concurrent-instances" max="1" />
-        </MediaCodec>
-        <MediaCodec name="OMX.amlogic.mswmv3.decoder.awesome" type="video/x-ms-wmv" >
-            <Limit name="size" min="64x64" max="1920x1088" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" min="1" max="972000" />
-            <Limit name="bitrate" range="1-300000000" />
-            <Feature name="adaptive-playback" />
-        </MediaCodec>
-        <MediaCodec name="OMX.amlogic.mjpeg.decoder.awesome" type="video/mjpeg" >
-            <Limit name="size" min="64x64" max="1920x1088" />
-            <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" min="1" max="972000" />
-            <Limit name="bitrate" range="1-300000000" />
-            <Feature name="adaptive-playback" />
-	    <Limit name="concurrent-instances" max="1" />
-        </MediaCodec>
         <MediaCodec name="OMX.amlogic.vp9.decoder.awesome" type="video/x-vnd.on2.vp9" >
             <Limit name="size" min="64x64" max="3840x2160" />
             <Limit name="alignment" value="2x2" />
@@ -227,16 +163,6 @@ Only the three quirks included above are recognized at this point:
             <Feature name="tunneled-playback" />
 	    <Limit name="concurrent-instances" max="1" />
         </MediaCodec>
-        <MediaCodec name="OMX.amlogic.vp6.decoder.sw" type="video/x-vnd.on2.vp6" />
-        <MediaCodec name="OMX.amlogic.vp6a.decoder.sw" type="video/x-vnd.on2.vp6a" />
-        <MediaCodec name="OMX.amlogic.vp6f.decoder.sw" type="video/x-vnd.on2.vp6f" />
-        <MediaCodec name="OMX.amlogic.rm10.decoder.sw" type="video/rm10" />
-        <MediaCodec name="OMX.amlogic.rm20.decoder.sw" type="video/rm20" />
-        <MediaCodec name="OMX.amlogic.rm30.decoder.sw" type="video/rm30" />
-        <MediaCodec name="OMX.amlogic.rm40.decoder.sw" type="video/rm40" />
-        <MediaCodec name="OMX.amlogic.wmv2.decoder.sw" type="video/wmv2" />
-        <MediaCodec name="OMX.amlogic.wmv1.decoder.sw" type="video/wmv1" />
-        <MediaCodec name="OMX.google.ffmpeg.decoder.sw" type="audio/ffmpeg" />
         <MediaCodec name="OMX.google.amrnb.decoder" type="audio/3gpp" />
         <MediaCodec name="OMX.google.amrwb.decoder" type="audio/amr-wb" />
         <MediaCodec name="OMX.google.aac.decoder" type="audio/mp4a-latm" />
@@ -254,9 +180,9 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.google.ape.decoder" type="audio/ape" />
         <MediaCodec name="OMX.google.truehd.decoder" type="audio/truehd" />
         <MediaCodec name="OMX.google.raw.decoder" type="audio/raw" />
-        <MediaCodec name="OMX.google.dtshd.decoder" type="audio/dtshd" />
         <MediaCodec name="OMX.amlogic.audio.decoder.ac3" type="audio/ac3" />
         <MediaCodec name="OMX.amlogic.audio.decoder.eac3" type="audio/eac3" />
+        <MediaCodec name="OMX.google.dtshd.decoder" type="audio/dtshd" />
         <MediaCodec name="OMX.google.opus.decoder" type="audio/opus">
             <Limit name="channel-count" max="8" />
             <Limit name="sample-rate" ranges="48000" />
@@ -285,7 +211,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-10000000" />
             <Feature name="adaptive-playback" />
         </MediaCodec>
-        <MediaCodec name="OMX.google.vp8.decoder" type="video/x-vnd.on2.vp8">
+	<MediaCodec name="OMX.google.vp8.decoder" type="video/x-vnd.on2.vp8">
             <Limit name="size" min="2x2" max="2048x2048" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />

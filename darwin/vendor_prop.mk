@@ -19,10 +19,10 @@
 
 # Set display related config
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.has.tvuimode=true \
     ro.platform.has.mbxuimode=true \
-    ro.platform.has.realoutputmode=true \
-    ro.platform.customize_tvsetting=true
+    ro.platform.has.tvuimode=true \
+    ro.platform.customize_tvsetting=true \
+    ro.platform.has.realoutputmode=true
 
 #camera max to 720p
 #PRODUCT_PROPERTY_OVERRIDES += \
@@ -39,10 +39,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.tvsoc.as.mbox=true
 
-#this property is used for Android TV audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.is.tv=1
-
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.noril=false
@@ -54,9 +50,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.net.pppoe=true
 
-PRODUCT_PROPERTY_OVERRIDES += \
-   ro.platform.support.dolbyvision=true
-
 #the prop is used for enable or disable
 #DD+/DD force output when HDMI EDID is not supported
 #by default,the force output mode is enabled.
@@ -64,6 +57,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #only for netflix,just disable the feature.so set the prop to true
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.disable.audiorawout=false
+
+#this property is used for Android TV audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.platform.is.tv=1
 
 #Dolby DD+ decoder option
 #this prop to for videoplayer display the DD+/DD icon when playback
@@ -97,10 +94,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.wfd.videoresolution-group=0 \
     media.wfd.videoframerate=24 \
     media.wfd.video-bitrate=2000000 \
-    media.html5videowin.enable=1 \
-    media.decoder.vfm.defmap=decoder ppmgr deinterlace amvideo \
-    media.decoder.vfm.drmmap=decoder amvideo
+    media.html5videowin.enable=1
 
+#platform support dolby vision
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.platform.support.dolbyvision=true
 
 #add for video boot, 1 means use video boot, others not .
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -114,6 +112,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     media.libplayer.seek.fwdsearch=1
 
+#set memory upper limit for extractor process
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.media.maxmem=629145600
+
 #fix hls sync
 PRODUCT_PROPERTY_OVERRIDES += \
     libplayer.livets.softdemux=1 \
@@ -124,7 +126,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.audio.mapvalue=0,0,0,0
 
 #By default, primary storage is physical
-PRODUCT_PROPERTY_OVERRIDES += \
+#PRODUCT_PROPERTY_OVERRIDES += \
     #ro.vold.primary_physical=true
 
 #Support storage visible to apps
@@ -151,5 +153,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     service.adb.tcp.port=5555
 
 # crypto volume
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.crypto.volume.filenames_mode=aes-256-cts
+
+#this property is used for Android TV audio
+PRODUCT_PROPERTY_OVERRIDES +=  \
+    ro.platform.is.tv=1
+
+#this property is used for timeshift
+PRODUCT_PROPERTY_OVERRIDES +=  \
+    tv.dtv.tf.path=/data/vendor_de/0

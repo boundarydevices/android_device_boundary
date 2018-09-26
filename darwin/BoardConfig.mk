@@ -132,6 +132,7 @@ BOARD_KERNEL_OFFSET := 0x1080000
 
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amlogic/common/bluetooth
 TARGET_RELEASETOOLS_EXTENSIONS := device/amlogic/common
 TARGET_USE_BLOCK_BASE_UPGRADE := true
 TARGET_OTA_UPDATE_DTB := true
@@ -152,13 +153,11 @@ endif
 include device/amlogic/common/sepolicy.mk
 #MALLOC_IMPL := dlmalloc
 
-WITH_DEXPREOPT := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 DEVICE_MANIFEST_FILE := device/amlogic/$(PRODUCT_DIR)/manifest.xml
 #DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml
 
-BOARD_HAS_ADTV := false
-
-BOARD_VNDK_VERSION=current
+BOARD_HAS_ADTV := true
+BOARD_VNDK_VERSION := current

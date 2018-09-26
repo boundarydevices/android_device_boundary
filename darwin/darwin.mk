@@ -34,12 +34,34 @@ endif
 
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/amlogic/common/products/tv/product_tv.mk)
+$(call inherit-product, device/amlogic/common/tuner/tuner.mk)
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/amlogic/darwin/device-vendor.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 
-# darwin:
+#TARGET_WITH_MEDIA_EXT_LEVEL := 3
 
+#########################################################################
+#
+#                     media ext
+#
+#########################################################################
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 1)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT :=true
+else
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 2)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_CODEC_EXT := true
+else
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT := true
+    TARGET_WITH_CODEC_EXT := true
+    TARGET_WITH_PLAYERS_EXT :=true
+endif
+endif
+endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
         sys.fb.bits=32 \
@@ -57,11 +79,11 @@ PRODUCT_TYPE := tv
 
 WITH_LIBPLAYER_MODULE := false
 
-OTA_UP_PART_NUM_CHANGED := true
-
 BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
-
 BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
+BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
+
+OTA_UP_PART_NUM_CHANGED := true
 
 #AB_OTA_UPDATER :=true
 BUILD_WITH_AVB := true
@@ -147,15 +169,6 @@ endif
 
 ########################################################################
 #
-#                           Live TV
-#
-########################################################################
-ifneq ($(TARGET_BUILD_GOOGLE_ATV),true)
-TARGET_BUILD_LIVETV := true
-endif
-
-########################################################################
-#
 #                           CTS
 #
 ########################################################################
@@ -166,6 +179,13 @@ TARGET_BUILD_CTS:= true
 TARGET_BUILD_NETFLIX:= true
 endif
 ########################################################################
+
+########################################################################
+#
+#                           Live TV
+#
+########################################################################
+TARGET_BUILD_LIVETV := true
 
 #########################################################################
 #
@@ -284,7 +304,7 @@ endif
 
 ifeq ($(BOARD_WIDEVINE_OEMCRYPTO_LEVEL), 1)
 TARGET_USE_OPTEEOS := true
-TARGET_ENABLE_TA_SIGN := false
+TARGET_ENABLE_TA_SIGN := true
 TARGET_USE_HW_KEYMASTER := true
 endif
 
@@ -346,9 +366,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
 endif
 
-# hdcp_tx22
-PRODUCT_COPY_FILES += \
-    device/amlogic/common/hdcp_tx22/hdcp_tx22:vendor/bin/hdcp_tx22
 
 #########################################################################
 #
@@ -376,6 +393,13 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-service
 endif
 
+#########################################################################
+#
+#                                     TB detect
+#
+#########################################################################
+$(call inherit-product, device/amlogic/common/tb_detect.mk)
+
 include device/amlogic/common/gpu/mali450-user-arm64.mk
 
 #########################################################################
@@ -395,5 +419,3 @@ endif
 ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
 $(warning $(shell ($(AUTO_PATCH_SHELL_FILE) $(TARGET_BUILD_LIVETV) $(TARGET_BUILD_GOOGLE_ATV))))
 endif
-
-
