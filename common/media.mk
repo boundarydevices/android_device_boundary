@@ -25,6 +25,7 @@
 #TARGET_WITH_AMLOGIC_SCREAN_MEDIASOURCE :=true
 #TARGET_WITH_AMLOGIC_RETRIEVER :=true
 #TARGET_WITH_AMLOGIC_PLAYERS :=true
+#move TARGET_WITH_MEDIA_EXT_LEVEL to platform mk
 #TARGET_WITH_MEDIA_EXT_LEVEL := 3
 #set on some prducts,used libplayer.
 BUILD_WITH_BOOT_PLAYER :=true
@@ -36,7 +37,7 @@ BUILD_WITH_BOOT_PLAYER :=true
 #########################################################################
 ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 1)
     TARGET_WITH_MEDIA_EXT :=true
-    TARGET_WITH_SWCODEC_EXT :=true
+    TARGET_WITH_SWCODEC_EXT := true
 else
 ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 2)
     TARGET_WITH_MEDIA_EXT :=true
@@ -46,22 +47,26 @@ ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
     TARGET_WITH_MEDIA_EXT :=true
     TARGET_WITH_SWCODEC_EXT := true
     TARGET_WITH_CODEC_EXT := true
-    TARGET_WITH_PLAYERS_EXT :=true
+#    TARGET_WITH_PLAYERS_EXT :=true
 endif
 endif
 endif
-
 ifeq ($(TARGET_WITH_MEDIA_EXT), true)
 PRODUCT_PACKAGES += \
-    libammediaext
+    libammediaext \
+    libammediaext.vendor \
+    libamffmpeg \
+    libamffmpeg.vendor \
+    libamextractor \
+    libamffmpegadapter \
+    libamffmpegcodec \
 
 endif
+
 #soft codec related.
 #
 ifeq ($(TARGET_WITH_SWCODEC_EXT), true)
 PRODUCT_PACKAGES += \
-    libamffmpeg \
-    libamffmpegadapter \
     libOmxCoreSw \
     libstagefright_soft_amsoftdec
 
@@ -72,6 +77,8 @@ endif
 ifeq ($(TARGET_WITH_CODEC_EXT), true)
 PRODUCT_PACKAGES += \
    libavenhancements
+PRODUCT_COPY_FILES += \
+   vendor/amlogic/common/prebuilt/libmedia/libavenhancements/vendor/lib/libavenhancements.so:$(TARGET_COPY_OUT_VENDOR)/lib/libavenhancements.so \
 
 endif
 
@@ -82,6 +89,8 @@ BOARD_USE_CUSTOM_MEDIASERVEREXTENSIONS:=true
 TARGET_WITH_AMNUPLAYER :=true
 
 endif
+
+
 
 #########################################################################
 #

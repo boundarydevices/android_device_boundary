@@ -186,24 +186,17 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.google.amrnb.decoder" type="audio/3gpp" />
         <MediaCodec name="OMX.google.amrwb.decoder" type="audio/amr-wb" />
         <MediaCodec name="OMX.google.aac.decoder" type="audio/mp4a-latm" />
-        <MediaCodec name="OMX.google.adif.decoder" type="audio/aac-adif" />
-        <MediaCodec name="OMX.google.latm.decoder" type="audio/aac-latm" />
-        <MediaCodec name="OMX.google.adts.decoder" type="audio/adts" />
         <MediaCodec name="OMX.google.g711.alaw.decoder" type="audio/g711-alaw" />
         <MediaCodec name="OMX.google.g711.mlaw.decoder" type="audio/g711-mlaw" />
         <MediaCodec name="OMX.google.adpcm.ima.decoder" type="audio/adpcm-ima" />
         <MediaCodec name="OMX.google.adpcm.ms.decoder" type="audio/adpcm-ms" />
         <MediaCodec name="OMX.google.vorbis.decoder" type="audio/vorbis" />
         <MediaCodec name="OMX.google.alac.decoder" type="audio/alac" />
-        <MediaCodec name="OMX.google.wma.decoder" type="audio/wma" />
-        <MediaCodec name="OMX.google.wmapro.decoder" type="audio/wmapro" />
         <MediaCodec name="OMX.google.ape.decoder" type="audio/ape" />
-        <MediaCodec name="OMX.google.truehd.decoder" type="audio/truehd" />
         <MediaCodec name="OMX.google.raw.decoder" type="audio/raw" />
-        <MediaCodec name="OMX.google.dtshd.decoder" type="audio/dtshd" />
-        <MediaCodec name="OMX.amlogic.audio.decoder.ac3" type="audio/ac3" />
-        <MediaCodec name="OMX.amlogic.audio.decoder.eac3" type="audio/eac3" />
-        <MediaCodec name="OMX.google.opus.decoder" type="audio/opus">
+	<MediaCodec name="OMX.amlogic.audio.decoder.ac3" type="audio/ac3" />
+	<MediaCodec name="OMX.amlogic.audio.decoder.eac3" type="audio/eac3" />
+	<MediaCodec name="OMX.google.opus.decoder" type="audio/opus">
             <Limit name="channel-count" max="8" />
             <Limit name="sample-rate" ranges="48000" />
             <Limit name="bitrate" range="6000-510000" />

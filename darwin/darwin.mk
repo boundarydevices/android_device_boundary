@@ -38,8 +38,12 @@ $(call inherit-product, device/amlogic/common/tuner/tuner.mk)
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/amlogic/darwin/device-vendor.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
-
-#TARGET_WITH_MEDIA_EXT_LEVEL := 3
+#########################################################################
+#
+#                                               Media extension
+#
+#########################################################################
+TARGET_WITH_MEDIA_EXT_LEVEL := 3
 
 #########################################################################
 #
@@ -48,7 +52,7 @@ $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 #########################################################################
 ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 1)
     TARGET_WITH_MEDIA_EXT :=true
-    TARGET_WITH_SWCODEC_EXT :=true
+    TARGET_WITH_SWCODEC_EXT := true
 else
 ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 2)
     TARGET_WITH_MEDIA_EXT :=true
@@ -58,7 +62,7 @@ ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
     TARGET_WITH_MEDIA_EXT :=true
     TARGET_WITH_SWCODEC_EXT := true
     TARGET_WITH_CODEC_EXT := true
-    TARGET_WITH_PLAYERS_EXT :=true
+#    TARGET_WITH_PLAYERS_EXT :=true
 endif
 endif
 endif
@@ -276,7 +280,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml
 endif
-
 
 
 #########################################################################
