@@ -205,6 +205,9 @@ on boot
     chmod 0666 /dev/dvb0.dvr0
     chmod 0666 /dev/dvb0.dvr1
     chmod 0666 /dev/dvb0.dvr2
+    write /sys/module/stream_input/parameters/def_vstreambuf_sizeM 10
+    write /sys/module/stream_input/parameters/def_4k_vstreambuf_sizeM 15
+
 
     chown media system /dev/dvb0.frontend0
     chown media system /dev/dvb0.demux0
