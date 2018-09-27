@@ -42,12 +42,9 @@ PRODUCT_PACKAGES += \
 #    $(TARGET_PRODUCT_DIR)/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf
 
 #arm audio decoder lib
-soft_adec_libs := $(shell ls hardware/amlogic/LibAudio/amadec/acodec_lib_android_n)
-PRODUCT_COPY_FILES += $(foreach file, $(soft_adec_libs), \
-        hardware/amlogic/LibAudio/amadec/acodec_lib_android_n/$(file):$(TARGET_COPY_OUT_VENDOR)/lib/$(file))
-
-#audio data ko
-PRODUCT_COPY_FILES += device/amlogic/common/audio/audio_data.ko:$(PRODUCT_OUT)/obj/lib_vendor/audio_data.ko
+#soft_adec_libs := $(shell ls hardware/amlogic/LibAudio/amadec/acodec_lib_android_n)
+#PRODUCT_COPY_FILES += $(foreach file, $(soft_adec_libs), \
+#        hardware/amlogic/LibAudio/amadec/acodec_lib_android_n/$(file):$(TARGET_COPY_OUT_VENDOR)/lib/$(file))
 
 #configurable audio policy
 USE_XML_AUDIO_POLICY_CONF := 1
