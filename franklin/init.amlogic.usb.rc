@@ -8,7 +8,7 @@ on boot
     write /config/usb_gadget/g1/bcdUSB 0x0200
     mkdir /config/usb_gadget/g1/strings/0x409 0770
     write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno}
-    write /config/usb_gadget/g1/strings/0x409/manufacturer amlogic
+    write /config/usb_gadget/g1/strings/0x409/manufacturer droidlogic
     write /config/usb_gadget/g1/strings/0x409/product franklin
     mkdir /config/usb_gadget/g1/functions/ffs.adb
     mkdir /config/usb_gadget/g1/functions/mtp.gs0
