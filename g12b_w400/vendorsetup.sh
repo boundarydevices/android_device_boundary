@@ -1,0 +1,3 @@
+add_lunch_combo g12b_w400-eng
+add_lunch_combo g12b_w400-user
+add_lunch_combo g12b_w400-userdebug
