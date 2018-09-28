@@ -23,8 +23,8 @@ make -C common O=../$KERNEL_OUT ARCH=arm64 -j6 CROSS_COMPILE=$PREFIX_CROSS_COMPI
 cp $KERNEL_OUT/arch/arm64/boot/Image.gz out/target/product/galilei/kernel
 
 if [ "$2" != "m" ]; then
-    make -C common O=../$KERNEL_OUT g12a_s905d2_u200.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE
-    make -C common O=../$KERNEL_OUT g12a_s905d2_u200.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE
+    make -C common O=../$KERNEL_OUT g12b_a311d_w400.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE
+    make -C common O=../$KERNEL_OUT g12b_a311d_w400.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE
     $DTBTOOL -o out/target/product/galilei/dtb.img -p $KERNEL_OUT/scripts/dtc/ $KERNEL_OUT/arch/arm64/boot/dts/amlogic/
 fi
 

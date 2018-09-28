@@ -36,12 +36,9 @@ $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/amlogic/common/products/mbox/product_mbox.mk)
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
-#########################################################################
-#
-#                                               Media extension
-#
-#########################################################################
+
 TARGET_WITH_MEDIA_EXT_LEVEL := 3
+
 #########################################################################
 #
 #                     media ext
@@ -49,7 +46,7 @@ TARGET_WITH_MEDIA_EXT_LEVEL := 3
 #########################################################################
 ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 1)
     TARGET_WITH_MEDIA_EXT :=true
-    TARGET_WITH_SWCODEC_EXT := true
+    TARGET_WITH_SWCODEC_EXT :=true
 else
 ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 2)
     TARGET_WITH_MEDIA_EXT :=true
@@ -59,11 +56,10 @@ ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
     TARGET_WITH_MEDIA_EXT :=true
     TARGET_WITH_SWCODEC_EXT := true
     TARGET_WITH_CODEC_EXT := true
-#    TARGET_WITH_PLAYERS_EXT :=true
+    TARGET_WITH_PLAYERS_EXT :=true
 endif
 endif
 endif
-
 # galilei:
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.hdmi.device_type=4 \
@@ -71,14 +67,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_NAME := galilei
 PRODUCT_DEVICE := galilei
-PRODUCT_BRAND := Droidlogic
+PRODUCT_BRAND := Android
 PRODUCT_MODEL := galilei
-PRODUCT_MANUFACTURER := Droidlogic
+PRODUCT_MANUFACTURER := Android
 
 TARGET_KERNEL_BUILT_FROM_SOURCE := true
 
 PRODUCT_TYPE := mbox
 
+BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 WITH_LIBPLAYER_MODULE := false
 
 OTA_UP_PART_NUM_CHANGED := true
@@ -147,8 +144,8 @@ endif
 
 #########Support compiling out encrypted zip/aml_upgrade_package.img directly
 #PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY := true
-PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/g12a_u200_v1/aml-user-key.sig
-PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./bootloader/uboot-repo/fip/g12a/aml_encrypt_g12a
+PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/g12b_w400_v1/aml-user-key.sig
+PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./bootloader/uboot-repo/fip/g12b/aml_encrypt_g12b
 PRODUCT_AML_SECUREBOOT_SIGNBOOTLOADER := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --bootsig \
 						--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY) \
 						--aeskey enable
@@ -187,7 +184,6 @@ endif
 #                                                Dm-Verity
 #
 #########################################################################
-#BUILD_WITH_DM_VERITY := true
 #TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL := true
 ifeq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL), true)
 BUILD_WITH_DM_VERITY := true
@@ -208,6 +204,7 @@ PRODUCT_COPY_FILES += \
 #
 #########################################################################
 
+#MULTI_WIFI_SUPPORT := true
 WIFI_MODULE := AP6398
 WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
@@ -291,7 +288,6 @@ BUILD_WITH_VIEWRIGHT_STB := false
 #########################################################################
 
 
-
 #DRM Widevine
 ifeq ($(BOARD_WIDEVINE_OEMCRYPTO_LEVEL),)
 BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 3
@@ -299,7 +295,7 @@ endif
 
 ifeq ($(BOARD_WIDEVINE_OEMCRYPTO_LEVEL), 1)
 TARGET_USE_OPTEEOS := true
-TARGET_ENABLE_TA_SIGN := false
+TARGET_ENABLE_TA_SIGN := true
 TARGET_USE_HW_KEYMASTER := true
 endif
 
@@ -325,7 +321,7 @@ PRODUCT_LOCALES := en_US en_AU en_IN fr_FR it_IT es_ES et_EE de_DE nl_NL cs_CZ p
 #
 #################################################################################
 #ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
-#BUILD_WITH_PPPOE := false
+#BUILD_WITH_PPPOE := true
 #endif
 
 ifeq ($(BUILD_WITH_PPPOE),true)
@@ -388,7 +384,7 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-service
 endif
 
-include device/amlogic/common/gpu/dvalin-user-arm64.mk
+include device/amlogic/common/gpu/gondul-user-arm64.mk
 
 #########################################################################
 #

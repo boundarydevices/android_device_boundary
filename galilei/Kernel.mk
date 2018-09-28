@@ -1,6 +1,10 @@
 #if use probuilt kernel or build kernel from source code
+-include device/amlogic/common/media_modules.mk
+-include device/amlogic/common/wifi_modules.mk
 KERNEL_ROOTDIR := common
 KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
+USE_PREBUILT_KERNEL := false
+WIFI_MODULE := multiwifi
 
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
@@ -46,14 +50,11 @@ $(INSTALLED_2NDBOOTLOADER_TARGET): $(INSTALLED_BOARDDTB_TARGET) | $(ACP)
 
 else
 
--include device/amlogic/common/gpu/dvalin-kernel.mk
--include device/amlogic/common/media_modules.mk
--include device/amlogic/common/wifi_modules.mk
-KERNEL_DEVICETREE := g12a_s905d2_u200_1g
+KERNEL_DEVICETREE := g12b_a311d_w400
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
-WIFI_MODULE := multiwifi
+
 
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
@@ -71,6 +72,8 @@ WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
 PREFIX_CROSS_COMPILE=/opt/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 
+KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
+
 define cp-modules
 	mkdir -p $(PRODUCT_OUT)/root/boot
 	mkdir -p $(KERNEL_KO_OUT)
@@ -87,6 +90,10 @@ $(KERNEL_OUT):
 
 $(KERNEL_CONFIG): $(KERNEL_OUT)
 	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(KERNEL_DEFCONFIG)
+
+BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
+
+INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
 
 $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(INSTALLED_BOARDDTB_TARGET)
 	@echo "make Image"
@@ -126,6 +133,8 @@ $(INSTALLED_2NDBOOTLOADER_TARGET): $(PRODUCT_OUT)/dt.img | $(ACP)
 $(INSTALLED_KERNEL_TARGET): $(INTERMEDIATES_KERNEL) | $(ACP)
 	@echo "Kernel installed"
 	$(transform-prebuilt-to-target)
+
+-include device/amlogic/common/gpu/gondul-kernel.mk
 
 $(BOARD_VENDOR_KERNEL_MODULES): $(INSTALLED_KERNEL_TARGET)
 	@echo "BOARD_VENDOR_KERNEL_MODULES: $(BOARD_VENDOR_KERNEL_MODULES)"
