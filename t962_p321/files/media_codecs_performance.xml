@@ -92,5 +92,11 @@
             <Limit name="measured-frame-rate-640x360" range="115-115" />
             <Limit name="measured-frame-rate-1280x720" range="49-49" />
         </MediaCodec>
+	<MediaCodec name="OMX.amlogic.vp8.decoder.sw" type="video/x-vnd.on2.vp8" update="true">
+            <Limit name="measured-frame-rate-320x180" range="676-676" />
+            <Limit name="measured-frame-rate-640x360" range="130-130" />
+            <Limit name="measured-frame-rate-1280x720" range="93-93" />
+            <Limit name="measured-frame-rate-1920x1080" range="42-42" />
+        </MediaCodec>
     </Decoders>
 </MediaCodecs>

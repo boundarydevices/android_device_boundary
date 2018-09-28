@@ -56,7 +56,6 @@ else
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
 endif
-
 ifeq ($(TARGET_WITH_MEDIA_EXT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/media_codecs_ext.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_ext.xml
