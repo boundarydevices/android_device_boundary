@@ -196,12 +196,12 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.google.raw.decoder" type="audio/raw" />
 	<MediaCodec name="OMX.amlogic.audio.decoder.ac3" type="audio/ac3" />
 	<MediaCodec name="OMX.amlogic.audio.decoder.eac3" type="audio/eac3" />
+        <MediaCodec name="OMX.amlogic.audio.decoder.dtshd" type="audio/dtshd" />
 	<MediaCodec name="OMX.google.opus.decoder" type="audio/opus">
             <Limit name="channel-count" max="8" />
             <Limit name="sample-rate" ranges="48000" />
             <Limit name="bitrate" range="6000-510000" />
         </MediaCodec>
-        <MediaCodec name="OMX.google.flac.decoder" type="audio/flac" />
 
         <MediaCodec name="OMX.google.mpeg4.decoder" type="video/mp4v-es" />
         <MediaCodec name="OMX.google.h263.decoder" type="video/3gpp" />
@@ -263,14 +263,6 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.google.aac.encoder" type="audio/mp4a-latm" />
         <MediaCodec name="OMX.google.flac.encoder" type="audio/flac" />
 
-        <MediaCodec name="OMX.amlogic.video.encoder.hevc" type="video/hevc" >
-            <Limit name="size" min="352x288" max="1920x1088" />
-            <Limit name="alignment" value="16x16" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="blocks-per-second" min="1" max="244800" />
-            <Limit name="bitrate" range="1-10000000" />
-            <Limit name="concurrent-instances" max="1" />
-        </MediaCodec>
         <MediaCodec name="OMX.amlogic.video.encoder.avc" type="video/avc" >
             <Limit name="size" min="64x64" max="1920x1088" />
             <Limit name="alignment" value="16x16" />

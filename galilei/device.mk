@@ -30,6 +30,7 @@ endif
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
     device/amlogic/$(PRODUCT_DIR)/files/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
     device/amlogic/$(PRODUCT_DIR)/files/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     device/amlogic/$(PRODUCT_DIR)/files/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
     device/amlogic/$(PRODUCT_DIR)/files/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
@@ -59,6 +60,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/recovery/init.recovery.amlogic.rc:root/init.recovery.amlogic.rc \
     device/amlogic/$(PRODUCT_DIR)/recovery/recovery.kl:recovery/root/etc/recovery.kl \
     device/amlogic/$(PRODUCT_DIR)/files/mesondisplay.cfg:recovery/root/etc/mesondisplay.cfg \
+    device/amlogic/$(PRODUCT_DIR)/recovery/busybox:recovery/root/sbin/busybox \
     device/amlogic/$(PRODUCT_DIR)/recovery/remotecfg:recovery/root/sbin/remotecfg \
     device/amlogic/$(PRODUCT_DIR)/files/remote.cfg:recovery/root/etc/remote.cfg \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab1:recovery/root/etc/remote.tab1 \
@@ -68,8 +70,7 @@ PRODUCT_COPY_FILES += \
 
 # remote IME config file
 PRODUCT_COPY_FILES += \
-    device/amlogic/common/products/mbox/Vendor_0001_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl \
-    device/amlogic/common/products/mbox/Vendor_1915_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_1915_Product_0001.kl
+    device/amlogic/common/products/mbox/Vendor_0001_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/Generic.kl:/$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
@@ -77,11 +78,16 @@ else
 PRODUCT_COPY_FILES += \
     device/amlogic/common/Generic.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl
 endif
+
 PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_CHARACTERISTICS := mbx,nosdcard
 
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+DEVICE_PACKAGE_OVERLAYS := \
+    device/amlogic/$(PRODUCT_DIR)/overlay
+endif
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 

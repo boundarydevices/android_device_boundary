@@ -23,8 +23,8 @@ fi
 make -C common O=../$KERNEL_OUT ARCH=arm64 -j6 CROSS_COMPILE=$PREFIX_CROSS_COMPILE modules Image.gz
 
 if [ "$2" != "m" ]; then
-    make -C common O=../$KERNEL_OUT g12a_s905d2_u200.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE PARTITION_DTSI=partition_mbox.dtsi
-    make -C common O=../$KERNEL_OUT g12a_s905d2_u200.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE PARTITION_DTSI=partition_mbox.dtsi
+    make -C common O=../$KERNEL_OUT g12b_a311d_w400.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE PARTITION_DTSI=partition_mbox.dtsi
+    make -C common O=../$KERNEL_OUT g12b_a311d_w400.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE PARTITION_DTSI=partition_mbox.dtsi
 fi
 
 if [ "$2" != "m" ]; then

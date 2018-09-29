@@ -33,6 +33,12 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.camera.preview.LimitedRate=1920x1080x30,1280x720x30,640x480x30,320x240x28 \
     ro.camera.preview.UseMJPEG=1
 
+#for bt auto connect
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.autoconnectbt.isneed=false \
+    ro.autoconnectbt.macprefix=00:CD:FF \
+    ro.autoconnectbt.btclass=50c \
+    ro.autoconnectbt.nameprefix=Amlogic_RC
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.radio.noril=false
@@ -53,7 +59,6 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #only for netflix,just disable the feature.so set the prop to true
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.platform.disable.audiorawout=false
-
 #Dolby DD+ decoder option
 #this prop to for videoplayer display the DD+/DD icon when playback
 PRODUCT_PROPERTY_OVERRIDES +=  \
@@ -65,7 +70,8 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.platform.support.dts=true
 
 #DTS-HD support prop
-#ro.platform.support.dtstrans=true
+#PRODUCT_PROPERTY_OVERRIDES += \
+    #ro.platform.support.dtstrans=true \
 #ro.platform.support.dtsmulasset=true
 #DTS-HD prop end
 # Enable player buildin
@@ -111,7 +117,8 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.audio.mapvalue=0,0,0,0
 
 #By default, primary storage is physical
-#ro.vold.primary_physical=true
+PRODUCT_PROPERTY_OVERRIDES += \
+    #ro.vold.primary_physical=true
 #Support storage visible to apps
 PRODUCT_PROPERTY_OVERRIDES +=  \
     persist.fw.force_adoptable=true
@@ -140,7 +147,3 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 PRODUCT_PROPERTY_OVERRIDES +=  \
     osd.afbcd.enable=1 \
     sys.sf.debug.nohwc=true
-
-# crypto volume
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    ro.crypto.volume.filenames_mode=aes-256-cts
