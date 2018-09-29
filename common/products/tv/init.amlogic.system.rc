@@ -276,7 +276,7 @@ on boot
     chown system system /sys/class/amhdmitx/amhdmitx0/cec_lang_config
     chown system system /sys/class/amhdmitx/amhdmitx0/config
     chown system system /sys/class/amhdmitx/amhdmitx0/avmute
-    chmod 0664 /sys/class/amhdmitx/amhdmitx0/avmute
+    chmod 0666 /sys/class/amhdmitx/amhdmitx0/avmute
     chown mediadrm audio /sys/class/amhdmitx/amhdmitx0/aud_output_chs
     chown media system /sys/class/switch/hdmi/state
     chmod 0660 /sys/class/switch/hdmi/state
@@ -429,6 +429,14 @@ service hdcp_rx22 /vendor/bin/hdcp_rx22 \
     disabled
     oneshot
     seclabel u:r:hdcp_rx22:s0
+
+service hdcp_rp22 /vendor/bin/hdcp_rp22 \
+    /vendor/etc/firmware/hdcp_rp22/firmware_rprx.le \
+    /vendor/etc/firmware/hdcp_rp22/firmware_rptx.le
+    class main
+    disabled
+    oneshot
+    seclabel u:r:hdcp_rp22:s0
 
 #service ddrtest /vendor/bin/ddrtest.sh
 #    class main
