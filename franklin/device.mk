@@ -26,6 +26,13 @@ else
 PRODUCT_COPY_FILES += \
     device/amlogic/common/products/mbox/ueventd.amlogic.rc:recovery/root/ueventd.amlogic.rc
 endif
+# DRM HAL
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl:32 \
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.1-service.widevine \
+    android.hardware.drm@1.1-service.clearkey \
+    move_widevine_data.sh
 
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
@@ -93,7 +100,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 
 # setup dalvik vm configs.
-$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
 
 # set default USB configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

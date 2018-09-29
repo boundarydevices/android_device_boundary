@@ -91,7 +91,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.wfd.videoresolution-group=0 \
     media.wfd.videoframerate=24 \
     media.wfd.video-bitrate=2000000 \
-    media.html5videowin.enable=1
+    media.html5videowin.enable=1 \
+    media.decoder.vfm.defmap=decoder ppmgr deinterlace amvideo \
+    media.decoder.vfm.drmmap=decoder amvideo
 
 
 #add for video boot, 1 means use video boot, others not .
@@ -105,6 +107,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #used forward seek for libplayer
 PRODUCT_PROPERTY_OVERRIDES += \
     media.libplayer.seek.fwdsearch=1
+#set memory upper limit for extractor process
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.media.maxmem=629145600
 
 #fix hls sync
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -147,3 +152,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     osd.afbcd.enable=1 \
     sys.sf.debug.nohwc=true
+
+# low memory for 1G
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.low_ram=true
+
+# crypto volume
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.volume.filenames_mode=aes-256-cts
+
+# JIT config
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.jit.codecachesize=0
+
+# hwui
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hwui.texture_cache_size=40.5f \
+    ro.hwui.layer_cache_size=33.75f
+

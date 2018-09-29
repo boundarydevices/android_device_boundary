@@ -1,4 +1,4 @@
-# Copyright (C) 2011 Amlogic Inc
+# Copyright (C) 2018 Amlogic Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,6 +67,7 @@ endif
 # franklin:
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.hdmi.device_type=4 \
+        ro.hdmi.set_menu_language=true \
         persist.sys.hdmi.keep_awake=false
 
 PRODUCT_NAME := franklin
@@ -86,6 +87,7 @@ WITH_LIBPLAYER_MODULE := false
 
 OTA_UP_PART_NUM_CHANGED := true
 
+BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 #AB_OTA_UPDATER :=true
 BUILD_WITH_AVB := true
 
@@ -296,7 +298,7 @@ endif
 
 ifeq ($(BOARD_WIDEVINE_OEMCRYPTO_LEVEL), 1)
 TARGET_USE_OPTEEOS := true
-TARGET_ENABLE_TA_SIGN := false
+TARGET_ENABLE_TA_SIGN := true
 TARGET_USE_HW_KEYMASTER := true
 endif
 
