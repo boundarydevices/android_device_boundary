@@ -81,8 +81,12 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/PQ/pq_default.ini:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq_default.ini
 
 #t962x_r311 local dimming algorithm
+ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
-    device/amlogic/$(PRODUCT_DIR)/files/tv/ldim_alg.ko:$(PRODUCT_OUT)/obj/lib_vendor/ldim_alg.ko
+    device/amlogic/$(PRODUCT_DIR)/files/tv/ldim_alg_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/ldim_alg.ko
+else
+    device/amlogic/$(PRODUCT_DIR)/files/tv/ldim_alg_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/ldim_alg.ko
+endif
 
 #DNLP ko
 ifeq ($(KERNEL_A32_SUPPORT), true)
