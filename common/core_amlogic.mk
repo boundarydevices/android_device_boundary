@@ -91,9 +91,6 @@ PRODUCT_COPY_FILES += \
         frameworks/av/media/libeffects/data/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf
 
 PRODUCT_COPY_FILES += \
-    device/amlogic/common/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
-
-PRODUCT_COPY_FILES += \
         device/amlogic/common/ddr/ddr_window_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/ddr_window_64.ko
 
 PRODUCT_PROPERTY_OVERRIDES += \
