@@ -249,7 +249,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="block-size" value="16x16" />
             <Limit name="blocks-per-second" min="1" max="244800" />
             <Limit name="bitrate" range="1-20000000" />
-            <Limit name="concurrent-instances" max="2" />
+            <Limit name="concurrent-instances" max="3" />
         </MediaCodec>
         <MediaCodec name="OMX.google.mpeg4.encoder" type="video/mp4v-es" >
             <Limit name="size" min="176x144" max="640x480" />
