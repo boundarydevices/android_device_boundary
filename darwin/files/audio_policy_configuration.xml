@@ -47,6 +47,7 @@
         <module name="primary" halVersion="3.0">
             <attachedDevices>
                 <item>Speaker</item>
+                <item>Spdif</item>
                 <item>Built-In Mic</item>
                 <item>Built-In Back Mic</item>
                 <item>Spdif In</item>
