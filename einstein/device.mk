@@ -85,6 +85,7 @@ ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/tv/ldim_alg_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/ldim_alg.ko
 else
+PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/tv/ldim_alg_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/ldim_alg.ko
 endif
 
