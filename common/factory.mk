@@ -18,6 +18,10 @@ ifneq ($(AB_OTA_UPDATER),true)
 BUILT_IMAGES += cache.img
 endif
 
+ifdef BOARD_PREBUILT_DTBOIMAGE
+BUILT_IMAGES += dtbo.img
+endif
+
 BUILT_IMAGES += vendor.img
 ifeq ($(BOARD_USES_ODMIMAGE),true)
 BUILT_IMAGES += odm.img
@@ -85,6 +89,9 @@ endif
 ifdef KERNEL_DEVICETREE
 DTBTOOL := $(BOARD_AML_VENDOR_PATH)/tools/dtbTool
 
+DTCTOOL := out/host/linux-x86/bin/dtc
+DTIMGTOOL := out/host/linux-x86/bin/mkdtimg
+
 ifdef KERNEL_DEVICETREE_CUSTOMER_DIR
 KERNEL_DEVICETREE_DIR := $(KERNEL_DEVICETREE_CUSTOMER_DIR)
 else
@@ -116,7 +123,7 @@ ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	INSTALLED_BOARDDTB_TARGET := $(INSTALLED_BOARDDTB_TARGET).encrypt
 endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
-$(INSTALLED_BOARDDTB_TARGET) : $(KERNEL_DEVICETREE_SRC) $(INSTALLED_KERNEL_TARGET)
+$(INSTALLED_BOARDDTB_TARGET) : $(KERNEL_DEVICETREE_SRC) $(INSTALLED_KERNEL_TARGET) $(DTCTOOL) $(DTIMGTOOL)
 	$(foreach aDts, $(KERNEL_DEVICETREE), \
 		sed -i 's/^#include \"partition_.*/#include \"$(TARGET_PARTITION_DTSI)\"/' $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(strip $(aDts)).dts; \
 		sed -i 's/^#include \"firmware_.*/#include \"$(TARGET_FIRMWARE_DTSI)\"/' $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(TARGET_PARTITION_DTSI); \
@@ -132,6 +139,9 @@ else# elif dts num == 1
 endif
 	$(hide) $(call aml-secureboot-sign-bin, $@)
 	@echo "Instaled $@"
+	$(DTCTOOL) -@ -O dtb -o $(PRODUCT_OUT)/$(DTBO_DEVICETREE).dtbo $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(DTBO_DEVICETREE).dts
+	$(DTIMGTOOL) create $(PRODUCT_OUT)/dtbo.img $(PRODUCT_OUT)/$(DTBO_DEVICETREE).dtbo
+	@echo "Instaled $@"
 ifeq ($(BOARD_AVB_ENABLE),true)
 	cp $@ $(INSTALLED_AVB_DTBIMAGE_TARGET)
 	$(AVBTOOL) add_hash_footer \
@@ -140,8 +150,15 @@ ifeq ($(BOARD_AVB_ENABLE),true)
 	  --partition_name dtb
 endif
 
+$(BOARD_PREBUILT_DTBOIMAGE): $(INSTALLED_BOARDDTB_TARGET)
+	cp $(PRODUCT_OUT)/dtbo.img $@
+	@echo "Instaled $@"
+
 .PHONY: dtbimage
 dtbimage: $(INSTALLED_BOARDDTB_TARGET)
+
+.PHONY: dtboimage
+dtboimage: $(INSTALLED_DTBOIMAGE_TARGET)
 
 endif # ifdef KERNEL_DEVICETREE
 
@@ -359,6 +376,10 @@ FASTBOOT_IMAGES += vendor.img dt.img
 
 ifeq ($(BOARD_USES_PRODUCTIMAGE),true)
 FASTBOOT_IMAGES += product.img
+endif
+
+ifdef BOARD_PREBUILT_DTBOIMAGE
+FASTBOOT_IMAGES += dtbo.img
 endif
 
 ifeq ($(BUILD_WITH_AVB),true)

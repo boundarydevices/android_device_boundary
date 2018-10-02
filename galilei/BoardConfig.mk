@@ -105,6 +105,12 @@ BOARD_ODMIMAGE_PARTITION_SIZE := 134217728
 BOARD_PRODUCTIMAGE_PARTITION_SIZE := 134217728
 endif
 
+# DTBO partition definitions
+BOARD_PREBUILT_DTBOIMAGE := device/amlogic/galilei-kernel/dtbo.img
+BOARD_DTBOIMG_PARTITION_SIZE := 8388608
+
+BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=0
+
 ifneq ($(USE_USB_AS_HOST),true)
 BOARD_KERNEL_CMDLINE += --cmdline "otg_device=1"
 endif
@@ -161,3 +167,5 @@ DEVICE_MANIFEST_FILE := device/amlogic/$(PRODUCT_DIR)/manifest.xml
 #DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml
 
 BOARD_VNDK_VERSION := current
+BOARD_BOOTIMG_HEADER_VERSION := 1
+BOARD_INCLUDE_RECOVERY_DTBO := true

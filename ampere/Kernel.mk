@@ -4,7 +4,7 @@ KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
 
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
-BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
+BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
 INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
 
@@ -52,6 +52,8 @@ else
 KERNEL_DEVICETREE := gxl_p212_1g
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
+
+DTBO_DEVICETREE := common_overlay_dt
 
 WIFI_MODULE := multiwifi
 

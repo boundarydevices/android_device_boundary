@@ -26,6 +26,7 @@ ping -n 5 127.0.0.1 >nul
 fastboot flashing unlock_critical
 fastboot flashing unlock
 fastboot flash dts dt.img
+fastboot flash dtbo dtbo.img
 fastboot -w
 fastboot erase param
 fastboot flash vbmeta vbmeta.img
