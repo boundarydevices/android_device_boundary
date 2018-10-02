@@ -12,4 +12,7 @@ allow hdmicecd { hdmicecd_hwservice  hidl_base_hwservice }:hwservice_manager { a
 allow hdmicecd cec_device:chr_file { open read write ioctl };
 allow hdmicecd hwservicemanager_prop:file { open read getattr };
 
+allow hdmicecd system_control:binder { call transfer };
+allow hdmicecd systemcontrol_hwservice:hwservice_manager { find };
+
 allow hdmicecd { hal_tv_cec_default system_app }:binder { call transfer };
