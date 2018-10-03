@@ -23,4 +23,7 @@ allow bootvideo property_socket:sock_file write;
 
 allow bootvideo sysfs_xbmc:file { open read write getattr };
 
-set_prop(bootvideo, system_prop)
+#--------------------------------------------------------------------#
+#  product_shipping_api_level=28 vendor/system cannot share prop
+#--------------------------------------------------------------------#
+#set_prop(bootvideo, system_prop)

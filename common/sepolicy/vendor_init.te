@@ -19,6 +19,8 @@ allow vendor_init self:capability sys_module;
 allow vendor_init proc:file write;
 allow vendor_init unlabeled:dir search;
 
+allow vendor_init ffs_prop:property_service set;
+set_prop(vendor_init, vendor_platform_prop)
 # optee
 allow vendor_init drm_device:chr_file setattr;
 

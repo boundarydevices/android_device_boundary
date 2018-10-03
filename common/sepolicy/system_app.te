@@ -46,8 +46,15 @@ allow system_app sysfs_display:dir search;
 allow system_app sysfs_display:dir search;
 allow system_app sysfs_display:file { read write open getattr };
 
+#--------------------------------------------------------------------#
+#  product_shipping_api_level=28 vendor/system cannot share prop
+#--------------------------------------------------------------------#
 get_prop(system_app, tv_prop)
-set_prop(system_app, media_prop)
+#set_prop(system_app, media_prop)
+get_prop(system_app, media_prop)
+#set_prop(system_app, netflix_prop)
+get_prop(system_app, netflix_prop)
+
 allow system_app vbi_device:chr_file { read write open ioctl };
 allow system_app vendor_file:file r_file_perms;
 allow system_app sysfs_video:dir { search };

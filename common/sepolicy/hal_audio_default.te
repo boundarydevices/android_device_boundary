@@ -12,8 +12,12 @@ allow hal_audio_default sysfs_xbmc:file { read open write };
 allow hal_audio_default hidraw_device:chr_file { create read write open ioctl};
 allow hal_audio_default property_socket:sock_file { write };
 allow hal_audio_default init:unix_stream_socket { connectto };
-allow hal_audio_default bluetooth_prop:property_service { set };
-allow hal_audio_default bluetooth_prop:file { read getattr open };
+
+#--------------------------------------------------------------------#
+#  product_shipping_api_level=28 vendor/system cannot share prop
+#--------------------------------------------------------------------#
+#s/get_prop(hal_audio_default, bluetooth_prop)
+
 allow hal_audio_default sysfs_aud_output_chs:file { open read write };
 allow hal_audio_default sysfs_aud_output_chs:file { read write open };
 allow hal_audio_default remotecontrol_hwservice:hwservice_manager find;

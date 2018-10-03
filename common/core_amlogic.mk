@@ -464,8 +464,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.disable_triple_buffer=1
 
 # ro.product.first_api_level indicates the first api level the device has commercially launched on.
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.first_api_level=26
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.product.first_api_level=26
 
 PRODUCT_PACKAGES += \
     vndk-sp

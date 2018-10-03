@@ -164,6 +164,9 @@ WITH_DEXPREOPT := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
+PRODUCT_SHIPPING_API_LEVEL := 28
+TARGET_USES_MKE2FS := true
+
 DEVICE_MANIFEST_FILE := device/amlogic/$(PRODUCT_DIR)/manifest.xml
 #DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml
 

@@ -34,18 +34,15 @@ allow system_control mnt_vendor_file:dir { search read open remove_name rmdir };
 allow system_control mnt_vendor_file:file { setattr getattr lock unlink };
 
 # Property Service write
-set_prop(system_control, system_prop)
-set_prop(system_control, dhcp_prop)
-set_prop(system_control, net_radio_prop)
-set_prop(system_control, system_radio_prop)
-set_prop(system_control, debug_prop)
-set_prop(system_control, powerctl_prop)
-
+#--------------------------------------------------------------------#
+#  product_shipping_api_level=28 vendor/system cannot share prop
+#--------------------------------------------------------------------#
 get_prop(system_control, tv_config_prop)
 get_prop(system_control, bcmdl_prop)
 get_prop(system_control, safemode_prop)
 get_prop(system_control, mmc_prop)
 get_prop(system_control, device_logging_prop)
+get_prop(system_control, vendor_platform_prop)
 
 set_prop(system_control, media_prop)
 get_prop(system_control, media_prop)
@@ -55,12 +52,16 @@ get_prop(system_control, uboot_prop)
 set_prop(system_control, tv_prop)
 get_prop(system_control, tv_prop)
 
-get_prop(system_control, wifi_prop)
+set_prop(system_control, vendor_persist_prop)
+get_prop(system_control, vendor_persist_prop)
+
+set_prop(system_control, netflix_prop)
+get_prop(system_control, netflix_prop)
+
+#get_prop(system_control, wifi_prop)
 set_prop(system_control, boottime_prop)
 get_prop(system_control, boottime_prop)
 
-#get_prop(system_control, firstboot_prop)
-#get_prop(system_control, serialno_prop)
 set_prop(system_control, overlay_prop)
 get_prop(system_control, overlay_prop)
 set_prop(system_control, net_dns_prop)
@@ -70,9 +71,8 @@ get_prop(system_control, logpersistd_logging_prop)
 set_prop(system_control, hwservicemanager_prop)
 get_prop(system_control, hwservicemanager_prop)
 set_prop(system_control, dumpstate_options_prop)
-get_prop(system_control, dumpstate_options_prop)
-set_prop(system_control, bluetooth_prop)
-get_prop(system_control, bluetooth_prop)
+#set_prop(system_control, bluetooth_prop)
+#get_prop(system_control, bluetooth_prop)
 
 set_prop(system_control, persistent_properties_ready_prop)
 get_prop(system_control, persistent_properties_ready_prop)

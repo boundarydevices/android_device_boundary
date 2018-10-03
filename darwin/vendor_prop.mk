@@ -19,11 +19,11 @@
 
 # Set display related config
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.has.mbxuimode=true \
-    ro.platform.has.tvuimode=true \
-    ro.platform.customize_tvsetting=true \
-    ro.platform.has.realoutputmode=true \
-    ro.platform.need.display.hdmicec=true
+    ro.vendor.platform.has.mbxuimode=true \
+    ro.vendor.platform.has.tvuimode=true \
+    ro.vendor.platform.customize_tvsetting=true \
+    ro.vendor.platform.has.realoutputmode=true \
+    ro.vendor.platform.need.display.hdmicec=true
 
 #camera max to 720p
 #PRODUCT_PROPERTY_OVERRIDES += \
@@ -57,20 +57,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #Note,please do not set the prop to true by default
 #only for netflix,just disable the feature.so set the prop to true
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.disable.audiorawout=false
+    ro.vendor.platform.disable.audiorawout=false
 
 #Dolby DD+ decoder option
 #this prop to for videoplayer display the DD+/DD icon when playback
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.support.dolby=true
+    ro.vendor.platform.support.dolby=true
 #DTS decoder option
 #display dts icon when playback
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.support.dts=true
+    ro.vendor.platform.support.dts=true
 #DTS-HD support prop
 #PRODUCT_PROPERTY_OVERRIDES += \
-    #ro.platform.support.dtstrans=true \
-    #ro.platform.support.dtsmulasset=true
+    #ro.vendor.platform.support.dtstrans=true \
+    #ro.vendor.platform.support.dtsmulasset=true
 #DTS-HD prop end
 # Enable player buildin
 
@@ -95,7 +95,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #platform support dolby vision
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.support.dolbyvision=true
+    ro.vendor.platform.support.dolbyvision=true
 
 #add for video boot, 1 means use video boot, others not .
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -155,7 +155,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 
 #this property is used for Android TV audio
 PRODUCT_PROPERTY_OVERRIDES +=  \
-    ro.platform.is.tv=1
+    ro.vendor.platform.is.tv=1
 
 #this property is used for timeshift
 PRODUCT_PROPERTY_OVERRIDES +=  \

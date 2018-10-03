@@ -361,7 +361,7 @@ PRODUCT_PACKAGES += \
     droidlogic.external.pppoe \
     droidlogic.software.pppoe.xml
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.has.pppoe=true
+    ro.vendor.platform.has.pppoe=true
 endif
 
 #################################################################################

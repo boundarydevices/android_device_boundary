@@ -1,4 +1,3 @@
-allow recovery aml_display_prop:property_service set;
 allow recovery input_device:chr_file write;
 allow recovery kmsg_device:chr_file { write open read };
 allow recovery self:netlink_kobject_uevent_socket { create setopt bind read };
@@ -6,7 +5,6 @@ allow recovery sysfs_xbmc:file { read write open };
 allow recovery system_prop:property_service set;
 allow recovery self:capability net_admin;
 
-allow recovery uboot_prop:property_service set;
 allow recovery rootfs:dir create_dir_perms;
 allow recovery sysfs:dir mounton;
 
@@ -20,7 +18,6 @@ allow recovery device:dir rw_dir_perms;
 allow recovery bootloader_device:chr_file rw_file_perms;
 allow recovery defendkey_device:chr_file rw_file_perms;
 allow recovery dtb_device:chr_file { open read write };
-allow recovery aml_display_prop:property_service set;
 allow recovery recovery:capability { net_admin };
 
 allow recovery sysfs_unifykey:dir search;
@@ -32,9 +29,13 @@ allow recovery sysfs_am_vecm:file { open read write };
 allow recovery sysfs_audio_cap:file r_file_perms;
 allow recovery sysfs_cec:file rw_file_perms;
 
-set_prop(recovery, aml_display_prop)
-set_prop(recovery, uboot_prop)
-set_prop(recovery, bluetooth_prop)
+#--------------------------------------------------------------------#
+#  product_shipping_api_level=28 vendor/system cannot share prop
+#--------------------------------------------------------------------#
+#get_prop(recovery, aml_display_prop)
+get_prop(recovery, uboot_prop)
+get_prop(recovery, bluetooth_prop)
+get_prop(recovery, vendor_platform_prop)
 set_prop(recovery, boottime_prop)
 set_prop(recovery, ctl_bootanim_prop)
 
@@ -128,6 +129,13 @@ allow sysfs_display tmpfs:filesystem associate;
 allow recovery sysfs_display:lnk_file { open read write getattr };
 
 allow init reco_file:file { open read create write };
+
+allow recovery aml_display_prop:file { getattr open read };
+allow recovery bluetooth_a2dp_offload_prop:file { getattr open };
+allow recovery exported_audio_prop:file { getattr open };
+allow recovery exported_bluetooth_prop:file { getattr open };
+allow recovery exported_overlay_prop:file { getattr open };
+allow recovery exported_wifi_prop:file { getattr open };
 
 allow shell tmpfs:file {open read getattr};
 allow shell rootfs:file {execute_no_trans};
