@@ -22,7 +22,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.has.mbxuimode=true \
     ro.platform.has.tvuimode=true \
     ro.platform.customize_tvsetting=true \
-    ro.platform.has.realoutputmode=true
+    ro.platform.has.realoutputmode=true \
+    ro.platform.need.display.hdmicec=true
 
 #camera max to 720p
 #PRODUCT_PROPERTY_OVERRIDES += \
