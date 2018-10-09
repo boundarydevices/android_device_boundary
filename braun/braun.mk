@@ -67,6 +67,7 @@ endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.hdmi.device_type=4 \
+        ro.hdmi.set_menu_language=true \
         persist.sys.hdmi.keep_awake=false
 
 PRODUCT_NAME := braun
@@ -87,7 +88,8 @@ BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 
 BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
 
-AB_OTA_UPDATER :=true
+BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
+#AB_OTA_UPDATER :=true
 BUILD_WITH_AVB := true
 
 ifeq ($(BUILD_WITH_AVB),true)
@@ -226,6 +228,7 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 
 BOARD_HAVE_BLUETOOTH := true
 BCMBT_SUPPORT := true
+#MULTI_BLUETOOTH_SUPPORT := true
 BCM_BLUETOOTH_LPM_ENABLE := true
 include device/amlogic/common/bluetooth.mk
 
@@ -298,6 +301,7 @@ endif
 
 ifeq ($(BOARD_WIDEVINE_OEMCRYPTO_LEVEL), 1)
 TARGET_USE_OPTEEOS := true
+TARGET_ENABLE_TA_SIGN := true
 TARGET_USE_HW_KEYMASTER := true
 endif
 
@@ -322,9 +326,9 @@ PRODUCT_LOCALES := en_US en_AU en_IN fr_FR it_IT es_ES et_EE de_DE nl_NL cs_CZ p
 #                                                PPPOE
 #
 #################################################################################
-ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
-#BUILD_WITH_PPPOE := true
-endif
+#ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+#BUILD_WITH_PPPOE := false
+#endif
 
 ifeq ($(BUILD_WITH_PPPOE),true)
 PRODUCT_PACKAGES += \

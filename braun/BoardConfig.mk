@@ -146,7 +146,7 @@ TARGET_RECOVERY_UI_LIB += \
     libsystemcontrol_static
 ifneq ($(AB_OTA_UPDATER),true)
 TARGET_RECOVERY_UPDATER_LIBS := libinstall_amlogic
-TARGET_RECOVERY_UPDATER_EXTRA_LIBS += libenv libsystemcontrol_static
+TARGET_RECOVERY_UPDATER_EXTRA_LIBS += libenv libsystemcontrol_static libsecurity libfdt
 endif
 
 include device/amlogic/common/sepolicy.mk
@@ -158,3 +158,5 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 DEVICE_MANIFEST_FILE := device/amlogic/$(PRODUCT_DIR)/manifest.xml
 #DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml
+
+BOARD_VNDK_VERSION := current
