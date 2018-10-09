@@ -42,9 +42,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.net.pppoe=true
 
-PRODUCT_PROPERTY_OVERRIDES += \
-   ro.platform.support.dolbyvision=true
-
 #the prop is used for enable or disable
 #DD+/DD force output when HDMI EDID is not supported
 #by default,the force output mode is enabled.
