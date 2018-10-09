@@ -173,6 +173,7 @@ PRODUCT_PACKAGES += \
     libjnidtvepgscanner \
     LiveTv \
     libtunertvinput_jni
+endif
 
 PRODUCT_PACKAGES += \
     droidlogic \
