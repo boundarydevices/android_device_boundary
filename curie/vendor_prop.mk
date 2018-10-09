@@ -21,6 +21,7 @@
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.platform.has.mbxuimode=true \
     ro.platform.has.realoutputmode=true \
+    ro.platform.need.display.hdmicec=true \
     ro.platform.support.4k=false \
 
 #camera max to 720p
@@ -36,7 +37,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES +=  \
-    ro.radio.noril=false \
+    ro.radio.noril=false
 
 #if need pppoe
 PRODUCT_PROPERTY_OVERRIDES +=  \

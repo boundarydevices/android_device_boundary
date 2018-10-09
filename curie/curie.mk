@@ -1,4 +1,4 @@
-# Copyright (C) 2011 Amlogic Inc
+# Copyright (C) 2018 Amlogic Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -83,14 +83,15 @@ TARGET_KERNEL_BUILT_FROM_SOURCE := true
 
 PRODUCT_TYPE := mbox
 
-BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
-
-BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
-
 WITH_LIBPLAYER_MODULE := false
 
 OTA_UP_PART_NUM_CHANGED := true
 
+BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
+
+BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
+
+BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 #AB_OTA_UPDATER :=true
 BUILD_WITH_AVB := true
 
