@@ -39,7 +39,7 @@ on init
     chmod 666 /sys/class/vdec/poweron_clock_level
     chmod 666 /sys/module/ionvideo/parameters/freerun_mode
     chown system system /sys/class/graphics/fb0/osd_afbcd
-    write /proc/sys/vm/watermark_scale_factor 150
+    write /proc/sys/vm/watermark_scale_factor 30
     chmod 666 /sys/class/video/blackout_policy
     chmod 666 /sys/class/tsync/vpause_flag
     chmod 0666 /dev/amstream_sub_read
@@ -105,8 +105,6 @@ on boot
     chown bluetooth bluetooth /data/misc/bluetooth
     insmod /vendor/lib/modules/btusb.ko
     mknod btusb0 c 180 194
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
 
     chown system mediadrm /sys/class/amhdmitx/amhdmitx0/aud_ch
     chmod 0664 /sys/class/amhdmitx/amhdmitx0/aud_ch
