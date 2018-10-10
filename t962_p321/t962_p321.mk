@@ -34,7 +34,6 @@ endif
 
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
 $(call inherit-product, device/amlogic/common/products/tv/product_tv.mk)
-$(call inherit-product, device/amlogic/common/tuner/tuner.mk)
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 #########################################################################
@@ -166,6 +165,14 @@ TARGET_BUILD_GOOGLE_ATV:= true
 DONT_DEXPREOPT_PREBUILTS:= true
 endif
 ########################################################################
+
+########################################################################
+#
+#                           Tuner
+#
+########################################################################
+TUNER_MODULE := r842
+include device/amlogic/common/tuner/tuner.mk
 
 ########################################################################
 #

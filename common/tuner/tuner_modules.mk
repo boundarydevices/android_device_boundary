@@ -14,20 +14,32 @@
 # limitations under the License.
 #
 
-#t962_p321 tuner
-ifeq ($(PRODUCT_DIR), t962_p321)
+#r840 tuner
+ifeq ($(TUNER_MODULE), r840)
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/r840_fe.ko
+endif
+
+#r842 tuner
+ifeq ($(TUNER_MODULE), r842)
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/r842_fe.ko
 endif
 
-#t962e_r321 tuner
-ifeq ($(PRODUCT_DIR), darwin)
+#si2151 tuner
+ifeq ($(TUNER_MODULE), si2151)
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/si2151_fe.ko
 endif
 
-#t962x_r311 tuner
-ifeq ($(PRODUCT_DIR), einstein)
+#si2159 tuner
+ifeq ($(TUNER_MODULE), si2159)
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/si2159_fe.ko
+endif
+
+#mxl661 tuner
+ifeq ($(TUNER_MODULE), mxl661)
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko
 endif

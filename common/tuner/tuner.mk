@@ -14,8 +14,19 @@
 # limitations under the License.
 #
 
-#t962_p321 tuner
-ifeq ($(PRODUCT_DIR), t962_p321)
+#r840 tuner
+ifeq ($(TUNER_MODULE), r840)
+ifeq ($(KERNEL_A32_SUPPORT), true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/tuner/32/r840_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/r840_fe.ko
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/tuner/64/r840_fe_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/r840_fe.ko
+endif
+endif
+
+#r842 tuner
+ifeq ($(TUNER_MODULE), r842)
 ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/r842_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/r842_fe.ko
@@ -25,8 +36,8 @@ PRODUCT_COPY_FILES += \
 endif
 endif
 
-#t962e_r321 tuner
-ifeq ($(PRODUCT_DIR), darwin)
+#si2151 tuner
+ifeq ($(TUNER_MODULE), si2151)
 ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/si2151_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2151_fe.ko
@@ -36,8 +47,19 @@ PRODUCT_COPY_FILES += \
 endif
 endif
 
-#t962x_r311 tuner
-ifeq ($(PRODUCT_DIR), einstein)
+#si2159 tuner
+ifeq ($(TUNER_MODULE), si2159)
+ifeq ($(KERNEL_A32_SUPPORT), true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/tuner/32/si2159_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2159_fe.ko
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/tuner/64/si2159_fe_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2159_fe.ko
+endif
+endif
+
+#mxl661 tuner
+ifeq ($(TUNER_MODULE), mxl661)
 ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/mxl661_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko
