@@ -207,3 +207,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.frp.pst=/dev/block/bootdevice/by-name/frp
+
+# For extcon status to 0 so that HDMI is disabled by default
+# Then if all sounds need to be routed to HDMI, use persist.audio.hdmi_out
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.audio.extcon.status=0
