@@ -24,6 +24,13 @@ PRODUCT_COPY_FILES += device/amlogic/common/products/tv/ueventd.amlogic.rc:root/
 else
 PRODUCT_COPY_FILES += device/amlogic/common/products/tv/ueventd.amlogic.rc:recovery/root/ueventd.amlogic.rc
 endif
+# DRM HAL
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl:32 \
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.1-service.widevine \
+    android.hardware.drm@1.1-service.clearkey \
+    move_widevine_data.sh
 
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
@@ -98,7 +105,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/common/video_algorithm/dnlp/dnlp_alg_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/dnlp_alg.ko
 endif
 
-PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi tvdpi
+PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_CHARACTERISTICS := einstein,nosdcard

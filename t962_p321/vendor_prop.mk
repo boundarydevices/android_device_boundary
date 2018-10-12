@@ -55,10 +55,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.platform.disable.audiorawout=false
 
-#this property is used for Android TV audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.is.tv=1
-
 #Dolby DD+ decoder option
 #this prop to for videoplayer display the DD+/DD icon when playback
 PRODUCT_PROPERTY_OVERRIDES += \

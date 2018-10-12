@@ -55,6 +55,7 @@ on fs
     mount_all /vendor/etc/fstab.amlogic
     setprop ro.crypto.fuse_sdcard true
     swapon_all /vendor/etc/fstab.amlogic
+    restorecon_recursive /mnt/vendor/param
 
 on post-fs-data
     #create droidota directory for system update
@@ -365,6 +366,8 @@ on boot
 
     write /sys/class/vfm/map "rm default"
     write /sys/class/vfm/map "add default decoder ppmgr deinterlace amvideo"
+
+    write /proc/sys/kernel/dmesg_restrict 0
 
 # virtual sdcard daemon running as media_rw (1023)
 #service sdcard /system/bin/sdcard -u 1023 -g 1023 /data/media /mnt/shell/emulated
