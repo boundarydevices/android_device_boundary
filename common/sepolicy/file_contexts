@@ -191,6 +191,7 @@
 
 /sys/class/amvecm(/.*)?                                         u:object_r:sysfs_video:s0
 /sys/class/video(/.*)?                                          u:object_r:sysfs_video:s0
+/dev/vbi                                                        u:object_r:vbi_device:s0
 /dev/vbi[0-3]                                                   u:object_r:vbi_device:s0
 
 /sys/class/mpgpu/scale_mode                                     u:object_r:sysfs_mpgpu_scale:s0
