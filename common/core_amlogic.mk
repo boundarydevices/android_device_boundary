@@ -494,3 +494,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #fix android.permission2.cts.ProtectedBroadcastsTest
 #PRODUCT_PACKAGES += \
 #    TeleService
+
+#add copy alarm file to product
+PRODUCT_COPY_FILES += \
+        frameworks/base/data/sounds/Alarm_Beep_01.ogg:product/media/audio/alarms/Alarm_Beep_01.ogg
