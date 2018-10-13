@@ -5,7 +5,7 @@ KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
 
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
-BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
+BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
 INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
 
@@ -67,6 +67,8 @@ KERNEL_ARCH := arm64
 INTERMEDIATES_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image.gz
 PREFIX_CROSS_COMPILE=/opt/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 endif
+
+DTBO_DEVICETREE := common_overlay_dt
 
 WIFI_MODULE := multiwifi
 

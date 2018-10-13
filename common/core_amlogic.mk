@@ -39,6 +39,12 @@ PRODUCT_PACKAGES += \
     libwnndict \
     WAPPushManager
 
+PRODUCT_PACKAGES += \
+	libfdt \
+	libufdt \
+	dtc \
+	mkdtimg
+
 #PRODUCT_PACKAGES += \
 #    Galaxy4 \
 #    HoloSpiralWallpaper \
