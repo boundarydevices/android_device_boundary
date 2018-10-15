@@ -310,7 +310,7 @@ endif
 #
 #########################################################################
 ifeq ($(TARGET_USE_OPTEEOS),true)
-ifeq ($(TARGET_KERNEL_BUILT_FROM_SOURCE), true)
+ifneq ($(TARGET_KERNEL_BUILT_FROM_SOURCE), false)
 PRODUCT_PACKAGES += \
 	optee_armtz \
 	optee
