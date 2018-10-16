@@ -37,7 +37,7 @@ $(call inherit-product, device/amlogic/common/products/mbox/product_mbox.mk)
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 
-TARGET_WITH_MEDIA_EXT_LEVEL := 3
+TARGET_WITH_MEDIA_EXT_LEVEL := 4
 
 #########################################################################
 #
@@ -56,7 +56,13 @@ ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 3)
     TARGET_WITH_MEDIA_EXT :=true
     TARGET_WITH_SWCODEC_EXT := true
     TARGET_WITH_CODEC_EXT := true
-    TARGET_WITH_PLAYERS_EXT :=true
+else
+ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 4)
+    TARGET_WITH_MEDIA_EXT :=true
+    TARGET_WITH_SWCODEC_EXT := true
+    TARGET_WITH_CODEC_EXT := true
+    TARGET_WITH_PLAYERS_EXT := true
+endif
 endif
 endif
 endif
