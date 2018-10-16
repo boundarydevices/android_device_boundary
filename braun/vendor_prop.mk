@@ -135,3 +135,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     service.adb.tcp.port=5555
 
+# enable droidvold
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.droidvold.enable=true
