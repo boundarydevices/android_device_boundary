@@ -13,5 +13,5 @@
 /dev/block/loop     auto                loop      defaults                                  voldmanaged=loop:auto
 /dev/block/param    /mnt/vendor/param                ext4      noatime,nosuid,nodev,nodelalloc,nomblk_io_submit,errors=panic    wait,check,encryptable=footer,quota,formattable
 # Add for zram. zramsize can be in numeric (byte) , in percent
-/dev/block/zram0     /mnt/vendor/swap_zram0             swap      defaults                             wait,zramsize=524288000
+/dev/block/zram0     /mnt/vendor/swap_zram0             swap      defaults                             wait,zramsize=268435456
 /dev/block/tee       /mnt/vendor/tee                 ext4      noatime,nosuid,nodev,nodelalloc,nomblk_io_submit,errors=panic    wait,check,formattable

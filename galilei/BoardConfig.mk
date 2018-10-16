@@ -158,6 +158,7 @@ endif
 
 include device/amlogic/common/sepolicy.mk
 #MALLOC_IMPL := dlmalloc
+MALLOC_SVELTE := true
 
 WITH_DEXPREOPT := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
