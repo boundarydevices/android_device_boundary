@@ -173,7 +173,3 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #this property is used for DVR
 PRODUCT_PROPERTY_OVERRIDES +=  \
     tv.dtv.rec.path=/data/vendor_de/0
-
-# enable droidvold
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.droidvold.enable=true
