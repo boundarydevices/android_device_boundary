@@ -169,7 +169,3 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #this property is used for Android TV audio
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.platform.is.tv=1
-
-# enable droidvold
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.droidvold.enable=true

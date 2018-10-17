@@ -148,7 +148,3 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 PRODUCT_PROPERTY_OVERRIDES +=  \
     osd.afbcd.enable=1 \
     sys.sf.debug.nohwc=true
-
-# enable droidvold
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.droidvold.enable=true

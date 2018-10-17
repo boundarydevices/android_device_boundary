@@ -149,7 +149,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.hwui.texture_cache_size=18.0f \
     ro.hwui.layer_cache_size=15.0f
-
-# enable droidvold
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.droidvold.enable=true
