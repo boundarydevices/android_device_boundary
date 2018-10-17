@@ -20,6 +20,10 @@
             <Limit name="measured-frame-rate-320x240" range="415-415" />
             <Limit name="measured-frame-rate-720x480" range="133-133" />
         </MediaCodec>
+        <MediaCodec name="OMX.amlogic.video.encoder.hevc" type="video/hevc" update="true">
+            <Limit name="measured-frame-rate-720x480" range="154-154" />
+            <Limit name="measured-frame-rate-1280x720" range="62-62" />
+        </MediaCodec>
         <MediaCodec name="OMX.google.h263.encoder" type="video/3gpp" update="true">
             <Limit name="measured-frame-rate-176x144" range="267-267" />
         </MediaCodec>
