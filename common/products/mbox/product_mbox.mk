@@ -35,7 +35,8 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 
 #Tvsettings
 PRODUCT_PACKAGES += \
-    TvSettings
+    TvSettings \
+    DroidTvSettings
 
 
 #USB PM
