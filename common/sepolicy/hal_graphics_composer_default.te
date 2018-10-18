@@ -20,6 +20,7 @@ allow hal_graphics_composer_default sysfs_display:dir search;
 allow hal_graphics_composer_default sysfs_display:lnk_file { open read write ioctl };
 allow hal_graphics_composer_default sysfs_display:file { read write open getattr };
 allow hal_graphics_composer_default sysfs_display:chr_file { ioctl read write open };
+allow hal_graphics_composer_default display_device:chr_file r_file_perms;
 allow hal_graphics_composer_default sysfs_amhdmitx:file { read write open getattr };
 allow hal_graphics_composer_default sysfs_amhdmitx:dir search;
 
