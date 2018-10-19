@@ -110,6 +110,7 @@
 /sys/class/video/axis						u:object_r:sysfs_video:s0
 /sys/class/tsync/enable						u:object_r:sysfs_video:s0
 /sys/class/audiodsp/digital_raw					u:object_r:sysfs_audio:s0
+/sys/class/amaudio/debug                                        u:object_r:sysfs_audio:s0
 /sys/class/tsync/firstapts                                      u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/pts_audio                                      u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/event                                          u:object_r:sysfs_xbmc:s0
