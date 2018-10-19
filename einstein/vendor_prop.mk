@@ -25,6 +25,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.has.realoutputmode=true \
     ro.vendor.platform.need.display.hdmicec=true
 
+# tmp add for no firstapi
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.platform.has.mbxuimode=true \
+    ro.platform.has.tvuimode=true \
+    ro.platform.customize_tvsetting=true \
+    ro.platform.has.realoutputmode=true \
+    ro.platform.need.display.hdmicec=true
+    ro.platform.is.tv=1 \
+    ro.platform.support.dolbyvision=true \
+    ro.platform.disable.audiorawout=false \
+    ro.platform.support.dts=true \
+    ro.platform.support.dolby=true
+
 #camera max to 720p
 #PRODUCT_PROPERTY_OVERRIDES += \
     #ro.camera.preview.MaxSize=1280x720 \
