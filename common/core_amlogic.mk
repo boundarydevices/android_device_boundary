@@ -30,6 +30,9 @@ AMLOGIC_PRODUCT := true
 
 ALLOW_MISSING_DEPENDENCIES := true
 
+# If want kernel build with KASAN, set it to true
+ENABLE_KASAN := false
+
 # Include drawables for all densities
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
 
