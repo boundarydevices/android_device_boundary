@@ -134,3 +134,7 @@ DISPLAY_BUILD_NUMBER := true
 #TV project,set omx to video layer,or PQ hasn't effect
 PRODUCT_PROPERTY_OVERRIDES += \
         media.omx.display_mode=1
+
+#TV project, need use 8 ch 32 bit output.
+TARGET_WITH_TV_AUDIO_MODE := true
+
