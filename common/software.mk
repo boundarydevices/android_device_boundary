@@ -1,6 +1,5 @@
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.adb.secure=1 \
-    sys.open.deepcolor=true
+    ro.adb.secure=1
 
 ifeq ($(TARGET_BUILD_CTS), true)
 
