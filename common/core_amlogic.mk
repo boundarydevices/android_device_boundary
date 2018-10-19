@@ -250,6 +250,7 @@ PRODUCT_PACKAGES += libomx_av_core_alt \
     libOmxVideo \
     libOmxAudio \
     libHwAudio_dcvdec \
+    libHwAudio_dtshd  \
     libthreadworker_alt \
     libdatachunkqueue_alt \
     libOmxBase \
