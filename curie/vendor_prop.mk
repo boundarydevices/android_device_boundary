@@ -142,9 +142,6 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 PRODUCT_PROPERTY_OVERRIDES +=  \
     service.adb.tcp.port=5555
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.open.deepcolor=true
-
 #720P UI,  1280 * 720 *4 * 5 = 18M, 5 frame is enough
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.hwui.texture_cache_size=18.0f \

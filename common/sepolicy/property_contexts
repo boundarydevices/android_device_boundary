@@ -10,3 +10,4 @@ rc_hidraw_fd            u:object_r:bluetooth_prop:s0
 vendor.display-size     u:object_r:netflix_prop:s0
 ro.vendor.platform      u:object_r:vendor_platform_prop:s0
 persist.vendor.sys   		u:object_r:vendor_persist_prop:s0
+vendor.sys              u:object_r:vendor_platform_prop:s0
