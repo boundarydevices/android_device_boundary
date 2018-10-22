@@ -67,12 +67,18 @@
                              channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO"/>
                 </mixPort>
                 <mixPort name="tunnel raw" role="source" flags="AUDIO_OUTPUT_FLAG_HW_AV_SYNC|AUDIO_OUTPUT_FLAG_DIRECT">
-                    <profile name="" format="AUDIO_FORMAT_AC3"
+                    <profile name="ac3 raw" format="AUDIO_FORMAT_AC3"
                              samplingRates="8000,11025,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_MONO,AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_QUAD_BACK,AUDIO_CHANNEL_OUT_QUAD_SIDE,AUDIO_CHANNEL_OUT_5POINT1_BACK,AUDIO_CHANNEL_OUT_5POINT1_SIDE,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
-                    <profile name="" format="AUDIO_FORMAT_E_AC3"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="eac3 raw" format="AUDIO_FORMAT_E_AC3"
+                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000,128000,176400,192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="dts raw" format="AUDIO_FORMAT_DTS"
                              samplingRates="8000,11025,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_MONO,AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_QUAD_BACK,AUDIO_CHANNEL_OUT_QUAD_SIDE,AUDIO_CHANNEL_OUT_5POINT1_BACK,AUDIO_CHANNEL_OUT_5POINT1_SIDE,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="iec raw" format="AUDIO_FORMAT_IEC61937"
+                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000,128000,176400,192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
                 </mixPort>
                 <mixPort name="tunnel pcm" role="source" flags="AUDIO_OUTPUT_FLAG_HW_AV_SYNC|AUDIO_OUTPUT_FLAG_DIRECT">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
@@ -128,6 +134,18 @@
                     </gains>
                 </devicePort>
                 <devicePort tagName="Spdif" role="sink" type="AUDIO_DEVICE_OUT_SPDIF">
+                    <profile name="ac3 raw" format="AUDIO_FORMAT_AC3"
+                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="eac3 raw" format="AUDIO_FORMAT_E_AC3"
+                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000,128000,176400,192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="dts raw" format="AUDIO_FORMAT_DTS"
+                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                    <profile name="iec raw" format="AUDIO_FORMAT_IEC61937"
+                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000,128000,176400,192000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
                 </devicePort>
                 <devicePort tagName="HDMI Arc" role="sink" type="AUDIO_DEVICE_OUT_HDMI_ARC">
                 </devicePort>
