@@ -132,7 +132,6 @@ allow init reco_file:file { open read create write };
 
 allow recovery aml_display_prop:file { getattr open read };
 allow recovery bluetooth_a2dp_offload_prop:file { getattr open };
-allow recovery exported_audio_prop:file { getattr open };
 allow recovery exported_bluetooth_prop:file { getattr open };
 allow recovery exported_overlay_prop:file { getattr open };
 allow recovery exported_wifi_prop:file { getattr open };
