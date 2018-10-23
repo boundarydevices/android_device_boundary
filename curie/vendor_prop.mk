@@ -89,7 +89,9 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
     media.html5videowin.enable=1 \
     media.decoder.vfm.defmap=decoder ppmgr deinterlace amvideo \
     media.decoder.vfm.drmmap=decoder amvideo \
-    persist.sys.dts.edid=false
+    persist.sys.dts.edid=false \
+    vendor.omx.osd_maxwidth=1280 \
+    vendor.omx.osd_maxheight=720
 
 #add for video boot, 1 means use video boot, others not .
 PRODUCT_PROPERTY_OVERRIDES +=  \
