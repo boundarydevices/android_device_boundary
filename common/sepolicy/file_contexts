@@ -219,6 +219,7 @@
 /vendor/bin/systemcontrol     u:object_r:system_control_exec:s0
 /vendor/bin/hdmicecd          u:object_r:hdmicecd_exec:s0
 /vendor/bin/droidvold         u:object_r:droidvold_exec:s0
+/vendor/bin/rc_server         u:object_r:rc_server_exec:s0
 /vendor/bin/tee-supplicant    u:object_r:tee_exec:s0
 /vendor/bin/tee_preload_fw    u:object_r:firmload_exec:s0
 
