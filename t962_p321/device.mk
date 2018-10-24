@@ -88,7 +88,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/PQ/pq_default.ini:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq_default.ini
 
 #DNLP ko
-ifeq ($(KERNEL_A32_SUPPORT), true)
+ifneq ($(KERNEL_A32_SUPPORT), false)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/video_algorithm/dnlp/dnlp_alg_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/dnlp_alg.ko
 else
