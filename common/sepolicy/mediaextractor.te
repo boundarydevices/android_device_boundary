@@ -9,3 +9,7 @@ allow mediaextractor same_process_hal_file:dir { read open };
 allow mediaextractor same_process_hal_file:file { read open getattr execute};
 allow platform_app iso9660:dir { search open read getattr };
 allow platform_app iso9660:file { open read getattr };
+
+allow mediaextractor exfat:file { read getattr };
+allow mediaextractor property_socket:sock_file write;
+

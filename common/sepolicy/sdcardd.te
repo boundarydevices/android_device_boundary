@@ -6,3 +6,6 @@ allow sdcardd vold:unix_stream_socket { read write };
 # for exfat
 allow sdcardd unlabeled:dir { open read write getattr search };
 allow sdcardd unlabeled:file { open read write getattr };
+
+allow sdcardd storage_file:dir mounton;
+
