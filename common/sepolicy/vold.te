@@ -6,3 +6,7 @@ allow vold param_tv_file:dir { ioctl open read };
 
 #for hw keymaster
 allow vold drm_device:chr_file  {open read write ioctl};
+
+allow vold fsck_exec:file {execute read open };
+allow vold kernel:system module_request;
+
