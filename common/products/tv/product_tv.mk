@@ -76,7 +76,7 @@ PRODUCT_PACKAGES += \
 #Tvsettings
 PRODUCT_PACKAGES += \
     TvSettings \
-    TempDroidTvSettings \
+    DroidTvSettings \
     DroidSoundEffectSettings
 
 PRODUCT_COPY_FILES += \
