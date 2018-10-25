@@ -156,7 +156,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # low memory for 1G
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.low_ram=true
+    ro.config.low_ram=false
 
 # crypto volume
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -173,3 +173,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=0
+

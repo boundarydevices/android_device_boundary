@@ -113,3 +113,6 @@ DEVICE_FRAMEWORK_MANIFEST_FILE += \
 
 #To keep healthd in the build
 PRODUCT_PACKAGES += android.hardware.health@2.0-service
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.picture_in_picture.xml:vendor/etc/permissions/android.software.picture_in_picture.xml
