@@ -369,6 +369,11 @@ on boot
 
     write /proc/sys/kernel/dmesg_restrict 0
 
+    #TV default set dolby mode to RF
+    write /sys/class/audiodsp/ac3_drc_control "drchighcutscale 0"
+    write /sys/class/audiodsp/ac3_drc_control "drclowboostscale 0"
+    write /sys/class/audiodsp/ac3_drc_control "drcmode 3"
+
 # virtual sdcard daemon running as media_rw (1023)
 #service sdcard /system/bin/sdcard -u 1023 -g 1023 /data/media /mnt/shell/emulated
 #   class late_start
