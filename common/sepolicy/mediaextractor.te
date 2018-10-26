@@ -14,3 +14,6 @@ allow platform_app iso9660:file { open read getattr };
 allow mediaextractor exfat:file { read getattr };
 allow mediaextractor property_socket:sock_file write;
 
+allow mediaextractor bootanim:fd { use };
+allow mediaextractor system_data_file:file { read getattr };
+

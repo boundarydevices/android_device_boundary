@@ -9,3 +9,8 @@ allow mediaserver sysfs_video:file  rw_file_perms;
 allow mediaserver sysfs_audio:file  rw_file_perms;
 
 get_prop(mediaserver, media_prop)
+
+allow mediaserver bootanim:binder { call transfer };
+allow mediaserver bootanim:fd  use;
+allow mediaserver system_data_file:file { read getattr };
+

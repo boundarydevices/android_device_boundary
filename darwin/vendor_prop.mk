@@ -149,3 +149,18 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #this property is used for DVR
 PRODUCT_PROPERTY_OVERRIDES +=  \
     tv.dtv.rec.path=/data/vendor_de/0
+
+#bootvideo
+#0                      |050
+#^                      |
+#|                      |
+#0:bootanim             |
+#1:bootanim + bootvideo |
+#2:bootvideo + bootanim |
+#3:bootvideo            |
+#others:bootanim        |
+#-----------------------|050
+#050:default volume value, volume range 0~100
+#note that the high position 0 can not be omitted
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.media.bootvideo=0050

@@ -154,3 +154,18 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #this property is used for Android TV audio
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.vendor.platform.is.tv=1
+
+#bootvideo
+#0                      |050
+#^                      |
+#|                      |
+#0:bootanim             |
+#1:bootanim + bootvideo |
+#2:bootvideo + bootanim |
+#3:bootvideo            |
+#others:bootanim        |
+#-----------------------|050
+#050:default volume value, volume range 0~100
+#note that the high position 0 can not be omitted
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.media.bootvideo=3050

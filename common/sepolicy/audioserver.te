@@ -12,7 +12,11 @@ allow audioserver self:netlink_kobject_uevent_socket create_socket_perms_no_ioct
 # operation hidraw device
 allow audioserver hidraw_audio_device:chr_file rw_file_perms;
 
+#bootanim
+allow audioserver bootanim:binder call;
+
 #operation property;
 
 set_prop(audioserver, audio_prop)
+
 get_prop(audioserver, vendor_platform_prop)

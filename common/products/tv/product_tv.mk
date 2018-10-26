@@ -109,6 +109,9 @@ PRODUCT_COPY_FILES += $(foreach file,$(custom_keylayouts),\
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bootanimation.zip:system/media/bootanimation.zip
 
+#bootvideo
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/bootvideo.zip:$(TARGET_COPY_OUT_VENDOR)/etc/bootvideo.zip
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/tv.mp4:$(TARGET_COPY_OUT_VENDOR)/etc/bootvideo
