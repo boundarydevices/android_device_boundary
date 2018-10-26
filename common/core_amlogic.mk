@@ -294,7 +294,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/common/optimization/config:$(TARGET_COPY_OUT_VENDOR)/package_config/config
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.app.optimization=true
+    ro.vendor.app.optimization=true
 
 ifeq ($(ANDROID_BUILD_TYPE), 64)
 PRODUCT_COPY_FILES += \
