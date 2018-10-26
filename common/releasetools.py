@@ -177,6 +177,14 @@ def BuildCustomerIncrementalImage(info, *par, **dictarg):
 
 def FullOTA_Assertions(info):
   print "amlogic extensions:FullOTA_Assertions"
+  try:
+    bootloader_img = info.input_zip.read("RADIO/bootloader.img")
+  except KeyError:
+    OPTIONS.ota_partition_change = False
+    print "no bootloader.img in target_files; skipping install"
+  else:
+    OPTIONS.ota_partition_change = True
+    common.ZipWriteStr(info.output_zip, "bootloader.img", bootloader_img)
   if OPTIONS.ota_zip_check:
     info.script.AppendExtra('if ota_zip_check() == "1" then')
     info.script.AppendExtra('set_bootloader_env("upgrade_step", "3");')
@@ -184,6 +192,9 @@ def FullOTA_Assertions(info):
     info.script.AppendExtra('write_dtb_image(package_extract_file("dt.img"));')
     info.script.AppendExtra('backup_data_cache(recovery, /cache/recovery/);')
     info.script.WriteRawImage("/recovery", "recovery.img")
+    if OPTIONS.ota_partition_change:
+      info.script.AppendExtra('ui_print("update bootloader.img...");')
+      info.script.AppendExtra('write_bootloader_image(package_extract_file("bootloader.img"));')
     info.script.AppendExtra('reboot_recovery();')
     info.script.AppendExtra('else')
 
@@ -215,13 +226,15 @@ def FullOTA_InstallEnd(info):
 
   ZipOtherImage("logo", OPTIONS.input_tmp, info.output_zip)
   ZipOtherImage("dt", OPTIONS.input_tmp, info.output_zip)
-  #ZipOtherImage("bootloader", OPTIONS.input_tmp, info.output_zip)
+  ZipOtherImage("dtbo", OPTIONS.input_tmp, info.output_zip)
   ZipOtherImage("vbmeta", OPTIONS.input_tmp, info.output_zip)
   if not OPTIONS.two_step:
     ZipOtherImage("recovery", OPTIONS.input_tmp, info.output_zip)
 
   info.script.AppendExtra("""ui_print("update logo.img...");
 package_extract_file("logo.img", "/dev/block/logo");
+ui_print("update dtbo.img...");
+package_extract_file("dtbo.img", "/dev/block/dtbo");
 ui_print("update dtb.img...");
 backup_data_cache(dtb, /cache/recovery/);
 write_dtb_image(package_extract_file("dt.img"));
@@ -231,12 +244,7 @@ package_extract_file("recovery.img", "/dev/block/recovery");
 ui_print("update vbmeta.img...");
 package_extract_file("vbmeta.img", "/dev/block/vbmeta");""")
 
-  try:
-    bootloader_img = info.input_zip.read("RADIO/bootloader.img")
-  except KeyError:
-    print "no bootloader.img in target_files; skipping install"
-  else:
-    common.ZipWriteStr(info.output_zip, "bootloader.img", bootloader_img)
+  if OPTIONS.ota_partition_change:
     info.script.AppendExtra('ui_print("update bootloader.img...");')
     info.script.AppendExtra('write_bootloader_image(package_extract_file("bootloader.img"));')
 
