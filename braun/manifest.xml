@@ -182,15 +182,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>vendor.amlogic.hardware.droidvold</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IDroidVold</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal>
         <name>vendor.amlogic.hardware.hdmicec</name>
         <transport>hwbinder</transport>
