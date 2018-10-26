@@ -408,8 +408,11 @@ endif
 ifeq ($(TARGET_PRODUCT),einstein)
 	echo "board=txlx_r311" > $(PRODUCT_OUT)/fastboot/android-info.txt
 endif
+ifeq ($(TARGET_PRODUCT),franklin)
+	echo "board=u212" > $(PRODUCT_OUT)/fastboot/android-info.txt
+endif
 ifeq ($(TARGET_PRODUCT),galilei)
-	echo "board=u200" > $(PRODUCT_OUT)/fastboot/android-info.txt
+	echo "board=g12b_w400" > $(PRODUCT_OUT)/fastboot/android-info.txt
 endif
 ifeq ($(TARGET_PRODUCT),atom)
 	echo "board=atom" > $(PRODUCT_OUT)/fastboot/android-info.txt

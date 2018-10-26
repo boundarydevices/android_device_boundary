@@ -1,2 +1,2 @@
-require board=u200
+require board=g12b_w400
 require version-bootloader=01.01.180822.152145

@@ -1,2 +1,2 @@
-require board=txlx_skt
+require board=t962e_r321
 require version-bootloader=01.01.180822.150325
