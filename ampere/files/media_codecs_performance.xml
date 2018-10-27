@@ -55,7 +55,7 @@
             <Limit name="measured-frame-rate-720x480" range="516-516" />
             <Limit name="measured-frame-rate-1280x720" range="294-294" />
             <Limit name="measured-frame-rate-1920x1080" range="132-132" />
-            <Limit name="measured-frame-rate-3840x2160" range="72-72" />
+            <Limit name="measured-frame-rate-3840x2160" range="45-45" />
         </MediaCodec>
         <MediaCodec name="OMX.amlogic.mpeg4.decoder.awesome" type="video/mp4v-es" update="true">
             <Limit name="measured-frame-rate-176x144" range="228-228" />
