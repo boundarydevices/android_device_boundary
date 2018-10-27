@@ -249,12 +249,14 @@ class BuildInfo(object):
   def __init__(self, info_dict, oem_dicts):
     """Initializes a BuildInfo instance with the given dicts.
 
+    Note that it only wraps up the given dicts, without making copies.
+
     Arguments:
       info_dict: The build-time info dict.
       oem_dicts: A list of OEM dicts (which is parsed from --oem_settings). Note
           that it always uses the first dict to calculate the fingerprint or the
           device name. The rest would be used for asserting OEM properties only
-          (e.g.  one package can be installed on one of these devices).
+          (e.g. one package can be installed on one of these devices).
     """
     self.info_dict = info_dict
     self.oem_dicts = oem_dicts
@@ -288,8 +290,14 @@ class BuildInfo(object):
   def __getitem__(self, key):
     return self.info_dict[key]
 
+  def __setitem__(self, key, value):
+    self.info_dict[key] = value
+
   def get(self, key, default=None):
     return self.info_dict.get(key, default)
+
+  def items(self):
+    return self.info_dict.items()
 
   def GetBuildProp(self, prop):
     """Returns the inquired build property."""
@@ -859,13 +867,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
 
-  ZipOtherImage("bootloader", OPTIONS.input_tmp, output_zip)
-
   script.ShowProgress(0.2, 10)
   device_specific.FullOTA_InstallEnd()
-
-  script.AppendExtra('ui_print("update bootloader.img...");')
-  script.AppendExtra('write_bootloader_image(package_extract_file("bootloader.img"));')
 
   if OPTIONS.extra_script is not None:
     script.AppendExtra(OPTIONS.extra_script)
@@ -875,6 +878,10 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if OPTIONS.wipe_user_data:
     script.ShowProgress(0.1, 10)
     script.FormatPartition("/data")
+
+  script.FormatPartition("/data")
+  script.FormatPartition("/metadata")
+  script.AppendExtra('wipe_cache();')
 
   if OPTIONS.two_step:
     script.AppendExtra("""
