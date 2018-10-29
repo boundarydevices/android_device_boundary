@@ -54,6 +54,8 @@ get_prop(system_app, tv_prop)
 get_prop(system_app, media_prop)
 #set_prop(system_app, netflix_prop)
 get_prop(system_app, netflix_prop)
+get_prop(system_app, vendor_platform_prop)
+get_prop(system_app, vendor_app_prop)
 
 allow system_app vbi_device:chr_file { read write open ioctl };
 allow system_app vendor_file:file r_file_perms;

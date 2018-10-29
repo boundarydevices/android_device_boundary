@@ -24,6 +24,7 @@ get_prop(tvserver, media_prop)
 get_prop(tvserver, tv_prop)
 set_prop(tvserver, tv_prop)
 set_prop(tvserver, tv_config_prop)
+get_prop(tvserver, vendor_default_prop)
 allow tvserver tv_prop:file { read open getattr };
 
 allow tvserver proc:file { read write open ioctl getattr };

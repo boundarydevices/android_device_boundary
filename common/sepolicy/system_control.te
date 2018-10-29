@@ -43,6 +43,7 @@ get_prop(system_control, safemode_prop)
 get_prop(system_control, mmc_prop)
 get_prop(system_control, device_logging_prop)
 get_prop(system_control, vendor_platform_prop)
+get_prop(system_control, vendor_default_prop)
 
 set_prop(system_control, media_prop)
 get_prop(system_control, media_prop)

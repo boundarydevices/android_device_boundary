@@ -20,9 +20,15 @@ allow vendor_init proc:file write;
 allow vendor_init unlabeled:dir search;
 
 allow vendor_init ffs_prop:property_service set;
-set_prop(vendor_init, vendor_platform_prop)
 # optee
 allow vendor_init drm_device:chr_file setattr;
 
 # allow init mount a new filesystem and set its selinux contexts
 allow vendor_init unlabeled:dir { getattr read relabelfrom setattr };
+
+set_prop(vendor_init, vendor_platform_prop)
+set_prop(vendor_init, media_prop)
+set_prop(vendor_init, aml_display_prop)
+set_prop(vendor_init, tv_config_prop)
+set_prop(vendor_init, tv_prop)
+set_prop(vendor_init, netflix_prop)
