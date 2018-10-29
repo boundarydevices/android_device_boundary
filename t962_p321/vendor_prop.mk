@@ -173,7 +173,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #disable timeshift
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.tv.dtv.tf.disable=true
+    tv.dtv.tf.disable=true
 
 # crypto volume
 PRODUCT_PROPERTY_OVERRIDES +=  \
