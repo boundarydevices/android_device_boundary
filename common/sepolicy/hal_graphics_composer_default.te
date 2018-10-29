@@ -24,3 +24,5 @@ allow hal_graphics_composer_default sysfs_amhdmitx:dir search;
 get_prop(hal_graphics_composer_default, tv_prop)
 allow hal_graphics_composer_default sysfs_video:dir { search };
 allow hal_graphics_composer_default sysfs_display:file { read write open getattr };
+
+get_prop(hal_graphics_composer_default, vendor_platform_prop)
