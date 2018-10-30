@@ -398,9 +398,15 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-service
 
 # HW Composer
+ifeq ($(TARGET_COMPOSOR2.2_SUPPORT), true)
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.2-impl \
     android.hardware.graphics.composer@2.2-service
+else
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service
+endif
 
 # dumpstate binderized
 PRODUCT_PACKAGES += \
