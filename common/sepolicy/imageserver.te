@@ -1,44 +1,30 @@
-type imageserver, domain;
-type imageserver_exec, exec_type, vendor_file_type, file_type;
+type imageserver, domain, coredomain;
+type imageserver_exec, exec_type, file_type;
 
 typeattribute imageserver mlstrustedsubject;
 
 init_daemon_domain(imageserver)
 
-allow imageserver vendor_file:file { execute };
+allow imageserver hwservicemanager:binder { call transfer };
+allow imageserver { imageserver_hwservice  hidl_base_hwservice }:hwservice_manager { add };
+r_dir_file(system_control, domain)
+r_dir_file(system_control, binderservicedomain)
+r_dir_file(system_control, appdomain)
+r_dir_file(system_control, platform_app)
+allow imageserver sdcardfs:dir {search};
+allow imageserver sdcardfs:file {read open getattr};
+allow imageserver media_rw_data_file:file {read open getattr};
+allow imageserver appdomain:file { r_file_perms };
+allow imageserver fuse:dir r_dir_perms;
+allow imageserver fuse:file r_file_perms;
+allow imageserver vfat:file { read open getattr};
+allow imageserver { mnt_user_file storage_file }:dir { getattr search };
+allow imageserver { mnt_user_file storage_file }:lnk_file { getattr read };
 
-#allow imageserver shell_exec:file rx_file_perms;
-#allow imageserver system_file:file execute_no_trans;
-
-#allow imageserver imageserver_service:service_manager add;
-
-#allow imageserver imageserver_exec:file { entrypoint read };
-
-#allow imageserver self:process execmem;
-
-#binder_use(imageserver);
-#binder_call(imageserver, binderservicedomain)
-#binder_call(imageserver, appdomain)
-#binder_service(imageserver)
-
-#allow imageserver self:capability dac_override;
-#allow imageserver self:capability dac_read_search;
-
-#allow imageserver appdomain:file { r_file_perms };
-#allow imageserver fuse:dir r_dir_perms;
-#allow imageserver fuse:file r_file_perms;
-#allow imageserver app_data_file:file rw_file_perms;
-#allow imageserver system_file:file execmod;
-
-#allow imageserver app_data_file:dir search;
-
-#allow imageserver system_control_service:service_manager find;
-
-#allow imageserver { mnt_user_file storage_file }:dir { getattr search };
-#allow imageserver { mnt_user_file storage_file }:lnk_file { getattr read };
-#allow imageserver permission_service:service_manager find;
-
-#allow imageserver picture_device:chr_file { read write open ioctl };
-#allow imageserver kernel:system module_request;
-
-#allow imageserver tmpfs:dir { getattr search };
+allow imageserver picture_device:chr_file { read write open ioctl };
+allow imageserver kernel:system module_request;
+allow imageserver tmpfs:dir { getattr search };
+allow imageserver sysfs_video:file rw_file_perms;
+allow imageserver { sysfs_video sysfs_cec sysfs_am_vecm }:dir { search };
+set_prop(imageserver, hwservicemanager_prop)
+get_prop(imageserver, hwservicemanager_prop)

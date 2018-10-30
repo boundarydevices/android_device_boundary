@@ -15,3 +15,6 @@ allow platform_app droidvold:binder { call transfer };
 
 allow platform_app tvserver_hwservice:hwservice_manager { find };
 allow platform_app tvserver:binder { call transfer };
+
+allow platform_app imageserver_hwservice:hwservice_manager { find };
+allow platform_app imageserver:binder { call transfer };
