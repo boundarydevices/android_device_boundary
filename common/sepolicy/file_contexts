@@ -159,6 +159,7 @@
 /sys/class/amhdmitx/amhdmitx0/sink_type                         u:object_r:sysfs_amhdmitx:s0
 /sys/class/amhdmitx/amhdmitx0/edid_parsing                      u:object_r:sysfs_amhdmitx:s0
 /sys/class/amhdmitx/amhdmitx0/hdcp_mode                         u:object_r:sysfs_amhdmitx:s0
+/sys/class/amhdmitx/amhdmitx0/avmute                         		u:object_r:sysfs_amhdmitx:s0
 /sys/module/amvdec_h265/parameters/double_write_mode            u:object_r:sysfs_amvdec:s0
 
 /sys/devices/virtual/remote/amremote(/.*)?                      u:object_r:sysfs_remote:s0
@@ -215,6 +216,7 @@
 
 /vendor/bin/hdcp_rx22         u:object_r:hdcp_rx22_exec:s0
 /vendor/bin/hdcp_tx22         u:object_r:hdcp_tx22_exec:s0
+/vendor/bin/hdcp_rp22         u:object_r:hdcp_rp22_exec:s0
 /vendor/bin/remotecfg         u:object_r:remotecfg_exec:s0
 /vendor/bin/systemcontrol     u:object_r:system_control_exec:s0
 /vendor/bin/hdmicecd          u:object_r:hdmicecd_exec:s0
