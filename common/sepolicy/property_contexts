@@ -4,6 +4,7 @@ sys.media.              u:object_r:media_prop:s0
 sys.subtitle.           u:object_r:media_prop:s0
 ro.audio.               u:object_r:media_prop:s0
 persist.vendor.audio.   u:object_r:media_prop:s0
+persist.vendor.media.   u:object_r:media_prop:s0
 drm.                    u:object_r:media_prop:s0
 ubootenv.               u:object_r:uboot_prop:s0
 ro.ubootenv.            u:object_r:uboot_prop:s0
@@ -15,7 +16,7 @@ wc_transport            u:object_r:bluetooth_prop:s0
 rc_hidraw_fd            u:object_r:bluetooth_prop:s0
 vendor.display-size     u:object_r:netflix_prop:s0
 ro.vendor.platform      u:object_r:vendor_platform_prop:s0
-persist.vendor.sys   		u:object_r:vendor_persist_prop:s0
+persist.vendor.sys      u:object_r:vendor_persist_prop:s0
 vendor.sys              u:object_r:vendor_platform_prop:s0
 ro.vendor.app           u:object_r:vendor_app_prop:s0
 
