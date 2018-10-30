@@ -19,13 +19,13 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/init.amlogic.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.usb.rc \
     device/amlogic/$(PRODUCT_DIR)/init.amlogic.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.board.rc
 
-ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
+ifeq ($(AB_OTA_UPDATER),true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/cppreopts_amlogic.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/cppreopts_amlogic.rc
+endif
+
 PRODUCT_COPY_FILES += \
     device/amlogic/common/products/mbox/ueventd.amlogic.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
-else
-PRODUCT_COPY_FILES += \
-    device/amlogic/common/products/mbox/ueventd.amlogic.rc:recovery/root/ueventd.amlogic.rc
-endif
 
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \

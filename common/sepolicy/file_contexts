@@ -30,6 +30,8 @@
 /dev/block/data     			u:object_r:userdata_block_device:s0
 /dev/block/cache    			u:object_r:cache_block_device:s0
 /dev/block/metadata    			u:object_r:metadata_block_device:s0
+/dev/block/metadata_a    		u:object_r:metadata_block_device:s0
+/dev/block/metadata_b    		u:object_r:metadata_block_device:s0
 /dev/block/zram0    			u:object_r:swap_block_device:s0
 /dev/block/param    			u:object_r:param_block_device:s0
 /dev/block/cri_data 			u:object_r:cri_block_device:s0
@@ -47,6 +49,11 @@
 /dev/block/vendor_b   			u:object_r:vendor_block_device:s0
 /dev/block/vendor   			u:object_r:vendor_block_device:s0
 /dev/block/product   			u:object_r:product_block_device:s0
+/dev/block/product_a   			u:object_r:product_block_device:s0
+/dev/block/product_b   			u:object_r:product_block_device:s0
+/dev/block/dtbo   			    u:object_r:dtbo_block_device:s0
+/dev/block/dtbo_a   			u:object_r:dtbo_block_device:s0
+/dev/block/dtbo_b   			u:object_r:dtbo_block_device:s0
 /dev/block/misc     			u:object_r:misc_block_device:s0
 /dev/block/tee          		u:object_r:tee_block_device:s0
 /dev/block/odm          		u:object_r:odm_block_device:s0
@@ -56,6 +63,10 @@
 /dev/block/mmcblk[0-9]p(.*)             u:object_r:sda_block_device:s0
 /dev/block/mmcblk[0-9]rpmb              u:object_r:sda_block_device:s0
 /sys/block/mmcblk0/queue/read_ahead_kb  u:object_r:sysfs_block_ahead:s0
+
+/dev/block/vbmeta_a   			u:object_r:vbmeta_block_device:s0
+/dev/block/vbmeta_b   			u:object_r:vbmeta_block_device:s0
+/dev/block/vbmeta   			u:object_r:vbmeta_block_device:s0
 
 /dev/block/mmcblk0boot0         u:object_r:bootloader_device:s0
 /dev/block/mmcblk0boot1         u:object_r:bootloader_device:s0

@@ -18,27 +18,29 @@ adb reboot fastboot
 fastboot flashing unlock_critical
 fastboot flashing unlock
 fastboot flash bootloader bootloader.img
+fastboot flash bootloader-boot0 bootloader.img
+fastboot flash bootloader-boot1 bootloader.img
 fastboot erase env
 fastboot reboot-bootloader
 ping -n 5 127.0.0.1 >nul
 fastboot flashing unlock_critical
 fastboot flashing unlock
 fastboot flash dts dt.img
-fastboot flash bootloader bootloader.img
-fastboot reboot-bootloader
-ping -n 5 127.0.0.1 >nul
-fastboot flashing unlock_critical
-fastboot flashing unlock
+fastboot flash dtbo dtbo.img
+fastboot -w
+fastboot erase metadata
+fastboot format metadata
+fastboot erase param
+fastboot erase tee
 fastboot flash vbmeta vbmeta.img
 fastboot flash odm odm.img
 fastboot flash logo logo.img
-fastboot reboot-bootloader
-ping -n 5 127.0.0.1 >nul
-fastboot -w
 fastboot flash boot boot.img
 fastboot flash system system.img
 fastboot flash vendor vendor.img
 fastboot flash product product.img
+fastboot flashing lock_critical
+fastboot flashing lock
 fastboot reboot
 
 echo Press any key to exit...

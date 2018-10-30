@@ -40,6 +40,10 @@ ifeq ($(BUILD_WITH_AVB),true)
 BUILT_IMAGES += vbmeta.img
 endif
 
+ifeq ($(BOARD_USES_SYSTEM_OTHER_ODEX),true)
+BUILT_IMAGES += system_other.img
+endif
+
 ifeq ($(strip $(HAS_BUILD_NUMBER)),false)
   # BUILD_NUMBER has a timestamp in it, which means that
   # it will change every time.  Pick a stable value.
@@ -399,6 +403,10 @@ endif
 
 ifeq ($(BUILD_WITH_AVB),true)
 	FASTBOOT_IMAGES += vbmeta.img
+endif
+
+ifeq ($(BOARD_USES_SYSTEM_OTHER_ODEX),true)
+FASTBOOT_IMAGES += system_other.img
 endif
 
 .PHONY:aml_fastboot_zip

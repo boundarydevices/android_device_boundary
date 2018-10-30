@@ -103,24 +103,33 @@ BOARD_AVB_KEY_PATH := device/amlogic/common/security/testkey_rsa2048.pem
 BOARD_AVB_ROLLBACK_INDEX := 0
 endif
 
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
 ifeq ($(AB_OTA_UPDATER),true)
 AB_OTA_PARTITIONS := \
     boot \
     system \
     vendor \
-    odm
+    vbmeta \
+    odm \
+    dtbo \
+    product
 
 TARGET_BOOTLOADER_CONTROL_BLOCK := true
 TARGET_NO_RECOVERY := true
-ifneq ($(BUILD_WITH_AVB),true)
-TARGET_PARTITION_DTSI := partition_mbox_ab.dtsi
+BOARD_USES_RECOVERY_AS_BOOT := true
+BOARD_USES_SYSTEM_OTHER_ODEX := true
+
+TARGET_PARTITION_DTSI := partition_mbox_ab_P_32.dtsi
+
+ifeq ($(BOARD_BUILD_DISABLED_VBMETAIMAGE), true)
+TARGET_FIRMWARE_DTSI := firmware_ab.dtsi
 else
-TARGET_PARTITION_DTSI := partition_mbox_ab_avb.dtsi
+TARGET_FIRMWARE_DTSI := firmware_avb_ab.dtsi
 endif
+
 else
 TARGET_NO_RECOVERY := false
-
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 ifeq ($(ANDROID_BUILD_TYPE), 64)
 TARGET_PARTITION_DTSI := partition_mbox_normal_P_64.dtsi
@@ -148,6 +157,7 @@ endif
 
 BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 25165824
 endif
 
 #########Support compiling out encrypted zip/aml_upgrade_package.img directly
@@ -219,8 +229,13 @@ PRODUCT_PACKAGES += \
 	slideshow
 endif
 
+ifeq ($(AB_OTA_UPDATER),true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/$(PRODUCT_DIR)/fstab.ab.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
+else
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
+endif
 
 #########################################################################
 #
@@ -390,7 +405,7 @@ endif
 #########################################################################
 ifeq ($(BUILD_WITH_AVB),true)
 PRODUCT_PACKAGES += \
-	bootctrl.avb \
+	bootctrl.amlogic \
 	libavb_user
 endif
 
@@ -405,8 +420,22 @@ PRODUCT_PACKAGES += \
     update_verifier \
     delta_generator \
     brillo_update_payload \
+    android.hardware.boot@1.0 \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
+
+PRODUCT_PACKAGES += \
+    otapreopt_script \
+    cppreopts.sh
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cp_system_other_odex=1
+
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    FILESYSTEM_TYPE_system=ext4 \
+    POSTINSTALL_OPTIONAL_system=true
 endif
 
 include device/amlogic/common/gpu/dvalin-user-arm64.mk
@@ -417,6 +446,7 @@ include device/amlogic/common/gpu/dvalin-user-arm64.mk
 #                          must put in the end of mk files
 #########################################################################
 AUTO_PATCH_SHELL_FILE := vendor/amlogic/common/tools/auto_patch/auto_patch.sh
+AUTO_PATCH_AB := vendor/amlogic/common/tools/auto_patch/auto_patch_ab.sh
 HAVE_WRITED_SHELL_FILE := $(shell test -f $(AUTO_PATCH_SHELL_FILE) && echo yes)
 
 ifneq ($(TARGET_BUILD_LIVETV),true)
@@ -427,4 +457,7 @@ TARGET_BUILD_GOOGLE_ATV := false
 endif
 ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
 $(warning $(shell ($(AUTO_PATCH_SHELL_FILE) $(TARGET_BUILD_LIVETV) $(TARGET_BUILD_GOOGLE_ATV))))
+ifeq ($(AB_OTA_UPDATER),true)
+$(warning $(shell ($(AUTO_PATCH_AB) $(PRODUCT_DIR))))
+endif
 endif

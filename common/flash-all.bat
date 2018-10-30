@@ -29,6 +29,7 @@ fastboot flash dts dt.img
 fastboot flash dtbo dtbo.img
 fastboot -w
 fastboot erase param
+fastboot erase tee
 fastboot flash vbmeta vbmeta.img
 fastboot flash odm odm.img
 fastboot flash logo logo.img

@@ -21,6 +21,7 @@ type amvideo_device, dev_type;
 type codec_device, dev_type;
 
 type product_block_device, dev_type;
+type dtbo_block_device, dev_type;
 
 type param_block_device, dev_type;
 type cri_block_device, dev_type;
@@ -30,6 +31,7 @@ type drm_block_device, dev_type;
 type tee_block_device, dev_type;
 type odm_block_device, dev_type;
 type vendor_block_device, dev_type;
+type vbmeta_block_device, dev_type;
 type system_block_fsck_device, dev_type;
 type subtitle_device, dev_type;
 type sw_sync_device, dev_type;
