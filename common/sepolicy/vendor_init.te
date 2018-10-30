@@ -27,6 +27,7 @@ allow vendor_init drm_device:chr_file setattr;
 allow vendor_init unlabeled:dir { getattr read relabelfrom setattr };
 
 set_prop(vendor_init, vendor_platform_prop)
+set_prop(vendor_init, shell_prop)
 set_prop(vendor_init, vendor_app_prop)
 set_prop(vendor_init, media_prop)
 set_prop(vendor_init, aml_display_prop)
