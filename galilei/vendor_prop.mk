@@ -36,10 +36,11 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 
 #for bt auto connect
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.autoconnectbt.isneed=false \
-    ro.autoconnectbt.macprefix=00:CD:FF \
-    ro.autoconnectbt.btclass=50c \
-    ro.autoconnectbt.nameprefix=Amlogic_RC
+    ro.vendor.autoconnectbt.isneed=false \
+    ro.vendor.autoconnectbt.macprefix=00:CD:FF \
+    ro.vendor.autoconnectbt.btclass=50c \
+    ro.vendor.autoconnectbt.nameprefix=Amlogic_RC \
+    ro.vendor.autoconnectbt.rssilimit=70
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.radio.noril=false
