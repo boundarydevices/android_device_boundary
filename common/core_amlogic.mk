@@ -335,7 +335,12 @@ PRODUCT_PACKAGES += \
 	tee_sha_perf_ta \
 	tee_sdp_basic_ta \
 	tee_concurrent_ta \
-	tee_concurrent_large_ta
+	tee_concurrent_large_ta \
+	tee_provision \
+	libprovision \
+	tee_provision_ta \
+	tee_hdcp \
+	tee_hdcp_ta
 
 ifeq ($(TARGET_USE_HW_KEYMASTER),true)
 PRODUCT_PACKAGES += \
