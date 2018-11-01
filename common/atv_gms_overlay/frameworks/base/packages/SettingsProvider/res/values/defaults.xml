@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <string name="def_location_providers_allowed" translatable="false">network</string>
+    <string name="def_location_providers_allowed" translatable="false">gps</string>
     <bool name="def_backup_enabled">true</bool>
     <bool name="def_wifi_on">true</bool>
     <!-- Do not give up on DHCP -->
