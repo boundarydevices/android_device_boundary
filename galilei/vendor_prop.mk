@@ -77,24 +77,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #DTS-HD prop end
 # Enable player buildin
 PRODUCT_PROPERTY_OVERRIDES +=  \
-    media.amplayer.seekkeyframe=true \
-    media.amsuperplayer.enable=true \
-    media.amplayer.enable-acodecs=ac3,eac3,rm,dts \
-    media.amplayer.enable=true \
-    media.amsuperplayer.m4aplayer=STAGEFRIGHT_PLAYER \
-    media.amsuperplayer.defplayer=PV_PLAYER \
-    media.amplayer.thumbnail=true \
-    media.amplayer.dsource4local=1 \
-    media.amplayer.dropwaitxms=100 \
-    media.arm.audio.decoder=ape,flac,dts,ac3,eac3,wma,wmapro,mp3,aac,vorbis,raac,cook,amr,pcm,adpcm,aac_latm,rm \
-    media.wfd.use-pcm-audio=false \
-    media.wfd.videoresolution-type=1 \
-    media.wfd.videoresolution-group=0 \
-    media.wfd.videoframerate=24 \
-    media.wfd.video-bitrate=2000000 \
-    media.html5videowin.enable=1 \
-    media.decoder.vfm.defmap=decoder ppmgr deinterlace amvideo \
-    media.decoder.vfm.drmmap=decoder amvideo
+    media.support.dolbyvision = true
 
 #add for video boot, 1 means use video boot, others not .
 PRODUCT_PROPERTY_OVERRIDES +=  \

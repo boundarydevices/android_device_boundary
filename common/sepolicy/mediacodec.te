@@ -21,3 +21,4 @@ allow mediacodec sysfs_am_vecm:file { read write open getattr };
 allow mediacodec uio_device:chr_file rw_file_perms;
 allow mediacodec audio_device:chr_file { setattr open read write };
 allow mediacodec sysfs_audio:file { open read write };
+allow mediacodec vendor_platform_prop:file { open read getattr };

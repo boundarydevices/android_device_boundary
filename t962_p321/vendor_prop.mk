@@ -72,22 +72,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.amplayer.seekkeyframe=true \
-    media.amsuperplayer.enable=true \
-    media.amplayer.enable-acodecs=ac3,eac3,rm,dts \
-    media.amplayer.enable=true \
-    media.amsuperplayer.m4aplayer=STAGEFRIGHT_PLAYER \
-    media.amsuperplayer.defplayer=PV_PLAYER \
-    media.amplayer.thumbnail=true \
-    media.amplayer.dsource4local=1 \
-    media.amplayer.dropwaitxms=100 \
-    media.arm.audio.decoder=ape,flac,dts,ac3,eac3,wma,wmapro,mp3,aac,vorbis,raac,cook,amr,pcm,adpcm,aac_latm,rm \
-    media.wfd.use-pcm-audio=false \
-    media.wfd.videoresolution-type=1 \
-    media.wfd.videoresolution-group=0 \
-    media.wfd.videoframerate=24 \
-    media.wfd.video-bitrate=2000000 \
-    media.html5videowin.enable=1
+    media.support.dolbyvision = true
 
 #platform support dolby vision
 PRODUCT_PROPERTY_OVERRIDES += \
