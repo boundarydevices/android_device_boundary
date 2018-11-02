@@ -72,7 +72,6 @@
 /dev/esm_rx         			u:object_r:hdcprx_device:s0
 /dev/ge2d                               u:object_r:ge2d_device:s0
 /dev/hdmirx0        			u:object_r:hdmirx0_device:s0
-/dev/irblaster1     			u:object_r:ir_device:s0
 /dev/mali           			u:object_r:gpu_device:s0
 /dev/mali0          			u:object_r:gpu_device:s0
 /dev/nand_env       			u:object_r:env_device:s0
@@ -148,6 +147,8 @@
 
 /sys/class/unifykeys(/.*)?                                      u:object_r:sysfs_unifykey:s0
 /sys/devices/platform/ffd26000.hdmirx/hdmirx/hdmirx0/key        u:object_r:sysfs_unifykey:s0
+
+/sys/devices/virtual/meson-irblaster/irblaster1(/.*)?           u:object_r:sysfs_ir:s0
 
 /sys/class/aml_store/store_device                               u:object_r:sysfs_store:s0
 /sys/class/defendkey/decrypt_dtb                                u:object_r:sysfs_defendkey:s0
