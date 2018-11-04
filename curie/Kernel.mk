@@ -10,6 +10,10 @@ INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
 INSTALLED_2NDBOOTLOADER_TARGET := $(PRODUCT_OUT)/2ndbootloader
+INSTALLED_BOARDDTB_TARGET := $(PRODUCT_OUT)/dt.img
+ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+	INSTALLED_BOARDDTB_TARGET := $(INSTALLED_BOARDDTB_TARGET).encrypt
+endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
 ifneq ($(TARGET_KERNEL_BUILT_FROM_SOURCE), true)
 TARGET_PREBUILT_KERNEL := device/amlogic/curie-kernel/Image.gz
@@ -48,7 +52,7 @@ $(INSTALLED_BOARDDTB_TARGET): $(LOCAL_DTB) | $(ACP)
 	@echo "dtb installed"
 	$(transform-prebuilt-to-target)
 
-$(INSTALLED_2NDBOOTLOADER_TARGET): $(INSTALLED_BOARDDTB_TARGET) | $(ACP)
+$(INSTALLED_2NDBOOTLOADER_TARGET): $(INSTALLED_BOARDDTB_TARGET) $(BOARD_PREBUILT_DTBOIMAGE) | $(ACP)
 	@echo "2ndbootloader installed"
 	$(transform-prebuilt-to-target)
 
@@ -160,7 +164,7 @@ savekernelconfig: $(KERNEL_OUT) $(KERNEL_CONFIG)
 build-modules-quick:
 	    $(media-modules)
 
-$(INSTALLED_2NDBOOTLOADER_TARGET): $(PRODUCT_OUT)/dt.img | $(ACP)
+$(INSTALLED_2NDBOOTLOADER_TARGET): $(INSTALLED_BOARDDTB_TARGET) $(BOARD_PREBUILT_DTBOIMAGE) | $(ACP)
 	@echo "2ndbootloader installed"
 	$(transform-prebuilt-to-target)
 

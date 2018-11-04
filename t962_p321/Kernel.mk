@@ -8,6 +8,11 @@ WIFI_MODULE := multiwifi
 
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
 
+
+INSTALLED_BOARDDTB_TARGET := $(PRODUCT_OUT)/dt.img
+ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+	INSTALLED_BOARDDTB_TARGET := $(INSTALLED_BOARDDTB_TARGET).encrypt
+endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 ifeq ($(USE_PREBUILT_KERNEL),true)
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
 
@@ -128,7 +133,7 @@ savekernelconfig: $(KERNEL_OUT) $(KERNEL_CONFIG)
 build-modules-quick:
 	    $(media-modules)
 
-$(INSTALLED_2NDBOOTLOADER_TARGET): $(PRODUCT_OUT)/dt.img | $(ACP)
+$(INSTALLED_2NDBOOTLOADER_TARGET): $(INSTALLED_BOARDDTB_TARGET) $(BOARD_PREBUILT_DTBOIMAGE) | $(ACP)
 	@echo "2ndbootloader installed"
 	$(transform-prebuilt-to-target)
 

@@ -12,10 +12,10 @@ ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	BUILT_IMAGES := $(addsuffix .encrypt, $(BUILT_IMAGES))
 endif#ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
-BUILT_IMAGES += system.img userdata.img
+BUILT_IMAGES += system.img #userdata.img
 
 ifneq ($(AB_OTA_UPDATER),true)
-BUILT_IMAGES += cache.img
+#BUILT_IMAGES += cache.img
 endif
 
 ifdef BOARD_PREBUILT_DTBOIMAGE
@@ -105,6 +105,9 @@ KERNEL_DEVICETREE_BIN := $(addprefix $(KERNEL_OUT)/$(KERNEL_DEVICETREE_DIR), $(K
 KERNEL_DEVICETREE_BIN := $(addsuffix .dtb, $(KERNEL_DEVICETREE_BIN))
 
 INSTALLED_BOARDDTB_TARGET := $(PRODUCT_OUT)/dt.img
+ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+	INSTALLED_BOARDDTB_TARGET := $(INSTALLED_BOARDDTB_TARGET).encrypt
+endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
 ifeq ($(BUILD_WITH_AVB),true)
 INSTALLED_AVB_DTBIMAGE_TARGET := $(PRODUCT_OUT)/dtb-avb.img
@@ -119,11 +122,8 @@ $(INSTALLED_VBMETAIMAGE_TARGET): $(INSTALLED_BOARDDTB_TARGET)
 vbmetaimage: $(INSTALLED_BOARDDTB_TARGET)
 endif
 
-ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
-	INSTALLED_BOARDDTB_TARGET := $(INSTALLED_BOARDDTB_TARGET).encrypt
-endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
-$(INSTALLED_BOARDDTB_TARGET) : $(KERNEL_DEVICETREE_SRC) $(INSTALLED_KERNEL_TARGET) $(DTCTOOL) $(DTIMGTOOL)
+$(INSTALLED_BOARDDTB_TARGET) : $(KERNEL_DEVICETREE_SRC) $(DTCTOOL) $(DTIMGTOOL)
 	$(foreach aDts, $(KERNEL_DEVICETREE), \
 		sed -i 's/^#include \"partition_.*/#include \"$(TARGET_PARTITION_DTSI)\"/' $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(strip $(aDts)).dts; \
 		sed -i 's/^#include \"firmware_.*/#include \"$(TARGET_FIRMWARE_DTSI)\"/' $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(TARGET_PARTITION_DTSI); \
@@ -139,9 +139,6 @@ else# elif dts num == 1
 endif
 	$(hide) $(call aml-secureboot-sign-bin, $@)
 	@echo "Instaled $@"
-	$(DTCTOOL) -@ -O dtb -o $(PRODUCT_OUT)/$(DTBO_DEVICETREE).dtbo $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(DTBO_DEVICETREE).dts
-	$(DTIMGTOOL) create $(PRODUCT_OUT)/dtbo.img $(PRODUCT_OUT)/$(DTBO_DEVICETREE).dtbo
-	@echo "Instaled $@"
 ifeq ($(BOARD_AVB_ENABLE),true)
 	cp $@ $(INSTALLED_AVB_DTBIMAGE_TARGET)
 	$(AVBTOOL) add_hash_footer \
@@ -150,21 +147,31 @@ ifeq ($(BOARD_AVB_ENABLE),true)
 	  --partition_name dtb
 endif
 
-$(BOARD_PREBUILT_DTBOIMAGE): $(INSTALLED_BOARDDTB_TARGET)
-	cp $(PRODUCT_OUT)/dtbo.img $@
+$(BOARD_PREBUILT_DTBOIMAGE): $(INSTALLED_BOARDDTB_TARGET) | $(DTCTOOL) $(DTIMGTOOL)
+	$(DTCTOOL) -@ -O dtb -o $(PRODUCT_OUT)/$(DTBO_DEVICETREE).dtbo $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(DTBO_DEVICETREE).dts
+	$(DTIMGTOOL) create $@ $(PRODUCT_OUT)/$(DTBO_DEVICETREE).dtbo
 	@echo "Instaled $@"
 
 .PHONY: dtbimage
 dtbimage: $(INSTALLED_BOARDDTB_TARGET)
 
 .PHONY: dtboimage
-dtboimage: $(INSTALLED_DTBOIMAGE_TARGET)
+dtboimage: $(PRODUCT_OUT)/dtbo.img
 
 endif # ifdef KERNEL_DEVICETREE
 
 # Adds to <product name>-img-<build number>.zip so can be flashed.  b/110831381
-INSTALLED_RADIOIMAGE_TARGET += $(PRODUCT_OUT)/dt.img
-BOARD_PACK_RADIOIMAGES += dt.img
+ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+	#using signed boot/recovery directly if 'PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY true'
+INSTALLED_AML_ENC_RADIOIMAGE_TARGET = $(addprefix $(PRODUCT_OUT)/,$(filter %.img.encrypt,$(BUILT_IMAGES)))
+BOARD_PACK_RADIOIMAGES += $(basename $(filter %.img.encrypt,$(BUILT_IMAGES)))
+INSTALLED_AML_ENC_RADIOIMAGE_TARGET += $(PRODUCT_OUT)/dt.img.unsigned.img
+$(warning echo "radio add $(filter %.img.encrypt,$(BUILT_IMAGES))")
+else
+INSTALLED_RADIOIMAGE_TARGET += $(addprefix $(PRODUCT_OUT)/,$(filter dt.img bootloader.img,$(BUILT_IMAGES)))
+BOARD_PACK_RADIOIMAGES += $(filter dt.img bootloader.img,$(BUILT_IMAGES))
+$(warning echo "radio add dt and bootloader")
+endif#ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
 UPGRADE_FILES := \
         aml_sdc_burn.ini \
@@ -275,7 +282,7 @@ $(INSTALLED_AMLOGIC_BOOTLOADER_TARGET) : $(TARGET_DEVICE_DIR)/bootloader.img
 	$(hide) $(call aml-secureboot-sign-bootloader, $@)
 	@echo "make $@: bootloader installed end"
 
-$(call dist-for-goals, droidcore, $(PRODUCT_OUT)/bootloader.img)
+$(call dist-for-goals, droidcore, $(INSTALLED_AMLOGIC_BOOTLOADER_TARGET))
 
 ifeq ($(TARGET_SUPPORT_USB_BURNING_V2),true)
 INSTALLED_AML_UPGRADE_PACKAGE_TARGET := $(PRODUCT_OUT)/aml_upgrade_package.img
@@ -313,6 +320,7 @@ endef #define aml-secureboot-sign-kernel
 define aml-secureboot-sign-bin
 	@echo -----aml-secureboot-sign-bin------
 	$(hide) mv -f $(1) $(basename $(1))
+	$(hide) cp -f $(basename $(1)) $(basename $(1)).unsigned.img
 	$(hide) $(PRODUCT_AML_SECUREBOOT_SIGBIN) --input $(basename $(1)) --output $(1)
 	@echo ----- Made aml secure-boot singed bin: $(1) --------
 endef #define aml-secureboot-sign-bin
@@ -333,15 +341,17 @@ $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET): \
 		cp -f $(file) $(PRODUCT_UPGRADE_OUT)/$(notdir $(file)); \
 		)
 	$(hide) $(foreach file,$(BUILT_IMAGES), \
-		echo cp $(file) $(PRODUCT_OUT)/$(file) $(PRODUCT_UPGRADE_OUT)/$(file); \
-		cp -f $(PRODUCT_OUT)/$(file) $(PRODUCT_UPGRADE_OUT)/$(file); \
+		echo "ln -sf $(shell readlink -f $(PRODUCT_OUT)/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file)"; \
+		ln -sf $(shell readlink -f $(PRODUCT_OUT)/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file); \
 		)
 	@echo $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET)
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	$(hide) rm -f $(PRODUCT_UPGRADE_OUT)/bootloader.img.encrypt.*
 	$(hide) $(ACP) $(PRODUCT_OUT)/bootloader.img.encrypt.* $(PRODUCT_UPGRADE_OUT)/
-	ln -sf $(TOP)/$(PRODUCT_OUT)/dt.img $(PRODUCT_UPGRADE_OUT)/dt.img
-	ln -sf $(TOP)/$(PRODUCT_OUT)/bootloader.img.encrypt.efuse $(PRODUCT_UPGRADE_OUT)/SECURE_BOOT_SET
+	ln -sf $(shell readlink -f $(PRODUCT_OUT)/dt.img) $(PRODUCT_UPGRADE_OUT)/dt.img
+	ln -sf $(shell readlink -f $(basename $(INSTALLED_AMLOGIC_BOOTLOADER_TARGET))) \
+		$(PRODUCT_UPGRADE_OUT)/$(notdir $(basename $(INSTALLED_AMLOGIC_BOOTLOADER_TARGET)))
+	ln -sf $(shell readlink -f $(PRODUCT_OUT)/bootloader.img.encrypt.efuse) $(PRODUCT_UPGRADE_OUT)/SECURE_BOOT_SET
 endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	$(security_dm_verity_conf)
 	$(update-aml_upgrade-conf)
@@ -362,7 +372,7 @@ INSTALLED_AML_FASTBOOT_ZIP := $(PRODUCT_OUT)/$(TARGET_PRODUCT)-fastboot-flashall
 $(warning will keep $(INSTALLED_AML_FASTBOOT_ZIP))
 $(call dist-for-goals, droidcore, $(INSTALLED_AML_FASTBOOT_ZIP))
 
-FASTBOOT_IMAGES := boot.img
+FASTBOOT_IMAGES := boot.img dt.img
 ifneq ($(TARGET_NO_RECOVERY),true)
 	FASTBOOT_IMAGES += recovery.img
 endif
@@ -372,7 +382,7 @@ endif#ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
 FASTBOOT_IMAGES += android-info.txt system.img
 
-FASTBOOT_IMAGES += vendor.img dt.img
+FASTBOOT_IMAGES += vendor.img
 
 ifeq ($(BOARD_USES_PRODUCTIMAGE),true)
 FASTBOOT_IMAGES += product.img
@@ -418,7 +428,6 @@ ifeq ($(TARGET_PRODUCT),atom)
 	echo "board=atom" > $(PRODUCT_OUT)/fastboot/android-info.txt
 endif
 	cd $(PRODUCT_OUT)/fastboot; zip -r ../$(TARGET_PRODUCT)-fastboot-image-$(BUILD_NUMBER).zip $(FASTBOOT_IMAGES)
-	#zipnote $@ | sed 's/@ \([a-z]*.img\).encrypt/&\n@=\1\n/' | zipnote -w $@
 	rm -rf $(PRODUCT_OUT)/fastboot_auto
 	mkdir -p $(PRODUCT_OUT)/fastboot_auto
 	cd $(PRODUCT_OUT); cp $(FASTBOOT_IMAGES) fastboot_auto/
@@ -441,6 +450,7 @@ endif
 	sed -i 's/fastboot update fastboot.zip/fastboot update $(TARGET_PRODUCT)-fastboot-image-$(BUILD_NUMBER).zip/' $(PRODUCT_OUT)/fastboot_auto/flash-all.sh
 	sed -i 's/fastboot update fastboot.zip/fastboot update $(TARGET_PRODUCT)-fastboot-image-$(BUILD_NUMBER).zip/' $(PRODUCT_OUT)/fastboot_auto/flash-all.bat
 	cd $(PRODUCT_OUT)/fastboot_auto; zip -r ../$(TARGET_PRODUCT)-fastboot-flashall-$(BUILD_NUMBER).zip *
+	zipnote $@ | sed 's/@ \([a-z]*.img\).encrypt/&\n@=\1\n/' | zipnote -w $@
 
 
 name := $(TARGET_PRODUCT)

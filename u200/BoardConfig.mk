@@ -106,7 +106,7 @@ BOARD_PRODUCTIMAGE_PARTITION_SIZE := 134217728
 endif
 
 # DTBO partition definitions
-BOARD_PREBUILT_DTBOIMAGE := device/amlogic/u200-kernel/dtbo.img
+BOARD_PREBUILT_DTBOIMAGE := out/target/product/$(PRODUCT_DIR)/$(PRODUCT_DIR)-kernel/dtbo.img
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
 BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=0
