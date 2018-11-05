@@ -135,3 +135,6 @@ allow system_control sysfs_unifykey:file { read write open };
 allow system_control unlabeled:dir search;
 allow system_control sysfs_mpgpu_scale:file { read write open } ;
 allow system_control hdmirx0_device:chr_file { read write open ioctl getattr };
+
+allow system_control exported_system_prop:file { read } ;
+get_prop(system_control, exported_system_prop);

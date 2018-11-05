@@ -38,7 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #if TV SOC as mbox
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.tvsoc.as.mbox=true
+    tv.soc.as.mbox=true
 
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES += \
