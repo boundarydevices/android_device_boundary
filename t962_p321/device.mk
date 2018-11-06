@@ -20,7 +20,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/init.amlogic.board.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.amlogic.board.rc
 
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
-PRODUCT_COPY_FILES += device/amlogic/common/products/tv/ueventd.amlogic.rc:root/ueventd.amlogic.rc
+PRODUCT_COPY_FILES += device/amlogic/common/products/tv/ueventd.amlogic.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
 else
 PRODUCT_COPY_FILES += device/amlogic/common/products/tv/ueventd.amlogic.rc:recovery/root/ueventd.amlogic.rc
 endif

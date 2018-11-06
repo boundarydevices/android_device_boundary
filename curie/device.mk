@@ -21,7 +21,7 @@ PRODUCT_COPY_FILES += \
 
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
 PRODUCT_COPY_FILES += \
-    device/amlogic/common/products/mbox/ueventd.amlogic.rc:vendor/ueventd.rc
+    device/amlogic/common/products/mbox/ueventd.amlogic.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
 else
 PRODUCT_COPY_FILES += \
     device/amlogic/common/products/mbox/ueventd.amlogic.rc:recovery/root/ueventd.amlogic.rc
