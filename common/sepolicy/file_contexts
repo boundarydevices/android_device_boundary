@@ -209,7 +209,7 @@
 #/vendor/bin/dv_config        u:object_r:dv_config_exec:s0
 
 
-#/vendor/bin/imageserver      u:object_r:imageserver_exec:s0
+/system/bin/imageserver      u:object_r:imageserver_exec:s0
 #/system/bin/mke2fs       --   u:object_r:fsck_exec:s0
 #/system/bin/e2fsdroid    --	  u:object_r:fsck_exec:s0
 #/vendor/bin/pppoe_wrapper    u:object_r:pppoe_wrapper_exec:s0

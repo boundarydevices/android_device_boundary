@@ -17,3 +17,8 @@ allow hwservicemanager tvserver:binder { call transfer };
 allow hwservicemanager tvserver:dir { search };
 allow hwservicemanager tvserver:file { read open };
 allow hwservicemanager tvserver:process { getattr };
+
+allow hwservicemanager imageserver:binder { call transfer };
+allow hwservicemanager imageserver:dir { search };
+allow hwservicemanager imageserver:file { read open };
+allow hwservicemanager imageserver:process { getattr };
