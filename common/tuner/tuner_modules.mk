@@ -43,3 +43,9 @@ ifeq ($(TUNER_MODULE), mxl661)
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko
 endif
+
+#atbm8881
+ifeq ($(TUNER_MODULE), atbm8881)
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/atbm8881_fe.ko
+endif

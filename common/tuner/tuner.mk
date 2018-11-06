@@ -68,3 +68,14 @@ PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/64/mxl661_fe_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko
 endif
 endif
+
+#atbm8881
+ifeq ($(TUNER_MODULE), atbm8881)
+ifeq ($(KERNEL_A32_SUPPORT), true)
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/tuner/32/atbm8881_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/atbm8881_fe.ko
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/tuner/64/atbm8881_fe_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/atbm8881_fe.ko
+endif
+endif

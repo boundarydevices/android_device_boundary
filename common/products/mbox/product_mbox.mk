@@ -4,6 +4,45 @@ $(call inherit-product, device/amlogic/common/core_amlogic.mk)
 PRODUCT_PACKAGES += \
     imageserver
 
+ifeq ($(TARGET_BUILD_LIVETV),true)
+#TV input HAL
+PRODUCT_PACKAGES += \
+    android.hardware.tv.input@1.0-impl \
+    android.hardware.tv.input@1.0-service \
+    vendor.amlogic.hardware.tvserver@1.0_vendor \
+    tv_input.amlogic
+
+# TV
+PRODUCT_PACKAGES += \
+    libtv \
+    libtv_linker \
+    libtvbinder \
+    libtv_jni \
+    tvserver \
+    libtvplay \
+    libvendorfont \
+    libTVaudio \
+    libntsc_decode \
+    libtinyxml \
+    libzvbi \
+    droidlogic-tv \
+    TvProvider \
+    DroidLogicTvInput \
+    DroidLogicFactoryMenu \
+    libjnidtvsubtitle
+
+# DTV
+PRODUCT_PACKAGES += \
+    libam_adp \
+    libam_mw \
+    libam_ver \
+    libam_sysfs
+
+# LiveTv
+PRODUCT_PACKAGES += \
+    DroidLiveTv
+endif
+
 # DLNA
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
@@ -50,6 +89,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.output.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.output.xml \
     frameworks/native/data/etc/android.hardware.location.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.xml \
     frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml \
+
+ifeq ($(TARGET_BUILD_LIVETV),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.live_tv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.live_tv.xml
+endif
 
 #copy lowmemorykiller.txt
 ifeq ($(BUILD_WITH_LOWMEM_COMMON_CONFIG),true)
