@@ -145,6 +145,7 @@
 /sys/devices/platform/meson-fb/graphics/fb[0-3](/.*)            u:object_r:sysfs_display:s0
 /sys/class/lcd/enable                                           u:object_r:sysfs_lcd:s0
 /sys/class/video/video_scaler_path_sel                          u:object_r:sysfs_video:s0
+/sys/module/amdolby_vision/parameters(/.*)?                     u:object_r:sysfs_video:s0
 
 /sys/class/unifykeys(/.*)?                                      u:object_r:sysfs_unifykey:s0
 /sys/devices/platform/ffd26000.hdmirx/hdmirx/hdmirx0/key        u:object_r:sysfs_unifykey:s0

@@ -246,6 +246,11 @@ on boot
     chown media system /sys/module/amvdec_h265/parameters/double_write_mode
     chmod 666 /sys/module/amvdec_h265/parameters/double_write_mode
 
+    chown media system /sys/module/amdolby_vision/parameters/dolby_vision_profile
+    chown media system /sys/module/amdolby_vision/parameters/dolby_vision_level
+    chmod 666 /sys/module/amdolby_vision/parameters/dolby_vision_profile
+    chmod 666 /sys/module/amdolby_vision/parameters/dolby_vision_level
+
     chown media system /sys/module/deinterlace/parameters/deinterlace_mode
     chown media system /sys/class/graphics/fb0/block_mode
 
