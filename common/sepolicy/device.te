@@ -35,6 +35,7 @@ type system_block_fsck_device, dev_type;
 type subtitle_device, dev_type;
 type sw_sync_device, dev_type;
 type ge2d_device, dev_type;
+type display_device, dev_type;
 type amvecm_device, dev_type;
 type di0_device, dev_type;
 type hidraw_device, dev_type;

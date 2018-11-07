@@ -64,6 +64,7 @@
 /dev/btusb0         			u:object_r:hci_attach_dev:s0
 /dev/cec            			u:object_r:cec_device:s0
 /dev/defendkey      			u:object_r:defendkey_device:s0
+/dev/display        			u:object_r:display_device:s0
 /dev/dtb            			u:object_r:dtb_device:s0
 /dev/dvb0.*         			u:object_r:dvb_device:s0
 /dev/dvb.*          			u:object_r:video_device:s0
@@ -239,6 +240,7 @@
 /data/vendor/mediadrm(/.*)?         u:object_r:hal_drm_data:s0
 
 /vendor/lib(64)?/hw/gralloc\.amlogic\.so   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/android\.hardware\.graphics\.mapper@2\.0-impl-2.1\.so   u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libfbcnf\.so              u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/extractors                u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?		           u:object_r:same_process_hal_file:s0
