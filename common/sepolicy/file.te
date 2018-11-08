@@ -66,6 +66,8 @@ type sysfs_remote, fs_type, sysfs_type;
 type sysfs_clock, fs_type, sysfs_type;
 type sysfs_hdmi, fs_type, sysfs_type;
 
+type sysfs_ir, fs_type, sysfs_type;
+
 type reco_file, file_type;
 
 type sysfs_unifykey, fs_type, sysfs_type;

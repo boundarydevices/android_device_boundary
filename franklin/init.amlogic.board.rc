@@ -31,3 +31,8 @@ on boot
 #NET LED
     chmod 666 sys/class/leds/net_green/brightness
     chmod 666 sys/class/leds/net_red/brightness
+
+#IR blaster
+    chmod 666 /sys/devices/virtual/meson-irblaster/irblaster1/carrier_freq
+    chmod 666 /sys/devices/virtual/meson-irblaster/irblaster1/duty_cycle
+    chmod 666 /sys/devices/virtual/meson-irblaster/irblaster1/send
