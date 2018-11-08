@@ -6,8 +6,8 @@ $(call inherit-product-if-exists,vendor/google/products/gms.mk)
 # Overrides
 PRODUCT_NAME := cid
 PRODUCT_DEVICE := cid
-PRODUCT_BRAND := boundary
-PRODUCT_MANUFACTURER := boundary
+PRODUCT_BRAND := CredenceID
+PRODUCT_MANUFACTURER := CredenceID
 KERNEL_IMX_PATH := vendor/boundary
 UBOOT_IMX_PATH := vendor/boundary
 
