@@ -59,8 +59,7 @@ PRODUCT_PACKAGES += \
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
     PhotoTable \
-    OTAUpgrade \
-    Provision
+    OTAUpgrade
 
 PRODUCT_PACKAGES += \
     LiveWallpapers \
