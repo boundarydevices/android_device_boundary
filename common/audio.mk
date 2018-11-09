@@ -40,7 +40,8 @@ PRODUCT_PACKAGES += \
     libbalance \
     libhpeqwrapper \
     libsrswrapper \
-    libtreblebasswrapper
+    libtreblebasswrapper \
+    libvirtualsurround \
 
 #PRODUCT_COPY_FILES += \
 #    $(TARGET_PRODUCT_DIR)/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \

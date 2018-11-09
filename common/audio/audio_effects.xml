@@ -14,6 +14,7 @@
         <library name="balance" path="libbalance.so"/>
         <library name="srs" path="libsrswrapper.so"/>
         <library name="treblebass" path="libtreblebasswrapper.so"/>
+        <library name="virtualsurround" path="libvirtualsurround.so"/>
     </libraries>
     <effects>
         <effect name="bassboost" library="bundle" uuid="8631f300-72e2-11df-b57e-0002a5d5c51b"/>
@@ -35,6 +36,7 @@
         <effect name="balance" library="balance" uuid="6f33b3a0-578e-11e5-892f-0002a5d5c51b"/>
         <effect name="srs" library="srs" uuid="8a857720-0209-11e2-a9d8-0002a5d5c51b"/>
         <effect name="treblebass" library="treblebass" uuid="76733af0-2889-11e2-81c1-0800200c9a66"/>
+        <effect name="virtualsurround" library="virtualsurround" uuid="c8459cd3-4400-4859-b76b-e12cc2aa67ce"/>
     </effects>
     <!--preprocess>
         <stream type="voice_communication">
