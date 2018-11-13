@@ -14,8 +14,8 @@ ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
 ifneq ($(TARGET_KERNEL_BUILT_FROM_SOURCE), true)
-TARGET_PREBUILT_KERNEL := device/amlogic/t962x2_x301-kernel/Image.gz
-LOCAL_DTB := device/amlogic/t962x2_x301-kernel/t962x2_x301.dtb
+TARGET_PREBUILT_KERNEL := device/amlogic/t962x2_skt-kernel/Image.gz
+LOCAL_DTB := device/amlogic/t962x2_skt-kernel/t962x2_skt.dtb
 
 $(TARGET_PREBUILT_KERNEL): $(INSTALLED_BOARDDTB_TARGET)
 	@echo "cp kernel modules"
@@ -59,7 +59,7 @@ else
 -include device/amlogic/common/tb_modules.mk
 -include device/amlogic/common/tuner/tuner_modules.mk
 
-KERNEL_DEVICETREE := tl1_t962x2_x301
+KERNEL_DEVICETREE := tl1_t962x2_skt
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 
 ifndef KERNEL_A32_SUPPORT
