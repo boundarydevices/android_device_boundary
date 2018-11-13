@@ -83,8 +83,14 @@ endif
 ifeq ($(TARGET_WITH_CODEC_EXT), true)
 PRODUCT_PACKAGES += \
    libavenhancements
+
+ifeq (,$(wildcard $(BOARD_AML_VENDOR_PATH)/frameworks/av/AmFFmpegAdapter))
+ifeq (,$(wildcard $(BOARD_AML_VENDOR_PATH)/AmFFmpegAdapter))
 PRODUCT_COPY_FILES += \
-   vendor/amlogic/common/prebuilt/libmedia/libavenhancements/vendor/lib/libavenhancements.so:$(TARGET_COPY_OUT_VENDOR)/lib/libavenhancements.so \
+   $(BOARD_AML_VENDOR_PATH)/prebuilt/libmedia/libavenhancements/vendor/lib/libavenhancements.so:$(TARGET_COPY_OUT_VENDOR)/lib/libavenhancements.so \
+
+endif
+endif
 
 endif
 
