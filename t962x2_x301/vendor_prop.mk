@@ -25,19 +25,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.has.realoutputmode=true \
     ro.vendor.platform.need.display.hdmicec=true
 
-# tmp add for no firstapi
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.has.mbxuimode=true \
-    ro.platform.has.tvuimode=true \
-    ro.platform.customize_tvsetting=true \
-    ro.platform.has.realoutputmode=true \
-    ro.platform.need.display.hdmicec=true \
-    ro.platform.is.tv=1 \
-    ro.platform.support.dolbyvision=true \
-    ro.platform.disable.audiorawout=false \
-    ro.platform.support.dts=true \
-    ro.platform.support.dolby=true
-
 #camera max to 720p
 #PRODUCT_PROPERTY_OVERRIDES += \
     #ro.camera.preview.MaxSize=1280x720 \
@@ -85,22 +72,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.amplayer.seekkeyframe=true \
-    media.amsuperplayer.enable=true \
-    media.amplayer.enable-acodecs=ac3,eac3,rm,dts \
-    media.amplayer.enable=true \
-    media.amsuperplayer.m4aplayer=STAGEFRIGHT_PLAYER \
-    media.amsuperplayer.defplayer=PV_PLAYER \
-    media.amplayer.thumbnail=true \
-    media.amplayer.dsource4local=1 \
-    media.amplayer.dropwaitxms=100 \
-    media.arm.audio.decoder=ape,flac,dts,ac3,eac3,wma,wmapro,mp3,aac,vorbis,raac,cook,amr,pcm,adpcm,aac_latm,rm \
-    media.wfd.use-pcm-audio=false \
-    media.wfd.videoresolution-type=1 \
-    media.wfd.videoresolution-group=0 \
-    media.wfd.videoframerate=24 \
-    media.wfd.video-bitrate=2000000 \
-    media.html5videowin.enable=1
+    media.support.dolbyvision = true
 
 #platform support dolby vision
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -161,7 +133,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #enable/disable afbc
 PRODUCT_PROPERTY_OVERRIDES += \
-    osd.afbcd.enable=1 \
+    osd.afbcd.enable=0 \
     vendor.sys.sf.debug.nohwc=true
 
 # low memory for 1G
@@ -191,3 +163,18 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #this property is used for DVR
 PRODUCT_PROPERTY_OVERRIDES +=  \
     tv.dtv.rec.path=/data/vendor_de/0
+
+#bootvideo
+#0                      |050
+#^                      |
+#|                      |
+#0:bootanim             |
+#1:bootanim + bootvideo |
+#2:bootvideo + bootanim |
+#3:bootvideo            |
+#others:bootanim        |
+#-----------------------|050
+#050:default volume value, volume range 0~100
+#note that the high position 0 can not be omitted
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.media.bootvideo=0050

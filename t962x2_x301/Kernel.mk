@@ -59,7 +59,7 @@ else
 -include device/amlogic/common/tb_modules.mk
 -include device/amlogic/common/tuner/tuner_modules.mk
 
-KERNEL_DEVICETREE := tl1_pxp
+KERNEL_DEVICETREE := tl1_t962x2_skt
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 
 ifndef KERNEL_A32_SUPPORT
