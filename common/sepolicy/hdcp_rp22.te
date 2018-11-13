@@ -12,7 +12,7 @@ allow hdcp_rp22 hdcp_rp22_exec:file {entrypoint read};
 
 allow hdcp_rp22 sysfs:file rw_file_perms;
 
-allow hdcp_rp22 param_tv_file:dir  { search read write open add_name remove_name rmdir };
+allow hdcp_rp22 param_tv_file:dir  { search create read write open add_name remove_name rmdir };
 allow hdcp_rp22 param_tv_file:file { create open read write setattr getattr lock unlink };
 allow hdcp_rp22 kmsg_device:chr_file {write};
 allow hdcp_rp22 device:dir {write};
