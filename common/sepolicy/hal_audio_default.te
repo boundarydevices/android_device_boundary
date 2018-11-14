@@ -27,4 +27,6 @@ allow hal_audio_default uio_device:chr_file { open read write };
 allow hal_audio_default system_app:binder call;
 allow hal_audio_default tv_prop:file { read getattr open };
 allow hal_audio_default hidraw_audio_device:chr_file { create read write open ioctl};
-
+allow hal_audio_default device:dir {read open};
+allow hal_audio_default btmic_data_file:dir {write read open add_name search};
+allow hal_audio_default btmic_data_file:file {write open create};

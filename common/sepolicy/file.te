@@ -78,3 +78,6 @@ type hdcp_file, file_type, data_file_type, core_data_file_type;
 
 #for app jni lib
 type app_jni_lib_file, vendor_file_type, file_type;
+
+# /data/btmic/
+type btmic_data_file, file_type, data_file_type;

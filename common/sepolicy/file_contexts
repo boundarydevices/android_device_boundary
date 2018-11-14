@@ -4,6 +4,7 @@
 /data/media_rw/sdcard1  		u:object_r:media_rw_data_file:s0
 /data/tee(/.*)?         		u:object_r:tee_droid_data_file:s0
 /data/droidota(/.*)?			u:object_r:update_data_file:s0
+/data/vendor/btmic(/.*)?		        u:object_r:btmic_data_file:s0
 /data/misc/wifi/sockets     u:object_r:wifi_socket:s0
 /data/misc/hdcp             u:object_r:hdcp_file:s0
 
