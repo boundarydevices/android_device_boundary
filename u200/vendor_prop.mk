@@ -1,5 +1,4 @@
 # Copyright (C) 2011 Amlogic Inc
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -156,3 +155,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.media.bootvideo=0050
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.platform.hdmi.device_type=4

@@ -171,3 +171,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.media.bootvideo=0050
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.platform.hdmi.device_type=4

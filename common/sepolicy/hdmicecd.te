@@ -16,3 +16,5 @@ allow hdmicecd system_control:binder { call transfer };
 allow hdmicecd systemcontrol_hwservice:hwservice_manager { find };
 
 allow hdmicecd { hal_tv_cec_default system_app }:binder { call transfer };
+
+allow hdmicecd vendor_platform_prop:file { open read getattr };
