@@ -17,6 +17,7 @@
 GPU_TARGET_PLATFORM := default_8a
 GPU_TYPE:=dvalin
 GPU_ARCH:=bifrost
+GPU_VULKAN_VERSION?=r15p0
 GPU_DRV_VERSION?=r15p0
 GRALLOC_USE_GRALLOC1_API:=1
 GRALLOC_DISABLE_FRAMEBUFFER_HAL:=1
@@ -29,8 +30,23 @@ PRODUCT_PACKAGES += \
 endif
 
 # The OpenGL ES API level that is natively supported by this device.
+ifeq ($(BOARD_INSTALL_VULKAN), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+		ro.opengles.version=196610 \
+		android.hardware.vulkan.version=4194307 \
+		android.hardware.vulkan.level=0
+else
 PRODUCT_PROPERTY_OVERRIDES += \
 		ro.opengles.version=196610
+endif
 
+ifeq ($(BOARD_INSTALL_VULKAN), true)
+PRODUCT_COPY_FILES += \
+		frameworks/native/data/etc/android.hardware.opengles.aep.xml:vendor/etc/permissions/android.hardware.opengles.aep.xml \
+		frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:vendor/etc/permissions/android.hardware.vulkan.version.xml \
+		frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:vendor/etc/permissions/android.hardware.vulkan.compute.xml \
+		frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:vendor/etc/permissions/android.hardware.vulkan.level.xml
+else
 PRODUCT_COPY_FILES += \
 		frameworks/native/data/etc/android.hardware.opengles.aep.xml:vendor/etc/permissions/android.hardware.opengles.aep.xml
+endif
