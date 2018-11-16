@@ -78,9 +78,6 @@
          format is UMTS|LTE|... -->
     <string translatable="false" name="config_radio_access_family">GSM | WCDMA | LTE | CDMA | EVDO</string>
 
-    <!-- <integer name="config_LTE_RSRP_threshold_type">1</integer> -->
-    <integer name="config_LTE_RSRP_threshold_type">0</integer>
-
     <!-- MMS user agent string -->
     <string name="config_mms_user_agent" translatable="false">CyanogenMod</string>
 
