@@ -230,7 +230,7 @@ PRODUCT_COPY_FILES += \
 
 #WIFI_MODULE := rtl8188eu
 #MULTI_WIFI_SUPPORT = true
-WIFI_MODULE := AP62x8
+WIFI_MODULE := AP6255
 WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
 
@@ -249,7 +249,6 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 BOARD_HAVE_BLUETOOTH := true
 BCM_BLUETOOTH_LPM_ENABLE := true
 BCMBT_SUPPORT := true
-BCM_USB_BT := true
 include device/amlogic/common/bluetooth.mk
 
 
