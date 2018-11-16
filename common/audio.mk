@@ -25,16 +25,7 @@ PRODUCT_PACKAGES += \
     libparameter \
     libamadec_omx_api \
     libfaad    \
-    libape     \
     libmad     \
-    libflac    \
-    libcook    \
-    libraac    \
-    libamr     \
-    libpcm     \
-    libadpcm   \
-    libpcm_wfd \
-    libaac_helix \
     libamadec_wfd_out \
     libavl \
     libbalance \

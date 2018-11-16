@@ -228,16 +228,7 @@ PRODUCT_PACKAGES += libmedia_amlogic \
 #audio
 PRODUCT_PACKAGES += libamadec_omx_api \
     libfaad    \
-    libape     \
     libmad     \
-    libflac    \
-    libcook    \
-    libraac    \
-    libamr     \
-    libpcm     \
-    libadpcm   \
-    libpcm_wfd \
-    libaac_helix \
     libamadec_wfd_out
 else
 #no libplayer but have amnuplayer
