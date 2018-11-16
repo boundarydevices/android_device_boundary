@@ -1,5 +1,7 @@
+allow mediaextractor init:unix_stream_socket { connectto };
 get_prop(mediaextractor, media_prop)
 get_prop(mediaextractor, vendor_default_prop)
+get_prop(mediaextractor, vendor_platform_prop)
 
 allow mediaextractor vfat:file { read getattr };
 allow mediaextractor fuseblk:file { read getattr };
