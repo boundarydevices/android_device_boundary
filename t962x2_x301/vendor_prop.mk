@@ -147,6 +147,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=40.5f \
     ro.hwui.layer_cache_size=33.75f
 
+#disable timeshift
+PRODUCT_PROPERTY_OVERRIDES += \
+    tv.dtv.tf.disable=true
+
 # crypto volume
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.crypto.volume.filenames_mode=aes-256-cts
