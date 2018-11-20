@@ -1,5 +1,7 @@
 ui_print("update logo.img...");
 package_extract_file("logo.img", "/dev/block/logo");
+ui_print("update dtbo.img...");
+package_extract_file("dtbo.img", "/dev/block/dtbo");
 ui_print("update dtb.img...");
 backup_data_cache(dtb, /cache/recovery/);
 write_dtb_image(package_extract_file("dt.img"));
