@@ -151,6 +151,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.jit.codecachesize=0
 
+# low memory dalvik
+PRODUCT_PROPERTY_OVERRIDES += \
+  dalvik.vm.heapgrowthlimit=160m \
+  dalvik.vm.heapmaxfree=4m \
+  dalvik.vm.heapsize=224m \
+  dalvik.vm.heapstartsize=4m
+
 # hwui
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=40.5f \
