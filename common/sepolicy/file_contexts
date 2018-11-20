@@ -179,6 +179,7 @@
 
 /vendor/etc/mesondisplay.cfg                                    u:object_r:vendor_app_file:s0
 /sys/class/display2/mode                                        u:object_r:sysfs_display:s0
+/sys/class/display/mode                                         u:object_r:sysfs_display:s0
 
 /sys/class/video/video_layer1_state                             u:object_r:sysfs_display:s0
 /sys/class/graphics(/.*)?                                       u:object_r:sysfs_display:s0
