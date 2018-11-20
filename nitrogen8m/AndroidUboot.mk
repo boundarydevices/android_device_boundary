@@ -10,6 +10,10 @@ define build_uboot
 	cp -v $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/lpddr4_pmu_train_2d_imem.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
 	cp -v $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/bl31.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
 	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ clean; \
-	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=iMX8M DTBS=imx8mq-nitrogen8m.dtb flash_hdmi_spl_uboot; \
-	cp -v $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/flash.bin $(PRODUCT_OUT)/boot/u-boot.$(strip $(2));
+	SZ=$(patsubst %_,,$(strip $(2))); \
+	if [ "$$SZ" = "$(strip $(2))" ] ; then \
+		SZ=2g; \
+	fi; \
+	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=iMX8M DTBS=imx8mq-nitrogen8m.dtb u-boot-lpddr4-$$SZ.hdmibin; \
+	cp -v $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/u-boot-lpddr4-$$SZ.hdmibin $(PRODUCT_OUT)/boot/u-boot.$(strip $(2));
 endef
