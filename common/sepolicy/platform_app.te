@@ -18,3 +18,6 @@ allow platform_app tvserver:binder { call transfer };
 
 allow platform_app imageserver_hwservice:hwservice_manager { find };
 allow platform_app imageserver:binder { call transfer };
+
+allow platform_app dtvkitserver_hwservice:hwservice_manager { find };
+allow platform_app dtvkitserver:binder {call transfer};

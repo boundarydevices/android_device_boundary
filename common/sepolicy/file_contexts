@@ -265,8 +265,9 @@
 /vendor/bin/tee_preload_fw    u:object_r:firmload_exec:s0
 
 /vendor/bin/tvserver          u:object_r:tvserver_exec:s0
+/vendor/bin/dtvkitserver      u:object_r:dtvkitserver_exec:s0
 #/vendor/bin/wlan_fwloader    u:object_r:wlan_fwloader_exec:s0
-/vendor/xbin/bcmdl   	      u:object_r:bcmdl_exec:s0
+/vendor/xbin/bcmdl            u:object_r:bcmdl_exec:s0
 
 /vendor/bin/miracast_hdcp2    u:object_r:miracast_hdcp2_exec:s0
 

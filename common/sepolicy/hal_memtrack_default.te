@@ -85,3 +85,5 @@ allow hal_memtrack_default hal_drm_clearkey:dir search;
 allow hal_memtrack_default hdcp_tx22:dir search;
 allow hal_memtrack_default hdcp_rx22:dir { search read };
 allow hal_memtrack_default hdcp_rx22:file { read open getattr };
+allow hal_memtrack_default dtvkitserver:dir {search};
+allow hal_memtrack_default dtvkitserver:file {read open getattr};
