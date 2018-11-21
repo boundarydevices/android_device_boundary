@@ -1,2 +1,0 @@
-on boot
-    insmod /vendor/lib/modules/8822bs.ko ifname=wlan0 if2name=p2p0

@@ -1,3 +1,0 @@
-kso_enable=0
-ccode=CN
-regrev=38
