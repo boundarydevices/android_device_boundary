@@ -3,6 +3,7 @@ ro.media.               u:object_r:media_prop:s0
 sys.media.              u:object_r:media_prop:s0
 sys.subtitle.           u:object_r:media_prop:s0
 ro.audio.               u:object_r:media_prop:s0
+ro.af.                  u:object_r:media_prop:s0
 persist.vendor.audio.   u:object_r:media_prop:s0
 persist.vendor.media.   u:object_r:media_prop:s0
 drm.                    u:object_r:media_prop:s0

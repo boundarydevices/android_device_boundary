@@ -502,6 +502,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.PQ.enable=true
 
+#set audioflinger heapsize,for lowramdevice
+#the default af heap size is 1M,it is not enough
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.af.client_heap_size_kbyte=1536
+
 #fix android.permission2.cts.ProtectedBroadcastsTest
 #PRODUCT_PACKAGES += \
 #    TeleService
