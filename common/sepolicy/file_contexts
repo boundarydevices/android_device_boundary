@@ -165,6 +165,7 @@
 /sys/class/amhdmitx/amhdmitx0/hdcp_mode                         u:object_r:sysfs_amhdmitx:s0
 /sys/class/amhdmitx/amhdmitx0/avmute                            u:object_r:sysfs_amhdmitx:s0
 /sys/class/amhdmitx/amhdmitx0/disp_cap                          u:object_r:sysfs_amhdmitx:s0
+/sys/class/amhdmitx/amhdmitx0/hdr_cap                           u:object_r:sysfs_amhdmitx:s0
 /sys/module/amvdec_h265/parameters/double_write_mode            u:object_r:sysfs_amvdec:s0
 
 /sys/devices/virtual/remote/amremote(/.*)?                      u:object_r:sysfs_remote:s0
