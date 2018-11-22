@@ -59,7 +59,7 @@ KERNEL_DEVICETREE := g12b_a311d_w400
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
-DTBO_DEVICETREE := common_overlay_dt
+DTBO_DEVICETREE := common_overlay_dt android_p_overlay_dt
 
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 

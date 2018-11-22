@@ -124,7 +124,7 @@ endif
 BOARD_PREBUILT_DTBOIMAGE := out/target/product/$(PRODUCT_DIR)/$(PRODUCT_DIR)-kernel/dtbo.img
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
-BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=0
+BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=0,1
 
 ifneq ($(USE_USB_AS_HOST),true)
 BOARD_KERNEL_CMDLINE += --cmdline "otg_device=1"

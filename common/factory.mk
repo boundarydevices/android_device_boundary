@@ -151,9 +151,12 @@ ifeq ($(BOARD_AVB_ENABLE),true)
 	  --partition_name dtb
 endif
 
+DTBOS:=$(foreach dtbo, $(DTBO_DEVICETREE), $(KERNEL_OUT)/$(KERNEL_DEVICETREE_DIR)/$(dtbo).dtbo)
 $(BOARD_PREBUILT_DTBOIMAGE): $(INSTALLED_BOARDDTB_TARGET) | $(DTCTOOL) $(DTIMGTOOL)
-	$(DTCTOOL) -@ -O dtb -o $(PRODUCT_OUT)/$(DTBO_DEVICETREE).dtbo $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(DTBO_DEVICETREE).dts
-	$(DTIMGTOOL) create $@ $(PRODUCT_OUT)/$(DTBO_DEVICETREE).dtbo
+	$(foreach aDtos, $(DTBO_DEVICETREE), \
+	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(strip $(aDtos)).dtbo; \
+	)
+	$(DTIMGTOOL) create $@ $(DTBOS)
 	@echo "Instaled $@"
 
 .PHONY: dtbimage

@@ -66,7 +66,7 @@ KERNEL_DEVICETREE := gxl_p241_1g gxl_p241_v2-1g
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
-DTBO_DEVICETREE := common_overlay_dt
+DTBO_DEVICETREE := common_overlay_dt android_p_overlay_dt
 
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 

@@ -56,7 +56,7 @@ KERNEL_DEVICETREE := gxl_p212_1g
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
-DTBO_DEVICETREE := common_overlay_dt
+DTBO_DEVICETREE := common_overlay_dt android_p_overlay_dt
 
 WIFI_MODULE := multiwifi
 
