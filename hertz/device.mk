@@ -70,6 +70,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab1:recovery/root/etc/remote.tab1 \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab2:recovery/root/etc/remote.tab2 \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab3:recovery/root/etc/remote.tab3 \
+    device/amlogic/common/recovery/busybox:recovery/root/sbin/busybox \
     device/amlogic/$(PRODUCT_DIR)/recovery/sh:recovery/root/sbin/sh
 
 # remote IME config file

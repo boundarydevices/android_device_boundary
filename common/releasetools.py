@@ -187,14 +187,17 @@ def FullOTA_Assertions(info):
     common.ZipWriteStr(info.output_zip, "bootloader.img", bootloader_img)
   if OPTIONS.ota_zip_check:
     info.script.AppendExtra('if ota_zip_check() == "1" then')
-    info.script.AppendExtra('set_bootloader_env("upgrade_step", "3");')
     info.script.AppendExtra('backup_data_cache(dtb, /cache/recovery/);')
-    info.script.AppendExtra('write_dtb_image(package_extract_file("dt.img"));')
     info.script.AppendExtra('backup_data_cache(recovery, /cache/recovery/);')
+    info.script.AppendExtra('set_bootloader_env("upgrade_step", "3");')
+    info.script.AppendExtra('write_dtb_image(package_extract_file("dt.img"));')
     info.script.WriteRawImage("/recovery", "recovery.img")
+    info.script.AppendExtra('backup_update_package("/dev/block/mmcblk0", "1894");')
     if OPTIONS.ota_partition_change:
       info.script.AppendExtra('ui_print("update bootloader.img...");')
       info.script.AppendExtra('write_bootloader_image(package_extract_file("bootloader.img"));')
+    info.script.AppendExtra('set_bootloader_env("upgrade_step", "2");')
+    info.script.AppendExtra('set_bootloader_env("upgrade_step", "3");')
     info.script.AppendExtra('reboot_recovery();')
     info.script.AppendExtra('else')
 
@@ -251,11 +254,11 @@ package_extract_file("vbmeta.img", "/dev/block/vbmeta");""")
   info.script.AppendExtra('if get_update_stage() == "2" then')
   info.script.FormatPartition("/data")
   info.script.FormatPartition("/metadata")
+  info.script.FormatPartition("/tee")
   info.script.AppendExtra('wipe_cache();')
   info.script.AppendExtra('set_update_stage("0");')
   info.script.AppendExtra('endif;')
 
-  info.script.FormatPartition("/param")
   SetBootloaderEnv(info.script, "upgrade_step", "1")
   SetBootloaderEnv(info.script, "force_auto_update", "false")
 
@@ -284,7 +287,7 @@ def IncrementalOTA_InstallBegin(info):
 def IncrementalOTA_ImageCheck(info, name):
   source_image = False; target_image = False; updating_image = False;
 
-  image_path = name.upper() + "/" + name
+  image_path = "IMAGES/" + name + ".img"
   image_name = name + ".img"
 
   if HasTargetImage(info.source_zip, image_path):
@@ -303,7 +306,7 @@ def IncrementalOTA_ImageCheck(info, name):
     message_process = "install " + name + " image..."
     info.script.Print(message_process);
     common.ZipWriteStr(info.output_zip, image_name, target_image.data)
-    if name == "dtb":
+    if name == "dt":
       info.script.WriteDtbImage(image_name)
     else:
       info.script.WriteRawImage("/" + name, image_name)
@@ -318,5 +321,8 @@ def IncrementalOTA_ImageCheck(info, name):
 def IncrementalOTA_InstallEnd(info):
   print "amlogic extensions:IncrementalOTA_InstallEnd"
   IncrementalOTA_ImageCheck(info, "logo");
-  IncrementalOTA_ImageCheck(info, "dtb");
+  IncrementalOTA_ImageCheck(info, "dt");
+  IncrementalOTA_ImageCheck(info, "recovery");
+  IncrementalOTA_ImageCheck(info, "vbmeta");
+  info.script.FormatPartition("/metadata")
   IncrementalOTA_ImageCheck(info, "bootloader");
