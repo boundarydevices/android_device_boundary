@@ -73,3 +73,5 @@ allow tvserver vendor_data_file:file { unlink write create open read getattr };
 
 allow tvserver sysfs_amhdmitx:dir search;
 allow tvserver sysfs_amhdmitx:file { write open read getattr };
+
+allow tvserver hdmicecd:binder { call transfer };
