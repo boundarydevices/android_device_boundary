@@ -69,3 +69,5 @@ allow system_app codec_device:chr_file { open read write ioctl getattr};
 allow system_app param_tv_file:file { create open read write setattr getattr lock unlink };
 allow system_app param_tv_file:dir { search read open write add_name remove_name getattr };
 
+allow system_app subtitle_device:chr_file rw_file_perms;
+
