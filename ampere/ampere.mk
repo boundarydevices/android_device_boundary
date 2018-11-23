@@ -218,7 +218,7 @@ PRODUCT_COPY_FILES += \
 #########################################################################
 
 #MULTI_WIFI_SUPPORT := true
-WIFI_MODULE := bcm4356
+WIFI_MODULE := BCMWIFI
 WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
 

@@ -230,7 +230,7 @@ PRODUCT_COPY_FILES += \
 
 #WIFI_MODULE := rtl8188eu
 #MULTI_WIFI_SUPPORT = true
-WIFI_MODULE := AP6256
+WIFI_MODULE := BCMWIFI
 WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
 
