@@ -185,6 +185,7 @@
 
 /sys/devices/virtual/amhdmitx/amhdmitx0/hdmi_audio/state        u:object_r:sysfs_hdmi:s0
 /sys/devices/virtual/thermal/thermal_zone0/mode                 u:object_r:sysfs_display:s0
+/sys/devices/platform/aml_pm/suspend_reason                     u:object_r:sysfs_pm:s0
 
 /acct/uid/cgroup.procs                                          u:object_r:reco_file:s0
 /acct/cgroup.procs                                              u:object_r:reco_file:s0

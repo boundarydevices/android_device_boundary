@@ -63,6 +63,7 @@ allow system_app sysfs_video:dir { search };
 allow system_app sysfs_video:file r_file_perms;
 allow system_app sysfs_amhdmitx:dir search;
 allow system_app sysfs_amhdmitx:file { getattr open read };
+allow system_app sysfs_pm:file r_file_perms;
 allow system_app vendor_app_file:file { read open getattr execute };
 allow system_app dvb_device:chr_file { open read write ioctl };
 allow system_app codec_device:chr_file { open read write ioctl getattr};
