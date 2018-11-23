@@ -1,5 +1,9 @@
 $(call inherit-product, device/amlogic/common/core_amlogic.mk)
 
+
+PRODUCT_PACKAGES += \
+    imageserver
+
 ifeq ($(TARGET_BUILD_LIVETV),true)
 #TV input HAL
 PRODUCT_PACKAGES += \
@@ -42,7 +46,6 @@ endif
 # DLNA
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
-    imageserver \
     DLNA
 endif
 
