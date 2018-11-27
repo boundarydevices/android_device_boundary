@@ -36,3 +36,5 @@ allow system_server sysfs_display:file { read write open getattr };
 allow system_server hal_audio_default:file write;
 
 allow system_server mediaprovider:file { write open };
+
+allow system_server dvb_device:chr_file rw_file_perms;
