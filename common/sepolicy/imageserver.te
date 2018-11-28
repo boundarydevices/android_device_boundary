@@ -26,5 +26,6 @@ allow imageserver kernel:system module_request;
 allow imageserver tmpfs:dir { getattr search };
 allow imageserver sysfs_video:file rw_file_perms;
 allow imageserver { sysfs_video sysfs_cec sysfs_am_vecm }:dir { search };
+allow imageserver fuseblk:file { read open getattr };
 set_prop(imageserver, hwservicemanager_prop)
 get_prop(imageserver, hwservicemanager_prop)
