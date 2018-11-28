@@ -250,9 +250,9 @@ endif
 #
 #########################################################################
 
-WIFI_MODULE := rtl8188eu
-#MULTI_WIFI_SUPPORT = true
-WIFI_BUILD_IN := true
+#WIFI_MODULE := rtl8188eu
+MULTI_WIFI_SUPPORT = true
+#WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
 
 # Change this to match target country

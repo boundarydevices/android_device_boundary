@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Amlogic Inc
+# Copyright (C) 2011 Amlogic Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 # This file is the build configuration for a full Android
 # build for Meson reference board.
 #
-PRODUCT_DIR := curie
-ANDROID_BUILD_TYPE := 32
+
+PRODUCT_DIR := t962x2_t309
 
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
@@ -33,7 +33,7 @@ endif
 endif
 
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/vendor_prop.mk)
-$(call inherit-product, device/amlogic/common/products/mbox/product_mbox.mk)
+$(call inherit-product, device/amlogic/common/products/tv/product_tv.mk)
 $(call inherit-product, device/amlogic/$(PRODUCT_DIR)/device.mk)
 $(call inherit-product-if-exists, vendor/google/products/gms.mk)
 #########################################################################
@@ -70,34 +70,28 @@ endif
 endif
 endif
 
-# curie:
-
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-
 PRODUCT_PROPERTY_OVERRIDES += \
         sys.fb.bits=32 \
-        ro.hdmi.device_type=4 \
-        persist.sys.hdmi.keep_awake=false
+        ro.hdmi.device_type=0
 
-PRODUCT_NAME := curie
-PRODUCT_DEVICE := curie
+PRODUCT_NAME := t962x2_t309
+PRODUCT_DEVICE := t962x2_t309
 PRODUCT_BRAND := Droidlogic
-PRODUCT_MODEL := curie
+PRODUCT_MODEL := t962x2_t309
 PRODUCT_MANUFACTURER := Droidlogic
 
 TARGET_KERNEL_BUILT_FROM_SOURCE := true
 
-PRODUCT_TYPE := mbox
+PRODUCT_TYPE := tv
 
 WITH_LIBPLAYER_MODULE := false
 
+BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
+BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
+BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
+
 OTA_UP_PART_NUM_CHANGED := true
 
-BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
-
-BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
-
-BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 #AB_OTA_UPDATER :=true
 BUILD_WITH_AVB := true
 
@@ -109,37 +103,29 @@ BOARD_AVB_KEY_PATH := device/amlogic/common/security/testkey_rsa2048.pem
 BOARD_AVB_ROLLBACK_INDEX := 0
 endif
 
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-
 ifeq ($(AB_OTA_UPDATER),true)
 AB_OTA_PARTITIONS := \
     boot \
     system \
     vendor \
-    vbmeta \
-    odm \
-    dtbo \
-    product
+    odm
 
 TARGET_BOOTLOADER_CONTROL_BLOCK := true
 TARGET_NO_RECOVERY := true
-BOARD_USES_RECOVERY_AS_BOOT := true
-BOARD_USES_SYSTEM_OTHER_ODEX := true
-
-TARGET_PARTITION_DTSI := partition_mbox_ab_P_32.dtsi
-
-ifeq ($(BOARD_BUILD_DISABLED_VBMETAIMAGE), true)
-TARGET_FIRMWARE_DTSI := firmware_ab.dtsi
+ifneq ($(BUILD_WITH_AVB),true)
+TARGET_PARTITION_DTSI := partition_mbox_ab.dtsi
 else
-TARGET_FIRMWARE_DTSI := firmware_avb_ab.dtsi
+TARGET_PARTITION_DTSI := partition_mbox_ab_avb.dtsi
 endif
 else
 TARGET_NO_RECOVERY := false
 
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
 ifeq ($(ANDROID_BUILD_TYPE), 64)
 TARGET_PARTITION_DTSI := partition_mbox_normal_P_64.dtsi
 else
-TARGET_PARTITION_DTSI := partition_mbox_p241_P.dtsi
+TARGET_PARTITION_DTSI := partition_mbox_normal_P_32.dtsi
 endif
 
 ifneq ($(BUILD_WITH_AVB),true)
@@ -162,28 +148,27 @@ endif
 
 BOARD_CACHEIMAGE_PARTITION_SIZE := 69206016
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 25165824
 endif
 
 #########Support compiling out encrypted zip/aml_upgrade_package.img directly
 #PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY := true
-#PRODUCT_AML_SECURE_BOOT_VERSION3 := true#use v3 tool instead of v2
+#PRODUCT_AML_SECURE_BOOT_VERSION3 := true
 ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
-PRODUCT_AML_SECUREBOOT_RSAKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/gxl_p241_v1/aml-key
-PRODUCT_AML_SECUREBOOT_AESKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/gxl_p241_v1/aml-key
-PRODUCT_SBV3_SIGBL_TOOL  := ./bootloader/uboot-repo/fip/stool/amlogic-sign-gxl.sh -s gxl
+PRODUCT_AML_SECUREBOOT_RSAKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/txlx_t962x_r311_v1/aml-key
+PRODUCT_AML_SECUREBOOT_AESKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/txlx_t962x_r311_v1/aml-key
+PRODUCT_SBV3_SIGBL_TOOL  := ./bootloader/uboot-repo/fip/stool/amlogic-sign-gxl.sh -s txlx
 PRODUCT_SBV3_SIGIMG_TOOL := ./bootloader/uboot-repo/fip/stool/signing-tool-gxl-dev/kernel.encrypt.signed.bash
 else
-PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/gxl_p241_v1/aml-user-key.sig
-PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./bootloader/uboot-repo/fip/gxl/aml_encrypt_gxl
+PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/txlx_t962x_r311_v1/aml-user-key.sig
+PRODUCT_AML_SECUREBOOT_SIGNTOOL := /bootloader/uboot-repo/fip/txlx/aml_encrypt_txlx
 PRODUCT_AML_SECUREBOOT_SIGNBOOTLOADER := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --bootsig \
 						--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY) \
-						--aeskey enable
+						--aeskey enable --level v3
 PRODUCT_AML_SECUREBOOT_SIGNIMAGE := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --imgsig \
 					--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY)
 PRODUCT_AML_SECUREBOOT_SIGBIN	:= $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --binsig \
 					--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY)
-endif # ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
+endif #ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
 
 ########################################################################
 #
@@ -199,6 +184,14 @@ endif
 
 ########################################################################
 #
+#                           Tuner
+#
+########################################################################
+TUNER_MODULE := mxl661
+include device/amlogic/common/tuner/tuner.mk
+
+########################################################################
+#
 #                           CTS
 #
 ########################################################################
@@ -207,9 +200,15 @@ BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 1
 BOARD_PLAYREADY_LEVEL := 1
 TARGET_BUILD_CTS:= true
 TARGET_BUILD_NETFLIX:= true
-TARGET_BUILD_NETFLIX_MGKID := true
 endif
 ########################################################################
+
+########################################################################
+#
+#                           Live TV
+#
+########################################################################
+TARGET_BUILD_LIVETV := true
 
 #########################################################################
 #
@@ -228,13 +227,8 @@ PRODUCT_PACKAGES += \
 	slideshow
 endif
 
-ifeq ($(AB_OTA_UPDATER),true)
-PRODUCT_COPY_FILES += \
-    device/amlogic/$(PRODUCT_DIR)/fstab.ab.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
-else
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/fstab.system.amlogic:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.amlogic
-endif
 
 #########################################################################
 #
@@ -242,7 +236,8 @@ endif
 #
 #########################################################################
 
-MULTI_WIFI_SUPPORT := true
+#WIFI_MODULE := rtl8188eu
+MULTI_WIFI_SUPPORT = true
 #WIFI_MODULE := BCMWIFI
 #WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
@@ -250,7 +245,8 @@ include device/amlogic/common/wifi.mk
 # Change this to match target country
 # 11 North America; 14 Japan; 13 rest of world
 PRODUCT_DEFAULT_WIFI_CHANNELS := 11
-
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/wifi/config.txt:system/etc/wifi/4354/config.txt
 
 #########################################################################
 #
@@ -259,8 +255,8 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 #########################################################################
 
 BOARD_HAVE_BLUETOOTH := true
-BLUETOOTH_MODULE := BCMBT
 BCM_BLUETOOTH_LPM_ENABLE := true
+BLUETOOTH_MODULE := BCMBT
 include device/amlogic/common/bluetooth.mk
 
 
@@ -299,8 +295,11 @@ include device/amlogic/common/audio.mk
 #
 #########################################################################
 
+ifneq ($(TARGET_BUILD_CTS), true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
+    frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
+    frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml
+endif
 
 
 
@@ -320,7 +319,6 @@ BUILD_WITH_VIEWRIGHT_WEB := false
 #verimatrix stb
 BUILD_WITH_VIEWRIGHT_STB := false
 #########################################################################
-
 
 
 #DRM Widevine
@@ -356,7 +354,7 @@ PRODUCT_LOCALES := en_US en_AU en_IN fr_FR it_IT es_ES et_EE de_DE nl_NL cs_CZ p
 #
 #################################################################################
 #ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
-#BUILD_WITH_PPPOE := true
+#BUILD_WITH_PPPOE := false
 #endif
 
 ifeq ($(BUILD_WITH_PPPOE),true)
@@ -386,10 +384,10 @@ BOARD_USES_USB_PM := true
 include device/amlogic/common/software.mk
 ifeq ($(TARGET_BUILD_GOOGLE_ATV),true)
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=213
+    ro.sf.lcd_density=320
 else
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=160
+    ro.sf.lcd_density=240
 endif
 
 
@@ -400,7 +398,7 @@ endif
 #########################################################################
 ifeq ($(BUILD_WITH_AVB),true)
 PRODUCT_PACKAGES += \
-	bootctrl.amlogic \
+	bootctrl.avb \
 	libavb_user
 endif
 
@@ -415,25 +413,11 @@ PRODUCT_PACKAGES += \
     update_verifier \
     delta_generator \
     brillo_update_payload \
-    android.hardware.boot@1.0 \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service
-
-PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cp_system_other_odex=1
-
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
 endif
 
-include device/amlogic/common/gpu/mali450-user-arm64.mk
+include device/amlogic/common/gpu/dvalin-user-arm64.mk
 
 #########################################################################
 #
@@ -441,7 +425,6 @@ include device/amlogic/common/gpu/mali450-user-arm64.mk
 #                          must put in the end of mk files
 #########################################################################
 AUTO_PATCH_SHELL_FILE := vendor/amlogic/common/tools/auto_patch/auto_patch.sh
-AUTO_PATCH_AB := vendor/amlogic/common/tools/auto_patch/auto_patch_ab.sh
 HAVE_WRITED_SHELL_FILE := $(shell test -f $(AUTO_PATCH_SHELL_FILE) && echo yes)
 
 ifneq ($(TARGET_BUILD_LIVETV),true)
@@ -452,7 +435,4 @@ TARGET_BUILD_GOOGLE_ATV := false
 endif
 ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
 $(warning $(shell ($(AUTO_PATCH_SHELL_FILE) $(TARGET_BUILD_LIVETV) $(TARGET_BUILD_GOOGLE_ATV))))
-ifeq ($(AB_OTA_UPDATER),true)
-$(warning $(shell ($(AUTO_PATCH_AB) $(PRODUCT_DIR))))
-endif
 endif

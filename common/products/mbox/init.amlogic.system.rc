@@ -409,6 +409,13 @@ service watchdogd /sbin/watchdogd 10 20
     disabled
     seclabel u:r:watchdogd:s0
 
+#wifi firmware_path
+on property:wlan.driver.status=ok
+   chown system wifi /sys/module/dhd/parameters/firmware_path
+   chmod 0660 /sys/module/dhd/parameters/firmware_path
+   chown system wifi /sys/module/bcmdhd/parameters/firmware_path
+   chmod 0660 /sys/module/bcmdhd/parameters/firmware_path
+   setprop wifi.direct.interface p2p-dev-wlan0
 
 # on userdebug and eng builds, enable kgdb on the serial console
 on property:ro.debuggable=1

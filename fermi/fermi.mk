@@ -238,9 +238,9 @@ endif
 #
 #########################################################################
 
-#MULTI_WIFI_SUPPORT := true
-WIFI_MODULE := BCMWIFI
-WIFI_BUILD_IN := true
+MULTI_WIFI_SUPPORT := true
+#WIFI_MODULE := BCMWIFI
+#WIFI_BUILD_IN := true
 include device/amlogic/common/wifi.mk
 
 # Change this to match target country
