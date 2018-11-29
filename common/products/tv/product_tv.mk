@@ -36,7 +36,6 @@ PRODUCT_PACKAGES += \
     libam_sysfs
 
 PRODUCT_PACKAGES += \
-    imageserver \
     busybox \
     utility_busybox
 
@@ -47,6 +46,7 @@ PRODUCT_PACKAGES += \
 # DLNA
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
+    imageserver \
     DLNA
 endif
 
