@@ -141,10 +141,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # 1G JIT config
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.jit.codecachesize=0
-# 1G hwui
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.texture_cache_size=40.5f \
-    ro.hwui.layer_cache_size=33.75f
 
 #disable timeshift
 PRODUCT_PROPERTY_OVERRIDES += \

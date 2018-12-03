@@ -30,8 +30,3 @@ endif
 # The OpenGL ES API level that is natively supported by this device.
 PRODUCT_PROPERTY_OVERRIDES += \
 		ro.opengles.version=131072
-
-PRODUCT_PROPERTY_OVERRIDES += \
-        debug.hwui.render_dirty_regions=false \
-        ro.hwui.texture_cache_size=64.0f \
-		debug.hwui.use_buffer_age=false
