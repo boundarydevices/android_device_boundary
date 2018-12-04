@@ -31,7 +31,7 @@ on boot
     symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
     setprop sys.usb.configfs 1
-    setprop sys.usb.controller "c9100000.dwc2_a"
+    setprop sys.usb.controller ${sys.usb.controller}
 
 service console /sbin/sh
     seclabel u:r:shell:s0
