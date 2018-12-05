@@ -71,7 +71,7 @@ endif
 
 #atbm8881
 ifeq ($(TUNER_MODULE), atbm8881)
-ifeq ($(KERNEL_A32_SUPPORT), true)
+ifneq ($(KERNEL_A32_SUPPORT), false)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/atbm8881_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/atbm8881_fe.ko
 else

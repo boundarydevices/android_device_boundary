@@ -95,6 +95,11 @@ BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
 
 BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
+
+ifndef KERNEL_A32_SUPPORT
+KERNEL_A32_SUPPORT := true
+endif
+
 #AB_OTA_UPDATER :=true
 BUILD_WITH_AVB := true
 

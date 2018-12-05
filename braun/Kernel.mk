@@ -58,8 +58,6 @@ else
 -include device/amlogic/common/tuner/tuner_modules.mk
 
 KERNEL_DEVICETREE := gxl_p230_2g
-KERNEL_DEFCONFIG := meson64_defconfig
-KERNEL_ARCH := arm64
 
 DTBO_DEVICETREE := android_p_overlay_dt
 
