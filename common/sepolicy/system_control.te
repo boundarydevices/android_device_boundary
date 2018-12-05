@@ -124,7 +124,7 @@ allow system_control droidvold:binder { call };
 allow system_control { video_device amvecm_device }:chr_file  { read write open ioctl getattr };
 allow system_control di0_device:chr_file { read write open ioctl };
 allow system_control param_tv_file:dir { write search add_name create };
-allow system_control param_tv_file:file { create read write open getattr };
+allow system_control param_tv_file:file { create read write open getattr ioctl};
 allow system_control sysfs_amhdmitx:dir search;
 allow system_control sysfs_amvdec:file { create open read write getattr};
 allow system_control sysfs_xbmc:file { read open };
@@ -141,3 +141,6 @@ allow system_control hdmirx0_device:chr_file { read write open ioctl getattr };
 
 allow system_control exported_system_prop:file { read } ;
 get_prop(system_control, exported_system_prop);
+
+allow system_control tvserver:binder { call transfer };
+allow system_control tvserver_hwservice:hwservice_manager find;
