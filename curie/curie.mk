@@ -167,6 +167,13 @@ endif
 
 #########Support compiling out encrypted zip/aml_upgrade_package.img directly
 #PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY := true
+#PRODUCT_AML_SECURE_BOOT_VERSION3 := true#use v3 tool instead of v2
+ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
+PRODUCT_AML_SECUREBOOT_RSAKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/gxl_p241_v1/aml-key
+PRODUCT_AML_SECUREBOOT_AESKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/gxl_p241_v1/aml-key
+PRODUCT_SBV3_SIGBL_TOOL  := ./bootloader/uboot-repo/fip/stool/amlogic-sign-gxl.sh -s gxl
+PRODUCT_SBV3_SIGIMG_TOOL := ./bootloader/uboot-repo/fip/stool/signing-tool-gxl-dev/kernel.encrypt.signed.bash
+else
 PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/gxl_p241_v1/aml-user-key.sig
 PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./bootloader/uboot-repo/fip/gxl/aml_encrypt_gxl
 PRODUCT_AML_SECUREBOOT_SIGNBOOTLOADER := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --bootsig \
@@ -176,6 +183,7 @@ PRODUCT_AML_SECUREBOOT_SIGNIMAGE := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --imgsig 
 					--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY)
 PRODUCT_AML_SECUREBOOT_SIGBIN	:= $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --binsig \
 					--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY)
+endif # ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
 
 ########################################################################
 #

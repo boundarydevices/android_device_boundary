@@ -168,13 +168,15 @@ ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	#using signed boot/recovery directly if 'PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY true'
 INSTALLED_AML_ENC_RADIOIMAGE_TARGET = $(addprefix $(PRODUCT_OUT)/,$(filter %.img.encrypt,$(BUILT_IMAGES)))
 BOARD_PACK_RADIOIMAGES += $(basename $(filter %.img.encrypt,$(BUILT_IMAGES)))
-INSTALLED_AML_ENC_RADIOIMAGE_TARGET += $(PRODUCT_OUT)/dt.img.unsigned.img
 $(warning echo "radio add $(filter %.img.encrypt,$(BUILT_IMAGES))")
 else
-INSTALLED_RADIOIMAGE_TARGET += $(addprefix $(PRODUCT_OUT)/,$(filter dt.img bootloader.img,$(BUILT_IMAGES)))
+INSTALLED_RADIOIMAGE_TARGET += $(addprefix $(PRODUCT_OUT)/,$(filter dt.img bootloader.img boot.img,$(BUILT_IMAGES)))
 BOARD_PACK_RADIOIMAGES += $(filter dt.img bootloader.img,$(BUILT_IMAGES))
 $(warning echo "radio add dt and bootloader")
 endif#ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+
+INSTALLED_RADIOIMAGE_TARGET += $(addprefix $(PRODUCT_OUT)/,system.img vendor.img vbmeta.img)
+BOARD_PACK_RADIOIMAGES += $(filter system.img vendor.img,$(BUILT_IMAGES))
 
 UPGRADE_FILES := \
         aml_sdc_burn.ini \
@@ -279,10 +281,18 @@ INSTALLED_AMLOGIC_BOOTLOADER_TARGET := $(PRODUCT_OUT)/bootloader.img
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	INSTALLED_AMLOGIC_BOOTLOADER_TARGET := $(INSTALLED_AMLOGIC_BOOTLOADER_TARGET).encrypt
 endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+.PHONY: aml_bootloader
+aml_bootloader : $(INSTALLED_AMLOGIC_BOOTLOADER_TARGET)
 
-$(INSTALLED_AMLOGIC_BOOTLOADER_TARGET) : $(TARGET_DEVICE_DIR)/bootloader.img
-	$(hide) cp $< $(PRODUCT_OUT)/bootloader.img
-	$(hide) $(call aml-secureboot-sign-bootloader, $@)
+BOOTLOADER_INPUT := $(TARGET_DEVICE_DIR)/bootloader.img
+ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
+	BOOTLOADER_INPUT := $(BOOTLOADER_INPUT).zip
+endif #ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
+endif # ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+$(INSTALLED_AMLOGIC_BOOTLOADER_TARGET) : $(BOOTLOADER_INPUT)
+	$(hide) cp $< $(PRODUCT_OUT)/$(notdir $<)
+	$(hide) $(call aml-secureboot-sign-bootloader, $@,$(PRODUCT_OUT)/$(notdir $<))
 	@echo "make $@: bootloader installed end"
 
 $(call dist-for-goals, droidcore, $(INSTALLED_AMLOGIC_BOOTLOADER_TARGET))
@@ -309,6 +319,36 @@ ifeq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL),true)
 endif # ifeq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL),true)
 
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
+define aml-secureboot-sign-bootloader
+	@echo -----aml-secureboot-sign-bootloader ------
+	rm $(PRODUCT_OUT)/bl_tmp -rf
+	unzip $(2) -d $(PRODUCT_OUT)/bl_tmp
+	mkdir -p $(PRODUCT_UPGRADE_OUT)
+	bash $(PRODUCT_SBV3_SIGBL_TOOL) -p $(PRODUCT_OUT)/bl_tmp \
+		-r $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR) -a $(PRODUCT_AML_SECUREBOOT_AESKEY_DIR) \
+		-o $(PRODUCT_OUT)
+	mv $(PRODUCT_OUT)/u-boot.bin.unsigned $(basename $(1))
+	mv $(PRODUCT_OUT)/u-boot.bin.signed.encrypted $(1)
+	mv $(PRODUCT_OUT)/u-boot.bin.signed.encrypted.sd.bin $(1).sd.bin
+	mv $(PRODUCT_OUT)/u-boot.bin.usb.bl2.signed.encrypted $(1).usb.bl2
+	mv $(PRODUCT_OUT)/u-boot.bin.usb.tpl.signed.encrypted $(1).usb.tpl
+	mv $(PRODUCT_OUT)/pattern.efuse $(1).encrypt.efuse
+	@echo ----- Made aml secure-boot singed bootloader: $(1) --------
+endef #define aml-secureboot-sign-bootloader
+define aml-secureboot-sign-kernel
+	@echo -----aml-secureboot-sign-kernel V3------
+	$(hide) mv -f $(1) $(basename $(1))
+	bash $(PRODUCT_SBV3_SIGIMG_TOOL) $(basename $(1)) $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR) $(1)
+	@echo ----- Made aml secure-boot singed kernel v3: $(1) --------
+endef #define aml-secureboot-sign-kernel
+define aml-secureboot-sign-bin
+	@echo -----aml-secureboot-sign-bin v3------
+	$(hide) mv -f $(1) $(basename $(1))
+	bash $(PRODUCT_SBV3_SIGIMG_TOOL) $(basename $(1)) $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR) $(1)
+	@echo ----- Made aml secure-boot singed bin v3: $(1) --------
+endef #define aml-secureboot-sign-bin
+else #follows secureboot v2
 define aml-secureboot-sign-bootloader
 	@echo -----aml-secureboot-sign-bootloader ------
 	$(hide) $(PRODUCT_AML_SECUREBOOT_SIGNBOOTLOADER) --input $(basename $(1)) --output $(1)
@@ -318,32 +358,29 @@ define aml-secureboot-sign-kernel
 	@echo -----aml-secureboot-sign-kernel ------
 	$(hide) mv -f $(1) $(basename $(1))
 	$(hide) $(PRODUCT_AML_SECUREBOOT_SIGNIMAGE) --input $(basename $(1)) --output $(1)
-	@echo ----- Made aml secure-boot singed bootloader: $(1) --------
+	@echo ----- Made aml secure-boot singed kernel: $(1) --------
 endef #define aml-secureboot-sign-kernel
 define aml-secureboot-sign-bin
 	@echo -----aml-secureboot-sign-bin------
 	$(hide) mv -f $(1) $(basename $(1))
-	$(hide) cp -f $(basename $(1)) $(basename $(1)).unsigned.img
 	$(hide) $(PRODUCT_AML_SECUREBOOT_SIGBIN) --input $(basename $(1)) --output $(1)
 	@echo ----- Made aml secure-boot singed bin: $(1) --------
 endef #define aml-secureboot-sign-bin
+endif#ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
 endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
+
+TARGET_USB_BURNING_V2_DEPEND_MODULES := $(AML_TARGET).zip #copy xx.img to $(AML_TARGET)/IMAGES for diff upgrade
 
 .PHONY:aml_upgrade
 aml_upgrade:$(INSTALLED_AML_UPGRADE_PACKAGE_TARGET)
 $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET): \
 	$(addprefix $(PRODUCT_OUT)/,$(BUILT_IMAGES)) \
 	$(UPGRADE_FILES) \
-	$(AML_TARGET).zip \
 	$(INSTALLED_AML_USER_IMAGES) \
 	$(INSTALLED_AML_LOGO) \
 	$(INSTALLED_MANIFEST_XML) \
 	$(TARGET_USB_BURNING_V2_DEPEND_MODULES)
 	mkdir -p $(PRODUCT_UPGRADE_OUT)
-	cp $(AML_TARGET)/IMAGES/system.img $(PRODUCT_OUT)/system.img
-	cp $(AML_TARGET)/IMAGES/vendor.img $(PRODUCT_OUT)/vendor.img
-	cp $(AML_TARGET)/IMAGES/vbmeta.img $(PRODUCT_OUT)/vbmeta.img
-	cp $(AML_TARGET)/IMAGES/boot.img $(PRODUCT_OUT)/boot.img
 	$(hide) $(foreach file,$(UPGRADE_FILES), \
 		echo cp $(file) $(PRODUCT_UPGRADE_OUT)/$(notdir $(file)); \
 		cp -f $(file) $(PRODUCT_UPGRADE_OUT)/$(notdir $(file)); \
@@ -412,10 +449,6 @@ endif
 aml_fastboot_zip:$(INSTALLED_AML_FASTBOOT_ZIP)
 $(INSTALLED_AML_FASTBOOT_ZIP): $(addprefix $(PRODUCT_OUT)/,$(FASTBOOT_IMAGES)) $(BUILT_ODMIMAGE_TARGET) $(AML_TARGET).zip
 	echo "install $@"
-	cp $(AML_TARGET)/IMAGES/system.img $(PRODUCT_OUT)/system.img
-	cp $(AML_TARGET)/IMAGES/vendor.img $(PRODUCT_OUT)/vendor.img
-	cp $(AML_TARGET)/IMAGES/vbmeta.img $(PRODUCT_OUT)/vbmeta.img
-	cp $(AML_TARGET)/IMAGES/boot.img $(PRODUCT_OUT)/boot.img
 	rm -rf $(PRODUCT_OUT)/fastboot
 	mkdir -p $(PRODUCT_OUT)/fastboot
 	cd $(PRODUCT_OUT); cp $(FASTBOOT_IMAGES) fastboot/;
