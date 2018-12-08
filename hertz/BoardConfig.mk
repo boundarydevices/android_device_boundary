@@ -122,7 +122,7 @@ endif
 BOARD_PREBUILT_DTBOIMAGE := device/amlogic/hertz-kernel/dtbo.img
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
-BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=0,1
+BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=0
 
 ifneq ($(USE_USB_AS_HOST),true)
 BOARD_KERNEL_CMDLINE += --cmdline "otg_device=1"

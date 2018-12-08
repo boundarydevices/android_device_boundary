@@ -52,7 +52,7 @@ BUILD_CONFIG := $(KERNEL_DEFCONFIG)
 endif
 endif
 
-DTBO_DEVICETREE := common_overlay_dt android_p_overlay_dt
+DTBO_DEVICETREE := android_p_overlay_dt
 
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
 TARGET_AMLOGIC_INT_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/uImage

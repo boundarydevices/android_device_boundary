@@ -88,7 +88,7 @@ BUILD_CONFIG := $(KERNEL_DEFCONFIG)
 endif
 endif
 
-DTBO_DEVICETREE := common_overlay_dt android_p_overlay_dt
+DTBO_DEVICETREE := android_p_overlay_dt
 
 WIFI_MODULE := multiwifi
 

@@ -28,7 +28,7 @@ KERNEL_DEVICETREE := g12a_s905y2_u221
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
-DTBO_DEVICETREE := common_overlay_dt android_p_overlay_dt
+DTBO_DEVICETREE := android_p_overlay_dt
 
 WIFI_MODULE := multiwifi
 
