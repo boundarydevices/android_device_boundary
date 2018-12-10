@@ -29,6 +29,7 @@
 #TARGET_WITH_MEDIA_EXT_LEVEL := 3
 #set on some prducts,used libplayer.
 BUILD_WITH_BOOT_PLAYER :=true
+BUILD_WITH_ES_PLAYER := true
 
 #########################################################################
 #
@@ -264,6 +265,11 @@ PRODUCT_PACKAGES += bootplayer \
     alsalib-cardsaliasesconf
 
 endif
+
+ifeq ($(BUILD_WITH_ES_PLAYER),true)
+PRODUCT_PACKAGES += esplayer
+endif
+
 ifeq ($(BUILD_WITH_TEEVIDEOFIRM_LOAD),true)
 PRODUCT_PACKAGES += \
     libtee_load_video_fw \
