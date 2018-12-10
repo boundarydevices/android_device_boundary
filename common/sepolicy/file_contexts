@@ -92,6 +92,7 @@
 /dev/otz_client     			u:object_r:tee_device:s0
 /dev/picdec         			u:object_r:picture_device:s0
 /dev/rtk_btusb      			u:object_r:hci_attach_dev:s0
+/dev/rtkbt_dev      			u:object_r:hci_attach_dev:s0
 /dev/socket/dig	        		u:object_r:dig_socket:s0
 /dev/socket/pppoe_wrapper		u:object_r:pppoe_wrapper_socket:s0
 /dev/sw_sync           			u:object_r:sw_sync_device:s0
