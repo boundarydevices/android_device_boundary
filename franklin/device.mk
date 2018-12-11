@@ -51,9 +51,15 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/PQ/pq_default.ini:$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig/pq/pq_default.ini
 
 ifeq ($(USE_XML_AUDIO_POLICY_CONF), 1)
+ifneq ($(TARGET_BUILD_LIVETV),true)
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     device/amlogic/$(PRODUCT_DIR)/files/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy_configuration_livetv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
+endif
 else
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf
@@ -78,6 +84,7 @@ PRODUCT_COPY_FILES += \
 
 # remote IME config file
 PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,device/amlogic/$(PRODUCT_DIR)/files/tv/tvconfig/,/$(TARGET_COPY_OUT_VENDOR)/etc/tvconfig) \
     device/amlogic/common/products/mbox/Vendor_0001_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_0001_Product_0001.kl \
     device/amlogic/common/products/mbox/Vendor_1915_Product_0001.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_1915_Product_0001.kl
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)

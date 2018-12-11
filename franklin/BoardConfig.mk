@@ -187,6 +187,7 @@ TARGET_USES_MKE2FS := true
 DEVICE_MANIFEST_FILE := device/amlogic/$(PRODUCT_DIR)/manifest.xml
 #DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml
 
+BOARD_HAS_ADTV := true
 BOARD_VNDK_VERSION := current
 BOARD_BOOTIMG_HEADER_VERSION := 1
 BOARD_INCLUDE_RECOVERY_DTBO := true
