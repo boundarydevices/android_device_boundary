@@ -69,6 +69,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 
+
+PRODUCT_PACKAGES += \
+    OTAUpgrade
+
 #Tvsettings
 PRODUCT_PACKAGES += \
     TvSettings \
