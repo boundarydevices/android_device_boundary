@@ -127,6 +127,7 @@
 /sys/class/amaudio/debug                                        u:object_r:sysfs_audio:s0
 /sys/class/tsync/firstapts                                      u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/pts_audio                                      u:object_r:sysfs_xbmc:s0
+/sys/class/tsync/pts_video                                     u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/event                                          u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/pts_pcrscr                                     u:object_r:sysfs_xbmc:s0
 
@@ -294,6 +295,9 @@
 /vendor/lib(64)?/libjnidtvepgscanner\.so   u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libjniuevent\.so            u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libsubjni\.so        u:object_r:vendor_app_file:s0
+/vendor/lib(64)?/libtvsubtitle_tv\.so        u:object_r:vendor_app_file:s0
+/vendor/lib(64)?/libjnifont_tv\.so        u:object_r:vendor_app_file:s0
+
 
 /dev/hidraw[0-9]*	u:object_r:hidraw_audio_device:s0
 #The final space is necessary. Please don't delete it.
