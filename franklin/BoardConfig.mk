@@ -48,7 +48,6 @@ TARGET_NO_RADIOIMAGE := true
 
 TARGET_BOARD_PLATFORM := franklin
 TARGET_BOOTLOADER_BOARD_NAME := franklin
-BOARD_INSTALL_VULKAN := true
 
 # Allow passing `--second` to mkbootimg via 2ndbootloader.
 TARGET_BOOTLOADER_IS_2ND := true

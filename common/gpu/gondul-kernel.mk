@@ -19,8 +19,8 @@ BOARD_VENDOR_KERNEL_MODULES += \
 
 GPU_TYPE:=gondul
 GPU_ARCH:=bifrost
-GPU_DRV_VERSION?=r12p0
-GPU_MODS_OUT:=obj/lib_vendor
+GPU_DRV_VERSION?=r16p0
+GPU_MODS_OUT:=obj/lib_vendor/
 
 CUSTOM_IMAGE_MODULES += mali
 

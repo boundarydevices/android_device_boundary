@@ -17,9 +17,12 @@
 GPU_TARGET_PLATFORM := default_8a
 GPU_TYPE:=gondul
 GPU_ARCH:=bifrost
-GPU_DRV_VERSION?=r12p0
+GPU_DRV_VERSION?=r16p0
 GRALLOC_USE_GRALLOC1_API:=1
 GRALLOC_DISABLE_FRAMEBUFFER_HAL:=1
+
+#BOARD_INSTALL_VULKAN default is false                                                                                                                                                                  #It should defined in $(TARGET_PRODUCT).mk if Vulkan is needed.
+BOARD_INSTALL_VULKAN ?= false
 
 ifeq ($(GRALLOC_USE_GRALLOC1_API), 1)
 PRODUCT_PACKAGES += \
@@ -32,5 +35,13 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
 		ro.opengles.version=196610
 
+ifeq ($(BOARD_INSTALL_VULKAN), true)
+PRODUCT_COPY_FILES += \
+		frameworks/native/data/etc/android.hardware.opengles.aep.xml:vendor/etc/permissions/android.hardware.opengles.aep.xml \
+		frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:vendor/etc/permissions/android.hardware.vulkan.version.xml \
+		frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:vendor/etc/permissions/android.hardware.vulkan.compute.xml \
+		frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:vendor/etc/permissions/android.hardware.vulkan.level.xml
+else
 PRODUCT_COPY_FILES += \
 		frameworks/native/data/etc/android.hardware.opengles.aep.xml:vendor/etc/permissions/android.hardware.opengles.aep.xml
+endif
