@@ -153,6 +153,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=40.5f \
     ro.hwui.layer_cache_size=33.75f
 
+# default enable sdr to hdr
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.sdr2hdr.enable=true
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=0
 
