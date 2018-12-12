@@ -2263,6 +2263,112 @@
         <channel_entry frequency="890000000" bandwidth="8" ofdm_mode="dtmb" id="65"/>
         <channel_entry frequency="898000000" bandwidth="8" ofdm_mode="dtmb" id="66"/>
     </channel_list>
+    <channel_list name="CN,Default DTMB EXTRA ALL" fe_type="dtmb">
+        <channel_entry frequency="52500000" bandwidth="8"  ofdm_mode="dtmb" id="1" display="DS-1"/>
+        <channel_entry frequency="60500000" bandwidth="8"  ofdm_mode="dtmb" id="2" display="DS-2"/>
+        <channel_entry frequency="68500000" bandwidth="8"  ofdm_mode="dtmb" id="3" display="DS-3"/>
+        <channel_entry frequency="80000000" bandwidth="8"  ofdm_mode="dtmb" id="4" display="DS-4"/>
+        <channel_entry frequency="88000000" bandwidth="8"  ofdm_mode="dtmb" id="5" display="DS-5"/>
+        <channel_entry frequency="115000000" bandwidth="8" ofdm_mode="dtmb" id="6" display="DS-5+1"/>
+        <channel_entry frequency="123000000" bandwidth="8" ofdm_mode="dtmb" id="7" display="DS-5+2"/>
+        <channel_entry frequency="131000000" bandwidth="8" ofdm_mode="dtmb" id="8" display="DS-5+3"/>
+        <channel_entry frequency="139000000" bandwidth="8" ofdm_mode="dtmb" id="9" display="DS-5+4"/>
+        <channel_entry frequency="147000000" bandwidth="8" ofdm_mode="dtmb" id="10" display="DS-5+5"/>
+        <channel_entry frequency="155000000" bandwidth="8" ofdm_mode="dtmb" id="11" display="DS-5+6"/>
+        <channel_entry frequency="163000000" bandwidth="8" ofdm_mode="dtmb" id="12" display="DS-5+7"/>
+        <channel_entry frequency="171000000" bandwidth="8" ofdm_mode="dtmb" id="13" display="DS-6"/>
+        <channel_entry frequency="179000000" bandwidth="8" ofdm_mode="dtmb" id="14" display="DS-7"/>
+        <channel_entry frequency="187000000" bandwidth="8" ofdm_mode="dtmb" id="15" display="DS-8"/>
+        <channel_entry frequency="195000000" bandwidth="8" ofdm_mode="dtmb" id="16" display="DS-9"/>
+        <channel_entry frequency="203000000" bandwidth="8" ofdm_mode="dtmb" id="17" display="DS-10"/>
+        <channel_entry frequency="211000000" bandwidth="8" ofdm_mode="dtmb" id="18" display="DS-11"/>
+        <channel_entry frequency="219000000" bandwidth="8" ofdm_mode="dtmb" id="19" display="DS-12"/>
+        <channel_entry frequency="227000000" bandwidth="8" ofdm_mode="dtmb" id="20" display="DS-12+1"/>
+        <channel_entry frequency="235000000" bandwidth="8" ofdm_mode="dtmb" id="21" display="DS-12+2"/>
+        <channel_entry frequency="243000000" bandwidth="8" ofdm_mode="dtmb" id="22" display="DS-12+3"/>
+        <channel_entry frequency="251000000" bandwidth="8" ofdm_mode="dtmb" id="23" display="DS-12+4"/>
+        <channel_entry frequency="259000000" bandwidth="8" ofdm_mode="dtmb" id="24" display="DS-12+5"/>
+        <channel_entry frequency="267000000" bandwidth="8" ofdm_mode="dtmb" id="25" display="DS-12+6"/>
+        <channel_entry frequency="275000000" bandwidth="8" ofdm_mode="dtmb" id="26" display="DS-12+7"/>
+        <channel_entry frequency="283000000" bandwidth="8" ofdm_mode="dtmb" id="27" display="DS-12+8"/>
+        <channel_entry frequency="291000000" bandwidth="8" ofdm_mode="dtmb" id="28" display="DS-12+9"/>
+        <channel_entry frequency="299000000" bandwidth="8" ofdm_mode="dtmb" id="29" display="DS-12+10"/>
+        <channel_entry frequency="307000000" bandwidth="8" ofdm_mode="dtmb" id="30" display="DS-12+11"/>
+        <channel_entry frequency="315000000" bandwidth="8" ofdm_mode="dtmb" id="31" display="DS-12+12"/>
+        <channel_entry frequency="323000000" bandwidth="8" ofdm_mode="dtmb" id="32" display="DS-12+13"/>
+        <channel_entry frequency="331000000" bandwidth="8" ofdm_mode="dtmb" id="33" display="DS-12+14"/>
+        <channel_entry frequency="339000000" bandwidth="8" ofdm_mode="dtmb" id="34" display="DS-12+15"/>
+        <channel_entry frequency="347000000" bandwidth="8" ofdm_mode="dtmb" id="35" display="DS-12+16"/>
+        <channel_entry frequency="355000000" bandwidth="8" ofdm_mode="dtmb" id="36" display="DS-12+17"/>
+        <channel_entry frequency="363000000" bandwidth="8" ofdm_mode="dtmb" id="37" display="DS-12+18"/>
+        <channel_entry frequency="371000000" bandwidth="8" ofdm_mode="dtmb" id="38" display="DS-12+19"/>
+        <channel_entry frequency="379000000" bandwidth="8" ofdm_mode="dtmb" id="39" display="DS-12+20"/>
+        <channel_entry frequency="387000000" bandwidth="8" ofdm_mode="dtmb" id="40" display="DS-12+21"/>
+        <channel_entry frequency="395000000" bandwidth="8" ofdm_mode="dtmb" id="41" display="DS-12+22"/>
+        <channel_entry frequency="403000000" bandwidth="8" ofdm_mode="dtmb" id="42" display="DS-12+23"/>
+        <channel_entry frequency="411000000" bandwidth="8" ofdm_mode="dtmb" id="43" display="DS-12+24"/>
+        <channel_entry frequency="419000000" bandwidth="8" ofdm_mode="dtmb" id="44" display="DS-12+25"/>
+        <channel_entry frequency="427000000" bandwidth="8" ofdm_mode="dtmb" id="45" display="DS-12+26"/>
+        <channel_entry frequency="435000000" bandwidth="8" ofdm_mode="dtmb" id="46" display="DS-12+27"/>
+        <channel_entry frequency="443000000" bandwidth="8" ofdm_mode="dtmb" id="47" display="DS-12+28"/>
+        <channel_entry frequency="451000000" bandwidth="8" ofdm_mode="dtmb" id="48" display="DS-12+29"/>
+        <channel_entry frequency="459000000" bandwidth="8" ofdm_mode="dtmb" id="49" display="DS-12+30"/>
+        <channel_entry frequency="467000000" bandwidth="8" ofdm_mode="dtmb" id="50" display="DS-12+31"/>
+        <channel_entry frequency="474000000" bandwidth="8" ofdm_mode="dtmb" id="51" display="DS-13"/>
+        <channel_entry frequency="482000000" bandwidth="8" ofdm_mode="dtmb" id="52" display="DS-14"/>
+        <channel_entry frequency="490000000" bandwidth="8" ofdm_mode="dtmb" id="53" display="DS-15"/>
+        <channel_entry frequency="498000000" bandwidth="8" ofdm_mode="dtmb" id="54" display="DS-16"/>
+        <channel_entry frequency="506000000" bandwidth="8" ofdm_mode="dtmb" id="55" display="DS-17"/>
+        <channel_entry frequency="514000000" bandwidth="8" ofdm_mode="dtmb" id="56" display="DS-18"/>
+        <channel_entry frequency="522000000" bandwidth="8" ofdm_mode="dtmb" id="57" display="DS-19"/>
+        <channel_entry frequency="530000000" bandwidth="8" ofdm_mode="dtmb" id="58" display="DS-20"/>
+        <channel_entry frequency="538000000" bandwidth="8" ofdm_mode="dtmb" id="59" display="DS-21"/>
+        <channel_entry frequency="546000000" bandwidth="8" ofdm_mode="dtmb" id="60" display="DS-22"/>
+        <channel_entry frequency="554000000" bandwidth="8" ofdm_mode="dtmb" id="61" display="DS-23"/>
+        <channel_entry frequency="562000000" bandwidth="8" ofdm_mode="dtmb" id="62" display="DS-24"/>
+        <channel_entry frequency="570000000" bandwidth="8" ofdm_mode="dtmb" id="63" display="DS-24+1"/>
+        <channel_entry frequency="578000000" bandwidth="8" ofdm_mode="dtmb" id="64" display="DS-24+2"/>
+        <channel_entry frequency="586000000" bandwidth="8" ofdm_mode="dtmb" id="65" display="DS-24+3"/>
+        <channel_entry frequency="594000000" bandwidth="8" ofdm_mode="dtmb" id="66" display="DS-24+4"/>
+        <channel_entry frequency="602000000" bandwidth="8" ofdm_mode="dtmb" id="67" display="DS-24+5"/>
+        <channel_entry frequency="610000000" bandwidth="8" ofdm_mode="dtmb" id="68" display="DS-25"/>
+        <channel_entry frequency="618000000" bandwidth="8" ofdm_mode="dtmb" id="69" display="DS-26"/>
+        <channel_entry frequency="626000000" bandwidth="8" ofdm_mode="dtmb" id="70" display="DS-27"/>
+        <channel_entry frequency="634000000" bandwidth="8" ofdm_mode="dtmb" id="71" display="DS-28"/>
+        <channel_entry frequency="642000000" bandwidth="8" ofdm_mode="dtmb" id="72" display="DS-29"/>
+        <channel_entry frequency="650000000" bandwidth="8" ofdm_mode="dtmb" id="73" display="DS-30"/>
+        <channel_entry frequency="658000000" bandwidth="8" ofdm_mode="dtmb" id="74" display="DS-31"/>
+        <channel_entry frequency="666000000" bandwidth="8" ofdm_mode="dtmb" id="75" display="DS-32"/>
+        <channel_entry frequency="674000000" bandwidth="8" ofdm_mode="dtmb" id="76" display="DS-33"/>
+        <channel_entry frequency="682000000" bandwidth="8" ofdm_mode="dtmb" id="77" display="DS-34"/>
+        <channel_entry frequency="690000000" bandwidth="8" ofdm_mode="dtmb" id="78" display="DS-35"/>
+        <channel_entry frequency="698000000" bandwidth="8" ofdm_mode="dtmb" id="79" display="DS-36"/>
+        <channel_entry frequency="706000000" bandwidth="8" ofdm_mode="dtmb" id="80" display="DS-37"/>
+        <channel_entry frequency="714000000" bandwidth="8" ofdm_mode="dtmb" id="81" display="DS-38"/>
+        <channel_entry frequency="722000000" bandwidth="8" ofdm_mode="dtmb" id="82" display="DS-39"/>
+        <channel_entry frequency="730000000" bandwidth="8" ofdm_mode="dtmb" id="83" display="DS-40"/>
+        <channel_entry frequency="738000000" bandwidth="8" ofdm_mode="dtmb" id="84" display="DS-41"/>
+        <channel_entry frequency="746000000" bandwidth="8" ofdm_mode="dtmb" id="85" display="DS-42"/>
+        <channel_entry frequency="754000000" bandwidth="8" ofdm_mode="dtmb" id="86" display="DS-43"/>
+        <channel_entry frequency="762000000" bandwidth="8" ofdm_mode="dtmb" id="87" display="DS-44"/>
+        <channel_entry frequency="770000000" bandwidth="8" ofdm_mode="dtmb" id="88" display="DS-45"/>
+        <channel_entry frequency="778000000" bandwidth="8" ofdm_mode="dtmb" id="89" display="DS-46"/>
+        <channel_entry frequency="786000000" bandwidth="8" ofdm_mode="dtmb" id="90" display="DS-47"/>
+        <channel_entry frequency="794000000" bandwidth="8" ofdm_mode="dtmb" id="91" display="DS-48"/>
+        <channel_entry frequency="802000000" bandwidth="8" ofdm_mode="dtmb" id="92" display="DS-49"/>
+        <channel_entry frequency="810000000" bandwidth="8" ofdm_mode="dtmb" id="93" display="DS-50"/>
+        <channel_entry frequency="818000000" bandwidth="8" ofdm_mode="dtmb" id="94" display="DS-51"/>
+        <channel_entry frequency="826000000" bandwidth="8" ofdm_mode="dtmb" id="95" display="DS-52"/>
+        <channel_entry frequency="834000000" bandwidth="8" ofdm_mode="dtmb" id="96" display="DS-53"/>
+        <channel_entry frequency="842000000" bandwidth="8" ofdm_mode="dtmb" id="97" display="DS-54"/>
+        <channel_entry frequency="850000000" bandwidth="8" ofdm_mode="dtmb" id="98" display="DS-55"/>
+        <channel_entry frequency="858000000" bandwidth="8" ofdm_mode="dtmb" id="99" display="DS-56"/>
+        <channel_entry frequency="866000000" bandwidth="8" ofdm_mode="dtmb" id="100" display="DS-57"/>
+        <channel_entry frequency="874000000" bandwidth="8" ofdm_mode="dtmb" id="101" display="DS-58"/>
+        <channel_entry frequency="882000000" bandwidth="8" ofdm_mode="dtmb" id="102" display="DS-59"/>
+        <channel_entry frequency="890000000" bandwidth="8" ofdm_mode="dtmb" id="103" display="DS-60"/>
+        <channel_entry frequency="898000000" bandwidth="8" ofdm_mode="dtmb" id="104" display="DS-61"/>
+    </channel_list>
     <channel_list name="BR,Default ISDBT" fe_type="isdbt">
         <channel_entry frequency="177143000" bandwidth="auto" id="2"/>
         <channel_entry frequency="183143000" bandwidth="auto" id="3"/>
@@ -2664,7 +2770,7 @@
         <channel_entry frequency="607250000" id="67"/>
         <channel_entry frequency="615250000" id="68"/>
         <channel_entry frequency="623250000" id="69"/>
-		<channel_entry frequency="631250000" id="70"/>
+        <channel_entry frequency="631250000" id="70"/>
         <channel_entry frequency="639250000" id="71"/>
         <channel_entry frequency="647250000" id="72"/>
         <channel_entry frequency="655250000" id="73"/>
