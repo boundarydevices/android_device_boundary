@@ -20,6 +20,7 @@ on fs
 	insmod /vendor/lib/modules/amvdec_real.ko
 	insmod /vendor/lib/modules/amvdec_vc1.ko
 	insmod /vendor/lib/modules/amvdec_vp9.ko
+        insmod /vendor/lib/modules/amvdec_avs2.ko
 	insmod /vendor/lib/modules/encoder.ko
 	insmod /vendor/lib/modules/vpu.ko
 
