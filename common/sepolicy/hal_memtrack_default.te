@@ -24,6 +24,7 @@ allow hal_memtrack_default hal_thermal_default:dir search;
 allow hal_memtrack_default hal_thermal_default:file { r_file_perms };
 allow hal_memtrack_default thermalserviced:dir search;
 allow hal_memtrack_default thermalserviced:file { r_file_perms };
+allow hal_memtrack_default debugfs:dir { read open };
 
 allow hal_memtrack_default incidentd:dir search;
 allow hal_memtrack_default incidentd:file { getattr open read };
@@ -37,8 +38,8 @@ allow hal_memtrack_default perfprofd:file { getattr open read };
 allow hal_memtrack_default secure_element:dir search;
 allow hal_memtrack_default secure_element:file { getattr open read };
 
-allow hal_memtrack_default { priv_app platform_app untrusted_app su drmserver installd keystore mdnsd isolated_app }:dir { search };
-allow hal_memtrack_default { priv_app platform_app untrusted_app su drmserver installd keystore mdnsd isolated_app }:file { r_file_perms };
+allow hal_memtrack_default { priv_app platform_app untrusted_app su drmserver hal_memtrack_default hal_bluetooth_default bluetooth installd keystore mdnsd isolated_app }:dir { search };
+allow hal_memtrack_default { priv_app platform_app untrusted_app su drmserver hal_bluetooth_default bluetooth installd keystore mdnsd isolated_app }:file { r_file_perms };
 
 allow hal_memtrack_default { gatekeeperd tombstoned webview_zygote zygote netd wificond sdcardd hal_camera_default hal_tv_cec_default }:dir { search };
 allow hal_memtrack_default { gatekeeperd tombstoned webview_zygote zygote netd wificond sdcardd hal_camera_default hal_tv_cec_default }:file { r_file_perms };

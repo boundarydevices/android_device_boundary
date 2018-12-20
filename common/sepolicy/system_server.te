@@ -3,6 +3,7 @@ typeattribute system_server mlstrustedsubject;
 #allow system_server vendor_file:file { getattr read open execute };
 allow system_server vendor_framework_file:dir { search getattr };
 allow system_server vendor_framework_file:file { read getattr open };
+allow system_server bluetooth:file { open read write };
 
 get_prop(system_server, media_prop)
 

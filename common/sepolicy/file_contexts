@@ -74,6 +74,7 @@
 
 /dev/bootloader     			u:object_r:bootloader_device:s0
 /dev/btusb0         			u:object_r:hci_attach_dev:s0
+/dev/stpbt                      u:object_r:device_stpbt:s0
 /dev/cec            			u:object_r:cec_device:s0
 /dev/defendkey      			u:object_r:defendkey_device:s0
 /dev/display        			u:object_r:display_device:s0

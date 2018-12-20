@@ -271,7 +271,7 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 
 BOARD_HAVE_BLUETOOTH := true
 BCM_BLUETOOTH_LPM_ENABLE := true
-BCMBT_SUPPORT := true
+BLUETOOTH_MODULE := BCMBT
 include device/amlogic/common/bluetooth.mk
 
 

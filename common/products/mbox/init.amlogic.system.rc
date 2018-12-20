@@ -150,6 +150,7 @@ on boot
     chmod 0666  /dev/audio_spdif
     chmod 0664  /sys/class/amaudio/debug
     chmod 0666 /dev/ilitek_ctrl
+    chmod 0660 /dev/wifi_power
 
 # default support XBMC
     chmod 666 /sys/class/video/axis
@@ -411,6 +412,12 @@ on property:ro.debuggable=1
     write /sys/module/kgdboc/parameters/kgdboc ttyFIQ2
     write /sys/module/fiq_debugger/parameters/kgdb_enable 1
 
+on property:vendor.sys.mtkbtdriver=true
+	insmod /vendor/lib/modules/btmtksdio.ko
+   
+on property:vendor.sys.mtkbtdriver=false
+	rmmod btmtksdio
+ 
 service remotecfg /vendor/bin/remotecfg /vendor/etc/remote.conf
     class main
     oneshot
@@ -449,6 +456,8 @@ service factoryreset /vendor/bin/factoryreset.sh
     oneshot
     seclabel u:r:install_recovery:s0
 
+
+ 
 service bugreport /system/bin/dumpstate -d -p -B -P -z \
     -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
     class main
