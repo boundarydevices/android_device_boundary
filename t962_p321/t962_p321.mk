@@ -77,7 +77,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_NAME := t962_p321
 PRODUCT_DEVICE := t962_p321
 PRODUCT_BRAND := Droidlogic
-PRODUCT_MODEL := AOSP on t962_p321
+PRODUCT_MODEL := t962_p321
 PRODUCT_MANUFACTURER := Droidlogic
 
 PRODUCT_TYPE := tv
@@ -208,8 +208,6 @@ BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 1
 BOARD_PLAYREADY_LEVEL := 1
 TARGET_BUILD_CTS:= true
 TARGET_BUILD_NETFLIX:= true
-else
-BUILD_WITH_BOOT_PLAYER := true
 endif
 ########################################################################
 

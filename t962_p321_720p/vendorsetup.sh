@@ -1,3 +1,0 @@
-add_lunch_combo t962_p321_720p-eng
-add_lunch_combo t962_p321_720p-user
-add_lunch_combo t962_p321_720p-userdebug

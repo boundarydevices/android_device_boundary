@@ -1,5 +1,4 @@
 # Copyright (C) 2011 Amlogic Inc
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -146,6 +145,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=40.5f \
     ro.hwui.layer_cache_size=33.75f
+
+#disable timeshift
+PRODUCT_PROPERTY_OVERRIDES += \
+    tv.dtv.tf.disable=true
 
 # crypto volume
 PRODUCT_PROPERTY_OVERRIDES +=  \

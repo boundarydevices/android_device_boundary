@@ -77,7 +77,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_NAME := t962x_r314
 PRODUCT_DEVICE := t962x_r314
 PRODUCT_BRAND := Droidlogic
-PRODUCT_MODEL := AOSP on t962x_r314
+PRODUCT_MODEL := t962x_r314
 PRODUCT_MANUFACTURER := Droidlogic
 
 TARGET_KERNEL_BUILT_FROM_SOURCE := true
@@ -386,6 +386,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.has.pppoe=true
 endif
+
+#################################################################################
+#
+#                                               BANDWIDTH
+#
+#################################################################################
+PRODUCT_PACKAGES += bandwidth.rc
+PRODUCT_PROPERTY_OVERRIDES +=  \
+    vendor.sys.bandwidth.enable=true
 
 #################################################################################
 #

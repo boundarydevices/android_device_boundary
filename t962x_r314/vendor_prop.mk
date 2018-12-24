@@ -71,13 +71,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable player buildin
 
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.support.dolbyvision = true
-
-#platform support dolby vision
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.platform.support.dolbyvision=true
-
 #add for video boot, 1 means use video boot, others not .
 PRODUCT_PROPERTY_OVERRIDES += \
     service.bootvideo=0
@@ -173,3 +166,6 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #note that the high position 0 can not be omitted
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.media.bootvideo=0050
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.platform.hdmi.device_type=0

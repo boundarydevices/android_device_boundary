@@ -71,13 +71,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable player buildin
 
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.support.dolbyvision = true
-
-#platform support dolby vision
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.platform.support.dolbyvision=true
-
 #add for video boot, 1 means use video boot, others not .
 PRODUCT_PROPERTY_OVERRIDES += \
     service.bootvideo=0
@@ -143,6 +136,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=40.5f \
     ro.hwui.layer_cache_size=33.75f
 
+#disable timeshift
+PRODUCT_PROPERTY_OVERRIDES += \
+    tv.dtv.tf.disable=true
+
 # crypto volume
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.crypto.volume.filenames_mode=aes-256-cts
@@ -150,14 +147,6 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 #this property is used for Android TV audio
 PRODUCT_PROPERTY_OVERRIDES +=  \
     ro.vendor.platform.is.tv=1
-
-#this property is used for timeshift
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    tv.dtv.tf.path=/data/vendor_de/0
-
-#this property is used for DVR
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    tv.dtv.rec.path=/data/vendor_de/0
 
 #bootvideo
 #0                      |050

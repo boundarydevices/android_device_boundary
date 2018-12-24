@@ -221,6 +221,15 @@
         </interface>
     </hal>
     <hal>
+        <name>vendor.amlogic.hardware.rpcserver</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IRPCServer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
         <name>vendor.amlogic.hardware.remotecontrol</name>
         <transport>hwbinder</transport>
         <version>1.0</version>

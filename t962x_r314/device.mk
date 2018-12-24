@@ -107,7 +107,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/common/video_algorithm/dnlp/dnlp_alg_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/dnlp_alg.ko
 endif
 
-PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi
+PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi tvdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 PRODUCT_CHARACTERISTICS := t962x_r314,nosdcard
