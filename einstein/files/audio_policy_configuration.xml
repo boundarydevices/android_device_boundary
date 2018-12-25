@@ -134,18 +134,6 @@
                     </gains>
                 </devicePort>
                 <devicePort tagName="Spdif" role="sink" type="AUDIO_DEVICE_OUT_SPDIF">
-                    <profile name="ac3 raw" format="AUDIO_FORMAT_AC3"
-                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
-                    <profile name="eac3 raw" format="AUDIO_FORMAT_E_AC3"
-                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000,128000,176400,192000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
-                    <profile name="dts raw" format="AUDIO_FORMAT_DTS"
-                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
-                    <profile name="iec raw" format="AUDIO_FORMAT_IEC61937"
-                             samplingRates="8000,11025,16000,22050,24000,32000,44100,48000,128000,176400,192000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
                 </devicePort>
                 <devicePort tagName="HDMI Arc" role="sink" type="AUDIO_DEVICE_OUT_HDMI_ARC">
                 </devicePort>
@@ -189,15 +177,15 @@
             <!-- route declaration, i.e. list all available sources for a given sink -->
             <routes>
                 <route type="mix" sink="Speaker"
-                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic"/>
+                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
                 <route type="mix" sink="Spdif"
-                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic"/>
+                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
                 <route type="mix" sink="HDMI Arc"
-                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic"/>
+                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
                 <route type="mix" sink="Wired Headset"
-                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic"/>
+                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
                 <route type="mix" sink="Wired Headphones"
-                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic"/>
+                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
                 <route type="mix" sink="primary input"
                        sources="Built-In Mic,Built-In Back Mic,Wired Headset Mic,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
             </routes>
