@@ -204,6 +204,7 @@ BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 1
 BOARD_PLAYREADY_LEVEL := 1
 TARGET_BUILD_CTS:= true
 TARGET_BUILD_NETFLIX:= true
+TARGET_BUILD_NETFLIX_MGKID := true
 endif
 ########################################################################
 

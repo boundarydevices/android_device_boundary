@@ -187,7 +187,13 @@ PRODUCT_PACKAGES += \
     libstagefright_soft_wmadec    \
     libstagefright_soft_ddpdcv \
 
+#for Netflix MGKID
+ifeq ($(TARGET_BUILD_NETFLIX_MGKID),true)
 
+PRODUCT_PACKAGES += libnetflixplugin \
+  00d1ca22-1764-4e35-90aa-5b8c12630764
+
+endif
 
 #for drm widevine.
 PRODUCT_PROPERTY_OVERRIDES += drm.service.enable=true
