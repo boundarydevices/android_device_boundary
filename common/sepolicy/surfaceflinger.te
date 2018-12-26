@@ -4,3 +4,6 @@ allow surfaceflinger video_device:chr_file rw_file_perms;
 
 get_prop(surfaceflinger, tv_prop)
 set_prop(surfaceflinger, ctl_default_prop)
+
+allow surfaceflinger media_prop:file { read };
+get_prop(surfaceflinger, media_prop)
