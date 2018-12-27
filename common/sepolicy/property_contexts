@@ -7,6 +7,7 @@ ro.af.                  u:object_r:media_prop:s0
 persist.vendor.audio.   u:object_r:media_prop:s0
 persist.vendor.media.   u:object_r:media_prop:s0
 drm.                    u:object_r:media_prop:s0
+audio.                  u:object_r:audio_prop:s0
 ubootenv.               u:object_r:uboot_prop:s0
 ro.ubootenv.            u:object_r:uboot_prop:s0
 const.filesystem.       u:object_r:aml_display_prop:s0
