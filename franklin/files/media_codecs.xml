@@ -265,7 +265,7 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.google.flac.encoder" type="audio/flac" />
 
         <MediaCodec name="OMX.amlogic.video.encoder.hevc" type="video/hevc" >
-            <Limit name="size" min="352x288" max="1920x1088" />
+            <Limit name="size" min="176x144" max="1920x1088" />
             <Limit name="alignment" value="16x16" />
             <Limit name="block-size" value="16x16" />
             <Limit name="blocks-per-second" min="1" max="244800" />
