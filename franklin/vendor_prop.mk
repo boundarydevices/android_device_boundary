@@ -20,7 +20,8 @@
 # Set display related config
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.has.mbxuimode=true \
-    ro.vendor.platform.has.realoutputmode=true
+    ro.vendor.platform.has.realoutputmode=true \
+    ro.vendor.platform.need.display.hdmicec=true
 
 #camera max to 720p
 #PRODUCT_PROPERTY_OVERRIDES += \
