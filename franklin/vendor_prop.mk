@@ -161,13 +161,9 @@ ifeq ($(TARGET_BUILD_LIVETV),true)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=1
 
-#this property is used for timeshift
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    tv.dtv.tf.path=/data/vendor_de/0
-
-#this property is used for DVR
-PRODUCT_PROPERTY_OVERRIDES +=  \
-    tv.dtv.rec.path=/data/vendor_de/0
+#disable timeshift
+PRODUCT_PROPERTY_OVERRIDES += \
+    tv.dtv.tf.disable=true
 
 else
 PRODUCT_PROPERTY_OVERRIDES += \
