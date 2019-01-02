@@ -376,6 +376,7 @@ aml_upgrade:$(INSTALLED_AML_UPGRADE_PACKAGE_TARGET)
 $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET): \
 	$(addprefix $(PRODUCT_OUT)/,$(BUILT_IMAGES)) \
 	$(UPGRADE_FILES) \
+	$(AML_TARGET).zip \
 	$(INSTALLED_AML_USER_IMAGES) \
 	$(INSTALLED_AML_LOGO) \
 	$(INSTALLED_MANIFEST_XML) \
@@ -386,8 +387,8 @@ $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET): \
 		cp -f $(file) $(PRODUCT_UPGRADE_OUT)/$(notdir $(file)); \
 		)
 	$(hide) $(foreach file,$(BUILT_IMAGES), \
-		echo "ln -sf $(shell readlink -f $(PRODUCT_OUT)/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file)"; \
-		ln -sf $(shell readlink -f $(PRODUCT_OUT)/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file); \
+		echo "ln -sf $(shell readlink -f $(AML_TARGET)/IMAGES/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file)"; \
+		ln -sf $(shell readlink -f $(AML_TARGET)/IMAGES/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file); \
 		)
 	@echo $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET)
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
@@ -447,7 +448,7 @@ endif
 
 .PHONY:aml_fastboot_zip
 aml_fastboot_zip:$(INSTALLED_AML_FASTBOOT_ZIP)
-$(INSTALLED_AML_FASTBOOT_ZIP): $(addprefix $(PRODUCT_OUT)/,$(FASTBOOT_IMAGES)) $(BUILT_ODMIMAGE_TARGET) $(AML_TARGET).zip
+$(INSTALLED_AML_FASTBOOT_ZIP): $(addprefix $(PRODUCT_OUT)/,$(FASTBOOT_IMAGES)) $(BUILT_ODMIMAGE_TARGET) $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET)
 	echo "install $@"
 	rm -rf $(PRODUCT_OUT)/fastboot
 	mkdir -p $(PRODUCT_OUT)/fastboot
