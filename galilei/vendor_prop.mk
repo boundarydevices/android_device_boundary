@@ -130,7 +130,7 @@ PRODUCT_PROPERTY_OVERRIDES +=  \
 
 #enable/disable afbc
 PRODUCT_PROPERTY_OVERRIDES +=  \
-    vendor.afbcd.enable=0
+    vendor.afbcd.enable=1
 
 # default enable sdr to hdr
 PRODUCT_PROPERTY_OVERRIDES += \

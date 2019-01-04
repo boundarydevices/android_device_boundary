@@ -132,7 +132,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #enable/disable afbc
 PRODUCT_PROPERTY_OVERRIDES += \
-    osd.afbcd.enable=0
+    osd.afbcd.enable=1
 
 # low memory for 1G
 PRODUCT_PROPERTY_OVERRIDES += \
