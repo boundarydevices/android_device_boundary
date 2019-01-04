@@ -22,4 +22,5 @@ ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
 $(warning $(shell ($(AUTO_PATCH_SHELL_FILE) clean)))
 endif
 
-$(call add-radio-file,bootloader.img)
+#moved to INSTALLED_RADIOIMAGE_TARGET in factory.mk for secureboot
+#$(call add-radio-file,bootloader.img)
