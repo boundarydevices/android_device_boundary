@@ -63,6 +63,10 @@ DTBO_DEVICETREE := android_p_overlay_dt
 
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 
+ifndef KERNEL_A32_SUPPORT
+KERNEL_A32_SUPPORT := true
+endif
+
 ifeq ($(KERNEL_A32_SUPPORT), true)
 KERNEL_DEFCONFIG := meson64_a32_defconfig
 KERNEL_ARCH := arm
