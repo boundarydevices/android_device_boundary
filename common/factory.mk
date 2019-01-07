@@ -8,6 +8,9 @@ BUILT_IMAGES := boot.img bootloader.img dt.img
 else
 BUILT_IMAGES := boot.img recovery.img bootloader.img dt.img
 endif
+
+VB_CHECK_IMAGES := vendor.img system.img vbmeta.img boot.img
+
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	BUILT_IMAGES := $(addsuffix .encrypt, $(BUILT_IMAGES))
 endif#ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
@@ -170,12 +173,11 @@ INSTALLED_AML_ENC_RADIOIMAGE_TARGET = $(addprefix $(PRODUCT_OUT)/,$(filter %.img
 BOARD_PACK_RADIOIMAGES += $(basename $(filter %.img.encrypt,$(BUILT_IMAGES)))
 $(warning echo "radio add $(filter %.img.encrypt,$(BUILT_IMAGES))")
 else
-INSTALLED_RADIOIMAGE_TARGET += $(addprefix $(PRODUCT_OUT)/,$(filter dt.img bootloader.img boot.img,$(BUILT_IMAGES)))
+INSTALLED_RADIOIMAGE_TARGET += $(addprefix $(PRODUCT_OUT)/,$(filter dt.img bootloader.img,$(BUILT_IMAGES)))
 BOARD_PACK_RADIOIMAGES += $(filter dt.img bootloader.img,$(BUILT_IMAGES))
 $(warning echo "radio add dt and bootloader")
 endif#ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
-INSTALLED_RADIOIMAGE_TARGET += $(addprefix $(PRODUCT_OUT)/,system.img vendor.img vbmeta.img)
 BOARD_PACK_RADIOIMAGES += $(filter system.img vendor.img,$(BUILT_IMAGES))
 
 UPGRADE_FILES := \
@@ -387,10 +389,14 @@ $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET): \
 		cp -f $(file) $(PRODUCT_UPGRADE_OUT)/$(notdir $(file)); \
 		)
 	$(hide) $(foreach file,$(BUILT_IMAGES), \
-		echo "ln -sf $(shell readlink -f $(AML_TARGET)/IMAGES/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file)"; \
-		ln -sf $(shell readlink -f $(AML_TARGET)/IMAGES/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file); \
+		echo "ln -sf $(shell readlink -f $(PRODUCT_OUT)/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file)"; \
+		ln -sf $(shell readlink -f $(PRODUCT_OUT)/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file); \
 		)
 	@echo $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET)
+	$(hide) $(foreach file,$(VB_CHECK_IMAGES), \
+		rm $(PRODUCT_UPGRADE_OUT)/$(file);\
+		ln -sf $(shell readlink -f $(AML_TARGET)/IMAGES/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file); \
+		)
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	$(hide) rm -f $(PRODUCT_UPGRADE_OUT)/bootloader.img.encrypt.*
 	$(hide) $(ACP) $(PRODUCT_OUT)/bootloader.img.encrypt.* $(PRODUCT_UPGRADE_OUT)/
