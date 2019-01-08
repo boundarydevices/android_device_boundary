@@ -29,6 +29,8 @@ on init
     write /proc/sys/kernel/panic_on_oops 1
     write /proc/sys/vm/max_map_count 1000000
 
+    write /proc/sys/vm/watermark_scale_factor 30
+    write /proc/sys/vm/min_free_kbytes 12288
     # Mount configfs for ffs
     mount configfs configfs /sys/kernel/config
 
