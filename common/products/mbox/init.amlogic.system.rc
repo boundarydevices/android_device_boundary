@@ -424,10 +424,7 @@ on property:ro.debuggable=1
 
 on property:vendor.sys.mtkbtdriver=true
 	insmod /vendor/lib/modules/btmtksdio.ko
-   
-on property:vendor.sys.mtkbtdriver=false
-	rmmod btmtksdio
- 
+
 service remotecfg /vendor/bin/remotecfg /vendor/etc/remote.conf
     class main
     oneshot
