@@ -252,7 +252,6 @@ package_extract_file("vbmeta.img", "/dev/block/vbmeta");""")
     info.script.AppendExtra('write_bootloader_image(package_extract_file("bootloader.img"));')
 
   info.script.AppendExtra('if get_update_stage() == "2" then')
-  info.script.FormatPartition("/data")
   info.script.FormatPartition("/metadata")
   info.script.FormatPartition("/tee")
   info.script.AppendExtra('wipe_cache();')
@@ -307,7 +306,7 @@ def IncrementalOTA_ImageCheck(info, name):
     info.script.Print(message_process);
     common.ZipWriteStr(info.output_zip, image_name, target_image.data)
     if name == "dt":
-      info.script.WriteDtbImage(image_name)
+      info.script.AppendExtra('write_dtb_image(package_extract_file("dt.img"));')
     else:
       info.script.WriteRawImage("/" + name, image_name)
 
