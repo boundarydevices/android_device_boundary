@@ -203,6 +203,15 @@
         </interface>
     </hal>
     <hal>
+        <name>vendor.amlogic.hardware.miracastserver</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IMiracastServer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
         <name>vendor.amlogic.hardware.hdmicec</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -280,6 +289,15 @@
         <version>2.1</version>
         <interface>
             <name>ISoundTriggerHw</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.amlogic.hardware.miracast_hdcp2</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IHDCPService</name>
             <instance>default</instance>
         </interface>
     </hal>

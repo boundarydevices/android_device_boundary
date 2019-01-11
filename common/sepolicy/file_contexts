@@ -6,7 +6,7 @@
 /data/droidota(/.*)?			u:object_r:update_data_file:s0
 /data/vendor/btmic(/.*)?		        u:object_r:btmic_data_file:s0
 /data/misc/wifi/sockets     u:object_r:wifi_socket:s0
-/data/misc/hdcp             u:object_r:hdcp_file:s0
+/data/vendor/hdcp(/.*)?         u:object_r:hdcp_file:s0
 
 /dev/amaudio_.*     			u:object_r:audio_device:s0
 /dev/amaudio2_out       		u:object_r:audio_device:s0
@@ -257,6 +257,9 @@
 /vendor/bin/tvserver          u:object_r:tvserver_exec:s0
 #/vendor/bin/wlan_fwloader    u:object_r:wlan_fwloader_exec:s0
 /vendor/xbin/bcmdl   	      u:object_r:bcmdl_exec:s0
+
+/vendor/bin/miracastserver    u:object_r:miracastserver_exec:s0
+/vendor/bin/miracast_hdcp2    u:object_r:miracast_hdcp2_exec:s0
 
 ## keylayout is vendor config file! must update!
 /(vendor|system/vendor)/usr/keylayout(/.*)?               u:object_r:vendor_configs_file:s0

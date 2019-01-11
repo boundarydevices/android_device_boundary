@@ -75,7 +75,7 @@ type sysfs_unifykey, fs_type, sysfs_type;
 type sysfs_block_ahead, fs_type, sysfs_type;
 
 type wifi_socket, file_type, data_file_type, core_data_file_type;
-type hdcp_file, file_type, data_file_type, core_data_file_type;
+type hdcp_file, file_type, data_file_type;
 
 #for app jni lib
 type app_jni_lib_file, vendor_file_type, file_type;

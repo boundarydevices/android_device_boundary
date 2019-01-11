@@ -455,6 +455,13 @@ PRODUCT_PACKAGES += \
     vendor.amlogic.hardware.droidvold@1.0_vendor \
     vendor.amlogic.hardware.droidvold-V1.0-java
 
+# Miracast HDCP2 HAL
+PRODUCT_PACKAGES += \
+    vendor.amlogic.hardware.miracast_hdcp2@1.0 \
+    miracast_hdcp2 \
+    libstagefright_hdcp \
+    807798e0-f011-11e5-a5fe0002a5d5c51b
+
 ifeq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_IS_ATV := true
 PRODUCT_COPY_FILES += \

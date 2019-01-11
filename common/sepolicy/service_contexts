@@ -9,3 +9,4 @@ tee_supplicant                              u:object_r:tee_service:s0
 tv_remote                                   u:object_r:tv_remote_service:s0
 droidmount                                  u:object_r:droidmount_service:s0
 bcmdl                                       u:object_r:bcmdl_service:s0
+miracast_hdcp2                              u:object_r:miracast_hdcp2_service:s0

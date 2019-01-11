@@ -76,6 +76,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     OTAUpgrade
 
+PRODUCT_PACKAGES += \
+    miracastserver \
+    Miracast
+
 #Tvsettings
 PRODUCT_PACKAGES += \
     TvSettings \
