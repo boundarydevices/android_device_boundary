@@ -108,14 +108,6 @@
 /dev/hidraw[0-3]			u:object_r:hidraw_device:s0
 /dev/galcore                    u:object_r:galcore_device:s0
 
-#############################
-# boot files
-#
-/boot(/.*)?                    u:object_r:boot_data_file:s0
-/factory(/.*)?                 u:object_r:factory_data_file:s0
-/swap_zram0(/.*)?              u:object_r:swap_data_file:s0
-/misc(/.*)?                    u:object_r:misc_data_file:s0
-
 /sys/devices/platform/bt-dev/rfkill/rfkill0/state	        u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/platform/bt-dev/rfkill/rfkill0/type	        u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/bt-dev.*/rfkill/rfkill0/state		        u:object_r:sysfs_bluetooth_writable:s0
@@ -238,10 +230,17 @@
 /sys/class/mpgpu/scale_mode                                     u:object_r:sysfs_mpgpu_scale:s0
 /sys/module/di/parameters/bypass_all                            u:object_r:sysfs_mpgpu_scale:s0
 
-/param(/.*)?                  u:object_r:param_tv_file:s0
+/boot(/.*)?                   u:object_r:boot_data_file:s0
+/misc(/.*)?                   u:object_r:misc_data_file:s0
 /tee(/.*)?                    u:object_r:tee_data_file:s0
+/param(/.*)?                  u:object_r:param_tv_file:s0
+/factory(/.*)?                u:object_r:factory_data_file:s0
+/swap_zram0(/.*)?             u:object_r:swap_data_file:s0
+
 /mnt/vendor/tee(/.*)?         u:object_r:tee_data_file:s0
 /mnt/vendor/param(/.*)?       u:object_r:param_tv_file:s0
+/mnt/vendor/factory(/.*)?     u:object_r:factory_data_file:s0
+/mnt/vendor/swap_zram0(/.*)?  u:object_r:swap_data_file:s0
 /mnt/vendor                   u:object_r:param_tv_file:s0
 
 #/vendor/bin/bootplayer       u:object_r:bootvideo_exec:s0

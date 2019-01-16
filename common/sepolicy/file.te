@@ -86,3 +86,4 @@ type app_jni_lib_file, vendor_file_type, file_type;
 type btmic_data_file, file_type, data_file_type;
 
 type debugfs_demod, fs_type, sysfs_type, debugfs_type;
+type debugfs_mali, fs_type, sysfs_type, debugfs_type;

@@ -2,7 +2,8 @@
 
 allow vold vold_block_device:blk_file { create write read open getattr ioctl unlink };
 
-allow vold param_tv_file:dir { ioctl open read };
+allow vold param_tv_file:dir { ioctl open read search };
+allow vold swap_data_file:dir { read open ioctl };
 
 #for hw keymaster
 allow vold drm_device:chr_file  {open read write ioctl};

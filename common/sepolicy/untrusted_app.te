@@ -6,3 +6,5 @@ allow untrusted_app fuseblk:file { read open getattr };
 allow untrusted_app vendor_file:file { read open getattr };
 
 get_prop(untrusted_app, netflix_prop)
+
+allow untrusted_app debugfs_mali:dir { search };

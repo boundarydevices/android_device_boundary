@@ -9,3 +9,4 @@ genfscon proc    /bluetooth/sleep/btwrite u:object_r:proc_bluetooth_writable:s0
 #genfscon exfat   /       u:object_r:exfat:s0
 genfscon debugfs  /demod       u:object_r:debugfs_demod:s0
 
+genfscon debugfs  /mali0       u:object_r:debugfs_mali:s0

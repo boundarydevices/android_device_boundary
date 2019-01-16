@@ -7,3 +7,5 @@ set_prop(surfaceflinger, ctl_default_prop)
 
 allow surfaceflinger media_prop:file { read };
 get_prop(surfaceflinger, media_prop)
+
+allow surfaceflinger debugfs_mali:dir { search };

@@ -1,5 +1,5 @@
 get_prop(platform_app, media_prop)
-get_prop(system_app, media_prop)
+get_prop(platform_app, vendor_platform_prop)
 
 #allow platform_app vendor_file:file { getattr read open execute };
 
@@ -21,3 +21,4 @@ allow platform_app imageserver:binder { call transfer };
 
 allow platform_app dtvkitserver_hwservice:hwservice_manager { find };
 allow platform_app dtvkitserver:binder {call transfer};
+allow platform_app debugfs_mali:dir search;

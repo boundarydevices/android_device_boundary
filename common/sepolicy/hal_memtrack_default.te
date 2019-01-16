@@ -81,9 +81,15 @@ allow hal_memtrack_default aml_core_app:file r_file_perms;
 allow hal_memtrack_default tvserver:dir search;
 allow hal_memtrack_default tvserver:file r_file_perms;
 
-allow hal_memtrack_default hal_drm_clearkey:dir search;
-allow hal_memtrack_default hdcp_tx22:dir search;
 allow hal_memtrack_default hdcp_rx22:dir { search read };
 allow hal_memtrack_default hdcp_rx22:file { read open getattr };
 allow hal_memtrack_default dtvkitserver:dir {search};
 allow hal_memtrack_default dtvkitserver:file {read open getattr};
+
+allow hal_memtrack_default debugfs_mali:dir { search read open };
+allow hal_memtrack_default debugfs_mali:file { r_file_perms };
+allow hal_memtrack_default { hal_drm_clearkey imageserver rc_server hal_wifi_supplicant_default }:dir { search };
+allow hal_memtrack_default { hal_drm_clearkey imageserver rc_server hal_wifi_supplicant_default }:file { read open getattr };
+
+allow hal_memtrack_default { miracast_hdcp2 }:dir { search read };
+allow hal_memtrack_default { miracast_hdcp2 }:file { read open getattr };

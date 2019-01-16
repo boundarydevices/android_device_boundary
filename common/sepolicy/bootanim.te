@@ -11,4 +11,5 @@ allow bootanim mediaserver_service:service_manager { find };
 allow bootanim mediaserver:binder { call transfer };
 set_prop(bootanim, system_prop)
 get_prop(bootanim, media_prop)
+allow bootanim debugfs_mali:dir { search };
 

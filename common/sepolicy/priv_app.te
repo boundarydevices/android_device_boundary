@@ -24,3 +24,5 @@ allow priv_app system_control:binder call;
 allow priv_app tvserver:binder { call transfer };
 allow priv_app param_tv_file:file { create open read write setattr getattr lock unlink };
 allow priv_app param_tv_file:dir { search read open write add_name remove_name getattr };
+
+allow priv_app vendor_platform_prop:file { read open getattr };
