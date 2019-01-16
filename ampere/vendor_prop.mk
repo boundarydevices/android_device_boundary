@@ -25,14 +25,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #camera max to 720p
 #PRODUCT_PROPERTY_OVERRIDES += \
-    #ro.camera.preview.MaxSize=1280x720 \
-    #ro.camera.preview.LimitedRate=1280x720x30,640x480x30,320x240x28
+    #ro.media.camera_preview.maxsize=1280x720 \
+    #ro.media.camera_preview.limitedrate=1280x720x30,640x480x30,320x240x28
 
 #camera max to 1080p
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.camera.preview.MaxSize=1920x1080 \
-    ro.camera.preview.LimitedRate=1920x1080x30,1280x720x30,640x480x30,320x240x28 \
-    ro.camera.preview.UseMJPEG=1
+    ro.media.camera_preview.maxsize=1920x1080 \
+    ro.media.camera_preview.limitedrate=1920x1080x30,1280x720x30,640x480x30,320x240x28 \
+    ro.media.camera_preview.usemjpeg=1
 
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES += \

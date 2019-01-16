@@ -156,7 +156,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # USB camera default face
 PRODUCT_PROPERTY_OVERRIDES += \
-    rw.camera.usb.faceback=true
+    ro.media.camera_usb.faceback=false
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
