@@ -2,7 +2,6 @@ import /vendor/etc/init/hw/init.amlogic.usb.rc
 import /vendor/etc/init/hw/init.amlogic.board.rc
 import /vendor/etc/init/hw/init.amlogic.wifi.rc
 import /vendor/etc/init/hw/init.amlogic.media.rc
-import /vendor/etc/init/hw/init.mtk.rc
 import /vendor/etc/init/hw/init.amlogic.wifi_buildin.rc
 import /vendor/etc/init/cppreopts_amlogic.rc
 
@@ -91,7 +90,6 @@ on boot
     chmod 0660 /proc/bluetooth/sleep/btwrite
     chmod 0660 /proc/bluetooth/sleep/lpm
     # change back to bluetooth from system
-    chown bluetooth bluetooth /data/misc/bluetooth
     insmod /vendor/lib/modules/btusb.ko
     #mknod btusb0 c 180 194 can not use it from P,fixed in btusb driver
 
