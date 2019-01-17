@@ -141,6 +141,7 @@
 /sys/devices/virtual/amhdmitx/amhdmitx0/aud_cap                 u:object_r:sysfs_audio_cap:s0
 /sys/devices/virtual/amhdmitx/amhdmitx0/aud_output_chs          u:object_r:sysfs_aud_output_chs:s0
 /sys/devices/platform/meson-fb/graphics/fb0/osd_afbcd           u:object_r:sysfs_fb0_afbcd:s0
+/sys/devices/platform/fb/graphics/fb0/osd_afbcd                 u:object_r:sysfs_fb0_afbcd:s0
 /sys/class/mpgpu/mpgpucmd                                       u:object_r:sysfs_mpgpu_cmd:s0
 /sys/power/early_suspend_trigger                                u:object_r:sysfs_power_trigger:s0
 
@@ -161,6 +162,7 @@
 /sys/class/display(/.*)                                         u:object_r:sysfs_display:s0
 /sys/devices/meson-fb/graphics/fb[0-3](/.*)                     u:object_r:sysfs_display:s0
 /sys/devices/platform/meson-fb/graphics/fb[0-3](/.*)            u:object_r:sysfs_display:s0
+/sys/devices/platform/fb/graphics/fb[0-3](/.*)                  u:object_r:sysfs_display:s0
 /sys/class/lcd/enable                                           u:object_r:sysfs_lcd:s0
 /sys/class/video/video_scaler_path_sel                          u:object_r:sysfs_video:s0
 /sys/module/amdolby_vision/parameters(/.*)?                     u:object_r:sysfs_video:s0
@@ -207,6 +209,7 @@
 /sys/devices/platform/vout/extcon/setmode/cable.0/state         u:object_r:sysfs_display:s0
 /sys/devices/platform/vout/extcon/setmode/state                 u:object_r:sysfs_display:s0
 /sys/devices/platform/meson-fb/graphics(/.*)?                   u:object_r:sysfs_display:s0
+/sys/devices/platform/fb/graphics(/.*)?                         u:object_r:sysfs_display:s0
 /dev/graphics/fb0                                               u:object_r:sysfs_display:s0
 /dev/graphics/fb1                                               u:object_r:sysfs_display:s0
 
