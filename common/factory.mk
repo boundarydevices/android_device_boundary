@@ -322,6 +322,7 @@ endif # ifeq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL),true)
 
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
+PRODUCT_AML_FIRMWARE_ANTIROLLBACK_CONFIG := ./device/amlogic/$(PRODUCT_DIR)/fw_arb.txt
 define aml-secureboot-sign-bootloader
 	@echo -----aml-secureboot-sign-bootloader ------
 	rm $(PRODUCT_OUT)/bl_tmp -rf
@@ -329,7 +330,7 @@ define aml-secureboot-sign-bootloader
 	mkdir -p $(PRODUCT_UPGRADE_OUT)
 	bash $(PRODUCT_SBV3_SIGBL_TOOL) -p $(PRODUCT_OUT)/bl_tmp \
 		-r $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR) -a $(PRODUCT_AML_SECUREBOOT_AESKEY_DIR) \
-		-o $(PRODUCT_OUT)
+		-b $(PRODUCT_AML_FIRMWARE_ANTIROLLBACK_CONFIG) -o $(PRODUCT_OUT)
 	mv $(PRODUCT_OUT)/u-boot.bin.unsigned $(basename $(1))
 	mv $(PRODUCT_OUT)/u-boot.bin.signed.encrypted $(1)
 	mv $(PRODUCT_OUT)/u-boot.bin.signed.encrypted.sd.bin $(1).sd.bin
