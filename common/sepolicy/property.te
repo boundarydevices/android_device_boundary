@@ -9,3 +9,4 @@ type netflix_prop, property_type;
 type vendor_platform_prop, property_type;
 type vendor_persist_prop, property_type;
 type vendor_app_prop, property_type;
+type net_pppoe_prop, property_type;

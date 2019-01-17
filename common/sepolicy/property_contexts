@@ -23,4 +23,4 @@ ro.vendor.platform      u:object_r:vendor_platform_prop:s0
 persist.vendor.sys      u:object_r:vendor_persist_prop:s0
 vendor.sys              u:object_r:vendor_platform_prop:s0
 ro.vendor.app           u:object_r:vendor_app_prop:s0
-
+ro.net.pppoe		  u:object_r:net_pppoe_prop:s0

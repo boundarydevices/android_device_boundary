@@ -1,6 +1,3 @@
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.adb.secure=1
-
 ifeq ($(TARGET_BUILD_CTS), true)
 
 #ADDITIONAL_DEFAULT_PROPERTIES += ro.vold.forceencryption=1
