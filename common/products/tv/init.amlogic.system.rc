@@ -23,6 +23,8 @@ on init
     chmod 666 /sys/class/video/video_inuse
     chmod 666 /sys/class/video/axis
     chmod 666 /sys/class/video/disable_video
+    chmod 666 /sys/class/video/axis_pip
+    chmod 666 /sys/class/video/disable_videopip
     chmod 666 /sys/class/tsync/enable
     chmod 666 /sys/class/tsync/apts_lookup
     chmod 666 /sys/class/tsync/pts_pcrscr
@@ -31,6 +33,7 @@ on init
     chmod 666 /sys/class/tsync/event
     chmod 666 /sys/class/tsync/av_threshold_min
     chmod 666 /sys/class/video/screen_mode
+    chmod 666 /sys/class/video/screen_mode_pip
     chmod 666 /sys/class/vdec/poweron_clock_level
     chmod 666 /sys/module/ionvideo/parameters/freerun_mode
     chown system system /sys/class/graphics/fb0/osd_afbcd
@@ -124,8 +127,11 @@ on boot
 
     chown media system /sys/class/video/blackout_policy
     chown media system /sys/class/video/screen_mode
+    chown media system /sys/class/video/screen_mode_pip
     chown media system /sys/class/video/axis
     chown media system /sys/class/video/disable_video
+    chown media system /sys/class/video/axis_pip
+    chown media system /sys/class/video/disable_videopip
     chown media system /sys/class/video/zoom
     chown media system /sys/class/video/free_keep_buffer
     chown media system /sys/class/video/free_cma_buffer
@@ -154,6 +160,9 @@ on boot
     chmod 666 /sys/class/video/axis
     chmod 666 /sys/class/video/screen_mode
     chmod 666 /sys/class/video/disable_video
+    chmod 666 /sys/class/video/axis_pip
+    chmod 666 /sys/class/video/disable_videopip
+    chmod 666 /sys/class/video/screen_mode_pip
     chmod 666 /sys/class/tsync/pts_pcrscr
     chmod 666 /dev/amstream_abuf
     chmod 666 /dev/amstream_hevc
@@ -172,6 +181,7 @@ on boot
     chmod 666 /dev/amstream_dves_avc
     chmod 666 /dev/amstream_dves_hevc
     chmod 666 /dev/ionvideo
+    chmod 666 /dev/videosync
 #add for XBMC BlueRay 3d and audio Passthrough
     chmod 666 /sys/class/audiodsp/digital_raw
     chmod 666 /sys/class/audiodsp/digital_codec

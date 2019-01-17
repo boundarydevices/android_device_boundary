@@ -33,6 +33,7 @@
 /dev/video19              0660   system     mediadrm
 /dev/video20              0660   system     mediadrm
 /dev/video21              0660   system     mediadrm
+/dev/video23              0660   system     mediadrm
 /dev/amaudio_utils        0660   media     system
 /dev/amaudio_ctl          0660   media     system
 /dev/amvenc_avc           0660   mediacodec     system
@@ -40,6 +41,7 @@
 /dev/amsubtitle           0660   media     system
 /dev/jpegenc		  0660   media     system
 /dev/display              0660   media    graphics
+/dev/videosync            0660   media    graphics
 
 #audio data
 /dev/audio_data_debug     0660   mediacodec audio
