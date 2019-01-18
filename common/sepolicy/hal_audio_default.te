@@ -1,6 +1,7 @@
 #########################################
 # sepolicy rules for hal_audio_default
 #########################################
+allow hal_audio_default sysfs_audio:file { open read write };
 allow hal_audio_default sysfs_audio_cap:file { read open };
 allow hal_audio_default sysfs_digital_codec:file { write read open };
 allow hal_audio_default sysfs_amhdmitx:dir search;

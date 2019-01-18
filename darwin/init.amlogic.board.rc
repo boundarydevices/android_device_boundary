@@ -6,11 +6,11 @@ on early-init
 
     insmod /vendor/lib/modules/si2151_fe.ko
     insmod /vendor/lib/modules/dnlp_alg.ko
+    insmod /vendor/lib/modules/mali.ko
 
 on init
 
 on post-fs-data
-    insmod /vendor/lib/modules/mali.ko
     insmod /vendor/lib/modules/cfg80211.ko
     insmod /vendor/lib/dovi.ko
     insmod /vendor/lib/modules/aml_hardware_dmx.ko

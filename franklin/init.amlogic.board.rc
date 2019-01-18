@@ -3,11 +3,11 @@ on early-init
 
     mount configfs configfs /sys/kernel/config
     #mount usbfs none /proc/bus/usb
+    insmod /vendor/lib/modules/mali.ko
 
 on init
 
 on post-fs-data
-    insmod /vendor/lib/modules/mali.ko
     insmod /vendor/lib/modules/cfg80211.ko
     insmod /vendor/lib/dovi.ko
     insmod /vendor/lib/sl_hdr.ko
