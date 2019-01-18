@@ -92,6 +92,8 @@
 /sys/class/amhdmitx/amhdmitx0   cec          0664    system    system
 
 /dev/btusb0                0660   bluetooth     bluetooth
+#mtkbt
+/dev/stpbt                 0660   bluetooth     bluetooth
 
 /sys/class/video/device_resolution    0666   system     system
 

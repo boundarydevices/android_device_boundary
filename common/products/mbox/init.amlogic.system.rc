@@ -4,6 +4,7 @@ import /vendor/etc/init/hw/init.amlogic.wifi.rc
 import /vendor/etc/init/hw/init.amlogic.media.rc
 import /vendor/etc/init/hw/init.amlogic.wifi_buildin.rc
 import /vendor/etc/init/cppreopts_amlogic.rc
+import /vendor/etc/init/hw/init.amlogic.bluetooth.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
@@ -448,9 +449,6 @@ service watchdogd /sbin/watchdogd 10 20
 on property:ro.debuggable=1
     write /sys/module/kgdboc/parameters/kgdboc ttyFIQ2
     write /sys/module/fiq_debugger/parameters/kgdb_enable 1
-
-on property:vendor.sys.mtkbtdriver=true
-	insmod /vendor/lib/modules/btmtksdio.ko
 
 service remotecfg /vendor/bin/remotecfg /vendor/etc/remote.conf
     class main

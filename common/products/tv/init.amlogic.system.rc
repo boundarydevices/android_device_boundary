@@ -3,7 +3,7 @@ import /vendor/etc/init/hw/init.amlogic.board.rc
 import /vendor/etc/init/hw/init.amlogic.wifi.rc
 import /vendor/etc/init/hw/init.amlogic.media.rc
 import /vendor/etc/init/hw/init.amlogic.wifi_buildin.rc
-
+import /vendor/etc/init/hw/init.amlogic.bluetooth.rc
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
 
