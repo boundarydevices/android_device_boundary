@@ -31,3 +31,6 @@ allow hal_graphics_composer_default sysfs_display:file { read write open getattr
 
 allow hal_graphics_composer_default vendor_platform_prop:file {getattr open read};
 get_prop(hal_graphics_composer_default, vendor_platform_prop)
+get_prop(hal_graphics_composer_default, vendor_default_prop)
+
+allow hal_graphics_composer_default kernel:process { setsched };
