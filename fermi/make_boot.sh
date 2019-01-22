@@ -11,7 +11,7 @@ if [ "$ROOTFS" == "" -o ! -f "$ROOTFS" ]; then
     exit 1
 fi
 
-KERNEL_OUT=out/target/product/u200/obj/KERNEL_OBJ
+KERNEL_OUT=out/target/product/fermi/obj/KERNEL_OBJ
 mkdir -p $KERNEL_OUT
 
 if [ ! -f $KERNEL_OUT/.config ]; then
@@ -20,12 +20,12 @@ fi
 
 make -C common O=../$KERNEL_OUT ARCH=arm64 -j6 CROSS_COMPILE=$PREFIX_CROSS_COMPILE modules Image.gz
 
-cp $KERNEL_OUT/arch/arm64/boot/Image.gz out/target/product/u200/kernel
+cp $KERNEL_OUT/arch/arm64/boot/Image.gz out/target/product/fermi/kernel
 
 if [ "$2" != "m" ]; then
     make -C common O=../$KERNEL_OUT g12a_s905d2_u200.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE
     make -C common O=../$KERNEL_OUT g12a_s905d2_u200.dtb ARCH=arm64 CROSS_COMPILE=$PREFIX_CROSS_COMPILE
-    $DTBTOOL -o out/target/product/u200/dtb.img -p $KERNEL_OUT/scripts/dtc/ $KERNEL_OUT/arch/arm64/boot/dts/amlogic/
+    $DTBTOOL -o out/target/product/fermi/dtb.img -p $KERNEL_OUT/scripts/dtc/ $KERNEL_OUT/arch/arm64/boot/dts/amlogic/
 fi
 
 if [ "$2" != "m" ]; then
@@ -33,8 +33,8 @@ if [ "$2" != "m" ]; then
         --base 0x0 \
         --kernel_offset 0x1080000 \
         --ramdisk ${ROOTFS} \
-        --second out/target/product/u200/dtb.img \
-        --output ./out/target/product/u200/boot.img
-    ls -l ./out/target/product/u200/boot.img
+        --second out/target/product/fermi/dtb.img \
+        --output ./out/target/product/fermi/boot.img
+    ls -l ./out/target/product/fermi/boot.img
     echo "boot.img done"
 fi

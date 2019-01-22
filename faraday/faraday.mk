@@ -17,7 +17,7 @@
 # build for Meson reference board.
 #
 
-PRODUCT_DIR := u200
+PRODUCT_DIR := faraday
 
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
@@ -76,10 +76,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.hdmi.set_menu_language=true \
         persist.sys.hdmi.keep_awake=false
 
-PRODUCT_NAME := u200
-PRODUCT_DEVICE := u200
+PRODUCT_NAME := faraday
+PRODUCT_DEVICE := faraday
 PRODUCT_BRAND := Droidlogic
-PRODUCT_MODEL := u200
+PRODUCT_MODEL := faraday
 PRODUCT_MANUFACTURER := Droidlogic
 
 TARGET_KERNEL_BUILT_FROM_SOURCE := true
@@ -88,12 +88,12 @@ PRODUCT_TYPE := mbox
 
 BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
-BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 
 WITH_LIBPLAYER_MODULE := false
 
 OTA_UP_PART_NUM_CHANGED := true
 
+BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 #AB_OTA_UPDATER :=true
 BUILD_WITH_AVB := true
 
@@ -166,12 +166,11 @@ endif
 #PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY := true
 #PRODUCT_AML_SECURE_BOOT_VERSION3 := true
 ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
-PRODUCT_AML_SECUREBOOT_RSAKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/g12a_u200_v1/aml-key
-PRODUCT_AML_SECUREBOOT_AESKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/g12a_u200_v1/aml-key
+PRODUCT_AML_SECUREBOOT_RSAKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/g12a_u221_v1/aml-key
+PRODUCT_AML_SECUREBOOT_AESKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/g12a_u221_v1/aml-key
 PRODUCT_SBV3_SIGBL_TOOL  := ./bootloader/uboot-repo/fip/stool/amlogic-sign-g12a.sh -s g12a
 PRODUCT_SBV3_SIGIMG_TOOL := ./bootloader/uboot-repo/fip/stool/signing-tool-g12a-dev/kernel.encrypt.signed.bash
-else
-PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/g12a_u200_v1/aml-user-key.sig
+PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/g12a_u221_v1/aml-user-key.sig
 PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./bootloader/uboot-repo/fip/g12a/aml_encrypt_g12a
 PRODUCT_AML_SECUREBOOT_SIGNBOOTLOADER := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --bootsig \
 						--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY) \
@@ -180,7 +179,7 @@ PRODUCT_AML_SECUREBOOT_SIGNIMAGE := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --imgsig 
 					--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY)
 PRODUCT_AML_SECUREBOOT_SIGBIN	:= $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --binsig \
 					--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY)
-endif# PRODUCT_AML_SECURE_BOOT_VERSION3 := true
+endif # ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
 
 ########################################################################
 #
@@ -239,14 +238,14 @@ endif
 #########################################################################
 
 #MULTI_WIFI_SUPPORT := true
-WIFI_MODULE := BCMWIFI
+WIFI_MODULE := AP62x8
 WIFI_BUILD_IN := true
+#BCM_USB_COMPOSITE := true
 include device/amlogic/common/wifi.mk
 
 # Change this to match target country
 # 11 North America; 14 Japan; 13 rest of world
 PRODUCT_DEFAULT_WIFI_CHANNELS := 11
-
 
 #########################################################################
 #
@@ -256,9 +255,9 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 
 BOARD_HAVE_BLUETOOTH := true
 BLUETOOTH_MODULE := BCMBT
+BCM_USB_BT := true
 BCM_BLUETOOTH_LPM_ENABLE := true
 include device/amlogic/common/bluetooth.mk
-
 
 #########################################################################
 #
@@ -381,8 +380,6 @@ BUILD_WITH_LOWMEM_COMMON_CONFIG := true
 
 BOARD_USES_USB_PM := true
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/Third_party_apk_camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/Third_party_apk_camera.xml \
 
 include device/amlogic/common/software.mk
 ifeq ($(TARGET_BUILD_GOOGLE_ATV),true)
@@ -433,6 +430,13 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 endif
+
+#########################################################################
+#
+#                                     TB detect
+#
+#########################################################################
+$(call inherit-product, device/amlogic/common/tb_detect.mk)
 
 include device/amlogic/common/gpu/dvalin-user-arm64.mk
 

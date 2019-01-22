@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/u221.mk
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/fermi.mk
