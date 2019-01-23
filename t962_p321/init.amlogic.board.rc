@@ -18,7 +18,6 @@ on post-fs-data
     insmod /vendor/lib/modules/aml_hardware_dmx.ko
 
 on boot
-    setprop ro.radio.noril true
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
     write /sys/class/freq_limit/limit 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_dflt_freq 1416000
