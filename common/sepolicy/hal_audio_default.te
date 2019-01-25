@@ -31,3 +31,4 @@ allow hal_audio_default hidraw_audio_device:chr_file { create read write open io
 allow hal_audio_default device:dir {read open};
 allow hal_audio_default btmic_data_file:dir {write read open add_name search};
 allow hal_audio_default btmic_data_file:file {write open create};
+allow hal_audio_default sysfs:dir { read open };
