@@ -26,6 +26,7 @@ import add_img_to_target_files
 
 OPTIONS = common.OPTIONS
 OPTIONS.ota_zip_check = True
+OPTIONS.data_save = False
 
 def SetBootloaderEnv(script, name, val):
   """Set bootloader env name with val."""
@@ -190,14 +191,16 @@ def FullOTA_Assertions(info):
     info.script.AppendExtra('backup_data_cache(dtb, /cache/recovery/);')
     info.script.AppendExtra('backup_data_cache(recovery, /cache/recovery/);')
     info.script.AppendExtra('set_bootloader_env("upgrade_step", "3");')
+    if not OPTIONS.data_save:
+      info.script.AppendExtra('backup_update_package("/dev/block/mmcblk0", "1894");')
+    info.script.AppendExtra('package_extract_file("logo.img", "/dev/block/logo");')
     info.script.AppendExtra('write_dtb_image(package_extract_file("dt.img"));')
     info.script.WriteRawImage("/recovery", "recovery.img")
-    info.script.AppendExtra('backup_update_package("/dev/block/mmcblk0", "1894");')
     if OPTIONS.ota_partition_change:
       info.script.AppendExtra('ui_print("update bootloader.img...");')
       info.script.AppendExtra('write_bootloader_image(package_extract_file("bootloader.img"));')
-    info.script.AppendExtra('set_bootloader_env("upgrade_step", "2");')
-    info.script.AppendExtra('set_bootloader_env("upgrade_step", "3");')
+    info.script.AppendExtra('delete_file("/cache/recovery/dtb.img");')
+    info.script.AppendExtra('delete_file("/cache/recovery/recovery.img");')
     info.script.AppendExtra('reboot_recovery();')
     info.script.AppendExtra('else')
 
@@ -240,9 +243,9 @@ ui_print("update dtbo.img...");
 package_extract_file("dtbo.img", "/dev/block/dtbo");
 ui_print("update dtb.img...");
 backup_data_cache(dtb, /cache/recovery/);
+backup_data_cache(recovery, /cache/recovery/);
 write_dtb_image(package_extract_file("dt.img"));
 ui_print("update recovery.img...");
-backup_data_cache(recovery, /cache/recovery/);
 package_extract_file("recovery.img", "/dev/block/recovery");
 ui_print("update vbmeta.img...");
 package_extract_file("vbmeta.img", "/dev/block/vbmeta");""")
@@ -259,6 +262,8 @@ package_extract_file("vbmeta.img", "/dev/block/vbmeta");""")
   info.script.AppendExtra('endif;')
 
   SetBootloaderEnv(info.script, "upgrade_step", "1")
+  info.script.AppendExtra('delete_file("/cache/recovery/dtb.img");')
+  info.script.AppendExtra('delete_file("/cache/recovery/recovery.img");')
   SetBootloaderEnv(info.script, "force_auto_update", "false")
 
   if OPTIONS.ota_zip_check:
