@@ -96,4 +96,9 @@
 
     <!-- Default value for led color when battery is fully charged: GREEN -->
     <integer name="config_notificationsBatteryFullARGB">0xFF00FF00</integer>
+
+    <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
+         on the headphone/microphone jack. When false use the older uevent framework. -->
+    <bool name="config_useDevInputEventForAudioJack">true</bool>
+
 </resources>
