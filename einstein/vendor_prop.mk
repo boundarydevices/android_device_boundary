@@ -79,10 +79,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=1
 
-#used forward seek for libplayer
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.libplayer.seek.fwdsearch=1
-
 #set memory upper limit for extractor process
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.maxmem=629145600
@@ -90,11 +86,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #map volume
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.audio.mapvalue=0,0,0,0
-
-#add livhls,libcurl as default hls
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.libplayer.curlenable=true \
-    media.libplayer.modules=vhls_mod,dash_mod,curl_mod,prhls_mod,vm_mod,bluray_mod
 
 #adb
 PRODUCT_PROPERTY_OVERRIDES += \
