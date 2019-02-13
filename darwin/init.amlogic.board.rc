@@ -1,5 +1,4 @@
 import /vendor/etc/init/hw/init.amlogic.usb.rc
-import /vendor/etc/init/hw/init.amlogic.tb_detect.rc
 
 on early-init
     loglevel 3

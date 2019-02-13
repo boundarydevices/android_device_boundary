@@ -124,12 +124,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.libplayer.curlenable=true \
     media.libplayer.modules=vhls_mod,dash_mod,curl_mod,prhls_mod,vm_mod,bluray_mod
 
-#Hdmi In
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.hdmiin.enable=true \
-    mbx.hdmiin.switchfull=false \
-    mbx.hdmiin.videolayer=false
-
 #adb
 PRODUCT_PROPERTY_OVERRIDES += \
     service.adb.tcp.port=5555
