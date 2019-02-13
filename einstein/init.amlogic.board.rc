@@ -7,6 +7,8 @@ on early-init
     insmod /vendor/lib/modules/mxl661_fe.ko
     insmod /vendor/lib/modules/ldim_alg.ko
     insmod /vendor/lib/modules/dnlp_alg.ko
+    insmod /vendor/lib/modules/mali.ko
+    insmod /vendor/lib/modules/dovi.ko
 
 on init
 
