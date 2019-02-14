@@ -14,6 +14,7 @@ on post-fs-data
     insmod /vendor/lib/modules/mali.ko
     insmod /vendor/lib/modules/cfg80211.ko
     insmod /vendor/lib/dovi.ko
+    insmod /vendor/lib/modules/si2168_fe.ko
     insmod /vendor/lib/modules/aml_hardware_dmx.ko
 
 on boot

@@ -44,6 +44,12 @@ BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko
 endif
 
+#si2168 tuner
+ifeq ($(TUNER_MODULE), si2168)
+BOARD_VENDOR_KERNEL_MODULES += \
+        $(PRODUCT_OUT)/obj/lib_vendor/si2168_fe.ko
+endif
+
 #atbm8881
 ifeq ($(TUNER_MODULE), atbm8881)
 BOARD_VENDOR_KERNEL_MODULES += \

@@ -69,6 +69,17 @@ PRODUCT_COPY_FILES += \
 endif
 endif
 
+#si2168 tuner
+ifeq ($(TUNER_MODULE), si2168)
+ifneq ($(KERNEL_A32_SUPPORT), false)
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/tuner/32/si2168_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2168_fe.ko
+else
+PRODUCT_COPY_FILES += \
+    device/amlogic/common/tuner/64/si2168_fe_64.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2168_fe.ko
+endif
+endif
+
 #atbm8881
 ifeq ($(TUNER_MODULE), atbm8881)
 ifneq ($(KERNEL_A32_SUPPORT), false)

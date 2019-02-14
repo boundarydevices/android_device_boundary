@@ -148,3 +148,7 @@ allow system_control sysfs_leds:dir search;
 
 allow system_control hal_keymaster_hwservice:hwservice_manager { find };
 allow system_control hal_keymaster_default:binder { call };
+
+allow system_control debugfs_demod:dir { search };
+allow system_control debugfs_demod:file { read write open };
+
