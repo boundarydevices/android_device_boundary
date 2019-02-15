@@ -348,14 +348,6 @@ endif
 
 #########################################################################
 #
-#                                     OTA PROPERTY
-#
-#########################################################################
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.firmware=00502001 \
-    ro.product.otaupdateurl=http://10.28.11.53:8080/otaupdate/update
-#########################################################################
-#
 #                                     hardware interfaces
 #
 #########################################################################
@@ -481,13 +473,6 @@ PRODUCT_PACKAGES += \
 # VNDK version is specified
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.vndk.version=26.1.0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.treble.enabled=true
-
-#for cts test disable quota
-PRODUCT_PROPERTY_OVERRIDES += \
-    fw.disable_quota=true
 
 # Override heap growth limit due to high display density on device
 PRODUCT_PROPERTY_OVERRIDES += \

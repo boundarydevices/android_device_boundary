@@ -93,26 +93,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.maxmem=629145600
 
-#fix hls sync
-PRODUCT_PROPERTY_OVERRIDES += \
-    libplayer.livets.softdemux=1 \
-    libplayer.netts.recalcpts=1
-
 #map volume
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.audio.mapvalue=0,0,0,0
-
-#By default, primary storage is physical
-#PRODUCT_PROPERTY_OVERRIDES += \
-    #ro.vold.primary_physical=true
-
-#Support storage visible to apps
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.fw.force_adoptable=true
-
-#use sdcardfs
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=true
 
 #add livhls,libcurl as default hls
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -128,12 +111,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.afbcd.enable=1
 
 # low memory for 1G
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.low_ram=true \
-    ro.config.max_starting_bg=8
-# 1G JIT config
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.jit.codecachesize=0
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.config.low_ram=true \
+#    ro.config.max_starting_bg=8
 
 #disable timeshift
 PRODUCT_PROPERTY_OVERRIDES += \
