@@ -81,7 +81,6 @@
 /dev/display        			u:object_r:display_device:s0
 /dev/dtb            			u:object_r:dtb_device:s0
 /dev/dvb0.*         			u:object_r:dvb_device:s0
-/dev/dvb.*          			u:object_r:video_device:s0
 /dev/v4l2_frontend			  u:object_r:frontend_device:s0
 /dev/esm            			u:object_r:hdcptx_device:s0
 /dev/esm_rx         			u:object_r:hdcprx_device:s0
