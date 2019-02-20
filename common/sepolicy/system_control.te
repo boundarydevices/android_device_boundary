@@ -144,3 +144,4 @@ get_prop(system_control, exported_system_prop);
 
 allow system_control tvserver:binder { call transfer };
 allow system_control tvserver_hwservice:hwservice_manager find;
+allow system_control sysfs_leds:dir search;
