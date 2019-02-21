@@ -55,7 +55,7 @@ else
 
 -include device/amlogic/common/media_modules.mk
 -include device/amlogic/common/wifi_modules.mk
-KERNEL_DEVICETREE := g12b_a311d_w400
+KERNEL_DEVICETREE := g12b_a311d_w400 g12b_a311d_w400_a
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
