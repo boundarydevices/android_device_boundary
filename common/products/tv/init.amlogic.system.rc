@@ -47,13 +47,9 @@ on init
     # for zram
     mkdir /swap_zram0 0700 root root
 
-    # for tee
-    mkdir /tee 0700 system system
-
 on fs
     mkdir /mnt/vendor/factory 0755 root root
     mkdir /mnt/vendor/swap_zram0 0700 root root
-    mkdir /mnt/vendor/tee 0700 system system
     mount_all /vendor/etc/fstab.amlogic
     setprop ro.crypto.fuse_sdcard true
     swapon_all /vendor/etc/fstab.amlogic

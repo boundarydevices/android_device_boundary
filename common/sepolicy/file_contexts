@@ -90,7 +90,6 @@
 /dev/mali           			u:object_r:gpu_device:s0
 /dev/mali0          			u:object_r:gpu_device:s0
 /dev/nand_env       			u:object_r:env_device:s0
-/dev/opteearmtz00       		u:object_r:drm_device:s0
 /dev/otz_client     			u:object_r:tee_device:s0
 /dev/picdec         			u:object_r:picture_device:s0
 /dev/rtk_btusb      			u:object_r:hci_attach_dev:s0

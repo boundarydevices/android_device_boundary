@@ -30,8 +30,6 @@ on boot
 
     # chmod 0666 /dev/ge2d
     chmod 666 /dev/cec
-    chmod 0666 /dev/opteearmtz00
-    chmod 0666 /dev/tee0
 
 #NET LED
     chmod 666 sys/class/leds/net_green/brightness
