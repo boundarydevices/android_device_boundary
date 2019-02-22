@@ -1,5 +1,3 @@
-import /vendor/etc/init/hw/init.amlogic.usb.rc
-
 on early-init
     loglevel 3
 
