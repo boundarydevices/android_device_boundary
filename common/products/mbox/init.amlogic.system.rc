@@ -53,7 +53,6 @@ on fs
     mkdir /mnt/vendor/swap_zram0 0700 root root
     mount_all /vendor/etc/fstab.amlogic
     setprop ro.crypto.fuse_sdcard true
-    swapon_all /vendor/etc/fstab.amlogic
     restorecon_recursive /mnt/vendor/param
 
 on post-fs-data
@@ -453,10 +452,12 @@ service factoryreset /vendor/bin/factoryreset.sh
     oneshot
     seclabel u:r:install_recovery:s0
 
-
- 
 service bugreport /system/bin/dumpstate -d -p -B -P -z \
     -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
     class main
     disabled
     oneshot
+
+on property:sys.boot_completed=1
+    # Enable ZRAM on boot_complete
+    swapon_all /vendor/etc/fstab.amlogic
