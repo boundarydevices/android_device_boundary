@@ -14,6 +14,6 @@ define build_uboot
 	if [ "$$SZ" = "$(strip $(2))" ] ; then \
 		SZ=2g; \
 	fi; \
-	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=iMX8M DTBS=imx8mq-nitrogen8m.dtb u-boot-lpddr4-$$SZ.hdmibin; \
+	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=iMX8M DTBS=imx8mq-nitrogen8m.dtb imx8mq-nitrogen8m_som.dtb u-boot-lpddr4-$$SZ.hdmibin; \
 	cp -v $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/u-boot-lpddr4-$$SZ.hdmibin $(PRODUCT_OUT)/boot/u-boot.$(strip $(2));
 endef

@@ -18,7 +18,7 @@ endif
 # Kernel / device tree configuration
 TARGET_KERNEL_DEFCONF := boundary_android_defconfig
 TARGET_BOARD_DTS_CONFIG := \
-	imx8mq:imx8mq-nitrogen8m.dtb
+	imx8mq:imx8mq-nitrogen8m.dtb imx8mq:imx8mq-nitrogen8m_som.dtb
 
 # Bootloader configuration
 TARGET_BOOTLOADER_BOARD_NAME := nitrogen8m
