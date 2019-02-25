@@ -157,6 +157,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # USB camera default face
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.camera_usb.faceback=false
+#add camera app
+PRODUCT_PACKAGES += Camera2
 
 ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_PACKAGES += \
@@ -168,7 +170,6 @@ PRODUCT_PACKAGES += \
     MusicFX \
     Browser2 \
     LatinIME \
-    Camera2 \
     Music
 endif
 

@@ -295,11 +295,8 @@ include device/amlogic/common/audio.mk
 #
 #########################################################################
 
-ifneq ($(TARGET_BUILD_CTS), true)
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml
-endif
+    frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
 
 
 
