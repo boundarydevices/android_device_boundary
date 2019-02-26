@@ -222,7 +222,7 @@ on boot
     chown media system /dev/dvb0.demux2
     chown media system /dev/dvb0.dvr0
     chown media system /dev/dvb0.dvr1
-    chmod media system /dev/dvb0.dvr2
+    chown media system /dev/dvb0.dvr2
 
     chown media system /sys/class/stb/demux0_source
     chown media system /sys/class/stb/demux1_source
