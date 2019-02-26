@@ -153,6 +153,9 @@ WITH_SOFT_AM_EXTRACTOR_DECODER := true
 PRODUCT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.statsd.enable=false
+
 # USB camera default face
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.camera_usb.faceback=false
