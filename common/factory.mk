@@ -185,6 +185,8 @@ UPGRADE_FILES := \
         ddr_init.bin \
 	u-boot.bin.sd.bin  u-boot.bin.usb.bl2 u-boot.bin.usb.tpl \
         u-boot-comp.bin
+TOOL_ITEMS := usb_flow.aml
+UPGRADE_FILES += $(TOOL_ITEMS)
 
 ifneq ($(TARGET_USE_SECURITY_MODE),true)
 UPGRADE_FILES += \
@@ -320,6 +322,19 @@ ifeq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL),true)
   endef #define security_dm_verity_conf
 endif # ifeq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL),true)
 
+define update-aml_upgrade-conf
+	$(foreach f, $(TOOL_ITEMS), \
+	if [ -f $(PRODUCT_UPGRADE_OUT)/$(f) ]; then \
+		echo exist item $(f); \
+		awk -v file="$(f)" \
+		-v main="$(lastword $(subst ., ,$(f)))" \
+		-v subtype="$(basename $(f))" \
+		'BEGIN{printf("file=\"%s\"\t\tmain_type=\"%s\"\t\tsub_type=\"%s\"\n", file, main, subtype)}' >> $(PACKAGE_CONFIG_FILE) ; \
+		sed -i '$$!H;$$!d;$$G' $(PACKAGE_CONFIG_FILE); \
+		sed -i '1H;1d;/\[LIST_NORMAL\]/G' $(PACKAGE_CONFIG_FILE); \
+	fi;)
+endef #define update-aml_upgrade-conf
+
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
 PRODUCT_AML_FIRMWARE_ANTIROLLBACK_CONFIG := ./device/amlogic/$(PRODUCT_DIR)/fw_arb.txt
@@ -379,7 +394,6 @@ aml_upgrade:$(INSTALLED_AML_UPGRADE_PACKAGE_TARGET)
 $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET): \
 	$(addprefix $(PRODUCT_OUT)/,$(BUILT_IMAGES)) \
 	$(UPGRADE_FILES) \
-	$(AML_TARGET).zip \
 	$(INSTALLED_AML_USER_IMAGES) \
 	$(INSTALLED_AML_LOGO) \
 	$(INSTALLED_MANIFEST_XML) \
