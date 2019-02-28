@@ -1,5 +1,14 @@
 <manifest version="1.0" type="device" target-level="3">
     <hal format="hidl">
+        <name>vendor.amlogic.hardware.imageserver</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IImageService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.configstore</name>
         <transport>hwbinder</transport>
         <version>1.1</version>
@@ -130,15 +139,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.ir</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IConsumerIr</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.keymaster</name>
         <transport>hwbinder</transport>
         <version>3.0</version>
@@ -194,6 +194,15 @@
         </interface>
     </hal>
     <hal>
+        <name>android.hardware.tv.input</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ITvInput</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
         <name>vendor.amlogic.hardware.systemcontrol</name>
         <transport>hwbinder</transport>
         <version>1.1</version>
@@ -208,6 +217,24 @@
         <version>1.0</version>
         <interface>
             <name>IDroidHdmiCEC</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
+        <name>vendor.amlogic.hardware.tvserver</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ITvServer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
+        <name>vendor.amlogic.hardware.rpcserver</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IRPCServer</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -253,15 +280,6 @@
         <version>1.0</version>
         <interface>
             <name>IMediaCasService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.dumpstate</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IDumpstateDevice</name>
             <instance>default</instance>
         </interface>
     </hal>

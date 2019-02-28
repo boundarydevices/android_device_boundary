@@ -462,7 +462,6 @@ include device/amlogic/common/gpu/dvalin-user-arm64.mk
 #                          must put in the end of mk files
 #########################################################################
 AUTO_PATCH_SHELL_FILE := vendor/amlogic/common/tools/auto_patch/auto_patch.sh
-AUTO_PATCH_AB := vendor/amlogic/common/tools/auto_patch/auto_patch_ab.sh
 HAVE_WRITED_SHELL_FILE := $(shell test -f $(AUTO_PATCH_SHELL_FILE) && echo yes)
 
 ifneq ($(TARGET_BUILD_LIVETV),true)
@@ -473,7 +472,4 @@ TARGET_BUILD_GOOGLE_ATV := false
 endif
 ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
 $(warning $(shell ($(AUTO_PATCH_SHELL_FILE) $(TARGET_BUILD_LIVETV) $(TARGET_BUILD_GOOGLE_ATV))))
-ifeq ($(AB_OTA_UPDATER),true)
-$(warning $(shell ($(AUTO_PATCH_AB) $(PRODUCT_DIR))))
-endif
 endif

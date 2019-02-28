@@ -182,7 +182,16 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 PRODUCT_SHIPPING_API_LEVEL := 28
 TARGET_USES_MKE2FS := true
 
-DEVICE_MANIFEST_FILE := device/amlogic/$(PRODUCT_DIR)/manifest.xml
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+DEVICE_MANIFEST_FILE := device/amlogic/common/products/mbox/manifest/manifest_aosp.xml
+else
+DEVICE_MANIFEST_FILE := device/amlogic/common/products/mbox/manifest/manifest_gtvs.xml
+endif
+
+AUTO_PATCH_AB := device/amlogic/common/products/mbox/manifest/ab_update.sh
+ifeq ($(AB_OTA_UPDATER),true)
+$(shell ($(AUTO_PATCH_AB) $(DEVICE_MANIFEST_FILE)))
+endif
 #DEVICE_MATRIX_FILE   := device/amlogic/common/compatibility_matrix.xml
 
 BOARD_VNDK_VERSION := current
