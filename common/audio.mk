@@ -42,7 +42,9 @@ PRODUCT_PACKAGES += \
 #soft_adec_libs := $(shell ls hardware/amlogic/LibAudio/amadec/acodec_lib_android_n)
 #PRODUCT_COPY_FILES += $(foreach file, $(soft_adec_libs), \
 #        hardware/amlogic/LibAudio/amadec/acodec_lib_android_n/$(file):$(TARGET_COPY_OUT_VENDOR)/lib/$(file))
-
+#audio dra decoder lib, now put libstagefrighthw dir for develop omx dra verion in future.
+PRODUCT_COPY_FILES += \
+    vendor/amlogic/common/prebuilt/libstagefrighthw/lib/libdra.so:$(TARGET_COPY_OUT_VENDOR)/lib/libdra.so
 #configurable audio policy
 USE_XML_AUDIO_POLICY_CONF := 1
 
