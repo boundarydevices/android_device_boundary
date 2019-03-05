@@ -185,7 +185,7 @@ UPGRADE_FILES := \
         ddr_init.bin \
 	u-boot.bin.sd.bin  u-boot.bin.usb.bl2 u-boot.bin.usb.tpl \
         u-boot-comp.bin
-TOOL_ITEMS := usb_flow.aml
+TOOL_ITEMS := usb_flow.aml keys.conf
 UPGRADE_FILES += $(TOOL_ITEMS)
 
 ifneq ($(TARGET_USE_SECURITY_MODE),true)
