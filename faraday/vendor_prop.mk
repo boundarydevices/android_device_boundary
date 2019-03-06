@@ -108,6 +108,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.low_ram=true
 
+# Low Power Mode Setting for S905Y2 U223
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.low_power_default_color=true
+
 # crypto volume
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.crypto.volume.filenames_mode=aes-256-cts
