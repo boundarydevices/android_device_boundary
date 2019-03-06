@@ -48,7 +48,6 @@ get_prop(system_control, vendor_default_prop)
 
 set_prop(system_control, media_prop)
 get_prop(system_control, media_prop)
-get_prop(system_control, aml_display_prop)
 set_prop(system_control, uboot_prop)
 get_prop(system_control, uboot_prop)
 set_prop(system_control, tv_prop)

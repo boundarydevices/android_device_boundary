@@ -10,7 +10,6 @@ drm.                    u:object_r:media_prop:s0
 audio.                  u:object_r:audio_prop:s0
 ubootenv.               u:object_r:uboot_prop:s0
 ro.ubootenv.            u:object_r:uboot_prop:s0
-const.filesystem.       u:object_r:aml_display_prop:s0
 snd.                    u:object_r:tv_config_prop:s0
 tv.                     u:object_r:tv_prop:s0
 persist.tv.             u:object_r:tv_prop:s0
@@ -23,6 +22,7 @@ ro.vendor.nrdp.modelgroup     u:object_r:netflix_prop:s0
 ro.vendor.platform      u:object_r:vendor_platform_prop:s0
 persist.vendor.sys      u:object_r:vendor_persist_prop:s0
 vendor.sys              u:object_r:vendor_platform_prop:s0
+vendor.filesystem.      u:object_r:vendor_platform_prop:s0
 ro.vendor.app           u:object_r:vendor_app_prop:s0
 ro.net.pppoe		    u:object_r:net_pppoe_prop:s0
 persist.miracast.hdcp2  u:object_r:miracast_prop:s0

@@ -32,7 +32,6 @@ allow recovery sysfs_cec:file rw_file_perms;
 #--------------------------------------------------------------------#
 #  product_shipping_api_level=28 vendor/system cannot share prop
 #--------------------------------------------------------------------#
-#get_prop(recovery, aml_display_prop)
 get_prop(recovery, uboot_prop)
 get_prop(recovery, bluetooth_prop)
 get_prop(recovery, vendor_platform_prop)
@@ -138,3 +137,5 @@ allow recovery exported_wifi_prop:file { getattr open };
 
 allow shell tmpfs:file {open read getattr};
 allow shell rootfs:file {execute_no_trans};
+
+allow recovery hdmirx0_device:chr_file { read write open ioctl getattr };
