@@ -11,6 +11,8 @@ allow hal_audio_default media_prop:file { read open getattr };
 allow hal_audio_default media_prop:property_service { set };
 allow hal_audio_default shell_data_file:file { read write };
 allow hal_audio_default sysfs_xbmc:file { read open write };
+allow hal_audio_default sysfs_video:file { read open };
+allow hal_audio_default sysfs_video:dir search;
 allow hal_audio_default hidraw_device:chr_file { create read write open ioctl};
 allow hal_audio_default property_socket:sock_file { write };
 allow hal_audio_default init:unix_stream_socket { connectto };
