@@ -124,6 +124,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     tv.dtv.tf.disable=true
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.platform.is.stb=true
+
 else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=0

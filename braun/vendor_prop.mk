@@ -82,12 +82,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 ifeq ($(TARGET_BUILD_LIVETV),true)
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.platform.is.tv=1 \
-    ro.vendor.platform.support.livetv=1
+    ro.vendor.platform.is.tv=1
 
 #disable timeshift
 PRODUCT_PROPERTY_OVERRIDES += \
     tv.dtv.tf.disable=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.platform.is.stb=true
 
 else
 PRODUCT_PROPERTY_OVERRIDES += \
