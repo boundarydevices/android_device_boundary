@@ -121,7 +121,10 @@ PRODUCT_PACKAGES += \
     libpac \
     ProxyHandler \
     SharedStorageBackup \
-    VpnDialogs
+    VpnDialogs \
+    libdolbyms12 \
+    libms12dap \
+
 
 $(call inherit-product-if-exists, frameworks/base/data/fonts/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/dancing-script/fonts.mk)
