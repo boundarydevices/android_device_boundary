@@ -130,7 +130,7 @@ vbmetaimage: $(INSTALLED_BOARDDTB_TARGET)
 endif
 
 
-$(INSTALLED_BOARDDTB_TARGET) : $(KERNEL_DEVICETREE_SRC) $(DTCTOOL) $(DTIMGTOOL)
+$(INSTALLED_BOARDDTB_TARGET) : $(KERNEL_DEVICETREE_SRC) $(DTCTOOL) $(DTIMGTOOL) | $(MINIGZIP)
 	$(foreach aDts, $(KERNEL_DEVICETREE), \
 		sed -i 's/^#include \"partition_.*/#include \"$(TARGET_PARTITION_DTSI)\"/' $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(strip $(aDts)).dts; \
 		sed -i 's/^#include \"firmware_.*/#include \"$(TARGET_FIRMWARE_DTSI)\"/' $(KERNEL_ROOTDIR)/$(KERNEL_DEVICETREE_DIR)/$(TARGET_PARTITION_DTSI); \
@@ -144,6 +144,10 @@ ifneq ($(strip $(word 2, $(KERNEL_DEVICETREE)) ),)
 else# elif dts num == 1
 	cp -f $(KERNEL_DEVICETREE_BIN) $@
 endif
+	if [ -n "$(shell find $@ -size +200k)" ]; then \
+		echo "$@ > 200k will be gziped"; \
+		mv $@ $@.orig && $(MINIGZIP) -c $@.orig > $@; \
+	fi;
 	$(hide) $(call aml-secureboot-sign-bin, $@)
 	@echo "Instaled $@"
 ifeq ($(BOARD_AVB_ENABLE),true)
@@ -219,11 +223,17 @@ UPGRADE_FILES += $(PACKAGE_CONFIG_FILE)
 
 ifneq ($(TARGET_AMLOGIC_RES_PACKAGE),)
 INSTALLED_AML_LOGO := $(PRODUCT_UPGRADE_OUT)/logo.img
-$(INSTALLED_AML_LOGO): $(IMGPACK) $(wildcard $(TARGET_AMLOGIC_RES_PACKAGE)/*)
+$(INSTALLED_AML_LOGO): $(wildcard $(TARGET_AMLOGIC_RES_PACKAGE)/*) | $(IMGPACK) $(MINIGZIP)
 	@echo "generate $(INSTALLED_AML_LOGO)"
 	$(hide) mkdir -p $(PRODUCT_UPGRADE_OUT)/logo
 	$(hide) rm -rf $(PRODUCT_UPGRADE_OUT)/logo/*
 	@cp -rf $(TARGET_AMLOGIC_RES_PACKAGE)/* $(PRODUCT_UPGRADE_OUT)/logo
+	$(foreach bmpf, $(filter %.bmp,$^), \
+		if [ -n "$(shell find $(bmpf) -type f -size +256k)" ]; then \
+			echo "logo pic $(bmpf) >256k gziped"; \
+			$(MINIGZIP) -c $(bmpf) > $(PRODUCT_UPGRADE_OUT)/logo/$(notdir $(bmpf)); \
+		else cp $(bmpf) $(PRODUCT_UPGRADE_OUT)/logo; \
+		fi;)
 	$(hide) $(IMGPACK) -r $(PRODUCT_UPGRADE_OUT)/logo $@
 	@echo "Installed $@"
 # Adds to <product name>-img-<build number>.zip so can be flashed.  b/110831381
