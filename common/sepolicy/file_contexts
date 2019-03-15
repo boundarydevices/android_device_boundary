@@ -104,6 +104,7 @@
 /dev/vdin0              		u:object_r:video_device:s0
 /dev/wifi_power     			u:object_r:radio_device:s0
 /dev/hidraw[0-3]			u:object_r:hidraw_device:s0
+/dev/galcore                    u:object_r:galcore_device:s0
 
 #############################
 # boot files

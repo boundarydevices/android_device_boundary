@@ -41,3 +41,5 @@ type di0_device, dev_type;
 type hidraw_device, dev_type;
 type vbi_device, dev_type;
 type hidraw_audio_device, dev_type;
+
+type galcore_device, dev_type;

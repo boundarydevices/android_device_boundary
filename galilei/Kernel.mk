@@ -55,6 +55,7 @@ else
 
 -include device/amlogic/common/media_modules.mk
 -include device/amlogic/common/wifi_modules.mk
+-include device/amlogic/common/npu_modules.mk
 KERNEL_DEVICETREE := g12b_a311d_w400 g12b_a311d_w400_a
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
@@ -97,7 +98,7 @@ BOARD_VENDOR_KERNEL_MODULES += \
 
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
 BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
-
+BOARD_VENDOR_KERNEL_MODULES += $(PRODUCT_OUT)/obj/lib_vendor/galcore.ko
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
 define cp-modules
@@ -136,6 +137,7 @@ endif
 	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/amlogic/common/wifi_driver.mk $(WIFI_MODULE)
 	$(cp-modules)
 	$(media-modules)
+	$(npu-modules)
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 	cp $(KERNEL_KO_OUT)/* $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 
