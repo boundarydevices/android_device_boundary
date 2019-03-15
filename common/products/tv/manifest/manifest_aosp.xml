@@ -292,15 +292,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal>
-        <name>vendor.amlogic.hardware.miracastserver</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IMiracastServer</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal format="hidl">
         <name>vendor.amlogic.hardware.miracast_hdcp2</name>
         <transport>hwbinder</transport>

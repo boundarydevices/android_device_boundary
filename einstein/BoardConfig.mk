@@ -194,6 +194,11 @@ ifeq ($(AB_OTA_UPDATER),true)
 $(shell ($(AUTO_PATCH_AB) $(DEVICE_MANIFEST_FILE)))
 endif
 
+AUTO_PATCH_MIRACAST := device/amlogic/common/products/tv/manifest/miracast_update.sh
+ifeq ($(BUILD_WITH_MIRACAST),true)
+$(shell ($(AUTO_PATCH_MIRACAST) $(DEVICE_MANIFEST_FILE)))
+endif
+
 BOARD_HAS_ADTV := true
 BOARD_VNDK_VERSION := current
 
