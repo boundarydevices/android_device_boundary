@@ -458,9 +458,14 @@ PRODUCT_PACKAGES += \
 # Miracast HDCP2 HAL
 PRODUCT_PACKAGES += \
     vendor.amlogic.hardware.miracast_hdcp2@1.0 \
-    miracast_hdcp2 \
+    miracast_hdcp2
+
+# Miracast HDCP Mode
+ifeq ($(BUILD_WITH_MIRACAST_HDCP), true)
+PRODUCT_PACKAGES += \
     libstagefright_hdcp \
     807798e0-f011-11e5-a5fe0002a5d5c51b
+endif
 
 ifeq ($(TARGET_BUILD_GOOGLE_ATV), true)
 PRODUCT_IS_ATV := true

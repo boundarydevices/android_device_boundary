@@ -76,9 +76,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     OTAUpgrade
 
+ifeq ($(BUILD_WITH_MIRACAST), true)
 PRODUCT_PACKAGES += \
     miracastserver \
     Miracast
+endif
 
 #Tvsettings
 PRODUCT_PACKAGES += \
