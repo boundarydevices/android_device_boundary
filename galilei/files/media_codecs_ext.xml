@@ -130,6 +130,14 @@ Only the three quirks included above are recognized at this point:
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="1" />
         </MediaCodec>
+	  <MediaCodec name="OMX.amlogic.avs2.decoder.awesome" type="video/avs2" >
+            <Limit name="size" min="64x64" max="3840x2160" />
+            <Limit name="alignment" value="2x2" />
+            <Limit name="block-size" value="16x16" />
+            <Limit name="blocks-per-second" min="1" max="972000" />
+            <Limit name="bitrate" range="1-300000000" />
+            <Feature name="adaptive-playback" />
+        </MediaCodec>
         <MediaCodec name="OMX.amlogic.vp6a.decoder.sw" type="video/x-vnd.on2.vp6a" />
         <MediaCodec name="OMX.amlogic.vp6f.decoder.sw" type="video/x-vnd.on2.vp6f" />
         <MediaCodec name="OMX.amlogic.rm10.decoder.sw" type="video/rm10" />
