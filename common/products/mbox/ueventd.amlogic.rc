@@ -51,6 +51,7 @@
 /dev/amjpegdec            0666   system     system
 /dev/ge2d                 0660   system     system
 /dev/vdin0                0660   system     system
+/dev/vdin1                0660   system     system
 /dev/virtmem              0666   system     system
 
 # Mali
