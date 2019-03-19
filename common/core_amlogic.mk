@@ -460,6 +460,11 @@ PRODUCT_PACKAGES += \
     vendor.amlogic.hardware.miracast_hdcp2@1.0 \
     miracast_hdcp2
 
+ifeq ($(BUILD_WITH_MIRACAST), true)
+PRODUCT_PACKAGES += \
+    libwfd_hdcp_adaptor
+endif
+
 # Miracast HDCP Mode
 ifeq ($(BUILD_WITH_MIRACAST_HDCP), true)
 PRODUCT_PACKAGES += \
