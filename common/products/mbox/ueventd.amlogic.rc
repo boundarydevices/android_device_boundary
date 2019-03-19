@@ -41,6 +41,9 @@
 /dev/amsubtitle           0660   media     system
 /dev/jpegenc		  0660   media     system
 /dev/videosync            0660   media     system
+/dev/ac_sbuf0             0660   system    camera
+/dev/ac_isp4uf            0660   system    camera
+
 
 #audio data
 /dev/audio_data_debug     0660   mediacodec audio

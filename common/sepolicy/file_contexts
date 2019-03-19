@@ -24,6 +24,8 @@
 /dev/amstream_sub_read			u:object_r:subtitle_device:s0
 /dev/avin_detect    			u:object_r:avin_device:s0
 /dev/videosync   			    u:object_r:video_device:s0
+/dev/ac_sbuf0                           u:object_r:video_device:s0
+/dev/ac_isp4uf                          u:object_r:video_device:s0
 
 /dev/unifykeys                  u:object_r:unify_device:s0
 
