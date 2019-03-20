@@ -275,6 +275,7 @@
 
 ## keylayout is vendor config file! must update!
 /(vendor|system/vendor)/usr/keylayout(/.*)?               u:object_r:vendor_configs_file:s0
+/(vendor|system/vendor)/usr/idc(/.*)?                     u:object_r:vendor_configs_file:s0
 
 /vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service.droidlogic      u:object_r:hal_dumpstate_default_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service.widevine              u:object_r:hal_drm_default_exec:s0
@@ -332,4 +333,3 @@
 /system/bin/ntfs-3g             u:object_r:fsck_exec:s0
 /system/bin/ntfsfix             u:object_r:fsck_exec:s0
 /system/bin/fsck.exfat          u:object_r:fsck_exec:s0
-
