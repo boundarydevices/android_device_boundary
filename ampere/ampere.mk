@@ -472,6 +472,13 @@ AB_OTA_POSTINSTALL_CONFIG += \
 
 endif
 
+#########################################################################
+#
+#                                     TB detect
+#
+#########################################################################
+$(call inherit-product, device/amlogic/common/tb_detect.mk)
+
 include device/amlogic/common/gpu/mali450-user-arm64.mk
 
 #########################################################################

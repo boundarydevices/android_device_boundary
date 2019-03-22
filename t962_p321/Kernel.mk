@@ -2,6 +2,7 @@
 -include device/amlogic/common/media_modules.mk
 -include device/amlogic/common/wifi_modules.mk
 -include device/amlogic/common/tuner/tuner_modules.mk
+-include device/amlogic/common/tb_modules.mk
 
 USE_PREBUILT_KERNEL := false
 WIFI_MODULE := multiwifi
@@ -61,7 +62,8 @@ BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/dnlp_alg.ko
 
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
-BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
+BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_WIFI_KERNEL_MODULES)
+BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_TB_DETECT_KERNEL_MODULES)
 
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 

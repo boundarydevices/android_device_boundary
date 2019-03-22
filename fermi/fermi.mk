@@ -463,6 +463,13 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_system=true
 endif
 
+#########################################################################
+#
+#                                     TB detect
+#
+#########################################################################
+$(call inherit-product, device/amlogic/common/tb_detect.mk)
+
 include device/amlogic/common/gpu/dvalin-user-arm64.mk
 #####npu ovx service
 #ifeq ($(BOARD_NPU_SERVICE_ENABLE), true)

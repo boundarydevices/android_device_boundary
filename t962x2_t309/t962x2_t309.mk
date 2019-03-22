@@ -445,6 +445,13 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-service
 endif
 
+#########################################################################
+#
+#                                     TB detect
+#
+#########################################################################
+$(call inherit-product, device/amlogic/common/tb_detect.mk)
+
 include device/amlogic/common/gpu/dvalin-user-arm64.mk
 
 #########################################################################

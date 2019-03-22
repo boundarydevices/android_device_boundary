@@ -24,6 +24,7 @@ else
 -include device/amlogic/common/gpu/dvalin-kernel.mk
 -include device/amlogic/common/media_modules.mk
 -include device/amlogic/common/wifi_modules.mk
+-include device/amlogic/common/tb_modules.mk
 -include device/amlogic/common/npu_modules.mk
 KERNEL_DEVICETREE := g12a_s905d2_u200_1g g12a_s905d2_u200 sm1_s905d3_ac200
 KERNEL_DEFCONFIG := meson64_defconfig
@@ -66,7 +67,8 @@ BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/ddr_window_64.ko
 
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
-BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
+BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_WIFI_KERNEL_MODULES)
+BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_TB_DETECT_KERNEL_MODULES)
 
 BOARD_VENDOR_KERNEL_MODULES += $(PRODUCT_OUT)/obj/lib_vendor/galcore.ko
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
@@ -99,6 +101,7 @@ endif
 #	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/amlogic/thermal/ ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules
 	#$(gpu-modules)
 	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/amlogic/common/wifi_driver.mk $(WIFI_MODULE)
+	$(tb-modules)
 	$(cp-modules)
 	$(media-modules)
 	$(npu-modules)

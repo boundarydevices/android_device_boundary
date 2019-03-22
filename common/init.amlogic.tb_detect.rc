@@ -1,4 +1,4 @@
-on post-fs-data
+on early-init
     insmod /vendor/lib/modules/tb_detect.ko
 
 on boot
