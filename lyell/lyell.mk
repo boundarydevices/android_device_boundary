@@ -165,7 +165,7 @@ ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
 PRODUCT_AML_SECUREBOOT_RSAKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/txl_p321_v1/aml-key
 PRODUCT_AML_SECUREBOOT_AESKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/txl_p321_v1/aml-key
 PRODUCT_SBV3_SIGBL_TOOL  := ./bootloader/uboot-repo/fip/stool/amlogic-sign-gxl.sh -s txl
-PRODUCT_SBV3_SIGIMG_TOOL := ./bootloader/uboot-repo/fip/stool/signing-tool-gxl-dev/kernel.encrypt.signed.bash
+PRODUCT_SBV3_SIGIMG_TOOL := ./bootloader/uboot-repo/fip/stool/signing-tool-gxl/sign-boot-gxl.sh --sign-kernel -h 1
 else
 PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/txl_p321_v1/aml-user-key.sig
 PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./bootloader/uboot-repo/fip/txl/aml_encrypt_txl
