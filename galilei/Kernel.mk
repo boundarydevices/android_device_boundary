@@ -56,6 +56,7 @@ else
 -include device/amlogic/common/media_modules.mk
 -include device/amlogic/common/wifi_modules.mk
 -include device/amlogic/common/npu_modules.mk
+-include device/amlogic/common/arm_isp_modules.mk
 KERNEL_DEVICETREE := g12b_a311d_w400 g12b_a311d_w400_a
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
@@ -138,6 +139,7 @@ endif
 	$(cp-modules)
 	$(media-modules)
 	$(npu-modules)
+	$(arm_isp-modules)
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 	cp $(KERNEL_KO_OUT)/* $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 
