@@ -367,13 +367,19 @@ endef #define aml-secureboot-sign-bootloader
 define aml-secureboot-sign-kernel
 	@echo -----aml-secureboot-sign-kernel V3------
 	$(hide) mv -f $(1) $(basename $(1))
-	bash $(PRODUCT_SBV3_SIGIMG_TOOL) $(basename $(1)) $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR) $(1)
+	bash $(PRODUCT_SBV3_SIGIMG_TOOL) -i $(basename $(1)) \
+		-k $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR)/kernelkey.pem \
+		-a $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR)/kernelaeskey \
+		--iv $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR)/kernelaesiv -o $(1)
 	@echo ----- Made aml secure-boot singed kernel v3: $(1) --------
 endef #define aml-secureboot-sign-kernel
 define aml-secureboot-sign-bin
 	@echo -----aml-secureboot-sign-bin v3------
 	$(hide) mv -f $(1) $(basename $(1))
-	bash $(PRODUCT_SBV3_SIGIMG_TOOL) $(basename $(1)) $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR) $(1)
+	bash $(PRODUCT_SBV3_SIGIMG_TOOL) -i $(basename $(1)) \
+		-k $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR)/kernelkey.pem \
+		-a $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR)/kernelaeskey \
+		--iv $(PRODUCT_AML_SECUREBOOT_RSAKEY_DIR)/kernelaesiv -o $(1)
 	@echo ----- Made aml secure-boot singed bin v3: $(1) --------
 endef #define aml-secureboot-sign-bin
 else #follows secureboot v2
