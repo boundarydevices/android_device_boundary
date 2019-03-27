@@ -7,4 +7,5 @@ type pppoe_service,             service_manager_type;
 type screenmediasource_service, service_manager_type;
 type tee_service,               service_manager_type;
 type droidmount_service,        service_manager_type;
-type bcmdl_service,            service_manager_type;
+type bcmdl_service,             service_manager_type;
+type miracast_hdcp2_service,    service_manager_type;
