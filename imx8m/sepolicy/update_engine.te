@@ -1,0 +1,2 @@
+allow update_engine system_app:binder { call transfer };
+allow update_engine dtbo_block_device:blk_file { open read write };

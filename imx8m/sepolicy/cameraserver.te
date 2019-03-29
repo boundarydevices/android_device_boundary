@@ -1,0 +1,14 @@
+typeattribute cameraserver system_writes_vendor_properties_violators;
+typeattribute cameraserver data_between_core_and_vendor_violators;
+
+get_prop(cameraserver, vendor_default_prop)
+
+allow cameraserver sysfs:dir { read open };
+allow cameraserver gpu_device:chr_file { read open write ioctl map };
+allow cameraserver self:netlink_kobject_uevent_socket { create setopt bind read };
+allow cameraserver tmpfs:dir { search };
+allow cameraserver pxp_device:chr_file { read write open ioctl };
+allow cameraserver mediacodec_tmpfs:file { write read open setattr };
+allow cameraserver vendor_file:file { read };
+allow cameraserver opencl_cache_file:dir create_dir_perms;
+allow cameraserver opencl_cache_file:file create_file_perms;

@@ -1,0 +1,3 @@
+genfscon sysfs /devices/platform/30b60000.mmc/mmc_host/mmc2/mmc2:0001/block/mmcblk2 u:object_r:sysfs_block_devices:s0
+genfscon sysfs /devices/platform/32e10000.mipi_dsi/32e10000.mipi_dsi.0/backlight u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/bt_rfkill/rfkill/rfkill0 u:object_r:sysfs_rfkill:s0

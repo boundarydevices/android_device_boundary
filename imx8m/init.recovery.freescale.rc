@@ -1,0 +1,24 @@
+import init.recovery.${ro.hardware}.${ro.boot.storage_type}.rc
+on init 
+    # disable cursor blink for fbcon, if no splash screen support
+    write /sys/class/graphics/fbcon/cursor_blink 0
+
+    mkdir /config 0500 root root
+    # mount the configfs on /config
+    mount configfs none /config mode=0755
+    mkdir /config/usb_gadget/g1
+    write /config/usb_gadget/g1/idProduct 0x4ee7
+    write /config/usb_gadget/g1/idVendor 0x18d1
+    mkdir /config/usb_gadget/g1/configs/b.1
+    mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "adb"
+    mkdir /config/usb_gadget/g1/functions/ffs.adb
+    mkdir /config/usb_gadget/g1/strings/0x409
+    write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno}
+    write /config/usb_gadget/g1/strings/0x409/manufacturer ${ro.product.manufacturer}
+    write /config/usb_gadget/g1/strings/0x409/product ${ro.product.model}
+
+on property:sys.usb.ffs.ready=1
+    rm /config/usb_gadget/g1/configs/b.1/f1
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/UDC "ci_hdrc.0"

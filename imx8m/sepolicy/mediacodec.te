@@ -1,0 +1,13 @@
+allow mediacodec sysfs:file { read open getattr };
+allow mediacodec tmpfs:dir { search write add_name create};
+allow mediacodec tmpfs:file { create open read write };
+allow mediacodec debugfs_tracing:file { write open };
+allow mediacodec rootfs:lnk_file { getattr };
+allow mediacodec mediacodec_tmpfs:file { create open setattr };
+allow mediacodec audio_device:chr_file { read write open ioctl map };
+allow mediacodec video_device:dir { search write add_name create};
+allow mediacodec video_device:file { create open read write setattr };
+allow mediacodec video_device:chr_file { create open read write setattr };
+allow mediacodec video_device:fifo_file create_file_perms;
+allow mediacodec video_device:fifo_file rw_file_perms;
+allow mediacodec system_file:dir r_dir_perms;

@@ -1,0 +1,13 @@
+allow vendor_init file_contexts_file:file { map };
+allow vendor_init cache_file:lnk_file { getattr read };
+allow vendor_init sysfs_rfkill:file { open write setattr };
+allow vendor_init sysfs_block_devices:file { open write setattr };
+
+set_prop(vendor_init, http_proxy_prop)
+set_prop(vendor_init, wc_prop)
+set_prop(vendor_init, vendor_usb_config_prop)
+set_prop(vendor_init, power_hal_prop)
+set_prop(vendor_init, vendor_bluetooth_prop)
+set_prop(vendor_init, public_vendor_default_prop)
+set_prop(vendor_init, vendor_default_prop)
+get_prop(vendor_init, default_prop)

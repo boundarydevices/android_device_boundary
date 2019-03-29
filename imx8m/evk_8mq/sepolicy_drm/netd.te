@@ -1,0 +1,4 @@
+# Rules on netd domain for optee xtest 200x tests
+allow netd tee:tcp_socket { read write getopt setopt };
+allow netd tee:udp_socket { read write getopt setopt };
+allow netd tee:fd { use };

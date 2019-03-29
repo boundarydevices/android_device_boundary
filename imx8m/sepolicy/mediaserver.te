@@ -1,0 +1,7 @@
+typeattribute mediaserver system_writes_vendor_properties_violators;
+
+get_prop(mediaserver, vendor_default_prop)
+
+allow mediaserver tmpfs:dir rw_dir_perms;
+allow mediaserver tmpfs:file rw_file_perms;
+allow mediaserver mediaserver:netlink_kobject_uevent_socket { create setopt bind read };

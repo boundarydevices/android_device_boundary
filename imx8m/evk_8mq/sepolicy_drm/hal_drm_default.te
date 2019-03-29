@@ -1,0 +1,2 @@
+allow hal_drm_default vendor_data_file:dir { create add_name search write };
+allow hal_drm_default vendor_data_file:file { create lock open read write getattr };

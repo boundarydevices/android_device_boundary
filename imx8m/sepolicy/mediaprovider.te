@@ -1,0 +1,3 @@
+typeattribute mediaprovider system_writes_vendor_properties_violators;
+
+get_prop(mediaprovider, vendor_default_prop)

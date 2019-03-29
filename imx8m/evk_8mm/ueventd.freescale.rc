@@ -1,0 +1,17 @@
+/dev/block/platform/30b50000\.mmc/by-name/presistdata 0600   system     system
+/dev/block/platform/30b60000\.mmc/by-name/presistdata 0600   system     system
+/dev/ttymxc0              0660   bluetooth  bluetooth
+/dev/snd/*                0660   system     audio
+/dev/video*               0660   system     camera
+/dev/mxc_hantro           0660   media      drmrpc
+/dev/mxc_hantro_h1        0660   media      drmrpc
+/dev/uinput               0660   system     bluetooth
+/dev/ion                  0666   media      drmrpc
+/dev/galcore	          0666 	 system     graphics
+/dev/graphics/fb0         0660   system     graphics
+/dev/watchdog             0660   system     root
+/dev/block/mmcblk2rpmb    0600   system     system
+/dev/trusty-ipc-dev0      0660   system     drmrpc
+
+/sys/devices/virtual/thermal/thermal_zone* trip_point_0_temp 0660 system system
+/sys/devices/virtual/thermal/thermal_zone* trip_point_1_temp 0660 system system

@@ -1,0 +1,34 @@
+#sd boot
+/dev/block/platform/30b50000\.usdhc/by-name/dtbo_[ab]        u:object_r:dtbo_block_device:s0
+/dev/block/platform/30b50000\.usdhc/by-name/boot_[ab]        u:object_r:boot_block_device:s0
+/dev/block/platform/30b50000\.usdhc/by-name/system_[ab]      u:object_r:system_block_device:s0
+/dev/block/platform/30b50000\.usdhc/by-name/vendor_[ab]      u:object_r:system_block_device:s0
+/dev/block/platform/30b50000\.usdhc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/30b50000\.usdhc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/30b50000\.usdhc/by-name/presistdata u:object_r:frp_block_device:s0
+/dev/block/platform/30b50000\.usdhc/by-name/userdata    u:object_r:userdata_block_device:s0
+/dev/block/platform/30b50000\.usdhc/by-name/vbmeta_[ab]    u:object_r:vbmeta_block_device:s0
+
+#emmc boot
+/dev/block/platform/30b40000\.usdhc/by-name/dtbo_[ab]        u:object_r:dtbo_block_device:s0
+/dev/block/platform/30b40000\.usdhc/by-name/boot_[ab]        u:object_r:boot_block_device:s0
+/dev/block/platform/30b40000\.usdhc/by-name/system_[ab]      u:object_r:system_block_device:s0
+/dev/block/platform/30b40000\.usdhc/by-name/vendor_[ab]      u:object_r:system_block_device:s0
+/dev/block/platform/30b40000\.usdhc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/30b40000\.usdhc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/30b40000\.usdhc/by-name/presistdata u:object_r:frp_block_device:s0
+/dev/block/platform/30b40000\.usdhc/by-name/userdata    u:object_r:userdata_block_device:s0
+/dev/block/platform/30b40000\.usdhc/by-name/vbmeta_[ab]    u:object_r:vbmeta_block_device:s0
+
+#peripheral
+/vendor/bin/magd                u:object_r:sensors_exec:s0
+/vendor/bin/fsl_sensor_fusion   u:object_r:sensors_exec:s0
+/dev/mma8x5x                    u:object_r:sensors_device:s0
+/dev/ttymxc[0-9]*               u:object_r:tty_device:s0
+/dev/FreescaleAccelerometer     u:object_r:sensors_device:s0
+/dev/FreescaleMagnetometer      u:object_r:sensors_device:s0
+/dev/FreescaleGyroscope         u:object_r:sensors_device:s0
+/dev/sda[0-8]*                  u:object_r:fuse:s0
+
+#Neural Network HAL service
+/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.0-service-imx-nn          u:object_r:hal_neuralnetworks_imx_exec:s0

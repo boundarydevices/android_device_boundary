@@ -1,0 +1,15 @@
+allow hal_bluetooth_default sysfs:file { write };
+allow hal_bluetooth_default bluetooth_data_file:file { write read append getattr };
+allow hal_bluetooth_default hal_bluetooth_default:unix_stream_socket { ioctl };
+
+allow hal_bluetooth_default sysfs_rfkill:file { write };
+# connect to the UART
+allow hal_bluetooth_default wcnss_filter:unix_stream_socket {connectto};
+
+# vendor.wc_transport.start_hci and friends
+set_prop(hal_bluetooth_default, wc_prop)
+set_prop(hal_bluetooth_default, vendor_bluetooth_prop)
+
+# talk to system_server to set priority
+allow hal_bluetooth_default fwk_scheduler_hwservice:hwservice_manager {find};
+allow hal_bluetooth_default system_server:binder {call};

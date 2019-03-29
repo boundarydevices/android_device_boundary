@@ -1,0 +1,11 @@
+type caam_device, dev_type;
+type pxp_device, dev_type;
+type vbmeta_block_device, dev_type;
+type dtbo_block_device, dev_type;
+type sysfs_usb_c, sysfs_type, fs_type;
+type sysfs_usb_device, sysfs_type, fs_type;
+type diag_device, dev_type, mlstrustedobject;
+type sysfs_rfkill, sysfs_type, fs_type;
+type sysfs_extcon, fs_type, sysfs_type;
+type sysfs_block_devices, sysfs_type, fs_type;
+type mmc_rpmb_block_device, dev_type;

@@ -1,0 +1,2 @@
+allow install_recovery mtd_device:dir { search read write};
+allow install_recovery mtd_device:chr_file { read write open ioctl};

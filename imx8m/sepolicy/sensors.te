@@ -1,0 +1,25 @@
+# Integrated qualcomm sensor process
+type sensors, domain;
+type sensors_exec, exec_type, vendor_file_type, file_type;
+
+# Started by init
+init_daemon_domain(sensors)
+
+# Change own perms to (nobody,nobody)
+allow sensors self:capability { setuid setgid };
+# Chown /data/misc/sensors/debug/ to nobody
+allow sensors self:capability chown;
+dontaudit sensors self:capability fsetid;
+
+# Access sensor nodes (/dev/msm_dsps)
+allow sensors sensors_device:chr_file rw_file_perms;
+
+
+# Wake lock access
+wakelock_use(sensors)
+
+allow sensors cgroup:dir { create add_name };
+allow sensors input_device:chr_file rw_file_perms;
+allow sensors input_device:dir r_dir_perms;
+allow sensors uhid_device:chr_file rw_file_perms;
+allow sensors device:dir { open read };

@@ -1,0 +1,2 @@
+allow adbd vendor_file:file { read getattr };
+allow adbd vendor_configs_file:file { map };

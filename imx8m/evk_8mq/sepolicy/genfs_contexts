@@ -1,0 +1,2 @@
+genfscon sysfs /devices/platform/30a00000.mipi_dsi_bridge/30a00000.mipi_dsi_bridge.0/backlight u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/bt_rfkill/rfkill/rfkill0 u:object_r:sysfs_rfkill:s0

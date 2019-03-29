@@ -1,0 +1,6 @@
+typeattribute surfaceflinger system_writes_vendor_properties_violators;
+
+allow surfaceflinger debug_prop:property_service { set };
+allow surfaceflinger ashmem_device:chr_file {execute};
+allow surfaceflinger self:process execmem;
+get_prop(surfaceflinger, vendor_default_prop)
