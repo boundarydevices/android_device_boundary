@@ -44,7 +44,7 @@ on early-boot
     setprop ro.lmk.use_minfree_levels true
 
     # Set the host name which used in console
-    export HOSTNAME evk_8mq
+    export HOSTNAME nitrogen8m
 
     # Set permission for IIM node
     symlink /dev/mxs_viim /dev/mxc_mem
