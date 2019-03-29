@@ -131,7 +131,7 @@ BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8m/dtbo-imx8mq.img
 TARGET_BOARD_DTS_CONFIG := imx8mq:imx8mq-nitrogen8m.dtb
 TARGET_BOOTLOADER_CONFIG := imx8mq:nitrogen8m_defconfig
 
-TARGET_KERNEL_DEFCONFIG := android_defconfig
+TARGET_KERNEL_DEFCONFIG := boundary_android_defconfig
 # TARGET_KERNEL_ADDITION_DEFCONF ?= android_addition_defconfig
 
 BOARD_SEPOLICY_DIRS := \
