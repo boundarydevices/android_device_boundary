@@ -27,10 +27,9 @@ TARGET_OPENCL_2D := true
 # Product-specific compile-time definitions.
 #
 
-IMX_DEVICE_PATH := device/fsl/imx8m/nitrogen8m
+IMX_DEVICE_PATH := device/boundary/imx8m/nitrogen8m
 
-include $(IMX_DEVICE_PATH)/build_id.mk
-include device/fsl/imx8m/BoardConfigCommon.mk
+include device/boundary/imx8m/BoardConfigCommon.mk
 ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 -include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
 endif
@@ -136,7 +135,7 @@ TARGET_KERNEL_DEFCONFIG := android_defconfig
 TARGET_BOOTLOADER_CONFIG += imx8mq-evk-uuu:imx8mq_evk_android_uuu_defconfig
 
 BOARD_SEPOLICY_DIRS := \
-       device/fsl/imx8m/sepolicy \
+       device/boundary/imx8m/sepolicy \
        $(IMX_DEVICE_PATH)/sepolicy
 
 ifeq ($(PRODUCT_IMX_DRM),true)
