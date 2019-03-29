@@ -28,8 +28,5 @@
 
 PRODUCT_MAKEFILES := \
   $(LOCAL_DIR)/evk_8mq/evk_8mq.mk \
-  $(LOCAL_DIR)/evk_8mq/evk_8mq_drm.mk \
-  $(LOCAL_DIR)/evk_8mm/evk_8mm.mk \
-  $(LOCAL_DIR)/evk_8mm/evk_8mm_drm.mk \
-  $(LOCAL_DIR)/aiy_8mq/aiy_8mq.mk
+  $(LOCAL_DIR)/evk_8mq/evk_8mq_drm.mk
 

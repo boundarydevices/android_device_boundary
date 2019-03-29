@@ -1,7 +1,0 @@
-on init
-    # link emmc node to /dev/block/by-name
-    symlink   /dev/block/platform/30b60000.mmc/by-name /dev/block/by-name
-    symlink   /dev/block/platform/30b60000.mmc/mmcblk2boot0 /dev/block/by-name/bootloader
-
-    # Load persistent dm-verity state
-    verity_load_state
