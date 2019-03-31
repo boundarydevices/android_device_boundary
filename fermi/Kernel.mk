@@ -24,7 +24,7 @@ else
 -include device/amlogic/common/gpu/dvalin-kernel.mk
 -include device/amlogic/common/media_modules.mk
 -include device/amlogic/common/wifi_modules.mk
-KERNEL_DEVICETREE := g12a_s905d2_u200_1g
+KERNEL_DEVICETREE := g12a_s905d2_u200_1g g12a_s905d2_u200 sm1_s905d3_ac200
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
