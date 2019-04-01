@@ -9,7 +9,7 @@ else
 BUILT_IMAGES := boot.img recovery.img bootloader.img dt.img
 endif
 
-VB_CHECK_IMAGES := vendor.img system.img vbmeta.img boot.img
+VB_CHECK_IMAGES := vendor.img system.img vbmeta.img boot.img product.img
 
 ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 	BUILT_IMAGES := $(addsuffix .encrypt, $(BUILT_IMAGES))
