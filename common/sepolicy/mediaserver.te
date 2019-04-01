@@ -14,4 +14,7 @@ get_prop(mediaserver, vendor_platform_prop)
 allow mediaserver bootanim:binder { call transfer };
 allow mediaserver bootanim:fd  use;
 allow mediaserver system_data_file:file { read getattr };
-
+allow mediaserver miracast_hdcp2_hwservice:hwservice_manager { find };
+# For interfacing with miracast hdcp2 HAL
+allow mediaserver miracast_hdcp2_hwservice:hwservice_manager find;
+allow mediaserver miracast_hdcp2:binder { call transfer };

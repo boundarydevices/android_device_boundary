@@ -27,3 +27,5 @@ allow miracast_hdcp2 hdcp_file:dir { read open write getattr create search add_n
 allow miracast_hdcp2 vendor_data_file:dir { read open getattr search write add_name create };
 allow miracast_hdcp2 vendor_data_file:file { read open write getattr create unlink rename append };
 allow miracast_hdcp2 system_app:binder { transfer call };
+allow miracast_hdcp2 media_prop:file { read getattr open };
+allow miracast_hdcp2 mediaserver:binder{ transfer call };

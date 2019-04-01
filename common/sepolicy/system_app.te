@@ -76,7 +76,6 @@ allow system_app sysfs_xbmc:file rw_file_perms;
 allow system_app subtitle_device:chr_file rw_file_perms;
 #allow system_app media_prop:property_service { set };
 
-allow system_app miracastserver:binder { call transfer };
-allow system_app miracastserver_hwservice:hwservice_manager { find };
 allow system_app miracast_hdcp2_hwservice:hwservice_manager { find };
 allow system_app miracast_hdcp2:binder { call transfer };
+allow system_app miracast_prop:file { read open getattr };

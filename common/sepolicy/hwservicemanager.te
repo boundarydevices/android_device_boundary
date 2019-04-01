@@ -23,11 +23,6 @@ allow hwservicemanager imageserver:dir { search };
 allow hwservicemanager imageserver:file { read open };
 allow hwservicemanager imageserver:process { getattr };
 
-allow hwservicemanager miracastserver:binder { call transfer };
-allow hwservicemanager miracastserver:dir { search };
-allow hwservicemanager miracastserver:file { read open };
-allow hwservicemanager miracastserver:process { getattr };
-
 allow hwservicemanager miracast_hdcp2:binder { call transfer };
 allow hwservicemanager miracast_hdcp2:dir { search };
 allow hwservicemanager miracast_hdcp2:file { read open };
