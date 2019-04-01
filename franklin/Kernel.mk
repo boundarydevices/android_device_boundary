@@ -51,7 +51,8 @@ else
 
 -include device/amlogic/common/gpu/dvalin-kernel.mk
 -include device/amlogic/common/media_modules.mk
--include device/amlogic/common/wifi_modules.mk
+-include hardware/amlogic/wifi/configs/wifi_modules.mk
+-include hardware/amlogic/bluetooth/configs/bluetooth_modules.mk
 -include device/amlogic/common/tb_modules.mk
 -include device/amlogic/common/tuner/tuner_modules.mk
 -include device/amlogic/common/npu_modules.mk
@@ -61,7 +62,6 @@ KERNEL_ARCH := arm64
 
 DTBO_DEVICETREE := android_p_overlay_dt
 
-WIFI_MODULE := multiwifi
 
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 
@@ -128,7 +128,8 @@ else
 endif
 #	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/amlogic/thermal/ ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules
 	#$(gpu-modules)
-	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/amlogic/common/wifi_driver.mk $(WIFI_MODULE)
+	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f hardware/amlogic/wifi/configs/wifi_driver.mk $(WIFI_MODULE)
+	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f hardware/amlogic/bluetooth/configs/bluetooth_driver.mk BLUETOOTH_INF=$(BLUETOOTH_INF) $(BLUETOOTH_MODULE)
 	$(tb-modules)
 	$(cp-modules)
 	$(media-modules)

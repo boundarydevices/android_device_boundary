@@ -260,17 +260,10 @@ endif
 #
 #########################################################################
 
-#WIFI_MODULE := rtl8188eu
-MULTI_WIFI_SUPPORT = true
+WIFI_MODULE := multiwifi
 #WIFI_MODULE := BCMWIFI
 #WIFI_BUILD_IN := true
-include device/amlogic/common/wifi.mk
-
-# Change this to match target country
-# 11 North America; 14 Japan; 13 rest of world
-PRODUCT_DEFAULT_WIFI_CHANNELS := 11
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/wifi/config.txt:system/etc/wifi/4354/config.txt
+include hardware/amlogic/wifi/configs/wifi.mk
 
 #########################################################################
 #
@@ -279,9 +272,8 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 #########################################################################
 
 BOARD_HAVE_BLUETOOTH := true
-BCM_BLUETOOTH_LPM_ENABLE := true
 BLUETOOTH_MODULE := BCMBT
-include device/amlogic/common/bluetooth.mk
+include hardware/amlogic/bluetooth/configs/bluetooth.mk
 
 
 #########################################################################

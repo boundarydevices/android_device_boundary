@@ -1,1 +1,0 @@
--include hardware/amlogic/wifi/configs/wifi_modules.mk

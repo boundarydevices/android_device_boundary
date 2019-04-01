@@ -86,9 +86,6 @@ on boot
     chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
     chmod 0660 /proc/bluetooth/sleep/btwrite
     chmod 0660 /proc/bluetooth/sleep/lpm
-    # change back to bluetooth from system
-    insmod /vendor/lib/modules/btusb.ko
-    #mknod btusb0 c 180 194 can not use it from P,fixed in btusb driver
 
 
     chown system mediadrm /sys/class/amhdmitx/amhdmitx0/aud_ch

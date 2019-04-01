@@ -246,15 +246,12 @@ endif
 #
 #########################################################################
 
-MULTI_WIFI_SUPPORT := true
-#WIFI_MODULE := BCMWIFI
+WIFI_MODULE := multiwifi
+#WIFI_MODULE := AP62x8
 #WIFI_BUILD_IN := true
 #BCM_USB_COMPOSITE := true
-include device/amlogic/common/wifi.mk
+include hardware/amlogic/wifi/configs/wifi.mk
 
-# Change this to match target country
-# 11 North America; 14 Japan; 13 rest of world
-PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 
 #########################################################################
 #
@@ -264,9 +261,8 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 
 BOARD_HAVE_BLUETOOTH := true
 BLUETOOTH_MODULE := BCMBT
-#BCM_USB_BT := true
-BCM_BLUETOOTH_LPM_ENABLE := true
-include device/amlogic/common/bluetooth.mk
+#BLUETOOTH_INF := USB
+include hardware/amlogic/bluetooth/configs/bluetooth.mk
 
 #########################################################################
 #

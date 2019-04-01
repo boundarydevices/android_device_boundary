@@ -250,10 +250,10 @@ endif
 #
 #########################################################################
 
-MULTI_WIFI_SUPPORT := true
+WIFI_MODULE := multiwifi
 #WIFI_MODULE := BCMWIFI
 #WIFI_BUILD_IN := true
-include device/amlogic/common/wifi.mk
+include hardware/amlogic/wifi/configs/wifi.mk
 
 #########################################################################
 #
@@ -263,8 +263,7 @@ include device/amlogic/common/wifi.mk
 
 BOARD_HAVE_BLUETOOTH := true
 BLUETOOTH_MODULE := BCMBT
-BCM_BLUETOOTH_LPM_ENABLE := true
-include device/amlogic/common/bluetooth.mk
+include hardware/amlogic/bluetooth/configs/bluetooth.mk
 
 
 #########################################################################

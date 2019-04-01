@@ -267,15 +267,10 @@ endif
 #
 #########################################################################
 
-MULTI_WIFI_SUPPORT := true
+WIFI_MODULE := multiwifi
 #WIFI_MODULE := BCMWIFI
 #WIFI_BUILD_IN := true
-include device/amlogic/common/wifi.mk
-
-# Change this to match target country
-# 11 North America; 14 Japan; 13 rest of world
-PRODUCT_DEFAULT_WIFI_CHANNELS := 11
-
+include hardware/amlogic/wifi/configs/wifi.mk
 
 #########################################################################
 #
@@ -285,8 +280,7 @@ PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 
 BOARD_HAVE_BLUETOOTH := true
 BLUETOOTH_MODULE := BCMBT
-BCM_BLUETOOTH_LPM_ENABLE := true
-include device/amlogic/common/bluetooth.mk
+include hardware/amlogic/bluetooth/configs/bluetooth.mk
 
 
 #########################################################################
@@ -421,6 +415,8 @@ TARGET_USE_OPTEEOS := true
 BUILD_WITH_MIRACAST_HDCP := true
 endif
 endif
+#########################################################################
+
 
 $(call inherit-product, device/amlogic/common/media.mk)
 
@@ -520,6 +516,13 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 endif
+
+#########################################################################
+#
+#                                     TB detect
+#
+#########################################################################
+$(call inherit-product, device/amlogic/common/tb_detect.mk)
 
 include device/amlogic/common/gpu/mali450-user-arm64.mk
 
