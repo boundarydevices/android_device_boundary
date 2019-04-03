@@ -23,6 +23,7 @@ ENABLE_CFI=false
 # enable opencl 2d.
 TARGET_OPENCL_2D := true
 
+TARGET_SOC := imx8m
 #
 # Product-specific compile-time definitions.
 #
