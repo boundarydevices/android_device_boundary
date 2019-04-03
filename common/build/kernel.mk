@@ -194,7 +194,12 @@ KERNEL_IMAGE := $(KERNEL_BIN)
 ALL_DEFAULT_INSTALLED_MODULES += $(KERNEL_MODULES_INSTALL)
 
 # Produces the actual kernel image!
-$(PRODUCT_OUT)/kernel: $(KERNEL_IMAGE) $(KERNEL_DEPS) | $(ACP)
+$(PRODUCT_OUT)/boot/Image: $(KERNEL_IMAGE) $(KERNEL_DEPS) | $(ACP)
 	$(ACP) -fp $< $@
+	for dtsplat in $(TARGET_BOARD_DTS_CONFIG); do \
+		DTS_PLATFORM=`echo $$dtsplat | cut -d':' -f1`; \
+		DTS_BOARD=`echo $$dtsplat | cut -d':' -f2`; \
+		install -D $(KERNEL_OUT)/arch/$(TARGET_ARCH)/boot/dts/freescale/$(DTS_ADDITIONAL_PATH)/$$DTS_BOARD $(PRODUCT_OUT)/boot/$$DTS_BOARD; \
+	done
 
-KERNEL_OUT/usr: $(PRODUCT_OUT)/kernel
+KERNEL_OUT/usr: $(PRODUCT_OUT)/boot/Image
