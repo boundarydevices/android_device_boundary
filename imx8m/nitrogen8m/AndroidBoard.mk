@@ -5,6 +5,7 @@ include device/boundary/common/build/uboot.mk
 include device/boundary/common/build/dtbo.mk
 include device/boundary/common/build/imx-recovery.mk
 include device/boundary/common/build/gpt.mk
+include device/boundary/common/build/bootscript.mk
 include $(LOCAL_PATH)/AndroidUboot.mk
 include $(LOCAL_PATH)/AndroidTee.mk
 include $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media-profile.mk
