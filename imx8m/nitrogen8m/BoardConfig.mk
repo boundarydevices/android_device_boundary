@@ -97,7 +97,6 @@ BOARD_HAVE_USB_CAMERA := true
 USE_ION_ALLOCATOR := true
 USE_GPU_ALLOCATOR := false
 
-BOARD_AVB_ENABLE := true
 TARGET_USES_MKE2FS := true
 
 # define frame buffer count
