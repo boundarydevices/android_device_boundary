@@ -139,11 +139,26 @@ define build_kernel
 		$(1)
 endef
 
+define build_dtb
+        CCACHE_NODIRECT="true" $(MAKE) -C $(TARGET_KERNEL_SRC) \
+        O=$(realpath $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ) \
+        ARCH=$(KERNEL_ARCH) \
+        CROSS_COMPILE="$(KERNEL_CROSS_COMPILE_WRAPPER)" \
+        KCFLAGS="$(KERNEL_CFLAGS)" \
+        KAFLAGS="$(KERNEL_AFLAGS)" \
+        dtbs
+endef
+
 $(KERNEL_BIN): $(KERNEL_CONFIG) $(TARGET_KERNEL_SRC) | $(KERNEL_OUT)
 	$(hide) echo "Building $(KERNEL_ARCH) $(KERNEL_VERSION) kernel ..."
 	$(hide) PATH=$$PATH $(MAKE) -C $(TARGET_KERNEL_SRC) mrproper
 	$(call build_kernel,$(KERNEL_NAME))
 	$(call build_kernel,modules)
+	$(call build_dtb); \
+        for dtsplat in $(TARGET_BOARD_DTS_CONFIG); do \
+                DTB_NAME=`echo $$dtsplat | cut -d':' -f2`; \
+		install -D $(KERNEL_OUT)/arch/$(TARGET_KERNEL_ARCH)/boot/dts/freescale/$(DTS_ADDITIONAL_PATH)/$${DTB_NAME} $(PRODUCT_OUT)/boot/$$DTB_NAME; \
+	done
 
 $(KERNEL_OUT)/vmlinux: $(KERNEL_BIN)
 	@true
