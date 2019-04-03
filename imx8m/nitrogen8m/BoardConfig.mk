@@ -127,7 +127,6 @@ $(error "TARGET_USERIMAGES_USE_UBIFS and TARGET_USERIMAGES_USE_EXT4 config open 
 endif
 endif
 
-BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8m/dtbo-imx8mq.img
 TARGET_BOARD_DTS_CONFIG := imx8mq:imx8mq-nitrogen8m.dtb
 TARGET_BOOTLOADER_CONFIG := imx8mq:nitrogen8m_defconfig
 
