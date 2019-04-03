@@ -45,7 +45,7 @@ PRODUCT_PACKAGES += \
     overlay.imx8 \
     power.imx8
 
-# A/B OTA
+ifneq ($(BOARD_AVB_ENABLE),false)
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service \
@@ -55,6 +55,13 @@ PRODUCT_PACKAGES += \
     update_engine_client \
     update_engine_sideload \
     update_verifier
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.bootctrl=avb
+else
+PRODUCT_PACKAGES += \
+    bootctrl.default
+endif
 
 # audio
 PRODUCT_PACKAGES += \
@@ -296,7 +303,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     pm.dexopt.boot=quicken \
-    ro.hardware.bootctrl=avb \
 
 # wifionly device
 PRODUCT_PROPERTY_OVERRIDES += \
