@@ -67,6 +67,7 @@ fi
 
 setenv bootargs $bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait
 setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=${soc}
+setenv bootargs $bootargs firmware_class.path=/vendor/firmware
 
 if itest.s "xmmc" == "x$devtype" ; then
 	if itest.s "x0" == "x$devnum" ; then
