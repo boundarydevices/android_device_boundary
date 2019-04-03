@@ -18,7 +18,10 @@ endif
 PRODUCT_NAME := nitrogen8m
 PRODUCT_DEVICE := nitrogen8m
 
-PRODUCT_FULL_TREBLE_OVERRIDE := true
+PRODUCT_FULL_TREBLE_OVERRIDE := false
+
+AB_OTA_UPDATER := false
+BOARD_AVB_ENABLE := false
 
 # Copy device related config and binary to board
 PRODUCT_COPY_FILES += \
