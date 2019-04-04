@@ -1,0 +1,88 @@
+{
+    "settings": {
+        "disk_size": "28 GiB",
+        "disk_alignment": 2097152,
+        "first_partition_offset": 8388608
+    },
+    "partitions": [
+        {
+            "label": "dtbo",
+            "size": "4 MiB",
+            "guid": "auto",
+            "type_guid": "b3c54657-8b47-48bc-9792-37b7c091ae69"
+        },
+        {
+            "label": "boot",
+            "size": "48 MiB",
+            "guid": "auto",
+            "type_guid": "bb499290-b57e-49f6-bf41-190386693794"
+        },
+        {
+            "label": "recovery",
+            "size": "48 MiB",
+            "guid": "auto",
+            "type_guid": "0fc63daf-8483-4772-8e79-3d69d8477de4"
+        },
+        {
+            "label": "system",
+            "size": "1792 MiB",
+            "guid": "auto",
+            "type_guid": "0f2778c4-5cc1-4300-8670-6c88b7e57ed6"
+        },
+        {
+            "label": "cache",
+            "size": "512 MiB",
+            "guid": "auto",
+            "type_guid": "aa3434b2-ddc3-4065-8b1a-18e99ea15cb7"
+        },
+        {
+            "label": "misc",
+            "size": "4 MiB",
+            "guid": "auto",
+            "type_guid": "6b2378b0-0fbc-4aa9-a4f6-4d6e17281c47"
+        },
+        {
+            "label": "datafooter",
+            "size": "2 MiB",
+            "guid": "auto",
+            "type_guid": "314f99d5-b2bf-4883-8d03-e2f2ce507d6a"
+        },
+        {
+            "label": "metadata",
+            "size": "2 MiB",
+            "guid": "auto",
+            "type_guid": "b598858a-5fe3-418e-b8c4-824b41f4adfc"
+        },
+        {
+            "label": "presistdata",
+            "size": "1 MiB",
+            "guid": "auto",
+            "type_guid": "e99d84d7-2c1b-44cf-8c58-effae2dc2558"
+        },
+        {
+            "label": "vendor",
+            "size": "112 MiB",
+            "guid": "auto",
+            "type_guid": "2578eab2-a534-43e2-92c0-fed1b01c5d1d"
+        },
+        {
+            "label": "userdata",
+            "grow": true,
+            "guid": "auto",
+            "type_guid": "0bb7e6ed-4424-49c0-9372-7fbab465ab4c"
+        },
+        {
+            "label": "fbmisc",
+            "size": "1 MiB",
+            "guid": "auto",
+            "type_guid": "ebd0a0a2-b9e5-4433-87c0-68b6b72699c7"
+        },
+        {
+            "label": "vbmeta",
+            "size": "1 MiB",
+            "guid": "auto",
+            "type_guid": "7d6ea677-fe98-4ffe-9771-f5c3ef6d282c"
+        }
+
+    ]
+}
