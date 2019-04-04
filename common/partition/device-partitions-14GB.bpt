@@ -6,12 +6,6 @@
     },
     "partitions": [
         {
-            "label": "dtbo",
-            "size": "4 MiB",
-            "guid": "auto",
-            "type_guid": "b3c54657-8b47-48bc-9792-37b7c091ae69"
-        },
-        {
             "label": "boot",
             "size": "48 MiB",
             "guid": "auto",
@@ -76,13 +70,6 @@
             "size": "1 MiB",
             "guid": "auto",
             "type_guid": "ebd0a0a2-b9e5-4433-87c0-68b6b72699c7"
-        },
-        {
-            "label": "vbmeta",
-            "size": "1 MiB",
-            "guid": "auto",
-            "type_guid": "7d6ea677-fe98-4ffe-9771-f5c3ef6d282c"
         }
-
     ]
 }
