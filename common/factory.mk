@@ -270,8 +270,8 @@ define aml-mk-user-img-template
 INSTALLED_AML_USER_IMAGES += $(2)
 $(eval tempUserSrcDir := $$($(strip $(1))_PART_DIR))
 $(2): $(call intermediates-dir-for,ETC,file_contexts.bin)/file_contexts.bin $(MAKE_EXT4FS) $(shell find $(tempUserSrcDir) -type f)
-	@echo $(MAKE_EXT4FS) -s -S $$< -l $$($(strip $(1))_PART_SIZE) -a $(1) $$@  $(tempUserSrcDir) && \
-	$(MAKE_EXT4FS) -s -S $$< -l $$($(strip $(1))_PART_SIZE) -a $(1) $$@  $(tempUserSrcDir)
+	@out/host/linux-x86/bin/mkuserimg_mke2fs.sh -s $(tempUserSrcDir) $$@ ext4  $(1) $$($(strip $(1))_PART_SIZE) -j 0 -T 1230739200 -B $(strip $(PRODUCT_OUT))/$(strip $(1)).map -L $(1) -M 0 $$< && \
+	out/host/linux-x86/bin/mkuserimg_mke2fs.sh -s $(tempUserSrcDir) $$@ ext4  $(1) $$($(strip $(1))_PART_SIZE) -j 0 -T 1230739200 -B $(strip $(PRODUCT_OUT))/$(strip $(1)).map -L $(1) -M 0 $$<
 endef
 .PHONY:contexts_add
 contexts_add:$(TARGET_ROOT_OUT)/file_contexts
@@ -282,7 +282,7 @@ $(foreach userPartName, $(BOARD_USER_PARTS_NAME), \
 	$(eval $(call aml-mk-user-img-template, $(userPartName),$(PRODUCT_OUT)/$(userPartName).img)))
 
 define aml-user-img-update-pkg
-	ln -sf $(TOP)/$(PRODUCT_OUT)/$(1).img $(PRODUCT_UPGRADE_OUT)/$(1).img && \
+	ln -sf $(shell readlink -f $(PRODUCT_OUT)/$(1).img) $(PRODUCT_UPGRADE_OUT)/$(1).img && \
 	sed -i "/file=\"$(1)\.img\"/d" $(2) && \
 	echo -e "file=\"$(1).img\"\t\tmain_type=\"PARTITION\"\t\tsub_type=\"$(1)\"" >> $(2) ;
 endef
@@ -418,6 +418,10 @@ $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET): \
 	$(hide) $(foreach file,$(UPGRADE_FILES), \
 		echo cp $(file) $(PRODUCT_UPGRADE_OUT)/$(notdir $(file)); \
 		cp -f $(file) $(PRODUCT_UPGRADE_OUT)/$(notdir $(file)); \
+		)
+	$(hide) $(foreach file,$(BOARD_USER_PARTS_NAME), \
+		echo cp $(PRODUCT_OUT)/$(file).* $(AML_TARGET)/IMAGES/; \
+		cp $(PRODUCT_OUT)/$(file).* $(AML_TARGET)/IMAGES/; \
 		)
 	$(hide) $(foreach file,$(BUILT_IMAGES), \
 		echo "ln -sf $(shell readlink -f $(PRODUCT_OUT)/$(file)) $(PRODUCT_UPGRADE_OUT)/$(file)"; \

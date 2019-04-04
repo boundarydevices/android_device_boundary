@@ -62,7 +62,7 @@ def GetImage(which, tmpdir):
   map must already exist in tmpdir.
   """
 
-  assert which in ("system", "vendor", "odm", "product")
+  #assert which in ("system", "vendor", "odm", "product")
 
   path = os.path.join(tmpdir, "IMAGES", which + ".img")
   mappath = os.path.join(tmpdir, "IMAGES", which + ".map")
@@ -78,6 +78,18 @@ def GetImage(which, tmpdir):
   clobbered_blocks = "0"
 
   return sparse_img.SparseImage(path, mappath, clobbered_blocks)
+
+def AddCustomerImage(info, tmpdir):
+  file_list = os.listdir(tmpdir + "/IMAGES")
+  for file in file_list:
+    if os.path.splitext(file)[1] == '.map':
+      of = file.rfind('.')
+      name = file[:of]
+      if name not in ["system", "vendor", "odm", "product"]:
+          tmp_tgt = GetImage(name, OPTIONS.input_tmp)
+          tmp_tgt.ResetFileMap()
+          tmp_diff = common.BlockDifference(name, tmp_tgt)
+          tmp_diff.WriteScript(info.script, info.output_zip)
 
 def FullOTA_Assertions(info):
   print "amlogic extensions:FullOTA_Assertions"
@@ -132,6 +144,8 @@ def FullOTA_InstallEnd(info):
   product_tgt.ResetFileMap()
   product_diff = common.BlockDifference("product", product_tgt)
   product_diff.WriteScript(info.script, info.output_zip)
+
+  AddCustomerImage(info, OPTIONS.input_tmp)
 
   ZipOtherImage("logo", OPTIONS.input_tmp, info.output_zip)
   ZipOtherImage("dt", OPTIONS.input_tmp, info.output_zip)
