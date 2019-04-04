@@ -45,7 +45,8 @@ TARGET_RECOVERY_FSTAB = $(IMX_DEVICE_PATH)/fstab.freescale
 
 # Support gpt
 BOARD_BPT_INPUT_FILES += device/boundary/common/partition/device-partitions-14GB.bpt
-ADDITION_BPT_PARTITION = partition-table-7GB:device/boundary/common/partition/device-partitions-7GB.bpt \
+ADDITION_BPT_PARTITION = partition-table-3.5GB:device/boundary/common/partition/device-partitions-3.5GB.bpt \
+                         partition-table-7GB:device/boundary/common/partition/device-partitions-7GB.bpt \
                          partition-table-28GB:device/boundary/common/partition/device-partitions-28GB.bpt
 
 
