@@ -174,6 +174,29 @@ if [ $# -eq 1 ]; then
             compile_uboot
             cd ../../
         done
+        echo -e "device: update uboot [1/1]\n"
+        echo -e "PD#SWPL-919\n"
+        echo -e "Problem:"
+        echo -e "need update bootloader\n"
+        echo "Solution:"
+        cd bootloader/uboot-repo/bl2/bin/
+        echo "bl2       : "$(git log --pretty=format:"%H" -1)
+        cd ../../../../
+        cd bootloader/uboot-repo/bl30/bin/
+        echo "bl30      : "$(git log --pretty=format:"%H" -1)
+        cd ../../../../
+        cd bootloader/uboot-repo/bl31/bin/
+        echo "bl31      : "$(git log --pretty=format:"%H" -1)
+        cd ../../../../
+        cd bootloader/uboot-repo/bl31_1.3/bin/
+        echo "bl31_1.3  : "$(git log --pretty=format:"%H" -1)
+        cd ../../../../
+        cd bootloader/uboot-repo/fip/
+        echo "fip       : "$(git log --pretty=format:"%H" -1)
+        echo -e
+        cd ../../../../
+        echo "Verify:"
+        echo "no need verify"
     fi
     exit
 fi
