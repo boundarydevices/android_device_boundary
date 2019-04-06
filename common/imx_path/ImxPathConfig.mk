@@ -17,10 +17,10 @@ FSL_RESTRICTED_CODEC_PATH := vendor/nxp-private
 GPU_VIV6_PATH := vendor/nxp-private
 RESTRICTED_APP_PATH := vendor/nxp-private
 
-KERNEL_IMX_PATH := vendor/nxp-opensource
-UBOOT_IMX_PATH := vendor/nxp-opensource
+KERNEL_IMX_PATH := vendor/boundary
+UBOOT_IMX_PATH := vendor/boundary
 IMX_LIB_PATH := vendor/nxp-opensource
-IMX_MKIMAGE_PATH := vendor/nxp-opensource
+IMX_MKIMAGE_PATH := vendor/boundary
 IMX_PATH := vendor/nxp-opensource
 FSL_IMX_DEMO_PATH := vendor/nxp-opensource
 LIBDRM_IMX := vendor/nxp-opensource
