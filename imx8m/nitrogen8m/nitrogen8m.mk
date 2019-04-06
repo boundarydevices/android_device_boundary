@@ -3,7 +3,7 @@
 
 IMX_DEVICE_PATH := device/boundary/imx8m/nitrogen8m
 
--include device/fsl/common/imx_path/ImxPathConfig.mk
+-include device/boundary/common/imx_path/ImxPathConfig.mk
 $(call inherit-product, device/boundary/imx8m/ProductConfigCommon.mk)
 
 ifneq ($(wildcard $(IMX_DEVICE_PATH)/fstab_nand.freescale),)
