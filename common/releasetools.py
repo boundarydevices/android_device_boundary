@@ -27,6 +27,7 @@ import add_img_to_target_files
 OPTIONS = common.OPTIONS
 OPTIONS.ota_zip_check = True
 OPTIONS.data_save = False
+OPTIONS.hdcp_key_write = False
 
 def SetBootloaderEnv(script, name, val):
   """Set bootloader env name with val."""
@@ -253,6 +254,12 @@ package_extract_file("vbmeta.img", "/dev/block/vbmeta");""")
   if OPTIONS.ota_partition_change:
     info.script.AppendExtra('ui_print("update bootloader.img...");')
     info.script.AppendExtra('write_bootloader_image(package_extract_file("bootloader.img"));')
+
+  if OPTIONS.hdcp_key_write:
+    info.script.AppendExtra('mount("ext4", "EMMC", "/dev/block/param", "/param");')
+    info.script.AppendExtra('ui_print("update hdcp22_rx_fw...");')
+    info.script.AppendExtra('write_hdcp_22rxfw();')
+    info.script.AppendExtra('unmount("/param");')
 
   info.script.AppendExtra('if get_update_stage() == "2" then')
   info.script.FormatPartition("/metadata")

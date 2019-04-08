@@ -139,3 +139,8 @@ allow shell tmpfs:file {open read getattr};
 allow shell rootfs:file {execute_no_trans};
 
 allow recovery hdmirx0_device:chr_file { read write open ioctl getattr };
+
+allow recovery param_tv_file:dir { create search open read };
+allow recovery param_tv_file:file { open read };
+allow recovery unify_device:chr_file { open read write ioctl };
+
