@@ -96,10 +96,6 @@ BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
 
 BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 
-ifndef KERNEL_A32_SUPPORT
-KERNEL_A32_SUPPORT := true
-endif
-
 #AB_OTA_UPDATER :=true
 BUILD_WITH_AVB := true
 
@@ -187,6 +183,15 @@ PRODUCT_AML_SECUREBOOT_SIGNIMAGE := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --imgsig 
 PRODUCT_AML_SECUREBOOT_SIGBIN	:= $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --binsig \
 					--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY)
 endif # ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
+
+########################################################################
+#
+#                           Kernel Arch
+#
+########################################################################
+ifndef KERNEL_A32_SUPPORT
+KERNEL_A32_SUPPORT := true
+endif
 
 ########################################################################
 #

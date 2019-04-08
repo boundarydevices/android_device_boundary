@@ -16,7 +16,7 @@
 
 #r840 tuner
 ifeq ($(TUNER_MODULE), r840)
-ifneq ($(KERNEL_A32_SUPPORT), false)
+ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/r840_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/r840_fe.ko
 else
@@ -27,7 +27,7 @@ endif
 
 #r842 tuner
 ifeq ($(TUNER_MODULE), r842)
-ifneq ($(KERNEL_A32_SUPPORT), false)
+ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/r842_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/r842_fe.ko
 else
@@ -38,7 +38,7 @@ endif
 
 #si2151 tuner
 ifeq ($(TUNER_MODULE), si2151)
-ifneq ($(KERNEL_A32_SUPPORT), false)
+ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/si2151_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2151_fe.ko
 else
@@ -49,7 +49,7 @@ endif
 
 #si2159 tuner
 ifeq ($(TUNER_MODULE), si2159)
-ifneq ($(KERNEL_A32_SUPPORT), false)
+ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/si2159_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2159_fe.ko
 else
@@ -60,7 +60,7 @@ endif
 
 #mxl661 tuner
 ifeq ($(TUNER_MODULE), mxl661)
-ifneq ($(KERNEL_A32_SUPPORT), false)
+ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/mxl661_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/mxl661_fe.ko
 else
@@ -71,7 +71,7 @@ endif
 
 #si2168 tuner
 ifeq ($(TUNER_MODULE), si2168)
-ifneq ($(KERNEL_A32_SUPPORT), false)
+ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/si2168_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/si2168_fe.ko
 else
@@ -82,7 +82,7 @@ endif
 
 #atbm8881
 ifeq ($(TUNER_MODULE), atbm8881)
-ifneq ($(KERNEL_A32_SUPPORT), false)
+ifeq ($(KERNEL_A32_SUPPORT), true)
 PRODUCT_COPY_FILES += \
     device/amlogic/common/tuner/32/atbm8881_fe_32.ko:$(PRODUCT_OUT)/obj/lib_vendor/atbm8881_fe.ko
 else
