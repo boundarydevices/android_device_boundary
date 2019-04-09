@@ -54,6 +54,10 @@ ifeq ($(TARGET_WITH_MEDIA_EXT_LEVEL), 4)
     TARGET_WITH_SWCODEC_EXT := true
     TARGET_WITH_CODEC_EXT := true
     TARGET_WITH_PLAYERS_EXT := true
+#add our private retriever extension
+#only can open for customer do no use cts
+#defult do not open it
+    #TARGET_WITH_RETRIEVER_EXT := true
 endif
 endif
 endif
@@ -103,7 +107,10 @@ TARGET_WITH_AMNUPLAYER :=true
 
 endif
 
-
+ifeq ($(TARGET_WITH_RETRIEVER_EXT), true)
+PRODUCT_PACKAGES += \
+    libmetadataretriever_ext
+endif
 
 #########################################################################
 #
