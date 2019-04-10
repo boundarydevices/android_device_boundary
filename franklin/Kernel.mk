@@ -54,7 +54,7 @@ else
 -include device/amlogic/common/wifi_modules.mk
 -include device/amlogic/common/tb_modules.mk
 -include device/amlogic/common/tuner/tuner_modules.mk
-KERNEL_DEVICETREE := g12a_s905x2_u212_1g
+KERNEL_DEVICETREE := g12a_s905x2_u212_1g g12a_s905x2_u212 sm1_s905x3_ac213
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
