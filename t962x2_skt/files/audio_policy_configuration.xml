@@ -182,6 +182,10 @@
                        sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
                 <route type="mix" sink="HDMI Arc"
                        sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
+                <route type="mix" sink="BT SCO"
+                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
+                <route type="mix" sink="BT SCO Headset"
+                       sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
                 <route type="mix" sink="Wired Headset"
                        sources="primary output,tunnel raw,tunnel pcm,BT SCO Headset Mic,Spdif In,HDMI In,Line In,Tuner"/>
                 <route type="mix" sink="Wired Headphones"
