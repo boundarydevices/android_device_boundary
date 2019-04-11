@@ -34,8 +34,7 @@ endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.app.rotation=original \
-    media.amplayer.widevineenable=true \
-    vendor.media.sync.limit=1
+    media.amplayer.widevineenable=true
 
 #WITH_DEXPREOPT := true
 #WITH_DEXPREOPT_PIC := true

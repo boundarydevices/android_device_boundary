@@ -24,11 +24,6 @@ on fs
 	insmod /vendor/lib/modules/encoder.ko
 	insmod /vendor/lib/modules/vpu.ko
 
-
-on property:vendor.media.sync.limit=1
-	write /sys/module/amvideo/parameters/omx_pts_interval_lower "-2200"
-	write /sys/module/amvideo/parameters/omx_pts_interval_upper "4500"
-
 service tee_preload_fw /vendor/bin/tee_preload_fw
     class core
     user root
