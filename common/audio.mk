@@ -45,10 +45,6 @@ PRODUCT_PACKAGES += \
 #audio dra decoder lib, now put libstagefrighthw dir for develop omx dra verion in future.
 PRODUCT_COPY_FILES += \
     vendor/amlogic/common/prebuilt/libstagefrighthw/lib/libdra.so:$(TARGET_COPY_OUT_VENDOR)/lib/libdra.so
-PRODUCT_COPY_FILES += \
-    vendor/amlogic/common/prebuilt/libstagefrighthw/lib/libdolbyms12.so:$(TARGET_COPY_OUT_VENDOR)/lib/libdolbyms12.so
-PRODUCT_COPY_FILES += \
-    vendor/amlogic/common/prebuilt/libstagefrighthw/lib/libms12dap.so:$(TARGET_COPY_OUT_VENDOR)/lib/libms12dap.so
 #configurable audio policy
 USE_XML_AUDIO_POLICY_CONF := 1
 
