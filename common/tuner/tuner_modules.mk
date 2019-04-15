@@ -55,3 +55,9 @@ ifeq ($(TUNER_MODULE), atbm8881)
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/atbm8881_fe.ko
 endif
+
+#avl6762
+ifeq ($(TUNER_MODULE), avl6762)
+BOARD_VENDOR_KERNEL_MODULES += \
+	$(PRODUCT_OUT)/obj/lib_vendor/avl6762_fe.ko
+endif
