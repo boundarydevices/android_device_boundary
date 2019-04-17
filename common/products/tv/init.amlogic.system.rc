@@ -26,6 +26,7 @@ on init
     chmod 666 /sys/class/video/disable_videopip
     chmod 666 /sys/class/tsync/enable
     chmod 666 /sys/class/tsync/apts_lookup
+    chmod 666 /sys/class/tsync/pts_latency
     chmod 666 /sys/class/tsync/pts_pcrscr
     chmod 666 /sys/class/tsync/pts_audio
     chmod 666 /sys/class/tsync/firstapts
