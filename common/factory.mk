@@ -485,7 +485,10 @@ endif
 
 .PHONY:aml_fastboot_zip
 aml_fastboot_zip:$(INSTALLED_AML_FASTBOOT_ZIP)
-$(INSTALLED_AML_FASTBOOT_ZIP): $(addprefix $(PRODUCT_OUT)/,$(FASTBOOT_IMAGES)) $(BUILT_ODMIMAGE_TARGET) $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET)
+$(INSTALLED_AML_FASTBOOT_ZIP): $(addprefix $(PRODUCT_OUT)/,$(FASTBOOT_IMAGES)) \
+                               $(addprefix $(PRODUCT_OUT)/,bootloader.img) \
+                               $(INSTALLED_AML_LOGO) \
+                               $(BUILT_ODMIMAGE_TARGET)
 	echo "install $@"
 	rm -rf $(PRODUCT_OUT)/fastboot
 	mkdir -p $(PRODUCT_OUT)/fastboot
@@ -630,6 +633,15 @@ $(INSTALLED_AML_EMMC_BIN): $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET) $(PRODUCT_CFG
 aml_emmc_bin :$(INSTALLED_AML_EMMC_BIN)
 endif # ifeq ($(TARGET_SUPPORT_USB_BURNING_V2),true)
 
+#define the OTA package for cipackage build.
+ota_name := $(TARGET_PRODUCT)
+ifeq ($(TARGET_BUILD_TYPE),debug)
+  ota_name := $(ota_name)_debug
+endif
+ota_name := $(ota_name)-ota-$(FILE_NAME_TAG)
+INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(ota_name).zip
+
 droidcore: $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET) $(INSTALLED_MANIFEST_XML) $(INSTALLED_AML_FASTBOOT_ZIP)
 otapackage: $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET) $(INSTALLED_MANIFEST_XML) $(INSTALLED_AML_FASTBOOT_ZIP)
 ota_amlogic: $(INSTALLED_AML_UPGRADE_PACKAGE_TARGET) $(INSTALLED_MANIFEST_XML) $(INSTALLED_AML_FASTBOOT_ZIP) otapackage
+cipackage: $(INTERNAL_OTA_PACKAGE_TARGET) $(INSTALLED_MANIFEST_XML) $(INSTALLED_AML_FASTBOOT_ZIP)
