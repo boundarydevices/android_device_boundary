@@ -1,5 +1,7 @@
 allow tee self:capability { sys_rawio };
 allow tee sysfs_xbmc:file { read open };
+allow tee sysfs_video:file { write };
+allow tee sysfs_audio:file { write };
 allow tee block_device:dir { open read search};
 allow tee sda_block_device:blk_file { read open write ioctl };
 allow tee drm_device:chr_file { read open write ioctl };
@@ -18,3 +20,13 @@ allow tee unlabeled:file { open read rename write };
 allow tee hidraw_device:chr_file { create read open write ioctl };
 allow tee vendor_file:file { read open getattr execute };
 allow tee param_tv_file:dir { search };
+
+#for vmx
+net_domain(tee)
+allow tee tee_data_file:lnk_file { read open };
+allow tee self:capability { net_raw };
+allow tee node:tcp_socket { node_bind };
+allow tee self:tcp_socket { bind create read write listen accept getopt };
+allow tee port:tcp_socket { name_bind } ;
+allow tee fwmarkd_socket:sock_file { write } ;
+allow tee netd:unix_stream_socket { connectto } ;

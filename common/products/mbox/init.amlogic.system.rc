@@ -136,11 +136,25 @@ on boot
     chown media system /sys/class/ppmgr/ppscaler_rect
     chown media system /sys/class/ppmgr/vtarget
 
+    chmod 666 /sys/module/decoder_common/parameters/force_nosecure_even_drm
+    chown media system /sys/module/decoder_common/parameters/force_nosecure_even_drm
     chown media system /sys/class/amaudio/audio_channels_mask
     chown media system /sys/class/amaudio/enable_resample
     chown media system /sys/class/amaudio/resample_type
     chown system mediadrm /sys/class/amaudio/debug
 
+    chmod 666 /sys/class/astream/format
+    chown media audio /sys/class/astream/format
+    chmod 666 /sys/class/astream/addr_offset
+    chown media audio /sys/class/astream/addr_offset
+    chmod 666 /sys/class/astream/astream-dev/uio0/maps/map0/addr
+    chown media audio  /sys/class/astream/astream-dev/uio0/maps/map0/addr
+    chmod 666 /sys/class/astream/astream-dev/uio0/maps/map0/size
+    chown media audio  /sys/class/astream/astream-dev/uio0/maps/map0/size
+    chmod 666 /sys/class/astream/astream-dev/uio0/maps/map0/offset
+    chown media audio  /sys/class/astream/astream-dev/uio0/maps/map0/offset
+    chmod 666 /sys/class/dmx/demux0_scramble
+    chown media system  /sys/class/dmx/demux0_scramble
     chown system system /sys/class/audiodsp/digital_raw
     chown system system /sys/class/audiodsp/ac3_drc_control
     chown media system /sys/class/audiodsp/dts_dec_control
@@ -214,6 +228,8 @@ on boot
     chmod 0666 /dev/dvb0.dvr0
     chmod 0666 /dev/dvb0.dvr1
     chmod 0666 /dev/dvb0.dvr2
+    chmod 0666 /dev/dvb0.ca0
+    chmod 0666 /dev/dvb0.ca1
     write /sys/module/stream_input/parameters/def_vstreambuf_sizeM 10
     write /sys/module/stream_input/parameters/def_4k_vstreambuf_sizeM 15
 
@@ -225,10 +241,16 @@ on boot
     chown media system /dev/dvb0.dvr0
     chown media system /dev/dvb0.dvr1
     chown media system /dev/dvb0.dvr2
+    chown media system /dev/dvb0.ca0
+    chown media system /dev/dvb0.ca1
 
     chown media system /sys/class/stb/demux0_source
     chown media system /sys/class/stb/demux1_source
     chown media system /sys/class/stb/demux2_source
+    chown media system /sys/class/stb/dsc0_source
+    chown media system /sys/class/stb/dsc0_free_dscs
+    chown media system /sys/class/stb/dsc1_source
+    chown media system /sys/class/stb/dsc1_free_dscs
     chown media system /sys/class/stb/source
     chown media system /sys/class/stb/asyncfifo0_source
     chown media system /sys/class/stb/asyncfifo1_source

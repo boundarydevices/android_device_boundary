@@ -48,6 +48,8 @@ type tee_droid_data_file, file_type, data_file_type, core_data_file_type;
 type optee_file, file_type, data_file_type, core_data_file_type;
 type sysfs_cec, fs_type, sysfs_type;
 type sysfs_display, fs_type, sysfs_type;
+type sysfs_stb, fs_type, sysfs_type;
+type sysfs_vdec, fs_type, sysfs_type;
 type sysfs_lcd, fs_type, sysfs_type;
 type sysfs_rdma, fs_type, sysfs_type;
 type sysfs_am_vecm, fs_type, sysfs_type;

@@ -129,12 +129,21 @@
 /sys/class/tsync/enable						u:object_r:sysfs_video:s0
 /sys/class/audiodsp/digital_raw					u:object_r:sysfs_audio:s0
 /sys/class/amaudio/debug                                        u:object_r:sysfs_audio:s0
+/sys/class/amaudio/mute_unmute                                  u:object_r:sysfs_audio:s0
+/sys/class/astream/addr_offset                                  u:object_r:sysfs_audio:s0
+/sys/class/astream/format                                       u:object_r:sysfs_audio:s0
+/sys/class/astream/astream-dev/uio0/maps/map0(/.*)?             u:object_r:sysfs_audio:s0
+/sys/devices/virtual/astream/astream-dev/uio0/maps/map0(/.*)?   u:object_r:sysfs_audio:s0
+/sys/class/dmx/demux0_scramble                                  u:object_r:sysfs_audio:s0
 /sys/class/tsync/firstapts                                      u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/pts_audio                                      u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/pts_video                                     u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/event                                          u:object_r:sysfs_xbmc:s0
 /sys/class/tsync/pts_pcrscr                                     u:object_r:sysfs_xbmc:s0
-
+/sys/class/tsync/firstvpts                                      u:object_r:sysfs_xbmc:s0
+/sys/class/tsync/mode                                           u:object_r:sysfs_xbmc:s0
+/sys/class/tsync/checkin_firstapts                              u:object_r:sysfs_xbmc:s0
+/sys/class/tsync/checkin_firstvpts                              u:object_r:sysfs_xbmc:s0
 /sys/devices/virtual/amhdmitx/amhdmitx0(/.*)?                   u:object_r:sysfs_amhdmitx:s0
 
 /sys/class/audiodsp/digital_codec       		        u:object_r:sysfs_digital_codec:s0
@@ -189,7 +198,8 @@
 /sys/module/amvdec_h265/parameters/double_write_mode            u:object_r:sysfs_amvdec:s0
 
 /sys/devices/virtual/remote/amremote(/.*)?                      u:object_r:sysfs_remote:s0
-
+/sys/class/stb(/.*)?                                            u:object_r:sysfs_stb:s0
+/sys/module/decoder_common/parameters/force_nosecure_even_drm   u:object_r:sysfs_vdec:s0
 /sys/devices/virtual/amhdmitx/amhdmitx0/hdmi_audio/state        u:object_r:sysfs_hdmi:s0
 /sys/devices/virtual/thermal/thermal_zone0/mode                 u:object_r:sysfs_display:s0
 /sys/devices/platform/aml_pm/suspend_reason                     u:object_r:sysfs_pm:s0

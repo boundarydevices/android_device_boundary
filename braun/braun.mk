@@ -335,10 +335,56 @@ PRODUCT_COPY_FILES += \
 #
 #                                                Verimatrix DRM
 ##########################################################################
-#verimatrix web
-BUILD_WITH_VIEWRIGHT_WEB := false
-#verimatrix stb
-BUILD_WITH_VIEWRIGHT_STB := false
+#BOARD_BUILD_VMX_DRM := true
+ifeq ($(BOARD_BUILD_VMX_DRM),true)
+#verimatrix web client
+BUILD_WITH_VIEWRIGHT_WEB := true
+#verimatrix iptv client
+BUILD_WITH_VIEWRIGHT_IPTV := true
+#verimatrix dvb client
+#BUILD_WITH_VIEWRIGHT_DVB := true
+
+#use Development lib or Production lib for IPTV client only
+BUILD_WITH_DEV_LIB := true
+#build with libcaclientapi.a  or not.
+#BUILD_WITH_CACLIENT_API := true
+TARGET_USE_OPTEEOS := true
+
+
+ifeq ($(BUILD_WITH_VIEWRIGHT_WEB),true)
+  PRODUCT_PACKAGES += libViewRightWebClient  \
+			acbe4b66-6e40-46dc-a2fe-a576922cf170  \
+			7a60371e-5af8-426c-be15-113d794238d4
+
+endif
+
+ifeq ($(BUILD_WITH_VIEWRIGHT_IPTV),true)
+  ifeq ($(BUILD_WITH_DEV_LIB),true)
+    PRODUCT_PACKAGES += libvriptvclientDEV
+  else
+    PRODUCT_PACKAGES += libvriptvclient
+  endif
+  PRODUCT_PACKAGES += libvmlogger
+  PRODUCT_PACKAGES += 37eb0e02-c43d-48a8-a129-a95dd3d43929 \
+                      7a60371e-5af8-426c-be15-113d794238d4
+endif
+
+#ifeq ($(BUILD_WITH_CACLIENT_API),true)
+#  PRODUCT_PACKAGES += libcaclientapi
+#endif
+
+PRODUCT_COPY_FILES += \
+     vendor/amlogic/common/tdk/ca_export_arm/lib_android/libteec.so:$(TARGET_COPY_OUT_VENDOR)/lib/libteec.so
+
+
+ifeq ($(BUILD_WITH_VIEWRIGHT_DVB),true)
+  PRODUCT_PACKAGES += 37eb0e02-c43d-48a8-a129-a95dd3d43929 \
+                      cb4066f7-e18f-4fb9-b6b1-9511bd319ebc
+
+  #testbin
+  #PRODUCT_PACKAGES += vmx_adv_hiu_test
+endif
+endif
 #########################################################################
 
 

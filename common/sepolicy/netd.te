@@ -9,3 +9,7 @@ allow netd proc_net:file { create };
 
 allow netd rootfs:lnk_file { getattr };
 allow netd self:capability sys_nice;
+
+#for vmx
+allow netd tee:fd { use };
+allow netd tee:tcp_socket { read write setopt getopt };
