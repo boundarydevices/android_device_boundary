@@ -1,0 +1,4 @@
+<resources>
+    <!-- Minimum swipe distance to catch the swipe gestures to invoke assist or switch tasks. -->
+    <dimen name="navigation_bar_min_swipe_distance">40dp</dimen>
+</resources>

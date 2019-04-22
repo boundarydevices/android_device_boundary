@@ -1,0 +1,3 @@
+allow mediadrmserver ion_device:chr_file { open read ioctl };
+allow mediadrmserver vendor_file:file { read getattr };
+allow mediadrmserver vendor_file:dir { read };

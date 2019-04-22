@@ -1,0 +1,41 @@
+on early-boot
+
+    # Set OpenGLES version
+    setprop ro.opengles.version 131072
+
+    # Set GPU 3D minimum clock to 3/64
+    write /sys/bus/platform/drivers/galcore/gpu3DMinClock 3
+
+    # change for FSL specific service
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+    chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+
+on property:sys.boot_completed=1
+    # Set default CPU frequency governor
+    # configure governor settings for little cluster
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "schedutil"
+    write /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us 20000
+
+on property:sys.boot_completed=1
+    # update cpuset now that processors are up
+    write /dev/cpuset/foreground/cpus 0-3
+
+    # top-app gets all cpus
+    write /dev/cpuset/top-app/cpus 0-3
+
+    #background contains a small subset (generally one little core)
+    write /dev/cpuset/background/cpus 0
+
+    # add system-background cpuset, a new cpuset for system services
+    # that should not run on larger cores
+    # system-background is for system tasks that should only run on
+    # little cores, not on bigs to be used only by init
+    write /dev/cpuset/system-background/cpus 0-2
