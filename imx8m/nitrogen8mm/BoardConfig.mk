@@ -126,7 +126,7 @@ endif
 endif
 
 BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8mm/dtbo-imx8mm.img
-TARGET_BOARD_DTS_CONFIG ?= imx8mm:fsl-imx8mm-evk.dtb imx8mm-mipi-panel:fsl-imx8mm-evk-rm67191.dtb imx8mm-dsd:fsl-imx8mm-evk-ak4497.dtb imx8mm-m4:fsl-imx8mm-evk-m4.dtb
+TARGET_BOARD_DTS_CONFIG := imx8mm:imx8mm-nitrogen8mm.dtb
 TARGET_BOOTLOADER_CONFIG := imx8mm:nitrogen8mm_2g_defconfig
 
 TARGET_KERNEL_DEFCONFIG := android_defconfig
