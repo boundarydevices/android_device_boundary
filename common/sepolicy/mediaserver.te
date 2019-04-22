@@ -1,5 +1,6 @@
 allow mediaserver system_server:unix_stream_socket { read write setopt };
 allow mediaserver video_device:chr_file rw_file_perms;
+allow mediaserver vendor_video_device:chr_file rw_file_perms;
 allow mediaserver codec_device:chr_file rw_file_perms;
 
 allow mediaserver  sysfs_mpgpu_scale:file  { open read write};

@@ -8,6 +8,7 @@ allow hal_graphics_composer_default systemcontrol_hwservice:hwservice_manager { 
 allow hal_graphics_composer_default system_control:binder { call };
 
 allow hal_graphics_composer_default video_device:chr_file rw_file_perms;
+allow hal_graphics_composer_default vendor_video_device:chr_file rw_file_perms;
 allow hal_graphics_composer_default graphics_device:chr_file {open read write ioctl};
 allow hal_graphics_composer_default sysfs_video:file rw_file_perms;
 allow hal_graphics_composer_default sysfs:file rw_file_perms;

@@ -122,6 +122,7 @@ allow system_control droidvold:binder { call };
 
 
 allow system_control { video_device amvecm_device }:chr_file  { read write open ioctl getattr };
+allow system_control { vendor_video_device }:chr_file  { read write open ioctl getattr };
 allow system_control di0_device:chr_file { read write open ioctl };
 allow system_control param_tv_file:dir { write search add_name create };
 allow system_control param_tv_file:file { create read write open getattr ioctl};
@@ -155,5 +156,6 @@ allow system_control debugfs_demod:file { read write open };
 
 allow system_control uhid_device:chr_file { ioctl open read write };
 
-allow system_control sysfs_stb:file   { read open write getattr};
-allow system_control sysfs_stb:dir   {search};
+allow system_control sysfs_stb:file { read open write getattr};
+allow system_control sysfs_stb:dir {search};
+allow system_control sysfs_xbmc:file { read write };

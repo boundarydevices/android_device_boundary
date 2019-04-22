@@ -23,4 +23,5 @@ set_prop(dtvkitserver, tv_prop)
 get_prop(dtvkitserver, media_prop)
 allow dtvkitserver tv_prop:file { read open getattr };
 allow dtvkitserver video_device:chr_file { read write open ioctl getattr };
+allow dtvkitserver vendor_video_device:chr_file { read write open ioctl getattr };
 allow dtvkitserver codec_device:chr_file { read write open ioctl };

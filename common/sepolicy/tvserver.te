@@ -14,7 +14,7 @@ allow tvserver hwservicemanager_prop:file { open read getattr };
 allow tvserver { hal_tv_input_default system_app }:binder { call transfer };
 
 
-allow tvserver { video_device dvb_video_device amvideo_device mediactl_video_device }:chr_file  { read write open ioctl getattr };
+allow tvserver { video_device vendor_video_device dvb_video_device amvideo_device mediactl_video_device }:chr_file  { read write open ioctl getattr };
 allow tvserver { hdmirx0_device avin_device }:chr_file  { read write open ioctl getattr };
 
 allow tvserver audio_device:dir { search };

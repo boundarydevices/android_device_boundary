@@ -16,7 +16,7 @@
 /dev/amvecm            			u:object_r:amvecm_device:s0
 /dev/di0                                u:object_r:di0_device:s0
 /dev/HevcEnc				u:object_r:video_device:s0
-/dev/amvideo				u:object_r:video_device:s0
+/dev/amvideo				u:object_r:vendor_video_device:s0
 /dev/amvideo_poll   			u:object_r:video_device:s0
 /dev/ionvideo   			u:object_r:video_device:s0
 /dev/amstream_.*    			u:object_r:codec_device:s0

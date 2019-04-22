@@ -41,3 +41,6 @@ allow system_server update_engine:binder call;
 allow system_server mediaprovider:file { write open };
 
 allow system_server dvb_device:chr_file rw_file_perms;
+
+allow system_server vendor_video_device:dir r_dir_perms;
+allow system_server vendor_video_device:chr_file rw_file_perms;

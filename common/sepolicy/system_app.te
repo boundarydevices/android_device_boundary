@@ -65,7 +65,7 @@ allow system_app sysfs_amhdmitx:dir search;
 allow system_app sysfs_amhdmitx:file { getattr open read };
 allow system_app sysfs_pm:file r_file_perms;
 allow system_app vendor_app_file:file { read open getattr execute };
-allow system_app dvb_device:chr_file { open read write ioctl };
+allow system_app dvb_device:chr_file { open read write ioctl getattr};
 allow system_app codec_device:chr_file { open read write ioctl getattr};
 allow system_app param_tv_file:file { create open read write setattr getattr lock unlink };
 allow system_app param_tv_file:dir { search read open write add_name remove_name getattr };
@@ -79,3 +79,11 @@ allow system_app debugfs_mali:dir search;
 allow system_app miracast_hdcp2_hwservice:hwservice_manager { find };
 allow system_app miracast_hdcp2:binder { call transfer };
 allow system_app miracast_prop:file { read open getattr };
+
+allow system_app sysfs_video:chr_file {open ioctl read write};
+allow system_app tv_prop:file {open read getattr};
+allow system_app param_tv_file:dir { search read write open add_name remove_name rmdir };
+allow system_app param_tv_file:file { create open read write setattr getattr lock unlink ioctl };
+allow system_app vendor_video_device:chr_file {open ioctl read write};
+allow system_app debugfs_mali:dir search;
+

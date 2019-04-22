@@ -12,6 +12,7 @@ type picture_device, dev_type;
 type hdcptx_device, dev_type;
 type hdcprx_device, dev_type;
 
+type vendor_video_device, dev_type;
 type dvb_video_device, dev_type;
 type mediactl_video_device, dev_type;
 type avin_device, dev_type;
