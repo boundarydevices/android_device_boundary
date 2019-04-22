@@ -1,5 +1,5 @@
 /dev/block/platform/30b50000\.mmc/by-name/presistdata 0600   system     system
-/dev/block/platform/30b60000\.mmc/by-name/presistdata 0600   system     system
+/dev/block/platform/30b40000\.mmc/by-name/presistdata 0600   system     system
 /dev/ttymxc0              0660   bluetooth  bluetooth
 /dev/snd/*                0660   system     audio
 /dev/video*               0660   system     camera

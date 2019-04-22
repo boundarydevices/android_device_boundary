@@ -72,7 +72,7 @@ setenv bootargs $bootargs androidboot.keystore=software
 
 if itest.s "xmmc" == "x$devtype" ; then
 	if itest.s "x0" == "x$devnum" ; then
-		bootdev=30b60000.mmc
+		bootdev=30b40000.mmc
 		setenv bootargs $bootargs androidboot.storage_type=emmc
 	elif itest.s "x1" == "x$devnum" ; then
 		bootdev=30b50000.mmc
