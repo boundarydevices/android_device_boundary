@@ -14,7 +14,10 @@ endif
 PRODUCT_NAME := nitrogen8mm
 PRODUCT_DEVICE := nitrogen8mm
 
-PRODUCT_FULL_TREBLE_OVERRIDE := true
+PRODUCT_FULL_TREBLE_OVERRIDE := false
+
+AB_OTA_UPDATER := false
+BOARD_AVB_ENABLE := false
 
 #Enable this to include trusty support
 #PRODUCT_IMX_TRUSTY := true
