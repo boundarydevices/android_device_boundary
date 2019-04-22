@@ -21,6 +21,7 @@ TARGET_CPU_SMP := true
 TARGET_HAVE_VULKAN := true
 ENABLE_CFI=false
 
+TARGET_SOC := imx8m
 #
 # Product-specific compile-time definitions.
 #
