@@ -32,6 +32,9 @@ ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 -include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
 endif
 
+export BUILD_ID=1.0.0-ga
+export BUILD_NUMBER=$(shell date +%Y%m%d)
+
 BUILD_TARGET_FS ?= ext4
 TARGET_USERIMAGES_USE_EXT4 := true
 
