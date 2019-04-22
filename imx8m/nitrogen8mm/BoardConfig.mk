@@ -100,7 +100,6 @@ BOARD_HAVE_USB_CAMERA := true
 USE_ION_ALLOCATOR := true
 USE_GPU_ALLOCATOR := false
 
-BOARD_AVB_ENABLE := true
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 BOARD_AVB_ALGORITHM := SHA256_RSA4096
 # The testkey_rsa4096.pem is copied from external/avb/test/data/testkey_rsa4096.pem
