@@ -25,10 +25,9 @@ ENABLE_CFI=false
 # Product-specific compile-time definitions.
 #
 
-IMX_DEVICE_PATH := device/fsl/imx8m/nitrogen8mm
+IMX_DEVICE_PATH := device/boundary/imx8m/nitrogen8mm
 
-include $(IMX_DEVICE_PATH)/build_id.mk
-include device/fsl/imx8m/BoardConfigCommon.mk
+include device/boundary/imx8m/BoardConfigCommon.mk
 ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 -include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
 endif
@@ -138,7 +137,7 @@ TARGET_KERNEL_ADDITION_DEFCONF := android_addition_defconfig
 TARGET_BOOTLOADER_CONFIG += imx8mm-evk-uuu:imx8mm_evk_android_uuu_defconfig
 
 BOARD_SEPOLICY_DIRS := \
-       device/fsl/imx8m/sepolicy \
+       device/boundary/imx8m/sepolicy \
        $(IMX_DEVICE_PATH)/sepolicy
 
 ifeq ($(PRODUCT_IMX_DRM),true)
