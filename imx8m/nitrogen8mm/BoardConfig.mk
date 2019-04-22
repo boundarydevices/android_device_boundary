@@ -25,7 +25,7 @@ ENABLE_CFI=false
 # Product-specific compile-time definitions.
 #
 
-IMX_DEVICE_PATH := device/fsl/imx8m/evk_8mm
+IMX_DEVICE_PATH := device/fsl/imx8m/nitrogen8mm
 
 include $(IMX_DEVICE_PATH)/build_id.mk
 include device/fsl/imx8m/BoardConfigCommon.mk
@@ -123,7 +123,7 @@ $(error "TARGET_USERIMAGES_USE_UBIFS and TARGET_USERIMAGES_USE_EXT4 config open 
 endif
 endif
 
-BOARD_PREBUILT_DTBOIMAGE := out/target/product/evk_8mm/dtbo-imx8mm.img
+BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8mm/dtbo-imx8mm.img
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 TARGET_BOOTLOADER_CONFIG := imx8mm:imx8mm_evk_android_trusty_defconfig
 TARGET_BOARD_DTS_CONFIG ?= imx8mm:fsl-imx8mm-trusty-evk.dtb imx8mm-mipi-panel:fsl-imx8mm-evk-rm67191.dtb imx8mm-dsd:fsl-imx8mm-evk-ak4497.dtb imx8mm-m4:fsl-imx8mm-evk-m4.dtb

@@ -28,5 +28,6 @@
 # Copied from build/target/product/AndroidProducts.mk
 
 PRODUCT_MAKEFILES := \
-  $(LOCAL_DIR)/nitrogen8m/nitrogen8m.mk
+  $(LOCAL_DIR)/nitrogen8m/nitrogen8m.mk \
+  $(LOCAL_DIR)/nitrogen8mm/nitrogen8mm.mk
 
