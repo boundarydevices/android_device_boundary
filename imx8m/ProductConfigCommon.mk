@@ -293,6 +293,7 @@ PRODUCT_COPY_FILES += \
     device/fsl/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Novatek_NT11003_Touch_Screen.idc \
     device/fsl/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/eGalax_Touch_Screen.idc \
     device/boundary/common/input/Goodix_Capacitive_TouchScreen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Goodix_Capacitive_TouchScreen.idc \
+    device/boundary/common/input/ft5x06.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/ft5x06.idc \
     device/fsl/imx8m/etc/ota.conf:$(TARGET_COPY_OUT_VENDOR)/etc/ota.conf \
     device/fsl/imx8m/init.recovery.freescale.rc:root/init.recovery.freescale.rc \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
