@@ -88,7 +88,7 @@ PRODUCT_TYPE := mbox
 
 WITH_LIBPLAYER_MODULE := false
 
-OTA_UP_PART_NUM_CHANGED := true
+OTA_UP_PART_NUM_CHANGED := false
 
 BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 

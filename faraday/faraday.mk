@@ -91,7 +91,7 @@ BOARD_WIDEVINE_TA_PATH := vendor/amlogic/
 
 WITH_LIBPLAYER_MODULE := false
 
-OTA_UP_PART_NUM_CHANGED := true
+OTA_UP_PART_NUM_CHANGED := false
 
 BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 #AB_OTA_UPDATER :=true

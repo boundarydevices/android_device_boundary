@@ -84,7 +84,7 @@ PRODUCT_TYPE := mbox
 BOARD_AML_TDK_KEY_PATH := device/amlogic/common/tdk_keys/
 WITH_LIBPLAYER_MODULE := false
 
-OTA_UP_PART_NUM_CHANGED := true
+OTA_UP_PART_NUM_CHANGED := false
 
 BOARD_AML_VENDOR_PATH := vendor/amlogic/common/
 

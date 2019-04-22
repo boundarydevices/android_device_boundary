@@ -80,6 +80,7 @@ PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/recovery/remotecfg:recovery/root/sbin/remotecfg \
     device/amlogic/$(PRODUCT_DIR)/files/remote.cfg:recovery/root/etc/remote.cfg \
     device/amlogic/$(PRODUCT_DIR)/files/remote.tab:recovery/root/etc/remote.tab \
+    device/amlogic/common/recovery/resize2fs:recovery/root/sbin/resize2fs \
     device/amlogic/$(PRODUCT_DIR)/recovery/sh:recovery/root/sbin/sh
 
 # darwin config file

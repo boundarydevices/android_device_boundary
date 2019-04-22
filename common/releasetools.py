@@ -27,6 +27,7 @@ import add_img_to_target_files
 OPTIONS = common.OPTIONS
 OPTIONS.ota_zip_check = True
 OPTIONS.data_save = False
+OPTIONS.backup_zip = True
 OPTIONS.hdcp_key_write = False
 
 def SetBootloaderEnv(script, name, val):
@@ -90,11 +91,17 @@ def FullOTA_Assertions(info):
     common.ZipWriteStr(info.output_zip, "bootloader.img", bootloader_img)
   if OPTIONS.ota_zip_check:
     info.script.AppendExtra('if ota_zip_check() == "1" then')
+    if OPTIONS.data_save:
+      info.script.AppendExtra('backup_data_partition_check("500");')
     info.script.AppendExtra('backup_data_cache(dtb, /cache/recovery/);')
     info.script.AppendExtra('backup_data_cache(recovery, /cache/recovery/);')
     info.script.AppendExtra('set_bootloader_env("upgrade_step", "3");')
-    if not OPTIONS.data_save:
+    # backup the update package to /cache or /dev/block/mmcblk0
+    if OPTIONS.backup_zip:
       info.script.AppendExtra('backup_update_package("/dev/block/mmcblk0", "1894");')
+    # use resize2fs for /dev/block/data and backup data partition
+    if OPTIONS.data_save:
+      info.script.AppendExtra('backup_data_partition();')
     info.script.AppendExtra('package_extract_file("logo.img", "/dev/block/logo");')
     info.script.AppendExtra('write_dtb_image(package_extract_file("dt.img"));')
     info.script.WriteRawImage("/recovery", "recovery.img")
@@ -109,6 +116,8 @@ def FullOTA_Assertions(info):
 def FullOTA_InstallBegin(info):
   print "amlogic extensions:FullOTA_InstallBegin"
   SetBootloaderEnv(info.script, "upgrade_step", "3")
+  if OPTIONS.data_save:
+    info.script.AppendExtra('recovery_data_partition();')
 
 def FullOTA_InstallEnd(info):
   print "amlogic extensions:FullOTA_InstallEnd"
