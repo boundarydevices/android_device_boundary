@@ -152,3 +152,7 @@ allow system_control hal_keymaster_default:binder { call };
 allow system_control debugfs_demod:dir { search };
 allow system_control debugfs_demod:file { read write open };
 
+allow system_control uhid_device:chr_file { ioctl open read write };
+
+allow system_control sysfs_stb:file   { read open write getattr};
+allow system_control sysfs_stb:dir   {search};

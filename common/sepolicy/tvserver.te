@@ -75,3 +75,6 @@ allow tvserver sysfs_amhdmitx:dir search;
 allow tvserver sysfs_amhdmitx:file { write open read getattr };
 
 allow tvserver hdmicecd:binder { call transfer };
+
+allow tvserver sysfs_stb:file   { read open write getattr};
+allow tvserver sysfs_stb:dir   {search};
