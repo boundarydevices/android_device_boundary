@@ -25,6 +25,8 @@ on init
     chmod 666 /sys/class/video/disable_video
     chmod 666 /sys/class/video/axis_pip
     chmod 666 /sys/class/video/disable_videopip
+    chmod 666 /sys/class/video/crop
+    chmod 666 /sys/class/video/crop_pip
     chmod 666 /sys/class/tsync/enable
     chmod 666 /sys/class/tsync/apts_lookup
     chmod 666 /sys/class/tsync/pts_latency
@@ -130,6 +132,8 @@ on boot
     chown media system /sys/class/video/zoom
     chown media system /sys/class/video/free_keep_buffer
     chown media system /sys/class/video/free_cma_buffer
+    chown media system /sys/class/video/crop
+    chown media system /sys/class/video/crop_pip
     chown mediacodec mediadrm /sys/class/codec_mm/tvp_enable
     chown media system /sys/class/ppmgr/angle
     chown media system /sys/class/ppmgr/disp
