@@ -34,6 +34,7 @@
 /dev/video20              0660   system     mediadrm
 /dev/video21              0660   system     mediadrm
 /dev/video23              0660   system     mediadrm
+/dev/video50              0660   system     camera
 /dev/amaudio_utils        0660   media     system
 /dev/amaudio_ctl          0660   media     system
 /dev/amvenc_avc           0660   mediacodec     system
