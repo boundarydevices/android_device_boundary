@@ -328,9 +328,31 @@ def IncrementalOTA_ImageCheck(info, name):
     else:
       SetBootloaderEnv(info.script, "upgrade_step", "2")
 
+def IncrementalOTA_Ext4ImageCheck(info, name):
+  source_image = False; target_image = False; updating_image = False;
+
+  image_path = "IMAGES/" + name + ".img"
+  image_name = name + ".img"
+
+  if HasTargetImage(info.source_zip, image_path):
+    source_image = GetImage(name, OPTIONS.source_tmp)
+
+  if HasTargetImage(info.target_zip, image_path):
+    target_image = GetImage(name, OPTIONS.target_tmp)
+
+  if source_image:
+    if target_image:
+      updating_image = common.BlockDifference(name, source_image, target_image,
+                                       True,
+                                       version=4,
+                                       disable_imgdiff=False)
+      updating_image.WriteScript(info.script, info.output_zip, progress=0.1)
+
 
 def IncrementalOTA_InstallEnd(info):
   print "amlogic extensions:IncrementalOTA_InstallEnd"
+  IncrementalOTA_Ext4ImageCheck(info, "odm");
+  IncrementalOTA_Ext4ImageCheck(info, "product");
   IncrementalOTA_ImageCheck(info, "logo");
   IncrementalOTA_ImageCheck(info, "dt");
   IncrementalOTA_ImageCheck(info, "recovery");

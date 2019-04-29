@@ -8,5 +8,7 @@ genfscon proc    /bluetooth/sleep/btwrite u:object_r:proc_bluetooth_writable:s0
 #genfscon ntfs    /       u:object_r:ntfs:s0
 #genfscon exfat   /       u:object_r:exfat:s0
 genfscon debugfs  /demod       u:object_r:debugfs_demod:s0
+genfscon proc    /sys/vm/watermark_scale_factor u:object_r:proc_vm_writable:s0
+genfscon proc    /sys/vm/min_free_kbytes u:object_r:proc_vm_writable:s0
 
 genfscon debugfs  /mali0       u:object_r:debugfs_mali:s0

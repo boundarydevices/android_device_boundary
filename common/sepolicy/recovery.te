@@ -144,3 +144,4 @@ allow recovery param_tv_file:dir { create search open read };
 allow recovery param_tv_file:file { open read };
 allow recovery unify_device:chr_file { open read write ioctl };
 
+allow recovery proc_vm_writable:file rw_file_perms;
