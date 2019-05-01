@@ -125,10 +125,6 @@ BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
 BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=0
 
-ifneq ($(USE_USB_AS_HOST),true)
-BOARD_KERNEL_CMDLINE += --cmdline "otg_device=1"
-endif
-
 ifeq ($(BOARD_BUILD_DISABLED_VBMETAIMAGE), true)
 ifeq ($(BOARD_BUILD_SYSTEM_ROOT_IMAGE), true)
 BOARD_KERNEL_CMDLINE += --cmdline "root=/dev/mmcblk0p18"
