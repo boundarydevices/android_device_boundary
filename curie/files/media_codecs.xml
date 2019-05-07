@@ -84,6 +84,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="blocks-per-second" min="1" max="972000" />
             <Limit name="bitrate" range="1-300000000" />
             <Feature name="adaptive-playback" />
+            <Feature name="tunneled-playback" />
             <Limit name="concurrent-instances" max="9" />
         </MediaCodec>
         <MediaCodec name="OMX.amlogic.hevc.decoder.awesome.secure" type="video/hevc" >
@@ -150,6 +151,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="blocks-per-second" min="1" max="972000" />
             <Limit name="bitrate" range="1-300000000" />
             <Feature name="adaptive-playback" />
+            <Feature name="tunneled-playback" />
             <Limit name="concurrent-instances" max="9" />
         </MediaCodec>
         <MediaCodec name="OMX.amlogic.vp9.decoder.awesome.secure" type="video/x-vnd.on2.vp9" >
