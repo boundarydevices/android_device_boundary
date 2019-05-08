@@ -26,7 +26,7 @@ else
 -include hardware/amlogic/wifi/configs/wifi_modules.mk
 -include hardware/amlogic/bluetooth/configs/bluetooth_modules.mk
 -include device/amlogic/common/tb_modules.mk
-KERNEL_DEVICETREE := g12a_s905d2_u202_1g g12a_s905d2_u202
+KERNEL_DEVICETREE := g12a_s905d2_u202_1g g12a_s905d2_u202 sm1_s905d3_ac202_1g sm1_s905d3_ac202
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
