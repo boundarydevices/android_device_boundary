@@ -426,9 +426,20 @@ endif
 
 include device/amlogic/common/gpu/gondul-user-arm64.mk
 #####npu ovx service
-ifeq ($(BOARD_NPU_SERVICE_ENABLE), true)
-PRODUCT_PACKAGES += android.hardware.neuralnetworks@1.0-service-ovx-driver
-endif
+#ifeq ($(BOARD_NPU_SERVICE_ENABLE), true)
+PRODUCT_PACKAGES += android.hardware.neuralnetworks@1.1-service-ovx-driver
+PRODUCT_PACKAGES += \
+    libCLC \
+	libGAL \
+	libLLVM_viv \
+	libNNVXCBinary \
+	libOpenCL \
+	libOpenVX \
+	libOpenVXU \
+	libovxlib \
+	libVSC \
+	libOvx12VXCBinary
+#endif
 #########################################################################
 #
 #                                     Auto Patch
