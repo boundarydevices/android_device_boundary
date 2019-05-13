@@ -252,6 +252,9 @@ on post-fs
     # This may have been created by the recovery system with the wrong context.
     restorecon /cache/recovery
 
+    # Allow writing to the kernel trace log.
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+
 on post-fs-data
     setprop vold.post_fs_data_done 1
     # create temp node for secure storage proxy
