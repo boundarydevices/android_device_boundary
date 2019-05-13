@@ -486,7 +486,7 @@ endif
 .PHONY:aml_fastboot_zip
 aml_fastboot_zip:$(INSTALLED_AML_FASTBOOT_ZIP)
 $(INSTALLED_AML_FASTBOOT_ZIP): $(addprefix $(PRODUCT_OUT)/,$(FASTBOOT_IMAGES)) \
-                               $(addprefix $(PRODUCT_OUT)/,bootloader.img) \
+                               $(INSTALLED_AMLOGIC_BOOTLOADER_TARGET) \
                                $(INSTALLED_AML_LOGO) \
                                $(BUILT_ODMIMAGE_TARGET)
 	echo "install $@"
