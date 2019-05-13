@@ -184,15 +184,6 @@ endif# PRODUCT_AML_SECURE_BOOT_VERSION3 := true
 
 ########################################################################
 #
-#                           Kernel Arch
-#
-########################################################################
-ifndef KERNEL_A32_SUPPORT
-KERNEL_A32_SUPPORT := true
-endif
-
-########################################################################
-#
 #                           ATV
 #
 ########################################################################
@@ -247,11 +238,14 @@ endif
 #
 #########################################################################
 
-WIFI_MODULE := multiwifi
+MULTI_WIFI_SUPPORT := true
 #WIFI_MODULE := BCMWIFI
 #WIFI_BUILD_IN := true
-include hardware/amlogic/wifi/configs/wifi.mk
+include device/amlogic/common/wifi.mk
 
+# Change this to match target country
+# 11 North America; 14 Japan; 13 rest of world
+PRODUCT_DEFAULT_WIFI_CHANNELS := 11
 
 
 #########################################################################
@@ -262,7 +256,8 @@ include hardware/amlogic/wifi/configs/wifi.mk
 
 BOARD_HAVE_BLUETOOTH := true
 BLUETOOTH_MODULE := BCMBT
-include hardware/amlogic/bluetooth/configs/bluetooth.mk
+BCM_BLUETOOTH_LPM_ENABLE := true
+include device/amlogic/common/bluetooth.mk
 
 
 #########################################################################
@@ -438,13 +433,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 endif
-
-#########################################################################
-#
-#                                     TB detect
-#
-#########################################################################
-$(call inherit-product, device/amlogic/common/tb_detect.mk)
 
 include device/amlogic/common/gpu/dvalin-user-arm64.mk
 

@@ -1,14 +1,13 @@
-import /vendor/etc/init/hw/init.amlogic.tb_detect.rc
 on early-init
     loglevel 3
 
     mount configfs configfs /sys/kernel/config
     #mount usbfs none /proc/bus/usb
-    insmod /vendor/lib/modules/mali.ko
 
 on init
 
 on post-fs-data
+    insmod /vendor/lib/modules/mali.ko
     insmod /vendor/lib/modules/cfg80211.ko
     insmod /vendor/lib/dovi.ko
 

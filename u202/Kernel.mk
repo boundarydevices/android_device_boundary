@@ -23,17 +23,20 @@ else
 
 -include device/amlogic/common/gpu/dvalin-kernel.mk
 -include device/amlogic/common/media_modules.mk
--include hardware/amlogic/wifi/configs/wifi_modules.mk
--include hardware/amlogic/bluetooth/configs/bluetooth_modules.mk
--include device/amlogic/common/tb_modules.mk
+-include device/amlogic/common/wifi_modules.mk
 KERNEL_DEVICETREE := g12a_s905d2_u202_1g g12a_s905d2_u202 sm1_s905d3_ac202_1g sm1_s905d3_ac202
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
 DTBO_DEVICETREE := android_p_overlay_dt
 
+WIFI_MODULE := multiwifi
 
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
+
+ifndef KERNEL_A32_SUPPORT
+KERNEL_A32_SUPPORT := true
+endif
 
 ifeq ($(KERNEL_A32_SUPPORT), true)
 KERNEL_DEFCONFIG := meson64_a32_defconfig
@@ -46,16 +49,14 @@ KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 INTERMEDIATES_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image.gz
 PREFIX_CROSS_COMPILE=/opt/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
-BUILD_CONFIG := $(KERNEL_DEFCONFIG)
-endif
-
 # COMPILE CHECK FOR KASAN
 ifeq ($(ENABLE_KASAN), true)
 CONFIG_DIR := $(KERNEL_ROOTDIR)/arch/$(KERNEL_ARCH)/configs/
 KASAN_DEFCONFIG := kasan_defconfig
 BUILD_CONFIG := $(KASAN_DEFCONFIG)
-$(shell cat $(CONFIG_DIR)/$(KERNEL_DEFCONFIG) > $(CONFIG_DIR)/$(KASAN_DEFCONFIG))
-$(shell cat device/amlogic/common/kasan.cfg >> $(CONFIG_DIR)/$(KASAN_DEFCONFIG))
+else
+BUILD_CONFIG := $(KERNEL_DEFCONFIG)
+endif
 endif
 
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
@@ -66,8 +67,8 @@ BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/ddr_window_64.ko
 
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
-BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_WIFI_KERNEL_MODULES)
-BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_TB_DETECT_KERNEL_MODULES)
+BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
+
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
 define cp-modules
@@ -83,6 +84,11 @@ endef
 
 $(KERNEL_OUT):
 	mkdir -p $(KERNEL_OUT)
+ifeq ($(ENABLE_KASAN), true)
+	@echo "KASAN enabled, generate new config"
+	cat $(CONFIG_DIR)/$(KERNEL_DEFCONFIG) > $(CONFIG_DIR)/$(KASAN_DEFCONFIG)
+	cat device/amlogic/common/kasan.cfg >> $(CONFIG_DIR)/$(KASAN_DEFCONFIG)
+endif
 
 $(KERNEL_CONFIG): $(KERNEL_OUT)
 	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) $(BUILD_CONFIG)
@@ -97,9 +103,7 @@ else
 endif
 #	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/amlogic/thermal/ ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules
 	#$(gpu-modules)
-	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f hardware/amlogic/wifi/configs/wifi_driver.mk $(WIFI_MODULE)
-	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f hardware/amlogic/bluetooth/configs/bluetooth_driver.mk BLUETOOTH_INF=$(BLUETOOTH_INF) $(BLUETOOTH_MODULE)
-	$(tb-modules)
+	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f device/amlogic/common/wifi_driver.mk $(WIFI_MODULE)
 	$(cp-modules)
 	$(media-modules)
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
