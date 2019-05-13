@@ -60,7 +60,6 @@ fi
 if itest.s "x" != "x${cmd_mipi}" ; then
 	run cmd_mipi
 	if itest.s "x" != "x${fb_mipi_name}" ; then
-		primary_display=mxsfb-drm ;
 		tile_support=disable ;
 	fi
 fi
@@ -69,6 +68,7 @@ setenv bootargs $bootargs console=${console},115200 vmalloc=128M consoleblank=0 
 setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=${soc}
 setenv bootargs $bootargs firmware_class.path=/vendor/firmware
 setenv bootargs $bootargs androidboot.keystore=software
+setenv bootargs $bootargs androidboot.primary_display=imx-drm
 
 if itest.s "xmmc" == "x$devtype" ; then
 	if itest.s "x0" == "x$devnum" ; then
@@ -87,12 +87,6 @@ if itest.s "x" != "x$selinux" ; then
 	setenv bootargs $bootargs androidboot.selinux=$selinux
 else
 	setenv bootargs $bootargs androidboot.selinux=permissive
-fi
-
-if itest.s "x" != "x${primary_display}" ; then
-	setenv bootargs $bootargs androidboot.primary_display=${primary_display}
-else
-	setenv bootargs $bootargs androidboot.primary_display=imx-drm
 fi
 
 if itest.s "x" != "x${tile_support}" ; then
