@@ -30,12 +30,13 @@ read_platform_type() {
         "       15. t962x2_skt   [T962x2]\n" \
         "       16. t962x2_t309  [T962X2]\n"\
         "       17. t962x_r314   [T962X]\n" \
+        "       18. u202 [S905D2/S90D3]\n"
 
         read -p "please select your platform type (default ampere):" platform_type
         if [ ${#platform_type} -eq 0 ]; then
             platform_type=1
         fi
-        if [[ $platform_type -le 0 || $platform_type -gt 17 ]]; then
+        if [[ $platform_type -le 0 || $platform_type -gt 18 ]]; then
             echo -e "the platform type is illegal, need select again\n"
         else
             break
@@ -136,6 +137,10 @@ select_platform_type() {
             platform_name="t962x_r314"
             platform_uboot_name="txlx_t962x_r314_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/txlx/bl32.img";;
+        18)
+            platform_name="u202"
+            platform_uboot_name="g12a_u202_v1"
+            platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
     esac
 }
 
@@ -191,6 +196,9 @@ if [ $# -eq 1 ]; then
         cd bootloader/uboot-repo/bl31_1.3/bin/
         echo "bl31_1.3  : "$(git log --pretty=format:"%H" -1)
         cd ../../../../
+        cd bootloader/uboot-repo/bl33/
+        echo "bl33      : "$(git log --pretty=format:"%H" -1)
+        cd ../../../
         cd bootloader/uboot-repo/fip/
         echo "fip       : "$(git log --pretty=format:"%H" -1)
         echo -e
