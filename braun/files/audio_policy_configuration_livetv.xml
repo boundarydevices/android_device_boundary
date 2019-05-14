@@ -90,10 +90,10 @@
                 <devicePort tagName="Speaker" role="sink" type="AUDIO_DEVICE_OUT_SPEAKER">
                     <gains>
                         <gain name="gain_1" mode="AUDIO_GAIN_MODE_JOINT"
-                              minValueMB="0"
-                              maxValueMB="100"
-                              defaultValueMB="30"
-                              stepValueMB="1"/>
+                              minValueMB="-10000"
+                              maxValueMB="0"
+                              defaultValueMB="-6000"
+                              stepValueMB="100"/>
                     </gains>
                 </devicePort>
                 <devicePort tagName="HDMI Out" type="AUDIO_DEVICE_OUT_AUX_DIGITAL" role="sink">
@@ -101,10 +101,10 @@
                 <devicePort tagName="Tuner" role="source" type="AUDIO_DEVICE_IN_TV_TUNER">
                     <gains>
                         <gain name="gain_1" mode="AUDIO_GAIN_MODE_JOINT"
-                              minValueMB="0"
-                              maxValueMB="100"
-                              defaultValueMB="30"
-                              stepValueMB="1"/>
+                              minValueMB="-10000"
+                              maxValueMB="0"
+                              defaultValueMB="-6000"
+                              stepValueMB="100"/>
                     </gains>
                 </devicePort>
                 <devicePort tagName="Wired Headset" type="AUDIO_DEVICE_OUT_WIRED_HEADSET" role="sink">
