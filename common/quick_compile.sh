@@ -172,7 +172,7 @@ if [ $# -eq 1 ]; then
 
     if [ $1 == "all" ]; then
         read_android_type
-        for ((platform_type=1; platform_type < 18; platform_type++))
+        for ((platform_type=1; platform_type < 19; platform_type++))
         do
             select_platform_type
             cd bootloader/uboot-repo
