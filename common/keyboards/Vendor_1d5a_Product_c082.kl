@@ -12,15 +12,15 @@ key 10    9
 key 11    0
 key 217   ASSIST
 key 158   BACK
-key 353    DPAD_CENTER
+key 353   DPAD_CENTER
 key 108   DPAD_DOWN
 key 103   DPAD_UP
-key 102   HOME
+key 172   HOME
 key 105   DPAD_LEFT
 key 106   DPAD_RIGHT
 key 115   VOLUME_UP
 key 114   VOLUME_DOWN
-key 240   POWER
+key 116   POWER
 key 139   MENU
 
 
