@@ -128,8 +128,14 @@ $(error "TARGET_USERIMAGES_USE_UBIFS and TARGET_USERIMAGES_USE_EXT4 config open 
 endif
 endif
 
-TARGET_BOARD_DTS_CONFIG := imx8mq:imx8mq-nitrogen8m.dtb
-TARGET_BOOTLOADER_CONFIG := imx8mq:nitrogen8m_defconfig
+TARGET_BOARD_DTS_CONFIG := imx8mq:imx8mq-nitrogen8m.dtb \
+			   imx8mq:imx8mq-nitrogen8m_som.dtb \
+			   imx8mq:imx8mq-nitrogen8m-m4.dtb
+TARGET_BOOTLOADER_CONFIG := imx8mq:nitrogen8m_defconfig \
+			    imx8mq:nitrogen8m_3g_defconfig \
+			    imx8mq:nitrogen8m_4g_defconfig \
+			    imx8mq:nitrogen8m_som_2g_defconfig \
+			    imx8mq:nitrogen8m_som_4g_defconfig
 
 TARGET_KERNEL_DEFCONFIG := boundary_android_defconfig
 # TARGET_KERNEL_ADDITION_DEFCONF ?= android_addition_defconfig
