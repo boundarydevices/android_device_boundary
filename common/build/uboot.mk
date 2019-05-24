@@ -121,7 +121,7 @@ $(UBOOT_BIN): $(UBOOT_OUT)
 		install -D $(UBOOT_OUT)/u-boot$(TARGET_DTB_POSTFIX).$(TARGET_BOOTLOADER_POSTFIX) $(PRODUCT_OUT)/u-boot-$$UBOOT_PLATFORM.imx; \
 		if [ $(UBOOT_POST_PROCESS) = true ]; then \
 			echo "build post process" ; \
-		    $(call build_imx_uboot, $(TARGET_BOOTLOADER_POSTFIX), $$UBOOT_PLATFORM) \
+		    $(call build_imx_uboot, $(TARGET_BOOTLOADER_POSTFIX), $$UBOOT_PLATFORM, $$UBOOT_CONFIG) \
 		fi; \
 		if [ $(PRODUCT_IMX_DRM) = true ]; then \
 		    echo "build post process with tee" ; \
