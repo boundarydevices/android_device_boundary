@@ -461,7 +461,7 @@ endif
 #########################################################################
 $(call inherit-product, device/amlogic/common/tb_detect.mk)
 
-include device/amlogic/common/gpu/mali450-user-arm64.mk
+include device/amlogic/common/gpu/t82x-user-arm64.mk
 
 #########################################################################
 #
