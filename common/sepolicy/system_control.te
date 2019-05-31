@@ -165,3 +165,5 @@ allow system_control aml_core_app:binder { call transfer };
 allow system_control hal_graphics_composer_default:binder { call transfer };
 allow system_control platform_app:binder { call transfer };
 allow system_control untrusted_app:binder { call transfer };
+
+allow system_control display_device:chr_file { open read write };
