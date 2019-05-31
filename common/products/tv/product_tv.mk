@@ -13,7 +13,6 @@ PRODUCT_PACKAGES += \
     libtv \
     libtv_linker \
     libtvbinder \
-    libtv_jni \
     tvserver \
     libtvplay \
     libvendorfont \
@@ -21,8 +20,6 @@ PRODUCT_PACKAGES += \
     libntsc_decode \
     libtinyxml \
     libzvbi \
-    droidlogic-tv \
-    droidlogic.tv.software.core.xml \
     TvProvider \
     DroidLogicTvInput \
     DroidLogicFactoryMenu \
@@ -168,4 +165,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #TV project, need use 8 ch 32 bit output.
 TARGET_WITH_TV_AUDIO_MODE := true
-

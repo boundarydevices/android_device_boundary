@@ -31,7 +31,7 @@ allow aml_core_app trust_service:service_manager find;
 allow aml_core_app user_service:service_manager find;
 
 
-allow aml_core_app system_control:binder call;
+allow aml_core_app system_control:binder { call transfer };
 
 binder_call(aml_core_app, droidvold)
 binder_call(aml_core_app, tvserver)

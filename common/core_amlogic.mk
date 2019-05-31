@@ -186,7 +186,14 @@ PRODUCT_PACKAGES += \
     systemcontrol \
     systemcontrol_static \
     libsystemcontrolservice \
+    libsystemcontrol_jni  \
     vendor.amlogic.hardware.systemcontrol@1.0_vendor
+
+#add tv library
+PRODUCT_PACKAGES += \
+    droidlogic-tv \
+    droidlogic.tv.software.core.xml \
+    libtv_jni
 
 PRODUCT_PACKAGES += \
     VideoPlayer \
@@ -512,3 +519,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #add copy alarm file to product
 PRODUCT_COPY_FILES += \
         frameworks/base/data/sounds/Alarm_Beep_01.ogg:product/media/audio/alarms/Alarm_Beep_01.ogg
+
+#public library txt
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt

@@ -300,6 +300,7 @@
 /vendor/lib(64)?/libvendorfont\.so         u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libtvbinder\.so           u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libtv_jni\.so             u:object_r:vendor_app_file:s0
+/vendor/lib(64)?/libsystemcontrol_jni\.so  u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libamadec_omx_api\.so     u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/liboptimization\.so       u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libsystemcontrolservice\.so  u:object_r:vendor_app_file:s0
@@ -311,12 +312,15 @@
 /vendor/lib(64)?/vendor\.amlogic\.hardware\.remotecontrol@1\.0\.so   u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/vendor\.amlogic\.hardware\.hdmicec@1\.0\.so    u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/vendor\.amlogic\.hardware\.droidvold@1\.0\.so  u:object_r:vendor_app_file:s0
+/vendor/lib(64)?/vendor\.amlogic\.hardware\.systemcontrol@1\.1\.so  u:object_r:vendor_app_file:s0
+/vendor/lib(64)?/vendor\.amlogic\.hardware\.systemcontrol@1\.0\.so  u:object_r:vendor_app_file:s0
+/vendor/lib(64)?/vendor\.amlogic\.hardware\.tvserver@1\.0\.so  u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libjnidtvepgscanner\.so   u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libjniuevent\.so            u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libsubjni\.so        u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libtvsubtitle_tv\.so        u:object_r:vendor_app_file:s0
 /vendor/lib(64)?/libjnifont_tv\.so        u:object_r:vendor_app_file:s0
-
+/vendor/lib(64)?/libsystemcontrolclient\.so        u:object_r:vendor_app_file:s0
 
 /dev/hidraw[0-9]*	u:object_r:hidraw_audio_device:s0
 #The final space is necessary. Please don't delete it.

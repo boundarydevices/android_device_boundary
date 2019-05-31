@@ -20,7 +20,7 @@ allow priv_app proc_uptime:file read;
 
 allow priv_app tvserver_hwservice:hwservice_manager { find };
 allow priv_app systemcontrol_hwservice:hwservice_manager { find };
-allow priv_app system_control:binder call;
+allow priv_app system_control:binder { call transfer };
 allow priv_app tvserver:binder { call transfer };
 allow priv_app param_tv_file:file { create open read write setattr getattr lock unlink };
 allow priv_app param_tv_file:dir { search read open write add_name remove_name getattr };

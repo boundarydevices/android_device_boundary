@@ -5,7 +5,7 @@ allow hal_graphics_composer_default hal_graphics_composer_default:netlink_kobjec
 allow hal_graphics_composer_default vndservicemanager:binder { call transfer };
 
 allow hal_graphics_composer_default systemcontrol_hwservice:hwservice_manager { find };
-allow hal_graphics_composer_default system_control:binder { call };
+allow hal_graphics_composer_default system_control:binder { call transfer };
 
 allow hal_graphics_composer_default video_device:chr_file rw_file_perms;
 allow hal_graphics_composer_default vendor_video_device:chr_file rw_file_perms;

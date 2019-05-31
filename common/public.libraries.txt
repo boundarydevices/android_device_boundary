@@ -1,0 +1,2 @@
+libsystemcontrol_jni.so
+libtv_jni.so
