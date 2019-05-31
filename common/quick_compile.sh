@@ -16,27 +16,18 @@ read_platform_type() {
         "       1. ampere    [S905X]\n"   \
         "       2. braun     [S905D]\n"    \
         "       3. curie     [S805X]\n"    \
-        "       4. darwin    [T962E]\n"   \
-        "       5. einstein  [T962X]\n" \
-        "       6. faraday   [S905Y2]\n"  \
-        "       7. fermi     [S905D2]\n"    \
-        "       8. franklin  [S905X2]\n" \
-        "       9. galilei   [S922X]\n"  \
-        "       10. hertz    [S912]\n"   \
-        "       11. lyell    [T962]\n"   \
-        "       12. marconi  [T962X2]\n" \
-        "       13. g12b_skt [S922X]\n"\
-        "       14. t962_p321    [T962]\n"  \
-        "       15. t962x2_skt   [T962x2]\n" \
-        "       16. t962x2_t309  [T962X2]\n"\
-        "       17. t962x_r314   [T962X]\n" \
-        "       18. u202 [S905D2/S90D3]\n"
+        "       4. faraday   [S905Y2]\n"  \
+        "       5. fermi     [S905D2]\n"    \
+        "       6. franklin  [S905X2]\n" \
+        "       7. galilei   [S922X]\n"  \
+        "       8. hertz    [S912]\n"   \
+        "       9. u202 [S905D2/S90D3]\n"
 
         read -p "please select your platform type (default ampere):" platform_type
         if [ ${#platform_type} -eq 0 ]; then
             platform_type=1
         fi
-        if [[ $platform_type -le 0 || $platform_type -gt 18 ]]; then
+        if [[ $platform_type -le 0 || $platform_type -gt 9 ]]; then
             echo -e "the platform type is illegal, need select again\n"
         else
             break
@@ -82,62 +73,26 @@ select_platform_type() {
             platform_uboot_name="gxl_p241_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/gx/bl32.img";;
         4)
-            platform_name="darwin"
-            platform_uboot_name="txlx_t962e_r321_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/txlx/bl32.img";;
-        5)
-            platform_name="einstein"
-            platform_uboot_name="txlx_t962x_r311_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/txlx/bl32.img";;
-        6)
             platform_name="faraday"
             platform_uboot_name="g12a_u221_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
-        7)
+        5)
             platform_name="fermi"
             platform_uboot_name="g12a_u200_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
-        8)
+        6)
             platform_name="franklin"
             platform_uboot_name="g12a_u212_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
-        9)
+        7)
             platform_name="galilei"
             platform_uboot_name="g12b_w400_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
-        10)
+        8)
             platform_name="hertz"
             platform_uboot_name="gxm_q200_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/gx/bl32.img";;
-        11)
-            platform_name="lyell"
-            platform_uboot_name="txl_p321_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/gx/bl32.img";;
-        12)
-            platform_name="marconi"
-            platform_uboot_name="tl1_x301_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/tl1/bl32.img";;
-        13)
-            platform_name="g12b_skt"
-            platform_uboot_name="g12b_skt_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
-        14)
-            platform_name="t962_p321"
-            platform_uboot_name="txl_p321_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/gx/bl32.img";;
-        15)
-            platform_name="t962x2_skt"
-            platform_uboot_name="tl1_skt_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/tl1/bl32.img";;
-        16)
-            platform_name="t962x2_t309"
-            platform_uboot_name="tl1_t309_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/tl1/bl32.img";;
-        17)
-            platform_name="t962x_r314"
-            platform_uboot_name="txlx_t962x_r314_v1"
-            platform_tdk_path="vendor/amlogic/common/tdk/secureos/txlx/bl32.img";;
-        18)
+        9)
             platform_name="u202"
             platform_uboot_name="g12a_u202_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
@@ -172,7 +127,7 @@ if [ $# -eq 1 ]; then
 
     if [ $1 == "all" ]; then
         read_android_type
-        for ((platform_type=1; platform_type < 19; platform_type++))
+        for ((platform_type=1; platform_type < 10; platform_type++))
         do
             select_platform_type
             cd bootloader/uboot-repo
