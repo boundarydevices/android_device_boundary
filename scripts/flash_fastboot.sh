@@ -25,7 +25,7 @@ if ! [ -d $OUT ]; then
    exit 1;
 fi
 
-fastboot flash gpt $OUT/partition-table-3.5GB.img
+fastboot flash gpt $OUT/partition-table.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash gpt.img"; exit 1; fi
 fastboot flash boot $OUT/boot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash boot.img"; exit 1; fi
