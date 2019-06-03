@@ -21,13 +21,14 @@ read_platform_type() {
         "       6. franklin  [S905X2]\n" \
         "       7. galilei   [S922X]\n"  \
         "       8. hertz    [S912]\n"   \
-        "       9. u202 [S905D2/S90D3]\n"
+        "       9. u202 [S905D2/S90D3]\n" \
+        "       10. p281 [S905W]\n"
 
         read -p "please select your platform type (default ampere):" platform_type
         if [ ${#platform_type} -eq 0 ]; then
             platform_type=1
         fi
-        if [[ $platform_type -le 0 || $platform_type -gt 9 ]]; then
+        if [[ $platform_type -le 0 || $platform_type -gt 10 ]]; then
             echo -e "the platform type is illegal, need select again\n"
         else
             break
@@ -96,6 +97,10 @@ select_platform_type() {
             platform_name="u202"
             platform_uboot_name="g12a_u202_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
+        10)
+            platform_name="p281"
+            platform_uboot_name="gxl_p281_v1"
+            platform_tdk_path="vendor/amlogic/common/tdk/secureos/gxl/bl32.img";;
     esac
 }
 
@@ -127,7 +132,7 @@ if [ $# -eq 1 ]; then
 
     if [ $1 == "all" ]; then
         read_android_type
-        for ((platform_type=1; platform_type < 10; platform_type++))
+        for ((platform_type=1; platform_type < 11; platform_type++))
         do
             select_platform_type
             cd bootloader/uboot-repo
