@@ -343,6 +343,26 @@ TARGET_ENABLE_TA_SIGN := true
 TARGET_USE_HW_KEYMASTER := true
 endif
 
+#########################################################################
+#
+#                                                Miracast Application
+##########################################################################
+#Miracast Function
+BUILD_WITH_MIRACAST := true
+ifeq ($(BUILD_WITH_MIRACAST),)
+BUILD_WITH_MIRACAST := false
+endif
+
+ifeq ($(BUILD_WITH_MIRACAST), true)
+BUILD_WITH_MIRACAST := true
+ifeq ($(BUILD_WITH_MIRACAST_HDCP),true)
+TARGET_USE_OPTEEOS := true
+BUILD_WITH_MIRACAST_HDCP := true
+endif
+endif
+#########################################################################
+
+
 $(call inherit-product, device/amlogic/common/media.mk)
 
 #########################################################################

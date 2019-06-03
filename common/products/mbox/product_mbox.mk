@@ -83,6 +83,11 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=4
 PRODUCT_PACKAGES += \
     OTAUpgrade
 
+ifeq ($(BUILD_WITH_MIRACAST), true)
+PRODUCT_PACKAGES += \
+    Miracast
+endif
+
 #Tvsettings
 PRODUCT_PACKAGES += \
     TvSettings \
