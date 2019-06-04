@@ -122,6 +122,7 @@
 /sys/class/video/axis_pip					u:object_r:sysfs_video:s0
 /sys/class/video/crop						u:object_r:sysfs_video:s0
 /sys/class/video/crop_pip					u:object_r:sysfs_video:s0
+/sys/class/ppmgr/angle						u:object_r:sysfs_video:s0
 /sys/class/tsync/enable						u:object_r:sysfs_video:s0
 /sys/class/audiodsp/digital_raw					u:object_r:sysfs_audio:s0
 /sys/class/amaudio/debug                                        u:object_r:sysfs_audio:s0
