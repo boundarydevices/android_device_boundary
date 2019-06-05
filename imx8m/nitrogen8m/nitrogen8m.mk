@@ -208,6 +208,17 @@ PRODUCT_PACKAGES += \
     libhantro \
     libcodec
 
+PRODUCT_PACKAGES += \
+	bdwlan30.bin \
+	otp30.bin \
+	qca/tfbtfw11.tlv \
+	qca/tfbtnv11.bin \
+	qwlan30.bin \
+	utf30.bin \
+	utfbd30.bin \
+	wlan/cfg.dat \
+	wlan/qcom_cfg.ini
+
 # Add oem unlocking option in settings.
 PRODUCT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/presistdata
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
