@@ -17,9 +17,4 @@ LOCAL_PATH := $(call my-dir)
 include $(LOCAL_PATH)/Kernel.mk
 include device/amlogic/common/factory.mk
 
-HAVE_WRITED_SHELL_FILE := $(shell test -f $(AUTO_PATCH_SHELL_FILE) && echo yes)
-ifeq ($(HAVE_WRITED_SHELL_FILE),yes)
-$(warning $(shell ($(AUTO_PATCH_SHELL_FILE) clean)))
-endif
-
 $(call add-radio-file,bootloader.img)
