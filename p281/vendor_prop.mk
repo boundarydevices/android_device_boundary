@@ -121,7 +121,7 @@ endif
 
 #P281 not support over 4k30 resolution
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.support.over.4k30=false
+    ro.vendor.platform.support.over.4k30=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.hdmi.device_type=4
