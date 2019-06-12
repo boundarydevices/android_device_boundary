@@ -194,3 +194,10 @@ BOARD_HAS_ADTV := true
 BOARD_VNDK_VERSION := current
 BOARD_BOOTIMG_HEADER_VERSION := 1
 BOARD_INCLUDE_RECOVERY_DTBO := true
+
+###npu board config
+BOARD_NPU_SERVICE_ENABLE := true
+AUTO_PATCH_NPU := device/amlogic/common/products/mbox/manifest/npu_update.sh
+ifeq ($(BOARD_NPU_SERVICE_ENABLE),true)
+$(shell ($(AUTO_PATCH_NPU) $(DEVICE_MANIFEST_FILE)))
+endif

@@ -463,7 +463,21 @@ AB_OTA_POSTINSTALL_CONFIG += \
 endif
 
 include device/amlogic/common/gpu/dvalin-user-arm64.mk
-
+#####npu ovx service
+#ifeq ($(BOARD_NPU_SERVICE_ENABLE), true)
+PRODUCT_PACKAGES += android.hardware.neuralnetworks@1.1-service-ovx-driver
+PRODUCT_PACKAGES += \
+    libCLC \
+	libGAL \
+	libLLVM_viv \
+	libNNVXCBinary \
+	libOpenCL \
+	libOpenVX \
+	libOpenVXU \
+	libovxlib \
+	libVSC \
+	libOvx12VXCBinary
+#endif
 #########################################################################
 #
 #                                     Auto Patch
