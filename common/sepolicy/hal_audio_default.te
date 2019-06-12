@@ -38,3 +38,8 @@ allow hal_audio_default frontend_device:chr_file { open read write ioctl };
 allow hal_audio_default codec_device:chr_file { read write open ioctl };
 #allow hal_audio_default audio_prop:property_service { set };
 allow hal_audio_default hal_audio_default:netlink_kobject_uevent_socket { read };
+
+allow hal_audio_default sysfs:dir { open read };
+allow hal_audio_default vendor_data_file:dir { add_name remove_name write };
+allow hal_audio_default vendor_data_file:lnk_file { read };
+allow hal_audio_default vendor_data_file:file { create read open setattr unlink};
