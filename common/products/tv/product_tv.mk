@@ -75,10 +75,7 @@ PRODUCT_PACKAGES += \
     libdtvkit_platform \
     dtvkitserver \
     inputsource \
-    libdtvkitsurfaceoverlay_jni
-
-PRODUCT_COPY_FILES += \
-    vendor/amlogic/common/external/DTVKit/dtvkit-amlogic/hw/src/dtvkit_amlogic.xml:$(TARGET_COPY_OUT_VENDOR)/etc/dtvkit_amlogic.xml
+    libdtvkit_jni
 endif
 
 

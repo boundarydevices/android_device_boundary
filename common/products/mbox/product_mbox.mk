@@ -35,6 +35,18 @@ PRODUCT_PACKAGES += \
 # LiveTv
 PRODUCT_PACKAGES += \
     DroidLiveTv
+
+# DTVKit
+ifeq ($(PRODUCT_SUPPORT_DTVKIT), true)
+PRODUCT_PACKAGES += \
+    libdtvkit_midware   \
+    libdtvkit_platform \
+    inputsource \
+    libdtvkit_jni
+endif
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.live_tv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.live_tv.xml
 endif
 
 # DLNA
@@ -88,11 +100,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.output.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.output.xml \
     frameworks/native/data/etc/android.hardware.location.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.xml \
     frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml \
-
-ifeq ($(TARGET_BUILD_LIVETV),true)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.live_tv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.live_tv.xml
-endif
 
 #copy lowmemorykiller.txt
 ifeq ($(BUILD_WITH_LOWMEM_COMMON_CONFIG),true)
