@@ -6,6 +6,8 @@ typeattribute imageserver mlstrustedsubject;
 init_daemon_domain(imageserver)
 
 allow imageserver hwservicemanager:binder { call transfer };
+allow imageserver systemcontrol_hwservice:hwservice_manager { find };
+allow imageserver system_control:binder { call };
 allow imageserver { imageserver_hwservice  hidl_base_hwservice }:hwservice_manager { add };
 r_dir_file(system_control, domain)
 r_dir_file(system_control, binderservicedomain)
