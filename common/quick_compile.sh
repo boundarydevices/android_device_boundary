@@ -75,7 +75,7 @@ select_platform_type() {
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/gx/bl32.img";;
         4)
             platform_name="faraday"
-            platform_uboot_name="g12a_u221_v1"
+            platform_uboot_name="g12a_u223_v1"
             platform_tdk_path="vendor/amlogic/common/tdk/secureos/g12a/bl32.img";;
         5)
             platform_name="fermi"
