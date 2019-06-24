@@ -301,14 +301,19 @@ PRODUCT_COPY_FILES += \
 
 #########################################################################
 #
-#                                                GDC firmware
+#                                                GDC
 #
 #########################################################################
 BOARD_GDC_FW_BUILTIN := true
+BOARD_GDC_LIB := true
 
 ifeq ($(BOARD_GDC_FW_BUILTIN),true)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/gdc,$(TARGET_COPY_OUT_VENDOR)/lib/firmware/gdc)
+endif
+
+ifeq ($(BOARD_GDC_LIB),true)
+PRODUCT_PACKAGES += libgdc
 endif
 
 #########################################################################
