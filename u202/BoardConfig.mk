@@ -48,7 +48,7 @@ TARGET_NO_RADIOIMAGE := true
 
 TARGET_BOARD_PLATFORM := u202
 TARGET_BOOTLOADER_BOARD_NAME := u202
-
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amlogic/u202/btbuild
 # Allow passing `--second` to mkbootimg via 2ndbootloader.
 TARGET_BOOTLOADER_IS_2ND := true
 
