@@ -460,7 +460,8 @@ $(call inherit-product, device/amlogic/common/tb_detect.mk)
 
 include device/amlogic/common/gpu/dvalin-user-arm64.mk
 #####npu ovx service
-#ifeq ($(BOARD_NPU_SERVICE_ENABLE), true)
+BOARD_NPU_SERVICE_ENABLE := true
+ifeq ($(BOARD_NPU_SERVICE_ENABLE), true)
 PRODUCT_PACKAGES += android.hardware.neuralnetworks@1.1-service-ovx-driver
 PRODUCT_PACKAGES += \
     libCLC \
@@ -473,7 +474,7 @@ PRODUCT_PACKAGES += \
 	libovxlib \
 	libVSC \
 	libOvx12VXCBinary
-#endif
+endif
 #########################################################################
 #
 #                                     Auto Patch
