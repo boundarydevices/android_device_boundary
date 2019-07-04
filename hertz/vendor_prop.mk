@@ -104,5 +104,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.is.tv=0
 
+#bootvideo
+#0                      |050
+#^                      |
+#|                      |
+#0:bootanim             |
+#1:bootanim + bootvideo |
+#2:bootvideo + bootanim |
+#3:bootvideo            |
+#others:bootanim        |
+#-----------------------|050
+#050:default volume value, volume range 0~100
+#note that the high position 0 can not be omitted
+ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.media.bootvideo=0050
+endif
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.hdmi.device_type=4

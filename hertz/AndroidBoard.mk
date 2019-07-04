@@ -17,4 +17,5 @@ LOCAL_PATH := $(call my-dir)
 include $(LOCAL_PATH)/Kernel.mk
 include device/amlogic/common/factory.mk
 
-$(call add-radio-file,bootloader.img)
+#moved to INSTALLED_RADIOIMAGE_TARGET in factory.mk for secureboot
+#$(call add-radio-file,bootloader.img)

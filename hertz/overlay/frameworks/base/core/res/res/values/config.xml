@@ -99,4 +99,7 @@
     <!-- disable wallpaper, which may consume too much boot time -->
     <!-- cannot disable wallpaper, com.android.settings will crash! -->
     <!--bool name="config_enableWallpaperService">false</bool-->
+
+    <!-- Remote server that can provide NTP responses. -->
+    <string translatable="false" name="config_ntpServer">2.android.pool.ntp.org</string>
 </resources>
