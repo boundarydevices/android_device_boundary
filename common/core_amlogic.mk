@@ -512,6 +512,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.af.client_heap_size_kbyte=1536
 
+# Google need add this prop ATV00VPSZYR<KEY> (<KEY> optional, OEM Custom)
+# ATV00: specification value
+# V: whether included voice remote, Not included:0 included:1
+# PSZ: 3-Digit Panel Size (inches).043 = 43” panel size, For non TV devices, set to 000
+# YR: 2-Digit Model Year. Example: 19 = 2019 model year
+# <KEY> (optional)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.oem.key1=ATV00104319
+
 #fix android.permission2.cts.ProtectedBroadcastsTest
 #PRODUCT_PACKAGES += \
 #    TeleService
