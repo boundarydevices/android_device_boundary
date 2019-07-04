@@ -500,3 +500,6 @@ ifeq ($(AB_OTA_UPDATER),true)
 $(warning $(shell ($(AUTO_PATCH_AB) $(PRODUCT_DIR))))
 endif
 endif
+
+PRODUCT_PACKAGES += \
+    Settings
