@@ -54,6 +54,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.disable.audiorawout=false
 
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.vendor.platform.support.dolbyvision=true
 #Dolby DD+ decoder option
 #this prop to for videoplayer display the DD+/DD icon when playback
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -67,6 +69,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     #ro.vendor.platform.support.dtstrans=true \
     #ro.vendor.platform.support.dtsmulasset=true
 #DTS-HD prop end
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.support.dolbyvision = true
 
 #add for video boot, 1 means use video boot, others not .
 PRODUCT_PROPERTY_OVERRIDES += \
