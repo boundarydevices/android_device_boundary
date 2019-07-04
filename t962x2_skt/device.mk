@@ -121,7 +121,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
 
-# set default USB configuration
+
+
 #PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 #    persist.sys.usb.config=mtp
 
