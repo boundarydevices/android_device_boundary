@@ -34,10 +34,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.camera_preview.limitedrate=1920x1080x30,1280x720x30,640x480x30,320x240x28 \
     ro.media.camera_preview.usemjpeg=1
 
-#enable/disable afbc
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.afbcd.enable=0
-
 #if wifi Only
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.noril=false
