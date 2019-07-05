@@ -142,3 +142,7 @@ endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.hdmi.device_type=4
+
+#default media vol ,max 15
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.media_vol_default=8

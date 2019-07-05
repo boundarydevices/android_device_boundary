@@ -154,3 +154,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.platform.support.network_led=true
+
+#default media vol ,max 15
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.media_vol_default=8
