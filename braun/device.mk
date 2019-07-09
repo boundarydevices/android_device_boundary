@@ -58,7 +58,7 @@ PRODUCT_COPY_FILES += \
 else
 PRODUCT_COPY_FILES += \
     device/amlogic/$(PRODUCT_DIR)/files/audio_policy_configuration_livetv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-    device/amlogic/$(PRODUCT_DIR)/files/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
+    device/amlogic/$(PRODUCT_DIR)/files/audio_policy_volumes_livetv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml
 endif
 else
 PRODUCT_COPY_FILES += \
