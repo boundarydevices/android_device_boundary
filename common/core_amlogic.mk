@@ -123,6 +123,10 @@ PRODUCT_PACKAGES += \
     SharedStorageBackup \
     VpnDialogs
 
+SKIP_BOOT_JARS_CHECK = true
+PRODUCT_BOOT_JARS += \
+        exoplayer
+
 $(call inherit-product-if-exists, frameworks/base/data/fonts/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/dancing-script/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/carrois-gothic-sc/fonts.mk)
