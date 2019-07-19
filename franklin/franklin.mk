@@ -283,6 +283,8 @@ include hardware/amlogic/wifi/configs/wifi.mk
 
 BOARD_HAVE_BLUETOOTH := true
 BLUETOOTH_MODULE := BCMBT
+#ap6398R3(AC213) and ap6398R2(U212) The default is AC213
+U212_CHIP := false
 include hardware/amlogic/bluetooth/configs/bluetooth.mk
 
 #########################################################################
