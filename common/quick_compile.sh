@@ -25,7 +25,7 @@ tdk_name="null"
 read_platform_type() {
     while true :
     do
-        printf "[%3d]   [%15s]   [%15s]  [%15s]\n" "NUM" "PROJECT" "SOC TYPE" "HARDWARE TYPE"
+        printf "[%3s]   [%15s]   [%15s]  [%15s]\n" "NUM" "PROJECT" "SOC TYPE" "HARDWARE TYPE"
         echo "---------------------------------------------"
         for i in `seq ${#project[@]}`;do
             printf "[%3d]   [%15s]  [%15s]  [%15s]\n" $i ${project[i]} ${soc[i]} ${hardware[i]}
