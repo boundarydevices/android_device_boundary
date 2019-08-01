@@ -502,4 +502,5 @@ endif
 endif
 
 PRODUCT_PACKAGES += \
-    Settings
+    Settings \
+    SettingsIntelligence
