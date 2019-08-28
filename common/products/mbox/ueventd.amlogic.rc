@@ -23,6 +23,7 @@
 /dev/video1               0660   system     camera
 /dev/video10              0660   system	   mediadrm
 /dev/video11              0660   media     system
+/dev/video12              0660   media     system
 /dev/video13              0660   system     mediadrm
 /dev/video14              0660   system     mediadrm
 /dev/video15              0660   system     mediadrm

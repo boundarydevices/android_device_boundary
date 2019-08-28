@@ -167,6 +167,9 @@ on boot
     chmod 0664  /sys/class/amaudio/debug
     chmod 0666 /dev/ilitek_ctrl
     chmod 0660 /dev/wifi_power
+    chmod 0666  /dev/vdin0
+    chmod 0666  /dev/video11
+    chmod 0666  /dev/video12
 
 # default support XBMC
     chmod 666 /sys/class/video/axis
@@ -446,6 +449,12 @@ service watchdogd /sbin/watchdogd 10 20
 on property:ro.debuggable=1
     write /sys/module/kgdboc/parameters/kgdboc ttyFIQ2
     write /sys/module/fiq_debugger/parameters/kgdb_enable 1
+
+on property:vendor.sys.mtkbtdriver=true
+	insmod /vendor/lib/modules/btmtksdio.ko
+
+on property:vendor.sys.mtkbtdriver=false
+	rmmod btmtksdio
 
 service remotecfg /vendor/bin/remotecfg /vendor/etc/remote.conf
     class main
