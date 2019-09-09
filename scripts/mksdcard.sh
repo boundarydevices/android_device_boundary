@@ -84,9 +84,9 @@ dd if=/dev/zero of=${node}7 bs=1M count=${METADATA_SIZE} conv=fsync
 mkfs.ext4 -F ${node}11 -Ldata
 sync;
 
-../../../out/host/linux-x86/bin/simg2img ${outdir}/boot.img ${node}1
-../../../out/host/linux-x86/bin/simg2img ${outdir}/recovery.img ${node}2
-../../../out/host/linux-x86/bin/simg2img ${outdir}/system.img ${node}3
-../../../out/host/linux-x86/bin/simg2img ${outdir}/cache.img ${node}4
-../../../out/host/linux-x86/bin/simg2img ${outdir}/vendor.img ${node}9
+simg2img ${outdir}/boot.img ${node}1
+simg2img ${outdir}/recovery.img ${node}2
+simg2img ${outdir}/system.img ${node}3
+simg2img ${outdir}/cache.img ${node}4
+simg2img ${outdir}/vendor.img ${node}9
 sync;
