@@ -7,10 +7,16 @@ fi
 
 case "$1" in
 	nitrogen8m)
-		PRODUCT=nitrogen8m
+		PRODUCT=nitrogen8m;
+		TABLE=partition-table.img;
 	;;
 	nitrogen8mm)
-		PRODUCT=nitrogen8mm
+		PRODUCT=nitrogen8mm;
+		TABLE=partition-table.img;
+	;;
+	bio)
+		PRODUCT=nitrogen8m;
+		TABLE=partition-table-56GB.img;
 	;;
 	*)
 		echo "Board name wrong!";
@@ -25,7 +31,7 @@ if ! [ -d $OUT ]; then
    exit 1;
 fi
 
-fastboot flash gpt $OUT/partition-table.img
+fastboot flash gpt $OUT/$TABLE
 if ! [ $? -eq 0 ] ; then echo "Failed to flash gpt.img"; exit 1; fi
 fastboot flash boot $OUT/boot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash boot.img"; exit 1; fi
