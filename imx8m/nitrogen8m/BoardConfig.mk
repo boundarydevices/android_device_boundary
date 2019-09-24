@@ -47,7 +47,8 @@ TARGET_RECOVERY_FSTAB = $(IMX_DEVICE_PATH)/fstab.freescale
 BOARD_BPT_INPUT_FILES += device/boundary/common/partition/device-partitions-7GB.bpt
 ADDITION_BPT_PARTITION = partition-table-3.5GB:device/boundary/common/partition/device-partitions-3.5GB.bpt \
                          partition-table-14GB:device/boundary/common/partition/device-partitions-14GB.bpt \
-                         partition-table-28GB:device/boundary/common/partition/device-partitions-28GB.bpt
+                         partition-table-28GB:device/boundary/common/partition/device-partitions-28GB.bpt \
+                         partition-table-56GB:device/boundary/common/partition/device-partitions-56GB.bpt
 
 
 # Vendor Interface manifest and compatibility
