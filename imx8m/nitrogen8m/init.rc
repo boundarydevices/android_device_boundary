@@ -16,6 +16,9 @@ on init
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
+    mkdir /dev/misc/
+    symlink /dev/rtc0 /dev/misc/rtc
+
     # setup the global environment
     export CORE_REGISTER_FILE /vendor/etc/core_register
     export COMPONENT_REGISTER_FILE /vendor/etc/component_register
