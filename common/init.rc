@@ -17,6 +17,9 @@ on init
     mkdir /boot 0755 root root
     mkdir /recovery 0755 root root
 
+    mkdir /dev/misc/
+    symlink /dev/rtc0 /dev/misc/rtc
+
     # setup the global environment
     export SHM_MOUNTPOINT /mnt/shm
     export VPU_FW_PATH /vendor/lib/firmware/vpu
