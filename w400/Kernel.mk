@@ -15,9 +15,9 @@ ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 endif# ifeq ($(PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY),true)
 
 ifneq ($(TARGET_KERNEL_BUILT_FROM_SOURCE), true)
-TARGET_PREBUILT_KERNEL := device/amlogic/galilei-kernel/Image.gz
+TARGET_PREBUILT_KERNEL := device/amlogic/w400-kernel/Image.gz
 INSTALLED_BOARDDTB_TARGET := $(PRODUCT_OUT)/dt.img
-LOCAL_DTB := device/amlogic/galilei-kernel/galilei.dtb
+LOCAL_DTB := device/amlogic/w400-kernel/w400.dtb
 
 $(TARGET_PREBUILT_KERNEL): $(INSTALLED_BOARDDTB_TARGET)
 	@echo "cp kernel modules"
@@ -27,16 +27,16 @@ $(TARGET_PREBUILT_KERNEL): $(INSTALLED_BOARDDTB_TARGET)
 	mkdir -p $(PRODUCT_OUT)/obj/KERNEL_OBJ/
 	mkdir -p $(PRODUCT_OUT)/recovery/root/boot
 	mkdir -p $(KERNEL_KO_OUT)
-	cp device/amlogic/galilei-kernel/lib/mali.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/amlogic/galilei-kernel/lib/modules/* $(KERNEL_KO_OUT)/
-	cp device/amlogic/galilei-kernel/lib/optee_armtz.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/amlogic/galilei-kernel/lib/optee.ko $(PRODUCT_OUT)/vendor/lib/
-	cp device/amlogic/galilei-kernel/lib/firmware/video/* $(PRODUCT_OUT)/vendor/lib/firmware/video/
-	-cp device/amlogic/galilei-kernel/obj/KERNEL_OBJ/vmlinux $(PRODUCT_OUT)/obj/KERNEL_OBJ/
+	cp device/amlogic/w400-kernel/lib/mali.ko $(PRODUCT_OUT)/vendor/lib/
+	cp device/amlogic/w400-kernel/lib/modules/* $(KERNEL_KO_OUT)/
+	cp device/amlogic/w400-kernel/lib/optee_armtz.ko $(PRODUCT_OUT)/vendor/lib/
+	cp device/amlogic/w400-kernel/lib/optee.ko $(PRODUCT_OUT)/vendor/lib/
+	cp device/amlogic/w400-kernel/lib/firmware/video/* $(PRODUCT_OUT)/vendor/lib/firmware/video/
+	-cp device/amlogic/w400-kernel/obj/KERNEL_OBJ/vmlinux $(PRODUCT_OUT)/obj/KERNEL_OBJ/
 	mkdir -p $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 	cp $(KERNEL_KO_OUT)/* $(PRODUCT_OUT)/$(TARGET_COPY_OUT_VENDOR)/lib/modules/
 	mkdir -p $(PRODUCT_OUT)/vendor/lib/egl
-	cp device/amlogic/galilei-kernel/lib/egl/* $(PRODUCT_OUT)/vendor/lib/egl/
+	cp device/amlogic/w400-kernel/lib/egl/* $(PRODUCT_OUT)/vendor/lib/egl/
 
 $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 	@echo "Kernel installed"
@@ -59,7 +59,7 @@ else
 -include device/amlogic/common/arm_isp_modules.mk
 -include device/amlogic/common/tb_modules.mk
 
-KERNEL_DEVICETREE := g12b_a311d_w200 g12b_a311d_w200_a
+KERNEL_DEVICETREE := g12b_a311d_w400 g12b_a311d_w400_a
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 

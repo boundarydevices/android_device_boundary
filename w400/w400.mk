@@ -17,7 +17,7 @@
 # build for Meson reference board.
 #
 
-PRODUCT_DIR := galilei
+PRODUCT_DIR := w400
 
 # Dynamic enable start/stop zygote_secondary in 64bits
 # and 32bit system, default closed
@@ -66,15 +66,15 @@ endif
 endif
 endif
 endif
-# galilei:
+# w400:
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.hdmi.device_type=4 \
         persist.sys.hdmi.keep_awake=false
 
-PRODUCT_NAME := galilei
-PRODUCT_DEVICE := galilei
+PRODUCT_NAME := w400
+PRODUCT_DEVICE := w400
 PRODUCT_BRAND := Droidlogic
-PRODUCT_MODEL := galilei
+PRODUCT_MODEL := w400
 PRODUCT_MANUFACTURER := Droidlogic
 
 TARGET_KERNEL_BUILT_FROM_SOURCE := true
@@ -162,12 +162,12 @@ endif
 #PRODUCT_BUILD_SECURE_BOOT_IMAGE_DIRECTLY := true
 #PRODUCT_AML_SECURE_BOOT_VERSION3 := true
 ifeq ($(PRODUCT_AML_SECURE_BOOT_VERSION3),true)
-PRODUCT_AML_SECUREBOOT_RSAKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/g12b_w200_v1/aml-key
-PRODUCT_AML_SECUREBOOT_AESKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/g12b_w200_v1/aml-key
+PRODUCT_AML_SECUREBOOT_RSAKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/g12b_w400_v1/aml-key
+PRODUCT_AML_SECUREBOOT_AESKEY_DIR := ./bootloader/uboot-repo/bl33/board/amlogic/g12b_w400_v1/aml-key
 PRODUCT_SBV3_SIGBL_TOOL  := ./bootloader/uboot-repo/fip/stool/amlogic-sign-g12a.sh -s g12b
 PRODUCT_SBV3_SIGIMG_TOOL := ./bootloader/uboot-repo/fip/stool/signing-tool-g12a/sign-boot-g12a.sh --sign-kernel -h 2
 else
-PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/g12b_w200_v1/aml-user-key.sig
+PRODUCT_AML_SECUREBOOT_USERKEY := ./bootloader/uboot-repo/bl33/board/amlogic/g12b_w400_v1/aml-user-key.sig
 PRODUCT_AML_SECUREBOOT_SIGNTOOL := ./bootloader/uboot-repo/fip/g12b/aml_encrypt_g12b
 PRODUCT_AML_SECUREBOOT_SIGNBOOTLOADER := $(PRODUCT_AML_SECUREBOOT_SIGNTOOL) --bootsig \
 						--amluserkey $(PRODUCT_AML_SECUREBOOT_USERKEY) \
