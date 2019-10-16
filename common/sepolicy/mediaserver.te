@@ -36,3 +36,8 @@ allow mediaserver uio_device:chr_file { open read write };
 allow mediaserver sysfs_audio:dir {search};
 allow mediaserver sysfs_audio:lnk_file {read};
 allow mediaserver self:udp_socket { ioctl read};
+
+#============= mediaserver ctsplayer==============
+allow mediaserver sysfs_amvdec:file { open read write };
+allow mediaserver sysfs_di:dir search;
+allow mediaserver sysfs_display:lnk_file read;
