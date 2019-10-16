@@ -855,7 +855,7 @@
 <Control ui_type="slider" name="reg_sr3_dejaggy_ctrlluma_alpha_0" range="0~15" addr=" 0x3e65" mask="19:16" dst="U" desc="reg_sr3_dejaggy_ctrlluma_alpha_0  :  alpha for LR video LPF" default="15" value="15" cmd="common:2,0xff900000"/>
 <Control ui_type="slider" name="reg_sr3_dejaggy_procchrm_alpha_1" range="0~15" addr=" 0x3e65" mask="15:12" dst="U" desc="reg_sr3_dejaggy_procchrm_alpha_1  :  alpha for LR video LPF" default="4" value="4" cmd="common:2,0xff900000"/>
 <Control ui_type="slider" name="reg_sr3_dejaggy_procchrm_alpha_0" range="0~15" addr=" 0x3e65" mask="11:8" dst="U" desc="reg_sr3_dejaggy_procchrm_alpha_0  :  alpha for LR video LPF" default="6" value="6" cmd="common:2,0xff900000"/>
-<Control ui_type="slider" name="reg_sr3_dejaggy_procluma_alpha_1" range="0~15" addr=" 0x3e65" mask="7:4" dst="U" desc="reg_sr3_dejaggy_procluma_alpha_1  :  alpha for LR video LPF" default="4" value="4" cmd="common:2,0xff900000"/>
+<Control ui_type="slider" name="reg_sr3_dejaggy_procluma_alpha_1" range="0~15" addr=" 0x3e65" mask="7:4" dst="U" desc="reg_sr3_dejaggy_procluma_alpha_1  :  alpha for LR video LPF" default="4" value="2" cmd="common:2,0xff900000"/>
 <Control ui_type="slider" name="reg_sr3_dejaggy_procluma_alpha_0" range="0~15" addr=" 0x3e65" mask="3:0" dst="U" desc="reg_sr3_dejaggy_procluma_alpha_0  :  alpha for LR video LPF" default="6" value="6" cmd="common:2,0xff900000"/>
 <Control ui_type="slider" name="reg_pk_debug_edge" range="0~127" addr=" 0x3e66" mask="14:8" dst="U" desc="reg_pk_debug_edge" default="0" value="0" cmd="common:2,0xff900000"/>
 <Control ui_type="slider" name="reg_sr3_drtlpf_theta_en" range="0~7" addr=" 0x3e66" mask="6:4" dst="U" desc="reg_sr3_drtlpf_theta_en" default="0" value="3" cmd="common:2,0xff900000"/>
