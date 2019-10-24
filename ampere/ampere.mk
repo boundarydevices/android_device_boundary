@@ -416,7 +416,7 @@ PRODUCT_PACKAGES += \
     mediaProcessorDemo \
     libminiframework \
     libliveplayer \
-    libAmIptvMedia \
+    libAmIptvMedia
 endif
 
 
