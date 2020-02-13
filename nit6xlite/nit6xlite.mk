@@ -117,6 +117,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sys.sdcardfs=0
 
+PRODUCT_PACKAGES += \
+    start-ssh \
+    sshd_config \
+    ssh-keygen \
+    sshd \
+    scp \
+    sftp \
+    ssh \
+    libssh
+
 DEVICE_PACKAGE_OVERLAYS := \
 	device/boundary/nit6xlite/overlay \
 	device/boundary/common/overlay
