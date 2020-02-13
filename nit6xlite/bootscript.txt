@@ -145,6 +145,10 @@ setenv bootargs $bootargs fec.disable_giga=1
 
 if itest.s "x" != "x$wlmac" ; then
 	setenv bootargs $bootargs wlcore.mac=$wlmac
+	setenv bootargs $bootargs androidboot.wlan.mac=$wlmac
+	# create a bt mac address from the wlan one
+	setexpr btmac sub "(..:..:..:).(.*)" "\\1b\\2" ${wlmac}
+	setenv bootargs $bootargs androidboot.btmacaddr=${btmac}
 fi
 
 if itest.s "x" == "x$cma" ; then
