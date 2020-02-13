@@ -22,4 +22,5 @@
 <resources>
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">false</bool>
+    <bool name="config_disableUsbPermissionDialogs">true</bool>
 </resources>
