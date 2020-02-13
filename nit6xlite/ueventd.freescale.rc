@@ -1,6 +1,5 @@
 /dev/pmem_gpu             0660   system     graphics
 /dev/ttymxc*              0666   system     system
-/dev/ttymxc2              0660   bluetooth  bluetooth
 /dev/snd/*                0664   system     audio
 /dev/ttyUSB*              0640   radio      radio
 /dev/ttyACM*              0640   radio      radio
