@@ -43,3 +43,5 @@
 /sys/devices/soc0/fb* mode 0660 system graphics
 /sys/devices/soc0/soc/soc:busfreq* enable 0660 system system
 /sys/devices/system/cpu/cpu* online 0664 root system
+
+/sys/devices/soc0/leds* brightness 0666 system system
