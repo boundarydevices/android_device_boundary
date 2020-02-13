@@ -11,7 +11,7 @@ ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 endif
 
 TARGET_KERNEL_DEFCONF := boundary_android_defconfig
-TARGET_BOARD_DTS_CONFIG := imx6dl:imx6dl-nit6xlite.dtb
+TARGET_BOARD_DTS_CONFIG := imx6dl:imx6dl-nit6xlite.dtb imx6dl:imx6dl-nit6xlite-access.dtb
 
 TARGET_RECOVERY_FSTAB := device/boundary/nit6xlite/fstab.freescale
 
