@@ -1,3 +1,6 @@
+setenv board nit6xlite-access
+setenv board_name nit6xlite-access
+
 setenv distro_bootpart 1
 
 setexpr rval *0x020CC068 \& 0x180
