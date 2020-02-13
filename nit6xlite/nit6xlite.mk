@@ -1,6 +1,7 @@
 -include device/fsl/common/imx_path/ImxPathConfig.mk
 $(call inherit-product, device/fsl/imx6/imx6.mk)
 $(call inherit-product-if-exists,vendor/google/products/gms.mk)
+include device/boundary/nitrogen6x/wifi_config.mk
 
 # Overrides
 PRODUCT_NAME := nit6xlite
@@ -45,6 +46,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	$(LINUX_FIRMWARE_PATH)/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:vendor/lib/firmware/vpu/vpu_fw_imx6d.bin \
 	$(LINUX_FIRMWARE_PATH)/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:vendor/lib/firmware/vpu/vpu_fw_imx6q.bin
+
+# WLAN driver configuration files
+PRODUCT_COPY_FILES += \
+	device/boundary/common/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf     \
+	device/boundary/common/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf     \
 
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
@@ -122,21 +128,28 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default
 
 # WLAN driver configuration files
-PRODUCT_COPY_FILES += \
-	device/boundary/common/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf     \
-	device/boundary/common/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf     \
+PRODUCT_PACKAGES += \
+	android.hardware.bluetooth@1.0-service \
+	qcacld_wlan.ko \
+	bdwlan30.bin \
+	otp30.bin \
+	qca/tfbtfw11.tlv \
+	qca/tfbtnv11.bin \
+	qwlan30.bin \
+	utf30.bin \
+	utfbd30.bin \
+	wlan/cfg.dat \
+	wlan/qcom_cfg.ini
 
 PRODUCT_COPY_FILES += \
-	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
-	device/boundary/nit6xlite/bt_vendor.conf:vendor/bluetooth/bt_vendor.conf \
-	device/boundary/brcm/bcm4330.hcd:vendor/firmware/bcm4330.hcd \
-	device/boundary/brcm/brcmfmac4330-sdio.bin:vendor/firmware/brcm/brcmfmac4330-sdio.bin \
-	device/boundary/brcm/brcmfmac4330-sdio.txt:vendor/firmware/brcm/brcmfmac4330-sdio.txt
+	device/boundary/common/init.qca.rc:root/init.bt-wlan.rc
+
+# Specify which rfkill node to use since the first available (rfkill0) is the
+# one from the HCI driver in the kernel (net/bluetooth/hci_core.c).
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.bt.rfkill.state=/sys/class/rfkill/rfkill1/state
 
 BOARD_CUSTOM_BT_CONFIG := device/boundary/nit6xlite/libbt_vnd_nit6xlite.conf
-BOARD_WLAN_DEVICE_REV  := bcm4330_b2
-WIFI_BAND              := 802_11_ABG
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
 # Misc packages
 PRODUCT_PACKAGES += \
