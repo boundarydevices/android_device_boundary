@@ -32,7 +32,7 @@ if itest.s "x" == "x${board}" ; then
 fi
 
 if itest.s "x" == "x${fdt_file}" ; then
-	fdt_file=${soc}-${board}.dtb;
+	fdt_file=imx8mm-${board}.dtb;
 fi
 
 if load ${devtype} ${devnum}:${distro_bootpart} ${a_script} uEnv.txt ; then
@@ -65,7 +65,7 @@ if itest.s "x" != "x${cmd_mipi}" ; then
 fi
 
 setenv bootargs $bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait
-setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=${soc}
+setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=imx8mm
 setenv bootargs $bootargs firmware_class.path=/vendor/firmware
 setenv bootargs $bootargs androidboot.keystore=software
 setenv bootargs $bootargs androidboot.primary_display=imx-drm
