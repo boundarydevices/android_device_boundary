@@ -41,7 +41,7 @@ fi
 
 if load ${devtype} ${devnum}:${distro_bootpart} ${a_fdt} ${prefix}${fdt_file} ; then
 	fdt addr ${a_fdt}
-	setenv fdt_high 0xffffffff
+	setenv fdt_high 0xffffffffffffffff
 else
 	echo "!!!! Error loading ${prefix}${fdt_file}";
 	exit;
@@ -66,7 +66,7 @@ if itest.s "x" != "x${cmd_mipi}" ; then
 fi
 
 setenv bootargs $bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait
-setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc=${soc}
+setenv bootargs $bootargs androidboot.hardware=freescale androidboot.soc_type=${soc}
 setenv bootargs $bootargs firmware_class.path=/vendor/firmware
 setenv bootargs $bootargs androidboot.keystore=software
 
