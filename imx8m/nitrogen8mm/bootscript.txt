@@ -115,7 +115,7 @@ if itest.s "x" != "x$wlmac" ; then
 fi
 
 if itest.s "x" == "x$cma" ; then
-	cma=736M
+	cma=736M@2G
 fi
 setenv bootargs $bootargs cma=$cma
 
