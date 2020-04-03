@@ -1,2 +1,0 @@
-on post-fs
-   exec u:r:modprobe:s0 -- /system/bin/modprobe -a -d /vendor/lib/modules brcmfmac p2pon=1

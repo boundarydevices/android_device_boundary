@@ -1,1 +1,0 @@
-am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard

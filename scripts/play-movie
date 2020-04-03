@@ -1,1 +1,0 @@
-am start -n  com.android.gallery3d/.app.MovieActivity -d file:///$1

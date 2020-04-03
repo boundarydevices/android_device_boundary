@@ -1,2 +1,0 @@
-add_lunch_combo nit6xlite-eng
-add_lunch_combo nit6xlite-user
