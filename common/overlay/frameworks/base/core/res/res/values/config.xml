@@ -75,7 +75,7 @@
     <string-array translatable="false" name="networkAttributes">
         <item>"wifi,1,1,1,-1,true"</item>
         <item>"wifi_p2p,13,1,0,-1,true"</item>
-        <item>"bluetooth,7,7,0,-1,true"</item>
+        <item>"bluetooth,7,7,2,-1,true"</item>
         <item>"ethernet,9,9,2,-1,true"</item>
     </string-array>
 
@@ -174,10 +174,6 @@
 
     <integer name="config_screenBrightnessDim">5</integer>
 
-    <!-- Base "touch slop" value used by ViewConfiguration as a
-         movement threshold where scrolling should begin. -->
-    <dimen name="config_viewConfigurationTouchSlop">24dp</dimen>
-
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">8</integer>
     <!--  Whether Multiuser UI should be shown -->
@@ -187,21 +183,8 @@
          autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">true</bool>
 
-    <integer name="config_undockedHdmiRotation">0</integer>
-
     <!-- This device is not "voice capable"; it's data-only. -->
     <bool name="config_voice_capable">false</bool>
-
-    <!-- Max space (in MB) allocated to DownloadManager to store the downloaded files
-         if they are to be stored in DownloadManager's data dir,
-         which typically is /data/data/com.android.providers.downloads/files. -->
-    <integer name="config_downloadDataDirSize">200</integer>
-
-    <!-- When the free space available in DownloadManager's data dir falls
-         below the percentage value specified by this param, DownloadManager
-         starts removing files to try to make percentage of available
-         free space above this threshold value. -->
-    <integer name="config_downloadDataDirLowSpaceThreshold">10</integer>
 
     <!-- Whether WiFi display is supported by this device.
          There are many prerequisites for this feature to work correctly.
@@ -226,5 +209,8 @@
     <!-- If true, the doze component is not started until after the screen has been
          turned off and the screen off animation has been performed. -->
     <bool name="config_dozeAfterScreenOff">true</bool>
+
+    <!-- Boolean indicating whether system support sustained performance mode. -->
+    <bool name="config_sustainedPerformanceModeSupported">true</bool>
 
 </resources>
