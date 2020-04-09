@@ -1,4 +1,0 @@
-allow netd kernel:system module_request;
-allow netd self:capability { fsetid sys_module };
-allow netd sysfs:dir { add_name write };
-allow netd sysfs:file create;

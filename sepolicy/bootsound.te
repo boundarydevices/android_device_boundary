@@ -1,1 +1,0 @@
-allow bootsound shell_exec:file { getattr read };

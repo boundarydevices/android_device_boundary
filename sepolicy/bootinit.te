@@ -1,5 +1,0 @@
-allow bootinit shell_exec:file { getattr read };
-allow bootinit sysfs:dir { open read setattr };
-allow bootinit sysfs:file { getattr open setattr write };
-allow bootinit sysfs:lnk_file getattr;
-allow bootinit toolbox_exec:file { getattr open read };

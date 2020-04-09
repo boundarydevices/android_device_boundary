@@ -1,2 +1,0 @@
-allow surfaceflinger device:chr_file ioctl;
-allow surfaceflinger device:dir { open read };
