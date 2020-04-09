@@ -1,0 +1,3 @@
+typeattribute untrusted_app_25 system_writes_vendor_properties_violators;
+
+get_prop(untrusted_app_25, vendor_default_prop)

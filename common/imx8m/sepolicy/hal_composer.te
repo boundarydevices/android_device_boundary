@@ -1,0 +1,2 @@
+allow hal_graphics_composer_default debugfs_sw_sync:file { open read write ioctl };
+allowxperm hal_graphics_composer_default debugfs_sw_sync:file ioctl { SW_SYNC_IOC_CREATE_FENCE SW_SYNC_IOC_INC };

@@ -1,0 +1,2 @@
+allow hal_wifi_supplicant_default proc_net:file { write } ;
+get_prop(hal_wifi_supplicant_default, vendor_default_prop)

@@ -1,0 +1,8 @@
+allow dumpstate userdata_block_device:blk_file { getattr };
+allow dumpstate block_device:blk_file { getattr };
+allow dumpstate safemode_prop:file { getattr open };
+allow dumpstate mmc_prop:file { getattr open };
+allow dumpstate device_logging_prop:file { getattr open };
+allow dumpstate sysfs_block_devices:file { open read getattr };
+allow dumpstate debugfs_mmc:dir { search };
+allow dumpstate debugfs:dir { r_dir_perms };

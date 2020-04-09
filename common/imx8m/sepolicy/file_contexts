@@ -1,0 +1,90 @@
+/dev/mxc_asrc                   u:object_r:audio_device:s0
+/dev/mxc_hdmi                   u:object_r:video_device:s0
+/dev/mxc_hantro                 u:object_r:video_device:s0
+/dev/mxc_hantro_h1              u:object_r:video_device:s0
+/dev/mxc_vpu_malone             u:object_r:video_device:s0
+/dev/mxc_hifi4                  u:object_r:audio_device:s0
+/dev/galcore                    u:object_r:gpu_device:s0
+/dev/imxdpu                     u:object_r:gpu_device:s0
+/dev/caam_kb                    u:object_r:caam_device:s0
+/dev/dri                        u:object_r:gpu_device:s0
+/dev/dri/card0                  u:object_r:graphics_device:s0
+/dev/dri/card1                  u:object_r:graphics_device:s0
+/dev/dri/card2                  u:object_r:graphics_device:s0
+/dev/dri/controlD64             u:object_r:graphics_device:s0
+/dev/dri/controlD65             u:object_r:graphics_device:s0
+/dev/dri/renderD128             u:object_r:gpu_device:s0
+/dev/dri/renderD129             u:object_r:gpu_device:s0
+/vendor/bin/hw/android\.hardware\.usb@1\.1-service.imx             u:object_r:hal_usb_impl_exec:s0
+/vendor/bin/hw/android\.hardware\.health@2\.0-service.imx          u:object_r:hal_health_default_exec:s0
+/dev/diag                       u:object_r:diag_device:s0
+/vendor/bin/wcnss_filter        u:object_r:wcnss_filter_exec:s0
+/vendor/app(/.*)?               u:object_r:same_process_hal_file:s0
+/data/vendor/ss(/.*)?           u:object_r:tee_data_file:s0
+/data/vendor/.opencl-cache(/.*)?       u:object_r:opencl_cache_file:s0
+
+###############################################
+# same-process HAL files and their dependencies
+#
+/vendor/lib(64)?/hw/gralloc\.imx8\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libfsldisplay\.so          u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/nxp.hardware.display@1.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libedid\.so                u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libdrm_android\.so         u:object_r:same_process_hal_file:s0
+
+/vendor/lib(64)?/libGLSLC\.so               u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libVSC\.so                 u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libGAL\.so                 u:object_r:same_process_hal_file:s0
+
+/vendor/lib(64)?/hw/vulkan\.imx8\.so        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/gralloc_viv\.imx8\.so   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libdrm_vivante\.so         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libvulkan_VIVANTE\.so      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSPIRV_viv\.so           u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libCLC\.so                 u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libLLVM_viv\.so            u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libOpenCL\.so              u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libopencl-2d\.so           u:object_r:same_process_hal_file:s0
+
+/vendor/lib(64)?/lib_aac_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_amr_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_ape_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_asf_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_avi_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_dsf_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_flac_parser_arm11_elinux\.3\.0\.so      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_flv_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mkv_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mp3_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mp3_parser_v2_arm11_elinux\.so          u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mp4_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mpg2_parser_arm11_elinux\.3\.0\.so      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_ogg_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_rm_parser_arm11_elinux\.3\.0\.so        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_wav_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/extractors/libfslextractor\.so              u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.keymaster@3\.0-service.trusty u:object_r:hal_keymaster_default_exec:s0
+
+
+/vendor/bin/hw/android\.hardware\.power@1\.3-service\.imx  u:object_r:hal_power_default_exec:s0
+
+# trusty ipc target
+/dev/trusty-ipc-dev0        u:object_r:tee_device:s0
+
+# mmc rpmb
+/dev/mmcblk2rpmb      u:object_r:mmc_rpmb_char_device:s0
+/dev/mmcblk0rpmb      u:object_r:mmc_rpmb_char_device:s0
+
+# secure os storage
+/vendor/bin/storageproxyd   u:object_r:tee_exec:s0
+
+/vendor/bin/init\.insmod\.sh                u:object_r:init-insmod-sh_exec:s0
+/vendor/etc/early\.init\.cfg                  u:object_r:init-insmod-sh_exec:s0
+
+/vendor/bin/hw/android\.hardware\.drm@1\.2-service\.widevine u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey u:object_r:hal_drm_clearkey_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.2-service\.clearkey u:object_r:hal_drm_clearkey_exec:s0
+/data/vendor/mediadrm(/.*)? u:object_r:mediadrm_vendor_data_file:s0
+/vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service\.imx      u:object_r:hal_dumpstate_impl_exec:s0
+/dev/cpu_dma_latency u:object_r:latency_device:s0
+/vendor/bin/hw/android\.hardware\.oemlock@1\.0-service\.imx      u:object_r:hal_oemlock_impl_exec:s0

@@ -1,0 +1,6 @@
+type http_proxy_prop, property_type;
+type wc_prop, property_type;
+type vendor_usb_config_prop, property_type;
+type power_hal_prop, property_type;
+type vendor_bluetooth_prop, property_type;
+type public_vendor_default_prop, property_type;

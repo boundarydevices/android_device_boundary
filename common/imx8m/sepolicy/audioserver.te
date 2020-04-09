@@ -1,0 +1,5 @@
+typeattribute audioserver system_writes_vendor_properties_violators;
+
+get_prop(audioserver, vendor_default_prop)
+
+allow audioserver rootfs:lnk_file { getattr };

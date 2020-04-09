@@ -1,0 +1,13 @@
+type hal_neuralnetworks_imx, domain;
+hal_server_domain(hal_neuralnetworks_imx, hal_neuralnetworks)
+
+type hal_neuralnetworks_imx_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_neuralnetworks_imx)
+
+allow hal_neuralnetworks_imx opencl_cache_file:dir create_dir_perms;
+allow hal_neuralnetworks_imx opencl_cache_file:file { create write open lock getattr read unlink map };
+allow hal_neuralnetworks_imx gpu_device:chr_file { open ioctl read write map getattr };
+allow hal_neuralnetworks_imx graphics_device:dir { search };
+allow hal_neuralnetworks_imx hal_graphics_mapper_hwservice:hwservice_manager { find };
+allow hal_neuralnetworks_imx hal_graphics_allocator_default:fd { use };
+allow hal_neuralnetworks_imx ion_device:chr_file { open read ioctl };

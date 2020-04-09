@@ -1,0 +1,9 @@
+allow update_engine system_app:binder { call transfer };
+allow update_engine dtbo_block_device:blk_file { open read write ioctl getattr };
+allow update_engine storage_file:dir { search read write };
+allow update_engine storage_file:lnk_file { read write };
+allow update_engine mnt_user_file:dir { search write };
+allow update_engine mnt_user_file:lnk_file { read write };
+allow update_engine sdcardfs:dir { search };
+allow update_engine sdcardfs:file { read open getattr };
+allow update_engine media_rw_data_file:file { read open getattr };

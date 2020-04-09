@@ -1,0 +1,2 @@
+allow adbd vendor_configs_file:file { map };
+get_prop(adbd, vendor_usb_config_prop);

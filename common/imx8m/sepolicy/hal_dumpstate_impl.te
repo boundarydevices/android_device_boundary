@@ -1,0 +1,16 @@
+type hal_dumpstate_impl, domain;
+hal_server_domain(hal_dumpstate_impl, hal_dumpstate)
+
+type hal_dumpstate_impl_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_dumpstate_impl)
+
+allow hal_dumpstate_impl vendor_shell_exec:file rx_file_perms;
+allow hal_dumpstate_impl vendor_toolbox_exec:file rx_file_perms;
+
+allow hal_dumpstate_impl  sysfs:file { open read getattr };
+allow hal_dumpstate_impl  sysfs:dir { open read };
+allow hal_dumpstate_impl  sysfs_batteryinfo:file { open read getattr };
+allow hal_dumpstate_impl  sysfs_batteryinfo:dir { read search };
+allow hal_dumpstate_impl  shell_data_file:file { read getattr };
+allow hal_dumpstate_impl  debugfs_dma:file { read };
+allow hal_dumpstate_impl  debugfs_dma:dir { read };
