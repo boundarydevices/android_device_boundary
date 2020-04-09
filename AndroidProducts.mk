@@ -29,3 +29,7 @@
 PRODUCT_MAKEFILES += \
   $(LOCAL_DIR)/nitrogen8m/nitrogen8m.mk \
 
+COMMON_LUNCH_CHOICES := \
+  nitrogen8m-user \
+  nitrogen8m-userdebug \
+
