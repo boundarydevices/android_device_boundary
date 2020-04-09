@@ -5,7 +5,7 @@ RAMDISK_ARCH := arm64
 endif
 
 RAMDISK_TARGET := $(PRODUCT_OUT)/boot/uramdisk.img
-$(RAMDISK_TARGET): $(PRODUCT_OUT)/ramdisk.img kernelmodules
+$(RAMDISK_TARGET): $(PRODUCT_OUT)/ramdisk.img
 	mkdir -p $(dir $@)
 	mkimage -A $(RAMDISK_ARCH) -O linux -T ramdisk -n "RAM Disk" -d $< $@
 
