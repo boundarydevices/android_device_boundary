@@ -19,8 +19,9 @@ GPU_VIV6_PATH := vendor/nxp-private
 RESTRICTED_APP_PATH := vendor/nxp-private
 IMX_SECURITY_PATH := vendor/nxp-private/security
 
-KERNEL_IMX_PATH := vendor/nxp-opensource
-UBOOT_IMX_PATH := vendor/nxp-opensource
+ATF_IMX_PATH := vendor/boundary
+KERNEL_IMX_PATH := vendor/boundary
+UBOOT_IMX_PATH := vendor/boundary
 IMX_LIB_PATH := vendor/nxp-opensource
 IMX_MKIMAGE_PATH := vendor/nxp-opensource
 IMX_PATH := vendor/nxp-opensource
