@@ -105,8 +105,8 @@ fi
 
 product_makefile=`pwd`/`find device/boundary -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
 product_path=${product_makefile%/*}
-soc_path=${product_path%/*}
-fsl_git_path=${soc_path%/*}
+soc_path=${product_path%/*}/common/imx8m
+fsl_git_path=${product_path%/*}
 
 # if uboot is to be compiled, remove the UBOOT_COLLECTION directory
 if [ -n "${build_bootloader}" ]; then
