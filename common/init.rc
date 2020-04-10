@@ -1,6 +1,5 @@
 import init.${ro.hardware}.usb.rc
 import init.${ro.hardware}.${ro.boot.soc}.rc
-import init.bt-wlan.rc
 
 on early-init
     # mount the debugfs
