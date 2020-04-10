@@ -1,19 +1,29 @@
-define build_uboot
-	cp -v out/target/product/nitrogen8m/obj/BOOTLOADER_OBJ/u-boot-nodtb.$(strip $(1)) $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	cp -v out/target/product/nitrogen8m/obj/BOOTLOADER_OBJ/spl/u-boot-spl.bin  $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	cp -v out/target/product/nitrogen8m/obj/BOOTLOADER_OBJ/tools/mkimage  $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/mkimage_uboot; \
-	cp -v out/target/product/nitrogen8m/obj/BOOTLOADER_OBJ/arch/arm/dts/imx8mq-nitrogen8m.dtb  $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	cp -v $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/signed_hdmi_imx8m.bin  $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	cp -v $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/lpddr4_pmu_train_1d_dmem.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	cp -v $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/lpddr4_pmu_train_1d_imem.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	cp -v $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/lpddr4_pmu_train_2d_dmem.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	cp -v $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/lpddr4_pmu_train_2d_imem.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	cp -v $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/bl31.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/.; \
-	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ clean; \
-	SZ=$(patsubst %_,,$(strip $(2))); \
-	if [ "$$SZ" = "$(strip $(2))" ] ; then \
-		SZ=2g; \
-	fi; \
-	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=iMX8M DTBS=imx8mq-nitrogen8m.dtb u-boot-lpddr4-$$SZ.hdmibin; \
-	cp -v $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/u-boot-lpddr4-$$SZ.hdmibin $(PRODUCT_OUT)/boot/u-boot.$(strip $(2));
+MAKE += SHELL=/bin/bash
+
+ifneq ($(AARCH64_GCC_CROSS_COMPILE),)
+ATF_CROSS_COMPILE := $(strip $(AARCH64_GCC_CROSS_COMPILE))
+else
+ATF_TOOLCHAIN_ABS := $(realpath prebuilts/gcc/$(HOST_PREBUILT_TAG)/aarch64/aarch64-linux-android-4.9/bin)
+ATF_CROSS_COMPILE := $(ATF_TOOLCHAIN_ABS)/aarch64-linux-androidkernel-
+endif
+
+define build_imx_uboot
+    echo ================= Building i.MX U-Boot with firmware; \
+    cp $(FSL_PROPRIETARY_PATH)/linux-firmware-imx/firmware/hdmi/cadence/signed_*.bin $(UBOOT_OUT) ; \
+    cp $(FSL_PROPRIETARY_PATH)/linux-firmware-imx/firmware/ddr/synopsys/lpddr4_pmu_train* $(UBOOT_OUT) ; \
+    if [ ${clean_build} = 1 ]; then \
+        $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ PLAT=`echo $(2) | cut -d '-' -f1` clean; \
+    fi; \
+    if [ `echo $(2) | cut -d '-' -f2` = "trusty" ] && [ `echo $(2) | rev | cut -d '-' -f1` != "uuu" ]; then \
+        cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/tee-imx8mq.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/tee.bin; \
+        $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B SPD=trusty || exit 1; \
+    else \
+        if [ -f $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/tee.bin ] ; then \
+            rm -rf $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/tee.bin; \
+        fi; \
+        $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B || exit 1; \
+    fi; \
+    cp $(ATF_IMX_PATH)/arm-trusted-firmware/build/`echo $(2) | cut -d '-' -f1`/release/bl31.bin $(UBOOT_OUT)/bl31-iMX8MQ.bin; \
+    $(MAKE) -C $(UBOOT_IMX_PATH)/uboot-imx/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" O=$(realpath $(UBOOT_OUT)) flash.bin; \
+    cp $(UBOOT_OUT)/flash.bin $(UBOOT_COLLECTION)/;
 endef

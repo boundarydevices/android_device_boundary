@@ -1,104 +1,125 @@
 #
-# Product-specific compile-time definitions.
+# Board-specific compile-time definitions.
 #
 
-include device/fsl/imx8/soc/imx8mq.mk
-export BUILD_ID=1.3.0-ga
-export BUILD_NUMBER=$(shell date +%Y%m%d)
+BOARD_SOC_TYPE := IMX8MQ
+BOARD_TYPE := Nitrogen
+BOARD_HAVE_VPU := true
+BOARD_VPU_TYPE := hantro
+HAVE_FSL_IMX_GPU2D := false
+HAVE_FSL_IMX_GPU3D := true
+HAVE_FSL_IMX_IPU := false
+HAVE_FSL_IMX_PXP := false
+BOARD_KERNEL_BASE := 0x40400000
+TARGET_GRALLOC_VERSION := v3
+TARGET_HIGH_PERFORMANCE := true
+TARGET_USES_HWC2 := true
+TARGET_HWCOMPOSER_VERSION := v2.0
+USE_OPENGL_RENDERER := true
+TARGET_HAVE_VULKAN := true
+ENABLE_CFI=false
 
-# OTA configuration
-TARGET_OTA_BLOCK_DISABLED := true
-AB_OTA_UPDATER := false
+SOONG_CONFIG_IMXPLUGIN += \
+                          BOARD_HAVE_VPU \
+                          BOARD_VPU_TYPE
 
-include device/fsl/imx8/BoardConfigCommon.mk
+SOONG_CONFIG_IMXPLUGIN_BOARD_SOC_TYPE = IMX8MQ
+SOONG_CONFIG_IMXPLUGIN_BOARD_HAVE_VPU = true
+SOONG_CONFIG_IMXPLUGIN_BOARD_VPU_TYPE = hantro
+
+IMX_DEVICE_PATH := device/boundary/nitrogen8m
+
+# Add preboot partition for ref design simplicity
+BOARD_HAVE_PREBOOTIMAGE := true
+
+include device/boundary/common/imx8m/BoardConfigCommon.mk
 ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 -include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
 endif
 
-# Kernel / device tree configuration
-TARGET_KERNEL_DEFCONF := boundary_android_defconfig
-TARGET_BOARD_DTS_CONFIG := \
-	imx8mq:imx8mq-nitrogen8m.dtb imx8mq:imx8mq-nitrogen8m_som.dtb
+# OTA configuration
+AB_OTA_UPDATER := false
 
-# Bootloader configuration
-TARGET_BOOTLOADER_BOARD_NAME := nitrogen8m
-TARGET_BOOTLOADER_CONFIG := \
-	nitrogen8m_defconfig
-TARGET_BOOTLOADER_POSTFIX := bin
-UBOOT_POST_PROCESS := true
+# Create recovery image since not using A/B
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 50331648
+TARGET_NO_RECOVERY := false
 
-# Misc configuration
-TARGET_COPY_OUT_VENDOR := vendor
-TARGET_RELEASETOOLS_EXTENSIONS := device/fsl/imx8
-TARGET_CPU_SMP := true
-
-# Vendor Interface manifest and compatibility
-DEVICE_MANIFEST_FILE := device/boundary/nitrogen8m/manifest.xml
-DEVICE_MATRIX_FILE := device/boundary/nitrogen8m/compatibility_matrix.xml
-
-# Support gpt
-BOARD_BPT_INPUT_FILES += device/fsl/common/partition/device-partitions-7GB.bpt
-
-# Override Freescale partition sizes to match our flashing script
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1342177280
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 5519704064
-BOARD_CACHEIMAGE_PARTITION_SIZE := 536870912
+# Create cache image since not using A/B
+BOARD_CACHEIMAGE_PARTITION_SIZE := 1073741824
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_PARTITION_SIZE := 67108864
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-
-# boot.img & recovery.img creation
-TARGET_BOOTIMAGE_USE_EXT4 := true
-BOARD_BOOTIMAGE_PARTITION_SIZE := 37748736
-TARGET_RECOVERYIMAGE_USE_EXT4 := true
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 37748736
-
-TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
 BUILD_TARGET_FS ?= ext4
-include device/fsl/imx8/imx8_target_fs.mk
+TARGET_USERIMAGES_USE_EXT4 := true
 
-# For recovery service
-TARGET_SELECT_KEY := 28
-TARGET_RECOVERY_FSTAB := device/boundary/nitrogen8m/fstab.freescale
+TARGET_RECOVERY_FSTAB = $(IMX_DEVICE_PATH)/fstab.freescale
 
-# Camera
-IMX_CAMERA_HAL_V3 := true
+# Support gpt
+BOARD_BPT_INPUT_FILES += device/boundary/common/partition/device-partitions-7GB.bpt
+
+# Vendor Interface manifest and compatibility
+DEVICE_MANIFEST_FILE := $(IMX_DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(IMX_DEVICE_PATH)/compatibility_matrix.xml
+
+TARGET_BOOTLOADER_BOARD_NAME := nitrogen8m
+
+USE_OPENGL_RENDERER := true
+
+BOARD_WLAN_DEVICE            := qcwcn
+WPA_SUPPLICANT_VERSION       := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER  := NL80211
+BOARD_HOSTAPD_DRIVER         := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB           := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB    := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(IMX_DEVICE_PATH)/bluetooth
+BOARD_HAVE_BLUETOOTH_QCOM        := true
+
+BOARD_USE_SENSOR_FUSION := false
+
 BOARD_HAVE_USB_CAMERA := true
 
-PRODUCT_MODEL := Nitrogen8m
-
-# GPU configuration
-USE_OPENGL_RENDERER := true
 USE_ION_ALLOCATOR := true
 USE_GPU_ALLOCATOR := false
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
-BOARD_EGL_CFG := $(FSL_PROPRIETARY_PATH)/fsl-proprietary/gpu-viv/lib64/egl/egl.cfg
 
-# WiFi/BT configuration
-BOARD_HAVE_WIFI                  := true
-BOARD_HAVE_BLUETOOTH             := true
-WPA_BUILD_HOSTAPD                := true
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_AVB_ENABLE := true
+TARGET_USES_MKE2FS := true
+BOARD_AVB_ALGORITHM := SHA256_RSA4096
+# The testkey_rsa4096.pem is copied from external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_KEY_PATH := device/boundary/common/security/testkey_rsa4096.pem
 
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
-BOARD_WLAN_DEVICE                := qcwcn
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
-BOARD_HAVE_BLUETOOTH_QCOM        := true
-BOARD_SUPPORTS_BLE_VND           := true
-BOARD_VENDOR_KERNEL_MODULES += \
-	$(TARGET_OUT_INTERMEDIATES)/ETC/qcacld_wlan.ko_intermediates/qcacld_wlan.ko
-
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/boundary/nitrogen8m/
+# define frame buffer count
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 ifeq ($(PRODUCT_IMX_DRM),true)
 CMASIZE=736M
 else
-CMASIZE=1536M
+CMASIZE=1280M
 endif
 
-include device/boundary/sepolicy.mk
+BOARD_KERNEL_CMDLINE := init=/init androidboot.hardware=freescale firmware_class.path=/vendor/firmware
+BOARD_KERNEL_CMDLINE += transparent_hugepage=never loop.max_part=7
 
-TARGET_BOARD_KERNEL_HEADERS := device/fsl/common/kernel-headers
+# Default wificountrycode
+BOARD_KERNEL_CMDLINE += androidboot.wificountrycode=US
+
+BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8m/dtbo-imx8mq.img
+TARGET_BOARD_DTS_CONFIG ?= \
+	imx8mq:imx8mq-nitrogen8m.dtb \
+	imx8mq:imx8mq-nitrogen8m-edp.dtb \
+	imx8mq:imx8mq-nitrogen8m-m4.dtb \
+	imx8mq:imx8mq-nitrogen8m_som.dtb \
+	imx8mq:imx8mq-nitrogen8m_som-m4.dtb \
+	imx8mq:imx8mq-nitrogen8m-tc358743.dtb \
+
+BOARD_SEPOLICY_DIRS := \
+       device/boundary/common/imx8m/sepolicy \
+       $(IMX_DEVICE_PATH)/sepolicy
+
+ifeq ($(PRODUCT_IMX_DRM),true)
+BOARD_SEPOLICY_DIRS += \
+       $(IMX_DEVICE_PATH)/sepolicy_drm
+endif
+
+TARGET_BOARD_KERNEL_HEADERS := device/boundary/common/kernel-headers
+
+ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
