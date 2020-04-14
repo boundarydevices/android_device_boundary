@@ -29,6 +29,7 @@ include ${product_path}/SharedBoardConfig.mk
 include ${product_path}/UbootKernelBoardConfig.mk
 
 include ${fsl_git_path}/common/build/kernel.mk
+include ${fsl_git_path}/common/build/qcacld.mk
 include ${fsl_git_path}/common/build/uboot.mk
 -include ${product_path}/AndroidUboot.mk
 -include ${product_path}/AndroidTee.mk
