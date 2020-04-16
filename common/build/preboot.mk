@@ -1,0 +1,12 @@
+ifeq ($(BOARD_HAVE_PREBOOTIMAGE),true)
+INSTALLED_PREBOOTIMAGE_TARGET := $(PRODUCT_OUT)/preboot.img
+$(INSTALLED_PREBOOTIMAGE_TARGET): $(MKEXTUSERIMG) $(BOOTSCRIPT_TARGET) $(UPGRADE_TARGET)
+	$(call pretty,"Target preboot image: $@")
+	$(MKEXTUSERIMG) $(INTERNAL_USERIMAGES_SPARSE_EXT_FLAG) $(PRODUCT_OUT)/preboot $@ ext4 preboot $(BOARD_PREBOOTIMAGE_PARTITION_SIZE) -L preboot
+
+.PHONY: preboot
+preboot: $(INSTALLED_PREBOOTIMAGE_TARGET)
+
+droidcore: preboot
+bootimage: preboot
+endif
