@@ -144,6 +144,8 @@ $(UBOOT_BIN): $(UBOOTENVSH) | $(UBOOT_COLLECTION) $(UBOOT_OUT)
 		    $(call build_uboot_w_tee,  $(TARGET_BOOTLOADER_POSTFIX), $$UBOOT_PLATFORM) \
 		fi; \
 		install -D $(UBOOT_COLLECTION)/flash.bin $(UBOOT_BIN); \
+		UBOOT_BD_NAME=`echo u-boot.$$UBOOT_CONFIG | sed 's/_defconfig//'`; \
+		install -D $(UBOOT_COLLECTION)/flash.bin $(PRODUCT_OUT)/preboot/$$UBOOT_BD_NAME; \
 	done
 
 .PHONY: bootloader $(UBOOT_BIN) $(UBOOTENVSH)
