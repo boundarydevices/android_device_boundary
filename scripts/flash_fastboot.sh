@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -z "$PRODUCT" ]; then PRODUCT=nitrogen6x; fi
+if [ -z "$PRODUCT" ]; then PRODUCT=nitrogen8m; fi
 if [ -z "$OUT" ]; then OUT=out/target/product/$PRODUCT; fi
 
 if ! [ -d $OUT ]; then
@@ -8,22 +8,26 @@ if ! [ -d $OUT ]; then
    exit 1;
 fi
 
-VID=0x0525
-fastboot -i $VID devices | grep fastboot > /dev/null
-if ! [ $? -eq 0 ] ; then VID=0x3016; fi
-
-fastboot -i $VID flash gpt $OUT/gpt.img
+fastboot flash gpt $OUT/partition-table.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash gpt.img"; exit 1; fi
-fastboot -i $VID flash boot $OUT/boot.img
+fastboot flash preboot $OUT/preboot.img
+if ! [ $? -eq 0 ] ; then echo "Failed to flash preboot.img"; exit 1; fi
+fastboot flash dtbo $OUT/dtbo.img
+if ! [ $? -eq 0 ] ; then echo "Failed to flash dtbo.img"; exit 1; fi
+fastboot flash boot $OUT/boot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash boot.img"; exit 1; fi
-fastboot -i $VID flash recovery $OUT/recovery.img
+fastboot flash recovery $OUT/recovery.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash recovery.img"; exit 1; fi
-fastboot -i $VID flash system $OUT/system.img
+fastboot flash system $OUT/system.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash system.img"; exit 1; fi
-fastboot -i $VID flash cache $OUT/cache.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
-fastboot -i $VID flash vendor $OUT/vendor.img
+fastboot flash vendor $OUT/vendor.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vendor.img"; exit 1; fi
-fastboot -i $VID flash data $OUT/userdata.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash userdata.img"; exit 1; fi
-fastboot -i $VID continue
+fastboot flash vbmeta $OUT/vbmeta.img
+if ! [ $? -eq 0 ] ; then echo "Failed to flash vbmeta.img"; exit 1; fi
+fastboot flash cache $OUT/cache.img
+if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
+if ! [ "$1" = "-d" ] ; then
+	echo fastboot erase userdata
+	if ! [ $? -eq 0 ] ; then echo "Failed to erase userdata"; exit 1; fi
+fi
+fastboot continue
