@@ -16,7 +16,6 @@ PRODUCT_MANUFACTURER := freescale
 PRODUCT_PACKAGES += \
     CactusPlayer \
     ExtractorPkg \
-    SystemUpdaterSample \
     charger_res_images \
     ethernet \
     libGLES_android \
@@ -53,8 +52,10 @@ PRODUCT_STATIC_BOOT_CONTROL_HAL:= \
     bootctrl-static.avb \
     libcutils \
 
+ifeq ($(AB_OTA_UPDATER),true)
 # A/B OTA
 PRODUCT_PACKAGES += \
+    SystemUpdaterSample \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service \
     bootctrl.avb \
@@ -65,6 +66,18 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_HOST_PACKAGES += \
     brillo_update_payload
+
+PRODUCT_COPY_FILES += \
+    device/boundary/common/imx8m/com.example.android.systemupdatersample.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.example.android.systemupdatersample.xml
+else
+# non-A/B OTA
+PRODUCT_PACKAGES += \
+    FSLOta
+
+PRODUCT_COPY_FILES += \
+    device/boundary/common/ota/com.fsl.android.ota.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/com.fsl.android.ota.xml \
+    device/boundary/common/ota/ota.conf:$(TARGET_COPY_OUT_VENDOR)/etc/ota.conf
+endif
 
 # audio
 PRODUCT_PACKAGES += \
@@ -312,7 +325,6 @@ PRODUCT_COPY_FILES += \
     $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_codecs_google_tv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_tv.xml \
     $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_profiles_720p.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_720p.xml \
     device/boundary/common/imx8m/init.recovery.freescale.rc:root/init.recovery.freescale.rc \
-    device/boundary/common/imx8m/com.example.android.systemupdatersample.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.example.android.systemupdatersample.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
