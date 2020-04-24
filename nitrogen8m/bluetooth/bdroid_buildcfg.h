@@ -3,4 +3,7 @@
 
 #define BTM_DEF_LOCAL_NAME   "Nitrogen8m"
 
+// Google VSC spec support
+#define BLE_VND_INCLUDED TRUE
+
 #endif
