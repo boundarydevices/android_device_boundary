@@ -39,9 +39,3 @@ on property:sys.boot_completed=1
     # system-background is for system tasks that should only run on
     # little cores, not on bigs to be used only by init
     write /dev/cpuset/system-background/cpus 0-2
-
-    # set back camera.
-    setprop back_camera_name mxc-mipi-csi2.0
-
-    # set front camera.
-    setprop front_camera_name mxc-mipi-csi2.1
