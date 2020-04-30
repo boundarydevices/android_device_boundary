@@ -3,6 +3,7 @@
 /dev/ttymxc2              0660   bluetooth  bluetooth
 /dev/snd/*                0660   system     audio
 /dev/video*               0660   system     camera
+/dev/v4l*                 0660   system     camera
 /dev/mxc_hantro           0660   media      drmrpc
 /dev/imxdpu               0660   media      drmrpc
 /dev/uinput               0660   system     bluetooth

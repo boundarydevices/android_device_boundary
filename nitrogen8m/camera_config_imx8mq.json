@@ -11,6 +11,7 @@
     {
       "camera_type": "back",
       "camera_name": "mx6s-csi,mxc-mipi-csi2.0",
+      "subdev_path": "/dev/v4l-subdev0",
       "orientation": "0",
       "buffer_type": "mmap",
       "ActiveArrayWidth": "2592",
@@ -39,6 +40,7 @@
     {
       "camera_type": "front",
       "camera_name": "mx6s-csi,mxc-mipi-csi2.1",
+      "subdev_path": "/dev/v4l-subdev1",
       "orientation": "0",
       "buffer_type": "mmap",
       "ActiveArrayWidth": "2592",
