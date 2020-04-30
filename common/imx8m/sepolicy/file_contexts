@@ -7,6 +7,7 @@
 /dev/galcore                    u:object_r:gpu_device:s0
 /dev/imxdpu                     u:object_r:gpu_device:s0
 /dev/caam_kb                    u:object_r:caam_device:s0
+/dev/v4l-subdev[0-9]*           u:object_r:video_device:s0
 /dev/dri                        u:object_r:gpu_device:s0
 /dev/dri/card0                  u:object_r:graphics_device:s0
 /dev/dri/card1                  u:object_r:graphics_device:s0
