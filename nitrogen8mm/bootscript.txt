@@ -1,0 +1,165 @@
+a_base=0x40000000
+setexpr a_Image   ${a_base} + 0x10000000
+setexpr a_fdt     ${a_base} + 0x04000000
+
+setenv apart boot
+setenv ramdisk '-'
+setenv bootmode normal
+setenv bootargs ''
+setenv m4 ''
+
+# standard BCB (boot control block) management
+part number ${devtype} ${devnum} misc bcbindex
+if bcb load ${devnum} ${bcbindex}; then
+	if bcb test command = bootonce-bootloader; then
+		echo "Android: Bootloader boot..."
+		bcb clear command; bcb store;
+		fastboot 0
+	elif bcb test command = boot-recovery; then
+		echo "Android: Recovery boot..."
+		setenv apart recovery
+		setenv bootmode recovery
+		setenv ramdisk ${a_Image}
+	else
+		echo "Android: Normal boot..."
+	fi
+else
+	echo "Warning: BCB is corrupted or does not exist";
+	echo "Android: Normal boot...";
+fi
+
+# First check AVB status
+setenv avb_verify 'avb init ${devnum}; avb verify;'
+if run avb_verify; then
+	echo AVB verification OK. Continue boot;
+else
+	echo AVB verification failed;
+	exit;
+fi;
+
+if itest.s "x1" == "x$m4enabled" ; then
+	run m4boot;
+	m4='-m4';
+fi
+
+if itest.s "x" == "x${board}" ; then
+	echo "!!!! Error: Your u-boot is outdated. Please upgrade.";
+	exit;
+fi
+
+# Load dtbo partition
+part start ${devtype} ${devnum} dtbo dtbo_start
+part size ${devtype} ${devnum} dtbo dtbo_size
+${devtype} read ${a_fdt} ${dtbo_start} ${dtbo_size}
+adtimg addr ${a_fdt}
+
+# Look for matching compatible
+setenv dtexp boundary,imx8mm-${board}${m4}
+setenv index 0
+setenv cont 1
+setenv dtfound 0
+setenv fdt_high 0xffffffffffffffff
+while itest.s "${cont}" == "1" ; do
+	if adtimg get dt --index=${index} a_fdt s_fdt ; then
+		fdt addr ${a_fdt}
+		fdt get value dtcomp / compatible
+		if itest.s "${dtcomp}" == "${dtexp}" ; then
+			setenv cont 0
+			setenv dtfound 1
+		else
+			setexpr index ${index} + 1
+		fi
+	else
+		setenv cont 0
+	fi
+done
+if itest.s "${dtfound}" == "0"; then
+	echo "Could not find DT ${dtexp}!"
+	exit
+fi
+fdt resize
+
+if itest.s "x" != "x${cmd_custom}" ; then
+	run cmd_custom
+fi
+
+# ------------------- Displays detection
+if itest.s "x" != "x${cmd_mipi}" ; then
+	run cmd_mipi
+fi
+
+setenv bootargs $bootargs console=${console},115200 androidboot.mode=${bootmode} androidboot.soc_type=imx8mm
+setenv bootargs $bootargs androidboot.dtbo_idx=${index} androidboot.keystore=software
+setenv bootargs $bootargs androidboot.primary_display=imx-drm
+
+if itest.s "xmmc" == "x$devtype" ; then
+	if itest.s "x0" == "x$devnum" ; then
+		bootdev=30b40000.usdhc
+	elif itest.s "x1" == "x$devnum" ; then
+		bootdev=30b50000.usdhc
+	fi
+elif itest.s "xusb" == "x$devtype" ; then
+	bootdev=38200000.usb/ci_hdrc.1
+fi
+setenv bootargs $bootargs androidboot.bootdevice=$bootdev
+
+if itest.s "x" != "x$selinux" ; then
+	setenv bootargs $bootargs androidboot.selinux=$selinux
+fi
+
+if itest.s "x" != "x${tile_support}" ; then
+	setenv bootargs $bootargs androidboot.fbTileSupport=${tile_support}
+else
+	setenv bootargs $bootargs androidboot.fbTileSupport=enable
+fi
+
+if itest.s "x" != "x${lcd_density}" ; then
+	setenv bootargs $bootargs androidboot.lcd_density=${lcd_density}
+else
+	setenv bootargs $bootargs androidboot.lcd_density=213
+fi
+
+if itest.s "x" != "x${serial#}" ; then
+	setenv bootargs $bootargs androidboot.serialno="${serial#}"
+fi
+
+if itest.s "x" != "x$hwrotation" ; then
+	setenv bootargs $bootargs androidboot.hwrotation=$hwrotation
+fi
+
+if itest.s "x" != "x$disable_giga" ; then
+        setenv bootargs $bootargs fec.disable_giga=1
+fi
+
+if itest.s "x" != "x$wlmac" ; then
+	setenv bootargs $bootargs wlcore.mac=$wlmac
+	# create a bt mac address from the wlan one
+	setexpr btmac sub "(..:..:..:).(.*)" "\\1b\\2" ${wlmac}
+else
+	# base it upon ethernet address, Android requires one
+	setexpr btmac sub "(..:..:..:).(.*)" "\\1b\\2" ${ethaddr}
+fi
+setenv bootargs $bootargs androidboot.btmacaddr=${btmac}
+
+if itest.s "x" == "x$cma" ; then
+	cma=800M
+fi
+setenv bootargs $bootargs cma=$cma
+
+if itest.s "x" != "x$show_fdt" ; then
+	fdt print /
+fi
+
+if itest.s "x" != "x$show_env" ; then
+	printenv
+fi
+
+# Load Android bootimage and boot it
+setenv bootargs $bootargs "$avb_bootargs"
+part start ${devtype} ${devnum} ${apart} boot_start
+part size  ${devtype} ${devnum} ${apart} boot_size
+if ${devtype} read ${a_Image} ${boot_start} ${boot_size} ; then
+	bootm ${a_Image} ${ramdisk} ${a_fdt} ;
+fi
+
+echo "Error loading the OS"

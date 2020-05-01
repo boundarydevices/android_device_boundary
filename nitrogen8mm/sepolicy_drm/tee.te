@@ -1,0 +1,18 @@
+# allow run xtest as shell
+domain_auto_trans(shell, tee_exec, tee);
+allow tee console_device:chr_file {  getattr read write ioctl };
+allow tee shell:fd { use };
+
+allow tee tee_data_file:dir { create rmdir rename };
+allow tee vendor_data_file:dir { write remove_name };
+
+# For xtest 200x tests
+allow tee tee:tcp_socket { create connect read write getopt setopt };
+allow tee tee:udp_socket { create connect read write getopt getattr };
+allow tee tee:capability { net_raw };
+allow tee fwmarkd_socket:sock_file { write };
+allow tee port:tcp_socket { name_connect };
+
+# For tee-supplicant
+allow tee system_data_file:dir getattr;
+allow tee vendor_data_file:dir { write create add_name };
