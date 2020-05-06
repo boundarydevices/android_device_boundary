@@ -10,7 +10,7 @@
   "camera_metadata": [
     {
       "camera_type": "back",
-      "camera_name": "mx6s-csi,mxc-mipi-csi2.0",
+      "camera_name": "mx6s-csi,mxc_mipi-csi.0",
       "subdev_path": "/dev/v4l-subdev0",
       "orientation": "0",
       "buffer_type": "mmap",
