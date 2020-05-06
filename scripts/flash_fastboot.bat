@@ -7,7 +7,11 @@ IF "%OUT%" == "" (
 	SET OUT=out\target\product\%PRODUCT%
 )
 
-fastboot.exe flash gpt %OUT%\partition-table.img
+IF "%GPT%" == "" (
+	SET GPT=partition-table-default.img
+)
+
+fastboot.exe flash gpt %OUT%\%GPT%
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash gpt.img
 	GOTO:eof

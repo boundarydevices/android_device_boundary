@@ -1,14 +1,52 @@
 #!/bin/sh
 
-if [ -z "$PRODUCT" ]; then PRODUCT=nitrogen8m; fi
-if [ -z "$OUT" ]; then OUT=out/target/product/$PRODUCT; fi
+if [ -z "$product" ]; then product=nitrogen8m; fi
 
+help() {
+cat << EOF
+
+Usage: $0 <options>
+
+options:
+  -h                displays this help message
+  -d <directory>    the directory of images (default: \$OUT)
+  -p <product_name> product/target being flashed (default: $product)
+  -s <mmc_size>     size of the mmc being flashed (8/16)
+  -u                do NOT erase userdata during the flashing process
+
+EOF
+}
+
+# Parse parameters
+skip_userdata=0
+gpt_size=0
+while [ $# -gt 0 ]; do
+	case $1 in
+		-h) help; exit ;;
+		-d) OUT=$2; shift;;
+		-p) product=$2; shift;;
+		-s) gpt_size=$2; shift;;
+		-u) skip_userdata=1 ;;
+		*)  echo "$1 is not a known option";
+			help; exit;;
+	esac
+	shift
+done
+case $gpt_size in
+	0*) gpt=partition-table-default.img;;
+	8*) gpt=partition-table-8GB.img;;
+	16*) gpt=partition-table-16GB.img;;
+	*) echo "Unsupported GPT size: $gpt_size";
+		help; exit;;
+esac
+
+if [ -z "$OUT" ]; then OUT=out/target/product/$product; fi
 if ! [ -d $OUT ]; then
    echo "Missing $OUT";
    exit 1;
 fi
 
-fastboot flash gpt $OUT/partition-table.img
+fastboot flash gpt $OUT/$gpt
 if ! [ $? -eq 0 ] ; then echo "Failed to flash gpt.img"; exit 1; fi
 fastboot flash preboot $OUT/preboot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash preboot.img"; exit 1; fi
@@ -26,8 +64,8 @@ fastboot flash vbmeta $OUT/vbmeta.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vbmeta.img"; exit 1; fi
 fastboot flash cache $OUT/cache.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
-if ! [ "$1" = "-d" ] ; then
-	echo fastboot erase userdata
+if ! [ ${skip_userdata} -eq 1 ] ; then
+	fastboot erase userdata
 	if ! [ $? -eq 0 ] ; then echo "Failed to erase userdata"; exit 1; fi
 fi
 fastboot continue
