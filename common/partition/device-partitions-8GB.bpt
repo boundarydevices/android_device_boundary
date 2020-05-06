@@ -1,6 +1,6 @@
 {
     "settings": {
-        "disk_size": "7 GiB",
+        "disk_size": "7.1 GiB",
         "disk_alignment": 2097152
     },
     "partitions": [

@@ -54,7 +54,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_RECOVERY_FSTAB = $(IMX_DEVICE_PATH)/fstab.freescale
 
 # Support gpt
-BOARD_BPT_INPUT_FILES += device/boundary/common/partition/device-partitions-7GB.bpt
+BOARD_BPT_INPUT_FILES += device/boundary/common/partition/device-partitions-8GB.bpt
 
 # Vendor Interface manifest and compatibility
 DEVICE_MANIFEST_FILE := $(IMX_DEVICE_PATH)/manifest.xml
