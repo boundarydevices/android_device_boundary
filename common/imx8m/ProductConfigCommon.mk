@@ -288,10 +288,8 @@ PRODUCT_PACKAGES += \
     media_profiles_V1_0.xml \
     media_codecs_google_video.xml
 
-ifneq ($(LOW_MEMORY),true)
 PRODUCT_PACKAGES += \
     media_codecs.xml
-endif
 
 # Omx excluded libs
 PRODUCT_PACKAGES += \
