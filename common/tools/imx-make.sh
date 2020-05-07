@@ -53,6 +53,25 @@ handle_special_arg()
     fi
 }
 
+download_prebuilt_bootloader()
+{
+    UBOOT_CONFIG=device/boundary/${TARGET_PRODUCT}/UbootKernelBoardConfig.mk
+    UBOOT_NAMES=`awk '/TARGET_BOOTLOADER_PREBUILT/{$1=$2=""; print $0}' ${UBOOT_CONFIG}`
+    if [ -z "${UBOOT_NAMES}" ]; then
+        echo "No U-Boot prebuilt defined for ${TARGET_PRODUCT}"
+        exit
+    fi
+    # create preboot folder if missing
+    mkdir -p ${OUT}/preboot
+    # remove artifacts if present
+    rm -f ${OUT}/preboot/u-boot.*
+    # download each prebuilt binary from BD server
+    for UBOOT_NAME in ${UBOOT_NAMES}; do
+        URL=http://linode.boundarydevices.com/u-boot-images/u-boot.${UBOOT_NAME}
+        wget -nv -P ${OUT}/preboot $URL
+    done
+}
+
 # check whether the build product and build mode is selected
 if [ -z ${OUT} ] || [ -z ${TARGET_PRODUCT} ]; then
     help;
@@ -78,6 +97,7 @@ for arg in ${args[*]} ; do
         -c) clean_build=1;;
         bootloader) build_bootloader_kernel_flag=1;
                     build_bootloader="bootloader";;
+        prebuilt-bootloader) download_prebuilt_bootloader; exit;;
         kernel) build_bootloader_kernel_flag=1;
                     build_kernel="${OUT}/kernel";;
         bootimage) build_bootloader_kernel_flag=1;
