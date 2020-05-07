@@ -6,7 +6,7 @@
     "partitions": [
         {
             "label": "preboot",
-            "size": "8 MiB",
+            "size": "16 MiB",
             "guid": "auto",
             "type_guid": "c23c955f-fce3-4ef1-86f7-4c5b8b5c4570"
         },
