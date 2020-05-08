@@ -10,6 +10,7 @@ Usage: $0 <options>
 options:
   -h                displays this help message
   -d <directory>    the directory of images (default: \$OUT)
+  -D                disables verity verification
   -p <product_name> product/target being flashed (default: $product)
   -s <mmc_size>     size of the mmc being flashed (8/16)
   -u                do NOT erase userdata during the flashing process
@@ -20,10 +21,12 @@ EOF
 # Parse parameters
 skip_userdata=0
 gpt_size=0
+disable_verity=""
 while [ $# -gt 0 ]; do
 	case $1 in
 		-h) help; exit ;;
 		-d) OUT=$2; shift;;
+		-D) disable_verity="--disable-verity";;
 		-p) product=$2; shift;;
 		-s) gpt_size=$2; shift;;
 		-u) skip_userdata=1 ;;
@@ -60,7 +63,7 @@ fastboot flash system $OUT/system.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash system.img"; exit 1; fi
 fastboot flash vendor $OUT/vendor.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vendor.img"; exit 1; fi
-fastboot flash vbmeta $OUT/vbmeta.img
+fastboot flash vbmeta $OUT/vbmeta.img $disable_verity
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vbmeta.img"; exit 1; fi
 fastboot flash cache $OUT/cache.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
