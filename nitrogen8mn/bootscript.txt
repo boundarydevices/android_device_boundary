@@ -1,6 +1,7 @@
 a_base=0x40000000
 setexpr a_Image   ${a_base} + 0x10000000
 setexpr a_fdt     ${a_base} + 0x04000000
+setexpr a_fdtbo   ${a_base} + 0x05000000
 
 setenv apart boot
 setenv ramdisk '-'
@@ -50,8 +51,8 @@ fi
 # Load dtbo partition
 part start ${devtype} ${devnum} dtbo dtbo_start
 part size ${devtype} ${devnum} dtbo dtbo_size
-${devtype} read ${a_fdt} ${dtbo_start} ${dtbo_size}
-adtimg addr ${a_fdt}
+${devtype} read ${a_fdtbo} ${dtbo_start} ${dtbo_size}
+adtimg addr ${a_fdtbo}
 
 # Look for matching compatible
 setenv dtexp boundary,imx8mn-${board}${m4}
@@ -60,8 +61,8 @@ setenv cont 1
 setenv dtfound 0
 setenv fdt_high 0xffffffffffffffff
 while itest.s "${cont}" == "1" ; do
-	if adtimg get dt --index=${index} a_fdt s_fdt ; then
-		fdt addr ${a_fdt}
+	if adtimg get dt --index=${index} a_fdtbo s_fdtbo ; then
+		fdt addr ${a_fdtbo}
 		fdt get value dtcomp / compatible
 		if itest.s "${dtcomp}" == "${dtexp}" ; then
 			setenv cont 0
@@ -77,6 +78,9 @@ if itest.s "${dtfound}" == "0"; then
 	echo "Could not find DT ${dtexp}!"
 	exit
 fi
+# copy dtb found to a properly aligned address
+cp ${a_fdtbo} ${a_fdt} ${s_fdtbo}
+fdt addr ${a_fdt}
 fdt resize
 
 if itest.s "x" != "x${cmd_custom}" ; then
