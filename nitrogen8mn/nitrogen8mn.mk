@@ -211,7 +211,6 @@ PRODUCT_PACKAGES += \
 
 # Add oem unlocking option in settings.
 PRODUCT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/frp
-PRODUCT_PROPERTY_OVERRIDES += ro.internel.storage_size=/sys/block/mmcblk0/size
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
 # Add Trusty OS backed gatekeeper and secure storage proxy
