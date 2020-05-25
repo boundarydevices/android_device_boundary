@@ -98,6 +98,7 @@ BOARD_KERNEL_CMDLINE += androidboot.wificountrycode=US
 BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8mn/dtbo-imx8mn.img
 TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mn:imx8mn-nitrogen8_nano.dtb \
+	imx8mn:imx8mn-nitrogen8_nano-m4.dtb \
 	imx8mn:imx8mn-nitrogen8mn.dtb \
 	imx8mn:imx8mn-nitrogen8mn_som.dtb \
 
