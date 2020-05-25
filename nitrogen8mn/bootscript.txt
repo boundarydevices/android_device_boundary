@@ -146,7 +146,7 @@ fi
 setenv bootargs $bootargs androidboot.btmacaddr=${btmac}
 
 if itest.s "x" == "x$cma" ; then
-	cma=320M
+	cma=320M@0x400M-0xb80M
 fi
 setenv bootargs $bootargs cma=$cma
 
