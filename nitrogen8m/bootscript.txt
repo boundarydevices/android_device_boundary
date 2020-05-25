@@ -40,7 +40,7 @@ fi;
 
 if itest.s "x1" == "x$m4enabled" ; then
 	run m4boot;
-	m4='-m4';
+	setenv m4 "-m4";
 fi
 
 if itest.s "x" == "x${board}" ; then
