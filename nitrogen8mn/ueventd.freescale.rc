@@ -10,6 +10,7 @@
 /dev/watchdog             0660   system     root
 /dev/mmcblk0rpmb          0600   system     system
 /dev/trusty-ipc-dev0      0660   system     drmrpc
+/dev/gpiochip*            0660   system     system
 
 # partitions properties
 /dev/block/platform/30b50000\.usdhc/by-name/frp 0600   system     system
