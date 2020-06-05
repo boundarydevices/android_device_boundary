@@ -8,3 +8,5 @@ type diag_device, dev_type, mlstrustedobject;
 type sysfs_block_devices, sysfs_type, fs_type;
 type mmc_rpmb_char_device, dev_type;
 type latency_device, dev_type;
+type sysfs_gpio, sysfs_type, fs_type;
+type gpio_device, dev_type;

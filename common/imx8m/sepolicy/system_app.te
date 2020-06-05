@@ -15,6 +15,9 @@ allow system_app http_proxy_prop:property_service  { set };
 allow system_app net_dns_prop:file { read } ;
 allow system_app update_engine:binder { call transfer };
 allow system_app fs_bpf:dir { search };
+allow system_app gpio_device:chr_file rw_file_perms;
+allow system_app sysfs_gpio:file r_file_perms;
+allow system_app sysfs_gpio:dir search;
 
 set_prop(system_app, vendor_bluetooth_prop)
 get_prop(system_app, vendor_default_prop)

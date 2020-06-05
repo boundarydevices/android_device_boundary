@@ -5,6 +5,7 @@
 /dev/mxc_vpu_malone             u:object_r:video_device:s0
 /dev/mxc_hifi4                  u:object_r:audio_device:s0
 /dev/galcore                    u:object_r:gpu_device:s0
+/dev/gpiochip[0-9]*             u:object_r:gpio_device:s0
 /dev/imxdpu                     u:object_r:gpu_device:s0
 /dev/caam_kb                    u:object_r:caam_device:s0
 /dev/v4l-subdev[0-9]*           u:object_r:video_device:s0
