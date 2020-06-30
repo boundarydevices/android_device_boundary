@@ -8,22 +8,24 @@ if ! [ -d $OUT ]; then
    exit 1;
 fi
 
-VID=0x0525
-fastboot -i $VID devices | grep fastboot > /dev/null
-if ! [ $? -eq 0 ] ; then VID=0x3016; fi
+OPT="-i 0x0525"
+fastboot $OPT devices | grep fastboot > /dev/null
+if ! [ $? -eq 0 ] ; then OPT="-i 0x3016"; fi
+fastboot $OPT devices | grep fastboot > /dev/null
+if ! [ $? -eq 0 ] ; then OPT=""; fi
 
-fastboot -i $VID flash gpt $OUT/gpt.img
+fastboot $OPT flash gpt $OUT/gpt.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash gpt.img"; exit 1; fi
-fastboot -i $VID flash boot $OUT/boot.img
+fastboot $OPT flash boot $OUT/boot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash boot.img"; exit 1; fi
-fastboot -i $VID flash recovery $OUT/recovery.img
+fastboot $OPT flash recovery $OUT/recovery.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash recovery.img"; exit 1; fi
-fastboot -i $VID flash system $OUT/system.img
+fastboot $OPT flash system $OUT/system.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash system.img"; exit 1; fi
-fastboot -i $VID flash cache $OUT/cache.img
+fastboot $OPT flash cache $OUT/cache.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
-fastboot -i $VID flash vendor $OUT/vendor.img
+fastboot $OPT flash vendor $OUT/vendor.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vendor.img"; exit 1; fi
-fastboot -i $VID flash data $OUT/userdata.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash userdata.img"; exit 1; fi
-fastboot -i $VID continue
+fastboot $OPT erase data
+if ! [ $? -eq 0 ] ; then echo "Failed to erase data"; exit 1; fi
+fastboot $OPT continue
