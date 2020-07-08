@@ -163,8 +163,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 BOARD_CUSTOM_BT_CONFIG := device/boundary/nit6xlite/libbt_vnd_nit6xlite.conf
 
 # Misc packages
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
 	su
+endif
 
 # GPU packages
 PRODUCT_PACKAGES += \
