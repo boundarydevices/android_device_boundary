@@ -133,7 +133,7 @@ on early-boot
     # enlarge media max memory size to 3G.
     setprop ro.media.maxmem 3221225471
 
-    setprop wifi.direct.interface p2p-dev-wlan0
+    setprop wifi.direct.interface p2p0
     start vendor.wifi_hal_legacy
 
 on boot
