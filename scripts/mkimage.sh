@@ -1,137 +1,89 @@
 #!/bin/bash
 if [ $# -lt 2 ]; then
-	echo "Usage: $0 imgfilename sizeMiB [product=nitrogen6x]"
+	echo "Usage: $0 imgfilename sizeMiB [product]"
 	exit -1 ;
-fi
-
-if ! hash udisks 2> /dev/null; then
-	if ! hash udisksctl 2> /dev/null; then
-		echo "This script requires udisks or udisks2 to be installed"
-		exit -1
-	else
-		mount="udisksctl mount -b";
-	fi
-else
-	mount="udisks --mount";
 fi
 
 outfilename=$1
 outsizemb=$2
+tmpfile=tmpfile
 
 if [ $# -gt 2 ]; then
-   product=$3;
+	product=$3;
 else
-   product=nitrogen6x;
+	product=nitrogen8m;
 fi
 
-if ! [ -d out/target/product/$product/system ]; then
-   echo "Missing out/target/product/$product/system";
-   exit 1;
+if [ -z "$OUT" ]; then OUT=out/target/product/$product; fi
+if ! [ -d $OUT ]; then
+	echo "Missing $OUT";
+	exit 1;
 fi
 
 if [ -e "$outfilename" ]; then
-   echo "$outfilename already exists... bailing out";
-   # exit 1;
+	echo "$outfilename already exists... bailing out";
+	exit 1;
 else
-   echo "---------build SD card image $outfilename of size ${outsizemb}MiB for product $product";
-   dd if=/dev/zero bs=1M count=$outsizemb of=$outfilename
+	dd if=/dev/zero bs=1M count=$outsizemb of=$tmpfile;
 fi
+echo "---------build SD card image $outfilename of size ${outsizemb}MiB for product $product";
 
 SCRIPT_DIR=`dirname $0`
 source $SCRIPT_DIR/partitions.inc
 
 sudo parted -a optimal \
--s ${outfilename} \
-unit MiB \
-mklabel gpt \
-$MKPART_COMMAND \
-print
+	-s ${tmpfile} \
+	unit MiB \
+	mklabel gpt \
+	$MKPART_COMMAND \
+	print
 
-setuploop(){
-      path=$1;
-      partnum=$2;
-      parts=`fdisk -l $path | grep ^$path | sed s/$path// | grep ^$partnum | sed 's/\\*//'`;
-      starts=`echo $parts | sed 's/*//' | awk '{print $2}'`;
-      startb=`expr $starts \* 512`;
-      ends=`echo $parts | awk '{print $3}'`;
-      endb=`expr \( $ends \+ 1 \) \* 512`;
-      sizeb=`expr $endb - $startb`;
-      loopdev=`sudo losetup -f`;
-      sudo losetup -o $startb --sizelimit $sizeb $loopdev $path
-      export loopdev;
-      echo "$path: $loopdev: $sizeb bytes";
+setuploop() {
+	path=$1;
+	partnum=$2;
+	parts=`fdisk -l $path | grep ^$path | sed s/$path// | grep ^$partnum | sed 's/\\*//'`;
+	starts=`echo $parts | sed 's/*//' | awk '{print $2}'`;
+	startb=`expr $starts \* 512`;
+	ends=`echo $parts | awk '{print $3}'`;
+	endb=`expr \( $ends \+ 1 \) \* 512`;
+	sizeb=`expr $endb - $startb`;
+	loopdev=`sudo losetup -f`;
+	sudo losetup -o $startb --sizelimit $sizeb $loopdev $path
+	if [ $? -ne 0 ] ; then
+		echo "failed to setup loop for part $partnum"
+		exit 1
+	fi
+	export loopdev;
+	echo "$path: $loopdev: $sizeb bytes";
 }
 
-setuploop $outfilename 1
-sudo mkfs.ext4 -L boot $loopdev
-$mount $loopdev
-mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
-if [ "$mountpoint" == "" ]; then
-	echo "error mountpoint not found"
-	exit 1
-fi
-if [ -d $mountpoint ]; then
-   sudo cp -rvf out/target/product/$product/boot/* $mountpoint/
-fi
-sudo umount $loopdev
-sudo losetup -d $loopdev
+flashpart() {
+	part_index=$1
+	part_img=$OUT/$2
+	echo "flashing $part_img to partion #${part_index}..."
+	setuploop $tmpfile $part_index
+	if [ ! -e $part_img ]; then
+		echo "partition $part_img doesn't exist"
+		exit 1
+	fi
+	file $part_img | grep sparse > /dev/null
+	if [ $? -eq 0 ] ; then
+		sudo simg2img $part_img $loopdev
+	else
+		sudo dd if=$part_img of=$loopdev bs=1M
+	fi
+	sync
+	sudo losetup -d $loopdev
+}
 
-setuploop $outfilename 2
-sudo mkfs.ext4 -L recovery $loopdev
-$mount $loopdev
-mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
-if [ "$mountpoint" == "" ]; then
-	echo "error mountpoint not found"
-	exit 1
-fi
-if [ -d $mountpoint ]; then
-   sudo cp -rvf out/target/product/$product/boot/* $mountpoint/
-   sudo cp -rfv out/target/product/$product/uramdisk-recovery.img $mountpoint/uramdisk.img
-fi
-sudo umount $loopdev
-sudo losetup -d $loopdev
+flashpart 1 preboot.img
+flashpart 2 dtbo.img
+flashpart 3 boot.img
+flashpart 4 recovery.img
+flashpart 5 system.img
+flashpart 6 cache.img
+flashpart 10 vendor.img
+flashpart 12 vbmeta.img
 
-setuploop $outfilename 10
-sudo mkfs.ext4 -L data $loopdev
-$mount $loopdev
-mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
-if [ "$mountpoint" == "" ]; then
-	echo "error mountpoint not found"
-	exit 1
-fi
-if [ -d $mountpoint ]; then
-   sudo cp -rvf out/target/product/$product/data/* $mountpoint/
-fi
-sudo umount $loopdev
-sudo losetup -d $loopdev
-
-setuploop $outfilename 3
-# Check whether system image is sparse or not
-system_img=out/target/product/$product/system.img
-file $system_img | grep sparse > /dev/null
-if [ $? -eq 0 ] ; then
-   sudo ./out/host/linux-x86/bin/simg2img $system_img $loopdev
-else
-   sudo dd if=$system_img of=$loopdev bs=1M
-fi
-sudo e2fsck -f $loopdev
-sudo losetup -d $loopdev
-
-setuploop $outfilename 4
-sudo mkfs.ext4 -L cache $loopdev
-sudo losetup -d $loopdev
-
-setuploop $outfilename 5
-sudo mkfs.ext4 -L vendor $loopdev
-$mount $loopdev
-mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
-if [ "$mountpoint" == "" ]; then
-	echo "error mountpoint not found"
-	exit 1
-fi
-if [ -d $mountpoint ]; then
-   sudo cp -rvf out/target/product/$product/vendor/* $mountpoint/
-fi
-sudo umount $loopdev
-sudo losetup -d $loopdev
-
+# trim final image without userdata
+dd if=$tmpfile of=$outfilename bs=1M count=$(( $DATA_PART_BEGIN + 1 )) && sync && rm $tmpfile
