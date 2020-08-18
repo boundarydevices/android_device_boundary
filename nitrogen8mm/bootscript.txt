@@ -106,6 +106,7 @@ elif itest.s "xusb" == "x$devtype" ; then
 	bootdev=38200000.usb/ci_hdrc.1
 fi
 setenv bootargs $bootargs androidboot.bootdevice=$bootdev
+fdt set /firmware/android/fstab/vendor dev /dev/block/platform/${bootdev}/by-name/vendor
 
 if itest.s "x" != "x$selinux" ; then
 	setenv bootargs $bootargs androidboot.selinux=$selinux
