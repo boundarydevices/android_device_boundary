@@ -3,7 +3,7 @@ UBOOT_POST_PROCESS := true
 
 TARGET_BOOTLOADER_CONFIG := imx8mq:nitrogen8m_defconfig
 
-TARGET_BOOTLOADER_PREBUILT := nitrogen8m nitrogen8m_3g nitrogen8m_4g nitrogen8m_2g_dp nitrogen8m_som_2g nitrogen8m_som_4g
+TARGET_BOOTLOADER_PREBUILT := nitrogen8m nitrogen8m_3g nitrogen8m_4g nitrogen8m_2g_dp nitrogen8m_som_2g nitrogen8m_som_4g bio_4g
 
 TARGET_KERNEL_DEFCONFIG := boundary_android_defconfig
 
