@@ -1,26 +1,26 @@
 #sd boot
-/dev/block/platform/30b50000\.usdhc/by-name/dtbo        u:object_r:dtbo_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/boot        u:object_r:boot_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/system      u:object_r:system_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/vendor      u:object_r:system_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/cache       u:object_r:cache_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/misc        u:object_r:misc_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/metadata    u:object_r:metadata_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/frp u:object_r:frp_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/userdata    u:object_r:userdata_block_device:s0
-/dev/block/platform/30b50000\.usdhc/by-name/vbmeta    u:object_r:vbmeta_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/dtbo        u:object_r:dtbo_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/boot        u:object_r:boot_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/system      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/vendor      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/cache       u:object_r:cache_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/frp         u:object_r:frp_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/userdata    u:object_r:userdata_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/vbmeta      u:object_r:vbmeta_block_device:s0
 
 #emmc boot
-/dev/block/platform/30b60000\.usdhc/by-name/dtbo        u:object_r:dtbo_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/boot        u:object_r:boot_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/system      u:object_r:system_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/vendor      u:object_r:system_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/cache       u:object_r:cache_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/misc        u:object_r:misc_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/metadata    u:object_r:metadata_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/frp u:object_r:frp_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/userdata    u:object_r:userdata_block_device:s0
-/dev/block/platform/30b60000\.usdhc/by-name/vbmeta    u:object_r:vbmeta_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/dtbo        u:object_r:dtbo_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/boot        u:object_r:boot_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/system      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/vendor      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/cache       u:object_r:cache_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/frp         u:object_r:frp_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/userdata    u:object_r:userdata_block_device:s0
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/vbmeta      u:object_r:vbmeta_block_device:s0
 
 #peripheral
 /vendor/bin/magd                u:object_r:sensors_exec:s0
@@ -36,3 +36,8 @@
 
 #Thermal HAL service
 /vendor/bin/hw/android\.hardware\.thermal@2\.0-service.imx         u:object_r:hal_thermal_default_exec:s0
+
+/vendor/bin/hw/android\.hardware\.media\.c2@1\.0-service    u:object_r:mediacodec_exec:s0
+
+#Neural Network HAL service
+/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.2-service-vsi-npu-server      u:object_r:hal_neuralnetworks_imx_exec:s0

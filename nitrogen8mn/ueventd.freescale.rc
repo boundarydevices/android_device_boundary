@@ -10,7 +10,7 @@
 /dev/galcore              0666   system     graphics
 /dev/graphics/fb0         0660   system     graphics
 /dev/watchdog             0660   system     root
-/dev/mmcblk0rpmb          0600   system     system
+/dev/mmcblk2rpmb          0600   system     system
 /dev/trusty-ipc-dev0      0660   system     drmrpc
 /dev/gpiochip*            0660   system     system
 
@@ -35,6 +35,7 @@
 /sys/devices/virtual/input/input*   position    0660  root   input
 /sys/devices/virtual/thermal/thermal_zone* trip_point_0_temp 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_temp 0660 system system
+/sys/devices/virtual/thermal/thermal_zone* trip_point_2_temp 0660 system system
 
 /sys/devices/virtual/thermal/thermal_zone* trip_point_0_hyst 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_hyst 0660 system system

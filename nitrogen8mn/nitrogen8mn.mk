@@ -4,7 +4,7 @@ IMX_DEVICE_PATH := device/boundary/nitrogen8mn
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
 
 -include device/boundary/common/imx_path/ImxPathConfig.mk
-$(call inherit-product, device/boundary/common/imx8m/ProductConfigCommon.mk)
+include device/boundary/common/imx8m/ProductConfigCommon.mk
 
 # Overrides
 PRODUCT_NAME := nitrogen8mn
@@ -41,6 +41,12 @@ PRODUCT_COPY_FILES += \
     device/boundary/common/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     device/boundary/common/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
+# Audio card json
+PRODUCT_COPY_FILES += \
+    device/fsl/common/audio-json/wm8960_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/wm8960_config.json \
+    device/fsl/common/audio-json/spdif_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/spdif_config.json \
+    device/fsl/common/audio-json/micfil_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/micfil_config.json \
+
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_COPY_FILES += \
     device/boundary/common/security/rpmb_key_test.bin:rpmb_key_test.bin \
@@ -68,6 +74,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
     frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml \
     frameworks/native/data/etc/android.software.backup.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.backup.xml \
     frameworks/native/data/etc/android.software.device_admin.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_admin.xml \
@@ -95,7 +102,7 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 PRODUCT_CHARACTERISTICS := tablet
 
-PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi xhdpi
+PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi xhdpi xxhdpi
 
 # GPU openCL g2d
 PRODUCT_COPY_FILES += \
@@ -119,20 +126,38 @@ PRODUCT_PACKAGES += \
     libEGL_VIVANTE \
     libGLESv1_CM_VIVANTE \
     libGLESv2_VIVANTE \
-    gralloc_viv.imx8 \
+    gralloc_viv.imx \
     libGAL \
     libGLSLC \
     libVSC \
     libgpuhelper \
     libSPIRV_viv \
     libvulkan_VIVANTE \
-    vulkan.imx8 \
+    vulkan.imx \
     libCLC \
     libLLVM_viv \
     libOpenCL \
     libg2d-opencl \
     libg2d-viv \
-    gatekeeper.imx8
+    libOpenVX \
+    libOpenVXU \
+    libNNVXCBinary-evis \
+    libNNVXCBinary-evis2 \
+    libNNVXCBinary-lite \
+    libOvx12VXCBinary-evis \
+    libOvx12VXCBinary-evis2 \
+    libOvx12VXCBinary-lite \
+    libNNGPUBinary-evis \
+    libNNGPUBinary-evis2 \
+    libNNGPUBinary-lite \
+    libNNGPUBinary-ulite \
+    gatekeeper.imx
+
+# Neural Network HAL and Lib
+PRODUCT_PACKAGES += \
+    libovxlib \
+    libnnrt \
+    android.hardware.neuralnetworks@1.2-service-vsi-npu-server
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@5.0-impl:32 \
@@ -202,11 +227,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.first_api_level=28
 
 PRODUCT_PACKAGES += \
-    libg1 \
-    libhantro \
-    libcodec \
-    libhantro_h1 \
-    libcodec_enc \
     DirectAudioPlayer
 
 # Add oem unlocking option in settings.
@@ -244,6 +264,19 @@ PRODUCT_PACKAGES += \
 endif
 
 IMX-DEFAULT-G2D-LIB := libg2d-opencl
+
+ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
+ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
+INSTALL_64BIT_LIBRARY := true
+endif
+-include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
+endif
+
+# imx c2 codec binary
+PRODUCT_PACKAGES += \
+    c2_component_register \
+    c2_component_register_ms \
+    c2_component_register_ra
 
 # Input configuration
 PRODUCT_COPY_FILES += \

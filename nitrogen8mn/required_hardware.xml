@@ -20,6 +20,7 @@
 <permissions>
     <!-- This is Android and fully CTS compatible.  Basically this is for CTS tests to use. -->
     <feature name="android.software.cts" />
+    <feature name="android.hardware.microphone" />
     <feature name="android.hardware.camera.any" />
     <feature name="android.software.cant_save_state" />
     <feature name="android.software.home_screen" />
