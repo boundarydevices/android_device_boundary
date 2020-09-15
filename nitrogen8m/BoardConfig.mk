@@ -26,6 +26,7 @@ SOONG_CONFIG_IMXPLUGIN += \
 SOONG_CONFIG_IMXPLUGIN_BOARD_SOC_TYPE = IMX8MQ
 SOONG_CONFIG_IMXPLUGIN_BOARD_HAVE_VPU = true
 SOONG_CONFIG_IMXPLUGIN_BOARD_VPU_TYPE = hantro
+SOONG_CONFIG_IMXPLUGIN_BOARD_VPU_ONLY = false
 
 IMX_DEVICE_PATH := device/boundary/nitrogen8m
 
@@ -33,9 +34,6 @@ IMX_DEVICE_PATH := device/boundary/nitrogen8m
 BOARD_HAVE_PREBOOTIMAGE := true
 
 include device/boundary/common/imx8m/BoardConfigCommon.mk
-ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
--include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
-endif
 
 # OTA configuration
 AB_OTA_UPDATER := false
@@ -79,6 +77,7 @@ BOARD_HAVE_BLUETOOTH_QCOM        := true
 BOARD_USE_SENSOR_FUSION := false
 
 BOARD_HAVE_USB_CAMERA := true
+BOARD_HAVE_USB_MJPEG_CAMERA := false
 
 USE_ION_ALLOCATOR := true
 USE_GPU_ALLOCATOR := false

@@ -4,7 +4,7 @@ IMX_DEVICE_PATH := device/boundary/nitrogen8m
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
 
 -include device/boundary/common/imx_path/ImxPathConfig.mk
-$(call inherit-product, device/boundary/common/imx8m/ProductConfigCommon.mk)
+include device/boundary/common/imx8m/ProductConfigCommon.mk
 
 # Overrides
 PRODUCT_NAME := nitrogen8m
@@ -36,6 +36,12 @@ PRODUCT_COPY_FILES += \
     device/boundary/common/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     device/boundary/common/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
+# Audio card json
+PRODUCT_COPY_FILES += \
+    device/fsl/common/audio-json/wm8960_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/wm8960_config.json \
+    device/fsl/common/audio-json/spdif_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/spdif_config.json \
+    device/fsl/common/audio-json/cdnhdmi_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/cdnhdmi_config.json \
+
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_COPY_FILES += \
     device/boundary/common/security/rpmb_key_test.bin:rpmb_key_test.bin \
@@ -60,6 +66,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
     frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml \
     frameworks/native/data/etc/android.software.backup.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.backup.xml \
     frameworks/native/data/etc/android.software.device_admin.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_admin.xml \
@@ -87,7 +94,7 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 PRODUCT_CHARACTERISTICS := tablet
 
-PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi xhdpi
+PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi xhdpi xxhdpi
 
 # GPU openCL g2d
 PRODUCT_COPY_FILES += \
@@ -120,14 +127,14 @@ PRODUCT_PACKAGES += \
     libEGL_VIVANTE \
     libGLESv1_CM_VIVANTE \
     libGLESv2_VIVANTE \
-    gralloc_viv.imx8 \
+    gralloc_viv.imx \
     libGAL \
     libGLSLC \
     libVSC \
     libgpuhelper \
     libSPIRV_viv \
     libvulkan_VIVANTE \
-    vulkan.imx8 \
+    vulkan.imx \
     libCLC \
     libLLVM_viv \
     libOpenCL \
@@ -136,12 +143,16 @@ PRODUCT_PACKAGES += \
     libOpenVX \
     libOpenVXU \
     libNNVXCBinary-evis \
+    libNNVXCBinary-evis2 \
     libNNVXCBinary-lite \
     libOvx12VXCBinary-evis \
+    libOvx12VXCBinary-evis2 \
     libOvx12VXCBinary-lite \
     libNNGPUBinary-evis \
+    libNNGPUBinary-evis2 \
     libNNGPUBinary-lite \
-    gatekeeper.imx8
+    libNNGPUBinary-ulite \
+    gatekeeper.imx
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@5.0-impl:32 \
@@ -242,6 +253,20 @@ PRODUCT_PACKAGES += \
     libhantro \
     libcodec
 
+# imx c2 codec binary
+PRODUCT_PACKAGES += \
+    lib_vpu_wrapper \
+    lib_imx_c2_videodec_common \
+    lib_imx_c2_videodec \
+    lib_imx_c2_vpuwrapper_dec \
+    lib_imx_c2_process \
+    lib_imx_c2_process_dummy_post \
+    c2_component_register \
+    c2_component_register_ms \
+    c2_component_register_wmv9 \
+    c2_component_register_ra \
+    c2_component_register_rv
+
 # Add oem unlocking option in settings.
 PRODUCT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/frp
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
@@ -252,6 +277,7 @@ PRODUCT_PACKAGES += \
 
 # Multi-Display launcher
 PRODUCT_PACKAGES += \
+    MultiClientInputMethod \
     MultiDisplay
 
 # Specify rollback index for bootloader and for AVB
@@ -278,6 +304,13 @@ PRODUCT_PACKAGES += \
 endif
 
 IMX-DEFAULT-G2D-LIB := libg2d-viv
+
+ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
+ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
+INSTALL_64BIT_LIBRARY := true
+endif
+-include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
+endif
 
 # Input configuration
 PRODUCT_COPY_FILES += \

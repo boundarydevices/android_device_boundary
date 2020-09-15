@@ -104,12 +104,10 @@ setenv bootargs $bootargs androidboot.dtbo_idx=${index} androidboot.keystore=sof
 
 if itest.s "xmmc" == "x$devtype" ; then
 	if itest.s "x0" == "x$devnum" ; then
-		bootdev=30b40000.usdhc
+		bootdev=soc@0/soc@0:bus@30800000/30b40000.mmc
 	elif itest.s "x1" == "x$devnum" ; then
-		bootdev=30b50000.usdhc
+		bootdev=soc@0/soc@0:bus@30800000/30b50000.mmc
 	fi
-elif itest.s "xusb" == "x$devtype" ; then
-	bootdev=38200000.usb/ci_hdrc.1
 fi
 setenv bootargs $bootargs androidboot.bootdevice=$bootdev
 fdt set /firmware/android/fstab/vendor dev /dev/block/platform/${bootdev}/by-name/vendor
@@ -121,7 +119,7 @@ fi
 if itest.s "x" != "x${primary_display}" ; then
 	setenv bootargs $bootargs androidboot.primary_display=${primary_display}
 else
-	setenv bootargs $bootargs androidboot.primary_display=imx-drm
+	setenv bootargs $bootargs androidboot.primary_display=imx-dcss
 fi
 
 if itest.s "x" != "x${tile_support}" ; then
