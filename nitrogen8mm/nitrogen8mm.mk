@@ -4,7 +4,7 @@ IMX_DEVICE_PATH := device/boundary/nitrogen8mm
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
 
 -include device/boundary/common/imx_path/ImxPathConfig.mk
-$(call inherit-product, device/boundary/common/imx8m/ProductConfigCommon.mk)
+include device/boundary/common/imx8m/ProductConfigCommon.mk
 
 # Overrides
 PRODUCT_NAME := nitrogen8mm
@@ -41,6 +41,10 @@ PRODUCT_COPY_FILES += \
     device/boundary/common/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     device/boundary/common/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
+# Audio card json
+PRODUCT_COPY_FILES += \
+    device/fsl/common/audio-json/wm8960_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/wm8960_config.json \
+
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_COPY_FILES += \
     device/boundary/common/security/rpmb_key_test.bin:rpmb_key_test.bin \
@@ -66,6 +70,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
     frameworks/native/data/etc/android.software.app_widgets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.app_widgets.xml \
     frameworks/native/data/etc/android.software.backup.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.backup.xml \
     frameworks/native/data/etc/android.software.device_admin.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_admin.xml \
@@ -113,13 +118,13 @@ PRODUCT_PACKAGES += \
     libEGL_VIVANTE \
     libGLESv1_CM_VIVANTE \
     libGLESv2_VIVANTE \
-    gralloc_viv.imx8 \
+    gralloc_viv.imx \
     libGAL \
     libGLSLC \
     libVSC \
     libg2d-viv \
     libgpuhelper \
-    gatekeeper.imx8
+    gatekeeper.imx
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@5.0-impl:32 \
@@ -196,6 +201,22 @@ PRODUCT_PACKAGES += \
     libcodec_enc \
     DirectAudioPlayer
 
+# imx c2 codec binary
+PRODUCT_PACKAGES += \
+    lib_vpu_wrapper \
+    lib_imx_c2_videodec \
+    lib_imx_c2_vpuwrapper_dec \
+    lib_imx_c2_videodec_common \
+    lib_imx_c2_videoenc_common \
+    lib_imx_c2_vpuwrapper_enc \
+    lib_imx_c2_videoenc \
+    lib_imx_c2_process \
+    lib_imx_c2_process_dummy_post \
+    lib_imx_c2_process_g2d_pre \
+    c2_component_register \
+    c2_component_register_ms \
+    c2_component_register_ra
+
 # Add oem unlocking option in settings.
 PRODUCT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/frp
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
@@ -244,6 +265,13 @@ PRODUCT_PACKAGES += \
 endif
 
 IMX-DEFAULT-G2D-LIB := libg2d-viv
+
+ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
+ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
+INSTALL_64BIT_LIBRARY := true
+endif
+-include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
+endif
 
 # Input configuration
 PRODUCT_COPY_FILES += \
