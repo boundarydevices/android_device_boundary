@@ -45,6 +45,7 @@ VS100COMNTOOLS                      u:object_r:public_vendor_default_prop:s0
 VS80COMNTOOLS                       u:object_r:public_vendor_default_prop:s0
 VS90COMNTOOLS                       u:object_r:public_vendor_default_prop:s0
 VSC_OPTION                          u:object_r:public_vendor_default_prop:s0
+G2D_YUV_COLOR_MODE                  u:object_r:public_vendor_default_prop:s0
 
 # openvx and nn
 VIV_MEMORY_PROFILE                        u:object_r:public_vendor_default_prop:s0

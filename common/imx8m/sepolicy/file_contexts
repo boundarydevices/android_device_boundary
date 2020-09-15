@@ -2,6 +2,7 @@
 /dev/mxc_hdmi                   u:object_r:video_device:s0
 /dev/mxc_hantro                 u:object_r:video_device:s0
 /dev/mxc_hantro_h1              u:object_r:video_device:s0
+/dev/mxc_hantro_vc8000e         u:object_r:video_device:s0
 /dev/mxc_vpu_malone             u:object_r:video_device:s0
 /dev/mxc_hifi4                  u:object_r:audio_device:s0
 /dev/galcore                    u:object_r:gpu_device:s0
@@ -28,7 +29,7 @@
 ###############################################
 # same-process HAL files and their dependencies
 #
-/vendor/lib(64)?/hw/gralloc\.imx8\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/gralloc\.imx\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libfsldisplay\.so          u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/nxp.hardware.display@1.0\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libedid\.so                u:object_r:same_process_hal_file:s0
@@ -38,8 +39,8 @@
 /vendor/lib(64)?/libVSC\.so                 u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libGAL\.so                 u:object_r:same_process_hal_file:s0
 
-/vendor/lib(64)?/hw/vulkan\.imx8\.so        u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/hw/gralloc_viv\.imx8\.so   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/vulkan\.imx\.so        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/gralloc_viv\.imx\.so   u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libdrm_vivante\.so         u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libvulkan_VIVANTE\.so      u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libSPIRV_viv\.so           u:object_r:same_process_hal_file:s0
@@ -64,7 +65,7 @@
 /vendor/lib(64)?/lib_ogg_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/lib_rm_parser_arm11_elinux\.3\.0\.so        u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/lib_wav_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/extractors/libfslextractor\.so              u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/extractors/libimxextractor\.so              u:object_r:same_process_hal_file:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.keymaster@3\.0-service.trusty u:object_r:hal_keymaster_default_exec:s0
 
 

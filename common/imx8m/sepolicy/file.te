@@ -1,3 +1,7 @@
 type mediadrm_vendor_data_file, file_type, data_file_type;
 type debugfs_dma, debugfs_type, fs_type;
 type debugfs_sw_sync, debugfs_type, fs_type;
+type sysfs_soc, sysfs_type, fs_type;
+type binderfs, fs_type;
+type binderfs_logs, fs_type;
+type binderfs_logs_proc, fs_type;

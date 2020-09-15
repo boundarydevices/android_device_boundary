@@ -2,6 +2,8 @@ allow vendor_init file_contexts_file:file { map };
 allow vendor_init cache_file:lnk_file { getattr read };
 allow vendor_init sysfs_block_devices:file { open write setattr };
 allow vendor_init proc_sysrq:file { write };
+allow vendor_init device:file { create write };
+allow vendor_init device:dir { setattr search };
 
 set_prop(vendor_init, http_proxy_prop)
 set_prop(vendor_init, wc_prop)

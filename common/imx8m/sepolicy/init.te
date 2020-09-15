@@ -20,3 +20,7 @@ allow init sysfs_dm:file { write open };
 allow init sysfs_devices_system_cpu:file { write };
 allow init sysfs_block_devices:file { open write setattr };
 allow init rootfs:lnk_file { setattr };
+allow init binderfs:dir { setattr };
+allow init binder_device:chr_file { setattr };
+allow init vndbinder_device:chr_file { setattr };
+allow init hwbinder_device:chr_file { setattr };

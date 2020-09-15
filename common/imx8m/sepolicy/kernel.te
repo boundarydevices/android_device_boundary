@@ -3,6 +3,7 @@ allow kernel fuse:file rw_file_perms;
 allow kernel fuse:dir rw_dir_perms;
 allow kernel device:dir  { add_name write create remove_name rmdir };
 allow kernel device:chr_file  { create setattr getattr unlink };
+allow kernel sysfs:blk_file  { create setattr };
 allow kernel sysfs_devices_system_cpu:file  { write };
 allow kernel mediaprovider:fd use;
 allow kernel vendor_file:file { read open map };

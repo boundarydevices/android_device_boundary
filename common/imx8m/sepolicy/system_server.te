@@ -4,7 +4,7 @@ get_prop(system_server, vendor_default_prop)
 
 allow system_server unlabeled:dir {relabelfrom rw_dir_perms};
 allow system_server unlabeled:sock_file {link unlink rw_file_perms};
-allow system_server system_data_file:file {relabelto rw_file_perms};
+allow system_server system_data_file:file {read relabelto rw_file_perms};
 allow system_server system_data_file:dir {relabelto rw_dir_perms};
 allow system_server kernel:system { syslog_read };
 allow system_server wifi_log_prop:property_service { set };

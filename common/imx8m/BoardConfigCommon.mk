@@ -9,7 +9,8 @@ TARGET_GRALLOC_VERSION \
 HAVE_FSL_IMX_IPU \
 PREBUILT_FSL_IMX_GPU \
 BOARD_SOC_TYPE \
-PRODUCT_MANUFACTURER
+PRODUCT_MANUFACTURER \
+BOARD_VPU_ONLY
 
 SOONG_CONFIG_IMXPLUGIN_BOARD_PLATFORM = imx8
 SOONG_CONFIG_IMXPLUGIN_NUM_FRAMEBUFFER_SURFACE_BUFFERS = 3
@@ -25,7 +26,7 @@ SOONG_CONFIG_IMXPLUGIN_PRODUCT_MANUFACTURER = freescale
 # Product-specific compile-time definitions.
 #
 
-TARGET_BOARD_PLATFORM := imx8
+TARGET_BOARD_PLATFORM := imx
 
 ifeq ($(IMX8_BUILD_32BIT_ROOTFS),true)
 TARGET_ARCH := arm
@@ -56,10 +57,9 @@ BOARD_SOC_CLASS := IMX8
 
 BOARD_KERNEL_OFFSET := 0x00080000
 BOARD_RAMDISK_OFFSET := 0x03200000
-BOARD_SECOND_OFFSET := 0x03000000
 BOARD_BOOTIMG_HEADER_VERSION := 1
 
-BOARD_MKBOOTIMG_ARGS = --base $(BOARD_KERNEL_BASE) --second_offset $(BOARD_SECOND_OFFSET) --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS = --base $(BOARD_KERNEL_BASE) --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
 #BOARD_USES_GENERIC_AUDIO := true
 BOARD_USES_ALSA_AUDIO := true
@@ -68,6 +68,7 @@ USE_CAMERA_STUB := false
 
 BOARD_HAVE_IMX_CAMERA := true
 BOARD_HAVE_USB_CAMERA := false
+BOARD_HAVE_USB_MJPEG_CAMERA := false
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
@@ -78,7 +79,6 @@ ifeq ($(HOST_OS),linux)
    endif
 endif
 
-PREBUILT_FSL_IMX_CODEC := true
 PREBUILT_FSL_IMX_OMX := false
 PREBUILT_FSL_IMX_GPU := true
 SOONG_CONFIG_IMXPLUGIN_PREBUILT_FSL_IMX_GPU = true
@@ -104,9 +104,9 @@ BOARD_GPU_LIBDRM := libdrm_imx
 
 AB_OTA_UPDATER := true
 ifeq ($(IMX_NO_PRODUCT_PARTITION),true)
-AB_OTA_PARTITIONS := dtbo boot system vendor vbmeta
+AB_OTA_PARTITIONS += dtbo boot system vendor vbmeta
 else
-AB_OTA_PARTITIONS := dtbo boot system vendor vbmeta product
+AB_OTA_PARTITIONS += dtbo boot system vendor vbmeta product
 endif
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 TARGET_NO_RECOVERY := true
@@ -147,7 +147,7 @@ endif
 KERNEL_OUT ?= $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/obj/KERNEL_OBJ
 
 PRODUCT_COPY_FILES += \
-    $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/obj/KERNEL_OBJ/arch/$(TARGET_KERNEL_ARCH)/boot/$(KERNEL_NAME):kernel
+    $(KERNEL_OUT)/arch/$(TARGET_KERNEL_ARCH)/boot/$(KERNEL_NAME):kernel
 
 
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_ms_codec/BoardConfig.mk
