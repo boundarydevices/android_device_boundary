@@ -1,0 +1,15 @@
+{
+  "driver_name": "ak5558-audio",
+  "supported_in_devices": ["builtin_mic"],
+
+  "init_ctl": [
+    {"name": "AK5558 Ch1 Enable", "type": "int", "val": 1},
+    {"name": "AK5558 Ch2 Enable", "type": "int", "val": 1},
+    {"name": "AK5558 Ch3 Enable", "type": "int", "val": 1},
+    {"name": "AK5558 Ch4 Enable", "type": "int", "val": 1},
+    {"name": "AK5558 Ch5 Enable", "type": "int", "val": 1},
+    {"name": "AK5558 Ch6 Enable", "type": "int", "val": 1},
+    {"name": "AK5558 Ch7 Enable", "type": "int", "val": 1},
+    {"name": "AK5558 Ch8 Enable", "type": "int", "val": 1}
+  ]
+}

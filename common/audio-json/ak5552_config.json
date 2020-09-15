@@ -1,0 +1,4 @@
+{
+  "driver_name": "ak5552-audio",
+  "supported_in_devices": ["builtin_mic"]
+}

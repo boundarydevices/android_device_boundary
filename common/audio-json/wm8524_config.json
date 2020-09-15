@@ -1,0 +1,4 @@
+{
+  "driver_name": "wm8524-audio",
+  "supported_out_devices": ["speaker"]
+}

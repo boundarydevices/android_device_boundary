@@ -1,0 +1,4 @@
+{
+  "driver_name": "imx-spdif",
+  "supported_in_devices": ["aux_digital"]
+}

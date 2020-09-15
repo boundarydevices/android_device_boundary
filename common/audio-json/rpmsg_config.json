@@ -1,0 +1,22 @@
+{
+  "driver_name": "rpmsg-audio",
+  "supported_out_devices": ["speaker", "wired_headphone", "wired_headset"],
+  "supported_in_devices": ["builtin_mic", "wired_headset"],
+  "out_period_size": 1024,
+  "out_period_count": 4,
+
+  "speaker_ctl": [
+    {"name": "Left Output Mixer PCM Playback Switch", "type": "int", "val": 1},
+    {"name": "Right Output Mixer PCM Playback Switch", "type": "int", "val": 1},
+    {"name": "Playback Volume", "type": "int", "val": 230},
+    {"name": "Speaker Playback Volume", "type": "int", "val": 120},
+    {"name": "Headphone Playback Volume", "type": "int", "val": 120}
+  ],
+
+  "builtin_mic_ctl": [
+    {"name": "ALC Function", "type": "int", "val": 3},
+    {"name": "Left Input Mixer Boost Switch", "type": "int", "val": 1},
+    {"name": "ADC PCM Capture Volume", "type": "int", "val": 230},
+    {"name": "Capture Volume", "type": "int", "val": 60}
+  ]
+}

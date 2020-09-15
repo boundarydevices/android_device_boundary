@@ -1,0 +1,22 @@
+{
+  "driver_name": "ak4458-audio",
+  "supported_out_devices": ["wired_headphone"],
+  "support_dsd": 1,
+  "support_multi_chn": 1,
+
+  "init_ctl": [
+    {"name": "0 DAC1 Playback Volume", "type": "int", "val": 172},
+    {"name": "0 DAC2 Playback Volume", "type": "int", "val": 172},
+    {"name": "0 DAC3 Playback Volume", "type": "int", "val": 172},
+    {"name": "0 DAC4 Playback Volume", "type": "int", "val": 172}
+  ],
+
+  "out_volume_min": 170,
+  "out_volume_max": 255,
+  "out_volume_ctl": [
+    "0 DAC1 Playback Volume",
+    "0 DAC2 Playback Volume",
+    "0 DAC3 Playback Volume",
+    "0 DAC4 Playback Volume"
+  ]
+}

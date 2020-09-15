@@ -1,0 +1,5 @@
+{
+  "driver_name": "audio-hdmi",
+  "supported_out_devices": ["hdmi"],
+  "is_hdmi_card": 1
+}

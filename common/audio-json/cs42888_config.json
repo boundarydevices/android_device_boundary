@@ -1,0 +1,11 @@
+{
+  "driver_name": "cs42888-audio",
+  "bus_name": "bus0_media_out",
+  "supported_out_devices": ["speaker", "bus"],
+  "supported_in_devices": ["builtin_mic"],
+  "support_multi_chn": 1,
+
+  "out_volume_ctl": [
+    "DAC1 Playback Volume"
+  ]
+}

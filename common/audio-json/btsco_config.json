@@ -1,0 +1,6 @@
+{
+  "driver_name": "bt-sco-audio",
+  "supported_out_devices": ["bluetooth_sco", "bluetooth_sco_headset", "bluetooth_sco_carkit"],
+  "supported_in_devices": ["bluetooth_sco_headset"],
+  "support_hfp": 1
+}
