@@ -17,3 +17,9 @@ genfscon sysfs /devices/soc0   u:object_r:sysfs_soc:s0
 genfscon sysfs /devices/platform/soc@0/soc@0:bus@30800000/30a40000.i2c/i2c-2/2-003d/extcon u:object_r:sysfs_extcon:s0
 genfscon debugfs /dma_buf u:object_r:debugfs_dma:s0
 genfscon debugfs /sync/sw_sync u:object_r:debugfs_sw_sync:s0
+genfscon binder /binder u:object_r:binder_device:s0
+genfscon binder /hwbinder u:object_r:hwbinder_device:s0
+genfscon binder /vndbinder u:object_r:vndbinder_device:s0
+genfscon binder /binder_logs u:object_r:binderfs_logs:s0
+genfscon binder /binder_logs/proc u:object_r:binderfs_logs_proc:s0
+genfscon binder / u:object_r:binderfs:s0
