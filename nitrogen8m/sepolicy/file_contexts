@@ -27,6 +27,8 @@
 /vendor/bin/fsl_sensor_fusion   u:object_r:sensors_exec:s0
 /dev/mma8x5x                    u:object_r:sensors_device:s0
 /dev/ttymxc[0-9]*               u:object_r:tty_device:s0
+/dev/ttyUSB[0-9]*               u:object_r:tty_device:s0
+/dev/ttyACM[0-9]*               u:object_r:tty_device:s0
 /dev/FreescaleAccelerometer     u:object_r:sensors_device:s0
 /dev/FreescaleMagnetometer      u:object_r:sensors_device:s0
 /dev/FreescaleGyroscope         u:object_r:sensors_device:s0
