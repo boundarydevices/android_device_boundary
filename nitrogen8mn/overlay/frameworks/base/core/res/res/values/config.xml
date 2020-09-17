@@ -27,5 +27,7 @@
         <item>/dev/ttymxc3</item>
         <item>/dev/ttyUSB0</item>
         <item>/dev/ttyUSB1</item>
+        <item>/dev/ttyACM0</item>
+        <item>/dev/ttyACM1</item>
     </string-array>
 </resources>
