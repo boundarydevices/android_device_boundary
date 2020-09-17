@@ -1,5 +1,7 @@
 /dev/ttymxc*              0660   system     system
 /dev/ttymxc0              0660   bluetooth  bluetooth
+/dev/ttyUSB*              0660   system     system
+/dev/ttyACM*              0660   system     system
 /dev/snd/*                0660   system     audio
 /dev/video*               0660   system     camera
 /dev/v4l*                 0660   system     camera
