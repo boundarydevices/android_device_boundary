@@ -88,8 +88,17 @@ if itest.s "x" != "x${cmd_custom}" ; then
 fi
 
 # ------------------- Displays detection
+if itest.s "x" != "x${cmd_hdmi}" ; then
+	run cmd_hdmi
+fi
 if itest.s "x" != "x${cmd_mipi}" ; then
 	run cmd_mipi
+fi
+if itest.s "x" != "x${cmd_lvds}" ; then
+	run cmd_lvds
+fi
+if itest.s "x" != "x${cmd_lvds2}" ; then
+	run cmd_lvds2
 fi
 
 setenv bootargs $bootargs console=${console},115200 androidboot.mode=${bootmode} androidboot.soc_type=imx8mp
