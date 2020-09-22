@@ -15,9 +15,9 @@
 /dev/gpiochip*            0660   system     system
 
 # partitions properties
-/dev/block/platform/30b40000\.usdhc/by-name/frp 0600   system     system
-/dev/block/platform/30b50000\.usdhc/by-name/frp 0600   system     system
-/dev/block/platform/30b60000\.usdhc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b40000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/frp 0600   system     system
 
 # sysfs properties
 /sys/devices/platform/backlight_*   brightness  0660  system system

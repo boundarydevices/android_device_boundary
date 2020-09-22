@@ -1,26 +1,26 @@
 #sd boot
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/dtbo        u:object_r:dtbo_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/boot        u:object_r:boot_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/system      u:object_r:system_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/vendor      u:object_r:system_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/cache       u:object_r:cache_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/misc        u:object_r:misc_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/metadata    u:object_r:metadata_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/frp         u:object_r:frp_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/userdata    u:object_r:userdata_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/vbmeta      u:object_r:vbmeta_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/dtbo        u:object_r:dtbo_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/boot        u:object_r:boot_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/system      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/vendor      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/cache       u:object_r:cache_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/frp         u:object_r:frp_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/userdata    u:object_r:userdata_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/vbmeta      u:object_r:vbmeta_block_device:s0
 
 #emmc boot
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/dtbo        u:object_r:dtbo_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/boot        u:object_r:boot_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/system      u:object_r:system_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/vendor      u:object_r:system_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/cache       u:object_r:cache_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/misc        u:object_r:misc_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/metadata    u:object_r:metadata_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/frp         u:object_r:frp_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/userdata    u:object_r:userdata_block_device:s0
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b60000\.mmc/by-name/vbmeta      u:object_r:vbmeta_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/dtbo        u:object_r:dtbo_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/boot        u:object_r:boot_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/system      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/vendor      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/cache       u:object_r:cache_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/frp         u:object_r:frp_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/userdata    u:object_r:userdata_block_device:s0
+/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/vbmeta      u:object_r:vbmeta_block_device:s0
 
 #peripheral
 /vendor/bin/magd                u:object_r:sensors_exec:s0
