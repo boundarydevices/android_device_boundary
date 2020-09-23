@@ -37,7 +37,7 @@ DTB_PATH := $(PRODUCT_OUT)/obj/KERNEL_OBJ/arch/$(TARGET_KERNEL_ARCH)/boot/dts/$(
 DTBS := $(foreach dtb,$(TARGET_BOARD_DTS_CONFIG),$(addprefix $(DTB_PATH),$(shell echo $(dtb) | cut -d':' -f2)))
 
 $(BOARD_PREBUILT_DTBOIMAGE): $(KERNEL_BIN) $(DTS_SRC) | $(MKDTIMG) $(AVBTOOL)
-	$(hide) echo "Building $(KERNEL_ARCH) dtbo ..."
+	$(hide) echo "Building $(TARGET_KERNEL_ARCH) dtbo ..."
 	$(MKDTIMG) create $@ $(DTBS);
 	$(AVBTOOL) add_hash_footer --image $@ \
 		--partition_name dtbo \
