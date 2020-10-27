@@ -93,6 +93,8 @@ enum v4l2_colorspace {
   V4L2_COLORSPACE_BT2020 = 10,
   V4L2_COLORSPACE_RAW = 11,
   V4L2_COLORSPACE_DCI_P3 = 12,
+  V4L2_COLORSPACE_GENERIC_FILM = 13,
+  V4L2_COLORSPACE_ST428 = 14,
 };
 #define V4L2_MAP_COLORSPACE_DEFAULT(is_sdtv,is_hdtv) ((is_sdtv) ? V4L2_COLORSPACE_SMPTE170M : ((is_hdtv) ? V4L2_COLORSPACE_REC709 : V4L2_COLORSPACE_SRGB))
 enum v4l2_xfer_func {
@@ -104,6 +106,13 @@ enum v4l2_xfer_func {
   V4L2_XFER_FUNC_NONE = 5,
   V4L2_XFER_FUNC_DCI_P3 = 6,
   V4L2_XFER_FUNC_SMPTE2084 = 7,
+  V4L2_XFER_FUNC_LINEAR = 8,
+  V4L2_XFER_FUNC_GAMMA22 = 9,
+  V4L2_XFER_FUNC_GAMMA28 = 10,
+  V4L2_XFER_FUNC_HLG = 11,
+  V4L2_XFER_FUNC_XVYCC = 12,
+  V4L2_XFER_FUNC_BT1361 = 13,
+  V4L2_XFER_FUNC_ST428 = 14,
 };
 #define V4L2_MAP_XFER_FUNC_DEFAULT(colsp) ((colsp) == V4L2_COLORSPACE_OPRGB ? V4L2_XFER_FUNC_OPRGB : ((colsp) == V4L2_COLORSPACE_SMPTE240M ? V4L2_XFER_FUNC_SMPTE240M : ((colsp) == V4L2_COLORSPACE_DCI_P3 ? V4L2_XFER_FUNC_DCI_P3 : ((colsp) == V4L2_COLORSPACE_RAW ? V4L2_XFER_FUNC_NONE : ((colsp) == V4L2_COLORSPACE_SRGB || (colsp) == V4L2_COLORSPACE_JPEG ? V4L2_XFER_FUNC_SRGB : V4L2_XFER_FUNC_709)))))
 enum v4l2_ycbcr_encoding {
@@ -116,6 +125,7 @@ enum v4l2_ycbcr_encoding {
   V4L2_YCBCR_ENC_BT2020 = 6,
   V4L2_YCBCR_ENC_BT2020_CONST_LUM = 7,
   V4L2_YCBCR_ENC_SMPTE240M = 8,
+  V4L2_YCBCR_ENC_BT470_6M = 9,
 };
 enum v4l2_hsv_encoding {
   V4L2_HSV_ENC_180 = 128,
@@ -227,6 +237,7 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_XRGB555X v4l2_fourcc_be('X', 'R', '1', '5')
 #define V4L2_PIX_FMT_RGB565X v4l2_fourcc('R', 'G', 'B', 'R')
 #define V4L2_PIX_FMT_BGR666 v4l2_fourcc('B', 'G', 'R', 'H')
+#define V4L2_PIX_FMT_RGB666 v4l2_fourcc('R', 'G', 'B', 'H')
 #define V4L2_PIX_FMT_BGR24 v4l2_fourcc('B', 'G', 'R', '3')
 #define V4L2_PIX_FMT_RGB24 v4l2_fourcc('R', 'G', 'B', '3')
 #define V4L2_PIX_FMT_BGR32 v4l2_fourcc('B', 'G', 'R', '4')
