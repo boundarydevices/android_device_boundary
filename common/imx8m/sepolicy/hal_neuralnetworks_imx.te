@@ -11,3 +11,5 @@ allow hal_neuralnetworks_imx graphics_device:dir { search };
 allow hal_neuralnetworks_imx hal_graphics_mapper_hwservice:hwservice_manager { find };
 allow hal_neuralnetworks_imx hal_graphics_allocator_default:fd { use };
 allow hal_neuralnetworks_imx ion_device:chr_file { open read ioctl };
+
+get_prop(hal_neuralnetworks_imx, vendor_default_prop)

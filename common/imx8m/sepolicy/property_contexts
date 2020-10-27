@@ -168,6 +168,9 @@ VIV_FAST_MODE                             u:object_r:public_vendor_default_prop:
 VIV_VX_TPLITE_CORE_COUNT                  u:object_r:public_vendor_default_prop:s0
 DILATION_MODE                             u:object_r:public_vendor_default_prop:s0
 VIV_VX_ENABLE_NN_DDR_BURST_SIZE_256B      u:object_r:public_vendor_default_prop:s0
+NN_DBG_OP_BLK_LIST                        u:object_r:public_vendor_default_prop:s0
+DISABLE_FLOAT_FEATURE                     u:object_r:public_vendor_default_prop:s0
+WEIGHT_MD5_CHECK                          u:object_r:public_vendor_default_prop:s0
 
 vendor.audio.lpa.enable             u:object_r:public_vendor_default_prop:s0
 gralloc.drm.device                  u:object_r:public_vendor_default_prop:s0

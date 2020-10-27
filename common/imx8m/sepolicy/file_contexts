@@ -91,3 +91,4 @@
 /vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service\.imx      u:object_r:hal_dumpstate_impl_exec:s0
 /dev/cpu_dma_latency u:object_r:latency_device:s0
 /vendor/bin/hw/android\.hardware\.oemlock@1\.0-service\.imx      u:object_r:hal_oemlock_impl_exec:s0
+/vendor/bin/hw/android\.hardware\.boot@1\.0-service\.imx      u:object_r:hal_bootctl_default_exec:s0

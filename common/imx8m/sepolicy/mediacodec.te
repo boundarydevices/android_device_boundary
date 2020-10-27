@@ -12,3 +12,4 @@ allow mediacodec video_device:fifo_file rw_file_perms;
 allow mediacodec system_file:dir r_dir_perms;
 allow mediacodec sysfs_soc:dir { read open search };
 allow mediacodec sysfs_soc:file { open read getattr };
+allow mediacodec tee_device:chr_file { open read write ioctl };

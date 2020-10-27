@@ -1,4 +1,13 @@
 OPTEE_PLATFORM ?= imx
+ifeq ($(TARGET_PRODUCT),$(filter $(TARGET_PRODUCT),evk_8mm evk_8mm_drm))
+OPTEE_PLATFORM_FLAVOR ?= mx8mmevk
+else
+ifeq ($(TARGET_PRODUCT),$(filter $(TARGET_PRODUCT),evk_8mq evk_8mq_drm))
+OPTEE_PLATFORM_FLAVOR ?= mx8mqevk
+else
+$(error Invalid platform $(TARGET_PRODUCT))
+endif
+endif
 OPTEE_CFG_ARM64_CORE ?= y
 OPTEE_TA_TARGETS ?= ta_arm64
 CFG_SECSTOR_TA_MGMT_PTA ?= y

@@ -18,14 +18,10 @@ PRODUCT_PACKAGES += \
     ExtractorPkg \
     charger_res_images \
     ethernet \
-    libGLES_android \
-    libRS \
     libedid \
     libion \
-    librs_jni \
     slideshow \
-    verity_warning_images \
-    vndk-sp
+    verity_warning_images
 
 ifneq ($(PRODUCT_IMX_CAR),true)
 PRODUCT_PACKAGES += \
@@ -35,7 +31,6 @@ PRODUCT_PACKAGES += \
     Gallery2 \
     LegacyCamera \
     LiveWallpapersPicker \
-    MagicSmokeWallpapers \
     SoundRecorder
 endif
 
@@ -48,16 +43,13 @@ PRODUCT_PACKAGES += \
     overlay.imx \
     power.imx
 
-PRODUCT_STATIC_BOOT_CONTROL_HAL:= \
-    bootctrl-static.avb \
-    libcutils \
-
 ifeq ($(AB_OTA_UPDATER),true)
 # A/B OTA
 PRODUCT_PACKAGES += \
     SystemUpdaterSample \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service \
+    android.hardware.boot@1.0-impl.imx \
+    android.hardware.boot@1.0-impl.imx.recovery \
+    android.hardware.boot@1.0-service.imx \
     bootctrl.avb \
     update_engine \
     update_engine_client \
@@ -85,12 +77,10 @@ PRODUCT_PACKAGES += \
     audio.primary.imx \
     audio.r_submix.default \
     audio.usb.default \
-    libaudioutils \
-    libsrec_jni \
-    libtinyalsa \
     tinycap \
     tinymix \
-    tinyplay
+    tinyplay \
+    tinypcminfo
 
 # LDAC codec
 PRODUCT_PACKAGES += \
@@ -110,8 +100,7 @@ PRODUCT_PACKAGES += \
 # sensor
 PRODUCT_PACKAGES += \
     fsl_sensor_fusion \
-    libbt-vendor \
-    magd
+    libbt-vendor
 
 # memtrack
 PRODUCT_PACKAGES += \
@@ -140,33 +129,12 @@ PRODUCT_PACKAGES += \
 
 # drm
 PRODUCT_PACKAGES += \
-    drmserver                   		\
-    libdrmframework             		\
-    libdrmframework_jni         		\
-    libdrmpassthruplugin        		\
+    libdrmpassthruplugin \
     libfwdlockengine
 
 # vivante libdrm support
 PRODUCT_PACKAGES += \
     libdrm_vivante
-
-# FUSE based emulated sdcard daemon
-PRODUCT_PACKAGES += \
-    sdcard
-
-# e2fsprogs libs
-PRODUCT_PACKAGES += \
-    libext2_blkid \
-    libext2_com_err \
-    libext2_e2p \
-    libext2_profile \
-    libext2_uuid \
-    libext2fs \
-    mke2fs
-
-# for CtsVerifier
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
 
 # gpu debug tool
 PRODUCT_PACKAGES += \
@@ -179,14 +147,11 @@ PRODUCT_PACKAGES += \
     lib_aacd_wrap_arm12_elinux_android \
     lib_flac_dec_v2_arm11_elinux \
     lib_mp3_dec_v2_arm12_elinux \
-    lib_mp3_enc_v2_arm12_elinux \
     lib_mp3d_wrap_arm12_elinux_android \
     lib_nb_amr_dec_v2_arm9_elinux \
     lib_nb_amr_enc_v2_arm11_elinux \
-    lib_peq_v2_arm11_elinux \
     lib_wb_amr_dec_arm9_elinux \
     lib_wb_amr_enc_arm11_elinux \
-    libfsl_jpeg_enc_arm11_elinux \
     media_codecs_c2_ac3.xml \
     media_codecs_c2_ddp.xml \
     media_codecs_c2_ms.xml \
@@ -207,7 +172,6 @@ PRODUCT_PACKAGES += \
     libimxextractor \
     lib_aac_parser_arm11_elinux.3.0 \
     lib_amr_parser_arm11_elinux.3.0 \
-    lib_ape_parser_arm11_elinux.3.0 \
     lib_avi_parser_arm11_elinux.3.0 \
     lib_dsf_parser_arm11_elinux.3.0 \
     lib_flac_parser_arm11_elinux.3.0 \
@@ -217,11 +181,9 @@ PRODUCT_PACKAGES += \
     lib_mp4_parser_arm11_elinux.3.0 \
     lib_mpg2_parser_arm11_elinux.3.0 \
     lib_ogg_parser_arm11_elinux.3.0 \
-    lib_wav_parser_arm11_elinux.3.0 \
 
 # Omx excluded libs
 PRODUCT_PACKAGES += \
-    lib_WMV789_dec_v2_arm11_elinux \
     lib_aacplus_dec_v2_arm11_elinux \
     lib_aacplusd_wrap_arm12_elinux_android \
     lib_ac3_dec_v2_arm11_elinux \
@@ -264,7 +226,6 @@ PRODUCT_COPY_FILES += \
     $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_codecs_google_c2_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_telephony.xml \
     $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_codecs_google_c2_tv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_tv.xml \
     $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_profiles_720p.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_720p.xml \
-    device/boundary/common/imx8m/init.recovery.freescale.rc:root/init.recovery.freescale.rc \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
@@ -272,8 +233,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    pm.dexopt.boot=quicken \
-    ro.hardware.bootctrl=avb \
+    pm.dexopt.boot=quicken
 
 # wifionly device
 PRODUCT_PROPERTY_OVERRIDES += \
