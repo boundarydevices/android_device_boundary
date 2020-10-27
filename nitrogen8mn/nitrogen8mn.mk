@@ -31,6 +31,7 @@ PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/usb_audio_policy_configuration-direct-output.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration-direct-output.xml \
     $(IMX_DEVICE_PATH)/fstab.freescale:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.freescale \
     $(IMX_DEVICE_PATH)/init.imx8mn.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.freescale.imx8mn.rc \
+    $(IMX_DEVICE_PATH)/init.recovery.freescale.rc:root/init.recovery.freescale.rc \
     $(IMX_DEVICE_PATH)/early.init.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/early.init.cfg \
     $(IMX_DEVICE_PATH)/init.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.freescale.rc \
     $(IMX_DEVICE_PATH)/init.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.freescale.usb.rc \
@@ -151,6 +152,8 @@ PRODUCT_PACKAGES += \
     libNNGPUBinary-evis2 \
     libNNGPUBinary-lite \
     libNNGPUBinary-ulite \
+    libNNArchPerf \
+    libarchmodelSw \
     gatekeeper.imx
 
 # Neural Network HAL and Lib
@@ -228,6 +231,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PACKAGES += \
     DirectAudioPlayer
+
+# Tensorflow lite camera demo
+PRODUCT_PACKAGES += \
+    tflitecamerademo
 
 # Add oem unlocking option in settings.
 PRODUCT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/frp
