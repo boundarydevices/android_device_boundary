@@ -69,6 +69,8 @@ on late-fs
     start vendor.keymaster-3-0-${ro.boot.keystore}
     setprop vendor.powerhal.init 1
 
+    mount_all /vendor/etc/fstab.freescale --late
+
 on late-fs && property:vendor.storageproxyd=trusty
     start vendor.oemlock-1-0
 
@@ -224,7 +226,7 @@ on boot
 
 on fs
     # mount ext4 partitions
-    mount_all /vendor/etc/fstab.freescale
+    mount_all /vendor/etc/fstab.freescale --early
 
     # Adjust parameters for dm-verity device
     write /sys/block/dm-0/queue/read_ahead_kb 4096
