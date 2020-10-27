@@ -1,0 +1,10 @@
+type isp, domain;
+type isp_exec, exec_type, vendor_file_type, file_type;
+
+# Started by init
+init_daemon_domain(isp)
+
+dontaudit isp self:capability { dac_override };
+
+allow isp video_device:chr_file { open read write ioctl map getattr };
+allow isp self:capability { sys_nice };
