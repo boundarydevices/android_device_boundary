@@ -13,6 +13,8 @@ cat << EOF
            -j[<num>]               specify the number of parallel jobs when build the target, the number after -j should be greater than 0
            bootloader              bootloader will be compiled
            kernel                  kernel, include related dts will be compiled
+           galcore                 galcore.ko in GPU repo will be compiled
+           vvcam                   vvcam.ko, the ISP driver will be compiled
            dtboimage               dtbo images will be built out
            bootimage               boot.img will be built out
            vendorimage             vendor.img will be built out
@@ -82,11 +84,14 @@ build_bootloader_kernel_flag=0
 build_android_flag=0
 build_bootloader=""
 build_kernel=""
+build_galcore=""
+build_vvcam=""
 build_bootimage=""
 build_dtboimage=""
 build_vendorimage=""
 parallel_option=""
 clean_build=0
+TOP=`pwd`
 
 # process of the arguments
 args=( "$@" )
@@ -100,6 +105,10 @@ for arg in ${args[*]} ; do
         prebuilt-bootloader) download_prebuilt_bootloader; exit;;
         kernel) build_bootloader_kernel_flag=1;
                     build_kernel="${OUT}/kernel";;
+        galcore) build_bootloader_kernel_flag=1;
+                    build_galcore="galcore";;
+        vvcam) build_bootloader_kernel_flag=1;
+                    build_vvcam="vvcam";;
         bootimage) build_bootloader_kernel_flag=1;
                     build_android_flag=1;
                     build_kernel="${OUT}/kernel";
@@ -123,6 +132,11 @@ if [ ${build_bootloader_kernel_flag} -eq 0 ] && [ ${build_android_flag} -eq 0 ];
     build_android_flag=1
 fi
 
+# vvcam.ko need build with kernel each time to make sure "insmod vvcam.ko" works
+if [ -n "${build_kernel}" ] && [ ${TARGET_PRODUCT} = *"8mp"* ]; then
+    build_vvcam="vvcam";
+fi
+
 product_makefile=`pwd`/`find device/boundary -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
 product_path=${product_makefile%/*}
 soc_path=${product_path%/*}/common/imx8m
@@ -137,6 +151,10 @@ fi
 soc_path=${soc_path} product_path=${product_path} fsl_git_path=${fsl_git_path} clean_build=${clean_build} \
     make -C ./ -f ${fsl_git_path}/common/build/Makefile ${parallel_option} \
     ${build_bootloader} ${build_kernel} </dev/null || exit
+
+soc_path=${soc_path} product_path=${product_path} fsl_git_path=${fsl_git_path} clean_build=${clean_build} \
+    make -C ./ -f ${fsl_git_path}/common/build/Makefile ${parallel_option} \
+    ${build_vvcam} ${build_galcore} </dev/null || exit
 
 if [ ${build_android_flag} -eq 1 ]; then
     # source envsetup.sh before building Android rootfs, the time spent on building uboot/kernel
