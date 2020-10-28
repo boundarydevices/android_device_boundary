@@ -168,13 +168,8 @@ $(KERNEL_BIN): $(KERNEL_CONFIG) $(TARGET_KERNEL_SRC) | $(KERNEL_OUT)
 $(KERNEL_OUT)/vmlinux: $(KERNEL_BIN)
 	@true
 
-.PHONY: $(KERNEL_MODULES_INSTALL)
 $(KERNEL_MODULES_INSTALL): $(KERNEL_BIN)
-	if [ "$(BOARD_HAS_QCACLD_MODULE)" = "true" ]; then \
-		echo "Building qcacld-2.0 module..." ; \
-		$(call build_qcacld) ; \
-	fi;
-	$(hide) echo "Installing kernel modules ..."
+	$(hide) echo "Installing kernel module $@ ..."
 
 $(KERNEL_HEADERS_INSTALL): $(KERNEL_BIN)
 	$(hide) echo "Installing kernel headers ..."

@@ -15,6 +15,7 @@ cat << EOF
            kernel                  kernel, include related dts will be compiled
            galcore                 galcore.ko in GPU repo will be compiled
            vvcam                   vvcam.ko, the ISP driver will be compiled
+           qcacld                  wlan.ko, the qcacld-2.0 driver will be compiled
            dtboimage               dtbo images will be built out
            bootimage               boot.img will be built out
            vendorimage             vendor.img will be built out
@@ -86,6 +87,7 @@ build_bootloader=""
 build_kernel=""
 build_galcore=""
 build_vvcam=""
+build_qcacld=""
 build_bootimage=""
 build_dtboimage=""
 build_vendorimage=""
@@ -109,6 +111,8 @@ for arg in ${args[*]} ; do
                     build_galcore="galcore";;
         vvcam) build_bootloader_kernel_flag=1;
                     build_vvcam="vvcam";;
+        qcacld) build_bootloader_kernel_flag=1;
+                    build_qcacld="qcacld";;
         bootimage) build_bootloader_kernel_flag=1;
                     build_android_flag=1;
                     build_kernel="${OUT}/kernel";
@@ -125,6 +129,11 @@ for arg in ${args[*]} ; do
     esac
 done
 
+product_makefile=`pwd`/`find device/boundary -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
+product_path=${product_makefile%/*}
+soc_path=${product_path%/*}/common/imx8m
+fsl_git_path=${product_path%/*}
+
 # if bootloader and kernel not in arguments, all need to be made
 if [ ${build_bootloader_kernel_flag} -eq 0 ] && [ ${build_android_flag} -eq 0 ]; then
     build_bootloader="bootloader";
@@ -133,14 +142,14 @@ if [ ${build_bootloader_kernel_flag} -eq 0 ] && [ ${build_android_flag} -eq 0 ];
 fi
 
 # vvcam.ko need build with kernel each time to make sure "insmod vvcam.ko" works
-if [ -n "${build_kernel}" ] && [ ${TARGET_PRODUCT} = *"8mp"* ]; then
+if [ -n "${build_kernel}" ] && [ ! `grep vvcam.ko ${product_path}/early.init.cfg > /dev/null` ]; then
     build_vvcam="vvcam";
 fi
 
-product_makefile=`pwd`/`find device/boundary -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
-product_path=${product_makefile%/*}
-soc_path=${product_path%/*}/common/imx8m
-fsl_git_path=${product_path%/*}
+# wlan.ko need build with kernel each time to make sure "insmod wlan.ko" works
+if [ -n "${build_kernel}" ] && [ ! `grep wlan.ko ${product_path}/early.init.cfg > /dev/null` ]; then
+    build_qcacld="qcacld";
+fi
 
 # if uboot is to be compiled, remove the UBOOT_COLLECTION directory
 if [ -n "${build_bootloader}" ]; then
@@ -154,7 +163,7 @@ soc_path=${soc_path} product_path=${product_path} fsl_git_path=${fsl_git_path} c
 
 soc_path=${soc_path} product_path=${product_path} fsl_git_path=${fsl_git_path} clean_build=${clean_build} \
     make -C ./ -f ${fsl_git_path}/common/build/Makefile ${parallel_option} \
-    ${build_vvcam} ${build_galcore} </dev/null || exit
+    ${build_vvcam} ${build_galcore} ${build_qcacld} </dev/null || exit
 
 if [ ${build_android_flag} -eq 1 ]; then
     # source envsetup.sh before building Android rootfs, the time spent on building uboot/kernel
