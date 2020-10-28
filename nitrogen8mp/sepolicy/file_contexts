@@ -47,4 +47,3 @@
 /vendor/bin/vvext                           u:object_r:isp_exec:s0
 /vendor/bin/video_test                      u:object_r:isp_exec:s0
 /vendor/bin/isp_media_server                u:object_r:isp_exec:s0
-/dev/v4l-subdev[0-9]*                       u:object_r:video_device:s0
