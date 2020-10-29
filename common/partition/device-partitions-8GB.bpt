@@ -60,15 +60,9 @@
         },
         {
             "label": "vendor",
-            "size": "512 MiB",
+            "size": "768 MiB",
             "guid": "auto",
             "type_guid": "2578eab2-a534-43e2-92c0-fed1b01c5d1d"
-        },
-        {
-            "label": "userdata",
-            "grow": true,
-            "guid": "auto",
-            "type_guid": "0bb7e6ed-4424-49c0-9372-7fbab465ab4c"
         },
         {
             "label": "fbmisc",
@@ -81,6 +75,12 @@
             "size": "1 MiB",
             "guid": "auto",
             "type_guid": "7d6ea677-fe98-4ffe-9771-f5c3ef6d282c"
+        },
+        {
+            "label": "userdata",
+            "grow": true,
+            "guid": "auto",
+            "type_guid": "0bb7e6ed-4424-49c0-9372-7fbab465ab4c"
         }
     ]
 }
