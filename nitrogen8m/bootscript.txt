@@ -176,7 +176,7 @@ if itest.s "x" != "x$show_env" ; then
 fi
 
 # Load Android bootimage and boot it
-setenv bootargs $bootargs "$avb_bootargs"
+setenv bootargs $bootargs "$avb_bootargs "
 part start ${devtype} ${devnum} ${apart} boot_start
 part size  ${devtype} ${devnum} ${apart} boot_size
 if ${devtype} read ${a_Image} ${boot_start} ${boot_size} ; then
