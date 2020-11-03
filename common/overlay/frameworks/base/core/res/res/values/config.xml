@@ -20,22 +20,18 @@
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
 <resources>
-
-    <!--For Android we support eth0 now -->
-    <string translatable="false" name="config_ethernet_iface_regex">eth0</string>
-
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
      <string-array translatable="false" name="config_tether_usb_regexs">
-       <item>"usb0"</item>
+       <item>"usb\\d"</item>
      </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
-        <item>"wlan0"</item>
+        <item>"wlan\\d"</item>
     </string-array>
 
    <!-- List of regexpressions describing the interface (if any) that represent tetherable
