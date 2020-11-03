@@ -11,7 +11,7 @@
     {
       "camera_type": "back",
       "camera_name": "viv_v4l2_device",
-      "device_node": "/dev/video1",
+      "device_node": "/dev/video0",
       "orientation": "0",
       "buffer_type": "mmap",
       "ActiveArrayWidth": "1920",
