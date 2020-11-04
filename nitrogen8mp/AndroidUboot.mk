@@ -11,8 +11,7 @@ endif
 
 define build_imx_uboot
     echo ================= Building i.MX U-Boot with firmware; \
-    cp $(FSL_PROPRIETARY_PATH)/linux-firmware-imx/firmware/hdmi/cadence/signed_*.bin $(UBOOT_IMX_PATH)/uboot-imx/ ; \
-    cp $(FSL_PROPRIETARY_PATH)/linux-firmware-imx/firmware/ddr/synopsys/lpddr4_pmu_train* $(UBOOT_IMX_PATH)/uboot-imx/ ; \
+    cp $(FSL_PROPRIETARY_PATH)/linux-firmware-imx/firmware/ddr/synopsys/lpddr4_pmu_train* $(UBOOT_OUT) ; \
     if [ ${clean_build} = 1 ]; then \
         $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ PLAT=`echo $(2) | cut -d '-' -f1` clean; \
     fi; \
