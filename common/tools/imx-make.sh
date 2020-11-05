@@ -142,12 +142,12 @@ if [ ${build_bootloader_kernel_flag} -eq 0 ] && [ ${build_android_flag} -eq 0 ];
 fi
 
 # vvcam.ko need build with kernel each time to make sure "insmod vvcam.ko" works
-if [ -n "${build_kernel}" ] && [ ! `grep vvcam.ko ${product_path}/early.init.cfg > /dev/null` ]; then
+if [ -n "${build_kernel}" ] && grep -q vvcam.ko ${product_path}/early.init.cfg; then
     build_vvcam="vvcam";
 fi
 
 # wlan.ko need build with kernel each time to make sure "insmod wlan.ko" works
-if [ -n "${build_kernel}" ] && [ ! `grep wlan.ko ${product_path}/early.init.cfg > /dev/null` ]; then
+if [ -n "${build_kernel}" ] && grep -q wlan.ko ${product_path}/early.init.cfg; then
     build_qcacld="qcacld";
 fi
 
@@ -176,4 +176,3 @@ fi
 if [ -n "${build_bootloader}" ]; then
     cp -f ${OUT}/obj/UBOOT_COLLECTION/*\.* ${OUT}
 fi
-
