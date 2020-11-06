@@ -5,7 +5,8 @@
 
 /devices/platform/32f10108.usb/38200000.dwc3/xhci-hcd.1.auto/* auto auto defaults voldmanaged=usb:auto,encryptable=userdata
 
-/dev/block/by-name/system      /            ext4    ro,barrier=1                                                                     wait,avb
+/dev/block/by-name/system      /system      ext4    ro,barrier=1                                                                     wait,avb
+/dev/block/by-name/vendor      /vendor      ext4    ro,barrier=1                                                                     wait,avb
 /dev/block/by-name/cache       /cache       ext4    noatime,nosuid,nodev,nomblk_io_submit                                            wait,formattable
 /dev/block/by-name/userdata    /data        ext4    nosuid,nodev,nodiratime,noatime,nomblk_io_submit,noauto_da_alloc,errors=panic    latemount,wait,formattable,quota,fileencryption=software,reservedsize=128M,checkpoint=block
 /dev/block/by-name/misc        /misc        emmc    defaults                                                                         defaults
