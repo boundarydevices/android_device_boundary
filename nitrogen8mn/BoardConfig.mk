@@ -35,13 +35,16 @@ include device/boundary/common/imx8m/BoardConfigCommon.mk
 # OTA configuration
 AB_OTA_UPDATER := false
 
-# Create recovery image since not using A/B
+# Necessary changes for non-A/B partitioning
+ifeq ($(AB_OTA_UPDATER),false)
+TARGET_RELEASETOOLS_EXTENSIONS := device/boundary/common/imx8m
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 50331648
 TARGET_NO_RECOVERY := false
-
-# Create cache image since not using A/B
+BOARD_USES_RECOVERY_AS_BOOT := false
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_CACHEIMAGE_PARTITION_SIZE := 1073741824
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+endif
 
 BUILD_TARGET_FS ?= ext4
 TARGET_USERIMAGES_USE_EXT4 := true

@@ -4,7 +4,7 @@ setexpr a_fdt     ${a_base} + 0x04000000
 setexpr a_fdtbo   ${a_base} + 0x05000000
 
 setenv apart boot
-setenv ramdisk '-'
+setenv ramdisk ${a_Image}
 setenv bootmode normal
 setenv bootargs ''
 setenv m4 ''
@@ -106,6 +106,7 @@ if itest.s "xmmc" == "x$devtype" ; then
 	fi
 fi
 setenv bootargs $bootargs androidboot.bootdevice=$bootdev
+fdt set /firmware/android/fstab/system dev /dev/block/platform/${bootdev}/by-name/system
 fdt set /firmware/android/fstab/vendor dev /dev/block/platform/${bootdev}/by-name/vendor
 
 if itest.s "x" != "x$selinux" ; then
