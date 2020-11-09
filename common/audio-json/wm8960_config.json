@@ -2,7 +2,7 @@
   "driver_name": "wm8960-audio",
   "bus_name": "bus1_system_sound_out",
   "supported_out_devices": ["speaker", "wired_headphone", "wired_headset", "bus", "line"],
-  "supported_in_devices": ["wired_headset"],
+  "supported_in_devices": ["builtin_mic", "wired_headset"],
   "support_lpa": 1,
 
   "init_ctl": [
@@ -11,6 +11,13 @@
     {"name": "Playback Volume", "type": "int", "val": 230},
     {"name": "Speaker Playback Volume", "type": "int", "val": 120},
     {"name": "Headphone Playback Volume", "type": "int", "val": 120}
+  ],
+
+  "builtin_mic_ctl": [
+    {"name": "ALC Function", "type": "int", "val": 3},
+    {"name": "Left Input Mixer Boost Switch", "type": "int", "val": 1},
+    {"name": "ADC PCM Capture Volume", "type": "int", "val": 230},
+    {"name": "Capture Volume", "type": "int", "val": 60}
   ],
 
   "headset_mic_ctl": [
