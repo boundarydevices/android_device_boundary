@@ -122,12 +122,6 @@ if itest.s "x" != "x$selinux" ; then
 	setenv bootargs $bootargs androidboot.selinux=$selinux
 fi
 
-if itest.s "x" != "x${tile_support}" ; then
-	setenv bootargs $bootargs androidboot.fbTileSupport=${tile_support}
-else
-	setenv bootargs $bootargs androidboot.fbTileSupport=enable
-fi
-
 if itest.s "x" != "x${lcd_density}" ; then
 	setenv bootargs $bootargs androidboot.lcd_density=${lcd_density}
 else
