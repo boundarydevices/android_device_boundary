@@ -290,3 +290,18 @@ PRODUCT_COPY_FILES += \
     device/boundary/common/input/eGalax_Touch_Screen.idc:vendor/usr/idc/EETI_eGalax_Touch_Screen.idc \
     device/boundary/common/input/eGalax_Touch_Screen.idc:vendor/usr/idc/ft5x06.idc \
     device/boundary/common/input/eGalax_Touch_Screen.idc:vendor/usr/idc/silead_ts.idc
+
+# libgpiod tools
+PRODUCT_PACKAGES += \
+    gpiodetect \
+    gpiofind \
+    gpioget \
+    gpioinfo \
+    gpiomon \
+    gpioset
+
+# can-utils tools
+PRODUCT_PACKAGES += \
+    candump \
+    cangen \
+    cansend
