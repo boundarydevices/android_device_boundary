@@ -106,6 +106,7 @@ TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mn:imx8mn-nitrogen8_nano-m4.dtb \
 	imx8mn:imx8mn-nitrogen8mn.dtb \
 	imx8mn:imx8mn-nitrogen8mn_som.dtb \
+	imx8mn:imx8mn-nitrogen8mn_som-m4.dtb \
 
 BOARD_SEPOLICY_DIRS := \
        device/boundary/common/imx8m/sepolicy \
