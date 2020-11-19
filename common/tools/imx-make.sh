@@ -70,7 +70,7 @@ download_prebuilt_bootloader()
     rm -f ${OUT}/preboot/u-boot.*
     # download each prebuilt binary from BD server
     for UBOOT_NAME in ${UBOOT_NAMES}; do
-        URL=http://linode.boundarydevices.com/u-boot-images/u-boot.${UBOOT_NAME}
+        URL=http://linode.boundarydevices.com/u-boot-images-2020.10/u-boot.${UBOOT_NAME}
         wget -nv -P ${OUT}/preboot $URL
     done
 }
