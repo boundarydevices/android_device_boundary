@@ -1,3 +1,4 @@
 wc_transport.        u:object_r:wc_transport_prop:s0
 ro.camera.                 u:object_r:camera_prop:s0
 persist.camera.            u:object_r:camera_prop:s0
+persist.netd.stable_secret u:object_r:netd_stable_secret_prop:s0
