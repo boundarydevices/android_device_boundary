@@ -39,6 +39,9 @@ case $gpt_size in
 	0*) gpt=partition-table-default.img;;
 	8*) gpt=partition-table-8GB.img;;
 	16*) gpt=partition-table-16GB.img;;
+	32*) gpt=partition-table-32GB.img;;
+	64*) gpt=partition-table-64GB.img;;
+	128*) gpt=partition-table-128GB.img;;
 	*) echo "Unsupported GPT size: $gpt_size";
 		help; exit;;
 esac
