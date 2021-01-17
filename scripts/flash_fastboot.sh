@@ -54,6 +54,8 @@ fi
 
 fastboot flash gpt $OUT/$gpt
 if ! [ $? -eq 0 ] ; then echo "Failed to flash gpt.img"; exit 1; fi
+fastboot reboot bootloader
+if ! [ $? -eq 0 ] ; then echo "Failed to rebot into bootloader mode"; exit 1; fi
 fastboot flash preboot $OUT/preboot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash preboot.img"; exit 1; fi
 fastboot flash dtbo $OUT/dtbo.img
@@ -74,4 +76,4 @@ if ! [ ${skip_userdata} -eq 1 ] ; then
 	fastboot erase userdata
 	if ! [ $? -eq 0 ] ; then echo "Failed to erase userdata"; exit 1; fi
 fi
-fastboot continue
+fastboot reboot

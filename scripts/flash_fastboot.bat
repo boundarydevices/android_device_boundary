@@ -16,6 +16,11 @@ IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash gpt.img
 	GOTO:eof
 )
+fastboot.exe reboot bootloader
+IF %ERRORLEVEL% NEQ 0 (
+	ECHO Failed to reboot in bootloader mode
+	GOTO:eof
+)
 fastboot.exe flash preboot %OUT%\preboot.img
 IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to flash preboot.img
@@ -61,5 +66,5 @@ IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to erase userdata
 	GOTO:eof
 )
-fastboot.exe continue
+fastboot.exe reboot
 ECHO Flashing successful!
