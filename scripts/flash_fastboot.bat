@@ -61,5 +61,5 @@ IF %ERRORLEVEL% NEQ 0 (
 	ECHO Failed to erase userdata
 	GOTO:eof
 )
-fastboot.exe continue
+fastboot.exe reboot
 ECHO Flashing successful!

@@ -74,4 +74,4 @@ if ! [ ${skip_userdata} -eq 1 ] ; then
 	fastboot erase userdata
 	if ! [ $? -eq 0 ] ; then echo "Failed to erase userdata"; exit 1; fi
 fi
-fastboot continue
+fastboot reboot
