@@ -112,11 +112,15 @@ BOARD_KERNEL_CMDLINE += androidboot.wificountrycode=US
 BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8m/dtbo-imx8mq.img
 TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mq:imx8mq-nitrogen8m.dtb \
+	imx8mq:imx8mq-nitrogen8m-avt.dtb \
 	imx8mq:imx8mq-nitrogen8m-edp.dtb \
+	imx8mq:imx8mq-nitrogen8m-gbr.dtb \
 	imx8mq:imx8mq-nitrogen8m-m4.dtb \
 	imx8mq:imx8mq-nitrogen8m_som.dtb \
+	imx8mq:imx8mq-nitrogen8m_som_sd.dtb \
 	imx8mq:imx8mq-nitrogen8m_som-m4.dtb \
 	imx8mq:imx8mq-nitrogen8m-tc358743.dtb \
+	imx8mq:imx8mq-nitrogen8m-tc358840.dtb \
 	imx8mq:imx8mq-bio.dtb \
 
 BOARD_SEPOLICY_DIRS := \
