@@ -15,7 +15,8 @@ TARGET_KERNEL_DEFCONF := boundary_android_defconfig
 TARGET_BOARD_DTS_CONFIG := \
 	imx6q:imx6q-nitrogen6x.dtb imx6dl:imx6dl-nitrogen6x.dtb imx6q:imx6q-nitrogen6_max.dtb \
 	imx6qp:imx6qp-nitrogen6_max.dtb imx6q:imx6q-sabrelite.dtb imx6dl:imx6dl-nitrogen6_vm.dtb \
-	imx6qp:imx6qp-nitrogen6_som2.dtb imx6q:imx6q-nitrogen6_som2.dtb imx6dl:imx6dl-nitrogen6_som2.dtb
+	imx6qp:imx6qp-nitrogen6_som2.dtb imx6q:imx6q-nitrogen6_som2.dtb imx6dl:imx6dl-nitrogen6_som2.dtb \
+	imx6q:imx6q-hp.dtb imx6dl:imx6dl-hp.dtb
 
 TARGET_RECOVERY_FSTAB := device/boundary/nitrogen6x/fstab.freescale
 
