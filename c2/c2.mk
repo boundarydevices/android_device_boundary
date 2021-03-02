@@ -242,6 +242,11 @@ PRODUCT_PACKAGES += \
     android.hardware.oemlock@1.0-service.imx
 endif
 
+# Vibrator HAL
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
+
 # Included GMS package
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
 
