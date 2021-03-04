@@ -11,3 +11,7 @@ IMX_NO_PRODUCT_PARTITION := true
 BOARD_HAS_QCACLD_MODULE := true
 BOARD_VENDOR_KERNEL_MODULES += \
     $(TARGET_OUT_INTERMEDIATES)/QCACLD_OBJ/wlan.ko
+
+# Dummy battery module for CTS
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(KERNEL_OUT)/drivers/power/supply/dummy_battery.ko
