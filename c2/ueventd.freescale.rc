@@ -21,6 +21,9 @@
 /dev/block/platform/soc@0/soc@0\:bus@30800000/30b40000\.mmc/by-name/frp 0600   system     system
 
 # sysfs properties
+/sys/devices/platform/soc@0/soc@0:bus@30800000/30a40000.i2c/i2c-2/i2c-5/5-0030/leds/* brightness     0660 system camera
+/sys/devices/platform/soc@0/soc@0:bus@30800000/30a40000.i2c/i2c-2/i2c-5/5-0030/leds/* max_brightness 0660 system camera
+/sys/devices/platform/soc@0/soc@0:bus@30800000/30a40000.i2c/i2c-2/i2c-5/5-0030/leds/* timeout_ms     0660 system camera
 /sys/devices/platform/backlight_*   brightness  0660  system system
 /sys/devices/platform/bt-rfkill*    state       0660  bluetooth bluetooth
 /sys/devices/platform/busfreq*      enable      0660  system system

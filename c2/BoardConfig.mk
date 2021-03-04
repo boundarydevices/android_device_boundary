@@ -36,6 +36,9 @@ BOARD_HAVE_PREBOOTIMAGE := true
 
 include device/boundary/common/imx8m/BoardConfigCommon.mk
 
+# Flash support
+BOARD_HAVE_FLASHLIGHT := true
+
 # OTA configuration
 AB_OTA_UPDATER := false
 
