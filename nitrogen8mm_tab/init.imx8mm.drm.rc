@@ -1,0 +1,19 @@
+import /vendor/etc/init/hw/init.${ro.hardware}.${ro.boot.soc_type}.main.rc
+
+on property:init.svc.mediadrm=running
+    mkdir /data/vendor/mediadrm 0770 media mediadrm
+
+on post-fs-data
+    # create for OP-TEE test
+    mkdir /data/vendor/tee 0660 media media
+    mkdir /data/vendor/tee/optee_armtz 0660 media media
+    restorecon_recursive /data/vendor/tee
+
+
+on boot
+    # optee device
+    chmod 0660 /dev/tee0
+    chown media media /dev/tee0
+
+    chmod 0660 /dev/teepriv0
+    chown media media /dev/teepriv0
