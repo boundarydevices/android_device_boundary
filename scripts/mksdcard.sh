@@ -5,23 +5,24 @@ if [ $# -lt 1 ]; then
 fi
 
 if [ $# -ge 2 ]; then
-   product=$2;
+	product=$2;
 else
-   product=nitrogen6x;
+	product=nitrogen6x;
 fi
 
 echo "---------build SD card for product $product";
 
-if ! [ -d out/target/product/$product/data ]; then
-   echo "Missing out/target/product/$product";
-   exit 1;
+if [ -z "$OUT" ]; then OUT=out/target/product/$product; fi
+if ! [ -d $OUT ]; then
+	echo "Missing $OUT";
+	exit 1;
 fi
 
 diskname=$1
 prefix='';
 
 if [[ "$diskname" =~ "mmcblk" ]]; then
-   prefix=p
+	prefix=p
 fi
 
 umount ${diskname}${prefix}*
@@ -65,6 +66,9 @@ flashpart 2 recovery.img
 flashpart 3 system.img
 flashpart 4 cache.img
 flashpart 5 vendor.img
+
+# Format userdata partition
+sudo mkfs.ext4 ${diskname}${prefix}10
 
 sync
 echo "---------done! SD card is ready!";
