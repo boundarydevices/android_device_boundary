@@ -235,9 +235,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     pm.dexopt.boot=quicken
 
+ifneq ($(PRODUCT_HAS_RIL),true)
 # wifionly device
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.noril=yes
+endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.mediacomponents.package=com.nxp.extractorpkg
