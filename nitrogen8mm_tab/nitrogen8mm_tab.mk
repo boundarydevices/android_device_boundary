@@ -286,9 +286,3 @@ PRODUCT_PACKAGES += \
     gpioinfo \
     gpiomon \
     gpioset
-
-# can-utils tools
-PRODUCT_PACKAGES += \
-    candump \
-    cangen \
-    cansend
