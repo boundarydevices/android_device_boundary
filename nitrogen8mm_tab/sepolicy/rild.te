@@ -1,0 +1,1 @@
+allow rild self:packet_socket { create bind write read };

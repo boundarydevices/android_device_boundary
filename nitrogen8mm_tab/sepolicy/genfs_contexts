@@ -7,3 +7,4 @@ genfscon sysfs /devices/platform/soc@0/soc@0:bus@30800000/30b40000.mmc/mmc_host/
 genfscon sysfs /devices/platform/soc@0/soc@0:bus@30800000/30b50000.mmc/mmc_host/mmc1/mmc1:0001/block/mmcblk1        u:object_r:sysfs_block_devices:s0
 genfscon sysfs /devices/platform/soc@0/soc@0:bus@32c00000/32e40000.usb/ci_hdrc.0/extcon                             u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/soc@0/soc@0:bus@32c00000/32e50000.usb/ci_hdrc.1/extcon                             u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/soc@0/soc@0:bus@32c00000/32e50000.usb/ci_hdrc.1/usb1/1-1/1-1:1.4/net               u:object_r:sysfs_net:s0

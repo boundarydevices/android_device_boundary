@@ -1,6 +1,10 @@
+subsystem usbmisc
+    devname uevent_devname
+
+/dev/cdc-wdm*             0660   radio      radio
 /dev/ttymxc*              0660   system     system
 /dev/ttymxc2              0660   bluetooth  bluetooth
-/dev/ttyUSB*              0660   system     system
+/dev/ttyUSB*              0660   radio      radio
 /dev/ttyACM*              0660   system     system
 /dev/snd/*                0660   system     audio
 /dev/video*               0660   system     camera
