@@ -123,6 +123,8 @@ fi
 
 if itest.s "x" != "x$hwrotation" ; then
 	setenv bootargs $bootargs androidboot.hwrotation=$hwrotation
+else
+	setenv bootargs $bootargs androidboot.hwrotation=180
 fi
 
 if itest.s "x" != "x$disable_giga" ; then
