@@ -41,3 +41,8 @@ on property:sys.boot_completed=1
     # system-background is for system tasks that should only run on
     # little cores, not on bigs to be used only by init
     write /dev/cpuset/system-background/cpus 0-2
+
+on post-fs-data
+    mkdir /data/vendor/sensor
+    chown root system /data/vendor/sensor
+    chmod 0770 /data/vendor/sensor

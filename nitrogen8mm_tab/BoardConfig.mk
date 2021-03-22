@@ -35,6 +35,7 @@ IMX_DEVICE_PATH := device/boundary/nitrogen8mm_tab
 BOARD_HAVE_PREBOOTIMAGE := true
 
 include device/boundary/common/imx8m/BoardConfigCommon.mk
+-include hardware/invensense/firmware/BoardConfigInvn.mk
 
 # Flash support
 BOARD_HAVE_FLASHLIGHT := true

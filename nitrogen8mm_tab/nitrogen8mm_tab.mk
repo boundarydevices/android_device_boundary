@@ -3,6 +3,7 @@ IMX_DEVICE_PATH := device/boundary/nitrogen8mm_tab
 # configs shared between uboot, kernel and Android rootfs
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
 -include vendor/quectel/ec2x/ril-quectel.mk
+-include hardware/invensense/firmware/device-invn.mk
 -include device/boundary/common/imx_path/ImxPathConfig.mk
 include device/boundary/common/imx8m/ProductConfigCommon.mk
 
