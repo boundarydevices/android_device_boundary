@@ -13,6 +13,7 @@
 /dev/mmcblk2rpmb          0600   system     system
 /dev/trusty-ipc-dev0      0660   system     drmrpc
 /dev/gpiochip*            0660   system     system
+/dev/i2c*                 0660   system     system
 
 # partitions properties
 /dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/frp 0600   system     system
