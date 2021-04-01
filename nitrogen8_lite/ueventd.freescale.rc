@@ -25,6 +25,7 @@
 /sys/devices/platform/backlight_*   brightness  0660  system system
 /sys/devices/platform/bt-rfkill*    state       0660  bluetooth bluetooth
 /sys/devices/platform/busfreq*      enable      0660  system system
+/sys/devices/platform/leds/leds/*   brightness  0660  system system
 /sys/devices/system/cpu/cpu*        online      0660  root   system
 /sys/devices/virtual/bluetooth/hci* state       0660  bluetooth bluetooth
 /sys/devices/virtual/input/input*   enable      0660  root   input
