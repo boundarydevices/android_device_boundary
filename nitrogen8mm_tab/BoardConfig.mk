@@ -117,6 +117,8 @@ BOARD_KERNEL_CMDLINE += androidboot.wificountrycode=US
 BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8mm_tab/dtbo-imx8mm.img
 TARGET_BOARD_DTS_CONFIG ?= \
     imx8mm:imx8mm-nitrogen8mm_tab.dtb \
+    imx8mm:imx8mm-nitrogen8mm.dtb \
+    imx8mm:imx8mm-nitrogen8mm_rev2.dtb \
 
 BOARD_SEPOLICY_DIRS := \
     device/boundary/common/imx8m/sepolicy \
