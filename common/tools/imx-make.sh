@@ -136,7 +136,6 @@ fsl_git_path=${product_path%/*}
 
 # if bootloader and kernel not in arguments, all need to be made
 if [ ${build_bootloader_kernel_flag} -eq 0 ] && [ ${build_android_flag} -eq 0 ]; then
-    build_bootloader="bootloader";
     build_kernel="${OUT}/kernel";
     build_android_flag=1
 fi
