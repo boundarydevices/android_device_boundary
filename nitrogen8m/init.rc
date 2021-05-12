@@ -187,6 +187,9 @@ service bugreport /system/bin/dumpstate -d -p -B -z \
     keycodes 114 115 116
 
 on fs
+    # Do like udev and kick block thread every 2 seconds
+    write /sys/module/block/parameters/events_dfl_poll_msecs 2000
+
     # mount ext4 partitions
     mount_all /vendor/etc/fstab.freescale --early
 
