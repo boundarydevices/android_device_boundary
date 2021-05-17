@@ -61,7 +61,7 @@ setenv cont 1
 setenv dtfound 0
 setenv fdt_high 0xffffffffffffffff
 while itest.s "${cont}" == "1" ; do
-	if adtimg get dt --index=${index} a_fdtbo s_fdtbo ; then
+	if adtimg get dt --index=0x${index} a_fdtbo s_fdtbo ; then
 		fdt addr ${a_fdtbo}
 		fdt get value dtcomp / compatible
 		if itest.s "${dtcomp}" == "${dtexp}" ; then
