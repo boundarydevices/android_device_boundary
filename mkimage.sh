@@ -4,6 +4,12 @@ if [ $# -lt 2 ]; then
 	exit -1 ;
 fi
 
+MKFS_VER=`mkfs.ext4 -V 2>&1 | head -n1 | awk '{ print $2 }'`
+MKFS_MIN_VER=1.43
+if awk "BEGIN {exit !($MKFS_VER >= $MKFS_MIN_VER)}"; then
+    MKFS_OPTS="-O '^metadata_csum,^64bit'"
+fi
+
 outfilename=$1
 outsizemb=$2
 
@@ -120,7 +126,7 @@ sudo umount $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 4 $DATASTART $DATAEND   
-sudo mkfs.ext4 -L DATA $loopdev
+sudo mkfs.ext4 $MKFS_OPTS -L DATA $loopdev
 sleep 1
 udisks --mount $loopdev
 mountpoint=`mount | grep $loopdev | awk '{ print $3 }'`;
@@ -143,14 +149,14 @@ sudo resize2fs $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 6 $CACHESTART $CACHEEND   
-sudo mkfs.ext4 -L CACHE $loopdev
+sudo mkfs.ext4 $MKFS_OPTS -L CACHE $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 7 $VENDSTART $VENDEND   
-sudo mkfs.ext4 -L VENDOR $loopdev
+sudo mkfs.ext4 $MKFS_OPTS -L VENDOR $loopdev
 sudo losetup -d $loopdev
 
 setuploop $outfilename 8 $MISCSTART $MISCEND
-sudo mkfs.ext4 -L MISC $loopdev
+sudo mkfs.ext4 $MKFS_OPTS -L MISC $loopdev
 sudo losetup -d $loopdev
 
