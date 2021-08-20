@@ -7,7 +7,7 @@ fi
 MKFS_VER=`mkfs.ext4 -V 2>&1 | head -n1 | awk '{ print $2 }'`
 MKFS_MIN_VER=1.43
 if awk "BEGIN {exit !($MKFS_VER >= $MKFS_MIN_VER)}"; then
-    MKFS_OPTS="-O '^metadata_csum,^64bit'"
+    MKFS_OPTS="-O ^metadata_csum,^64bit"
 fi
 
 outfilename=$1
