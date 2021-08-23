@@ -27,6 +27,10 @@
 /data/vendor/ss(/.*)?           u:object_r:tee_data_file:s0
 /data/vendor/.opencl-cache(/.*)?       u:object_r:opencl_cache_file:s0
 
+# NFC labeling
+/data/nfc(/.*)?        u:object_r:nfc_data_file:s0
+/data/vendor/nfc(/.*)? u:object_r:nfc_vendor_data_file:s0
+
 ###############################################
 # same-process HAL files and their dependencies
 #

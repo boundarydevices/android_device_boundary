@@ -1,0 +1,8 @@
+#============= hal_nfc_default ==============
+allow hal_nfc_default nxpnfc_hwservice:hwservice_manager { add find};
+
+allow hal_nfc_default nfc_device:chr_file { read write };
+allow hal_nfc_default nfc_data_file:file getattr;
+
+allow hal_nfc_default nfc_vendor_data_file:dir { getattr add_name read write search remove_name };
+allow hal_nfc_default nfc_vendor_data_file:file { getattr open create read write unlink setattr };

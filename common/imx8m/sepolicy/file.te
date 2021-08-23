@@ -5,3 +5,4 @@ type sysfs_soc, sysfs_type, fs_type;
 type binderfs, fs_type;
 type binderfs_logs, fs_type;
 type binderfs_logs_proc, fs_type;
+type nfc_vendor_data_file, file_type, data_file_type;
