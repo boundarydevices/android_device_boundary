@@ -26,14 +26,14 @@
             "Monitor":true
         },
         {
-            "Name":"battery",
+            "Name":"max1726x_battery",
             "Type":"BATTERY",
             "HotThreshold":[
                 "NAN",
                 "NAN",
                 "NAN",
-                "NAN",
-                "NAN",
+                85.0,
+                95.0,
                 "NAN",
                 "NAN"
             ],
