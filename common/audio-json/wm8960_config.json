@@ -16,6 +16,7 @@
   "builtin_mic_ctl": [
     {"name": "ALC Function", "type": "int", "val": 3},
     {"name": "Left Input Mixer Boost Switch", "type": "int", "val": 1},
+    {"name": "Right Input Mixer Boost Switch", "type": "int", "val": 1},
     {"name": "ADC PCM Capture Volume", "type": "int", "val": 230},
     {"name": "Capture Volume", "type": "int", "val": 60}
   ],
@@ -23,6 +24,7 @@
   "headset_mic_ctl": [
     {"name": "ALC Function", "type": "int", "val": 3},
     {"name": "Left Input Mixer Boost Switch", "type": "int", "val": 1},
+    {"name": "Right Input Mixer Boost Switch", "type": "int", "val": 1},
     {"name": "ADC PCM Capture Volume", "type": "int", "val": 230},
     {"name": "Capture Volume", "type": "int", "val": 60}
   ],
