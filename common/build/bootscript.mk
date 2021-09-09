@@ -6,7 +6,7 @@ BOOTSCRIPT_ARCH := arm64
 endif
 
 BOOTSCRIPT_TARGET := $(PRODUCT_OUT)/preboot/boot.scr
-$(BOOTSCRIPT_TARGET): device/boundary/$(TARGET_PRODUCT)/bootscript.txt
+$(BOOTSCRIPT_TARGET): $(LOCAL_PATH)/bootscript.txt
 	mkdir -p $(dir $@)
 	mkimage -A $(BOOTSCRIPT_ARCH) -O linux -T script -C none -a 0 -e 0 -n "boot script" -d $< $@
 
