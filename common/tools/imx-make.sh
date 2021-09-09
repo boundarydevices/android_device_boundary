@@ -1,4 +1,6 @@
 #!/bin/bash
+# Stop if a command fail
+set -e
 
 # help function, it display the usage of this script.
 help() {
@@ -58,7 +60,7 @@ handle_special_arg()
 
 download_prebuilt_bootloader()
 {
-    UBOOT_CONFIG=device/boundary/${TARGET_PRODUCT}/UbootKernelBoardConfig.mk
+    UBOOT_CONFIG=${product_path}/UbootKernelBoardConfig.mk
     UBOOT_NAMES=`awk '/TARGET_BOOTLOADER_PREBUILT/{$1=$2=""; print $0}' ${UBOOT_CONFIG}`
     if [ -z "${UBOOT_NAMES}" ]; then
         echo "No U-Boot prebuilt defined for ${TARGET_PRODUCT}"
@@ -95,6 +97,11 @@ parallel_option=""
 clean_build=0
 TOP=`pwd`
 
+product_makefile=`pwd`/`find device -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
+product_path=${product_makefile%/*}
+fsl_git_path=`pwd`/device/boundary
+soc_path=${fsl_git_path}/common/imx8m
+
 # process of the arguments
 args=( "$@" )
 for arg in ${args[*]} ; do
@@ -128,11 +135,6 @@ for arg in ${args[*]} ; do
         *) handle_special_arg ${arg};;
     esac
 done
-
-product_makefile=`pwd`/`find device/boundary -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
-product_path=${product_makefile%/*}
-soc_path=${product_path%/*}/common/imx8m
-fsl_git_path=${product_path%/*}
 
 # if bootloader and kernel not in arguments, all need to be made
 if [ ${build_bootloader_kernel_flag} -eq 0 ] && [ ${build_android_flag} -eq 0 ]; then
