@@ -100,7 +100,7 @@ BOARD_KERNEL_CMDLINE += transparent_hugepage=never loop.max_part=7
 # Default wificountrycode
 BOARD_KERNEL_CMDLINE += androidboot.wificountrycode=US
 
-BOARD_PREBUILT_DTBOIMAGE := out/target/product/nitrogen8mn/dtbo-imx8mn.img
+BOARD_PREBUILT_DTBOIMAGE := out/target/product/$(PRODUCT_DEVICE)/dtbo-imx8mn.img
 TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mn:imx8mn-nitrogen8_nano.dtb \
 	imx8mn:imx8mn-nitrogen8_nano-m4.dtb \
