@@ -1,6 +1,7 @@
 {
   "driver_name": "cs42888",
   "bus_name": "bus0_media_out",
+  "secondary_bus_name": "bus1_system_sound_out",
   "supported_out_devices": ["speaker", "bus"],
   "supported_in_devices": ["builtin_mic"],
   "support_multi_chn": 1,
