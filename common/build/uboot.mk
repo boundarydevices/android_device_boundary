@@ -62,8 +62,7 @@ ifeq ($(TARGET_UBOOT_ARCH), arm)
 ifneq ($(AARCH32_GCC_CROSS_COMPILE),)
 UBOOT_CROSS_COMPILE := $(strip $(AARCH32_GCC_CROSS_COMPILE))
 else
-UBOOT_TOOLCHAIN_ABS := $(realpath prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin)
-UBOOT_CROSS_COMPILE := $(UBOOT_TOOLCHAIN_ABS)/arm-linux-androidkernel-
+$(error shell env AARCH32_GCC_CROSS_COMPILE is not set)
 endif
 UBOOT_SRC_ARCH := arm
 UBOOT_CFLAGS :=
@@ -72,8 +71,7 @@ else ifeq ($(TARGET_UBOOT_ARCH), arm64)
 ifneq ($(AARCH64_GCC_CROSS_COMPILE),)
 UBOOT_CROSS_COMPILE := $(strip $(AARCH64_GCC_CROSS_COMPILE))
 else
-UBOOT_TOOLCHAIN_ABS := $(realpath prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin)
-UBOOT_CROSS_COMPILE := $(UBOOT_TOOLCHAIN_ABS)/aarch64-linux-androidkernel-
+$(error shell env AARCH64_GCC_CROSS_COMPILE is not set)
 endif
 UBOOT_SRC_ARCH := arm64
 UBOOT_CFLAGS :=
