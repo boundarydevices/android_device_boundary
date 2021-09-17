@@ -5,15 +5,17 @@ else
 BOOTSCRIPT_ARCH := arm64
 endif
 
+MKIMAGE := $(PRODUCT_OUT)/obj/UBOOT_OBJ/tools/mkimage
+
 BOOTSCRIPT_TARGET := $(PRODUCT_OUT)/preboot/boot.scr
-$(BOOTSCRIPT_TARGET): $(LOCAL_PATH)/bootscript.txt
+$(BOOTSCRIPT_TARGET): $(MKIMAGE) $(LOCAL_PATH)/bootscript.txt
 	mkdir -p $(dir $@)
-	mkimage -A $(BOOTSCRIPT_ARCH) -O linux -T script -C none -a 0 -e 0 -n "boot script" -d $< $@
+	$(MKIMAGE) -A $(BOOTSCRIPT_ARCH) -O linux -T script -C none -a 0 -e 0 -n "boot script" -d $< $@
 
 UPGRADE_TARGET := $(PRODUCT_OUT)/preboot/upgrade.scr
-$(UPGRADE_TARGET): $(UBOOT_IMX_PATH)/uboot-imx/board/boundary/bootscripts/upgrade.txt
+$(UPGRADE_TARGET): $(MKIMAGE) $(UBOOT_IMX_PATH)/uboot-imx/board/boundary/bootscripts/upgrade.txt
 	mkdir -p $(dir $@)
-	mkimage -A $(BOOTSCRIPT_ARCH) -O linux -T script -C none -a 0 -e 0 -n "upgrade script" -d $< $@
+	$(MKIMAGE) -A $(BOOTSCRIPT_ARCH) -O linux -T script -C none -a 0 -e 0 -n "upgrade script" -d $< $@
 
 .PHONY: bootscript
 bootscript: $(BOOTSCRIPT_TARGET) $(UPGRADE_TARGET)
