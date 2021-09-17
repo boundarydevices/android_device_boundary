@@ -20,7 +20,6 @@
 #include <errno.h>
 #include <string.h>
 
-#include "common.h"
 #include "recovery_ui/device.h"
 #include "recovery_ui/screen_ui.h"
 
