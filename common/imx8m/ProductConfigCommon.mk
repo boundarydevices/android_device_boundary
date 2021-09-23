@@ -1,3 +1,5 @@
+include $(CONFIG_REPO_PATH)/common/build/build_info.mk
+# -------@block_infrastructure-------
 ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
@@ -8,164 +10,61 @@ $(call inherit-product, packages/services/Car/car_product/build/car.mk)
 endif
 $(call inherit-product, $(TOPDIR)frameworks/base/data/sounds/AllAudio.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
+# Installs gsi keys into ramdisk.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+PRODUCT_PACKAGES += \
+    adb_debug.prop
+
+# -------@block_common_config-------
 # overrides
 PRODUCT_BRAND := Android
-PRODUCT_MANUFACTURER := freescale
+PRODUCT_MANUFACTURER := nxp
 
-# Android infrastructures
-PRODUCT_PACKAGES += \
-    CactusPlayer \
-    ExtractorPkg \
-    charger_res_images \
-    ethernet \
-    libedid \
-    libion \
-    slideshow \
-    verity_warning_images
+# related to the definition and load of library modules
+TARGET_BOARD_PLATFORM := imx
+
+PRODUCT_SHIPPING_API_LEVEL := 30
+
+# -------@block_app-------
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    pm.dexopt.boot=quicken
+
+# Enforce privapp-permissions whitelist
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.control_privapp_permissions=enforce
+
+
+# -------@block_multimedia_codec-------
 
 ifneq ($(PRODUCT_IMX_CAR),true)
 PRODUCT_PACKAGES += \
-    Camera \
-    CubeLiveWallpapers \
-    Email \
-    Gallery2 \
-    LegacyCamera \
-    LiveWallpapersPicker \
-    SoundRecorder
-endif
-
-# HAL
-PRODUCT_PACKAGES += \
-    copybit.imx \
-    gralloc.imx \
-    hwcomposer.imx \
-    lights.imx \
-    overlay.imx \
-    power.imx
-
-ifeq ($(AB_OTA_UPDATER),true)
-# A/B OTA
-PRODUCT_PACKAGES += \
-    SystemUpdaterSample \
-    android.hardware.boot@1.0-impl.imx \
-    android.hardware.boot@1.0-impl.imx.recovery \
-    android.hardware.boot@1.0-service.imx \
-    bootctrl.avb \
-    update_engine \
-    update_engine_client \
-    update_engine_sideload \
-    update_verifier
-
-PRODUCT_HOST_PACKAGES += \
-    brillo_update_payload
-
-PRODUCT_COPY_FILES += \
-    device/boundary/common/imx8m/com.example.android.systemupdatersample.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.example.android.systemupdatersample.xml
-else
-# non-A/B OTA
-PRODUCT_PACKAGES += \
-    FSLOta
-
-PRODUCT_COPY_FILES += \
-    device/boundary/common/ota/com.fsl.android.ota.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/com.fsl.android.ota.xml \
-    device/boundary/common/ota/ota.conf:$(TARGET_COPY_OUT_VENDOR)/etc/ota.conf
-endif
-
-# audio
-PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio.primary.imx \
-    audio.r_submix.default \
-    audio.usb.default \
-    tinycap \
-    tinymix \
-    tinyplay \
-    tinypcminfo
-
-# LDAC codec
-PRODUCT_PACKAGES += \
-    libldacBT_enc \
-    libldacBT_abr
-
-# wifi
-PRODUCT_PACKAGES += \
-    hostapd \
-    hostapd_cli \
-    wpa_supplicant \
-    wpa_supplicant.conf
-
-PRODUCT_PACKAGES += \
-    netutils-wrapper-1.0
-
-# sensor
-PRODUCT_PACKAGES += \
-    fsl_sensor_fusion \
-    libbt-vendor
-
-# memtrack
-PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
-    memtrack.imx
-
-# camera
-ifneq ($(PRODUCT_IMX_CAR),true)
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service \
-    camera.device@1.0-impl \
-    camera.device@3.2-impl \
-    camera.imx
+    Gallery2
 endif
 
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-service.imx
+    vsidaemon \
+    CactusPlayer
 
-# display
-PRODUCT_PACKAGES += \
-    libdrm_android \
-    libfsldisplay \
-    nxp.hardware.display@1.0
-
-# drm
-PRODUCT_PACKAGES += \
-    libdrmpassthruplugin \
-    libfwdlockengine
-
-# vivante libdrm support
-PRODUCT_PACKAGES += \
-    libdrm_vivante
-
-# gpu debug tool
-PRODUCT_PACKAGES += \
-    gmem_info \
-    gpu-top
-
-# Omx related libs, please align to device/boundary/proprietary/omx/fsl-omx.mk
+# Omx related libs
 PRODUCT_PACKAGES += \
     lib_aac_dec_v2_arm12_elinux \
     lib_aacd_wrap_arm12_elinux_android \
-    lib_flac_dec_v2_arm11_elinux \
     lib_mp3_dec_v2_arm12_elinux \
     lib_mp3d_wrap_arm12_elinux_android \
-    lib_nb_amr_dec_v2_arm9_elinux \
-    lib_nb_amr_enc_v2_arm11_elinux \
-    lib_wb_amr_dec_arm9_elinux \
-    lib_wb_amr_enc_arm11_elinux \
     media_codecs_c2_ac3.xml \
     media_codecs_c2_ddp.xml \
     media_codecs_c2_ms.xml \
     media_codecs_c2_wmv9.xml \
     media_codecs_c2_ra.xml \
     media_codecs_c2_rv.xml \
+    media_codecs.xml \
     media_codecs_performance.xml \
     media_profiles_V1_0.xml \
-    media_codecs_google_c2_video.xml \
     media_codecs_c2.xml \
     media_codecs_performance_c2.xml
-
-PRODUCT_PACKAGES += \
-    media_codecs.xml
 
 #parser
 PRODUCT_PACKAGES += \
@@ -180,7 +79,8 @@ PRODUCT_PACKAGES += \
     lib_mp3_parser_arm11_elinux.3.0 \
     lib_mp4_parser_arm11_elinux.3.0 \
     lib_mpg2_parser_arm11_elinux.3.0 \
-    lib_ogg_parser_arm11_elinux.3.0 \
+    lib_ogg_parser_arm11_elinux.3.0
+
 
 # Omx excluded libs
 PRODUCT_PACKAGES += \
@@ -214,45 +114,7 @@ PRODUCT_PACKAGES += \
     lib_c2_imx_eac3_dec \
     lib_c2_imx_mp3_dec \
     lib_c2_imx_ra_dec \
-    lib_c2_imx_wma_dec \
-
-# Support Dynamic partition userspace fastboot
-PRODUCT_PACKAGES += \
-    fastbootd \
-
-# Copy soc related config and binary to board
-PRODUCT_COPY_FILES += \
-    $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
-    $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_codecs_google_c2_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_telephony.xml \
-    $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_codecs_google_c2_tv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_tv.xml \
-    $(FSL_PROPRIETARY_PATH)/fsl-proprietary/media-profile/media_profiles_720p.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_720p.xml \
-    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
-    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
-    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    pm.dexopt.boot=quicken
-
-ifneq ($(PRODUCT_HAS_RIL),true)
-# wifionly device
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.radio.noril=yes
-endif
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.mediacomponents.package=com.nxp.extractorpkg
-
-# Freescale multimedia parser related prop setting
-# Define fsl avi/aac/asf/mkv/flv/flac format support
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.FSL_AVI_PARSER=1 \
-    ro.FSL_AAC_PARSER=1 \
-    ro.FSL_FLV_PARSER=1 \
-    ro.FSL_MKV_PARSER=1 \
-    ro.FSL_FLAC_PARSER=1 \
-    ro.FSL_MPG2_PARSER=1
+    lib_c2_imx_wma_dec
 
 # Set c2 codec in default
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -260,12 +122,226 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.omx_default_rank=0x200 \
     debug.stagefright.c2-poolmask=0x70000
 
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
+-include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_real_dec/fsl_real_dec.mk
+-include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_ms_codec/fsl_ms_codec.mk
+
+PREBUILT_FSL_IMX_CODEC := true
+
+# -------@enable isp copy-------
+PREBUILT_FSL_IMX_ISP := true
+
+# -------@block_storage-------
+
+ifeq ($(AB_OTA_UPDATER),true)
+PRODUCT_PACKAGES += \
+    SystemUpdaterSample
+
+PRODUCT_COPY_FILES += \
+    $(CONFIG_REPO_PATH)/imx8m/com.example.android.systemupdatersample.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.example.android.systemupdatersample.xml
+
+
+# A/B OTA
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.1-impl \
+    android.hardware.boot@1.1-impl.recovery \
+    android.hardware.boot@1.1-service \
+    update_engine \
+    update_engine_client \
+    update_engine_sideload \
+    update_verifier
+
+PRODUCT_HOST_PACKAGES += \
+    brillo_update_payload
+else
+# non-A/B OTA
+PRODUCT_PACKAGES += \
+    FSLOta
+
+PRODUCT_COPY_FILES += \
+    device/boundary/common/ota/com.fsl.android.ota.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/com.fsl.android.ota.xml \
+    device/boundary/common/ota/ota.conf:$(TARGET_COPY_OUT_VENDOR)/etc/ota.conf
+endif
+
+# Support Dynamic partition userspace fastboot
+PRODUCT_PACKAGES += \
+    fastbootd \
+
+# enable incremental installation
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.incremental.enable=1
+
+# -------@block_power-------
+
+PRODUCT_PACKAGES += \
+    charger_res_images \
+    charger
+
+# health
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-impl-imx
+# -------@block_ethernet-------
+
+PRODUCT_PACKAGES += \
+    ethernet
+
+# -------@block_camera-------
+ifneq ($(PRODUCT_IMX_CAR),true)
+ifneq ($(POWERSAVE),true)
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.6-service-google \
+    android.hardware.camera.provider@2.6-impl-google \
+    libgooglecamerahal \
+    libgooglecamerahalutils \
+    lib_profiler \
+    libimxcamerahwl_impl
+
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-external-service \
+    android.hardware.camera.provider@2.4-impl \
+    camera.device@1.0-impl \
+    camera.device@3.2-impl
+endif
+endif
+
+# external camera feature demo
+PRODUCT_PACKAGES += \
+     Camera2Basic
+
+# -------@block_display-------
+ifneq ($(PRODUCT_IMX_CAR),true)
+PRODUCT_PACKAGES += \
+    CubeLiveWallpapers \
+    LiveWallpapersPicker
+endif
+
+PRODUCT_PACKAGES += \
+    libedid
+
+# HAL
+PRODUCT_PACKAGES += \
+    gralloc.imx \
+    hwcomposer.imx
+
+PRODUCT_PACKAGES += \
+    libdrm_android \
+    libdisplayutils \
+    libfsldisplay
+
+PRODUCT_HOST_PACKAGES += \
+    nxp.hardware.display@1.0
+
+PRODUCT_SOONG_NAMESPACES += external/mesa3d
+
+# -------@block_gpu-------
+# vivante libdrm support
+PRODUCT_PACKAGES += \
+    libdrm_vivante
+
+# gpu debug tool
+PRODUCT_PACKAGES += \
+    gmem_info \
+    gpu-top
+
+
+# -------@block_memory-------
+PRODUCT_PACKAGES += \
+    libion
+
+# memtrack
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
+    memtrack.imx
+
+# include a google recommand heap config file.
+include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
+
+# -------@block_security-------
+# drm
+PRODUCT_PACKAGES += \
+    libdrmpassthruplugin \
+    libfwdlockengine
 
 PRODUCT_DEFAULT_DEV_CERTIFICATE := \
-    device/boundary/common/security/testkey
+    $(CONFIG_REPO_PATH)/common/security/testkey
 
+ifeq ($(PRODUCT_IMX_TRUSTY),true)
+PRODUCT_PACKAGES += \
+    trusty_apploader \
+
+endif
+
+#OEM Unlock reporting
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.oem_unlock_supported=1
+
+# -------@block_audio-------
+ifneq ($(PRODUCT_IMX_CAR),true)
+PRODUCT_PACKAGES += \
+    SoundRecorder
+endif
+
+PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    audio.primary.imx \
+    audio.r_submix.default \
+    audio.usb.default \
+    tinycap \
+    tinymix \
+    tinyplay \
+    tinypcminfo
+
+
+PRODUCT_COPY_FILES += \
+    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
+
+# -------@block_wifi-------
+PRODUCT_PACKAGES += \
+    hostapd \
+    hostapd_cli \
+    wpa_supplicant \
+    wpa_cli \
+    wpa_supplicant.conf
+
+PRODUCT_PACKAGES += \
+    netutils-wrapper-1.0
+
+PRODUCT_PACKAGES += \
+    mlanutl
+
+ifneq ($(PRODUCT_HAS_RIL),true)
+# wifionly device
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.radio.noril=yes
+endif
+
+# -------@block_bluetooth-------
+
+PRODUCT_PACKAGES += \
+     libbt-vendor
+
+# LDAC codec
+PRODUCT_PACKAGES += \
+    libldacBT_enc \
+    libldacBT_abr
+
+# -------@block_sensor-------
+PRODUCT_PACKAGES += \
+    fsl_sensor_fusion
+
+# -------@block_input-------
+
+PRODUCT_COPY_FILES += \
+    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/eGalax_Touch_Screen.idc \
+    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/ft5x06.idc \
+    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/silead_ts.idc
+
+# -------@block_debug-------
 # In userdebug, add minidebug info the the boot image and the system server to support
 # diagnosing native crashes.
 ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
@@ -277,16 +353,11 @@ ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
     $(call add-product-dex-preopt-module-config,wifi-service,--generate-mini-debug-info)
 endif
 
-PRODUCT_AAPT_CONFIG := normal mdpi
+#Dumpstate HAL 1.1 support
+PRODUCT_PACKAGES += \
+    android.hardware.dumpstate@1.1-service.imx
 
-# Enforce privapp-permissions whitelist
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=enforce
-
-# include a google recommand heap config file.
-include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
-
--include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_real_dec/fsl_real_dec.mk
--include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_ms_codec/fsl_ms_codec.mk
-
-PREBUILT_FSL_IMX_CODEC := true
+# -------@block_treble-------
+# vndservicemanager
+PRODUCT_PACKAGES += \
+    vndservicemanager

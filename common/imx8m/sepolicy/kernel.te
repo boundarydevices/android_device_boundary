@@ -10,3 +10,8 @@ allow kernel vendor_file:file { read open map };
 allow kernel rootfs:file { execute };
 allow kernel vendor_configs_file:file { map };
 allow kernel vold_data_file:file { write };
+dontaudit kernel device:blk_file { create setattr };
+
+allow kernel shell_exec:file { read open execute map getattr };
+domain_auto_trans(kernel, shell_exec, ueventd)
+allow ueventd kernel:fd { use };

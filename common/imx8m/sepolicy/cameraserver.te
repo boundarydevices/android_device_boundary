@@ -1,5 +1,3 @@
-typeattribute cameraserver system_writes_vendor_properties_violators;
-
 get_prop(cameraserver, vendor_default_prop)
 
 allow cameraserver sysfs:dir { read open };

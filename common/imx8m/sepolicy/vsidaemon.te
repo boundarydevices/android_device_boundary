@@ -1,0 +1,24 @@
+type vsidaemon, domain;
+type vsidaemon_exec, exec_type, vendor_file_type, file_type;
+
+
+allow vsidaemon ueventd:fd { use };
+domain_auto_trans(kernel, shell_exec, ueventd)
+domain_auto_trans(ueventd, vsidaemon_exec, vsidaemon)
+allow ueventd vsidaemon_exec:file { getattr execute };
+allow ueventd kernel:fd { use };
+
+allow kernel shell_exec:file { read open execute };
+allow kernel vsi_daemon_ctrl_device:chr_file { open read write };
+
+allow vsidaemon ion_device:chr_file { open read write ioctl };
+allow vsidaemon video_device:chr_file { open read write ioctl map getattr };
+allow vsidaemon vsidaemon_exec:file { read open map getattr };
+allow vsidaemon vsi_daemon_ctrl_device:chr_file { open read write ioctl map getattr };
+allow vsidaemon vendor_data_file:dir { write };
+
+
+type vsi_data_file, file_type, data_file_type;
+
+allow vsidaemon vsi_data_file:dir { rw_dir_perms ra_dir_perms create_dir_perms };
+allow vsidaemon vsi_data_file:file { rw_file_perms create_file_perms };

@@ -7,7 +7,7 @@ init_daemon_domain(wcnss_filter)
 # talk to /dev/ttyHS0
 allow wcnss_filter hci_attach_dev:chr_file rw_file_perms;
 
-set_prop(wcnss_filter, wc_prop)
+set_prop(wcnss_filter, vendor_wc_prop)
 set_prop(wcnss_filter, vendor_bluetooth_prop)
 
 # write to proc/sysrq-trigger

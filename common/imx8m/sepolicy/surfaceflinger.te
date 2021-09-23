@@ -1,6 +1,6 @@
-typeattribute surfaceflinger system_writes_vendor_properties_violators;
-
 allow surfaceflinger debug_prop:property_service { set };
 allow surfaceflinger ashmem_device:chr_file {execute};
 allow surfaceflinger self:process execmem;
+allow surfaceflinger hal_graphics_allocator_default_tmpfs:file { read write getattr };
+
 get_prop(surfaceflinger, vendor_default_prop)

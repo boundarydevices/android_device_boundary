@@ -1,7 +1,6 @@
-typeattribute platform_app system_writes_vendor_properties_violators;
+allow platform_app hal_graphics_allocator_default_tmpfs:file { read write };
 
 get_prop(platform_app, vendor_default_prop)
-set_prop(platform_app, public_vendor_default_prop)
 
 allow platform_app tty_device:chr_file rw_file_perms;
 allow platform_app nfc_service:service_manager find;

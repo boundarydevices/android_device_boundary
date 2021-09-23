@@ -9,3 +9,6 @@ allow tee self:capability { setuid setgid sys_rawio };
 allow tee block_device:dir { search };
 allow tee mmc_rpmb_char_device:chr_file rw_file_perms;
 allow tee tee_data_file:dir create_dir_perms;
+
+# trusty_apploader operations
+allow tee vendor_file:file { read open map };
