@@ -108,9 +108,9 @@ setenv bootargs $bootargs androidboot.dtbo_idx=${index} androidboot.keystore=sof
 
 if itest.s "xmmc" == "x$devtype" ; then
 	if itest.s "x0" == "x$devnum" ; then
-		bootdev=soc@0/soc@0:bus@30800000/30b40000.mmc
+		bootdev=soc@0/30800000.bus/30b40000.mmc
 	elif itest.s "x1" == "x$devnum" ; then
-		bootdev=soc@0/soc@0:bus@30800000/30b50000.mmc
+		bootdev=soc@0/30800000.bus/30b50000.mmc
 	fi
 fi
 setenv bootargs $bootargs androidboot.bootdevice=$bootdev

@@ -11,6 +11,7 @@
     {
       "camera_type": "back",
       "camera_name": "mx6s-csi,mxc-mipi-csi2.0",
+      "bus_info": "platform:30b80000.csi2_bridge",
       "subdev_path": "/dev/v4l-subdev0",
       "orientation": "0",
       "buffer_type": "mmap",
