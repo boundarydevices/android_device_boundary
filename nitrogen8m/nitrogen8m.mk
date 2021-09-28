@@ -200,6 +200,7 @@ PRODUCT_COPY_FILES += \
 # -------@block_camera-------
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/camera_config_imx8mq.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/camera_config_imx8mq.json \
+    $(IMX_DEVICE_PATH)/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
 
 PRODUCT_SOONG_NAMESPACES += hardware/google/camera
 PRODUCT_SOONG_NAMESPACES += vendor/nxp-opensource/imx/camera
