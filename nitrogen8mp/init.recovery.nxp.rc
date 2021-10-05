@@ -4,5 +4,5 @@ on init
 
     setprop sys.usb.configfs 1
 
-on post-fs-data
+on early-boot
     setprop sys.usb.controller "38100000.dwc3"

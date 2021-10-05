@@ -10,8 +10,8 @@
   "camera_metadata": [
     {
       "camera_type": "back",
-      "camera_name": "viv_v4l2_device",
-      "device_node": "/dev/video0",
+      "camera_name": "viv_v4l20",
+      "bus_info": "platform:viv0",
       "orientation": "0",
       "buffer_type": "mmap",
       "ActiveArrayWidth": "1920",
@@ -23,23 +23,36 @@
       "FocalLength": "4.0",
       "MaxJpegSize": "4194304",
       "MinFrameDuration": "33331760",
-      "MaxFrameDuration": "300000000"
+      "MaxFrameDuration": "300000000",
+      "ae_comp_min": "-4",
+      "ae_comp_max": "4",
+      "ae_comp_step_nummerator": "1",
+      "ae_comp_step_denominator": "2",
+      "exposure_ns_min": "68000",
+      "exposure_ns_max": "33360000"
     },
     {
       "camera_type": "front",
-      "camera_name": "uvc",
+      "camera_name": "viv_v4l21",
+      "bus_info": "platform:viv1",
       "orientation": "0",
-      "buffer_type": "dma",
+      "buffer_type": "mmap",
       "ActiveArrayWidth": "1920",
       "ActiveArrayHeight": "1080",
       "PixelArrayWidth": "1920",
       "PixelArrayHeight": "1080",
-      "PhysicalWidth": "2.688",
-      "PhysicalHeight": "1.512",
-      "FocalLength": "3.42",
+      "PhysicalWidth": "4.032",
+      "PhysicalHeight": "2.268",
+      "FocalLength": "4.0",
       "MaxJpegSize": "4194304",
       "MinFrameDuration": "33331760",
-      "MaxFrameDuration": "300000000"
+      "MaxFrameDuration": "300000000",
+      "ae_comp_min": "-4",
+      "ae_comp_max": "4",
+      "ae_comp_step_nummerator": "1",
+      "ae_comp_step_denominator": "2",
+      "exposure_ns_min": "68000",
+      "exposure_ns_max": "33360000"
     }
   ]
 }

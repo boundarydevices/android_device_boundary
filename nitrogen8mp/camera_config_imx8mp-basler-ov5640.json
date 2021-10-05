@@ -1,0 +1,52 @@
+{
+  "__readme": [
+    "Basic Camera HAL v3 configuration."
+  ],
+
+  "hal_version": "3",
+  "cam_blit_copy": "GPU_3D",
+  "cam_blit_csc": "GPU_3D",
+
+  "camera_metadata": [
+    {
+      "camera_type": "back",
+      "camera_name": "viv_v4l20",
+      "bus_info": "platform:viv0",
+      "orientation": "0",
+      "buffer_type": "mmap",
+      "ActiveArrayWidth": "3840",
+      "ActiveArrayHeight": "2160",
+      "PixelArrayWidth": "3840",
+      "PixelArrayHeight": "2160",
+      "PhysicalWidth": "8.064",
+      "PhysicalHeight": "4.536",
+      "FocalLength": "4.0",
+      "MaxJpegSize": "6291456",
+      "MinFrameDuration": "33331760",
+      "MaxFrameDuration": "300000000",
+      "ae_comp_min": "-4",
+      "ae_comp_max": "4",
+      "ae_comp_step_nummerator": "1",
+      "ae_comp_step_denominator": "2",
+      "exposure_ns_min": "68000",
+      "exposure_ns_max": "33360000"
+    },
+    {
+      "camera_type": "front",
+      "camera_name": "mxc_isi.1.capture",
+      "orientation": "0",
+      "mplane": "1",
+      "buffer_type": "dma",
+      "ActiveArrayWidth": "2592",
+      "ActiveArrayHeight": "1944",
+      "PixelArrayWidth": "2592",
+      "PixelArrayHeight": "1944",
+      "PhysicalWidth": "3.6288",
+      "PhysicalHeight": "2.7216",
+      "FocalLength": "3.37",
+      "MaxJpegSize": "8388608",
+      "MinFrameDuration": "33331760",
+      "MaxFrameDuration": "300000000"
+    }
+  ]
+}

@@ -29,21 +29,21 @@
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
-                <mixPort name="esai output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_HW_AV_SYNC">
+                <mixPort name="lpa output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_HW_AV_SYNC">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="48000,96000,192000,384000,768000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
-                    <profile name="" format="AUDIO_FORMAT_PCM_FLOAT"
-                             samplingRates="48000,96000,192000,384000,768000"
-                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
-                <mixPort name="dsd output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD">
-                    <profile name="" format="AUDIO_FORMAT_DSD"
-                             samplingRates="2822400,5644800,11289600,22579200" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                <mixPort name="hi-res output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_HW_AV_SYNC">
+                    <profile name="" format="AUDIO_FORMAT_PCM_FLOAT"
+                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
                 <mixPort name="hdmi output" role="source">
                     <profile name="" format="AUDIO_FORMAT_PCM_8_24_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </mixPort>
+                <mixPort name="passthrough output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="32000,44100,48000,88200,96000,176400,192000" channelMasks="AUDIO_CHANNEL_NONE"/>
                 </mixPort>
 
                 <mixPort name="primary input" role="sink">
@@ -75,13 +75,13 @@
                 <route type="mix" sink="Speaker"
                        sources="primary output"/>
                 <route type="mix" sink="Wired Headphones"
-                       sources="dsd output,esai output,primary output"/>
+                       sources="primary output"/>
                 <route type="mix" sink="Wired Headset"
-                       sources="dsd output,esai output,primary output"/>
+                       sources="primary output"/>
                 <route type="mix" sink="Line-Out"
-                       sources="dsd output,esai output,primary output"/>
+                       sources="hi-res output,lpa output,primary output"/>
                 <route type="mix" sink="HDMI Out"
-                       sources="hdmi output"/>
+                       sources="passthrough output,hdmi output"/>
 
                 <route type="mix" sink="primary input"
                        sources="Wired Headset Mic,Built-In Mic,Spdif-In"/>

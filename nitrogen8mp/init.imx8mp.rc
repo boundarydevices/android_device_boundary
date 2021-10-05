@@ -16,6 +16,10 @@ on early-boot
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
     chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+    chown root system /sys/devices/system/cpu/cpu2/online
+    chmod 0664 /sys/devices/system/cpu/cpu2/online
+    chown root system /sys/devices/system/cpu/cpu3/online
+    chmod 0664 /sys/devices/system/cpu/cpu3/online
 
 on property:sys.boot_completed=1
     # Set default CPU frequency governor
@@ -25,6 +29,11 @@ on property:sys.boot_completed=1
     # Set up and down limit to 200us/200us
     write /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us 200
     write /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us 200
+    write /proc/sys/kernel/sched_util_clamp_min 512
+    write /sys/devices/platform/soc@0/30c00000.bus/30e20000.audio-blk-ctrl/power/control auto
+    write /sys/devices/platform/soc@0/32c00000.bus/32ec0000.media-blk-ctrl/power/control auto
+    write /sys/devices/platform/soc@0/30c00000.bus/32fc0000.hdmi-blk-ctrl/power/control auto
+    write /sys/clk_ctrl/enable_clk_disable_unused 1
 
 on property:sys.boot_completed=1
     # update cpuset now that processors are up
@@ -42,10 +51,13 @@ on property:sys.boot_completed=1
     # little cores, not on bigs to be used only by init
     write /dev/cpuset/system-background/cpus 0-2
 
+on post-fs-data
+    mkdir /data/vendor/isp 0771 system camera
+
 on early-boot
-    export VSI_LOG_LEVEL 0
+    export ISP_LOG_LEVEL 4
     start isp_media_server
 
-service isp_media_server /vendor/bin/isp_media_server /vendor/etc/configs/isp/daA3840_30mc_1080P.json
+service isp_media_server /vendor/bin/isp_media_server
     group camera
     oneshot

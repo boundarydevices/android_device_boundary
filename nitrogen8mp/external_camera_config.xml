@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <ExternalCamera>
     <Provider>
-        <ignore> <!-- Internal video devices to be ignored by external camera HAL -->
-            <id>1</id> <!-- No leading/trailing spaces -->
-            <id>2</id>
-            <id>3</id>
+        <ignore>
+            <!-- Internal video devices to be ignored by external camera HAL -->
+            <!-- No leading/trailing spaces -->
+            <!-- <id>0</id>  -->
         </ignore>
     </Provider>
-    <!-- See ExternalCameraUtils.cpp for default values of Device configurations below-->
+    <!-- See ExternalCameraUtils.cpp for default values of Device configurations below -->
     <Device>
         <!-- Max JPEG buffer size in bytes-->
-        <MaxJpegBufferSize bytes="3145728"/> <!-- 3MB (~= 1080p YUV420) -->
+        <MaxJpegBufferSize bytes="3145728"/>
         <!-- Size of v4l2 buffer queue when streaming >= 30fps -->
         <!-- Larger value: more request can be cached pipeline (less janky)  -->
         <!-- Smaller value: use less memory -->
-        <NumVideoBuffers count="8"/>
+        <NumVideoBuffers count="4"/>
         <!-- Size of v4l2 buffer queue when streaming < 30fps -->
         <NumStillBuffers count="2"/>
 
@@ -24,10 +23,8 @@
         <FpsList>
             <!-- width/height must be increasing, fpsBound must be decreasing-->
             <Limit width="640" height="480" fpsBound="60.0"/>
-            <Limit width="720" height="480" fpsBound="60.0"/>
-            <Limit width="960" height="560" fpsBound="60.0"/>
-            <Limit width="1280" height="720" fpsBound="60.0"/>
-            <Limit width="1920" height="1080" fpsBound="60.0"/>
+            <Limit width="1280" height="720" fpsBound="30.0"/>
+            <Limit width="1920" height="1080" fpsBound="30.0"/>
             <!-- image size larger than the last entry will not be supported-->
         </FpsList>
     </Device>

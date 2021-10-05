@@ -16,7 +16,7 @@ define build_imx_uboot
         $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ PLAT=`echo $(2) | cut -d '-' -f1` clean; \
     fi; \
     if [ `echo $(2) | cut -d '-' -f2` = "trusty" ] && [ `echo $(2) | rev | cut -d '-' -f1` != "uuu" ]; then \
-        cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/tee-imx8mp.bin $(UBOOT_OUT)/tee.bin; \
+        cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/tee-imx8mp.bin $(UBOOT_OUT)/tee-imx8mp.bin; \
         cp $(UBOOT_IMX_PATH)/uboot-imx/bl31-tee-iMX8MP.bin $(UBOOT_OUT)/bl31-tee-iMX8MP.bin; \
     else \
         cp $(UBOOT_IMX_PATH)/uboot-imx/bl31-iMX8MP.bin $(UBOOT_OUT)/bl31-iMX8MP.bin; \
