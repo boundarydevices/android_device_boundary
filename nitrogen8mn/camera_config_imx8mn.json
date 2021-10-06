@@ -10,10 +10,11 @@
   "camera_metadata": [
     {
       "camera_type": "back",
-      "camera_name": "mx6s-csi,mxc_mipi-csi.0",
+      "camera_name": "mxc_isi.0.capture",
       "subdev_path": "/dev/v4l-subdev0",
       "orientation": "0",
-      "buffer_type": "mmap",
+      "mplane": "1",
+      "buffer_type": "dma",
       "ActiveArrayWidth": "2592",
       "ActiveArrayHeight": "1944",
       "PixelArrayWidth": "2592",

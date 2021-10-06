@@ -14,14 +14,15 @@
 /dev/trusty-ipc-dev0      0660   system     drmrpc
 /dev/gpiochip*            0660   system     system
 /dev/i2c*                 0660   system     system
+/dev/block/pmem0          0660    system    system
 
 # partitions properties
-/dev/block/platform/soc@0/30800000.bus/30b40000\.mmc/by-name/frp 0600   system     system
-/dev/block/platform/soc@0/30800000.bus/30b50000\.mmc/by-name/frp 0600   system     system
-/dev/block/platform/soc@0/30800000.bus/30b60000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/30800000\.bus/30b40000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/30800000\.bus/30b50000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/30800000\.bus/30b60000\.mmc/by-name/frp 0600   system     system
 
 # sysfs properties
-/sys/devices/platform/backlight_*   brightness  0660  system system
+/sys/devices/platform/backlight*    brightness  0660  system system
 /sys/devices/platform/bt-rfkill*    state       0660  bluetooth bluetooth
 /sys/devices/platform/busfreq*      enable      0660  system system
 /sys/devices/system/cpu/cpu*        online      0660  root   system

@@ -44,7 +44,7 @@ on early-boot
     mount functionfs mtp /dev/usb-ffs/mtp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
     mount functionfs ptp /dev/usb-ffs/ptp rmode=0770,fmode=0660,uid=1024,gid=1024,no_disconnect=1
     setprop sys.usb.mtp.device_type 3
-    setprop vendor.usb.config ${sys.usb.controller}
+    setprop vendor.usb.config "ci_hdrc.0"
     write /sys/module/libcomposite/parameters/disable_l1_for_hs "y"
     symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
 
