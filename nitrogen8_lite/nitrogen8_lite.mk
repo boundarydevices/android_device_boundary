@@ -299,3 +299,6 @@ PRODUCT_PACKAGES += \
     candump \
     cangen \
     cansend
+
+# FOSS Browser
+PRODUCT_PACKAGES += foss_browser
