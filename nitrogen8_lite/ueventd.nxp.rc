@@ -5,8 +5,9 @@
 /dev/snd/*                0660   system     audio
 /dev/video*               0660   system     camera
 /dev/v4l*                 0660   system     camera
-/dev/mxc_hantro           0660   media      drmrpc
-/dev/mxc_hantro_h1        0660   media      drmrpc
+/dev/mxc_hantro           0666   media      drmrpc
+/dev/mxc_hantro_h1        0666   media      drmrpc
+/dev/vsi_daemon_ctrl      0666   media      drmrpc
 /dev/uinput               0660   system     bluetooth
 /dev/ion                  0666   media      drmrpc
 /dev/galcore              0666   system     graphics
@@ -14,15 +15,16 @@
 /dev/watchdog             0660   system     root
 /dev/mmcblk0rpmb          0600   system     system
 /dev/trusty-ipc-dev0      0660   system     drmrpc
+/dev/block/pmem0          0660   system     system
 /dev/gpiochip*            0660   system     system
 /dev/i2c*                 0660   system     system
 
 # partitions properties
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b50000\.mmc/by-name/frp 0600   system     system
-/dev/block/platform/soc@0/soc@0\:bus@30800000/30b40000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/30800000\.bus/30b50000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/30800000\.bus/30b40000\.mmc/by-name/frp 0600   system     system
 
 # sysfs properties
-/sys/devices/platform/backlight_*   brightness  0660  system system
+/sys/devices/platform/backlight*    brightness  0660  system system
 /sys/devices/platform/bt-rfkill*    state       0660  bluetooth bluetooth
 /sys/devices/platform/busfreq*      enable      0660  system system
 /sys/devices/platform/leds/leds/*   brightness  0660  system system

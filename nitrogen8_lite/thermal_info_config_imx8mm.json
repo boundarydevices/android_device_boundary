@@ -1,14 +1,18 @@
 {
+    "HotplugCPUs":[
+            "cpu2",
+            "cpu3"
+    ],
     "Sensors":[
         {
             "Name":"cpu-thermal",
             "Type":"CPU",
             "HotThreshold":[
                 "NAN",
-                "NAN",
-                "NAN",
-                85.0,
-                95.0,
+                80.0,
+                82.0,
+                86.0,
+                90.0,
                 "NAN",
                 "NAN"
             ],
