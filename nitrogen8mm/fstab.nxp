@@ -4,6 +4,7 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 /devices/platform/soc@0/32c00000.bus/32e50000.usb/ci_hdrc.1/* auto auto defaults voldmanaged=usb:auto,encryptable=userdata
+/devices/platform/soc@0/30800000.bus/30b50000.mmc/mmc_host/*  auto auto defaults voldmanaged=sdcard:auto,encryptable=userdata
 
 /dev/block/by-name/system      /system      ext4    ro,barrier=1                                                                     wait,avb
 /dev/block/by-name/vendor      /vendor      ext4    ro,barrier=1                                                                     wait,avb
