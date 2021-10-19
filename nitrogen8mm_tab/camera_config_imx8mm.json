@@ -4,13 +4,14 @@
   ],
 
   "hal_version": "3",
-  "cam_blit_copy": "CPU",
+  "cam_blit_copy": "GPU_2D",
   "cam_blit_csc": "GPU_2D",
 
   "camera_metadata": [
     {
       "camera_type": "back",
-      "camera_name": "mx6s-csi,mxc_mipi-csi.0",
+      "camera_name": "mx6s-csi",
+      "bus_info": "platform:32e20000.csi1_bridge",
       "subdev_path": "/dev/v4l-subdev0",
       "flash_path": "/sys/class/leds/flash",
       "flash_brightness": "300",

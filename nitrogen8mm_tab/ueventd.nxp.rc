@@ -1,0 +1,295 @@
+subsystem usbmisc
+    devname uevent_devname
+
+/dev/cdc-wdm*             0660   radio      radio
+/dev/ttymxc*              0660   system     system
+/dev/ttymxc2              0660   bluetooth  bluetooth
+/dev/ttyUSB*              0660   radio      radio
+/dev/ttyACM*              0660   system     system
+/dev/snd/*                0660   system     audio
+/dev/video*               0660   system     camera
+/dev/v4l*                 0660   system     camera
+/dev/mxc_hantro           0666   media      drmrpc
+/dev/mxc_hantro_h1        0666   media      drmrpc
+/dev/vsi_daemon_ctrl      0666   media      drmrpc
+/dev/uinput               0660   system     bluetooth
+/dev/ion                  0666   media      drmrpc
+/dev/galcore              0666   system     graphics
+/dev/graphics/fb0         0660   system     graphics
+/dev/watchdog             0660   system     root
+/dev/mmcblk0rpmb          0600   system     system
+/dev/trusty-ipc-dev0      0660   system     drmrpc
+/dev/block/pmem0          0660   system     system
+/dev/gpiochip*            0660   system     system
+/dev/iio:*                0660   system     system
+/dev/i2c*                 0660   system     system
+
+# partitions properties
+/dev/block/platform/soc@0/30800000\.bus/30b50000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/30800000\.bus/30b40000\.mmc/by-name/frp 0600   system     system
+
+# sysfs properties
+/sys/devices/platform/soc@0/30800000.bus/30a40000.i2c/i2c-2/i2c-11/11-0030/leds/* brightness     0660 system camera
+/sys/devices/platform/soc@0/30800000.bus/30a40000.i2c/i2c-2/i2c-11/11-0030/leds/* max_brightness 0660 system camera
+/sys/devices/platform/soc@0/30800000.bus/30a40000.i2c/i2c-2/i2c-11/11-0030/leds/* timeout_ms     0660 system camera
+/sys/devices/platform/backlight*    brightness  0660  system system
+/sys/devices/platform/bt-rfkill*    state       0660  bluetooth bluetooth
+/sys/devices/platform/busfreq*      enable      0660  system system
+/sys/devices/system/cpu/cpu*        online      0660  root   system
+/sys/devices/virtual/bluetooth/hci* state       0660  bluetooth bluetooth
+/sys/devices/virtual/input/input*   enable      0660  root   input
+/sys/devices/virtual/input/input*   fifo        0660  root   input
+/sys/devices/virtual/input/input*   max         0660  root   input
+/sys/devices/virtual/input/input*   min         0660  root   input
+/sys/devices/virtual/input/input*   name        0660  root   input
+/sys/devices/virtual/input/input*   poll        0660  root   input
+/sys/devices/virtual/input/input*   poll_delay  0660  root   input
+/sys/devices/virtual/input/input*   position    0660  root   input
+/sys/devices/virtual/thermal/thermal_zone* trip_point_0_temp 0660 system system
+/sys/devices/virtual/thermal/thermal_zone* trip_point_1_temp 0660 system system
+/sys/devices/virtual/thermal/thermal_zone* trip_point_2_temp 0660 system system
+
+/sys/devices/virtual/thermal/thermal_zone* trip_point_0_hyst 0660 system system
+/sys/devices/virtual/thermal/thermal_zone* trip_point_1_hyst 0660 system system
+
+# Invensense iio devices attributes
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/trigger*       name                                0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    buffer/enable                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    buffer/length                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    buffer/watermark                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    current_timestamp_clock             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    mount_matrix                        0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_mount_matrix                     0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    name                                0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    sampling_frequency                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    sampling_frequency_available        0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    trigger/current_trigger             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_timestamp_offset                 0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_timestamp_scale                  0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_timestamp_en       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_timestamp_index    0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_timestamp_type     0440    system  system
+# standard iio accel attributes
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_offset                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_scale                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_scale_available            0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_calibscale                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_calibbias                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_sampling_frequency         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_mount_matrix               0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_x_raw                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_x_scale                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_x_offset                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_x_calibscale               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_x_calibbias                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_y_raw                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_y_scale                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_y_offset                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_y_calibscale               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_y_calibbias                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_z_raw                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_z_scale                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_z_offset                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_z_calibscale               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_z_calibbias                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_x_en         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_x_index      0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_x_type       0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_y_en         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_y_index      0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_y_type       0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_z_en         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_z_index      0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_accel_z_type       0440    system  system
+# standard iio gyro attributes
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_offset                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_scale                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_scale_available          0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_calibscale               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_calibbias                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_sampling_frequency       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_mount_matrix             0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_x_raw                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_x_scale                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_x_offset                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_x_calibscale             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_x_calibbias              0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_y_raw                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_y_scale                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_y_offset                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_y_calibscale             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_y_calibbias              0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_z_raw                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_z_scale                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_z_offset                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_z_calibscale             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_z_calibbias              0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_x_en       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_x_index    0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_x_type     0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_y_en       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_y_index    0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_y_type     0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_z_en       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_z_index    0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_anglvel_z_type     0440    system  system
+# standard iio magn attributes
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_offset                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_scale                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_scale_available             0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_sampling_frequency          0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_mount_matrix                0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_x_raw                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_x_scale                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_x_offset                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_x_calibscale                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_x_calibbias                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_y_raw                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_y_scale                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_y_offset                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_y_calibscale                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_y_calibbias                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_z_raw                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_z_scale                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_z_offset                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_z_calibscale                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_z_calibbias                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_x_en          0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_x_index       0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_x_type        0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_y_en          0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_y_index       0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_y_type        0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_z_en          0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_z_index       0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_magn_z_type        0440    system  system
+# standard iio temp attributes
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_temp_offset                      0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_temp_scale                       0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_temp_sampling_frequency          0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_temp_raw                         0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_temp_calibbias                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_temp_calibscale                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_temp_en            0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_temp_index         0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    scan_elements/in_temp_type          0440    system  system
+# InvenSense specific iio attributes
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_3quat_enable                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_3quat_rate                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_6quat_enable                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_6quat_rate                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_6quat_wake_enable                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_6quat_wake_rate                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_9quat_enable                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_9quat_rate                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_9quat_wake_enable                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_9quat_wake_rate                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_enable                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_rate                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_raw                        0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_wake_enable                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_wake_rate                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_x_dmp_bias                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_x_ois_st_calibbias         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_x_st_calibbias             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_y_dmp_bias                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_y_ois_st_calibbias         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_y_st_calibbias             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_z_dmp_bias                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_z_ois_st_calibbias         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_accel_z_st_calibbias             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_activity_enable                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_enable                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_rate                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_raw                      0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_wake_enable              0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_wake_rate                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_x_dmp_bias               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_x_ois_st_calibbias       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_x_st_calibbias           0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_y_dmp_bias               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_y_ois_st_calibbias       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_y_st_calibbias           0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_z_dmp_bias               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_z_ois_st_calibbias       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_anglvel_z_st_calibbias           0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_calib_anglvel_enable             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_calib_anglvel_rate               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_calib_anglvel_wake_enable        0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_calib_anglvel_wake_rate          0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_calib_magn_enable                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_calib_magn_rate                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_calib_magn_wake_enable           0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_calib_magn_wake_rate             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_eis_auth                         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_eis_enable                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_eis_rate                         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_geomag_enable                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_geomag_rate                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_geomag_wake_enable               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_geomag_wake_rate                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_enable                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_rate                        0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_raw                         0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_sensitivity_x               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_sensitivity_y               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_sensitivity_z               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_wake_enable                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_wake_rate                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_x_dmp_bias                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_y_dmp_bias                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_magn_z_dmp_bias                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_ois_accel_fs                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_ois_enable                       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_ois_gyro_fs                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_p6quat_enable                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_p6quat_rate                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_p6quat_wake_enable               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_p6quat_wake_rate                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_power_on                         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_sc_auth                          0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_step_counter_enable              0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_step_counter_send                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_step_counter_wake_enable         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_step_detector_enable             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    in_step_detector_wake_enable        0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    info_accel_lp_mode                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    info_accel_matrix                   0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    info_anglvel_matrix                 0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    info_firmware_loaded                0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    info_gyro_lp_mode                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    info_gyro_sf                        0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    info_magn_matrix                    0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    info_secondary_name                 0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    event_eis_enable                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    event_motion_detect_enable          0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    event_pedometer_enable              0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    event_pick_up_enable                0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    event_smd_enable                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    event_stationary_detect_enable      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    event_tilt_enable                   0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    event_tap_enable                    0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    misc_accel_recalibration            0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    misc_batchmode_timeout              0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    misc_bin_dmp_firmware               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    misc_flush_batch                    0220    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    misc_gyro_recalibration             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    misc_ois_self_test                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    misc_self_test                      0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    out_pedometer_counter               0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    out_pedometer_steps                 0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    out_pedometer_time                  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    out_temperature                     0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    params_accel_calibration_rate       0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    params_accel_calibration_threshold  0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    params_pedometer_int_mode           0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    params_pedometer_int_on             0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    params_pedometer_int_thresh         0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    params_pedometer_step_thresh        0660    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    poll_activity                       0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    poll_pedometer                      0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    poll_pick_up                        0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    poll_smd                            0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    poll_tilt                           0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    calibdata                           0440    system  system
+/sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/i2c-5/5-0068/iio:device*    mode                                0660    system  system

@@ -29,10 +29,17 @@
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
-                <mixPort name="esai output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
+                <mixPort name="direct output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="48000,96000,192000,384000,768000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
+                </mixPort>
+                <mixPort name="lpa output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_HW_AV_SYNC">
+                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </mixPort>
+                <mixPort name="hi-res output" role="source" flags="AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_HW_AV_SYNC">
                     <profile name="" format="AUDIO_FORMAT_PCM_FLOAT"
                              samplingRates="48000,96000,192000,384000,768000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_QUAD,AUDIO_CHANNEL_OUT_5POINT1,AUDIO_CHANNEL_OUT_7POINT1"/>
@@ -64,9 +71,9 @@
                 <route type="mix" sink="Speaker"
                        sources="primary output"/>
                 <route type="mix" sink="Wired Headphones"
-                       sources="dsd output,esai output,primary output"/>
+                       sources="dsd output,hi-res output,direct output,primary output"/>
                 <route type="mix" sink="Line-Out"
-                       sources="dsd output,esai output,primary output"/>
+                       sources="dsd output,lpa output,primary output"/>
 
                 <route type="mix" sink="primary input"
                        sources="Built-In Mic,Spdif-In"/>
