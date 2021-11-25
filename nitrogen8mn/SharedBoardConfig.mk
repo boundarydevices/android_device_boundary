@@ -18,3 +18,6 @@ LOW_MEMORY := true
 #Enable this to include trusty support
 PRODUCT_IMX_TRUSTY := false
 
+# GPU Vivante driver
+BOARD_VENDOR_KERNEL_MODULES += \
+    $(KERNEL_OUT)/drivers/mxc/gpu-viv/galcore.ko
