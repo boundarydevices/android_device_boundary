@@ -12,4 +12,5 @@ qcacld: $(QCACLD_PATH)
 		$(kernel_build_shell_env) $(MAKE) $(qcacld_build_make_env) clean ; \
 	fi ; \
 	$(kernel_build_shell_env) $(MAKE) $(qcacld_build_make_env) ; \
-	cp -v $(QCACLD_PATH)/wlan.ko $(QCACLD_OUT)/wlan.ko
+	$(kernel_build_shell_env) llvm-strip --strip-debug \
+		$(QCACLD_PATH)/wlan.ko -o $(QCACLD_OUT)/wlan.ko
