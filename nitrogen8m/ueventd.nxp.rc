@@ -17,6 +17,7 @@
 /dev/trusty-ipc-dev0      0660   system     drmrpc
 /dev/gpiochip*            0660   system     system
 /dev/i2c*                 0660   system     system
+/dev/cec0                 0660   system     graphics
 
 # partitions properties
 /dev/block/platform/soc@0/30800000\.bus/30b50000\.mmc/by-name/frp 0600   system     system

@@ -27,6 +27,9 @@
 /dev/block/mmcblk0boot0                      u:object_r:emmc_boot0:s0
 /dev/block/mmcblk1                           u:object_r:sdcard:s0
 
+# HDMI CEC
+/dev/cec0                       u:object_r:cec_device:s0
+
 #peripheral
 /vendor/bin/fsl_sensor_fusion   u:object_r:sensors_exec:s0
 /dev/ttymxc[0-9]*               u:object_r:tty_device:s0

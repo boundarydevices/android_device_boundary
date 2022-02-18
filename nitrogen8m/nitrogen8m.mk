@@ -420,3 +420,12 @@ PRODUCT_PACKAGES += \
     gpioinfo \
     gpiomon \
     gpioset
+
+# HDMI CEC service
+PRODUCT_PACKAGES += \
+    android.hardware.tv.cec@1.0-impl \
+    android.hardware.tv.cec@1.0-service \
+    hdmi_cec.nxp
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml
