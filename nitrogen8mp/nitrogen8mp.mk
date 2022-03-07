@@ -511,3 +511,11 @@ PRODUCT_PACKAGES += \
     candump \
     cangen \
     cansend
+
+# libubootenv tools
+PRODUCT_PACKAGES += \
+    fw_printenv \
+    fw_setenv
+
+PRODUCT_COPY_FILES += \
+    $(IMX_DEVICE_PATH)/fw_env.config:$(TARGET_COPY_OUT_SYSTEM)/etc/fw_env.config
