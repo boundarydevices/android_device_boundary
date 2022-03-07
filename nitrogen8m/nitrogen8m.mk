@@ -429,3 +429,11 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml
+
+# libubootenv tools
+PRODUCT_PACKAGES += \
+    fw_printenv \
+    fw_setenv
+
+PRODUCT_COPY_FILES += \
+    $(IMX_DEVICE_PATH)/fw_env.config:$(TARGET_COPY_OUT_SYSTEM)/etc/fw_env.config
