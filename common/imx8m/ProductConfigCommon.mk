@@ -357,3 +357,8 @@ PRODUCT_PACKAGES += \
 # vndservicemanager
 PRODUCT_PACKAGES += \
     vndservicemanager
+
+# WiFi regulatory database files
+PRODUCT_COPY_FILES += \
+    external/wireless-regdb/regulatory.db.p7s:$(TARGET_COPY_OUT_VENDOR)/firmware/regulatory.db.p7s \
+    external/wireless-regdb/regulatory.db:$(TARGET_COPY_OUT_VENDOR)/firmware/regulatory.db
