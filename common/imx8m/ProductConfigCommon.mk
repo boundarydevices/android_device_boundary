@@ -10,7 +10,7 @@ $(call inherit-product, $(TOPDIR)frameworks/base/data/sounds/AllAudio.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 # overrides
 PRODUCT_BRAND := Android
-PRODUCT_MANUFACTURER := freescale
+PRODUCT_MANUFACTURER := boundary
 
 # Android infrastructures
 PRODUCT_PACKAGES += \
