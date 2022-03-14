@@ -20,7 +20,7 @@ PRODUCT_PACKAGES += \
 # -------@block_common_config-------
 # overrides
 PRODUCT_BRAND := Android
-PRODUCT_MANUFACTURER := nxp
+PRODUCT_MANUFACTURER := boundary
 
 # related to the definition and load of library modules
 TARGET_BOARD_PLATFORM := imx
