@@ -6,6 +6,7 @@
   "hal_version": "3",
   "cam_blit_copy": "GPU_3D",
   "cam_blit_csc": "GPU_3D",
+  "use_cpu_encoder": "1",
 
   "camera_metadata": [
     {
@@ -23,8 +24,9 @@
       "PhysicalHeight": "2.7216",
       "FocalLength": "3.37",
       "MaxJpegSize": "8388608",
-      "MinFrameDuration": "33331760",
+      "MinFrameDuration": "33333333",
       "MaxFrameDuration": "300000000",
+      "MinFrameDurationBlob5M": "600000000",
       "OmitFrame": [
           {
               "width": "2592",
@@ -53,8 +55,9 @@
       "PhysicalHeight": "2.7216",
       "FocalLength": "3.37",
       "MaxJpegSize": "8388608",
-      "MinFrameDuration": "33331760",
+      "MinFrameDuration": "33333333",
       "MaxFrameDuration": "300000000",
+      "MinFrameDurationBlob5M": "600000000",
       "OmitFrame": [
           {
               "width": "2592",
