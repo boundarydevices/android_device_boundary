@@ -1,6 +1,7 @@
 vendor.wc_transport.                u:object_r:vendor_wc_prop:s0
 persist.vendor.usb.config           u:object_r:vendor_usb_config_prop:s0
 vendor.usb.config                   u:object_r:vendor_usb_config_prop:s0
+vendor.usb.sysfs_path               u:object_r:vendor_usb_config_prop:s0
 vendor.powerhal.                    u:object_r:vendor_power_hal_prop:s0
 
 ro.boot.vendor.sysrq                u:object_r:vendor_public_default_prop:s0
@@ -180,35 +181,36 @@ vendor.gki.enable                   u:object_r:vendor_public_default_prop:s0
 vendor.hwc.debug.dump_refresh_rate  u:object_r:vendor_public_default_prop:s0
 vendor.hwc.drm.fbTileSupport        u:object_r:vendor_public_default_prop:s0
 
-ro.boot.gui_resolution              u:object_r:vendor_default_prop:s0
-ro.boot.primary_display             u:object_r:vendor_default_prop:s0
-vendor.hwc.drm.device               u:object_r:vendor_default_prop:s0
-vendor.hwc.enable.overlay           u:object_r:vendor_default_prop:s0
-ro.boot.displaymode                 u:object_r:vendor_default_prop:s0
-ro.hardware.lightsensor             u:object_r:vendor_default_prop:s0
-vendor.ro.lightsensor.threshold     u:object_r:vendor_default_prop:s0
-vendor.rw.camera.test               u:object_r:vendor_default_prop:s0
-vendor.audio.lpa.hold_second        u:object_r:vendor_default_prop:s0
-vendor.audio.lpa.period_ms          u:object_r:vendor_default_prop:s0
-vendor.qcom.bluetooth.soc           u:object_r:vendor_default_prop:s0
-vendor.hwc.debug.dump_compose              u:object_r:vendor_default_prop:s0
-vendor.hwc.debug.dump_bitmap               u:object_r:vendor_default_prop:s0
-vendor.hwc.debug.dump_split_area           u:object_r:vendor_default_prop:s0
-vendor.hwc.stretch.filter                  u:object_r:vendor_default_prop:s0
-vendor.hwc.debug.disable_compression       u:object_r:vendor_default_prop:s0
-vendor.persist.audio.pass.through          u:object_r:vendor_default_prop:s0
-vendor.rw.VIDEO_RENDER_NAME                u:object_r:vendor_default_prop:s0
-vendor.sys.SECOND_DISPLAY_ENABLED          u:object_r:vendor_default_prop:s0
-vendor.AQROOT                              u:object_r:vendor_default_prop:s0
-vendor.CL_NOPREPROCESS                     u:object_r:vendor_default_prop:s0
+ro.boot.gui_resolution              u:object_r:vendor_public_default_prop:s0
+ro.boot.primary_display             u:object_r:vendor_public_default_prop:s0
+vendor.hwc.drm.device               u:object_r:vendor_public_default_prop:s0
+vendor.hwc.enable.overlay           u:object_r:vendor_public_default_prop:s0
+ro.boot.displaymode                 u:object_r:vendor_public_default_prop:s0
+ro.hardware.lightsensor             u:object_r:vendor_public_default_prop:s0
+vendor.ro.lightsensor.threshold     u:object_r:vendor_public_default_prop:s0
+vendor.rw.camera.test               u:object_r:vendor_public_default_prop:s0
+vendor.audio.lpa.hold_second        u:object_r:vendor_public_default_prop:s0
+vendor.audio.lpa.period_ms          u:object_r:vendor_public_default_prop:s0
+vendor.audio.dump                   u:object_r:vendor_public_default_prop:s0
+vendor.qcom.bluetooth.soc           u:object_r:vendor_public_default_prop:s0
+vendor.hwc.debug.dump_compose              u:object_r:vendor_public_default_prop:s0
+vendor.hwc.debug.dump_bitmap               u:object_r:vendor_public_default_prop:s0
+vendor.hwc.debug.dump_split_area           u:object_r:vendor_public_default_prop:s0
+vendor.hwc.stretch.filter                  u:object_r:vendor_public_default_prop:s0
+vendor.hwc.debug.disable_compression       u:object_r:vendor_public_default_prop:s0
+vendor.persist.audio.pass.through          u:object_r:vendor_public_default_prop:s0
+vendor.rw.VIDEO_RENDER_NAME                u:object_r:vendor_public_default_prop:s0
+vendor.sys.SECOND_DISPLAY_ENABLED          u:object_r:vendor_public_default_prop:s0
+vendor.AQROOT                              u:object_r:vendor_public_default_prop:s0
+vendor.CL_NOPREPROCESS                     u:object_r:vendor_public_default_prop:s0
 
 # vendor_wifi_version
 vendor.wlan.driver.version    u:object_r:vendor_wifi_version:s0
 vendor.wlan.firmware.version  u:object_r:vendor_wifi_version:s0
 
+# vendor_camera_prop
+vendor.camera.mjpg.decoder    u:object_r:vendor_camera_prop:s0
+
 # vendor verbose logging prop
 persist.vendor.verbose_logging_enabled u:object_r:vendor_logging_prop:s0
 ro.vendor.build_id                     u:object_r:vendor_public_default_prop:s0
-
-# NFC properties
-persist.nfc.            u:object_r:nfc_prop:s0

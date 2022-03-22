@@ -1,6 +1,6 @@
 allow platform_app hal_graphics_allocator_default_tmpfs:file { read write };
 
-get_prop(platform_app, vendor_default_prop)
+get_prop(platform_app, vendor_public_default_prop)
 
 allow platform_app tty_device:chr_file rw_file_perms;
 allow platform_app nfc_service:service_manager find;

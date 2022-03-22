@@ -16,4 +16,4 @@ allow system_app i2c_device:chr_file rw_file_perms;
 allow system_app sysfs_gpio:file r_file_perms;
 allow system_app sysfs_gpio:dir search;
 
-get_prop(system_app, vendor_default_prop)
+get_prop(system_app, vendor_public_default_prop)

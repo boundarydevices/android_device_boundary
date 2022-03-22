@@ -5,7 +5,6 @@ recovery_only(`
   allow recovery self:capability {sys_resource};
   allow recovery cache_file:dir { mounton }; 
   allow recovery debug_prop:property_service { set }; 
-  allow recovery ffs_prop:property_service { set };
   allow recovery sysfs:dir { read open search };
   allow recovery sysfs:file { read open getattr };
 ')

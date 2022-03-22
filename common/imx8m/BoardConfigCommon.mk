@@ -1,4 +1,6 @@
 # -------@block_common_config-------
+ENABLE_DMABUF_HEAP := true
+
 SOONG_CONFIG_NAMESPACES += IMXPLUGIN
 SOONG_CONFIG_IMXPLUGIN += BOARD_PLATFORM \
 NUM_FRAMEBUFFER_SURFACE_BUFFERS \
@@ -12,12 +14,16 @@ PREBUILT_FSL_IMX_ISP \
 BOARD_SOC_TYPE \
 PRODUCT_MANUFACTURER \
 BOARD_VPU_ONLY \
-BOARD_HAVE_VPU
+BOARD_HAVE_VPU \
+PREBUILT_FSL_IMX_CODEC \
+POWERSAVE \
+ENABLE_DMABUF_HEAP
 
 SOONG_CONFIG_IMXPLUGIN_BOARD_PLATFORM = imx8
 SOONG_CONFIG_IMXPLUGIN_BOARD_USE_SENSOR_FUSION = true
 SOONG_CONFIG_IMXPLUGIN_BOARD_SOC_CLASS = IMX8
 SOONG_CONFIG_IMXPLUGIN_HAVE_FSL_IMX_GPU3D = true
+SOONG_CONFIG_IMXPLUGIN_ENABLE_DMABUF_HEAP = true
 
 #
 # Product-specific compile-time definitions.
@@ -57,15 +63,19 @@ TARGET_NO_RADIOIMAGE := true
 BOARD_KERNEL_OFFSET := 0x00080000
 BOARD_RAMDISK_OFFSET := 0x04280000
 ifeq ($(TARGET_USE_VENDOR_BOOT),true)
-BOARD_BOOT_HEADER_VERSION := 3
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_INCLUDE_DTB_IN_BOOTIMG := false
 else
 BOARD_BOOT_HEADER_VERSION := 1
 endif
 
 BOARD_MKBOOTIMG_ARGS = --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --header_version $(BOARD_BOOT_HEADER_VERSION)
 
-BOARD_USES_RECOVERY_AS_BOOT := true
+ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+  BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
+else
+  BOARD_USES_RECOVERY_AS_BOOT := true
+endif
 
 # kernel module's copy to vendor need this folder setting
 KERNEL_OUT ?= $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/obj/KERNEL_OBJ
@@ -74,6 +84,18 @@ PRODUCT_COPY_FILES += \
     $(KERNEL_OUT)/arch/$(TARGET_KERNEL_ARCH)/boot/$(KERNEL_NAME):kernel
 
 TARGET_BOARD_KERNEL_HEADERS := $(CONFIG_REPO_PATH)/common/kernel-headers
+
+TARGET_IMX_KERNEL ?= true
+ifeq ($(TARGET_IMX_KERNEL),false)
+# boot-debug.img is built by IMX, with Google released kernel Image
+# boot.img is released by Google
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+BOARD_PREBUILT_BOOTIMAGE := vendor/nxp/fsl-proprietary/gki/boot-debug.img
+else
+BOARD_PREBUILT_BOOTIMAGE := vendor/nxp/fsl-proprietary/gki/boot.img
+endif
+TARGET_NO_KERNEL := true
+endif
 
 # -------@block_app-------
 # Enable dex-preoptimization to speed up first boot sequence

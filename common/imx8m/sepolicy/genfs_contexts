@@ -18,4 +18,3 @@ genfscon sysfs /devices/platform/soc@0/30800000.bus/30a40000.i2c/i2c-2/2-003d/ex
 genfscon sysfs /devices/soc0   u:object_r:sysfs_soc:s0
 genfscon debugfs /dma_buf u:object_r:debugfs_dma:s0
 genfscon debugfs /sync/sw_sync u:object_r:debugfs_sw_sync:s0
-genfscon proc /sys/kernel/sched_util_clamp_min u:object_r:proc_util_clamp:s0

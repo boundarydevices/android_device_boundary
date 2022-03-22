@@ -1,6 +1,7 @@
 type vsidaemon, domain;
 type vsidaemon_exec, exec_type, vendor_file_type, file_type;
 
+init_daemon_domain(vsidaemon)
 
 allow vsidaemon ueventd:fd { use };
 domain_auto_trans(kernel, shell_exec, ueventd)
@@ -22,3 +23,5 @@ type vsi_data_file, file_type, data_file_type;
 
 allow vsidaemon vsi_data_file:dir { rw_dir_perms ra_dir_perms create_dir_perms };
 allow vsidaemon vsi_data_file:file { rw_file_perms create_file_perms };
+allow vsidaemon dmabuf_heap_device:chr_file { read write open ioctl };
+allow vsidaemon dmabuf_system_secure_heap_device:chr_file {read write open ioctl};

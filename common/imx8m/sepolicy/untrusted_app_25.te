@@ -1,1 +1,1 @@
-get_prop(untrusted_app_25, vendor_default_prop)
+get_prop(untrusted_app_25, vendor_public_default_prop)

@@ -1,7 +1,10 @@
-type vendor_wc_prop, property_type;
-type vendor_usb_config_prop, property_type;
-type vendor_power_hal_prop, property_type;
-type vendor_bluetooth_prop, property_type;
-type vendor_public_default_prop, property_type;
-type vendor_wifi_version, property_type;
-type vendor_logging_prop, property_type;
+vendor_internal_prop(vendor_wc_prop)
+vendor_restricted_prop(vendor_usb_config_prop)
+vendor_internal_prop(vendor_power_hal_prop)
+vendor_internal_prop(vendor_bluetooth_prop)
+vendor_restricted_prop(vendor_public_default_prop)
+vendor_internal_prop(vendor_wifi_version)
+vendor_internal_prop(vendor_logging_prop)
+vendor_internal_prop(vendor_camera_prop)
+
+system_public_prop(usb_notify_prop)

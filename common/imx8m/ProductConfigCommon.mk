@@ -36,6 +36,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.control_privapp_permissions=enforce
 
+# add dmabufheap debug info
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.c2.use_dmabufheaps=1
 
 # -------@block_multimedia_codec-------
 
@@ -142,9 +145,9 @@ PRODUCT_COPY_FILES += \
 
 # A/B OTA
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.1-impl \
-    android.hardware.boot@1.1-impl.recovery \
-    android.hardware.boot@1.1-service \
+    android.hardware.boot@1.2-impl \
+    android.hardware.boot@1.2-impl.recovery \
+    android.hardware.boot@1.2-service \
     update_engine \
     update_engine_client \
     update_engine_sideload \
@@ -170,6 +173,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.incremental.enable=1
 
+# enable FUSE passthrough
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.sys.fuse.passthrough.enable=true
+
 # -------@block_power-------
 
 PRODUCT_PACKAGES += \
@@ -189,8 +196,8 @@ PRODUCT_PACKAGES += \
 ifneq ($(PRODUCT_IMX_CAR),true)
 ifneq ($(POWERSAVE),true)
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.6-service-google \
-    android.hardware.camera.provider@2.6-impl-google \
+    android.hardware.camera.provider@2.7-service-google \
+    android.hardware.camera.provider@2.7-impl-google \
     libgooglecamerahal \
     libgooglecamerahalutils \
     lib_profiler \
@@ -273,6 +280,11 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
 
 # -------@block_audio-------
+PRODUCT_PACKAGES += \
+    android.hardware.audio@7.0-impl:32 \
+    android.hardware.audio.service \
+    android.hardware.audio.effect@7.0-impl:32
+
 ifneq ($(PRODUCT_IMX_CAR),true)
 PRODUCT_PACKAGES += \
     SoundRecorder
@@ -290,7 +302,7 @@ PRODUCT_PACKAGES += \
 
 
 PRODUCT_COPY_FILES += \
-    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
+    frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration_7_0.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
@@ -337,7 +349,7 @@ PRODUCT_COPY_FILES += \
     $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/ft5x06.idc \
     $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/silead_ts.idc
 
-# -------@block_debug-------
+# -------@block_profile-------
 # In userdebug, add minidebug info the the boot image and the system server to support
 # diagnosing native crashes.
 ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
@@ -347,6 +359,11 @@ ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
     # Note: we cannot use PRODUCT_SYSTEM_SERVER_JARS, as it has not been expanded at this point.
     $(call add-product-dex-preopt-module-config,services,--generate-mini-debug-info)
     $(call add-product-dex-preopt-module-config,wifi-service,--generate-mini-debug-info)
+
+    PRODUCT_PROPERTY_OVERRIDES += \
+      logd.logpersistd.rotate_kbytes=51200 \
+      logd.logpersistd=logcatd \
+      logd.logpersistd.size=3
 endif
 
 #Dumpstate HAL 1.1 support

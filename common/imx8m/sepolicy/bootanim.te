@@ -1,4 +1,4 @@
-get_prop(bootanim, vendor_default_prop)
+get_prop(bootanim, vendor_public_default_prop)
 
 allow bootanim ashmem_device:chr_file {execute};
 allow bootanim self:process execmem;
