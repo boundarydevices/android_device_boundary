@@ -16,5 +16,11 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#define LINUX_VERSION_CODE 330312
-#define KERNEL_VERSION(a,b,c) (((a) << 16) + ((b) << 8) + ((c) > 255 ? 255 : (c)))
+#ifndef _LINUX_DMABUF_IMX_H
+#define _LINUX_DMABUF_IMX_H
+struct dmabuf_imx_phys_data {
+  __u32 dmafd;
+  uint64_t phys;
+};
+#define DMABUF_GET_PHYS _IOWR('M', 32, struct dmabuf_imx_phys_data)
+#endif

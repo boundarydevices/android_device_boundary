@@ -1,0 +1,6 @@
+{
+  "driver_name": "imx-spdif",
+  "supported_in_devices": ["aux_digital"],
+  "supported_out_devices": ["hdmi"],
+  "is_hdmi_card": 1
+}

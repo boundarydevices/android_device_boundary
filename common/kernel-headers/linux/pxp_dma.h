@@ -86,6 +86,7 @@ typedef unsigned long dma_addr_t;
 #define PXP_IOC_PUT_PHYMEM _IOW(PXP_IOC_MAGIC, 5, struct pxp_mem_desc)
 #define PXP_IOC_WAIT4CMPLT _IOWR(PXP_IOC_MAGIC, 6, struct pxp_mem_desc)
 #define PXP_IOC_FILL_DATA _IOWR(PXP_IOC_MAGIC, 7, struct pxp_mem_desc)
+#define PXP_IOC_EXPBUF _IOR(PXP_IOC_MAGIC, 8, struct pxp_mem_desc)
 #define ALPHA_MODE_ROP 0x1
 #define ALPHA_MODE_LEGACY 0x2
 #define ALPHA_MODE_PORTER_DUFF 0x3

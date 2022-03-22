@@ -19,12 +19,20 @@
 #ifndef _UAPI_HX280ENC_H_
 #define _UAPI_HX280ENC_H_
 #include <linux/ioctl.h>
+#include <linux/types.h>
 #undef PDEBUG
 #ifdef HX280ENC_DEBUG
 #define PDEBUG(fmt,args...) printf(__FILE__ ":%d: " fmt, __LINE__, ##args)
 #else
 #define PDEBUG(fmt,args...)
 #endif
+struct enc_regs_buffer {
+  __u32 core_id;
+  __u32 * regs;
+  __u32 offset;
+  __u32 size;
+  __u32 * reserved;
+};
 #define HX280ENC_IOC_MAGIC 'k'
 #define HX280ENC_IOCGHWOFFSET _IOR(HX280ENC_IOC_MAGIC, 3, unsigned long *)
 #define HX280ENC_IOCGHWIOSIZE _IOR(HX280ENC_IOC_MAGIC, 4, unsigned int *)
@@ -37,5 +45,7 @@
 #define HX280ENC_IOCH_ENC_RESERVE _IOR(HX280ENC_IOC_MAGIC, 11, unsigned int *)
 #define HX280ENC_IOCH_ENC_RELEASE _IOR(HX280ENC_IOC_MAGIC, 12, unsigned int *)
 #define HX280ENC_IOCG_CORE_WAIT _IOR(HX280ENC_IOC_MAGIC, 13, unsigned int *)
+#define HX280ENC_IOC_WRITE_REGS _IOW(HX280ENC_IOC_MAGIC, 14, struct enc_regs_buffer *)
+#define HX280ENC_IOC_READ_REGS _IOR(HX280ENC_IOC_MAGIC, 15, struct enc_regs_buffer *)
 #define HX280ENC_IOC_MAXNR 30
 #endif

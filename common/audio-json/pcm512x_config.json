@@ -1,0 +1,10 @@
+{
+  "driver_name": "pcm512x-audio",
+  "supported_out_devices": ["line"],
+  "support_lpa": 1,
+
+  "init_ctl": [
+    {"name": "Headphone Playback Volume", "type": "int", "val": 15}
+  ]
+
+}

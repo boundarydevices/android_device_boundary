@@ -14,7 +14,7 @@ cat << EOF
            -h/--help               display this help info
            -j[<num>]               specify the number of parallel jobs when build the target, the number after -j should be greater than 0
            bootloader              bootloader will be compiled
-           kernel                  kernel, include related dts will be compiled
+           kernel                  kernel, include the kernel modules and device tree files will be compiled
            galcore                 galcore.ko in GPU repo will be compiled
            vvcam                   vvcam.ko, the ISP driver will be compiled
            mxmwifi                 mlan.ko moal.ko, the MXMWifi driver will be compiled
@@ -85,11 +85,13 @@ if [ -z ${OUT} ] || [ -z ${TARGET_PRODUCT} ]; then
 fi
 
 # global variables
-build_bootloader_kernel_flag=0
 build_android_flag=0
+build_whole_android_flag=0
 build_bootloader=""
 build_kernel=""
-build_kernel_module_flag=0
+build_kernel_modules=""
+build_kernel_dts=""
+build_kernel_oot_module_flag=0
 build_galcore=""
 build_vvcam=""
 build_mxmwifi=""
@@ -104,7 +106,6 @@ TOP=`pwd`
 
 # Force the use of toolchains provided by BD
 export AARCH64_GCC_CROSS_COMPILE=$TOP/prebuilts/toolchains/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-
-export CLANG_PATH=$TOP/prebuilts/toolchains
 
 product_makefile=`pwd`/`find device -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
 product_path=${product_makefile%/*}
@@ -118,60 +119,59 @@ for arg in ${args[*]} ; do
         -h) help;;
         --help) help;;
         -c) clean_build=1;;
-        bootloader) build_bootloader_kernel_flag=1;
-                    build_bootloader="bootloader";;
         prebuilt-bootloader) download_prebuilt_bootloader; exit;;
-        kernel) build_bootloader_kernel_flag=1;
-                    build_kernel="${OUT}/kernel";;
-        galcore) build_bootloader_kernel_flag=1;
-                    build_kernel_module_flag=1;
+        bootloader) build_bootloader="bootloader";;
+        kernel) build_kernel="${OUT}/kernel";
+                    build_kernel_modules="KERNEL_MODULES";
+                    build_kernel_dts="KERNEL_DTB";;
+        galcore) build_kernel_oot_module_flag=1;
                     build_galcore="galcore";;
-        vvcam) build_bootloader_kernel_flag=1;
-                    build_kernel_module_flag=1
+        vvcam) build_kernel_oot_module_flag=1
                     build_vvcam="vvcam";;
-        mxmwifi) build_bootloader_kernel_flag=1;
-                    build_kernel_module_flag=1
+        mxmwifi) build_kernel_oot_module_flag=1
                     build_mxmwifi="mxmwifi";;
-        qcacld) build_bootloader_kernel_flag=1;
-                    build_kernel_module_flag=1
+        qcacld) build_kernel_oot_module_flag=1
                     build_qcacld="qcacld";;
-        bootimage) build_bootloader_kernel_flag=1;
-                    build_android_flag=1;
+        bootimage) build_android_flag=1;
                     build_kernel="${OUT}/kernel";
                     build_bootimage="bootimage";;
-        vendorbootimage) build_bootloader_kernel_flag=1;
-                    build_android_flag=1;
-                    build_kernel="${OUT}/kernel";
+        vendorbootimage) build_android_flag=1;
+                    build_kernel_oot_module_flag=1;
+                    build_kernel_dts="KERNEL_DTB";
+                    build_kernel_modules="KERNEL_MODULES";
                     build_vendorbootimage="vendorbootimage";;
-        dtboimage) build_bootloader_kernel_flag=1;
-                    build_android_flag=1;
-                    build_kernel="${OUT}/kernel";
+        dtboimage) build_android_flag=1;
+                    build_kernel_dts="KERNEL_DTB";
                     build_dtboimage="dtboimage";;
-        vendorimage) build_bootloader_kernel_flag=1;
-                    build_android_flag=1;
-                    build_kernel="${OUT}/kernel";
+        vendorimage) build_android_flag=1;
+                    build_kernel_oot_module_flag=1;
+                    build_kernel_modules="KERNEL_MODULES";
                     build_vendorimage="vendorimage";;
         *) handle_special_arg ${arg};;
     esac
 done
 
 # if bootloader and kernel not in arguments, all need to be made
-if [ ${build_bootloader_kernel_flag} -eq 0 ] && [ ${build_android_flag} -eq 0 ]; then
+if [ "${build_bootloader}" = "" ] && [ "${build_kernel}" = "" ] && \
+        [ "${build_kernel_modules}" = "" ] && [ "${build_kernel_dts}" = "" ] && \
+        [ ${build_kernel_oot_module_flag} -eq 0 ] && [ ${build_android_flag} -eq 0 ]; then
     build_bootloader="bootloader";
     build_kernel="${OUT}/kernel";
-    build_android_flag=1
+    build_kernel_modules="KERNEL_MODULES";
+    build_kernel_dts="KERNEL_DTB";
+    build_whole_android_flag=1
 fi
 
-# vvcam.ko need build with kernel each time to make sure "insmod vvcam.ko" works
-if [ -n "${build_kernel}" ] && [[ "${TARGET_PRODUCT}" =~ "8mp" ]]; then
+# vvcam.ko need build with in-tree modules each time to make sure "insmod vvcam.ko" works
+if [ -n "${build_kernel_modules}" ] && [[ "${TARGET_PRODUCT}" =~ "8mp" ]]; then
     build_vvcam="vvcam";
-    build_kernel_module_flag=1;
+    build_kernel_oot_module_flag=1;
 fi
 
 # wlan.ko need build with kernel each time to make sure "insmod wlan.ko" works
-if [ -n "${build_kernel}" ]; then
+if [ -n "${build_kernel_modules}" ]; then
     build_qcacld="qcacld";
-    build_kernel_module_flag=1;
+    build_kernel_oot_module_flag=1;
 fi
 
 # if uboot is to be compiled, remove the UBOOT_COLLECTION directory
@@ -183,14 +183,32 @@ fi
 soc_path=${soc_path} product_path=${product_path} nxp_git_path=${nxp_git_path} clean_build=${clean_build} \
     make -C ./ -f ${nxp_git_path}/common/build/Makefile ${parallel_option} \
     ${build_bootloader} ${build_kernel} </dev/null || exit
-
-if [ ${build_kernel_module_flag} -eq 1 ]; then
-    soc_path=${soc_path} product_path=${product_path} nxp_git_path=${nxp_git_path} clean_build=${clean_build} \
-        make -C ./ -f ${nxp_git_path}/common/build/Makefile ${parallel_option} \
-        ${build_vvcam} ${build_galcore} ${build_qcacld} ${build_mxmwifi} </dev/null || exit
+# in the execution of this script, if the kernel build env is cleaned or configured, do not trigger that again
+if [ -n "${build_kernel}" ]; then
+    skip_config_or_clean=1
 fi
 
-if [ ${build_android_flag} -eq 1 ]; then
+if [ -n "${build_kernel_modules}" ]; then
+    soc_path=${soc_path} product_path=${product_path} nxp_git_path=${nxp_git_path} clean_build=${clean_build} \
+        skip_config_or_clean=${skip_config_or_clean} make -C ./ -f ${nxp_git_path}/common/build/Makefile ${parallel_option} \
+        ${build_kernel_modules} </dev/null || exit
+    skip_config_or_clean=1
+fi
+
+if [ -n "${build_kernel_dts}" ]; then
+    soc_path=${soc_path} product_path=${product_path} nxp_git_path=${nxp_git_path} clean_build=${clean_build} \
+        skip_config_or_clean=${skip_config_or_clean} make -C ./ -f ${nxp_git_path}/common/build/Makefile ${parallel_option} \
+        ${build_kernel_dts} </dev/null || exit
+    skip_config_or_clean=1
+fi
+
+if [ ${build_kernel_oot_module_flag} -eq 1 ] || [ -n "${build_kernel_modules}" ]; then
+    soc_path=${soc_path} product_path=${product_path} nxp_git_path=${nxp_git_path} clean_build=${clean_build} \
+        skip_config_or_clean=${skip_config_or_clean} make -C ./ -f ${nxp_git_path}/common/build/Makefile ${parallel_option} \
+        ${build_vvcam} ${build_galcore} ${build_mxmwifi} ${build_qcacld} </dev/null || exit
+fi
+
+if [ ${build_android_flag} -eq 1 ] || [ ${build_whole_android_flag} -eq 1 ]; then
     # source envsetup.sh before building Android rootfs, the time spent on building uboot/kernel
     # before this does not count in the final result
     source build/envsetup.sh

@@ -27,8 +27,10 @@ struct pxp_mem_desc {
   unsigned int handle;
   unsigned int size;
   dma_addr_t phys_addr;
-  unsigned int virt_uaddr;
+  void * virt_uaddr;
   unsigned int mtype;
+  __u32 flags;
+  __s32 fd;
 };
 struct pxp_mem_flush {
   unsigned int handle;
@@ -43,6 +45,7 @@ struct pxp_mem_flush {
 #define PXP_IOC_PUT_PHYMEM _IOW(PXP_IOC_MAGIC, 5, struct pxp_mem_desc)
 #define PXP_IOC_WAIT4CMPLT _IOWR(PXP_IOC_MAGIC, 6, struct pxp_mem_desc)
 #define PXP_IOC_FLUSH_PHYMEM _IOR(PXP_IOC_MAGIC, 7, struct pxp_mem_flush)
+#define PXP_IOC_EXPBUF _IOR(PXP_IOC_MAGIC, 8, struct pxp_mem_desc)
 #define MEMORY_TYPE_UNCACHED 0x0
 #define MEMORY_TYPE_WC 0x1
 #define MEMORY_TYPE_CACHED 0x2

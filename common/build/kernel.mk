@@ -54,7 +54,7 @@ TARGET_KERNEL_SRC := $(KERNEL_IMX_PATH)/kernel_imx
 CLANG_TO_COMPILE := LLVM=1 LLVM_IAS=1
 
 # Uncomment below line to use prebuilt clang tool in android platform code
-# CLANG_PATH := $(realpath prebuilts/clang/host/linux-x86)
+CLANG_PATH := $(realpath prebuilts/clang/host/linux-x86)
 
 # Or use external clang
 ifeq ($(CLANG_PATH),)
@@ -62,7 +62,7 @@ $(error shell env CLANG_PATH is not set. Please follow user guide doc to set cor
 endif
 
 # This clang version need align with $(kernel_source)/build.config.common
-CLANG_BIN := $(CLANG_PATH)/clang-r428724/bin
+CLANG_BIN := $(CLANG_PATH)/clang-r416183b/bin
 
 ifeq (,$(wildcard $(CLANG_BIN)))
 $(error CLANG_BIN:$(CLANG_BIN) does not exist. Please update clang to latest version: \
@@ -155,6 +155,9 @@ KERNEL_HEADERS_INSTALL := $(KERNEL_OUT)/usr
 #KERNEL_MODULES_INSTALL := $(TARGET_OUT)/lib/modules
 KERNEL_MODULES_INSTALL := $(BOARD_VENDOR_KERNEL_MODULES)
 
+$(KERNEL_OUT):
+	mkdir -p $@
+
 KERNEL_FIRMWARE_DIR_CONFIG := $(KERNEL_OUT)/firmware.kconf
 
 $(KERNEL_FIRMWARE_DIR_CONFIG):
@@ -163,9 +166,6 @@ $(KERNEL_FIRMWARE_DIR_CONFIG):
 ifdef TARGET_KERNEL_EXTRA_FIRMWARE_DIR
 KERNEL_CONFIG_SRC += $(KERNEL_FIRMWARE_DIR_CONFIG)
 endif
-
-$(KERNEL_OUT):
-	mkdir -p $@
 
 # Merge the required kernel config elements into a single file.
 $(KERNEL_CONFIG_REQUIRED): $(KERNEL_CONFIG_REQUIRED_SRC) | $(KERNEL_OUT)
@@ -182,18 +182,30 @@ merge_config_params = -p "$(CLANG_TO_COMPILE)" -O $(realpath $(KERNEL_OUT)) $(KE
 
 # Merge the final target kernel config.
 $(KERNEL_CONFIG): $(KERNEL_CONFIG_SRC) $(TARGET_KERNEL_SRC) | $(KERNEL_OUT)
-	$(hide) echo Merging KERNEL config srcs: $(KERNEL_CONFIG_SRC)
-	$(hide) rm -f $(KERNEL_CONFIG)
-	$(hide) cd $(TARGET_KERNEL_SRC) && $(merge_config_env) $(KERNEL_MERGE_CONFIG) $(merge_config_params)
+	$(hide) if [ "${skip_config_or_clean}" != "1" ]; then \
+		if [ "${clean_build}" = "1" ]; then \
+			PATH=$$PATH $(MAKE) -C $(TARGET_KERNEL_SRC) O=$(realpath $(KERNEL_OUT)) clean; \
+		fi; \
+		echo Merging KERNEL config srcs: $(KERNEL_CONFIG_SRC); \
+		rm -f $(KERNEL_CONFIG); \
+		cd $(TARGET_KERNEL_SRC) && $(merge_config_env) $(KERNEL_MERGE_CONFIG) $(merge_config_params); \
+	fi
 
 $(KERNEL_BIN): $(KERNEL_CONFIG) $(TARGET_KERNEL_SRC) | $(KERNEL_OUT)
 	$(hide) echo "Building $(KERNEL_ARCH) $(KERNEL_VERSION) kernel ..."
-	$(hide) if [ ${clean_build} = 1 ]; then \
-		PATH=$$PATH $(MAKE) -C $(TARGET_KERNEL_SRC) O=$(realpath $(KERNEL_OUT)) clean; \
-	fi
 	$(hide) $(kernel_build_shell_env) $(MAKE) $(kernel_build_make_env) syncconfig
 	$(hide) $(kernel_build_shell_env) $(MAKE) $(kernel_build_make_env) $(KERNEL_NAME)
+
+.PHONY: KERNEL_MODULES KERNEL_DTB
+
+KERNEL_MODULES: $(KERNEL_CONFIG) $(TARGET_KERNEL_SRC) | $(KERNEL_OUT)
+	$(hide) echo "Building $(KERNEL_ARCH) $(KERNEL_VERSION) kernel modules ..."
+	$(hide) $(kernel_build_shell_env) $(MAKE) $(kernel_build_make_env) syncconfig
 	$(hide) $(kernel_build_shell_env) $(MAKE) $(kernel_build_make_env) modules
+
+KERNEL_DTB: $(KERNEL_CONFIG) $(TARGET_KERNEL_SRC) | $(KERNEL_OUT)
+	$(hide) echo "Building $(KERNEL_ARCH) $(KERNEL_VERSION) device trees ..."
+	$(hide) $(kernel_build_shell_env) $(MAKE) $(kernel_build_make_env) syncconfig
 	$(hide) $(kernel_build_shell_env) $(MAKE) $(kernel_build_make_env) dtbs
 
 $(KERNEL_OUT)/vmlinux: $(KERNEL_BIN)

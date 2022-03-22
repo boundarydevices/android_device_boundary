@@ -20,6 +20,10 @@
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
 <resources>
+
+    <!--For Android we support eth0 now -->
+    <string translatable="false" name="config_ethernet_iface_regex">eth0</string>
+
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
@@ -209,4 +213,6 @@
     <!-- Boolean indicating whether system support sustained performance mode. -->
     <bool name="config_sustainedPerformanceModeSupported">true</bool>
 
+    <!-- If the system has the input method for each display - enable per-display focus. -->
+    <bool name="config_perDisplayFocusEnabled">true</bool>
 </resources>

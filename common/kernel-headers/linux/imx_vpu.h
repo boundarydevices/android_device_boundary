@@ -28,6 +28,7 @@
 #define V4L2_CID_IPCM (V4L2_CID_USER_IMX_BASE + 5)
 #define V4L2_CID_HDR10META (V4L2_CID_USER_IMX_BASE + 6)
 #define V4L2_CID_SECUREMODE (V4L2_CID_USER_IMX_BASE + 7)
+#define V4L2_CID_SC_ENABLE (V4L2_CID_USER_IMX_BASE + 8)
 #define V4L2_MAX_ROI_REGIONS 8
 struct v4l2_enc_roi_param {
   struct v4l2_rect rect;
