@@ -95,6 +95,9 @@ BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 2
 DEVICE_MANIFEST_FILE := $(IMX_DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(IMX_DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(IMX_DEVICE_PATH)/device_framework_matrix.xml
+ifeq ($(TARGET_USE_HDMI_CEC),true)
+DEVICE_MANIFEST_FILE += vendor/nxp-opensource/imx/hdmicec/manifest.xml
+endif
 
 # -------@block_wifi-------
 BOARD_WLAN_DEVICE            := qcwcn

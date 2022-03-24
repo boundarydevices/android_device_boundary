@@ -144,13 +144,4 @@
        <name>android.hardware.security.sharedsecret</name>
        <fqname>ISharedSecret/default</fqname>
     </hal>
-    <hal>
-        <name>android.hardware.tv.cec</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IHdmiCec</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
 </manifest>
