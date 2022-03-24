@@ -421,6 +421,7 @@ PRODUCT_PACKAGES += \
     gpiomon \
     gpioset
 
+ifeq ($(TARGET_USE_HDMI_CEC),true)
 # HDMI CEC service
 PRODUCT_PACKAGES += \
     android.hardware.tv.cec@1.0-impl \
@@ -429,6 +430,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.hdmi.cec.xml:system/etc/permissions/android.hardware.hdmi.cec.xml
+endif
 
 # libubootenv tools
 PRODUCT_PACKAGES += \
