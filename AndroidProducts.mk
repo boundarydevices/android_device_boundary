@@ -27,7 +27,6 @@
 # Copied from build/target/product/AndroidProducts.mk
 
 PRODUCT_MAKEFILES += \
-  $(LOCAL_DIR)/c2/c2.mk \
   $(LOCAL_DIR)/nitrogen8_lite/nitrogen8_lite.mk \
   $(LOCAL_DIR)/nitrogen8m/nitrogen8m.mk \
   $(LOCAL_DIR)/nitrogen8mm/nitrogen8mm.mk \
@@ -36,8 +35,6 @@ PRODUCT_MAKEFILES += \
   $(LOCAL_DIR)/nitrogen8mp/nitrogen8mp.mk \
 
 COMMON_LUNCH_CHOICES := \
-  c2-user \
-  c2-userdebug \
   nitrogen8_lite-user \
   nitrogen8_lite-userdebug \
   nitrogen8m-user \
