@@ -48,5 +48,7 @@ on early-boot
     write /sys/module/libcomposite/parameters/disable_l1_for_hs "y"
     symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
 
+    setprop vendor.usb.sysfs_path /sys/devices/platform/soc@0/32f10100.usb/38100000.dwc3/
+
 on boot
     setprop sys.usb.configfs 2

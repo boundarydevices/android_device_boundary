@@ -1,7 +1,9 @@
 # -------@block_infrastructure-------
 CONFIG_REPO_PATH := device/boundary
 CURRENT_FILE_PATH :=  $(lastword $(MAKEFILE_LIST))
-IMX_DEVICE_PATH := device/boundary/nitrogen8mp
+IMX_DEVICE_PATH := $(strip $(patsubst %/, %, $(dir $(CURRENT_FILE_PATH))))
+
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := true
 
 # configs shared between uboot, kernel and Android rootfs
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
@@ -25,6 +27,8 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
+PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=boundary
+PRODUCT_VENDOR_PROPERTIES += ro.soc.model=IMX8MP
 # -------@block_treble-------
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
@@ -52,6 +56,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/thermal_info_config_imx8mp.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/thermal_info_config_imx8mp.json
 
+# Task Profiles
+PRODUCT_COPY_FILES += \
+    $(IMX_DEVICE_PATH)/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
 
 # -------@block_app-------
 
@@ -70,6 +77,13 @@ PRODUCT_COPY_FILES += \
 # Enable this to support vendor boot and boot header v3, this would be a MUST for GKI
 TARGET_USE_VENDOR_BOOT ?= false
 
+ifeq ($(IMX8MP_USES_GKI),true)
+  BOARD_RAMDISK_USE_LZ4 := true
+
+  BOARD_USES_GENERIC_KERNEL_IMAGE := true
+  $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
+endif
+
 # We load the fstab from device tree so this is not needed, but since no kernel modules are installed to vendor
 # boot ramdisk so far, we need this step to generate the vendor-ramdisk folder or build process would fail. This
 # can be deleted once we figure out what kernel modules should be put into the vendor boot ramdisk.
@@ -85,12 +99,23 @@ PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/ueventd.nxp.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
 
 # -------@block_storage-------
+# support metadata checksum during first stage mount
+ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+PRODUCT_PACKAGES += \
+    linker.vendor_ramdisk \
+    resizefs.vendor_ramdisk \
+    tune2fs.vendor_ramdisk
+endif
 
 #Enable this to use dynamic partitions for the readonly partitions not touched by bootloader
 TARGET_USE_DYNAMIC_PARTITIONS ?= false
 
 ifeq ($(TARGET_USE_DYNAMIC_PARTITIONS),true)
-  $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+  ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+    $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+  else
+    $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+  endif
   PRODUCT_USE_DYNAMIC_PARTITIONS := true
   BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
   BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE := true
@@ -135,17 +160,16 @@ endif
 # Keymaster HAL
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service.trusty
+    android.hardware.security.keymint-service.trusty
 endif
 
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service-imx
+    android.hardware.security.keymint-service-imx
 
 # Confirmation UI
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.confirmationui@1.0-service.trusty \
-    securedisplayd-imx
+    android.hardware.confirmationui@1.0-service.trusty
 endif
 
 # new gatekeeper HAL
@@ -190,16 +214,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rebootescrow.device=/dev/block/pmem0
 
-#DRM Widevine 1.3 L1 support
+#DRM Widevine 1.4 L1 support
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.3-service.widevine \
-    android.hardware.drm@1.3-service.clearkey \
+    android.hardware.drm@1.4-service.widevine \
+    android.hardware.drm@1.4-service.clearkey \
     libwvdrmcryptoplugin \
     libwvhidl \
     libwvdrmengine \
     liboemcrypto \
 
-$(call inherit-product-if-exists, vendor/nxp-private/widevine/nxp_widevine_tee.mk)
+$(call inherit-product-if-exists, vendor/nxp-private/widevine/nxp_widevine_tee_8mp.mk)
 
 # -------@block_audio-------
 
@@ -209,38 +233,39 @@ PRODUCT_COPY_FILES += \
     $(CONFIG_REPO_PATH)/common/audio-json/micfil_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/micfil_config.json \
     $(CONFIG_REPO_PATH)/common/audio-json/hdmi_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/hdmi_config.json \
 
-PRODUCT_PACKAGES += \
-    android.hardware.audio@6.0-impl:32 \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio.effect@6.0-impl:32
-
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
     $(IMX_DEVICE_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(IMX_DEVICE_PATH)/usb_audio_policy_configuration-direct-output.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration-direct-output.xml
+
+ifeq ($(POWERSAVE),true)
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/target/product/$(firstword $(PRODUCT_DEVICE))/imx8mp_mcu_demo.bin:imx8mp_mcu_demo.img \
+    $(IMX_DEVICE_PATH)/audio_policy_configuration_pcm512x.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+else
+PRODUCT_COPY_FILES += \
+    $(FSL_PROPRIETARY_PATH)/fsl-proprietary/mcu-sdk/imx8mp/imx8mp_mcu_demo.img:imx8mp_mcu_demo.img \
+    $(IMX_DEVICE_PATH)/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml
+endif
 
 # -------@block_camera-------
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/camera_config_imx8mp.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/camera_config_imx8mp.json \
     $(IMX_DEVICE_PATH)/camera_config_imx8mp-basler-ov5640.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/camera_config_imx8mp-basler-ov5640.json \
+    $(IMX_DEVICE_PATH)/camera_config_imx8mp-only-ov5640.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/camera_config_imx8mp-only-ov5640.json \
     $(IMX_DEVICE_PATH)/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
 
 PRODUCT_SOONG_NAMESPACES += hardware/google/camera
 PRODUCT_SOONG_NAMESPACES += vendor/nxp-opensource/imx/camera
 
-# Copy isp files to board
-ifeq ($(PREBUILT_FSL_IMX_ISP),true)
-ISP_PROPRIETARY := $(FSL_PROPRIETARY_PATH)/fsl-proprietary/isp
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(ISP_PROPRIETARY)/bin,$(TARGET_COPY_OUT_VENDOR)/bin) \
-    $(call find-copy-subdir-files,*,$(ISP_PROPRIETARY)/lib64,$(TARGET_COPY_OUT_VENDOR)/lib64) \
-    $(call find-copy-subdir-files,*,$(ISP_PROPRIETARY)/config,$(TARGET_COPY_OUT_VENDOR)/etc/configs/isp)
-endif
-
 # ISP camera feature demo
 PRODUCT_PACKAGES += \
     CameraXBasic
+
+PRODUCT_PACKAGES += \
+    media_profiles_8mp-ov5640.xml \
+    media_profiles_8mp-basler-ov5640.xml
 
 # -------@block_display-------
 
@@ -349,6 +374,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/init.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.nxp.usb.rc
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    sys.usb.mtp.batchcancel=1
+
 # -------@block_multimedia_codec-------
 
 # Vendor seccomp policy files for media components:
@@ -406,10 +434,6 @@ ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
 INSTALL_64BIT_LIBRARY := true
 endif
--include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
--include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/imx_dsp_aacp_dec/imx_dsp_aacp_dec.mk
--include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/imx_dsp_codec/imx_dsp_codec.mk
--include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/imx_dsp_wma_dec/imx_dsp_wma_dec.mk
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/imx_dsp/imx_dsp_8mp.mk
 endif
 
@@ -477,7 +501,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-0.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level-2020-03-01.xml \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
@@ -496,6 +521,73 @@ PRODUCT_COPY_FILES += \
 # Included GMS package
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
 PRODUCT_SOONG_NAMESPACES += vendor/partner_gms
+
+# isp block
+# lib
+PRODUCT_PACKAGES += \
+    DAA3840_30MC_1080P \
+    liba2dnr \
+    liba3dnr \
+    libadpcc \
+    libadpf \
+    libaec \
+    libaee \
+    libaflt \
+    libaf \
+    libahdr \
+    libappshell_ebase \
+    libappshell_hal \
+    libappshell_ibd \
+    libappshell_oslayer \
+    libavs \
+    libawb \
+    libawdr3 \
+    libbase64 \
+    libbufferpool \
+    libbufsync_ctrl \
+    libcam_calibdb \
+    libcam_device \
+    libcam_engine \
+    libcameric_drv \
+    libcameric_reg_drv \
+    libcim_ctrl \
+    libcommon \
+    libdaA3840_30mc \
+    libdewarp_hal \
+    libebase \
+    libfpga \
+    libhal \
+    libi2c_drv \
+    libibd \
+    libisi \
+    libmedia_server \
+    libmim_ctrl \
+    libmipi_drv \
+    libmom_ctrl \
+    libos08a20 \
+    liboslayer \
+    libov2775 \
+    libsom_ctrl \
+    libversion \
+    libvom_ctrl \
+    libvvdisplay_shared
+
+# bin
+PRODUCT_PACKAGES += \
+    isp_media_server \
+    vvext
+
+# config
+PRODUCT_PACKAGES += \
+    DAA3840_30MC_1080P-linear.xml \
+    DAA3840_30MC_1080P-hdr.xml \
+    DAA3840_30MC_4K-linear.xml \
+    DAA3840_30MC_4K-hdr.xml \
+    Sensor0_Entry.cfg \
+    Sensor1_Entry.cfg \
+    Sensor0_Entry-4K.cfg \
+    daA3840_30mc_1080P.json \
+    daA3840_30mc_4K.json
 
 # libgpiod tools
 PRODUCT_PACKAGES += \

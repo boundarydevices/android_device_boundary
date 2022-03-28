@@ -1,0 +1,29 @@
+{
+  "__readme": [
+    "Basic Camera HAL v3 configuration."
+  ],
+
+  "hal_version": "3",
+  "cam_blit_copy": "GPU_2D",
+  "cam_blit_csc": "GPU_2D",
+
+  "camera_metadata": [
+    {
+      "camera_type": "back",
+      "camera_name": "mxc_isi.0.capture",
+      "orientation": "0",
+      "mplane": "1",
+      "buffer_type": "dma",
+      "ActiveArrayWidth": "2592",
+      "ActiveArrayHeight": "1944",
+      "PixelArrayWidth": "2592",
+      "PixelArrayHeight": "1944",
+      "PhysicalWidth": "3.6288",
+      "PhysicalHeight": "2.7216",
+      "FocalLength": "3.37",
+      "MaxJpegSize": "8388608",
+      "MinFrameDuration": "33333333",
+      "MaxFrameDuration": "300000000"
+    }
+  ]
+}

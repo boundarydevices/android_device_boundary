@@ -4,8 +4,8 @@
   ],
 
   "hal_version": "3",
-  "cam_blit_copy": "GPU_3D",
-  "cam_blit_csc": "GPU_3D",
+  "cam_blit_copy": "GPU_2D",
+  "cam_blit_csc": "GPU_2D",
 
   "camera_metadata": [
     {
@@ -22,14 +22,14 @@
       "PhysicalHeight": "4.536",
       "FocalLength": "4.0",
       "MaxJpegSize": "6291456",
-      "MinFrameDuration": "33331760",
+      "MinFrameDuration": "16666666",
       "MaxFrameDuration": "300000000",
       "ae_comp_min": "-4",
       "ae_comp_max": "4",
       "ae_comp_step_nummerator": "1",
       "ae_comp_step_denominator": "2",
       "exposure_ns_min": "68000",
-      "exposure_ns_max": "33360000"
+      "exposure_ns_max": "16632000"
     },
     {
       "camera_type": "front",
@@ -45,7 +45,7 @@
       "PhysicalHeight": "2.7216",
       "FocalLength": "3.37",
       "MaxJpegSize": "8388608",
-      "MinFrameDuration": "33331760",
+      "MinFrameDuration": "33333333",
       "MaxFrameDuration": "300000000"
     }
   ]

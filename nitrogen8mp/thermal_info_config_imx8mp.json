@@ -12,9 +12,9 @@
                 80.0,
                 82.0,
                 86.0,
-                90.0,
+                88.0,
                 "NAN",
-                "NAN"
+                90.0
             ],
             "HotHysteresis":[
                 2.0,
@@ -37,9 +37,9 @@
                 "NAN",
                 "NAN",
                 85.0,
-                95.0,
+                88.0,
                 "NAN",
-                "NAN"
+                90.0
             ],
             "HotHysteresis":[
                 2.0,
@@ -64,7 +64,7 @@
                 "NAN",
                 "NAN",
                 "NAN",
-                "NAN"
+                100.0
             ],
             "VrThreshold":"NAN",
             "Multiplier":0.001,
