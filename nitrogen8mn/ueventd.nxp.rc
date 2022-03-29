@@ -15,6 +15,9 @@
 /dev/gpiochip*            0660   system     system
 /dev/i2c*                 0660   system     system
 /dev/block/pmem0          0660    system    system
+/dev/dma_heap/reserved    0666   system     system
+/dev/dma_heap/reserved-uncached    0666   system     system
+/dev/dma_heap/secure      0666   system     system
 
 # partitions properties
 /dev/block/platform/soc@0/30800000\.bus/30b40000\.mmc/by-name/frp 0600   system     system
@@ -41,3 +44,5 @@
 
 /sys/devices/virtual/thermal/thermal_zone* trip_point_0_hyst 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_hyst 0660 system system
+
+/dev/dmabuf_imx           0664   system     system

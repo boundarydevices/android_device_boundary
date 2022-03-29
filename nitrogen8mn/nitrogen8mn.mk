@@ -2,7 +2,9 @@
 
 CONFIG_REPO_PATH := device/boundary
 CURRENT_FILE_PATH :=  $(lastword $(MAKEFILE_LIST))
-IMX_DEVICE_PATH := device/boundary/nitrogen8mn
+IMX_DEVICE_PATH := $(strip $(patsubst %/, %, $(dir $(CURRENT_FILE_PATH))))
+
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := true
 
 # configs shared between uboot, kernel and Android rootfs
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
@@ -27,6 +29,8 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
+PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=boundary
+PRODUCT_VENDOR_PROPERTIES += ro.soc.model=IMX8MN
 # -------@block_treble-------
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
@@ -54,6 +58,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/thermal_info_config_imx8mn.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/thermal_info_config_imx8mn.json
 
+# Task Profiles
+PRODUCT_COPY_FILES += \
+    $(IMX_DEVICE_PATH)/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 # -------@block_app-------
 #Enable this to choose 32 bit user space build
 IMX8_BUILD_32BIT_ROOTFS := false
@@ -65,6 +73,13 @@ PRODUCT_COPY_FILES += \
 # -------@block_kernel_bootimg-------
 # Enable this to support vendor boot and boot header v3, this would be a MUST for GKI
 TARGET_USE_VENDOR_BOOT ?= false
+
+ifeq ($(IMX8MN_USES_GKI),true)
+  BOARD_RAMDISK_USE_LZ4 := true
+
+  BOARD_USES_GENERIC_KERNEL_IMAGE := true
+  $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
+endif
 
 # We load the fstab from device tree so this is not needed, but since no kernel modules are installed to vendor
 # boot ramdisk so far, we need this step to generate the vendor-ramdisk folder or build process would fail. This
@@ -81,11 +96,23 @@ PRODUCT_COPY_FILES += \
     $(CONFIG_REPO_PATH)/common/init/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh
 
 # -------@block_storage-------
+# support metadata checksum during first stage mount
+ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+PRODUCT_PACKAGES += \
+    linker.vendor_ramdisk \
+    resizefs.vendor_ramdisk \
+    tune2fs.vendor_ramdisk
+endif
+
 #Enable this to use dynamic partitions for the readonly partitions not touched by bootloader
 TARGET_USE_DYNAMIC_PARTITIONS ?= false
 
 ifeq ($(TARGET_USE_DYNAMIC_PARTITIONS),true)
-  $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+  ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+    $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+  else
+    $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+  endif
   PRODUCT_USE_DYNAMIC_PARTITIONS := true
   BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
   BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE := true
@@ -129,22 +156,21 @@ endif
 # Keymaster HAL
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service.trusty
+    android.hardware.security.keymint-service.trusty
 endif
 
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service-imx
+    android.hardware.security.keymint-service-imx
 
 # Confirmation UI
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.confirmationui@1.0-service.trusty \
-    securedisplayd-imx
+    android.hardware.confirmationui@1.0-service.trusty
 endif
 
-#DRM Widevine 1.2 L3 support
+#DRM Clearkey 1.4 L3 support
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.3-service.clearkey \
+    android.hardware.drm@1.4-service.clearkey \
 
 # new gatekeeper HAL
 PRODUCT_PACKAGES += \
@@ -195,11 +221,6 @@ PRODUCT_COPY_FILES += \
     $(CONFIG_REPO_PATH)/common/audio-json/spdif_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/spdif_config.json \
     $(CONFIG_REPO_PATH)/common/audio-json/micfil_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/micfil_config.json \
     $(CONFIG_REPO_PATH)/common/audio-json/btsco_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/btsco_config.json \
-
-PRODUCT_PACKAGES += \
-    android.hardware.audio@6.0-impl:32 \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio.effect@6.0-impl:32
 
 PRODUCT_COPY_FILES += \
     $(FSL_PROPRIETARY_PATH)/fsl-proprietary/mcu-sdk/imx8mn/imx8mn_mcu_demo.img:imx8mn_mcu_demo.img \
@@ -389,7 +410,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-0.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_1.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level-2020-03-01.xml \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
