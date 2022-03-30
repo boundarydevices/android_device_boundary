@@ -46,40 +46,45 @@ on init && property:vendor.skip.charger_not_need=0
     # deattch the fbcon as hdmi hotplug conflict with fbcon
     write /sys/class/vtconsole/vtcon1/bind 0
 
-    chown system system /dev/stune/top-app/schedtune.boost
-    chmod 664 /dev/stune/top-app/schedtune.boost
-    chown system system /dev/stune/top-app/schedtune.prefer_idle
-    chmod 664 /dev/stune/top-app/schedtune.prefer_idle
-    chown system system /dev/stune/foreground/schedtune.boost
-    chmod 664 /dev/stune/foreground/schedtune.boost
-    chown system system /dev/stune/foreground/schedtune.prefer_idle
-    chmod 664 /dev/stune/foreground/schedtune.prefer_idle
-    chown system system /dev/stune/schedtune.boost
-    chmod 664 /dev/stune/schedtune.boost
+    chown system system /dev/cpuctl/top-app/cpu.uclamp.min
+    chmod 664 /dev/cpuctl/top-app/cpu.uclamp.min
+    chown system system /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+    chmod 664 /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+    chown system system /dev/cpuctl/foreground/cpu.uclamp.min
+    chmod 664 /dev/cpuctl/foreground/cpu.uclamp.min
+    chown system system /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive
+    chmod 664 /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive
+    chown system system /dev/cpuctl/rt/cpu.uclamp.min
+    chmod 664 /dev/cpuctl/rt/cpu.uclamp.min
+    chown system system /dev/cpuctl/rt/cpu.uclamp.latency_sensitive
+    chmod 664 /dev/cpuctl/rt/cpu.uclamp.latency_sensitive
+    chown system system /dev/cpuctl/background/cpu.uclamp.max
+    chmod 664 /dev/cpuctl/background/cpu.uclamp.max
 
-    # set default schedTune value for foreground/top-app (only affects EAS)
-    write /dev/stune/foreground/schedtune.boost 10
-    write /dev/stune/foreground/schedtune.prefer_idle 1
-    write /dev/stune/top-app/schedtune.boost 40
-    write /dev/stune/top-app/schedtune.prefer_idle 1
-    write /dev/stune/rt/schedtune.boost 50
-    write /dev/stune/rt/schedtune.prefer_idle 1
+    # set default uclamp value for foreground/top-app/rt/background (only affects EAS)
+    write /dev/cpuctl/foreground/cpu.uclamp.min 20
+    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/top-app/cpu.uclamp.min 50
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/rt/cpu.uclamp.min 60
+    write /dev/cpuctl/rt/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/background/cpu.uclamp.max 50
+
+on late-fs && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
+    start storageproxyd
+    start vendor.oemlock-1-0
+    start confirmationui-1-0
 
 on late-fs && property:vendor.skip.charger_not_need=0
     # Start keymaster/gatekeeper service
     start vendor.gatekeeper-1-0-${ro.boot.keystore}
-    start vendor.keymaster-4-0-${ro.boot.keystore}
+    start vendor.keymint-${ro.boot.keystore}
     setprop vendor.powerhal.init 1
 
     # Wait for keymaster
     exec_start wait_for_keymaster
 
     mount_all /vendor/etc/fstab.nxp --late
-
-on late-fs && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
-    start vendor.oemlock-1-0
-    start confirmationui-1-0
-    start securedisplayd-imx
 
 on early-boot && property:vendor.skip.charger_not_need=0
     # For nitrogen8mm, when swap used about 400M, upgrade the level.
@@ -97,9 +102,6 @@ on early-boot && property:vendor.skip.charger_not_need=0
     setprop vendor.media.fsl_codec.flag 7
 
     setprop camera.disable_zsl_mode 1
-
-    #Enable GPU 2D do CSC on imx8mm platform
-    setprop vendor.camera.2d.enable true
 
    # Tweak the mmc device read ahead buffer size
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
@@ -154,6 +156,10 @@ service bugreport /system/bin/dumpstate -d -p -z
     oneshot
     keycodes 114 115 116
 
+service vsidaemon /vendor/bin/vsidaemon
+    class main
+    user root
+
 on boot && property:vendor.skip.charger_not_need=0
     start audioserver
     start mediadrm
@@ -186,12 +192,11 @@ on post-fs && property:vendor.skip.charger_not_need=0
 
 on post-fs-data && property:vendor.skip.charger_not_need=0
     setprop vold.post_fs_data_done 1
-    # create temp node for secure storage proxy
-    mkdir /data/vendor/ss 0700 system system
 
 on zygote-start && property:vendor.skip.charger_not_need=0
     # Create the directories used by the Wireless subsystem
     mkdir /data/vendor/wifi 0771 wifi wifi
+    mkdir /data/vendor/wifi/wifi_dumps 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
 
@@ -202,8 +207,10 @@ service early_init_sh /vendor/bin/init.insmod.sh /vendor/etc/early.init.cfg vend
     disabled
     oneshot
 
-on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
-    start storageproxyd
+on post-fs-data && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
+    # create temp node for secure storage proxy
+    mkdir /data/vendor/ss 0700 system system
+    restart storageproxyd
 
 service storageproxyd /vendor/bin/storageproxyd -p /data/vendor/ss -r /dev/mmcblk0rpmb -d /dev/trusty-ipc-dev0
    group system

@@ -23,8 +23,9 @@
       "PhysicalHeight": "2.7216",
       "FocalLength": "3.37",
       "MaxJpegSize": "8388608",
-      "MinFrameDuration": "33331760",
+      "MinFrameDuration": "33333333",
       "MaxFrameDuration": "300000000",
+      "MinFrameDurationBlob5M": "600000000",
       "OmitFrame": [
           {
               "width": "2592",
