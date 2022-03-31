@@ -2,7 +2,9 @@
 
 CONFIG_REPO_PATH := device/boundary
 CURRENT_FILE_PATH :=  $(lastword $(MAKEFILE_LIST))
-IMX_DEVICE_PATH := device/boundary/nitrogen8_lite
+IMX_DEVICE_PATH := $(strip $(patsubst %/, %, $(dir $(CURRENT_FILE_PATH))))
+
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := true
 
 # configs shared between uboot, kernel and Android rootfs
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
@@ -31,6 +33,8 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
+PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=boundary
+PRODUCT_VENDOR_PROPERTIES += ro.soc.model=IMX8MM
 # -------@block_treble-------
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
@@ -59,6 +63,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/thermal_info_config_imx8mm.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/thermal_info_config_imx8mm.json
 
+# Task Profiles
+PRODUCT_COPY_FILES += \
+    $(IMX_DEVICE_PATH)/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 
 # -------@block_app-------
 
@@ -80,6 +88,11 @@ TARGET_USE_VENDOR_BOOT ?= false
 ifeq ($(IMX8MM_USES_GKI),true)
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.gki.enable=true
+
+BOARD_RAMDISK_USE_LZ4 := true
+
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 endif
 
 # We load the fstab from device tree so this is not needed, but since no kernel modules are installed to vendor
@@ -92,17 +105,29 @@ endif
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/early.init.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/early.init.cfg \
-    $(LINUX_FIRMWARE_IMX_PATH)/linux-firmware-imx/firmware/sdma/sdma-imx7d.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/imx/sdma/sdma-imx7d.bin \
+    $(LINUX_FIRMWARE_IMX_PATH)/linux-firmware-imx/firmware/sdma/sdma-imx7d.bin:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/firmware/imx/sdma/sdma-imx7d.bin \
     $(CONFIG_REPO_PATH)/common/init/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
     $(IMX_DEVICE_PATH)/ueventd.nxp.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
 
 # -------@block_storage-------
 
+# support metadata checksum during first stage mount
+ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+PRODUCT_PACKAGES += \
+    linker.vendor_ramdisk \
+    resizefs.vendor_ramdisk \
+    tune2fs.vendor_ramdisk
+endif
+
 #Enable this to use dynamic partitions for the readonly partitions not touched by bootloader
 TARGET_USE_DYNAMIC_PARTITIONS ?= false
 
 ifeq ($(TARGET_USE_DYNAMIC_PARTITIONS),true)
-  $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+  ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+    $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+  else
+    $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+  endif
   PRODUCT_USE_DYNAMIC_PARTITIONS := true
   BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
   BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE := true
@@ -142,24 +167,23 @@ endif
 
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_COPY_FILES += \
-    $(IMX_DEVICE_PATH)/security/rpmb_key_test.bin:rpmb_key_test.bin \
-    $(IMX_DEVICE_PATH)/security/testkey_public_rsa4096.bin:testkey_public_rsa4096.bin
+    $(CONFIG_REPO_PATH)/common/security/rpmb_key_test.bin:rpmb_key_test.bin \
+    $(CONFIG_REPO_PATH)/common/security/testkey_public_rsa4096.bin:testkey_public_rsa4096.bin
 endif
 
 # Keymaster HAL
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service.trusty
+    android.hardware.security.keymint-service.trusty
 endif
 
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service-imx
+    android.hardware.security.keymint-service-imx
 
 # Confirmation UI
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.confirmationui@1.0-service.trusty \
-    securedisplayd-imx
+    android.hardware.confirmationui@1.0-service.trusty
 endif
 
 # new gatekeeper HAL
@@ -204,10 +228,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.rebootescrow.device=/dev/block/pmem0
 
-#DRM Widevine 1.2 L3 support
+#DRM Widevine 1.4 L3 support
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.3-service.widevine \
-    android.hardware.drm@1.3-service.clearkey \
+    android.hardware.drm@1.4-service.widevine \
+    android.hardware.drm@1.4-service.clearkey \
     libwvdrmcryptoplugin \
     libwvhidl \
     libwvdrmengine
@@ -220,11 +244,6 @@ PRODUCT_COPY_FILES += \
     $(CONFIG_REPO_PATH)/common/audio-json/spdif_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/spdif_config.json \
     $(CONFIG_REPO_PATH)/common/audio-json/micfil_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/micfil_config.json \
     $(CONFIG_REPO_PATH)/common/audio-json/btsco_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/btsco_config.json \
-
-PRODUCT_PACKAGES += \
-    android.hardware.audio@6.0-impl:32 \
-    android.hardware.audio@2.0-service \
-    android.hardware.audio.effect@6.0-impl:32
 
 PRODUCT_COPY_FILES += \
     $(FSL_PROPRIETARY_PATH)/fsl-proprietary/mcu-sdk/imx8mm/imx8mm_mcu_demo.img:imx8mm_mcu_demo.img \
@@ -397,7 +416,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level-2020-03-01.xml \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2021-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
@@ -412,6 +432,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.voice_recognizers.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.voice_recognizers.xml \
     frameworks/native/data/etc/android.software.activities_on_secondary_displays.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.activities_on_secondary_displays.xml \
     frameworks/native/data/etc/android.software.picture_in_picture.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.picture_in_picture.xml
+
+# trusty loadable apps
+PRODUCT_COPY_FILES += \
+    vendor/nxp/fsl-proprietary/uboot-firmware/imx8m/confirmationui.app:/vendor/firmware/tee/confirmationui.app
 
 # Included GMS package
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
