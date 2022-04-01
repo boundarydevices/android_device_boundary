@@ -247,9 +247,9 @@ PRODUCT_PACKAGES += \
         libg2d-opencl
 
 # Multi-Display launcher
-PRODUCT_PACKAGES += \
-    MultiClientInputMethod \
-    MultiDisplay
+#PRODUCT_PACKAGES += \
+#    MultiClientInputMethod \
+#    MultiDisplay
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/input-port-associations.xml:$(TARGET_COPY_OUT_VENDOR)/etc/input-port-associations.xml
