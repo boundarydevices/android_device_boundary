@@ -199,6 +199,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.first_api_level=28
 
+# Battery polling interval (for pedestal)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.health.interval.fast=5 \
+    ro.vendor.health.interval.slow=5
+
 PRODUCT_PACKAGES += \
     libg1 \
     libhantro \
