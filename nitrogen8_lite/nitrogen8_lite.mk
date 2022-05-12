@@ -41,6 +41,11 @@ PRODUCT_SOONG_NAMESPACES += hardware/google/pixel
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/powerhint_imx8mm.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/powerhint_imx8mm.json
 
+# Battery polling interval (for pedestal)
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.vendor.health.interval.fast=5 \
+    ro.vendor.health.interval.slow=5
+
 # Charger Mode
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.charger.no_ui=false
