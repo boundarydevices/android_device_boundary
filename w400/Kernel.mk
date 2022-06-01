@@ -71,13 +71,13 @@ ifeq ($(KERNEL_A32_SUPPORT), true)
 KERNEL_DEFCONFIG := meson64_a32_defconfig
 KERNEL_ARCH := arm
 INTERMEDIATES_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/uImage
-PREFIX_CROSS_COMPILE=/opt/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
+PREFIX_CROSS_COMPILE=$(PWD)/prebuilts/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
 BUILD_CONFIG := $(KERNEL_DEFCONFIG)
 else
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 INTERMEDIATES_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Image.gz
-PREFIX_CROSS_COMPILE=/opt/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+PREFIX_CROSS_COMPILE=$(PWD)/prebuilts/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 BUILD_CONFIG := $(KERNEL_DEFCONFIG)
 endif
 
