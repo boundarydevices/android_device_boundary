@@ -59,7 +59,7 @@ else
 -include device/amlogic/common/arm_isp_modules.mk
 -include device/amlogic/common/tb_modules.mk
 
-KERNEL_DEVICETREE := g12b_a311d_w400 g12b_a311d_w400_a
+KERNEL_DEVICETREE := g12b_a311d_w400
 KERNEL_DEFCONFIG := meson64_defconfig
 KERNEL_ARCH := arm64
 
@@ -125,9 +125,9 @@ $(INTERMEDIATES_KERNEL): $(KERNEL_OUT) $(KERNEL_CONFIG) $(INSTALLED_BOARDDTB_TAR
 	@echo "make Image"
 #	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE)
 ifeq ($(KERNEL_A32_SUPPORT), true)
-	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules uImage
+	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules dtbs uImage
 else
-	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules Image.gz
+	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules dtbs Image.gz
 endif
 #	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/amlogic/thermal/ ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules
 	#$(gpu-modules)
