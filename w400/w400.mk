@@ -243,12 +243,22 @@ endif
 #
 #########################################################################
 
-WIFI_MODULE := multiwifi
-#WIFI_MODULE := BCMWIFI
-#WIFI_BUILD_IN := true
-include hardware/amlogic/wifi/configs/wifi.mk
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
 
+PRODUCT_COPY_FILES += \
+    device/amlogic/$(PRODUCT_DIR)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
+    device/amlogic/$(PRODUCT_DIR)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
+PRODUCT_PACKAGES += \
+    bdwlan30.bin \
+    cfg.dat \
+    otp30.bin \
+    qcom_cfg.ini \
+    qwlan30.bin \
+    wifi_poweron
 
 #########################################################################
 #
@@ -256,10 +266,12 @@ include hardware/amlogic/wifi/configs/wifi.mk
 #
 #########################################################################
 
-BOARD_HAVE_BLUETOOTH := true
-BLUETOOTH_MODULE := BCMBT
-include hardware/amlogic/bluetooth/configs/bluetooth.mk
-
+#PRODUCT_COPY_FILES += \
+#    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
+#
+#PRODUCT_PACKAGES += \
+#    tfbtfw11.tlv \
+#    tfbtnv11.bin
 
 #########################################################################
 #

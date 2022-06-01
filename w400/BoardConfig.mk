@@ -205,3 +205,15 @@ AUTO_PATCH_NPU := device/amlogic/common/products/mbox/manifest/npu_update.sh
 ifeq ($(BOARD_NPU_SERVICE_ENABLE),true)
 $(shell ($(AUTO_PATCH_NPU) $(DEVICE_MANIFEST_FILE)))
 endif
+
+# -------@block_wifi-------
+BOARD_WLAN_DEVICE            := qcwcn
+WPA_SUPPLICANT_VERSION       := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER  := NL80211
+BOARD_HOSTAPD_DRIVER         := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB           := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB    := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+
+# -------@block_bluetooth-------
+#BOARD_HAVE_BLUETOOTH_QCOM        := true
+#BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/amlogic/w400/bluetooth
