@@ -97,6 +97,15 @@ TARGET_AMLOGIC_INT_RECOVERY_KERNEL := $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/Ima
 BOARD_VENDOR_KERNEL_MODULES += \
 	$(PRODUCT_OUT)/obj/lib_vendor/ddr_window_64.ko
 
+DEFAULT_WIFI_KERNEL_MODULES := $(PRODUCT_OUT)/obj/lib_vendor/wlan.ko
+QCACLD_MODULE_PATH := vendor/boundary/qcacld-2.0
+define qcacld-modules
+	@$(MAKE) -C $(QCACLD_MODULE_PATH) KERNEL_SRC=$(PWD)/$(KERNEL_OUT) \
+		ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE); \
+	$(PREFIX_CROSS_COMPILE)strip --strip-debug $(QCACLD_MODULE_PATH)/wlan.ko \
+		-o $(DEFAULT_WIFI_KERNEL_MODULES)
+endef
+
 BOARD_VENDOR_KERNEL_MODULES	+= $(DEFAULT_MEDIA_KERNEL_MODULES)
 BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_WIFI_KERNEL_MODULES)
 BOARD_VENDOR_KERNEL_MODULES += $(DEFAULT_TB_DETECT_KERNEL_MODULES)
@@ -129,10 +138,8 @@ ifeq ($(KERNEL_A32_SUPPORT), true)
 else
 	$(MAKE) -C $(KERNEL_ROOTDIR) O=../$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules dtbs Image.gz
 endif
-#	$(MAKE) -C $(shell pwd)/$(PRODUCT_OUT)/obj/KERNEL_OBJ M=$(shell pwd)/hardware/amlogic/thermal/ ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) modules
 	#$(gpu-modules)
-	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f hardware/amlogic/wifi/configs/wifi_driver.mk $(WIFI_MODULE)
-	$(MAKE) KERNEL_ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(PREFIX_CROSS_COMPILE) -f hardware/amlogic/bluetooth/configs/bluetooth_driver.mk BLUETOOTH_INF=$(BLUETOOTH_INF) $(BLUETOOTH_MODULE)
+	$(qcacld-modules)
 	$(tb-modules)
 	$(cp-modules)
 	$(media-modules)
