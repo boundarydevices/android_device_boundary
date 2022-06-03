@@ -1,0 +1,10 @@
+cc_binary {
+    name: "wifi_poweron",
+    vendor: true,
+    srcs: [
+        "wifi_poweron.c"
+    ],
+    shared_libs: [
+        "libcutils",
+    ],
+}

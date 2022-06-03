@@ -267,6 +267,7 @@
 /vendor/bin/rc_server         u:object_r:rc_server_exec:s0
 /vendor/bin/tee-supplicant    u:object_r:tee_exec:s0
 /vendor/bin/tee_preload_fw    u:object_r:firmload_exec:s0
+/vendor/bin/wifi_poweron      u:object_r:hal_wifi_default_exec:s0
 
 /vendor/bin/tvserver          u:object_r:tvserver_exec:s0
 /vendor/bin/dtvkitserver      u:object_r:dtvkitserver_exec:s0
