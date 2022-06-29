@@ -1,0 +1,8 @@
+recovery_only(`
+   allow fastbootd dtbo_block_device:blk_file { getattr r_file_perms w_file_perms ioctl };
+   allow fastbootd boot_block_device:blk_file { getattr r_file_perms w_file_perms ioctl };
+   allow fastbootd vbmeta_block_device:blk_file { getattr r_file_perms w_file_perms ioctl };
+   allow fastbootd system_block_device:blk_file { getattr r_file_perms w_file_perms ioctl };
+   allow fastbootd frp_block_device:blk_file { getattr };
+')
+

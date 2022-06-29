@@ -1,0 +1,1 @@
+nxp.hardware.display::IDisplay     u:object_r:hal_graphics_composer_hwservice:s0

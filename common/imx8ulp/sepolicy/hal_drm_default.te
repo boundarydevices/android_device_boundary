@@ -1,0 +1,4 @@
+# Allow DRM HAL to use vendor-binder service
+vndbinder_use(hal_drm_default);
+allow hal_drm_default vendor_data_file:dir { create_file_perms rw_file_perms add_name };
+allow hal_drm_default vendor_data_file:file { create open write read append getattr };

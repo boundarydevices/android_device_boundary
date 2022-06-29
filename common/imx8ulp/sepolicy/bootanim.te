@@ -1,0 +1,6 @@
+get_prop(bootanim, vendor_public_default_prop)
+
+allow bootanim ashmem_device:chr_file {execute};
+allow bootanim self:process execmem;
+allow bootanim rootfs:lnk_file {getattr};
+allow bootanim hal_graphics_allocator_default_tmpfs:file { read write };

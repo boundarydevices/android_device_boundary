@@ -1,0 +1,18 @@
+genfscon nfs / u:object_r:rootfs:s0
+genfscon fuseblk / u:object_r:vfat:s0
+genfscon sysfs /class/typec                                             u:object_r:sysfs_usb_c:s0
+genfscon sysfs /devices/virtual/power_supply/usb                  u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/virtual/power_supply/battery              u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/soc@0/soc@0:bus@30000000/30370000.snvs   u:object_r:sysfs_rtc:s0
+genfscon sysfs /devices/platform/sound-ak4458/extcon              u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/sound-wm8960/extcon              u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/sound-rpmsg/extcon               u:object_r:sysfs_extcon:s0
+# 8mp HDMI
+genfscon sysfs /devices/platform/soc@0/30c00000.bus/32fd8000.hdmi/extcon            u:object_r:sysfs_extcon:s0
+# 8mq HDMI
+genfscon sysfs /devices/platform/soc@0/32c00000.bus/32c00000.hdmi/extcon            u:object_r:sysfs_extcon:s0
+# 8ulp HDMI
+genfscon sysfs /devices/platform/i2c-rpbus-0/i2c-0/0-006c/extcon                    u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/soc0   u:object_r:sysfs_soc:s0
+genfscon debugfs /dma_buf u:object_r:debugfs_dma:s0
+genfscon debugfs /sync/sw_sync u:object_r:debugfs_sw_sync:s0

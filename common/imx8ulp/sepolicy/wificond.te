@@ -1,0 +1,1 @@
+get_prop(wificond, vendor_public_default_prop)

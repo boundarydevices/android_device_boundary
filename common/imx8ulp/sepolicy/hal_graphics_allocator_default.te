@@ -1,0 +1,2 @@
+typeattribute hal_graphics_allocator_default_tmpfs mlstrustedobject;
+allow hal_graphics_allocator_default dmabuf_heap_device:chr_file { read open ioctl };

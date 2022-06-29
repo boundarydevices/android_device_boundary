@@ -1,0 +1,7 @@
+type hal_oemlock_impl, domain;
+hal_server_domain(hal_oemlock_impl, hal_oemlock)
+
+type hal_oemlock_impl_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_oemlock_impl)
+
+allow hal_oemlock tee_device:chr_file {ioctl open read write};

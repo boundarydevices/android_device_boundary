@@ -1,0 +1,6 @@
+# Allow alarmtimers to be set
+allow hal_health_default self:capability2 { wake_alarm };
+allow hal_health_default sysfs_batteryinfo:file rw_file_perms;
+allow hal_health_default sysfs_block_devices:file rw_file_perms;
+allow hal_health_default sysfs_block_devices:dir search;
+allow hal_health_default sysfs:file rw_file_perms;

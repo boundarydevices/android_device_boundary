@@ -1,0 +1,1 @@
+allow vold_prepare_subdirs vendor_configs_file:file { map };
