@@ -20,7 +20,7 @@ PRODUCT_PACKAGES += \
 # -------@block_common_config-------
 # overrides
 PRODUCT_BRAND := Android
-PRODUCT_MANUFACTURER := nxp
+PRODUCT_MANUFACTURER := boundary
 
 # related to the definition and load of library modules
 TARGET_BOARD_PLATFORM := imx
@@ -136,6 +136,7 @@ PREBUILT_FSL_IMX_ISP := true
 
 # -------@block_storage-------
 
+ifeq ($(AB_OTA_UPDATER),true)
 PRODUCT_PACKAGES += \
     SystemUpdaterSample
 
@@ -155,6 +156,15 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_HOST_PACKAGES += \
     brillo_update_payload
+else
+# non-A/B OTA
+PRODUCT_PACKAGES += \
+    FSLOta
+
+PRODUCT_COPY_FILES += \
+    device/boundary/common/ota/com.fsl.android.ota.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/com.fsl.android.ota.xml \
+    device/boundary/common/ota/ota.conf:$(TARGET_COPY_OUT_VENDOR)/etc/ota.conf
+endif
 
 # Support Dynamic partition userspace fastboot
 PRODUCT_PACKAGES += \
@@ -201,10 +211,6 @@ PRODUCT_PACKAGES += \
     camera.device@3.2-impl
 endif
 endif
-
-# external camera feature demo
-PRODUCT_PACKAGES += \
-     Camera2Basic
 
 # -------@block_display-------
 ifneq ($(PRODUCT_IMX_CAR),true)
@@ -317,10 +323,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
+ifneq ($(PRODUCT_HAS_RIL),true)
 # wifionly device
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.radio.noril=yes
-
+endif
 
 # -------@block_bluetooth-------
 
@@ -339,12 +346,9 @@ PRODUCT_PACKAGES += \
 # -------@block_input-------
 
 PRODUCT_COPY_FILES += \
-    $(CONFIG_REPO_PATH)/common/input/Dell_Dell_USB_Entry_Keyboard.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Dell_Dell_USB_Entry_Keyboard.idc \
-    $(CONFIG_REPO_PATH)/common/input/Dell_Dell_USB_Keyboard.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Dell_Dell_USB_Keyboard.idc \
-    $(CONFIG_REPO_PATH)/common/input/Dell_Dell_USB_Keyboard.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Dell_Dell_USB_Keyboard.kl \
-    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/HannStar_P1003_Touchscreen.idc \
-    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Novatek_NT11003_Touch_Screen.idc \
-    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/eGalax_Touch_Screen.idc
+    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/eGalax_Touch_Screen.idc \
+    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/ft5x06.idc \
+    $(CONFIG_REPO_PATH)/common/input/eGalax_Touch_Screen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/silead_ts.idc
 
 # -------@block_profile-------
 # In userdebug, add minidebug info the the boot image and the system server to support
@@ -371,3 +375,8 @@ PRODUCT_PACKAGES += \
 # vndservicemanager
 PRODUCT_PACKAGES += \
     vndservicemanager
+
+# WiFi regulatory database files
+PRODUCT_COPY_FILES += \
+    external/wireless-regdb/regulatory.db.p7s:$(TARGET_COPY_OUT_VENDOR)/firmware/regulatory.db.p7s \
+    external/wireless-regdb/regulatory.db:$(TARGET_COPY_OUT_VENDOR)/firmware/regulatory.db

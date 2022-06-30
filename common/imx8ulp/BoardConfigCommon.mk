@@ -83,7 +83,7 @@ PRODUCT_COPY_FILES += \
 
 TARGET_BOARD_KERNEL_HEADERS := $(CONFIG_REPO_PATH)/common/kernel-headers
 
-TARGET_IMX_KERNEL ?= false
+TARGET_IMX_KERNEL ?= true
 ifeq ($(TARGET_IMX_KERNEL),false)
 # boot-debug.img is built by IMX, with Google released kernel Image
 # boot.img is released by Google
@@ -106,6 +106,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # -------@block_storage-------
+ifeq ($(AB_OTA_UPDATER),)
 AB_OTA_UPDATER := true
 ifeq ($(IMX_NO_PRODUCT_PARTITION),true)
 AB_OTA_PARTITIONS += dtbo boot system system_ext vendor vbmeta
@@ -116,9 +117,14 @@ else
 AB_OTA_PARTITIONS += dtbo boot system system_ext vendor vbmeta product
 endif
 endif
+endif
+
+ifeq ($(BOARD_HAVE_PREBOOTIMAGE),true)
+BOARD_PREBOOTIMAGE_PARTITION_SIZE := 16777216
+endif
 
 BOARD_DTBOIMG_PARTITION_SIZE := 4194304
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_BOOTIMAGE_PARTITION_SIZE := 50331648
 ifeq ($(TARGET_USE_VENDOR_BOOT),true)
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
 endif
@@ -132,10 +138,12 @@ ifneq ($(IMX_NO_PRODUCT_PARTITION),true)
   TARGET_COPY_OUT_PRODUCT := product
 endif
 
+ifeq ($(BOARD_USES_SYSTEM_EXTIMAGE),)
 # Build a separate system_ext.img partition
 BOARD_USES_SYSTEM_EXTIMAGE := true
 BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+endif
 
 BOARD_FLASH_BLOCK_SIZE := 4096
 
@@ -151,7 +159,7 @@ ifeq ($(TARGET_USE_DYNAMIC_PARTITIONS),true)
   endif
 else
   BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
-  BOARD_VENDORIMAGE_PARTITION_SIZE := 671088640
+  BOARD_VENDORIMAGE_PARTITION_SIZE := 805306368
   BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE := 134217728
   ifeq ($(IMX_NO_PRODUCT_PARTITION),true)
     BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2952790016
