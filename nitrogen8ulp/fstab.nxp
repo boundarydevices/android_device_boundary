@@ -1,0 +1,20 @@
+# Android fstab file.
+#<src>                                                  <mnt_point>         <type>    <mnt_flags and options>                       <fs_mgr_flags>
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+/devices/platform/soc@0/29800000.bus/299[02]0000.usb/* auto auto defaults voldmanaged=usb:auto,encryptable=userdata
+
+/dev/block/by-name/system      /system      ext4    ro,barrier=1                                                                     wait,avb
+/dev/block/by-name/vendor      /vendor      ext4    ro,barrier=1                                                                     wait,avb
+/dev/block/by-name/cache       /cache       ext4    noatime,nosuid,nodev,nomblk_io_submit                                            wait,formattable
+/dev/block/by-name/userdata    /data        ext4    nosuid,nodev,nodiratime,noatime,noauto_da_alloc,errors=panic                     latemount,wait,formattable,quota,fileencryption=software,reservedsize=128M,checkpoint=block
+/dev/block/by-name/metadata    /metadata    ext4    noatime,nosuid,nodev,discard,sync                                                wait,formattable,first_stage_mount,check
+/dev/block/by-name/misc        /misc        emmc    defaults                                                                         defaults
+/dev/block/by-name/vbmeta      /vbmeta      emmc    defaults                                                                         defaults
+/dev/block/by-name/dtbo        /dtbo        emmc    defaults                                                                         defaults
+/dev/block/by-name/boot        /boot        emmc    defaults                                                                         defaults
+/dev/block/by-name/recovery    /recovery    emmc    defaults                                                                         defaults
+
+/dev/block/zram0               none         swap    defaults                                                                         zramsize=629145600
+/tmp                           /sdcard      none    defaults,bind                                                                    recoveryonly

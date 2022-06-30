@@ -1,0 +1,4 @@
+allow shell tee_exec:file { getattr execute read open execute_no_trans };
+allow shell tee_data_file:file { create write open getattr unlink read };
+allow shell tee_data_file:dir { write add_name remove_name rename search };
+allow shell tee_data_file:chr_file { read write open ioctl };
