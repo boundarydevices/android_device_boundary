@@ -27,8 +27,7 @@
 /dev/i2c*                 0660   system     system
 
 # partitions properties
-/dev/block/platform/soc@0/30800000\.bus/30b50000\.mmc/by-name/frp 0600   system     system
-/dev/block/platform/soc@0/30800000\.bus/30b40000\.mmc/by-name/frp 0600   system     system
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/frp 0600   system     system
 
 # sysfs properties
 /sys/devices/platform/backlight*    brightness  0660  system system

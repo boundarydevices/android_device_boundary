@@ -105,7 +105,7 @@
 /dev/block/by-name/product_[ab]              u:object_r:system_block_device:s0
 /dev/block/by-name/misc                      u:object_r:misc_block_device:s0
 /dev/block/by-name/metadata                  u:object_r:metadata_block_device:s0
-/dev/block/by-name/presistdata               u:object_r:frp_block_device:s0
+/dev/block/by-name/frp                       u:object_r:frp_block_device:s0
 /dev/block/by-name/userdata                  u:object_r:userdata_block_device:s0
 /dev/block/by-name/vbmeta_[ab]               u:object_r:vbmeta_block_device:s0
 /dev/block/by-name/super                     u:object_r:super_block_device:s0

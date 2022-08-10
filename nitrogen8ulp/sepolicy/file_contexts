@@ -1,3 +1,16 @@
+#emmc boot
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/dtbo        u:object_r:dtbo_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/boot        u:object_r:boot_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/recovery    u:object_r:recovery_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/system      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/vendor      u:object_r:system_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/cache       u:object_r:cache_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/frp         u:object_r:frp_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/userdata    u:object_r:userdata_block_device:s0
+/dev/block/platform/soc@0/29800000\.bus/298d0000\.mmc/by-name/vbmeta      u:object_r:vbmeta_block_device:s0
+
 /dev/block/mmcblk0boot0                      u:object_r:emmc_boot0:s0
 
 #peripheral
@@ -23,4 +36,3 @@
 /sys/devices/virtual/wakeup/wakeup[0-9]*(/.*)?                                                                                                u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/1-0050/power_supply/tcpm-source-psy-1-0050/wakeup[0-9]*(/.*)?                     u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/soc@0/30800000.bus/30be0000.ethernet/net/eth0/wakeup[0-9]*(/.*)?                                                        u:object_r:sysfs_wakeup:s0
-
