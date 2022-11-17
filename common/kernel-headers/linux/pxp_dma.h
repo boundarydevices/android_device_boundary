@@ -180,6 +180,8 @@ struct pxp_layer_param {
   struct pxp_alpha alpha;
   struct rect crop;
   dma_addr_t paddr;
+  dma_addr_t paddr_u;
+  dma_addr_t paddr_v;
 };
 struct pxp_collision_info {
   unsigned int pixel_cnt;
