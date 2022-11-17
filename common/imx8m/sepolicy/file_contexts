@@ -22,7 +22,8 @@
 /dev/dri/controlD65             u:object_r:graphics_device:s0
 /dev/dri/renderD128             u:object_r:gpu_device:s0
 /dev/dri/renderD129             u:object_r:gpu_device:s0
-/vendor/bin/hw/android\.hardware\.usb@1\.1-service.imx             u:object_r:hal_usb_impl_exec:s0
+/vendor/bin/hw/android\.hardware\.usb@1\.3-service.imx             u:object_r:hal_usb_impl_exec:s0
+/vendor/bin/hw/android\.hardware\.usb\.gadget@1\.2-service.imx     u:object_r:hal_usb_impl_exec:s0
 /vendor/bin/hw/android\.hardware\.health@2\.0-service.imx          u:object_r:hal_health_default_exec:s0
 /dev/diag                       u:object_r:diag_device:s0
 /vendor/bin/wcnss_filter        u:object_r:wcnss_filter_exec:s0
@@ -128,6 +129,9 @@
 
 # allocator 4.0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.graphics\.allocator@4\.0-service.imx   u:object_r:hal_graphics_allocator_default_exec:s0
+
+# memtrack
+/(vendor|system/vendor)/bin/hw/android\.hardware\.memtrack-service\.imx       u:object_r:hal_memtrack_default_exec:s0
 
 # hantro v4l2 daemon
 /vendor/bin/vsidaemon                         u:object_r:vsidaemon_exec:s0

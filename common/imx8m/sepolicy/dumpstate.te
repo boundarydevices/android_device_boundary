@@ -7,5 +7,7 @@ allow dumpstate sysfs_block_devices:file { open read getattr };
 allow dumpstate debugfs_mmc:dir { search };
 allow dumpstate debugfs:dir { r_dir_perms };
 allow dumpstate debugfs_dma:dir { search };
-allow dumpstate debugfs_dma:file { read open getattr };
+no_debugfs_restriction(`
+  allow dumpstate debugfs_dma:file { read open getattr };
+')
 allow dumpstate hal_power_default:binder { call };

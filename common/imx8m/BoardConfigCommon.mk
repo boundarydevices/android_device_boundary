@@ -80,9 +80,6 @@ endif
 # kernel module's copy to vendor need this folder setting
 KERNEL_OUT ?= $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/obj/KERNEL_OBJ
 
-PRODUCT_COPY_FILES += \
-    $(KERNEL_OUT)/arch/$(TARGET_KERNEL_ARCH)/boot/$(KERNEL_NAME):kernel
-
 TARGET_BOARD_KERNEL_HEADERS := $(CONFIG_REPO_PATH)/common/kernel-headers
 
 TARGET_IMX_KERNEL ?= true
@@ -232,3 +229,13 @@ BOARD_VNDK_VERSION := current
 
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_ms_codec/BoardConfig.mk
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_real_dec/BoardConfig.mk
+
+ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
+endif
+
+# Set Vendor SPL to match platform
+VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
+
+# Set boot SPL
+BOOT_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)

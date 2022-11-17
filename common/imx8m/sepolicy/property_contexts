@@ -8,6 +8,7 @@ ro.boot.vendor.sysrq                u:object_r:vendor_public_default_prop:s0
 vendor.all.early_init.ready         u:object_r:vendor_public_default_prop:s0
 vendor.sys.hwc.disable              u:object_r:vendor_public_default_prop:s0
 vendor.2d.composition               u:object_r:vendor_public_default_prop:s0
+vendor.2d.ocl.enable                u:object_r:vendor_public_default_prop:s0
 vendor.imx.default-g2d              u:object_r:vendor_public_default_prop:s0
 vendor.all.system_server.ready      u:object_r:vendor_public_default_prop:s0
 vendor.hw.backlight.dev             u:object_r:vendor_public_default_prop:s0
@@ -214,3 +215,6 @@ vendor.camera.mjpg.decoder    u:object_r:vendor_camera_prop:s0
 # vendor verbose logging prop
 persist.vendor.verbose_logging_enabled u:object_r:vendor_logging_prop:s0
 ro.vendor.build_id                     u:object_r:vendor_public_default_prop:s0
+
+# extend feature for secure ui
+ro.boot.androidui.overlay              u:object_r:vendor_public_default_prop:s0

@@ -12,7 +12,9 @@ allow hal_dumpstate_impl  sysfs:dir { open read };
 allow hal_dumpstate_impl  sysfs_batteryinfo:file { open read getattr };
 allow hal_dumpstate_impl  sysfs_batteryinfo:dir { read search };
 allow hal_dumpstate_impl  shell_data_file:file { read getattr };
-allow hal_dumpstate_impl  debugfs_dma:file { read open };
+no_debugfs_restriction(`
+  allow hal_dumpstate_impl  debugfs_dma:file { read open };
+')
 allow hal_dumpstate_impl  debugfs_dma:dir { read search};
 
 set_prop(hal_dumpstate_impl, vendor_logging_prop);

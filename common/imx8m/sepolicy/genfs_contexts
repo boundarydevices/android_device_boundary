@@ -11,7 +11,12 @@ genfscon sysfs /devices/virtual/power_supply/battery              u:object_r:sys
 genfscon sysfs /devices/platform/soc@0/soc@0:bus@30000000/30370000.snvs   u:object_r:sysfs_rtc:s0
 genfscon sysfs /devices/platform/sound-ak4458/extcon              u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/sound-wm8960/extcon              u:object_r:sysfs_extcon:s0
-genfscon sysfs /devices/platform/sound-rpmsg/extcon               u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/3b6e8000.dsp/extcon              u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rpmsg_audio/imx-audio-rpmsg.0.auto/extcon          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rpmsg_audio/imx-audio-rpmsg.1.auto/extcon          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rpmsg_audio/imx-audio-rpmsg.2.auto/extcon          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rpmsg_audio/imx-audio-rpmsg.4.auto/extcon          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rpmsg_audio/extcon               u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/soc@0/30c00000.bus/32fd8000.hdmi/extcon            u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/soc@0/32c00000.bus/32c00000.hdmi/extcon            u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/soc@0/30800000.bus/30a40000.i2c/i2c-2/2-003d/extcon u:object_r:sysfs_extcon:s0

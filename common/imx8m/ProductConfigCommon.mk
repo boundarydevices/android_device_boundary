@@ -25,7 +25,7 @@ PRODUCT_MANUFACTURER := boundary
 # related to the definition and load of library modules
 TARGET_BOARD_PLATFORM := imx
 
-PRODUCT_SHIPPING_API_LEVEL := 30
+PRODUCT_SHIPPING_API_LEVEL := 32
 
 # -------@block_app-------
 
@@ -94,10 +94,6 @@ PRODUCT_PACKAGES += \
     lib_asf_parser_arm11_elinux.3.0 \
     lib_ddpd_wrap_arm12_elinux_android \
     lib_ddplus_dec_v2_arm12_elinux \
-    lib_omx_ac3_dec_v2_arm11_elinux \
-    lib_omx_ra_dec_v2_arm11_elinux \
-    lib_omx_wma_dec_v2_arm11_elinux \
-    lib_omx_wmv_dec_v2_arm11_elinux \
     lib_realad_wrap_arm11_elinux_android \
     lib_realaudio_dec_v2_arm11_elinux \
     lib_rm_parser_arm11_elinux.3.0 \
@@ -109,6 +105,7 @@ PRODUCT_PACKAGES += \
     android.hardware.media.c2@1.0-service \
     libsfplugin_ccodec \
     lib_imx_c2_componentbase \
+    lib_imx_utils \
     lib_imx_ts_manager \
     lib_c2_imx_store \
     lib_c2_imx_audio_dec_common \
@@ -123,7 +120,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.ccodec=4  \
     debug.stagefright.omx_default_rank=0x200 \
-    debug.stagefright.c2-poolmask=0x70000
+    debug.stagefright.c2-poolmask=0x70000 \
+    debug.stagefright.ccodec_delayed_params=true
 
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_real_dec/fsl_real_dec.mk
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_ms_codec/fsl_ms_codec.mk
@@ -247,15 +245,13 @@ PRODUCT_PACKAGES += \
     gpu-top
 
 
+# -------@block_memtrack-------
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack-service.imx
+
 # -------@block_memory-------
 PRODUCT_PACKAGES += \
     libion
-
-# memtrack
-PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
-    memtrack.imx
 
 # include a google recommand heap config file.
 include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
@@ -307,6 +303,11 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
+
+# compress offload audio playback support
+PRODUCT_PACKAGES += \
+    libtinycompress \
+    cplay
 
 # -------@block_wifi-------
 PRODUCT_PACKAGES += \
@@ -369,6 +370,13 @@ endif
 #Dumpstate HAL 1.1 support
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.1-service.imx
+
+# for userdebug or eng build, do not apply the debugfs restrictions
+ifneq (,$(filter user, $(TARGET_BUILD_VARIANT)))
+    PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
+else
+    PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
+endif
 
 # -------@block_treble-------
 # vndservicemanager
