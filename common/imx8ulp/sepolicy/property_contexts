@@ -7,6 +7,7 @@ ro.boot.vendor.sysrq                u:object_r:vendor_public_default_prop:s0
 vendor.all.early_init.ready         u:object_r:vendor_public_default_prop:s0
 vendor.sys.hwc.disable              u:object_r:vendor_public_default_prop:s0
 vendor.2d.composition               u:object_r:vendor_public_default_prop:s0
+vendor.2d.ocl.enable                u:object_r:vendor_public_default_prop:s0
 vendor.imx.default-g2d              u:object_r:vendor_public_default_prop:s0
 vendor.all.system_server.ready      u:object_r:vendor_public_default_prop:s0
 vendor.hw.backlight.dev             u:object_r:vendor_public_default_prop:s0

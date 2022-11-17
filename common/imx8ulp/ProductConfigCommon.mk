@@ -25,7 +25,7 @@ PRODUCT_MANUFACTURER := boundary
 # related to the definition and load of library modules
 TARGET_BOARD_PLATFORM := imx
 
-PRODUCT_SHIPPING_API_LEVEL := 30
+PRODUCT_SHIPPING_API_LEVEL := 32
 
 # -------@block_app-------
 
@@ -248,15 +248,13 @@ PRODUCT_PACKAGES += \
     gpu-top
 
 
+# -------@block_memtrack-------
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack-service.imx
+
 # -------@block_memory-------
 PRODUCT_PACKAGES += \
     libion
-
-# memtrack
-PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
-    memtrack.imx
 
 # include a google recommand heap config file.
 include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
@@ -370,6 +368,13 @@ endif
 #Dumpstate HAL 1.1 support
 PRODUCT_PACKAGES += \
     android.hardware.dumpstate@1.1-service.imx
+
+# for userdebug or eng build, do not apply the debugfs restrictions
+ifneq (,$(filter user, $(TARGET_BUILD_VARIANT)))
+    PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
+else
+    PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
+endif
 
 # -------@block_treble-------
 # vndservicemanager

@@ -7,6 +7,7 @@ genfscon sysfs /devices/platform/soc@0/soc@0:bus@30000000/30370000.snvs   u:obje
 genfscon sysfs /devices/platform/sound-ak4458/extcon              u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/sound-wm8960/extcon              u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/sound-rpmsg/extcon               u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rpmsg-audio/extcon               u:object_r:sysfs_extcon:s0
 # 8mp HDMI
 genfscon sysfs /devices/platform/soc@0/30c00000.bus/32fd8000.hdmi/extcon            u:object_r:sysfs_extcon:s0
 # 8mq HDMI
@@ -15,4 +16,3 @@ genfscon sysfs /devices/platform/soc@0/32c00000.bus/32c00000.hdmi/extcon        
 genfscon sysfs /devices/platform/i2c-rpbus-0/i2c-0/0-006c/extcon                    u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/soc0   u:object_r:sysfs_soc:s0
 genfscon debugfs /dma_buf u:object_r:debugfs_dma:s0
-genfscon debugfs /sync/sw_sync u:object_r:debugfs_sw_sync:s0

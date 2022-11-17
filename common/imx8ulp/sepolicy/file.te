@@ -1,5 +1,6 @@
 type mediadrm_vendor_data_file, file_type, data_file_type;
 type debugfs_dma, debugfs_type, fs_type;
-type debugfs_sw_sync, debugfs_type, fs_type;
 type sysfs_soc, sysfs_type, fs_type;
 type pps_socket, file_type;
+type sysfs_iio_file_ctrl, fs_type, sysfs_type;
+type sysfs_iio_devices, fs_type, sysfs_type;
