@@ -25,7 +25,3 @@ BOARD_VENDOR_KERNEL_MODULES += \
 # Dummy battery module for CTS
 BOARD_VENDOR_KERNEL_MODULES += \
     $(KERNEL_OUT)/drivers/power/supply/dummy_battery.ko
-
-# GPU Vivante driver
-BOARD_VENDOR_KERNEL_MODULES += \
-    $(KERNEL_OUT)/drivers/mxc/gpu-viv/galcore.ko
