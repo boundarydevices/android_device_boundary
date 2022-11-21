@@ -160,6 +160,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service.software-imx
 
+# Confirmation UI
+ifeq ($(PRODUCT_IMX_TRUSTY),true)
+PRODUCT_PACKAGES += \
+    android.hardware.confirmationui@1.0-service.trusty
+endif
+
 # Add Trusty OS backed gatekeeper and secure storage proxy
 
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
@@ -331,7 +337,8 @@ BOARD_CUSTOM_BT_CONFIG := $(IMX_DEVICE_PATH)/bluetooth/libbt_vnd.conf
 # -------@block_usb-------
 # Usb HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.1-service.imx
+    android.hardware.usb@1.3-service.imx \
+    android.hardware.usb.gadget@1.2-service.imx
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/init.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.nxp.usb.rc
@@ -399,6 +406,10 @@ else
   PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/init.recovery.nxp.rc:root/init.recovery.nxp.rc
 endif
+
+# Display Device Config
+PRODUCT_COPY_FILES += \
+    $(CONFIG_REPO_PATH)/common/imx8m/displayconfig/display_port_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_port_0.xml
 
 # ONLY devices that meet the CDD's requirements may declare these features
 PRODUCT_COPY_FILES += \

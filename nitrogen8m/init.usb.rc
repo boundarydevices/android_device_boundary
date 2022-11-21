@@ -29,6 +29,7 @@ on early-boot
     mkdir /config/usb_gadget/g1/functions/audio_source.gs3
     mkdir /config/usb_gadget/g1/functions/rndis.gs4
     mkdir /config/usb_gadget/g1/functions/midi.gs5
+    mkdir /config/usb_gadget/g1/functions/ncm.gs6
     mkdir /config/usb_gadget/g1/functions/ffs.adb
     mkdir /config/usb_gadget/g1/functions/ffs.mtp
     mkdir /config/usb_gadget/g1/functions/ffs.ptp

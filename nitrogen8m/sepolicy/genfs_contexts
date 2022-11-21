@@ -4,4 +4,6 @@ genfscon sysfs /devices/platform/soc@0/30800000.bus/30a20000.i2c/i2c-0/i2c-7/7-0
 genfscon sysfs /devices/platform/soc@0/30000000.bus/30370000.snvs/30370000.snvs:snvs-rtc-lp/rtc/rtc1/hctosys     u:object_r:sysfs_rtc:s0
 genfscon sysfs /devices/platform/soc@0/30800000.bus/30be0000.ethernet/net               u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/soc@0/33800000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc@0/33c00000.pcie/pci0001:00/0001:00:00.0/0001:01:00.0/net u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/backlight-mipi/backlight u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc@0/38100000.usb                                     u:object_r:sysfs_usb_device:s0
