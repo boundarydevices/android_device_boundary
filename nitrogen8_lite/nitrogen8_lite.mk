@@ -107,7 +107,7 @@ PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/early.init.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/early.init.cfg \
     $(LINUX_FIRMWARE_IMX_PATH)/linux-firmware-imx/firmware/sdma/sdma-imx7d.bin:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/lib/firmware/imx/sdma/sdma-imx7d.bin \
     $(CONFIG_REPO_PATH)/common/init/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
-    $(IMX_DEVICE_PATH)/ueventd.nxp.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
+    $(IMX_DEVICE_PATH)/ueventd.nxp.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
 # -------@block_storage-------
 
@@ -333,7 +333,8 @@ BOARD_CUSTOM_BT_CONFIG := $(IMX_DEVICE_PATH)/bluetooth/libbt_vnd.conf
 
 # Usb HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.1-service.imx
+    android.hardware.usb@1.3-service.imx \
+    android.hardware.usb.gadget@1.2-service.imx
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/init.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.nxp.usb.rc
@@ -359,14 +360,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     lib_vpu_wrapper \
     lib_imx_c2_videodec \
-    lib_imx_c2_vpuwrapper_dec \
     lib_imx_c2_videodec_common \
     lib_imx_c2_videoenc_common \
-    lib_imx_c2_vpuwrapper_enc \
     lib_imx_c2_videoenc \
+    lib_imx_c2_v4l2_dev \
+    lib_imx_c2_v4l2_dec \
+    lib_imx_c2_v4l2_enc \
     lib_imx_c2_process \
     lib_imx_c2_process_dummy_post \
     lib_imx_c2_process_g2d_pre \
+    lib_imx_c2_g2d_pre_filter \
+    libc2filterplugin \
     c2_component_register \
     c2_component_register_ms \
     c2_component_register_ra
@@ -400,6 +404,10 @@ else
   PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/init.recovery.nxp.rc:root/init.recovery.nxp.rc
 endif
+
+# Display Device Config
+PRODUCT_COPY_FILES += \
+    $(CONFIG_REPO_PATH)/common/imx8m/displayconfig/display_port_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_port_0.xml
 
 # ONLY devices that meet the CDD's requirements may declare these features
 PRODUCT_COPY_FILES += \
@@ -435,7 +443,7 @@ PRODUCT_COPY_FILES += \
 
 # trusty loadable apps
 PRODUCT_COPY_FILES += \
-    vendor/nxp/fsl-proprietary/uboot-firmware/imx8m/confirmationui.app:/vendor/firmware/tee/confirmationui.app
+    vendor/nxp/fsl-proprietary/uboot-firmware/imx8m/confirmationui-imx8mm.app:/vendor/firmware/tee/confirmationui.app
 
 # Included GMS package
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)

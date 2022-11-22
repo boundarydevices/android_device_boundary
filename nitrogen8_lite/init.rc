@@ -233,3 +233,12 @@ on property:ro.boot.lpa.enable=1
     setprop vendor.audio.lpa.hold_second 20
     setprop vendor.audio.lpa.period_ms 500
     setprop vendor.audio.lpa.enable 1
+
+service confirmationui_ta_load /vendor/bin/trusty_apploader /vendor/firmware/tee/confirmationui.app
+    user root
+    group root system
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
+    start confirmationui_ta_load
