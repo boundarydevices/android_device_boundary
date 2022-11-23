@@ -36,12 +36,12 @@
           {
               "width": "1280",
               "height": "720",
-              "omit_num": "1"
+              "omit_num": "3"
           },
           {
               "width": "320",
               "height": "240",
-              "omit_num": "1"
+              "omit_num": "3"
           }
       ]
     },
@@ -73,12 +73,12 @@
           {
               "width": "1280",
               "height": "720",
-              "omit_num": "1"
+              "omit_num": "3"
           },
           {
               "width": "320",
               "height": "240",
-              "omit_num": "1"
+              "omit_num": "3"
           }
       ]
     }

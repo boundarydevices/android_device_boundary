@@ -5,6 +5,7 @@
 /dev/snd/*                0660   system     audio
 /dev/video*               0660   system     camera
 /dev/v4l*                 0660   system     camera
+/dev/dma_heap/dsp         0660   mediacodec mediacodec
 /dev/mxc_hifi4            0660   media      drmrpc
 /dev/mxc_hantro           0666   media      drmrpc
 /dev/mxc_hantro_vc8000e   0666   media      drmrpc

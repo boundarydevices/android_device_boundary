@@ -8,3 +8,4 @@ genfscon sysfs /devices/platform/soc@0/30800000.bus/30b50000.mmc/mmc_host/mmc1/m
 genfscon sysfs /devices/platform/soc@0/30800000.bus/30b60000.mmc/mmc_host/mmc2/mmc2:0001/block/mmcblk2           u:object_r:sysfs_block_devices:s0
 genfscon sysfs /devices/platform/soc@0/30800000.bus/30be0000.ethernet/net                                        u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/soc@0/30800000.bus/30bf0000.ethernet/net                                        u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc@0/32f10100.usb                                                              u:object_r:sysfs_usb_device:s0
