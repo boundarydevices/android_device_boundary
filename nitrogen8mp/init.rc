@@ -272,6 +272,10 @@ on property:ro.boot.lpa.enable=1
 on property:ro.boot.lpa.enable=1 && property:ro.boot.powersave.lpa=true
     write /sys/lpa_ctrl/lpa 1
 
+# default is for dual basler
+on property:ro.boot.camera.layout=""
+    mount overlay overlay /vendor/etc/configs/isp ro lowerdir=/vendor/vendor_overlay_sensor/basler/vendor/etc/configs/isp:/vendor/etc/configs/isp,override_creds=off
+
 service confirmationui_ta_load /vendor/bin/trusty_apploader /vendor/firmware/tee/confirmationui.app
     user root
     group root system

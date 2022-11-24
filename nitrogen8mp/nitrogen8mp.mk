@@ -264,7 +264,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     media_profiles_8mp-ov5640.xml \
-    media_profiles_8mp-basler-ov5640.xml
+    media_profiles_8mp-ispsensor-ov5640.xml
 
 # -------@block_display-------
 
@@ -595,6 +595,9 @@ PRODUCT_PACKAGES += \
     basler-Sensor1_Entry.cfg \
     daA3840_30mc_1080P.json \
     daA3840_30mc_4K.json
+
+# make sure /vendor/etc/configs/isp/ is created
+PRODUCT_PACKAGES += hollow
 
 # libgpiod tools
 PRODUCT_PACKAGES += \

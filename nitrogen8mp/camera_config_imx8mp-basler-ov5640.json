@@ -14,14 +14,14 @@
       "bus_info": "platform:viv0",
       "orientation": "0",
       "buffer_type": "mmap",
-      "ActiveArrayWidth": "3840",
-      "ActiveArrayHeight": "2160",
-      "PixelArrayWidth": "3840",
-      "PixelArrayHeight": "2160",
-      "PhysicalWidth": "8.064",
-      "PhysicalHeight": "4.536",
+      "ActiveArrayWidth": "1920",
+      "ActiveArrayHeight": "1080",
+      "PixelArrayWidth": "1920",
+      "PixelArrayHeight": "1080",
+      "PhysicalWidth": "4.032",
+      "PhysicalHeight": "2.268",
       "FocalLength": "4.0",
-      "MaxJpegSize": "6291456",
+      "MaxJpegSize": "4194304",
       "MinFrameDuration": "16666666",
       "MaxFrameDuration": "300000000",
       "ae_comp_min": "-4",
@@ -29,7 +29,21 @@
       "ae_comp_step_nummerator": "1",
       "ae_comp_step_denominator": "2",
       "exposure_ns_min": "68000",
-      "exposure_ns_max": "16632000"
+      "exposure_ns_max": "16632000",
+      "MaxWidth": "1920",
+      "MaxHeight": "1080",
+      "OmitFrame": [
+          {
+              "width": "1280",
+              "height": "720",
+              "omit_num": "3"
+          },
+          {
+              "width": "320",
+              "height": "240",
+              "omit_num": "3"
+          }
+      ]
     },
     {
       "camera_type": "front",
