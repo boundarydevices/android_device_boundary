@@ -3,7 +3,7 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-/devices/platform/soc@0/32f10108.usb/38200000.dwc3/* auto auto defaults voldmanaged=usb:auto,encryptable=userdata
+/devices/platform/soc@0/32f10108.usb/38200000.usb/* auto auto defaults voldmanaged=usb:auto,encryptable=userdata
 /devices/platform/soc@0/30800000.bus/30b40000.mmc/mmc_host/* auto auto defaults voldmanaged=sdcard:auto,encryptable=userdata
 
 /dev/block/by-name/system      /system      ext4    ro,barrier=1                                                                     wait,avb

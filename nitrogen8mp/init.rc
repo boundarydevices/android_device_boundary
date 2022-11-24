@@ -254,11 +254,13 @@ on property:ro.boot.usb.debugging=1
 # setenv append_bootargs androidboot.powersave.usb=true
 on property:ro.boot.powersave.usb=true
     # enable platform/32f10100.usb runtime_pm
-    write /sys/devices/platform/soc@0/32f10100.usb/38100000.dwc3/power/control auto
+    write /sys/devices/platform/soc@0/32f10100.usb/38100000.usb/power/control auto
 
     #enable platform/32f10108.usb runtime_pm
-    write /sys/devices/platform/soc@0/32f10108.usb/38200000.dwc3/power/control auto
-    write /sys/devices/platform/soc@0/32f10108.usb/38200000.dwc3/xhci-hcd.0.auto/power/control auto
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/power/control auto
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.0.auto/power/control auto
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.1.auto/power/control auto
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.2.auto/power/control auto
 
 # setenv append_bootargs androidboot.lpa.enable=1
 on property:ro.boot.lpa.enable=1
