@@ -72,7 +72,10 @@ fastboot flash cache $OUT/cache.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
 if ! [ ${skip_userdata} -eq 1 ] ; then
 	fastboot erase userdata
-	fastboot erase metadata
 	if ! [ $? -eq 0 ] ; then echo "Failed to erase userdata"; exit 1; fi
+	fastboot erase metadata
+	if ! [ $? -eq 0 ] ; then echo "Failed to erase metadata"; exit 1; fi
+	fastboot erase misc
+	if ! [ $? -eq 0 ] ; then echo "Failed to erase misc"; exit 1; fi
 fi
 fastboot reboot
