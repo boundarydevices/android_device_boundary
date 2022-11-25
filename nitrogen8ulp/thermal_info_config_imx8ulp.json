@@ -1,8 +1,4 @@
 {
-    "HotplugCPUs":[
-            "cpu2",
-            "cpu3"
-    ],
     "Sensors":[
         {
             "Name":"cpu-thermal",
@@ -44,16 +40,6 @@
             "VrThreshold":"NAN",
             "Multiplier":0.001,
             "Monitor":true
-        }
-    ],
-    "CoolingDevices":[
-        {
-            "Name":"thermal-devfreq-0",
-            "Type":"GPU"
-        },
-        {
-            "Name":"thermal-cpufreq-0",
-            "Type":"CPU"
         }
     ]
 }

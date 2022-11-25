@@ -50,3 +50,9 @@
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_hyst 0660 system system
 
 /dev/dmabuf_imx           0664   system     system
+
+# iio sensor sysfs properities
+/dev/iio:device*                                                     0660    system     system
+/sys/bus/iio/devices/iio:device*    in_steps_en                      0660    system     system
+/sys/bus/iio/devices/iio:device*    events/in_steps_change_period    0660    system     system
+/sys/bus/iio/devices/iio:device*    events/in_steps_change_value     0660    system     system

@@ -72,6 +72,7 @@ on init && property:vendor.skip.charger_not_need=0
 on late-fs && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
     start storageproxyd
     start vendor.oemlock-1-0
+    start confirmationui-1-0
 
 on late-fs && property:vendor.skip.charger_not_need=0
     # Start keymaster/gatekeeper service
@@ -219,3 +220,23 @@ service storageproxyd /vendor/bin/storageproxyd -p /data/vendor/ss -r /dev/mmcbl
 
 on property:ro.boot.vendor.sysrq=1 && property:vendor.skip.charger_not_need=0
     write /proc/sys/kernel/sysrq 1
+
+# setenv append_bootargs androidboot.usb.debugging=1
+on property:ro.boot.usb.debugging=1
+    setprop persist.sys.usb.config adb
+
+# setenv append_bootargs androidboot.lpa.enable=1
+on property:ro.boot.lpa.enable=1
+    setprop vendor.audio.lpa.hold_second 20
+    setprop vendor.audio.lpa.period_ms 500
+    setprop vendor.audio.lpa.enable 1
+
+# apploader load confirmationUI TA
+service confirmationui_ta_load /vendor/bin/trusty_apploader /vendor/firmware/tee/confirmationui.app
+    user root
+    group root system
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
+    start confirmationui_ta_load

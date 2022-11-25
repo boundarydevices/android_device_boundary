@@ -32,4 +32,5 @@
     <feature name="android.software.autofill" />
     <feature name="android.software.secure_lock_screen" />
     <feature name="android.hardware.keystore.app_attest_key" />
+    <feature name="android.hardware.security.model.compatible" />
 </permissions>

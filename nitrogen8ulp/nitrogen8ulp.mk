@@ -92,7 +92,7 @@ PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/early.init.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/early.init.cfg \
     $(LINUX_FIRMWARE_IMX_PATH)/linux-firmware-imx/firmware/sdma/sdma-imx7d.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/imx/sdma/sdma-imx7d.bin \
     $(CONFIG_REPO_PATH)/common/init/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
-    $(IMX_DEVICE_PATH)/ueventd.nxp.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
+    $(IMX_DEVICE_PATH)/ueventd.nxp.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
 # -------@block_storage-------
 
@@ -256,36 +256,36 @@ PRODUCT_PACKAGES += \
 # -------@block_gpu-------
 
 PRODUCT_PACKAGES += \
-        libEGL_VIVANTE \
-        libGLESv1_CM_VIVANTE \
-        libGLESv2_VIVANTE \
-        gralloc_viv.$(TARGET_BOARD_PLATFORM) \
-        libGAL \
-        libGLSLC \
-        libVSC \
-        libgpuhelper \
-        libSPIRV_viv \
-        libvulkan_VIVANTE \
-        vulkan.$(TARGET_BOARD_PLATFORM) \
-        libCLC \
-        libLLVM_viv \
-        libOpenCL \
-        libg2d-viv \
-        libOpenVX \
-        libOpenVXU \
-        libNNVXCBinary-evis \
-        libNNVXCBinary-evis2 \
-        libNNVXCBinary-lite \
-        libOvx12VXCBinary-evis \
-        libOvx12VXCBinary-evis2 \
-        libOvx12VXCBinary-lite \
-        libNNGPUBinary-evis \
-        libNNGPUBinary-evis2 \
-        libNNGPUBinary-lite \
-        libNNGPUBinary-ulite \
-        libNNGPUBinary-nano \
-        libNNArchPerf \
-        libarchmodelSw
+    libEGL_VIVANTE \
+    libGLESv1_CM_VIVANTE \
+    libGLESv2_VIVANTE \
+    gralloc_viv.$(TARGET_BOARD_PLATFORM) \
+    libGAL \
+    libGLSLC \
+    libVSC \
+    libgpuhelper \
+    libSPIRV_viv \
+    libvulkan_VIVANTE \
+    vulkan.$(TARGET_BOARD_PLATFORM) \
+    libCLC \
+    libLLVM_viv \
+    libOpenCL \
+    libg2d-viv \
+    libOpenVX \
+    libOpenVXU \
+    libNNVXCBinary-evis \
+    libNNVXCBinary-evis2 \
+    libNNVXCBinary-lite \
+    libOvx12VXCBinary-evis \
+    libOvx12VXCBinary-evis2 \
+    libOvx12VXCBinary-lite \
+    libNNGPUBinary-evis \
+    libNNGPUBinary-evis2 \
+    libNNGPUBinary-lite \
+    libNNGPUBinary-ulite \
+    libNNGPUBinary-nano \
+    libNNArchPerf \
+    libarchmodelSw
 
 # -------@block_wifi-------
 PRODUCT_COPY_FILES += \
@@ -319,7 +319,8 @@ BOARD_CUSTOM_BT_CONFIG := $(IMX_DEVICE_PATH)/bluetooth/libbt_vnd.conf
 
 # Usb HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.1-service.imx
+    android.hardware.usb@1.3-service.imx \
+    android.hardware.usb.gadget@1.2-service.imx
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/init.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.nxp.usb.rc
@@ -380,7 +381,7 @@ PRODUCT_PACKAGES += \
 
 # Tensorflow lite camera demo
 PRODUCT_PACKAGES += \
-                    tflitecamerademo
+    tflitecamerademo
 
 # -------@block_miscellaneous-------
 
@@ -397,6 +398,10 @@ else
   PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/init.recovery.nxp.rc:root/init.recovery.nxp.rc
 endif
+
+# Display Device Config
+PRODUCT_COPY_FILES += \
+    $(CONFIG_REPO_PATH)/common/imx8ulp/displayconfig/display_port_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_port_0.xml
 
 # ONLY devices that meet the CDD's requirements may declare these features
 PRODUCT_COPY_FILES += \

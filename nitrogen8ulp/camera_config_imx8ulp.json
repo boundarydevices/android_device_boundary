@@ -25,7 +25,7 @@
       "MaxJpegSize": "8388608",
       "MinFrameDuration": "33333333",
       "MaxFrameDuration": "300000000",
-      "MinFrameDurationBlob5M": "600000000",
+      "MinFrameDurationBlob5M": "700000000",
       "OmitFrame": [
         {
             "width": "2592",
