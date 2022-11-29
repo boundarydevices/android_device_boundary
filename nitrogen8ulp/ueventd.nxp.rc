@@ -1,6 +1,5 @@
 /dev/ttyLP*               0660   system     system
 /dev/ttymxc*              0660   system     system
-/dev/ttymxc2              0660   bluetooth  bluetooth
 /dev/ttyUSB*              0660   system     system
 /dev/ttyACM*              0660   system     system
 /dev/snd/*                0660   system     audio
@@ -31,10 +30,8 @@
 
 # sysfs properties
 /sys/devices/platform/backlight*    brightness  0660  system system
-/sys/devices/platform/bt-rfkill*    state       0660  bluetooth bluetooth
 /sys/devices/platform/busfreq*      enable      0660  system system
 /sys/devices/system/cpu/cpu*        online      0660  root   system
-/sys/devices/virtual/bluetooth/hci* state       0660  bluetooth bluetooth
 /sys/devices/virtual/input/input*   enable      0660  root   input
 /sys/devices/virtual/input/input*   fifo        0660  root   input
 /sys/devices/virtual/input/input*   max         0660  root   input

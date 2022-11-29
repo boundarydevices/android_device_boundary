@@ -20,8 +20,6 @@
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
 <resources>
-    <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
-    <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
     <!-- List of paths to serial ports that are available to the serial manager -->
     <string-array translatable="false" name="config_serialPorts">
         <item>/dev/ttymxc1</item>

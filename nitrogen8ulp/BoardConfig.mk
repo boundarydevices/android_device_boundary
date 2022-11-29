@@ -17,6 +17,7 @@ include $(CONFIG_REPO_PATH)/common/imx8ulp/BoardConfigCommon.mk
 
 BOARD_SOC_TYPE := IMX8ULP
 BOARD_TYPE := Nitrogen
+BOARD_HAVE_BLUETOOTH := false
 BOARD_HAVE_VPU := false
 HAVE_FSL_IMX_GPU2D := true
 HAVE_FSL_IMX_GPU3D := true
@@ -88,19 +89,6 @@ DEVICE_MANIFEST_FILE := $(IMX_DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(IMX_DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(IMX_DEVICE_PATH)/device_framework_matrix.xml
 
-
-# -------@block_wifi-------
-BOARD_WLAN_DEVICE            := qcwcn
-WPA_SUPPLICANT_VERSION       := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER  := NL80211
-BOARD_HOSTAPD_DRIVER         := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB           := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB    := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-
-# -------@block_bluetooth-------
-BOARD_HAVE_BLUETOOTH_QCOM        := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(IMX_DEVICE_PATH)/bluetooth
-
 # -------@block_sensor-------
 BOARD_USE_SENSOR_FUSION := false
 
@@ -116,9 +104,6 @@ BOARD_KERNEL_CMDLINE := init=/init androidboot.hardware=nxp firmware_class.path=
 
 # memory config
 BOARD_KERNEL_CMDLINE += transparent_hugepage=never
-
-# wifi config
-BOARD_KERNEL_CMDLINE += androidboot.wificountrycode=US
 
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 BOARD_KERNEL_CMDLINE += androidboot.vendor.sysrq=1
