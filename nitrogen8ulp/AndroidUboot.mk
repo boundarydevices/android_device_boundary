@@ -1,4 +1,6 @@
 MAKE += SHELL=/bin/bash
+MKIMAGE_SOC := iMX8ULP
+BOARD_MKIMAGE_PATH := $(IMX_MKIMAGE_PATH)/imx-mkimage/$(MKIMAGE_SOC)
 
 ifneq ($(AARCH64_GCC_CROSS_COMPILE),)
 ATF_CROSS_COMPILE := $(strip $(AARCH64_GCC_CROSS_COMPILE))
@@ -10,22 +12,42 @@ CLANG_TO_COMPILE := CC=$(CLANG_TOOLCHAIN_ABS)/clang
 endif
 
 define build_imx_uboot
-    echo ================= Building i.MX U-Boot with firmware; \
-    cp $(FSL_PROPRIETARY_PATH)/linux-firmware-imx/firmware/hdmi/cadence/signed_*.bin $(UBOOT_OUT) ; \
-    cp $(FSL_PROPRIETARY_PATH)/linux-firmware-imx/firmware/ddr/synopsys/lpddr4_pmu_train* $(UBOOT_OUT) ; \
-    if [ ${clean_build} = 1 ]; then \
-        $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ PLAT=`echo $(2) | cut -d '-' -f1` clean; \
-    fi; \
-    if [ `echo $(2) | cut -d '-' -f2` = "trusty" ] && [ `echo $(2) | rev | cut -d '-' -f1` != "uuu" ]; then \
-        cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/tee-imx8mq.bin $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/tee.bin; \
-        $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" $(CLANG_TO_COMPILE) PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B SPD=trusty || exit 1; \
-    else \
-        if [ -f $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/tee.bin ] ; then \
-            rm -rf $(IMX_MKIMAGE_PATH)/imx-mkimage/iMX8M/tee.bin; \
-        fi; \
-        $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" $(CLANG_TO_COMPILE) PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B || exit 1; \
-    fi; \
-    cp $(ATF_IMX_PATH)/arm-trusted-firmware/build/`echo $(2) | cut -d '-' -f1`/release/bl31.bin $(UBOOT_OUT)/bl31-iMX8MQ.bin; \
-    $(MAKE) -C $(UBOOT_IMX_PATH)/uboot-imx/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" O=$(realpath $(UBOOT_OUT)) flash.bin; \
-    cp $(UBOOT_OUT)/flash.bin $(UBOOT_COLLECTION)/;
+	$(hide) echo Building i.MX U-Boot with firmware; \
+	if [ `echo $(2) | cut -d '-' -f3` = "lpa" ]; then \
+	    cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/mcu-sdk/imx8ulp/imx8ulp_mcu_demo_lpa.img $(BOARD_MKIMAGE_PATH)/m33_image.bin; \
+	else \
+	    cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/mcu-sdk/imx8ulp/imx8ulp_mcu_demo.img $(BOARD_MKIMAGE_PATH)/m33_image.bin; \
+	fi; \
+	if [ `echo $(2) | cut -d '-' -f2` = "9x9" ] || [ `echo $(2) | cut -d '-' -f3` = "9x9" ]; then \
+		cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8ulp/upower_a0.bin $(BOARD_MKIMAGE_PATH)/upower.bin; \
+		cp $(FSL_PROPRIETARY_PATH)/sentinel/mx8ulpa0-ahab-container.img $(BOARD_MKIMAGE_PATH); \
+	else \
+		cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8ulp/upower.bin $(BOARD_MKIMAGE_PATH)/upower.bin; \
+		cp $(FSL_PROPRIETARY_PATH)/sentinel/mx8ulpa1-ahab-container.img $(BOARD_MKIMAGE_PATH); \
+	fi; \
+	cp $(UBOOT_OUT)/u-boot.$(strip $(1)) $(BOARD_MKIMAGE_PATH); \
+	cp $(UBOOT_OUT)/spl/u-boot-spl.bin  $(BOARD_MKIMAGE_PATH); \
+	cp $(UBOOT_OUT)/tools/mkimage  $(BOARD_MKIMAGE_PATH)/mkimage_uboot; \
+	$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ PLAT=`echo $(2) | cut -d '-' -f1` clean; \
+	if [ `echo $(2) | cut -d '-' -f2` = "trusty" ] && [ `echo $(2) | rev | cut -d '-' -f1` != "uuu" ]; then \
+		cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8ulp/tee-imx8ulp.bin $(BOARD_MKIMAGE_PATH)/tee.bin; \
+		if [ `echo $(2) | cut -d '-' -f3` = "4g" ]; then \
+			$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B BL32_BASE=0xfe000000 SPD=trusty 1>/dev/null || exit 1; \
+		else \
+			$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B SPD=trusty 1>/dev/null || exit 1; \
+		fi; \
+	else \
+		if [ -f $(BOARD_MKIMAGE_PATH)/tee.bin ] ; then \
+			rm -rf $(BOARD_MKIMAGE_PATH)/tee.bin; \
+		fi; \
+		$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B 1>/dev/null || exit 1; \
+	fi; \
+	cp $(ATF_IMX_PATH)/arm-trusted-firmware/build/`echo $(2) | cut -d '-' -f1`/release/bl31.bin $(BOARD_MKIMAGE_PATH)/bl31.bin; \
+	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ clean; \
+	if [ `echo $(2) | cut -d '-' -f2` = "9x9" ] || [ `echo $(2) | cut -d '-' -f3` = "9x9" ]; then \
+		$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=$(MKIMAGE_SOC) REV=A0 flash_singleboot_m33 || exit 1; \
+	else \
+		$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=$(MKIMAGE_SOC) REV=A1 flash_singleboot_m33 || exit 1; \
+	fi; \
+	cp $(BOARD_MKIMAGE_PATH)/flash.bin $(UBOOT_COLLECTION)/ ;
 endef
