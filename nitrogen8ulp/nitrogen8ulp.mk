@@ -215,8 +215,7 @@ PRODUCT_PACKAGES += \
 
 # Audio card json
 PRODUCT_COPY_FILES += \
-    $(CONFIG_REPO_PATH)/common/audio-json/wm8960_rpmsg_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/wm8960_config.json \
-    $(CONFIG_REPO_PATH)/common/audio-json/spdif_out_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/spdif_config.json \
+    $(CONFIG_REPO_PATH)/common/audio-json/dummy_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/audio/dummy_config.json \
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \

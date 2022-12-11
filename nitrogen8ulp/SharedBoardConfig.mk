@@ -8,6 +8,7 @@ IMX_NO_PRODUCT_PARTITION := true
 
 # Dummy battery module
 BOARD_VENDOR_KERNEL_MODULES += \
+    $(KERNEL_OUT)/sound/drivers/snd-dummy.ko \
     $(KERNEL_OUT)/drivers/power/supply/dummy_battery.ko
 
 # -------@block_security-------
