@@ -1,0 +1,15 @@
+{
+  "driver_name": "Dummy",
+  "bus_name": "bus1_system_sound_out",
+  "supported_out_devices": ["speaker", "wired_headphone", "wired_headset", "bus", "line"],
+  "support_lpa": 1,
+  "support_compress": 1,
+
+  "init_ctl": [
+    {"name": "Master Volume", "type": "int", "val": 80}
+  ],
+
+  "out_volume_ctl": [
+    "Master Volume"
+  ]
+}
