@@ -4,7 +4,11 @@ ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+ifneq ($(PRODUCT_HAS_RIL),true)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
+else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
+endif
 ifeq ($(PRODUCT_IMX_CAR),true)
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
 endif
