@@ -192,29 +192,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-service \
     android.hardware.health@2.1-impl-imx
-# -------@block_ethernet-------
-
-PRODUCT_PACKAGES += \
-    ethernet
-
-# -------@block_camera-------
-ifneq ($(PRODUCT_IMX_CAR),true)
-ifneq ($(POWERSAVE),true)
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.7-service-google \
-    android.hardware.camera.provider@2.7-impl-google \
-    libgooglecamerahal \
-    libgooglecamerahalutils \
-    lib_profiler \
-    libimxcamerahwl_impl
-
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-external-service \
-    android.hardware.camera.provider@2.4-impl \
-    camera.device@1.0-impl \
-    camera.device@3.2-impl
-endif
-endif
 
 # -------@block_display-------
 ifneq ($(PRODUCT_IMX_CAR),true)
@@ -288,11 +265,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.audio.effect@7.0-impl:32
 
-ifneq ($(PRODUCT_IMX_CAR),true)
-PRODUCT_PACKAGES += \
-    SoundRecorder
-endif
-
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.primary.imx \
@@ -302,7 +274,6 @@ PRODUCT_PACKAGES += \
     tinymix \
     tinyplay \
     tinypcminfo
-
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration_7_0.xml \
