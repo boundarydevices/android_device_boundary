@@ -112,6 +112,7 @@ endif
 TARGET_BOARD_DTS_CONFIG ?= \
 	imx8ulp:imx8ulp-evk.dtb \
 	imx8ulp:imx8ulp-tag.dtb \
+	imx8ulp:imx8ulp-tag-m33.dtb \
 
 ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
 
