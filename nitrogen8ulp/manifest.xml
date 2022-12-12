@@ -105,11 +105,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-       <name>android.hardware.camera.provider</name>
-       <transport>hwbinder</transport>
-       <fqname>@2.4::ICameraProvider/external/0</fqname>
-    </hal>
     <hal format="aidl">
        <name>android.hardware.security.keymint</name>
        <fqname>IKeyMintDevice/default</fqname>
