@@ -60,16 +60,23 @@ fastboot flash dtbo $OUT/dtbo.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash dtbo.img"; exit 1; fi
 fastboot flash boot $OUT/boot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash boot.img"; exit 1; fi
+if [ -e $OUT/recovery.img ]; then
 fastboot flash recovery $OUT/recovery.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash recovery.img"; exit 1; fi
+fastboot flash cache $OUT/cache.img
+if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
+fi
+if [ -e $OUT/super.img ]; then
+fastboot flash super $OUT/super.img
+if ! [ $? -eq 0 ] ; then echo "Failed to flash super.img"; exit 1; fi
+else
 fastboot flash system $OUT/system.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash system.img"; exit 1; fi
 fastboot flash vendor $OUT/vendor.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vendor.img"; exit 1; fi
+fi
 fastboot flash vbmeta $OUT/vbmeta.img $disable_verity
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vbmeta.img"; exit 1; fi
-fastboot flash cache $OUT/cache.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
 if ! [ ${skip_userdata} -eq 1 ] ; then
 	fastboot erase userdata
 	if ! [ $? -eq 0 ] ; then echo "Failed to erase userdata"; exit 1; fi
