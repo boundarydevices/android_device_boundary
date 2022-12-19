@@ -142,7 +142,7 @@ PRODUCT_PACKAGES += \
     SystemUpdaterSample
 
 PRODUCT_COPY_FILES += \
-    $(CONFIG_REPO_PATH)/imx8m/com.example.android.systemupdatersample.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.example.android.systemupdatersample.xml
+    $(CONFIG_REPO_PATH)/common/imx8m/com.example.android.systemupdatersample.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.example.android.systemupdatersample.xml
 
 
 # A/B OTA

@@ -105,10 +105,13 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # -------@block_storage-------
-ifeq ($(AB_OTA_UPDATER),)
-AB_OTA_UPDATER := true
+ifeq ($(AB_OTA_UPDATER),true)
 ifeq ($(IMX_NO_PRODUCT_PARTITION),true)
+ifeq ($(BOARD_USES_SYSTEM_EXTIMAGE),false)
+AB_OTA_PARTITIONS += dtbo boot system vendor vbmeta
+else
 AB_OTA_PARTITIONS += dtbo boot system system_ext vendor vbmeta
+endif
 else
 ifeq ($(TARGET_USE_VENDOR_BOOT),true)
 AB_OTA_PARTITIONS += dtbo boot vendor_boot system system_ext vendor vbmeta product
@@ -148,10 +151,14 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 
 ifeq ($(TARGET_USE_DYNAMIC_PARTITIONS),true)
   BOARD_SUPER_PARTITION_GROUPS := nxp_dynamic_partitions
-  BOARD_SUPER_PARTITION_SIZE := 4294967296
-  BOARD_NXP_DYNAMIC_PARTITIONS_SIZE := 4284481536
+  BOARD_SUPER_PARTITION_SIZE := 6442450944
+  BOARD_NXP_DYNAMIC_PARTITIONS_SIZE := 6431965184
   ifeq ($(IMX_NO_PRODUCT_PARTITION),true)
+    ifeq ($(BOARD_USES_SYSTEM_EXTIMAGE),false)
+    BOARD_NXP_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor
+    else
     BOARD_NXP_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor
+    endif
   else
     BOARD_NXP_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor product
 
