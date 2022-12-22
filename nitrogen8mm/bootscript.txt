@@ -8,9 +8,20 @@ setenv ramdisk ${a_Image}
 setenv bootmode normal
 setenv bootargs ''
 setenv m4 ''
+setenv abtest ''
+setenv slot_suffix ''
 
 # standard BCB (boot control block) management
 part number ${devtype} ${devnum} misc bcbindex
+
+# check if we use A/B partitioning
+part number ${devtype} ${devnum} boot_a abtest
+if itest.s "x${abtest}" != "x"; then
+	ab_select slot_name mmc ${devnum}:${bcbindex};
+	setenv slot_suffix _${slot_name};
+	setenv bootargs $bootargs androidboot.slot_suffix=${slot_suffix}
+fi
+
 if bcb load ${devnum} ${bcbindex}; then
 	if bcb test command = bootonce-bootloader; then
 		echo "Android: Bootloader boot..."
@@ -18,11 +29,14 @@ if bcb load ${devnum} ${bcbindex}; then
 		fastboot 0
 	elif bcb test command = boot-recovery; then
 		echo "Android: Recovery boot..."
-		setenv apart recovery
+		if itest.s "x${abtest}" == "x"; then
+			setenv apart recovery
+		fi
 		setenv bootmode recovery
 		setenv ramdisk ${a_Image}
 	else
 		echo "Android: Normal boot..."
+		setenv bootargs $bootargs androidboot.force_normal_boot=1
 	fi
 else
 	echo "Warning: BCB is corrupted or does not exist";
@@ -30,7 +44,7 @@ else
 fi
 
 # First check AVB status
-setenv avb_verify 'avb init ${devnum}; avb verify;'
+setenv avb_verify 'avb init ${devnum}; avb verify ${slot_suffix};'
 if run avb_verify; then
 	echo AVB verification OK. Continue boot;
 else
@@ -49,8 +63,8 @@ if itest.s "x" == "x${board}" ; then
 fi
 
 # Load dtbo partition
-part start ${devtype} ${devnum} dtbo dtbo_start
-part size ${devtype} ${devnum} dtbo dtbo_size
+part start ${devtype} ${devnum} dtbo${slot_suffix} dtbo_start
+part size ${devtype} ${devnum} dtbo${slot_suffix} dtbo_size
 ${devtype} read ${a_fdtbo} ${dtbo_start} ${dtbo_size}
 adtimg addr ${a_fdtbo}
 
@@ -107,9 +121,16 @@ if itest.s "xmmc" == "x$devtype" ; then
 		bootdev=soc@0/30800000.bus/30b50000.mmc
 	fi
 fi
-setenv bootargs $bootargs androidboot.bootdevice=$bootdev
+setenv bootargs $bootargs androidboot.boot_device=$bootdev
+if itest.s "x${abtest}" == "x"; then
 fdt set /firmware/android/fstab/system dev /dev/block/platform/${bootdev}/by-name/system
 fdt set /firmware/android/fstab/vendor dev /dev/block/platform/${bootdev}/by-name/vendor
+else
+fdt set /firmware/android/fstab/system dev system
+fdt set /firmware/android/fstab/vendor dev vendor
+fdt set /firmware/android/fstab/system fsmgr_flags wait,slotselect,avb,logical,first_stage_mount
+fdt set /firmware/android/fstab/vendor fsmgr_flags wait,slotselect,avb,logical,first_stage_mount
+fi
 
 if itest.s "x" != "x$selinux" ; then
 	setenv bootargs $bootargs androidboot.selinux=$selinux
@@ -164,8 +185,8 @@ fi
 
 # Load Android bootimage and boot it
 setenv bootargs $bootargs "$avb_bootargs "
-part start ${devtype} ${devnum} ${apart} boot_start
-part size  ${devtype} ${devnum} ${apart} boot_size
+part start ${devtype} ${devnum} ${apart}${slot_suffix} boot_start
+part size  ${devtype} ${devnum} ${apart}${slot_suffix} boot_size
 if ${devtype} read ${a_Image} ${boot_start} ${boot_size} ; then
 	bootm ${a_Image} ${ramdisk} ${a_fdt} ;
 fi
