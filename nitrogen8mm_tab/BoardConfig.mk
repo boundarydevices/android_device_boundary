@@ -58,6 +58,7 @@ BUILD_TARGET_FS ?= ext4
 TARGET_USERIMAGES_USE_EXT4 := true
 
 TARGET_RECOVERY_FSTAB = $(IMX_DEVICE_PATH)/fstab.freescale
+TARGET_RECOVERY_DEFAULT_ROTATION = ROTATION_DOWN
 
 # Support gpt
 BOARD_BPT_INPUT_FILES += device/boundary/common/partition/device-partitions-8GB.bpt
