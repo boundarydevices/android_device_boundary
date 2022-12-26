@@ -21,6 +21,7 @@ if bcb load ${devnum} ${bcbindex}; then
 		setenv apart recovery
 		setenv bootmode recovery
 		setenv ramdisk ${a_Image}
+		setenv selinux permissive
 	else
 		echo "Android: Normal boot..."
 	fi
