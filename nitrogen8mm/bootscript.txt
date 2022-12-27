@@ -33,7 +33,9 @@ if bcb load ${devnum} ${bcbindex}; then
 			setenv apart recovery
 		fi
 		setenv bootmode recovery
-		setenv ramdisk ${a_Image}
+	elif bcb test command = boot-fastboot; then
+		echo "Android: fastbootd boot..."
+		setenv bootmode recovery
 	else
 		echo "Android: Normal boot..."
 		setenv bootargs $bootargs androidboot.force_normal_boot=1
