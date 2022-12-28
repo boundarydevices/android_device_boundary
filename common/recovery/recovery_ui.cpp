@@ -31,7 +31,12 @@ const char* HEADERS[] = { "Volume up/down to move highlight;",
 const std::vector<std::string> ITEMS{ "reboot system now",
                         "apply update from ADB",
                         "wipe data/factory reset",
-                        "wipe cache partition",};
+#ifndef DYNAMIC_PARTITIONS
+                        "wipe cache partition",
+#else
+                        "enter fastbootd",
+#endif
+                        };
 
 class ImxDevice : public Device {
   public:
@@ -44,7 +49,11 @@ class ImxDevice : public Device {
           case 0: return REBOOT;
           case 1: return APPLY_ADB_SIDELOAD;
           case 2: return WIPE_DATA;
+#ifndef DYNAMIC_PARTITIONS
           case 3: return WIPE_CACHE;
+#else
+          case 3: return ENTER_FASTBOOT;
+#endif
           default: return NO_ACTION;
         }
     }
