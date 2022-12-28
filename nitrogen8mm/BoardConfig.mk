@@ -60,6 +60,7 @@ ADDITION_BPT_PARTITION = partition-table-16GB:$(CONFIG_REPO_PATH)/common/partiti
 else
 BOARD_BPT_INPUT_FILES += $(CONFIG_REPO_PATH)/common/partition/device-partitions-16GB-ab.bpt
 ADDITION_BPT_PARTITION = partition-table-16GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-16GB-ab.bpt \
+    partition-table-8GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-8GB-ab.bpt \
     partition-table-32GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-32GB-ab.bpt \
     partition-table-64GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-64GB-ab.bpt \
     partition-table-128GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-128GB-ab.bpt \
