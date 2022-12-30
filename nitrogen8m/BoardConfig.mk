@@ -3,7 +3,7 @@
 # Product-specific compile-time definitions.
 #
 
-AB_OTA_UPDATER := false
+AB_OTA_UPDATER ?= false
 BOARD_HAVE_PREBOOTIMAGE := true
 BOARD_USES_SYSTEM_EXTIMAGE := false
 IMX_DEVICE_PATH := device/boundary/nitrogen8m
@@ -46,17 +46,31 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
 # Support gpt
-BOARD_BPT_INPUT_FILES += $(CONFIG_REPO_PATH)/common/partition/device-partitions-8GB.bpt
+ifeq ($(AB_OTA_UPDATER),false)
+BOARD_BPT_INPUT_FILES += $(CONFIG_REPO_PATH)/common/partition/device-partitions-16GB.bpt
 ADDITION_BPT_PARTITION = partition-table-16GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-16GB.bpt \
     partition-table-8GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-8GB.bpt \
     partition-table-32GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-32GB.bpt \
     partition-table-64GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-64GB.bpt \
     partition-table-128GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-128GB.bpt \
 
+else
+BOARD_BPT_INPUT_FILES += $(CONFIG_REPO_PATH)/common/partition/device-partitions-16GB-ab.bpt
+ADDITION_BPT_PARTITION = partition-table-16GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-16GB-ab.bpt \
+    partition-table-8GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-8GB-ab.bpt \
+    partition-table-32GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-32GB-ab.bpt \
+    partition-table-64GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-64GB-ab.bpt \
+    partition-table-128GB:$(CONFIG_REPO_PATH)/common/partition/device-partitions-128GB-ab.bpt \
+
+endif
+
 BOARD_PREBUILT_DTBOIMAGE := $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/dtbo-imx8mq.img
 
 BOARD_USES_METADATA_PARTITION := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
+
+# system-as-root is not possible for non-A/B or A/B with dynamic partitions
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 # Necessary changes for non-A/B partitioning
 ifeq ($(AB_OTA_UPDATER),false)
@@ -64,7 +78,6 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(CONFIG_REPO_PATH)/common/imx8m
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 TARGET_NO_RECOVERY := false
 BOARD_USES_RECOVERY_AS_BOOT := false
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_CACHEIMAGE_PARTITION_SIZE := 1073741824
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 endif
