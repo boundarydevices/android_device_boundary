@@ -7,7 +7,7 @@ setenv apart boot
 setenv ramdisk ${a_Image}
 setenv bootmode normal
 setenv bootargs ''
-setenv m4 ''
+setenv m33 ''
 
 # standard BCB (boot control block) management
 part number ${devtype} ${devnum} misc bcbindex
@@ -38,9 +38,9 @@ else
 	exit;
 fi;
 
-if itest.s "x1" == "x$m4enabled" ; then
-	run m4boot;
-	setenv m4 "-m4";
+if itest.s "x1" == "x$m33enabled" ; then
+	run m33boot;
+	setenv m33 "-m33";
 fi
 
 if itest.s "x" == "x${board}" ; then
@@ -55,7 +55,7 @@ ${devtype} read ${a_fdtbo} ${dtbo_start} ${dtbo_size}
 adtimg addr ${a_fdtbo}
 
 # Look for matching compatible
-setenv dtexp boundary,${soc}-${board}${m4}
+setenv dtexp boundary,${soc}-${board}${m33}
 setenv index 0
 setenv cont 1
 setenv dtfound 0
