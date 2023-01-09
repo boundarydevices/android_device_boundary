@@ -1,3 +1,4 @@
+/dev/auxdisplay           0666   system     system
 /dev/ttyLP*               0660   system     system
 /dev/ttymxc*              0660   system     system
 /dev/ttyUSB*              0660   system     system

@@ -401,3 +401,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/fw_env.config:$(TARGET_COPY_OUT_SYSTEM)/etc/fw_env.config
+
+# aux display writer
+PRODUCT_PACKAGES += \
+    wrspi
