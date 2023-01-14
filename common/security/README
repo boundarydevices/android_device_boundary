@@ -5,6 +5,8 @@ The following commands were used to generate the test key pairs:
   development/tools/make_key shared   '/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
   development/tools/make_key media    '/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
   development/tools/make_key networkstack    '/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
+  development/tools/make_key bluetooth    '/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
+  development/tools/make_key sdk_sandbox  '/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
 
 The following standard test keys are currently included:
 
@@ -13,6 +15,8 @@ platform -- a test key for packages that are part of the core platform.
 shared -- a test key for things that are shared in the home/contacts process.
 media -- a test key for packages that are part of the media/download system.
 networkstack -- a test key for networkstack packages.
+bluetooth --  a test key for bluetooth packages.
+sdk_sandbox --  a test key for sdk_sandbox packages.
 
 These test keys are used strictly in development, and should never be assumed
 to convey any sort of validity.  When $BUILD_SECURE=true, the code should not

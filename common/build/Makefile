@@ -5,6 +5,9 @@ PRODUCT_OUT := ${OUT}
 TARGET_OUT_INTERMEDIATES := $(PRODUCT_OUT)/obj
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 
+export PRODUCT_OUT
+export TARGET_OUT_INTERMEDIATES
+
 # firstly to include UbootKernelCommonConfig.mk, then SharedBoardConfig.mk, finally UbootKernelBoardConfig.mk
 
 include ${nxp_git_path}/common/imx_path/ImxPathConfig.mk
