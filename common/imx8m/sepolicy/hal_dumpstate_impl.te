@@ -18,3 +18,8 @@ no_debugfs_restriction(`
 allow hal_dumpstate_impl  debugfs_dma:dir { read search};
 
 set_prop(hal_dumpstate_impl, vendor_logging_prop);
+
+allow hal_dumpstate_impl  aac_drc_prop:file { open getattr map };
+allow hal_dumpstate_impl  ab_update_gki_prop:file { open getattr };
+
+binder_call(servicemanager, hal_dumpstate_impl)

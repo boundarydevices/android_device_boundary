@@ -108,6 +108,9 @@ UBOOT_COLLECTION := $(TARGET_OUT_INTERMEDIATES)/UBOOT_COLLECTION
 UBOOT_BIN := $(PRODUCT_OUT)/$(TARGET_UBOOT_BUILD_TARGET)
 UBOOT_ENV_OUT := $(PRODUCT_OUT)/uboot.env
 
+export UBOOT_OUT
+export UBOOT_COLLECTION
+
 # Figure out which U-Boot version is being built (disregard -stable version).
 UBOOT_VERSION := $(shell $(MAKE) -j1 --no-print-directory -C $(UBOOT_IMX_PATH)/uboot-imx -s SUBLEVEL="" ubootversion)
 

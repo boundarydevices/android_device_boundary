@@ -11,3 +11,9 @@ no_debugfs_restriction(`
   allow dumpstate debugfs_dma:file { read open getattr };
 ')
 allow dumpstate hal_power_default:binder { call };
+
+allow dumpstate console_device:chr_file { read write ioctl getattr };
+allow dumpstate fuse:dir { search };
+
+binder_call(dumpstate, hal_audio_default)
+binder_call(dumpstate, vold)

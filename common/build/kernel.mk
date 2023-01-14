@@ -51,7 +51,7 @@ KERNEL_CC_WRAPPER := $(CC_WRAPPER)
 KERNEL_AFLAGS :=
 TARGET_KERNEL_SRC := $(KERNEL_IMX_PATH)/kernel_imx
 
-CLANG_TO_COMPILE := LLVM=1 LLVM_IAS=1
+CLANG_TO_COMPILE := LLVM=1
 
 # Uncomment below line to use prebuilt clang tool in android platform code
 CLANG_PATH := $(realpath prebuilts/clang/host/linux-x86)
@@ -62,7 +62,7 @@ $(error shell env CLANG_PATH is not set. Please follow user guide doc to set cor
 endif
 
 # This clang version need align with $(kernel_source)/build.config.common
-CLANG_BIN := $(CLANG_PATH)/clang-r416183b/bin
+CLANG_BIN := $(CLANG_PATH)/clang-r450784e/bin
 
 ifeq (,$(wildcard $(CLANG_BIN)))
 $(error CLANG_BIN:$(CLANG_BIN) does not exist. Please update clang to latest version: \
@@ -172,10 +172,15 @@ $(KERNEL_CONFIG_REQUIRED): $(KERNEL_CONFIG_REQUIRED_SRC) | $(KERNEL_OUT)
 	$(hide) cat $^ > $@
 
 # use deferred expansion
-kernel_build_shell_env = PATH=$(CLANG_BIN):$(realpath prebuilts/misc/linux-x86/lz4):$${PATH} \
+kernel_build_shell_env = KBUILD_SYMTYPES=1 PATH=$(CLANG_BIN):$(realpath prebuilts/misc/linux-x86/lz4):$${PATH} \
         $(CLANG_TRIPLE) CCACHE_NODIRECT="true"
+ifeq ($(CLANG_TO_COMPILE),)
 kernel_build_common_env = ARCH=$(KERNEL_ARCH) CROSS_COMPILE=$(strip $(KERNEL_CROSS_COMPILE_WRAPPER)) \
         KCFLAGS="$(KERNEL_CFLAGS)" KAFLAGS="$(KERNEL_AFLAGS)"
+else
+kernel_build_common_env = ARCH=$(KERNEL_ARCH) \
+        KCFLAGS="$(KERNEL_CFLAGS)" KAFLAGS="$(KERNEL_AFLAGS)"
+endif
 kernel_build_make_env = $(kernel_build_common_env) $(CLANG_TO_COMPILE) -C $(TARGET_KERNEL_SRC) O=$(realpath $(KERNEL_OUT))
 merge_config_env = $(kernel_build_shell_env) $(kernel_build_common_env)
 merge_config_params = -p "$(CLANG_TO_COMPILE)" -O $(realpath $(KERNEL_OUT)) $(KERNEL_CONFIG_SRC)
