@@ -62,7 +62,7 @@ $(error shell env CLANG_PATH is not set. Please follow user guide doc to set cor
 endif
 
 # This clang version need align with $(kernel_source)/build.config.common
-CLANG_BIN := $(CLANG_PATH)/clang-r450784e/bin
+CLANG_BIN := $(CLANG_PATH)/clang-r450784d/bin
 
 ifeq (,$(wildcard $(CLANG_BIN)))
 $(error CLANG_BIN:$(CLANG_BIN) does not exist. Please update clang to latest version: \
