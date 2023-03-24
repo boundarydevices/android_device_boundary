@@ -334,8 +334,9 @@ PRODUCT_PACKAGES += \
 # -------@block_bluetooth-------
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service
+    android.hardware.bluetooth@1.1-service.btlinux \
+    android.hardware.bluetooth.audio@2.0-impl \
+    audio.bluetooth.default \
 
 BOARD_CUSTOM_BT_CONFIG := $(IMX_DEVICE_PATH)/bluetooth/libbt_vnd.conf
 

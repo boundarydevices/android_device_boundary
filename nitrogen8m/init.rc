@@ -113,11 +113,6 @@ on early-boot && property:vendor.skip.charger_not_need=0
     setprop wifi.interface wlan0
     setprop wifi.direct.interface p2p0
 
-    # Prepare for bluetooth
-    chmod 665 /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    write /sys/class/rfkill/rfkill0/state 0
-
     # Disable surfaceflinger back pressure propagate
     setprop debug.sf.disable_backpressure 1
 
