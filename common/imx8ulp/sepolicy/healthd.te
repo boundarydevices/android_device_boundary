@@ -1,3 +1,0 @@
-allow healthd self:capability2 { wake_alarm };
-allow healthd sysfs_batteryinfo:file rw_file_perms;
-allow healthd sysfs_batteryinfo:file rw_file_perms;

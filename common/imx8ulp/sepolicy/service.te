@@ -1,0 +1,1 @@
+type hal_secureime_service, vendor_service, protected_service, hal_service_type, service_manager_type;

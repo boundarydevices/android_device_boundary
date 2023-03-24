@@ -29,7 +29,7 @@ PRODUCT_MANUFACTURER := boundary
 # related to the definition and load of library modules
 TARGET_BOARD_PLATFORM := imx
 
-PRODUCT_SHIPPING_API_LEVEL := 32
+PRODUCT_SHIPPING_API_LEVEL := 33
 
 # -------@block_app-------
 
@@ -184,14 +184,11 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # -------@block_power-------
 
-PRODUCT_PACKAGES += \
-    charger_res_images \
-    charger
-
 # health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-service \
-    android.hardware.health@2.1-impl-imx
+    android.hardware.health-service.example \
+    android.hardware.health-service.example_recovery \
+    charger_res_images_vendor
 
 # -------@block_display-------
 ifneq ($(PRODUCT_IMX_CAR),true)
@@ -217,6 +214,10 @@ PRODUCT_HOST_PACKAGES += \
     nxp.hardware.display@1.0
 
 PRODUCT_SOONG_NAMESPACES += external/mesa3d
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.sf.color_saturation=1.0 \
+    ro.hw_timeout_multiplier=2
 
 # -------@block_gpu-------
 # vivante libdrm support
@@ -261,12 +262,13 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # -------@block_audio-------
 PRODUCT_PACKAGES += \
-    android.hardware.audio@7.0-impl:32 \
+    android.hardware.audio@7.1-impl \
     android.hardware.audio.service \
     android.hardware.audio.effect@7.0-impl:32
 
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
+    android.hardware.bluetooth.audio-impl \
+    audio.bluetooth.default \
     audio.primary.imx \
     audio.r_submix.default \
     audio.usb.default \
@@ -278,6 +280,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration_7_0.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+    frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration_7_0.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
@@ -312,10 +315,6 @@ PRODUCT_PACKAGES += \
     libldacBT_enc \
     libldacBT_abr
 
-# -------@block_sensor-------
-PRODUCT_PACKAGES += \
-    fsl_sensor_fusion
-
 # -------@block_input-------
 
 PRODUCT_COPY_FILES += \
@@ -340,9 +339,9 @@ ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
       logd.logpersistd.size=3
 endif
 
-#Dumpstate HAL 1.1 support
+#Dumpstate AIDL support
 PRODUCT_PACKAGES += \
-    android.hardware.dumpstate@1.1-service.imx
+    android.hardware.dumpstate-service.imx
 
 # for userdebug or eng build, do not apply the debugfs restrictions
 ifneq (,$(filter user, $(TARGET_BUILD_VARIANT)))

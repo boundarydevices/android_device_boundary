@@ -1,0 +1,13 @@
+type hal_secureime_default, domain;
+hal_server_domain(hal_secureime_default, hal_secureime)
+
+type hal_secureime_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_secureime_default)
+
+add_service(hal_secureime_default, hal_secureime_service)
+
+binder_use(hal_secureime_service)
+binder_call(hal_secureime_service, servicemanager)
+
+allow hal_secureime_default tee_device:chr_file {open read write ioctl};
+allow hal_secureime_default hal_graphics_allocator_default:fd {use};
