@@ -9,5 +9,6 @@ allow hal_graphics_composer_default sysfs_leds:dir { search };
 allow hal_graphics_composer_default sysfs_leds:file { getattr open read write };
 allow hal_graphics_composer_default hal_graphics_allocator_default_tmpfs:file { read write };
 allow hal_graphics_composer_default dmabuf_heap_device:chr_file { read open ioctl };
+allow hal_graphics_composer_default tee_device:chr_file { read write open ioctl };
 
 set_prop(hal_graphics_composer_default, vendor_public_default_prop)
