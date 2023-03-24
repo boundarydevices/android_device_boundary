@@ -112,15 +112,13 @@ DEVICE_MANIFEST_FILE += vendor/nxp-opensource/imx/hdmicec/manifest.xml
 endif
 
 # -------@block_wifi-------
-BOARD_WLAN_DEVICE            := qcwcn
 WPA_SUPPLICANT_VERSION       := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER  := NL80211
 BOARD_HOSTAPD_DRIVER         := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB           := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB    := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
 # -------@block_bluetooth-------
-BOARD_HAVE_BLUETOOTH_QCOM        := true
+BOARD_HAVE_BLUETOOTH         := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(IMX_DEVICE_PATH)/bluetooth
 
 # -------@block_sensor-------
