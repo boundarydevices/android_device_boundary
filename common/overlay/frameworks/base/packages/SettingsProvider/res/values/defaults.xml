@@ -23,4 +23,6 @@
     <bool name="def_lockscreen_disabled">true</bool>
     <integer name="def_screen_off_timeout">3600000</integer>
     <bool name="def_stay_on_while_plugged_in">true</bool>
+    <string name="enabled_input_methods" translatable="false">com.android.inputmethod.latin/.LatinIME</string>
+    <string name="default_input_method" translatable="false">com.android.inputmethod.latin/.LatinIME</string>
 </resources>

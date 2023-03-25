@@ -215,4 +215,7 @@
 
     <!-- If the system has the input method for each display - enable per-display focus. -->
     <bool name="config_perDisplayFocusEnabled">true</bool>
+
+    <!-- show global actions menu when long press power button -->
+    <integer name="config_longPressOnPowerBehavior">1</integer>
 </resources>
