@@ -7,4 +7,12 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="aidl" optional="true">
+        <name>nxp.hardware.secureime</name>
+        <version>1</version>
+        <interface>
+            <name>ISecureIME</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
 </compatibility-matrix>
