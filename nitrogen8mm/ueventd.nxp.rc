@@ -21,6 +21,7 @@
 /dev/dma_heap/reserved    0666   system     system
 /dev/dma_heap/reserved-uncached    0666   system     system
 /dev/dma_heap/secure      0666   system     system
+/dev/rfkill               0666   bluetooth  system
 
 # partitions properties
 /dev/block/platform/soc@0/30800000\.bus/30b50000\.mmc/by-name/frp 0600   system     system
