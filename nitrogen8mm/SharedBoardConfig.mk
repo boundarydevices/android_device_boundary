@@ -1,6 +1,6 @@
 # -------@block_kernel_bootimg-------
 
-KERNEL_NAME := Image
+KERNEL_NAME := Image.gz
 TARGET_KERNEL_ARCH := arm64
 IMX8MM_USES_GKI := false
 
