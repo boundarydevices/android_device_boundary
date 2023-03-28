@@ -291,7 +291,6 @@ PRODUCT_PACKAGES += \
     hostapd_cli \
     wpa_supplicant \
     wpa_cli \
-    wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
     mlanutl
