@@ -291,7 +291,9 @@ PRODUCT_PACKAGES += \
     hostapd_cli \
     wpa_supplicant \
     wpa_cli \
-    wpa_supplicant.conf
+
+PRODUCT_COPY_FILES += \
+    $(CONFIG_REPO_PATH)/common/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
 
 PRODUCT_PACKAGES += \
     mlanutl
