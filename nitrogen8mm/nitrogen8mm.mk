@@ -309,6 +309,7 @@ PRODUCT_PACKAGES += \
 
 # wifi supplicant overlay
 PRODUCT_COPY_FILES += \
+    $(CONFIG_REPO_PATH)/common/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
     $(CONFIG_REPO_PATH)/common/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(CONFIG_REPO_PATH)/common/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
 
@@ -333,8 +334,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.1-service.btlinux \
     android.hardware.bluetooth.audio@2.0-impl \
     audio.bluetooth.default \
-
-BOARD_CUSTOM_BT_CONFIG := $(IMX_DEVICE_PATH)/bluetooth/libbt_vnd.conf
 
 # -------@block_usb-------
 
