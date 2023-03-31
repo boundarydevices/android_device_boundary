@@ -107,6 +107,11 @@ on early-boot && property:vendor.skip.charger_not_need=0
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk1/queue/read_ahead_kb 2048
 
+    # Prepare for bluetooth
+    chmod 665 /sys/class/rfkill/rfkill1/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
+    write /sys/class/rfkill/rfkill1/state 0
+
     # Set tracefs permission to 755
     chmod 0755 /sys/kernel/debug/tracing
 
