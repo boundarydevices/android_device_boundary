@@ -1,5 +1,4 @@
-<manifest version="1.0" type="device" target-level="6">
-    <kernel  target-level="6" />
+<manifest version="1.0" type="device" target-level="7">
     <hal format="hidl">
 	<name>android.hardware.graphics.allocator</name>
         <transport>hwbinder</transport>
@@ -18,19 +17,6 @@
             <name>IComposer</name>
             <instance>default</instance>
         </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.drm</name>
-        <transport>hwbinder</transport>
-        <version>1.3</version>
-        <interface>
-            <name>ICryptoFactory</name>
-        </interface>
-        <interface>
-            <name>IDrmFactory</name>
-        </interface>
-        <fqname>@1.3::ICryptoFactory/clearkey</fqname>
-        <fqname>@1.3::IDrmFactory/clearkey</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.gatekeeper</name>
@@ -85,7 +71,7 @@
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
-        <version>7.0</version>
+        <version>7.1</version>
         <interface>
             <name>IDevicesFactory</name>
             <instance>default</instance>
@@ -110,15 +96,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.dumpstate</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IDumpstateDevice</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>nxp.hardware.display</name>
             <transport>hwbinder</transport>
         <version>1.0</version>
@@ -129,10 +106,12 @@
     </hal>
     <hal format="aidl">
        <name>android.hardware.security.keymint</name>
+       <version>2</version>
        <fqname>IKeyMintDevice/default</fqname>
     </hal>
     <hal format="aidl">
        <name>android.hardware.security.keymint</name>
+       <version>2</version>
        <fqname>IRemotelyProvisionedComponent/default</fqname>
     </hal>
     <hal format="aidl">

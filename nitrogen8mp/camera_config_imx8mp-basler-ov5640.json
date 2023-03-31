@@ -31,19 +31,7 @@
       "exposure_ns_min": "68000",
       "exposure_ns_max": "16632000",
       "MaxWidth": "1920",
-      "MaxHeight": "1080",
-      "OmitFrame": [
-          {
-              "width": "1280",
-              "height": "720",
-              "omit_num": "3"
-          },
-          {
-              "width": "320",
-              "height": "240",
-              "omit_num": "3"
-          }
-      ]
+      "MaxHeight": "1080"
     },
     {
       "camera_type": "front",
