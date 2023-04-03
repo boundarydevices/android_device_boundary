@@ -266,7 +266,7 @@ PRODUCT_SOONG_NAMESPACES += vendor/nxp-opensource/imx/camera
 
 # ISP camera feature demo
 PRODUCT_PACKAGES += \
-    CameraXBasic
+    Camera2Basic
 
 PRODUCT_PACKAGES += \
     media_profiles_8mp-ov5640.xml \
