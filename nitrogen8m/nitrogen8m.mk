@@ -328,8 +328,8 @@ PRODUCT_PACKAGES += \
     otp30.bin \
     qcom_cfg.ini \
     qwlan30.bin \
-    tfbtfw11.tlv \
-    tfbtnv11.bin
+    rampatch_00230302.bin \
+    nvm_00230302.bin
 
 # -------@block_bluetooth-------
 # Bluetooth HAL
