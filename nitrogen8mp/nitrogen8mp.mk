@@ -296,10 +296,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libg2d-opencl
 
-# Multi-Display launcher
-PRODUCT_PACKAGES += \
-    MultiDisplay
-
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/input-port-associations.xml:$(TARGET_COPY_OUT_VENDOR)/etc/input-port-associations.xml
 
@@ -430,9 +426,6 @@ PRODUCT_PACKAGES += \
     c2_component_register_dsp \
     c2_component_register_dsp_wma \
     c2_component_register_dsp_aacp
-
-PRODUCT_PACKAGES += \
-    DirectAudioPlayer
 
 ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
