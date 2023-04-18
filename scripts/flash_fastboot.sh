@@ -48,35 +48,42 @@ esac
 
 if [ -z "$OUT" ]; then OUT=out/target/product/$product; fi
 if ! [ -d $OUT ]; then
-   echo "Missing $OUT";
-   exit 1;
+	echo "Missing $OUT";
+	exit 1;
 fi
 
 fastboot flash gpt $OUT/$gpt
 if ! [ $? -eq 0 ] ; then echo "Failed to flash gpt.img"; exit 1; fi
 fastboot flash preboot $OUT/preboot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash preboot.img"; exit 1; fi
-fastboot flash dtbo $OUT/dtbo.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash dtbo.img"; exit 1; fi
-fastboot flash boot $OUT/boot.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash boot.img"; exit 1; fi
-if [ -e $OUT/recovery.img ]; then
-fastboot flash recovery $OUT/recovery.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash recovery.img"; exit 1; fi
-fastboot flash cache $OUT/cache.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
-fi
-if [ -e $OUT/super.img ]; then
-fastboot flash super $OUT/super.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash super.img"; exit 1; fi
+
+# checking if we're flash with slots
+HAS_SLOTS=`fastboot getvar has-slot:boot 2>&1 | grep has-slot | awk '{ print $2 }'`
+if [ "$HAS_SLOTS" == "yes" ]; then
+	slot="_a"
 else
-fastboot flash system $OUT/system.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash system.img"; exit 1; fi
-fastboot flash vendor $OUT/vendor.img
-if ! [ $? -eq 0 ] ; then echo "Failed to flash vendor.img"; exit 1; fi
+	slot=""
 fi
-fastboot flash vbmeta $OUT/vbmeta.img $disable_verity
+
+fastboot flash dtbo${slot} $OUT/dtbo.img
+if ! [ $? -eq 0 ] ; then echo "Failed to flash dtbo.img"; exit 1; fi
+fastboot flash boot${slot} $OUT/boot.img
+if ! [ $? -eq 0 ] ; then echo "Failed to flash boot.img"; exit 1; fi
+fastboot flash vbmeta${slot} $OUT/vbmeta.img $disable_verity
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vbmeta.img"; exit 1; fi
+if [ "$HAS_SLOTS" == "yes" ]; then
+	fastboot flash super $OUT/super.img
+	if ! [ $? -eq 0 ] ; then echo "Failed to flash super.img"; exit 1; fi
+else
+	fastboot flash recovery $OUT/recovery.img
+	if ! [ $? -eq 0 ] ; then echo "Failed to flash recovery.img"; exit 1; fi
+	fastboot flash cache $OUT/cache.img
+	if ! [ $? -eq 0 ] ; then echo "Failed to flash cache.img"; exit 1; fi
+	fastboot flash system $OUT/system.img
+	if ! [ $? -eq 0 ] ; then echo "Failed to flash system.img"; exit 1; fi
+	fastboot flash vendor $OUT/vendor.img
+	if ! [ $? -eq 0 ] ; then echo "Failed to flash vendor.img"; exit 1; fi
+fi
 if ! [ ${skip_userdata} -eq 1 ] ; then
 	fastboot erase userdata
 	if ! [ $? -eq 0 ] ; then echo "Failed to erase userdata"; exit 1; fi
