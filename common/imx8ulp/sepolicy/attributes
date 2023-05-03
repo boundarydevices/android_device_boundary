@@ -1,0 +1,3 @@
+attribute hal_secureime;
+attribute hal_secureime_client;
+attribute hal_secureime_server;
