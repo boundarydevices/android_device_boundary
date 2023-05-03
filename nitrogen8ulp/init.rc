@@ -106,15 +106,8 @@ on early-boot && property:vendor.skip.charger_not_need=0
     write /sys/block/mmcblk1/queue/read_ahead_kb 2048
     write /sys/block/mmcblk2/queue/read_ahead_kb 2048
 
-    # Disable surfaceflinger back pressure propagate
-    setprop debug.sf.disable_backpressure 1
-
     # Set tracefs permission to 755
     chmod 0755 /sys/kernel/debug/tracing
-
-    # Set sw_sync group to graphics and set permission to 664
-    chown root graphics /sys/kernel/debug/sync/sw_sync
-    chmod 0664 /sys/kernel/debug/sync/sw_sync
 
     # Default backlight device
     setprop vendor.hw.backlight.dev "backlight-mipi"

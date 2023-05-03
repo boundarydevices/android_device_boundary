@@ -6,6 +6,9 @@ on early-boot
     # Set GPU 3D minimum clock to 3/64
     write /sys/bus/platform/drivers/galcore/gpu3DMinClock 3
 
+    # Set RenderEngine Backend
+    setprop debug.renderengine.backend gles
+
     # Set NN reject model by weights md5
     setprop vendor.MODEL_BLOCK_LEVEL 1
 
