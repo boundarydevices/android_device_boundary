@@ -356,6 +356,12 @@ PRODUCT_PACKAGES += \
     rampatch_00230302.bin \
     nvm_00230302.bin
 
+PRODUCT_PACKAGES += \
+    BCM4373A0.hcd \
+    cyfmac4373-sdio.bin \
+    cyfmac4373-sdio.txt \
+    cyfmac4373-sdio.clm_blob
+
 # -------@block_bluetooth-------
 
 # Bluetooth HAL

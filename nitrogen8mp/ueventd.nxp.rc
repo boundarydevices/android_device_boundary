@@ -32,7 +32,6 @@
 
 # sysfs properties
 /sys/devices/platform/backlight*    brightness  0660  system system
-/sys/devices/platform/bt-rfkill*    state       0660  bluetooth bluetooth
 /sys/devices/platform/busfreq*      enable      0660  system system
 /sys/devices/system/cpu/cpu*        online      0660  root   system
 /sys/devices/virtual/bluetooth/hci* state       0660  bluetooth bluetooth
@@ -50,5 +49,8 @@
 
 /sys/devices/virtual/thermal/thermal_zone* trip_point_0_hyst 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_hyst 0660 system system
+
+/sys/devices/platform/soc@0/30800000.bus/30860000.serial/serial0/serial0-0/bluetooth/hci0/rfkill* state 0660 bluetooth bluetooth
+/sys/devices/platform/soc@0/30800000.bus/30860000.serial/serial0/serial0-0/bluetooth/hci0/rfkill* type  0660 bluetooth bluetooth
 
 /dev/dmabuf_imx           0664   system     system
