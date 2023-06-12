@@ -148,13 +148,6 @@ on early-boot && property:vendor.skip.charger_not_need=0
     # Enlarge limition of audio buffer allocation
     setprop ro.af.client_heap_size_kbyte 32768
 
-service sensor_fusion /vendor/bin/fsl_sensor_fusion
-    class late_start
-    seclabel u:r:sensors:s0
-    user system
-    group system uhid
-    oneshot
-
 # Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
 service watchdogd /system/bin/watchdogd 10 20
     class core
