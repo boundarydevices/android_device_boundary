@@ -600,6 +600,14 @@ PRODUCT_PACKAGES += \
     daA3840_30mc_1080P.json \
     daA3840_30mc_4K.json
 
+# config for imx219
+PRODUCT_PACKAGES += \
+    libimx219 \
+    IMX219_8M_02_1080p_linear.xml \
+    imx219-Sensor0_Entry.cfg \
+    imx219-Sensor1_Entry.cfg \
+    sensor_dwe_imx219_1080P_config.json
+
 # make sure /vendor/etc/configs/isp/ is created
 PRODUCT_PACKAGES += hollow
 
