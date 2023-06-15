@@ -152,6 +152,14 @@ if itest.s "x" != "x$selinux" ; then
 	setenv bootargs $bootargs androidboot.selinux=$selinux
 fi
 
+if itest.s "x" == "x${camera_layout}" && itest.s "xnitrogen_smarc" == "x$board" ; then
+	setenv camera_layout dual-imx219
+fi
+
+if itest.s "x" != "x${camera_layout}" ; then
+	setenv bootargs $bootargs androidboot.camera.layout=${camera_layout}
+fi
+
 if itest.s "x" != "x${lcd_density}" ; then
 	setenv bootargs $bootargs androidboot.lcd_density=${lcd_density}
 else
