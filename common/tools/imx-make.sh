@@ -13,6 +13,7 @@ cat << EOF
         options:
            -h/--help               display this help info
            -j[<num>]               specify the number of parallel jobs when build the target, the number after -j should be greater than 0
+           prebuilt-bootloader     download latest prebuilt bootloader from BD server
            bootloader              bootloader will be compiled
            kernel                  kernel, include the kernel modules and device tree files will be compiled
            galcore                 galcore.ko in GPU repo will be compiled
