@@ -59,7 +59,8 @@ if ! [ $? -eq 0 ] ; then echo "Failed to flash preboot.img"; exit 1; fi
 
 # checking if we're flash with slots
 HAS_SLOTS=`fastboot getvar has-slot:boot 2>&1 | grep has-slot | awk '{ print $2 }'`
-if [ "$HAS_SLOTS" == "yes" ]; then
+echo HAS SLOTS $HAS_SLOTS
+if [ "$HAS_SLOTS" = "yes" ]; then
 	slot="_a"
 else
 	slot=""
@@ -71,7 +72,7 @@ fastboot flash boot${slot} $OUT/boot.img
 if ! [ $? -eq 0 ] ; then echo "Failed to flash boot.img"; exit 1; fi
 fastboot flash vbmeta${slot} $OUT/vbmeta.img $disable_verity
 if ! [ $? -eq 0 ] ; then echo "Failed to flash vbmeta.img"; exit 1; fi
-if [ "$HAS_SLOTS" == "yes" ]; then
+if [ "$HAS_SLOTS" = "yes" ]; then
 	fastboot flash super $OUT/super.img
 	if ! [ $? -eq 0 ] ; then echo "Failed to flash super.img"; exit 1; fi
 else
