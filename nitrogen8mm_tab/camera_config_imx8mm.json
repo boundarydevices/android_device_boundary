@@ -16,7 +16,7 @@
       "flash_brightness": "300",
       "torch_path": "/sys/class/leds/torch",
       "torch_brightness": "25",
-      "orientation": "0",
+      "orientation": "90",
       "buffer_type": "mmap",
       "ActiveArrayWidth": "2592",
       "ActiveArrayHeight": "1944",
