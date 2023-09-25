@@ -10,7 +10,7 @@
   "camera_metadata": [
     {
       "camera_type": "back",
-      "camera_name": "mxc_isi.0.capture",
+      "camera_name": "mxc_isi.1.capture",
       "orientation": "0",
       "mplane": "1",
       "buffer_type": "dma",
