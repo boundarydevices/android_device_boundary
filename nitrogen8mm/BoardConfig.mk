@@ -154,6 +154,7 @@ TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mm:imx8mm-nitrogen8mm_som-mcp25625.dtb \
 	imx8mm:imx8mm-nitrogen8mm-tc358743.dtb \
 	imx8mm:imx8mm-nitrogen8_lite.dtb \
+	imx8mm:imx8mm-nitrogen_smarc.dtb \
 
 ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
 
