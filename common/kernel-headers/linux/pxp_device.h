@@ -34,6 +34,7 @@ struct pxp_mem_desc {
 };
 struct pxp_mem_flush {
   unsigned int handle;
+  int dmabuf_fd;
   unsigned int type;
 };
 #define PXP_IOC_MAGIC 'P'

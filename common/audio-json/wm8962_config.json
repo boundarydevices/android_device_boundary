@@ -1,7 +1,9 @@
 {
   "driver_name": "wm8962-audio",
-  "supported_out_devices": ["speaker", "wired_headphone", "wired_headset"],
+  "supported_out_devices": ["speaker", "wired_headphone", "wired_headset", "line"],
   "supported_in_devices": ["builtin_mic", "wired_headset"],
+  "support_lpa": 1,
+  "support_compress": 1,
 
   "init_ctl": [
     {"name": "Speaker Volume", "type": "int", "val": 114},
@@ -12,6 +14,9 @@
     {"name": "Capture Switch", "type": "int", "val": 1},
     {"name": "Capture Volume", "type": "int", "val": 40},
     {"name": "Digital Capture Volume", "type": "int", "val": 108}
-  ]
+  ],
 
+  "out_volume_ctl": [
+    "Headphone Volume"
+  ]
 }

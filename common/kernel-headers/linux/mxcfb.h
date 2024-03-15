@@ -127,12 +127,6 @@ struct mxcfb_waveform_modes {
 struct mxcfb_csc_matrix {
   int param[5][3];
 };
-struct mxcfb_buffer {
-  unsigned long phys;
-  int xoffset;
-  int yoffset;
-  int stride;
-};
 struct mxcfb_datainfo {
   struct fb_var_screeninfo screeninfo;
   unsigned long smem_start;
@@ -166,7 +160,5 @@ struct mxcfb_datainfo {
 #define MXCFB_GET_WORK_BUFFER _IOWR('F', 0x34, unsigned long)
 #define MXCFB_DISABLE_EPDC_ACCESS _IO('F', 0x35)
 #define MXCFB_ENABLE_EPDC_ACCESS _IO('F', 0x36)
-#define MXCFB_UPDATE_SCREEN _IOW('F', 0x100, struct mxcfb_buffer)
-#define MXCFB_UPDATE_OVERLAY _IOW('F', 0x101, struct mxcfb_datainfo)
 #define MXCFB_PRESENT_SCREEN _IOW('F', 0x102, struct mxcfb_datainfo)
 #endif
