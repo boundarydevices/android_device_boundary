@@ -1,5 +1,0 @@
-service tee_supplicant /vendor/bin/tee-supplicant
-    class main
-    user root
-    group shell
-    oneshot

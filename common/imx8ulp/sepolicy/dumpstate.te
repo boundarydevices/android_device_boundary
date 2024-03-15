@@ -16,3 +16,4 @@ allow dumpstate fuse:dir { search };
 
 binder_call(dumpstate, hal_audio_default)
 binder_call(dumpstate, vold)
+binder_call(dumpstate, tee)

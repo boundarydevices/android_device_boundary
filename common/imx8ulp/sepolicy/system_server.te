@@ -27,5 +27,3 @@ allow system_server graphics_device:dir { search };
 allow system_server graphics_device:chr_file { open read ioctl };
 allow system_server sysfs_extcon:file { getattr open read };
 allow system_server hal_graphics_allocator_default_tmpfs:file { getattr read write};
-
-get_prop(system_server, usb_notify_prop)

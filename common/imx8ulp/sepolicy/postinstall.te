@@ -13,3 +13,8 @@ allow postinstall sysfs_block_devices:file { rw_file_perms };
 
 allow postinstall proc:dir { search };
 allow postinstall proc_drop_caches:file { w_file_perms };
+
+allow postinstall bootloader_block_device:blk_file { open read write ioctl getattr };
+
+allow postinstall dek_extractor_service:service_manager { find };
+allow postinstall tee:binder { call };

@@ -1,2 +1,0 @@
-persist.adb.notify                  u:object_r:usb_notify_prop:s0
-persist.charging.notify             u:object_r:usb_notify_prop:s0
