@@ -86,6 +86,5 @@ enum {
 #define V4L2_PIX_FMT_RFCX v4l2_fourcc('R', 'F', 'C', 'X')
 #define V4L2_PIX_FMT_411SP v4l2_fourcc('4', '1', 'S', 'P')
 #define V4L2_PIX_FMT_AV1 v4l2_fourcc('A', 'V', '1', '0')
-#define V4L2_PIX_FMT_RV v4l2_fourcc('R', 'V', '0', '0')
 #define V4L2_PIX_FMT_AVS v4l2_fourcc('A', 'V', 'S', '0')
 #endif

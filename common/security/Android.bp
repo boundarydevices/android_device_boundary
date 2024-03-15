@@ -1,0 +1,20 @@
+/*
+ * Copyright 2023 NXP
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ */
+
+bootstrap_go_package {
+    name: "soong-security",
+    pkgPath: "android/soong/device/boundary/common/security",
+
+    srcs: [
+        "security.go",
+    ],
+
+    deps: [
+       "soong-android-allowlists",
+    ],
+    pluginFor: ["soong_build"],
+}
