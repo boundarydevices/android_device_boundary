@@ -12,4 +12,10 @@ allow tee tee_data_file:dir create_dir_perms;
 
 # trusty_apploader operations
 allow tee vendor_file:file { read open map };
-allow tee dmabuf_heap_device:chr_file { read open ioctl };
+allow tee dmabuf_system_heap_device:chr_file { read open ioctl };
+allow tee dmabuf_system_secure_heap_device:chr_file { read open ioctl };
+allow tee metadata_file:dir { search };
+allow tee gsi_metadata_file:dir { search };
+
+allow tee dek_extractor_service:service_manager { add };
+allow tee servicemanager:binder { call transfer };

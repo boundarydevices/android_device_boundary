@@ -41,11 +41,13 @@ TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := cortex-a53
 
+ifeq ($(filter TRUE true 1,$(IMX8_BUILD_64BIT_ROOTFS)),)
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a9
+endif
 endif
 
 BOARD_SOC_CLASS := IMX8
@@ -62,12 +64,14 @@ BOARD_KERNEL_OFFSET := 0x00080000
 BOARD_RAMDISK_OFFSET := 0x04280000
 ifeq ($(TARGET_USE_VENDOR_BOOT),true)
 BOARD_BOOT_HEADER_VERSION := 4
+BOARD_INIT_BOOT_HEADER_VERSION := 4
 BOARD_INCLUDE_DTB_IN_BOOTIMG := false
 else
 BOARD_BOOT_HEADER_VERSION := 1
 endif
 
 BOARD_MKBOOTIMG_ARGS = --kernel_offset $(BOARD_KERNEL_OFFSET) --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 
 ifeq ($(TARGET_USE_VENDOR_BOOT),true)
   BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
@@ -82,13 +86,7 @@ TARGET_BOARD_KERNEL_HEADERS := $(CONFIG_REPO_PATH)/common/kernel-headers
 
 TARGET_IMX_KERNEL ?= true
 ifeq ($(TARGET_IMX_KERNEL),false)
-# boot-debug.img is built by IMX, with Google released kernel Image
-# boot.img is released by Google
-ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-BOARD_PREBUILT_BOOTIMAGE := vendor/nxp/fsl-proprietary/gki/boot-debug.img
-else
 BOARD_PREBUILT_BOOTIMAGE := vendor/nxp/fsl-proprietary/gki/boot.img
-endif
 TARGET_NO_KERNEL := true
 endif
 

@@ -19,4 +19,7 @@
     <privapp-permissions package="com.google.android.gms">
         <permission name="android.permission.WRITE_DEVICE_CONFIG" />
     </privapp-permissions>
+    <privapp-permissions package="com.google.android.googlequicksearchbox">
+        <permission name="android.permission.SCHEDULE_EXACT_ALARM" />
+    </privapp-permissions>
 </permissions>

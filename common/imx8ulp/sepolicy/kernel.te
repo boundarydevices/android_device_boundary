@@ -15,3 +15,4 @@ dontaudit kernel device:blk_file { create };
 allow kernel shell_exec:file { read open execute map getattr };
 domain_auto_trans(kernel, shell_exec, ueventd)
 allow ueventd kernel:fd { use };
+allow kernel init-insmod-sh:key { search };

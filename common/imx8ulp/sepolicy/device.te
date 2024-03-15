@@ -12,3 +12,4 @@ type emmc_boot0, dev_type;
 type sdcard, dev_type;
 type vsi_daemon_ctrl_device, dev_type;
 type bootloader_block_device, dev_type;
+type logbuffer_device, dev_type;

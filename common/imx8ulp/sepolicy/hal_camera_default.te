@@ -7,7 +7,9 @@ allow hal_camera_default sysfs:file { open read getattr };
 allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager find;
 allow hal_camera_default opencl_cache_file:dir create_dir_perms;
 allow hal_camera_default opencl_cache_file:file create_file_perms;
-allow hal_camera_default dmabuf_heap_device:chr_file {ioctl read open };
+allow hal_camera_default dmabuf_system_heap_device:chr_file {ioctl read open };
+allow hal_camera_default system_data_file:dir { search };
+add_service(hal_camera_default, external_camera_service)
 
 set_prop(hal_camera_default, vendor_camera_prop)
 get_prop(hal_camera_default, vendor_camera_prop)

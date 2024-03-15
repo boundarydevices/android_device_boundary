@@ -1,7 +1,11 @@
 include $(CONFIG_REPO_PATH)/common/build/build_info.mk
 # -------@block_infrastructure-------
 ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
+ifneq ($(filter TRUE true 1,$(IMX8_BUILD_64BIT_ROOTFS)),)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+endif
 endif
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 ifneq ($(PRODUCT_HAS_RIL),true)
@@ -28,7 +32,7 @@ PRODUCT_MANUFACTURER := boundary
 # related to the definition and load of library modules
 TARGET_BOARD_PLATFORM := imx
 
-PRODUCT_SHIPPING_API_LEVEL := 33
+PRODUCT_SHIPPING_API_LEVEL := 34
 
 # -------@block_app-------
 
@@ -111,6 +115,8 @@ PRODUCT_PACKAGES += \
 # imx c2 codec binary
 PRODUCT_PACKAGES += \
     android.hardware.media.c2@1.0-service \
+    codec2.vendor.base.policy \
+    codec2.vendor.ext.policy \
     libsfplugin_ccodec \
     lib_imx_c2_componentbase \
     lib_imx_ts_manager \
@@ -127,7 +133,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.ccodec=4  \
     debug.stagefright.omx_default_rank=0x200 \
-    debug.stagefright.c2-poolmask=0x70000
+    debug.stagefright.c2-poolmask=0x70000 \
+    debug.stagefright.c2inputsurface=-1
 
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_real_dec/fsl_real_dec.mk
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/fsl_ms_codec/fsl_ms_codec.mk
@@ -139,6 +146,8 @@ PREBUILT_FSL_IMX_ISP := true
 
 # -------@block_storage-------
 
+TARGET_USERIMAGES_USE_F2FS := true
+
 ifeq ($(AB_OTA_UPDATER),true)
 PRODUCT_PACKAGES += \
     SystemUpdaterSample
@@ -149,9 +158,8 @@ PRODUCT_COPY_FILES += \
 
 # A/B OTA
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl \
-    android.hardware.boot@1.2-impl.recovery \
-    android.hardware.boot@1.2-service \
+    android.hardware.boot-service.default \
+    android.hardware.boot-service.default_recovery \
     update_engine \
     update_engine_client \
     update_engine_sideload \
@@ -181,13 +189,48 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.fuse.passthrough.enable=true
 
-# -------@block_power-------
-
 # health
 PRODUCT_PACKAGES += \
     android.hardware.health-service.example \
     android.hardware.health-service.example_recovery \
     charger_res_images_vendor
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    apexd.config.dm_create.timeout=60000 \
+    apexd.config.loop_wait.attempts=99
+
+# -------@block_ethernet-------
+
+#PRODUCT_PACKAGES += \
+    ethernet
+
+# -------@block_camera-------
+ifneq ($(PRODUCT_IMX_CAR),true)
+ifneq ($(POWERSAVE),true)
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.7-service-google \
+    android.hardware.camera.provider@2.7-impl-google \
+    libgooglecamerahal \
+    libgooglecamerahalutils \
+    lib_profiler \
+    libimxcamerahwl_impl \
+    libimageprocess
+
+# external camera, AIDL
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider-V1-external-service \
+    android.hardware.camera.metadata-V1-ndk.so \
+    android.hardware.graphics.allocator-V1-ndk.so \
+    android.hardware.camera.device-V1-ndk.so \
+    android.hardware.camera.provider-V1-ndk.so \
+    android.hardware.camera.provider-V1-external-impl.so \
+    camera.device-external-imx-impl.so
+endif
+endif
+
+# external camera feature demo
+PRODUCT_PACKAGES += \
+     Camera2Basic
 
 # -------@block_display-------
 ifneq ($(PRODUCT_IMX_CAR),true)
@@ -199,18 +242,10 @@ endif
 PRODUCT_PACKAGES += \
     libedid
 
-# HAL
-PRODUCT_PACKAGES += \
-    gralloc.imx \
-    hwcomposer.imx
-
 PRODUCT_PACKAGES += \
     libdrm_android \
     libdisplayutils \
     libfsldisplay
-
-PRODUCT_HOST_PACKAGES += \
-    nxp.hardware.display@1.0
 
 PRODUCT_SOONG_NAMESPACES += external/mesa3d
 
@@ -265,6 +300,11 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.audio.effect@7.0-impl:32
 
+ifneq ($(PRODUCT_IMX_CAR),true)
+PRODUCT_PACKAGES += \
+    SoundRecorder
+endif
+
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
     audio.bluetooth.default \
@@ -283,6 +323,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_in_audio_policy_configuration_7_0.xml \
     frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration_7_0.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
+
+PRODUCT_VENDOR_PROPERTIES += ro.config.ringtone=Ring_Synth_04.ogg
 
 # -------@block_wifi-------
 PRODUCT_PACKAGES += \

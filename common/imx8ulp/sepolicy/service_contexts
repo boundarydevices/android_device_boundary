@@ -1,1 +1,4 @@
 nxp.hardware.secureime.ISecureIME/default u:object_r:hal_secureime_service:s0
+android.hardware.camera.provider.ICameraProvider/external/0                  u:object_r:external_camera_service:s0
+android.hardware.neuralnetworks.IDevice/nnapi-imx_sl                         u:object_r:hal_neuralnetworks_service:s0
+nxp.hardware.imx_dek_extractor.IDek_Extractor/default                    u:object_r:dek_extractor_service:s0
