@@ -29,7 +29,6 @@
 PRODUCT_MAKEFILES += \
   $(LOCAL_DIR)/nitrogen8m/nitrogen8m.mk \
   $(LOCAL_DIR)/nitrogen8mm/nitrogen8mm.mk \
-  $(LOCAL_DIR)/nitrogen8mm_tab/nitrogen8mm_tab.mk \
   $(LOCAL_DIR)/nitrogen8mp/nitrogen8mp.mk \
   $(LOCAL_DIR)/nitrogen8ulp/nitrogen8ulp.mk \
 
@@ -38,8 +37,6 @@ COMMON_LUNCH_CHOICES := \
   nitrogen8m-userdebug \
   nitrogen8mm-user \
   nitrogen8mm-userdebug \
-  nitrogen8mm_tab-user \
-  nitrogen8mm_tab-userdebug \
   nitrogen8mp-user \
   nitrogen8mp-userdebug \
   nitrogen8ulp-user \
