@@ -1,3 +1,0 @@
-allow system_app sysfs_accontrol:dir search;
-allow system_app sysfs_accontrol:file rw_file_perms;
-allow system_app sysfs_leds:dir search;
