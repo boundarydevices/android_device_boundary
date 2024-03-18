@@ -19,7 +19,6 @@ cat << EOF
            galcore                 galcore.ko in GPU repo will be compiled
            vvcam                   vvcam.ko, the ISP driver will be compiled
            mxmwifi                 mlan.ko moal.ko, the MXMWifi driver will be compiled
-           qcacld                  wlan.ko, the qcacld-2.0 driver will be compiled
            dtboimage               dtbo images will be built out
            bootimage               boot.img will be built out
            vendorbootimage         vendor_boot.img will be built out
@@ -96,7 +95,6 @@ build_kernel_oot_module_flag=0
 build_galcore=""
 build_vvcam=""
 build_mxmwifi=""
-build_qcacld=""
 build_bootimage=""
 build_vendorbootimage=""
 build_dtboimage=""
@@ -131,8 +129,6 @@ for arg in ${args[*]} ; do
                     build_vvcam="vvcam";;
         mxmwifi) build_kernel_oot_module_flag=1
                     build_mxmwifi="mxmwifi";;
-        qcacld) build_kernel_oot_module_flag=1
-                    build_qcacld="qcacld";;
         bootimage) build_android_flag=1;
                     build_kernel="${OUT}/kernel";
                     build_bootimage="bootimage";;
@@ -166,12 +162,6 @@ fi
 # vvcam.ko need build with in-tree modules each time to make sure "insmod vvcam.ko" works
 if [ -n "${build_kernel_modules}" ] && [[ "${TARGET_PRODUCT}" =~ "8mp" ]]; then
     build_vvcam="vvcam";
-    build_kernel_oot_module_flag=1;
-fi
-
-# wlan.ko need build with kernel each time to make sure "insmod wlan.ko" works
-if [ -n "${build_kernel_modules}" ]; then
-    build_qcacld="qcacld";
     build_kernel_oot_module_flag=1;
 fi
 
