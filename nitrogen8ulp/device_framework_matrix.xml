@@ -1,17 +1,17 @@
 <compatibility-matrix version="1.0" type="framework">
-    <hal format="hidl" optional="true">
-        <name>nxp.hardware.display</name>
-        <version>1.0</version>
-        <interface>
-            <name>IDisplay</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal format="aidl" optional="true">
         <name>nxp.hardware.secureime</name>
         <version>1</version>
         <interface>
             <name>ISecureIME</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>nxp.hardware.imx_dek_extractor</name>
+        <version>1</version>
+        <interface>
+            <name>IDek_Extractor</name>
             <instance>default</instance>
         </interface>
     </hal>

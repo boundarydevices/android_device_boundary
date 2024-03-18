@@ -117,14 +117,6 @@ TARGET_BOARD_DTS_CONFIG ?= \
 ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
 
 # -------@block_sepolicy-------
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
-    $(CONFIG_REPO_PATH)/common/imx8ulp/system_ext_pri_sepolicy
-
 BOARD_SEPOLICY_DIRS := \
        $(CONFIG_REPO_PATH)/common/imx8ulp/sepolicy \
        $(IMX_DEVICE_PATH)/sepolicy
-
-ifeq ($(PRODUCT_IMX_DRM),true)
-BOARD_SEPOLICY_DIRS += \
-       $(IMX_DEVICE_PATH)/sepolicy_drm
-endif
