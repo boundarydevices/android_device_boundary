@@ -72,11 +72,11 @@ on init && property:vendor.skip.charger_not_need=0
 on late-fs && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
     start storageproxyd
     start vendor.oemlock-1-0
-    start confirmationui-1-0
+    start vendor.confirmationui_default
 
 on late-fs && property:vendor.skip.charger_not_need=0
     # Start keymaster/gatekeeper service
-    start vendor.gatekeeper-1-0-${ro.boot.keystore}
+    start vendor.gatekeeper-${ro.boot.keystore}
     start vendor.keymint-${ro.boot.keystore}
     setprop vendor.powerhal.init 1
 
@@ -152,12 +152,6 @@ on fs && property:vendor.skip.charger_not_need=0
     verity_update_state
 
 on post-fs && property:vendor.skip.charger_not_need=0
-    # Set netd memlock rlimit to 8MB
-    setrlimit 8 8388608 8388608
-
-    # Turn on swap
-    swapon_all /vendor/etc/fstab.nxp
-
     # Swap in only 1 page at a time
     write /proc/sys/vm/page-cluster 0
 
@@ -205,3 +199,17 @@ service confirmationui_ta_load /vendor/bin/trusty_apploader /vendor/firmware/tee
 
 on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
     start confirmationui_ta_load
+    start vendor.secureime-default
+
+service imx_dek_extractor /vendor/bin/hw/imx_dek_extractor
+    user system
+    group system
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty
+    start imx_dek_extractor
+
+on property:sys.boot_completed=1
+    # Turn on swap
+    swapon_all /vendor/etc/fstab.nxp
