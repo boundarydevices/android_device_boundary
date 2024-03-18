@@ -18,13 +18,8 @@ define build_imx_uboot
 	else \
 	    cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/mcu-sdk/imx8ulp/imx8ulp_mcu_demo.img $(BOARD_MKIMAGE_PATH)/m33_image.bin; \
 	fi; \
-	if [ `echo $(2) | cut -d '-' -f2` = "9x9" ] || [ `echo $(2) | cut -d '-' -f3` = "9x9" ]; then \
-		cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8ulp/upower_a0.bin $(BOARD_MKIMAGE_PATH)/upower.bin; \
-		cp $(FSL_PROPRIETARY_PATH)/sentinel/mx8ulpa0-ahab-container.img $(BOARD_MKIMAGE_PATH); \
-	else \
-		cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8ulp/upower.bin $(BOARD_MKIMAGE_PATH)/upower.bin; \
-		cp $(FSL_PROPRIETARY_PATH)/sentinel/mx8ulpa1-ahab-container.img $(BOARD_MKIMAGE_PATH); \
-	fi; \
+	cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8ulp/upower.bin $(BOARD_MKIMAGE_PATH)/upower.bin; \
+	cp $(FSL_PROPRIETARY_PATH)/ele/mx8ulpa2-ahab-container.img $(BOARD_MKIMAGE_PATH); \
 	cp $(UBOOT_OUT)/u-boot.$(strip $(1)) $(BOARD_MKIMAGE_PATH); \
 	cp $(UBOOT_OUT)/spl/u-boot-spl.bin  $(BOARD_MKIMAGE_PATH); \
 	cp $(UBOOT_OUT)/tools/mkimage  $(BOARD_MKIMAGE_PATH)/mkimage_uboot; \
@@ -44,10 +39,6 @@ define build_imx_uboot
 	fi; \
 	cp $(ATF_IMX_PATH)/arm-trusted-firmware/build/`echo $(2) | cut -d '-' -f1`/release/bl31.bin $(BOARD_MKIMAGE_PATH)/bl31.bin; \
 	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ clean; \
-	if [ `echo $(2) | cut -d '-' -f2` = "9x9" ] || [ `echo $(2) | cut -d '-' -f3` = "9x9" ]; then \
-		$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=$(MKIMAGE_SOC) REV=A0 flash_singleboot_m33 || exit 1; \
-	else \
-		$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=$(MKIMAGE_SOC) REV=A1 flash_singleboot_m33 || exit 1; \
-	fi; \
+	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ SOC=$(MKIMAGE_SOC) REV=A2 flash_singleboot_m33 || exit 1; \
 	cp $(BOARD_MKIMAGE_PATH)/flash.bin $(UBOOT_COLLECTION)/ ;
 endef
