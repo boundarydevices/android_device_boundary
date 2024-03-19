@@ -109,7 +109,8 @@ BOARD_KERNEL_CMDLINE += androidboot.vendor.sysrq=1
 endif
 
 TARGET_BOARD_DTS_CONFIG ?= \
-	imx8ulp:imx8ulp-evk.dtb \
+	imx8ulp:imx8ulp-nitrogen-som.dtb \
+	imx8ulp:imx8ulp-nitrogen-som-m33.dtb \
 	imx8ulp:imx8ulp-tag.dtb \
 	imx8ulp:imx8ulp-tag-m33.dtb \
 
