@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="config_show_wifi_settings">false</bool>
+    <bool name="config_show_wifi_hotspot_settings">false</bool>
+    <bool name="config_show_wifi_hotspot_speed">false</bool>
+    <bool name="config_show_wifi_ip_address">false</bool>
+    <bool name="config_show_wifi_mac_address">false</bool>
+</resources>
