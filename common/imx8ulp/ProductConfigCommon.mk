@@ -199,39 +199,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     apexd.config.dm_create.timeout=60000 \
     apexd.config.loop_wait.attempts=99
 
-# -------@block_ethernet-------
-
-#PRODUCT_PACKAGES += \
-    ethernet
-
-# -------@block_camera-------
-ifneq ($(PRODUCT_IMX_CAR),true)
-ifneq ($(POWERSAVE),true)
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.7-service-google \
-    android.hardware.camera.provider@2.7-impl-google \
-    libgooglecamerahal \
-    libgooglecamerahalutils \
-    lib_profiler \
-    libimxcamerahwl_impl \
-    libimageprocess
-
-# external camera, AIDL
-PRODUCT_PACKAGES += \
-    android.hardware.camera.provider-V1-external-service \
-    android.hardware.camera.metadata-V1-ndk.so \
-    android.hardware.graphics.allocator-V1-ndk.so \
-    android.hardware.camera.device-V1-ndk.so \
-    android.hardware.camera.provider-V1-ndk.so \
-    android.hardware.camera.provider-V1-external-impl.so \
-    camera.device-external-imx-impl.so
-endif
-endif
-
-# external camera feature demo
-PRODUCT_PACKAGES += \
-     Camera2Basic
-
 # -------@block_display-------
 ifneq ($(PRODUCT_IMX_CAR),true)
 PRODUCT_PACKAGES += \
