@@ -12,7 +12,7 @@ CLANG_TO_COMPILE := CC=$(CLANG_TOOLCHAIN_ABS)/clang
 endif
 
 define build_imx_uboot
-	$(hide) echo Building i.MX U-Boot with firmware; \
+	echo Building i.MX U-Boot with firmware; \
 	if [ `echo $(2) | cut -d '-' -f3` = "lpa" ]; then \
 	    cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/mcu-sdk/imx8ulp/imx8ulp_mcu_demo_lpa.img $(BOARD_MKIMAGE_PATH)/m33_image.bin; \
 	else \
@@ -27,15 +27,15 @@ define build_imx_uboot
 	if [ `echo $(2) | cut -d '-' -f2` = "trusty" ] && [ `echo $(2) | rev | cut -d '-' -f1` != "uuu" ]; then \
 		cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8ulp/tee-imx8ulp.bin $(BOARD_MKIMAGE_PATH)/tee.bin; \
 		if [ `echo $(2) | cut -d '-' -f3` = "4g" ]; then \
-			$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B BL32_BASE=0xfe000000 SPD=trusty 1>/dev/null || exit 1; \
+			$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B BL32_BASE=0xfe000000 SPD=trusty || exit 1; \
 		else \
-			$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B SPD=trusty 1>/dev/null || exit 1; \
+			$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B SPD=trusty || exit 1; \
 		fi; \
 	else \
 		if [ -f $(BOARD_MKIMAGE_PATH)/tee.bin ] ; then \
 			rm -rf $(BOARD_MKIMAGE_PATH)/tee.bin; \
 		fi; \
-		$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B 1>/dev/null || exit 1; \
+		$(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B || exit 1; \
 	fi; \
 	cp $(ATF_IMX_PATH)/arm-trusted-firmware/build/`echo $(2) | cut -d '-' -f1`/release/bl31.bin $(BOARD_MKIMAGE_PATH)/bl31.bin; \
 	$(MAKE) -C $(IMX_MKIMAGE_PATH)/imx-mkimage/ clean; \
