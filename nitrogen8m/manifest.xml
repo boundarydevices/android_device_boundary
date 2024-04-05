@@ -1,32 +1,15 @@
-<manifest version="1.0" type="device" target-level="7">
-    <hal format="hidl">
-	<name>android.hardware.graphics.allocator</name>
-        <transport>hwbinder</transport>
-	<impl level="generic"></impl>
-	<version>4.0</version>
-	<interface>
-	    <name>IAllocator</name>
-	    <instance>default</instance>
-	</interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
-        <version>2.4</version>
+<manifest version="1.0" type="device" target-level="8">
+    <hal format="aidl">
+        <name>android.hardware.camera.provider</name>
+        <version>1</version>
         <interface>
-            <name>IComposer</name>
-            <instance>default</instance>
+            <name>ICameraProvider</name>
+            <instance>external/0</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-       <name>android.hardware.camera.provider</name>
-       <transport>hwbinder</transport>
-       <fqname>@2.4::ICameraProvider/external/0</fqname>
-    </hal>
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.gatekeeper</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
+        <version>1</version>
         <interface>
             <name>IGatekeeper</name>
             <instance>default</instance>
@@ -61,19 +44,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.media.omx</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IOmx</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IOmxStore</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport>hwbinder</transport>
         <version>7.1</version>
@@ -100,23 +70,14 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>nxp.hardware.display</name>
-            <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IDisplay</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal format="aidl">
        <name>android.hardware.security.keymint</name>
-       <version>2</version>
+       <version>3</version>
        <fqname>IKeyMintDevice/default</fqname>
     </hal>
     <hal format="aidl">
        <name>android.hardware.security.keymint</name>
-       <version>2</version>
+       <version>3</version>
        <fqname>IRemotelyProvisionedComponent/default</fqname>
     </hal>
     <hal format="aidl">

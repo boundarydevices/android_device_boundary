@@ -45,9 +45,9 @@
     },
     {
       "Name": "PowerHALMainState",
-      "Path": "vendor.powerhal.camera",
+      "Path": "vendor.powerhal.state",
       "Values": [
-        "CAMERA_STREAMING_MID",
+        "SUSTAINED_PERFORMANCE",
         ""
       ],
       "Type": "Property"
@@ -74,6 +74,12 @@
   "Actions": [
     {
       "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "PowerHALMainState",
+      "Duration": 0,
+      "Value": "SUSTAINED_PERFORMANCE"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
       "Node": "CPULittleClusterMaxFreq",
       "Duration": 0,
       "Value": "1300000"
@@ -92,6 +98,18 @@
     },
     {
       "PowerHint": "INTERACTION",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 500,
+      "Value": "0"
+    },
+    {
+      "PowerHint": "BOOSTWIDEVINE",
+      "Node": "CPULittleClusterMinFreq",
+      "Duration": 0,
+      "Value": "1500000"
+    },
+    {
+      "PowerHint": "BOOSTWIDEVINE",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 500,
       "Value": "0"
@@ -134,12 +152,6 @@
     },
     {
       "PowerHint": "CAMERA_STREAMING_MID",
-      "Node": "PowerHALMainState",
-      "Duration": 0,
-      "Value": "CAMERA_STREAMING_MID"
-    },
-    {
-      "PowerHint": "CAMERA_STREAMING_MID",
       "Node": "CPULittleClusterMaxFreq",
       "Duration": 0,
       "Value": "1300000"
@@ -160,6 +172,12 @@
       "PowerHint": "CAMERA_SHOT",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 1000,
+      "Value": "0"
+    },
+    {
+      "PowerHint": "AUDIO_LAUNCH",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 0,
       "Value": "0"
     },
     {

@@ -1,5 +1,6 @@
 /dev/ttymxc*              0660   system     system
 /dev/ttymxc2              0660   bluetooth  bluetooth
+/dev/cec0                 0660   system     graphics
 /dev/ttyUSB*              0660   system     system
 /dev/ttyACM*              0660   system     system
 /dev/snd/*                0660   system     audio
@@ -15,12 +16,12 @@
 /dev/watchdog             0660   system     root
 /dev/mmcblk0rpmb          0600   system     system
 /dev/trusty-ipc-dev0      0660   system     drmrpc
+/dev/trusty-log0          0660   system     system
 /dev/dma_heap/reserved    0666   system     system
 /dev/dma_heap/reserved-uncached    0666   system     system
 /dev/dma_heap/secure      0666   system     system
 /dev/gpiochip*            0660   system     system
 /dev/i2c*                 0660   system     system
-/dev/cec0                 0660   system     graphics
 /dev/rfkill               0666   bluetooth  system
 
 # partitions properties

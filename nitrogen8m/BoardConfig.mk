@@ -69,9 +69,6 @@ BOARD_PREBUILT_DTBOIMAGE := $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/dtbo-imx
 BOARD_USES_METADATA_PARTITION := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
 
-# system-as-root is not possible for non-A/B or A/B with dynamic partitions
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-
 # Necessary changes for non-A/B partitioning
 ifeq ($(AB_OTA_UPDATER),false)
 TARGET_RELEASETOOLS_EXTENSIONS := $(CONFIG_REPO_PATH)/common/imx8m
@@ -107,9 +104,6 @@ BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 DEVICE_MANIFEST_FILE := $(IMX_DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(IMX_DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(IMX_DEVICE_PATH)/device_framework_matrix.xml
-ifeq ($(TARGET_USE_HDMI_CEC),true)
-DEVICE_MANIFEST_FILE += vendor/nxp-opensource/imx/hdmicec/manifest.xml
-endif
 
 # -------@block_wifi-------
 WPA_SUPPLICANT_VERSION       := VER_0_8_X
@@ -146,29 +140,16 @@ endif
 
 TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mq:imx8mq-nitrogen8m.dtb \
-	imx8mq:imx8mq-nitrogen8m-avt.dtb \
 	imx8mq:imx8mq-nitrogen8m-edp.dtb \
-	imx8mq:imx8mq-nitrogen8m-gbr.dtb \
 	imx8mq:imx8mq-nitrogen8m-m4.dtb \
 	imx8mq:imx8mq-nitrogen8m_som.dtb \
 	imx8mq:imx8mq-nitrogen8m_som-sd.dtb \
 	imx8mq:imx8mq-nitrogen8m_som-m4.dtb \
-	imx8mq:imx8mq-nitrogen8m-tc358743.dtb \
-	imx8mq:imx8mq-nitrogen8m-tc358840.dtb \
-	imx8mq:imx8mq-bio.dtb \
 
 ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
 
 # -------@block_sepolicy-------
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
-    $(CONFIG_REPO_PATH)/common/imx8m/system_ext_pri_sepolicy
-
 BOARD_SEPOLICY_DIRS := \
        $(CONFIG_REPO_PATH)/common/imx8m/sepolicy \
        $(IMX_DEVICE_PATH)/sepolicy
-
-ifeq ($(PRODUCT_IMX_DRM),true)
-BOARD_SEPOLICY_DIRS += \
-       $(IMX_DEVICE_PATH)/sepolicy_drm
-endif
 

@@ -8,3 +8,4 @@ genfscon sysfs /devices/platform/soc@0/33800000.pcie/pci0000:00/0000:00:00.0/000
 genfscon sysfs /devices/platform/soc@0/33c00000.pcie/pci0001:00/0001:00:00.0/0001:01:00.0/net u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/backlight-mipi/backlight u:object_r:sysfs_leds:s0
 genfscon sysfs /devices/platform/soc@0/38100000.usb                                     u:object_r:sysfs_usb_device:s0
+genfscon sysfs /devices/platform/soc@0/33c00000.pcie/pci0001:00/0001:00:00.0/0001:01:00.1/net u:object_r:sysfs_net:s0
