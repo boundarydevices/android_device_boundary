@@ -1,0 +1,2 @@
+type external_camera_service,       service_manager_type;
+type dek_extractor_service,         service_manager_type;

@@ -1,0 +1,10 @@
+init_daemon_domain(hal_tv_hdmi_cec_default);
+hal_client_domain(hal_tv_hdmi_cec_default, hal_graphics_composer);
+
+allow hal_tv_hdmi_cec_default hal_graphics_composer_default:binder { call };
+allow hal_tv_hdmi_cec_default property_socket:sock_file { write };
+allow hal_tv_hdmi_cec_default init:unix_stream_socket { connectto };
+allow hal_tv_hdmi_cec_default vendor_public_default_prop:property_service { set };
+allow hal_tv_hdmi_cec_default hdmi_config_prop:file { read open getattr map };
+allow hal_tv_hdmi_cec_default hal_graphics_composer_service:service_manager { find };
+allow hal_graphics_composer_default hal_tv_hdmi_cec_default:binder { transfer };

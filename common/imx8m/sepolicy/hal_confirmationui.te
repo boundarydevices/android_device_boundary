@@ -11,6 +11,9 @@ allow hal_confirmationui input_device:dir {read open search};
 allow hal_confirmationui input_device:chr_file {read write open ioctl};
 allow hal_confirmationui keystore:binder {call};
 allow hal_confirmationui ion_device:chr_file {read open ioctl};
-allow hal_confirmationui dmabuf_heap_device:chr_file {read open ioctl};
+allow hal_confirmationui dmabuf_system_heap_device:chr_file { open ioctl read };
 allow hal_confirmationui_impl hal_graphics_composer_hwservice:hwservice_manager {find};
+allow hal_confirmationui_impl property_socket:sock_file { write };
+allow hal_confirmationui_impl init:unix_stream_socket { connectto };
+allow hal_confirmationui_impl vendor_public_default_prop:property_service { set };
 

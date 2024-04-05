@@ -2,13 +2,13 @@ vendor.wc_transport.                u:object_r:vendor_wc_prop:s0
 persist.vendor.usb.config           u:object_r:vendor_usb_config_prop:s0
 vendor.sys.usb.adb.disabled         u:object_r:vendor_usb_config_prop:s0
 vendor.usb.config                   u:object_r:vendor_usb_config_prop:s0
-vendor.usb.sysfs_path               u:object_r:vendor_usb_config_prop:s0
 vendor.powerhal.                    u:object_r:vendor_power_hal_prop:s0
 
 ro.boot.vendor.sysrq                u:object_r:vendor_public_default_prop:s0
 vendor.all.early_init.ready         u:object_r:vendor_public_default_prop:s0
 vendor.sys.hwc.disable              u:object_r:vendor_public_default_prop:s0
-vendor.2d.composition               u:object_r:vendor_public_default_prop:s0
+vendor.hwc.disable.overlay          u:object_r:vendor_public_default_prop:s0
+vendor.hwc.prefer.2d-composition    u:object_r:vendor_public_default_prop:s0
 vendor.2d.ocl.enable                u:object_r:vendor_public_default_prop:s0
 vendor.imx.default-g2d              u:object_r:vendor_public_default_prop:s0
 vendor.all.system_server.ready      u:object_r:vendor_public_default_prop:s0
@@ -170,6 +170,17 @@ vendor.DISABLE_FLOAT_FEATURE                     u:object_r:vendor_public_defaul
 vendor.MODEL_BLOCK_LEVEL                         u:object_r:vendor_public_default_prop:s0
 vendor.USE_GPU_INFERENCE                         u:object_r:vendor_public_default_prop:s0
 
+#tim-vx
+vendor.VSI_NN_ENABLE_OPCHECK                     u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_ENABLE_CONCAT_OPTIMIZE             u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_ENABLE_I8TOU8                      u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_ENABLE_DATACONVERT_OPTIMIZE        u:object_r:vendor_public_default_prop:s0
+vendor.VSI_VX_ENABLE_STREAM_PROCESSOR            u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_FORCE_RGB888_OUT_NHWC              u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_ENABLE_SLICE_OPTIMIZE              u:object_r:vendor_public_default_prop:s0
+vendor.VSI_VX_ENABLE_BATCH_OPT                   u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_LOG_LEVEL                          u:object_r:vendor_public_default_prop:s0
+
 ro.boot.lpa.enable                  u:object_r:vendor_public_default_prop:s0
 vendor.audio.lpa.enable             u:object_r:vendor_public_default_prop:s0
 vendor.gralloc.drm.device           u:object_r:vendor_public_default_prop:s0
@@ -186,7 +197,6 @@ vendor.hwc.drm.fbTileSupport        u:object_r:vendor_public_default_prop:s0
 ro.boot.gui_resolution              u:object_r:vendor_public_default_prop:s0
 ro.boot.primary_display             u:object_r:vendor_public_default_prop:s0
 vendor.hwc.drm.device               u:object_r:vendor_public_default_prop:s0
-vendor.hwc.enable.overlay           u:object_r:vendor_public_default_prop:s0
 ro.boot.displaymode                 u:object_r:vendor_public_default_prop:s0
 ro.hardware.lightsensor             u:object_r:vendor_public_default_prop:s0
 vendor.ro.lightsensor.threshold     u:object_r:vendor_public_default_prop:s0
@@ -219,3 +229,4 @@ ro.vendor.build_id                     u:object_r:vendor_public_default_prop:s0
 
 # extend feature for secure ui
 ro.boot.androidui.overlay              u:object_r:vendor_public_default_prop:s0
+vendor.androidui.overlay               u:object_r:vendor_public_default_prop:s0

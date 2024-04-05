@@ -16,3 +16,8 @@ allow init-insmod-sh vendor_file:system module_load;
 
 allow init-insmod-sh vendor_wc_prop:property_service { set };
 allow init-insmod-sh proc_cmdline:file { read open getattr };
+
+allow init-insmod-sh system_dlkm_file:dir r_dir_perms;
+allow init-insmod-sh system_dlkm_file:file r_file_perms;
+allow init-insmod-sh system_dlkm_file:system module_load;
+allow init-insmod-sh self:key write;
