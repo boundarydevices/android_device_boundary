@@ -16,6 +16,7 @@ cat << EOF
            prebuilt-bootloader     download latest prebuilt bootloader from BD server
            bootloader              bootloader will be compiled
            kernel                  kernel, include the kernel modules and device tree files will be compiled
+           backports               backports wlan & bt modules
            galcore                 galcore.ko in GPU repo will be compiled
            vvcam                   vvcam.ko, the ISP driver will be compiled
            mxmwifi                 mlan.ko moal.ko, the MXMWifi driver will be compiled
@@ -92,6 +93,7 @@ build_kernel=""
 build_kernel_modules=""
 build_kernel_dts=""
 build_kernel_oot_module_flag=0
+build_backports=""
 build_galcore=""
 build_vvcam=""
 build_mxmwifi=""
@@ -123,6 +125,8 @@ for arg in ${args[*]} ; do
         kernel) build_kernel="${OUT}/kernel";
                     build_kernel_modules="KERNEL_MODULES";
                     build_kernel_dts="KERNEL_DTB";;
+        backports) build_kernel_oot_module_flag=1;
+                    build_backports="backports";;
         galcore) build_kernel_oot_module_flag=1;
                     build_galcore="galcore";;
         vvcam) build_kernel_oot_module_flag=1
@@ -165,6 +169,12 @@ if [ -n "${build_kernel_modules}" ] && [[ "${TARGET_PRODUCT}" =~ "8mp" ]]; then
     build_kernel_oot_module_flag=1;
 fi
 
+# build backports driver modules for platform with wifi feature
+if [ -n "${build_kernel_modules}" ] && grep -q "android.hardware.wifi.xml" $product_makefile ; then
+    build_backports="backports";
+    build_kernel_oot_module_flag=1;
+fi
+
 # if uboot is to be compiled, remove the UBOOT_COLLECTION directory
 if [ -n "${build_bootloader}" ]; then
     rm -rf ${OUT}/obj/UBOOT_COLLECTION
@@ -196,7 +206,7 @@ fi
 if [ ${build_kernel_oot_module_flag} -eq 1 ] || [ -n "${build_kernel_modules}" ]; then
     soc_path=${soc_path} product_path=${product_path} nxp_git_path=${nxp_git_path} clean_build=${clean_build} \
         skip_config_or_clean=${skip_config_or_clean} make -C ./ -f ${nxp_git_path}/common/build/Makefile ${parallel_option} \
-        ${build_vvcam} ${build_galcore} ${build_mxmwifi} ${build_qcacld} </dev/null || exit
+        ${build_vvcam} ${build_galcore} ${build_mxmwifi} ${build_backports} </dev/null || exit
 fi
 
 if [ ${build_android_flag} -eq 1 ] || [ ${build_whole_android_flag} -eq 1 ]; then
