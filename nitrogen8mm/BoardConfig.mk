@@ -72,9 +72,6 @@ BOARD_PREBUILT_DTBOIMAGE := $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/dtbo-imx
 BOARD_USES_METADATA_PARTITION := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
 
-# system-as-root is not possible for non-A/B or A/B with dynamic partitions
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-
 # Necessary changes for non-A/B partitioning
 ifeq ($(AB_OTA_UPDATER),false)
 TARGET_RELEASETOOLS_EXTENSIONS := $(CONFIG_REPO_PATH)/common/imx8m
@@ -151,23 +148,14 @@ TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mm:imx8mm-nitrogen8mm_rev2-m4.dtb \
 	imx8mm:imx8mm-nitrogen8mm_som.dtb \
 	imx8mm:imx8mm-nitrogen8mm_som-m4.dtb \
-	imx8mm:imx8mm-nitrogen8mm_som-mcp25625.dtb \
-	imx8mm:imx8mm-nitrogen8mm-tc358743.dtb \
-	imx8mm:imx8mm-nitrogen8_lite.dtb \
 	imx8mm:imx8mm-nitrogen_smarc.dtb \
 
 ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
 
 # -------@block_sepolicy-------
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
-    $(CONFIG_REPO_PATH)/common/imx8m/system_ext_pri_sepolicy
-
 BOARD_SEPOLICY_DIRS := \
        $(CONFIG_REPO_PATH)/common/imx8m/sepolicy \
        $(IMX_DEVICE_PATH)/sepolicy
 
-ifeq ($(PRODUCT_IMX_DRM),true)
-BOARD_SEPOLICY_DIRS += \
-       $(IMX_DEVICE_PATH)/sepolicy_drm
-endif
-
+BOARD_BOOTCONFIG += \
+       androidboot.vendor.apex.com.google.android.widevine=com.google.android.widevine

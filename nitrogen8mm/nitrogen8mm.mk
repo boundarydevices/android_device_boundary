@@ -5,6 +5,8 @@ CURRENT_FILE_PATH :=  $(lastword $(MAKEFILE_LIST))
 IMX_DEVICE_PATH := $(strip $(patsubst %/, %, $(dir $(CURRENT_FILE_PATH))))
 
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := true
+#Enable this to choose 32 bit user space build
+IMX_BUILD_32BIT_ROOTFS ?= false
 
 # configs shared between uboot, kernel and Android rootfs
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
@@ -31,6 +33,7 @@ PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
 PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=boundary
 PRODUCT_VENDOR_PROPERTIES += ro.soc.model=IMX8MM
+PRODUCT_VENDOR_PROPERTIES += ro.crypto.metadata_init_delete_all_keys.enabled=true
 # -------@block_treble-------
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
@@ -40,10 +43,6 @@ PRODUCT_SOONG_NAMESPACES += hardware/google/pixel
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/powerhint_imx8mm.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/powerhint_imx8mm.json
-
-# Charger Mode
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.charger.no_ui=false
 
 # Do not skip charger_not_need trigger by default
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -56,15 +55,12 @@ TARGET_VENDOR_PROP := $(LOCAL_PATH)/product.prop
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.imx
+    android.hardware.thermal-service.imx
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/thermal_info_config_imx8mm.json:$(TARGET_COPY_OUT_VENDOR)/etc/configs/thermal_info_config_imx8mm.json
 
 # -------@block_app-------
-
-#Enable this to choose 32 bit user space build
-IMX8_BUILD_32BIT_ROOTFS := false
 
 # Set permission for GMS packages
 PRODUCT_COPY_FILES += \
@@ -176,7 +172,7 @@ endif
 # Keymaster HAL
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.security.keymint-service.trusty
+    android.hardware.security.keymint-service.rust.trusty
 endif
 
 PRODUCT_PACKAGES += \
@@ -185,27 +181,29 @@ PRODUCT_PACKAGES += \
 # Confirmation UI
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.confirmationui@1.0-service.trusty
+    android.hardware.confirmationui-service.trusty
 endif
 
 # new gatekeeper HAL
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-service.software-imx
+    android.hardware.gatekeeper-service-imx
 
 # Add Trusty OS backed gatekeeper and secure storage proxy
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-service.trusty \
-    storageproxyd
+    android.hardware.gatekeeper-service.trusty \
+    storageproxyd \
+    imx_dek_extractor \
+    imx_dek_inserter
 endif
 
 # Add oem unlocking option in settings.
 PRODUCT_PROPERTY_OVERRIDES += ro.frp.pst=/dev/block/by-name/frp
 
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
-#Oemlock HAL 1.0 support
+#Oemlock HAL support
 PRODUCT_PACKAGES += \
-    android.hardware.oemlock@1.0-service.imx
+    android.hardware.oemlock-service.imx
 endif
 
 # Specify rollback index for boot and vbmeta partition
@@ -238,10 +236,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #DRM Widevine 1.4 L3 support
 PRODUCT_PACKAGES += \
-    android.hardware.drm-service.widevine  \
     android.hardware.drm-service.clearkey \
     libwvdrmcryptoplugin \
-    libwvaidl \
+    libwvaidl
+
+TARGET_BUILD_WIDEVINE :=
+TARGET_BUILD_WIDEVINE_USE_PREBUILT := true
+
+$(call inherit-product-if-exists, vendor/nxp-private/widevine/apex/device.mk)
 
 # -------@block_audio-------
 
@@ -274,20 +276,32 @@ PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi xhdpi xxhdpi
 
 # HWC2 HAL
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.composer@2.4-service
+    android.hardware.graphics.composer3-service.imx
 
 # define frame buffer count
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3
 
+# disable frame rate override
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.enable_frame_rate_override=false
+
 # Gralloc HAL
 PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@4.0-impl.imx \
-    android.hardware.graphics.allocator@4.0-service.imx
+    android.hardware.graphics.allocator-service.imx
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
+
+# 2d test
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PACKAGES += 2d-test
+endif
+
+PRODUCT_PACKAGES += \
+    libg2d-opencl
 
 # -------@block_gpu-------
 
@@ -304,7 +318,14 @@ PRODUCT_PACKAGES += \
     libOpenCL \
     libg2d-viv \
     libgpuhelper \
+    libSPIRV_viv \
 
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.hardware.egl = VIVANTE
+
+# GPU openCL g2d
+PRODUCT_COPY_FILES += \
+    $(IMX_PATH)/imx/opencl-2d/cl_g2d.cl:$(TARGET_COPY_OUT_VENDOR)/etc/cl_g2d.cl
 
 # -------@block_wifi-------
 
@@ -329,7 +350,6 @@ PRODUCT_PACKAGES += \
     nvm_00230302.bin
 
 # -------@block_bluetooth-------
-
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.1-service.btlinux \
@@ -340,8 +360,8 @@ PRODUCT_PACKAGES += \
 
 # Usb HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service.imx \
-    android.hardware.usb.gadget@1.2-service.imx
+    android.hardware.usb-service.imx \
+    android.hardware.usb.gadget-service.imx
 
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/init.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.nxp.usb.rc
@@ -351,9 +371,7 @@ PRODUCT_COPY_FILES += \
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/seccomp/mediacodec-seccomp.policy:vendor/etc/seccomp_policy/mediacodec.policy \
-    $(IMX_DEVICE_PATH)/seccomp/mediaextractor-seccomp.policy:vendor/etc/seccomp_policy/mediaextractor.policy \
-    $(CONFIG_REPO_PATH)/common/seccomp_policy/codec2.vendor.base.policy:vendor/etc/seccomp_policy/codec2.vendor.base.policy \
-    $(CONFIG_REPO_PATH)/common/seccomp_policy/codec2.vendor.ext.policy:vendor/etc/seccomp_policy/codec2.vendor.ext.policy
+    $(IMX_DEVICE_PATH)/seccomp/mediaextractor-seccomp.policy:vendor/etc/seccomp_policy/mediaextractor.policy
 
 PRODUCT_PACKAGES += \
     libg1 \
@@ -373,17 +391,16 @@ PRODUCT_PACKAGES += \
     lib_imx_c2_v4l2_dev \
     lib_imx_c2_v4l2_dec \
     lib_imx_c2_v4l2_enc \
-    lib_imx_c2_process \
-    lib_imx_c2_process_dummy_post \
-    lib_imx_c2_process_g2d_pre \
-    lib_imx_c2_g2d_pre_filter \
+    lib_imx_c2_unia_pre_filter \
+    lib_imx_c2_filter_device_factory \
+    lib_imx_c2_filter_device_g2d \
     libc2filterplugin \
     c2_component_register \
     c2_component_register_ms \
     c2_component_register_ra
 
 ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
-ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
+ifneq ($(IMX_BUILD_32BIT_ROOTFS),true)
 INSTALL_64BIT_LIBRARY := true
 endif
 -include $(FSL_CODEC_PATH)/fsl-codec/fsl-codec.mk
@@ -414,7 +431,7 @@ endif
 
 # Display Device Config
 PRODUCT_COPY_FILES += \
-    $(CONFIG_REPO_PATH)/common/imx8m/displayconfig/display_port_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_port_0.xml
+    $(CONFIG_REPO_PATH)/common/imx8m/displayconfig/display_id_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_0.xml
 
 # ONLY devices that meet the CDD's requirements may declare these features
 PRODUCT_COPY_FILES += \
@@ -431,8 +448,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2022-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
-    frameworks/native/data/etc/android.software.opengles.deqp.level-2022-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
@@ -451,6 +468,10 @@ PRODUCT_COPY_FILES += \
 # trusty loadable apps
 PRODUCT_COPY_FILES += \
     vendor/nxp/fsl-proprietary/uboot-firmware/imx8m/confirmationui-imx8mm.app:/vendor/firmware/tee/confirmationui.app
+
+# Keymint configuration
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
 
 # Included GMS package
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)

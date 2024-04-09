@@ -12,3 +12,5 @@ genfscon sysfs /devices/platform/soc@0/30800000.bus/30b50000.mmc/mmc_host/mmc1/m
 genfscon sysfs /devices/platform/soc@0/30800000.bus/30be0000.ethernet/net                                     u:object_r:sysfs_net:s0
 genfscon sysfs /devices/platform/soc@0/32c00000.bus/32e40000.usb/ci_hdrc.0/extcon                             u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/soc@0/32c00000.bus/32e50000.usb/ci_hdrc.1/extcon                             u:object_r:sysfs_extcon:s0
+# for dumpstate to access the stat file
+genfscon sysfs /devices/platform/b8500000.pmem/ndbus0/region0/namespace0.0/block/pmem0                                            u:object_r:sysfs_block_devices:s0
