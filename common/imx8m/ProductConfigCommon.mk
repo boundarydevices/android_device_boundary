@@ -399,6 +399,10 @@ endif
 PRODUCT_PACKAGES += \
     vndservicemanager
 
+# Restore hwrotation capability
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    debug.sf.ignore_hwc_physical_display_orientation=true
+
 # WiFi regulatory database files
 PRODUCT_COPY_FILES += \
     external/wireless-regdb/regulatory.db.p7s:$(TARGET_COPY_OUT_VENDOR)/firmware/regulatory.db.p7s \
