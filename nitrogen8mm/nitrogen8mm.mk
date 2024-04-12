@@ -339,15 +339,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     wificond
 
-# WiFi RRO
-PRODUCT_PACKAGES += \
-    bdwlan30.bin \
-    cfg.dat \
-    otp30.bin \
-    qcom_cfg.ini \
-    qwlan30.bin \
-    rampatch_00230302.bin \
-    nvm_00230302.bin
+# BD-SDMAC Firmware files
+BDSDMAC_FW_PATH := vendor/boundary/radio_firmware/laird-bdsdmac-firmware/lib/firmware
+PRODUCT_COPY_FILES += \
+    $(BDSDMAC_FW_PATH)/bdwlan30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/bdwlan30.bin \
+    $(BDSDMAC_FW_PATH)/otp30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/otp30.bin \
+    $(BDSDMAC_FW_PATH)/qwlan30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/qwlan30.bin \
+    $(BDSDMAC_FW_PATH)/utf30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/utf30.bin \
+    $(BDSDMAC_FW_PATH)/wlan/cfg.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/cfg.dat \
+    $(BDSDMAC_FW_PATH)/wlan/qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/qcom_cfg.ini \
+    $(BDSDMAC_FW_PATH)/qca/tfbtfw11.tlv:$(TARGET_COPY_OUT_VENDOR)/firmware/qca/rampatch_00230302.bin \
+    $(BDSDMAC_FW_PATH)/qca/tfbtnv11.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/qca/nvm_00230302.bin
 
 # -------@block_bluetooth-------
 # Bluetooth HAL
