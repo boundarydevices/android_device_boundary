@@ -10,21 +10,9 @@ LOW_MEMORY := false
 # Enable this to include trusty support
 PRODUCT_IMX_TRUSTY := false
 
-# Bluetooth driver moduls
+# Wi-Fi & Bluetooth driver modules
 BOARD_VENDOR_KERNEL_MODULES += \
-    $(KERNEL_OUT)/drivers/bluetooth/btbcm.ko \
-    $(KERNEL_OUT)/drivers/bluetooth/btqca.ko \
-    $(KERNEL_OUT)/drivers/bluetooth/hci_uart.ko
-
-# QCA9377 wifi driver module
-BOARD_HAS_QCACLD_MODULE := true
-BOARD_VENDOR_KERNEL_MODULES += \
-    $(TARGET_OUT_INTERMEDIATES)/QCACLD_OBJ/wlan.ko
-
-# LWB5+ wifi driver module
-BOARD_VENDOR_KERNEL_MODULES += \
-    $(KERNEL_OUT)/drivers/net/wireless/broadcom/brcm80211/brcmutil/brcmutil.ko \
-    $(KERNEL_OUT)/drivers/net/wireless/broadcom/brcm80211/brcmfmac/brcmfmac.ko
+    $(wildcard $(PRODUCT_OUT)/obj/BACKPORTS_OBJ/*.ko)
 
 # isp vvcam driver module
 BOARD_VENDOR_KERNEL_MODULES += \
@@ -34,6 +22,6 @@ BOARD_VENDOR_KERNEL_MODULES += \
     $(TARGET_OUT_INTERMEDIATES)/VVCAM_OBJ/imx219.ko \
     $(TARGET_OUT_INTERMEDIATES)/VVCAM_OBJ/basler-camera-driver-vvcam.ko
 
-# Dummy battery module for CTS
+# Dummy battery module
 BOARD_VENDOR_KERNEL_MODULES += \
     $(KERNEL_OUT)/drivers/power/supply/dummy_battery.ko

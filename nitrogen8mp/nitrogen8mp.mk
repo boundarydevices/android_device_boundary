@@ -380,20 +380,25 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     wificond
 
-PRODUCT_PACKAGES += \
-    bdwlan30.bin \
-    cfg.dat \
-    otp30.bin \
-    qcom_cfg.ini \
-    qwlan30.bin \
-    rampatch_00230302.bin \
-    nvm_00230302.bin
+# BD-SDMAC Firmware files
+BDSDMAC_FW_PATH := vendor/boundary/radio_firmware/laird-bdsdmac-firmware/lib/firmware
+PRODUCT_COPY_FILES += \
+    $(BDSDMAC_FW_PATH)/bdwlan30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/bdwlan30.bin \
+    $(BDSDMAC_FW_PATH)/otp30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/otp30.bin \
+    $(BDSDMAC_FW_PATH)/qwlan30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/qwlan30.bin \
+    $(BDSDMAC_FW_PATH)/utf30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/utf30.bin \
+    $(BDSDMAC_FW_PATH)/wlan/cfg.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/cfg.dat \
+    $(BDSDMAC_FW_PATH)/wlan/qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/qcom_cfg.ini \
+    $(BDSDMAC_FW_PATH)/qca/tfbtfw11.tlv:$(TARGET_COPY_OUT_VENDOR)/firmware/qca/rampatch_00230302.bin \
+    $(BDSDMAC_FW_PATH)/qca/tfbtnv11.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/qca/nvm_00230302.bin
 
-PRODUCT_PACKAGES += \
-    BCM4373A0.hcd \
-    cyfmac4373-sdio.bin \
-    cyfmac4373-sdio.txt \
-    cyfmac4373-sdio.clm_blob
+# LWB5+ Firmware files
+LWB5P_FW_PATH := vendor/boundary/radio_firmware/laird-lwb5plus-sdio-sa-firmware/lib/firmware
+PRODUCT_COPY_FILES += \
+    $(LWB5P_FW_PATH)/brcm/BCM4373A0.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/BCM4373A0.hcd \
+    $(LWB5P_FW_PATH)/brcm/brcmfmac4373-sdio.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/brcmfmac4373-sdio.bin \
+    $(LWB5P_FW_PATH)/brcm/brcmfmac4373-sdio.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/brcmfmac4373-sdio.txt \
+    $(LWB5P_FW_PATH)/brcm/brcmfmac4373-sdio.clm_blob:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/brcmfmac4373-sdio.clm_blob
 
 # -------@block_bluetooth-------
 
