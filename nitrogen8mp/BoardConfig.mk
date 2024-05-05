@@ -69,9 +69,6 @@ BOARD_PREBUILT_DTBOIMAGE := $(OUT_DIR)/target/product/$(PRODUCT_DEVICE)/dtbo-imx
 BOARD_USES_METADATA_PARTITION := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata
 
-# system-as-root is not possible for non-A/B or A/B with dynamic partitions
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-
 # Necessary changes for non-A/B partitioning
 ifeq ($(AB_OTA_UPDATER),false)
 TARGET_RELEASETOOLS_EXTENSIONS := $(CONFIG_REPO_PATH)/common/imx8m
