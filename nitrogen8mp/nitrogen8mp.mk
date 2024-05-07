@@ -5,7 +5,7 @@ IMX_DEVICE_PATH := $(strip $(patsubst %/, %, $(dir $(CURRENT_FILE_PATH))))
 
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := true
 #Enable this to choose 32 bit user space build
-IMX8_BUILD_32BIT_ROOTFS ?= false
+IMX_BUILD_32BIT_ROOTFS ?= false
 
 # configs shared between uboot, kernel and Android rootfs
 include $(IMX_DEVICE_PATH)/SharedBoardConfig.mk
@@ -176,7 +176,7 @@ endif
 # Keymaster HAL
 ifeq ($(PRODUCT_IMX_TRUSTY),true)
 PRODUCT_PACKAGES += \
-    android.hardware.security.keymint-service.trusty
+    android.hardware.security.keymint-service.rust.trusty
 endif
 
 PRODUCT_PACKAGES += \
@@ -327,6 +327,9 @@ PRODUCT_PACKAGES += \
     libg2d-opencl
 
 PRODUCT_COPY_FILES += \
+    $(IMX_DEVICE_PATH)/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+
+PRODUCT_COPY_FILES += \
     $(IMX_DEVICE_PATH)/input-port-associations.xml:$(TARGET_COPY_OUT_VENDOR)/etc/input-port-associations.xml
 
 # -------@block_gpu-------
@@ -368,6 +371,9 @@ PRODUCT_VENDOR_PROPERTIES += \
 # GPU openCL g2d
 PRODUCT_COPY_FILES += \
     $(IMX_PATH)/imx/opencl-2d/cl_g2d.cl:$(TARGET_COPY_OUT_VENDOR)/etc/cl_g2d.cl
+
+# GPU openCL SDK header file
+-include $(FSL_PROPRIETARY_PATH)/fsl-proprietary/include/CL/cl_sdk.mk
 
 # -------@block_wifi-------
 
@@ -465,7 +471,7 @@ PRODUCT_PACKAGES += \
     c2_component_register_dsp_aacp
 
 ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
-ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
+ifneq ($(IMX_BUILD_32BIT_ROOTFS),true)
 INSTALL_64BIT_LIBRARY := true
 endif
 -include $(FSL_RESTRICTED_CODEC_PATH)/fsl-restricted-codec/imx_dsp/imx_dsp_8mp.mk
@@ -482,7 +488,6 @@ endif
 
 # Neural Network HAL and lib
 PRODUCT_PACKAGES += \
-    libovxlib \
     libtim-vx \
     libVsiSupportLibrary \
     android.hardware.neuralnetworks-shell-service-imx

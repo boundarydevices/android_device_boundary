@@ -101,6 +101,18 @@
       "Value": "0"
     },
     {
+      "PowerHint": "BOOSTWIDEVINE",
+      "Node": "CPULittleClusterMinFreq",
+      "Duration": 0,
+      "Value": "1800000"
+    },
+    {
+      "PowerHint": "BOOSTWIDEVINE",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 500,
+      "Value": "0"
+    },
+    {
       "PowerHint": "LAUNCH",
       "Node": "CPULittleClusterMinFreq",
       "Duration": 5000,

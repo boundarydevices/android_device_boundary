@@ -92,6 +92,9 @@ on early-boot && property:vendor.skip.charger_not_need=0
     # Default g2d [dpu|pxp|viv] lib to be used
     setprop vendor.imx.default-g2d viv
 
+    #viv sdk dir
+    setprop vendor.VIVANTE_SDK_DIR /vendor/etc/viv_sdk
+
     # fsl omx graphic manager media framework property
     setprop vendor.rw.VIDEO_RENDER_NAME video_render.surface
     setprop vendor.media.fsl_codec.flag 7
