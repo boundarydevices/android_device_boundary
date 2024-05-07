@@ -16,11 +16,12 @@ define build_imx_uboot
         $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ PLAT=`echo $(2) | cut -d '-' -f1` clean; \
     fi; \
     if [ `echo $(2) | cut -d '-' -f2` = "trusty" ] && [ `echo $(2) | rev | cut -d '-' -f1` != "uuu" ]; then \
-        cp $(FSL_PROPRIETARY_PATH)/fsl-proprietary/uboot-firmware/imx8m/tee-imx8mp.bin $(UBOOT_OUT)/tee-imx8mp.bin; \
-        cp $(UBOOT_IMX_PATH)/uboot-imx/bl31-tee-iMX8MP.bin $(UBOOT_OUT)/bl31-tee-iMX8MP.bin; \
+        cp $(UBOOT_IMX_PATH)/uboot-imx//tee-imx8mp.bin $(UBOOT_OUT)/tee-imx8mp.bin; \
+        $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" $(CLANG_TO_COMPILE) PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B SPD=trusty || exit 1; \
     else \
-        cp $(UBOOT_IMX_PATH)/uboot-imx/bl31-iMX8MP.bin $(UBOOT_OUT)/bl31-iMX8MP.bin; \
+        $(MAKE) -C $(ATF_IMX_PATH)/arm-trusted-firmware/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" $(CLANG_TO_COMPILE) PLAT=`echo $(2) | cut -d '-' -f1` bl31 -B || exit 1; \
     fi; \
+    cp $(ATF_IMX_PATH)/arm-trusted-firmware/build/`echo $(2) | cut -d '-' -f1`/release/bl31.bin $(UBOOT_OUT)/bl31-iMX8MQ.bin; \
     $(MAKE) -C $(UBOOT_IMX_PATH)/uboot-imx/ CROSS_COMPILE="$(ATF_CROSS_COMPILE)" O=$(realpath $(UBOOT_OUT)) flash.bin; \
     cp $(UBOOT_OUT)/flash.bin $(UBOOT_COLLECTION)/;
 endef
