@@ -22,6 +22,6 @@ BOARD_VENDOR_KERNEL_MODULES += \
     $(TARGET_OUT_INTERMEDIATES)/VVCAM_OBJ/imx219.ko \
     $(TARGET_OUT_INTERMEDIATES)/VVCAM_OBJ/basler-camera-driver-vvcam.ko
 
-# Dummy battery module
 BOARD_VENDOR_KERNEL_MODULES += \
-    $(KERNEL_OUT)/drivers/power/supply/dummy_battery.ko
+    $(KERNEL_OUT)/drivers/power/supply/dummy_battery.ko \
+    $(KERNEL_OUT)/drivers/staging/media/imx/imx8-media-dev.ko
