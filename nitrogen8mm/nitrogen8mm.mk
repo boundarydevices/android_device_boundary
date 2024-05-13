@@ -351,6 +351,14 @@ PRODUCT_COPY_FILES += \
     $(BDSDMAC_FW_PATH)/qca/tfbtfw11.tlv:$(TARGET_COPY_OUT_VENDOR)/firmware/qca/rampatch_00230302.bin \
     $(BDSDMAC_FW_PATH)/qca/tfbtnv11.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/qca/nvm_00230302.bin
 
+# Sona IF573 Firmware files
+IF573_FW_PATH := vendor/boundary/radio_firmware/laird-if573-sdio-firmware/lib/firmware
+PRODUCT_COPY_FILES += \
+    $(IF573_FW_PATH)/cypress/cyfmac55572-sdio.clm_blob:$(TARGET_COPY_OUT_VENDOR)/firmware/cypress/cyfmac55572-sdio.clm_blob \
+    $(IF573_FW_PATH)/cypress/cyfmac55572-sdio.trxse:$(TARGET_COPY_OUT_VENDOR)/firmware/cypress/cyfmac55572-sdio.trxse \
+    $(IF573_FW_PATH)/cypress/cyfmac55572-sdio.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/cypress/cyfmac55572-sdio.txt \
+    $(IF573_FW_PATH)/cypress/CYW55560A1_v001.002.087.0225.0065.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/CYW55560A1.hcd
+
 # -------@block_bluetooth-------
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
