@@ -170,6 +170,17 @@ vendor.DISABLE_FLOAT_FEATURE                     u:object_r:vendor_public_defaul
 vendor.MODEL_BLOCK_LEVEL                         u:object_r:vendor_public_default_prop:s0
 vendor.USE_GPU_INFERENCE                         u:object_r:vendor_public_default_prop:s0
 
+#tim-vx
+vendor.VSI_NN_ENABLE_OPCHECK                     u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_ENABLE_CONCAT_OPTIMIZE             u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_ENABLE_I8TOU8                      u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_ENABLE_DATACONVERT_OPTIMIZE        u:object_r:vendor_public_default_prop:s0
+vendor.VSI_VX_ENABLE_STREAM_PROCESSOR            u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_FORCE_RGB888_OUT_NHWC              u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_ENABLE_SLICE_OPTIMIZE              u:object_r:vendor_public_default_prop:s0
+vendor.VSI_VX_ENABLE_BATCH_OPT                   u:object_r:vendor_public_default_prop:s0
+vendor.VSI_NN_LOG_LEVEL                          u:object_r:vendor_public_default_prop:s0
+
 vendor.audio.lpa.enable             u:object_r:vendor_public_default_prop:s0
 vendor.gralloc.drm.device           u:object_r:vendor_public_default_prop:s0
 vendor.gralloc.trace                u:object_r:vendor_public_default_prop:s0

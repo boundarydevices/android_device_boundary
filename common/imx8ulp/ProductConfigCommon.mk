@@ -1,10 +1,14 @@
 include $(CONFIG_REPO_PATH)/common/build/build_info.mk
 # -------@block_infrastructure-------
-ifneq ($(IMX8_BUILD_32BIT_ROOTFS),true)
-ifneq ($(filter TRUE true 1,$(IMX8_BUILD_64BIT_ROOTFS)),)
+ifneq ($(IMX_BUILD_32BIT_ROOTFS),true)
+ifeq ($(filter TRUE true 1,$(IMX_BUILD_32BIT_64BIT_ROOTFS)),)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+endif
+else
+ifneq ($(filter TRUE true 1,$(IMX_BUILD_32BIT_64BIT_ROOTFS)),)
+$(error IMX_BUILD_32BIT_ROOTFS and IMX_BUILD_32BIT_64BIT_ROOTFS CANNOT be both set)
 endif
 endif
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
@@ -188,6 +192,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # enable FUSE passthrough
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.sys.fuse.passthrough.enable=true
+
+# RKPD
+PRODUCT_PRODUCT_PROPERTIES += \
+    remote_provisioning.enable_rkpd=true \
+    remote_provisioning.hostname=remoteprovisioning.googleapis.com
 
 # health
 PRODUCT_PACKAGES += \
