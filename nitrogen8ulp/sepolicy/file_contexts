@@ -35,5 +35,11 @@
 /sys/devices/virtual/power_supply/battery/wakeup[0-9]*(/.*)?                                                                                  u:object_r:sysfs_wakeup:s0
 /sys/devices/virtual/power_supply/usb/wakeup[0-9]*(/.*)?                                                                                      u:object_r:sysfs_wakeup:s0
 /sys/devices/virtual/wakeup/wakeup[0-9]*(/.*)?                                                                                                u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/rtc-rpmsg/wakeup                                                                    u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/rtc-rpmsg/wakeup/wakeup[0-9]*(/.*)?                                                 u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/rtc-rpmsg/rtc/rtc0/alarmtimer.[0-9].auto/wakeup                                     u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/rtc-rpmsg/rtc/rtc0/alarmtimer.[0-9].auto/wakeup/wakeup[0-9]*(/.*)?                  u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/soc@0/29800000.bus/298f0000.mmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:1/wakeup          u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/soc@0/29800000.bus/298f0000.mmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:1/wakeup/wakeup[0-9]*(/.*)?          u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/1-0050/power_supply/tcpm-source-psy-1-0050/wakeup[0-9]*(/.*)?                     u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/soc@0/30800000.bus/30be0000.ethernet/net/eth0/wakeup[0-9]*(/.*)?                                                        u:object_r:sysfs_wakeup:s0
