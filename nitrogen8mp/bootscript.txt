@@ -7,7 +7,7 @@ setenv apart boot
 setenv ramdisk ${a_Image}
 setenv bootmode normal
 setenv bootargs ''
-setenv m4 ''
+setenv mcore ''
 setenv abtest ''
 setenv slot_suffix ''
 
@@ -54,9 +54,11 @@ else
 	exit;
 fi;
 
-if itest.s "x1" == "x$m4enabled" ; then
-	run m4boot;
-	setenv m4 "-m4";
+if itest.s "x1" == "x$mcore_enabled" ; then
+	if test ! -z "${mcoreboot}"; then
+		run mcoreboot;
+	fi
+	setenv mcore "-rpmsg";
 fi
 
 if itest.s "x" == "x${board}" ; then
@@ -71,7 +73,7 @@ ${devtype} read ${a_fdtbo} ${dtbo_start} ${dtbo_size}
 adtimg addr ${a_fdtbo}
 
 # Look for matching compatible
-setenv dtexp boundary,imx8mp-${board}${m4}
+setenv dtexp boundary,imx8mp-${board}${mcore}
 setenv index 0
 setenv cont 1
 setenv dtfound 0
