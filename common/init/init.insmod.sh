@@ -17,8 +17,11 @@ if [ -f $cfg_file ]; then
       "setprop") setprop $name $value ;;
       "modprobe")
                  if [ -f  /vendor/lib/modules/modules.load ]; then
-                     arg="$(cat /vendor/lib/modules/modules.load)"
+                     arg="$(cat /vendor/lib/modules/modules.load | grep -v wlan)"
                      modprobe -a -d /vendor/lib/modules $arg
+                     if grep -q wlan /vendor/lib/modules/modules.load; then
+                         modprobe -a -d /vendor/lib/modules wlan
+                     fi
                  fi
     esac
   done < $cfg_file
