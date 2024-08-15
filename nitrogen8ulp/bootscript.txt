@@ -168,6 +168,7 @@ setenv bootargs $bootargs "$avb_bootargs "
 part start ${devtype} ${devnum} ${apart} boot_start
 part size  ${devtype} ${devnum} ${apart} boot_size
 if ${devtype} read ${a_Image} ${boot_start} ${boot_size} ; then
+	abootimg addr ${a_Image}
 	bootm ${a_Image} ${ramdisk} ${a_fdt} ;
 fi
 
