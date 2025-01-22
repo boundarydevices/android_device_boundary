@@ -25,7 +25,7 @@ def FullOTA_InstallEnd(info):
     dtbo_img = common.GetBootableImage(
         "dtbo.img", "dtbo.img", OPTIONS.input_tmp, "DTBO")
   except KeyError:
-    print "no vbmeta or dtbo images in target_files; skipping install"
+    print("no vbmeta or dtbo images in target_files; skipping install")
     return
   # copy the vbmeta into the package.
   common.ZipWriteStr(info.output_zip, "vbmeta.img", vbmeta_img.data)
