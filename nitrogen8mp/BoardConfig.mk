@@ -149,6 +149,7 @@ TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mp:imx8mp-nitrogen8mp_r20-enc-rpmsg.dtb \
 	imx8mp:imx8mp-nitrogen_smarc.dtb \
 	imx8mp:imx8mp-nitrogen_smarc-rpmsg.dtb \
+	imx8mp:imx8mp-tag.dtb \
 
 ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
 
