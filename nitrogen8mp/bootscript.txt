@@ -58,6 +58,7 @@ if itest.s "x1" == "x$mcore_enabled" ; then
 	if test ! -z "${mcoreboot}"; then
 		run mcoreboot;
 	fi
+	setenv bootargs $bootargs $mcore_bootargs
 	setenv mcore "-rpmsg";
 fi
 
