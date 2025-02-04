@@ -38,3 +38,25 @@ def FullOTA_InstallEnd(info):
 
   # emit the script code to trigger the dtbo updater on the device
   info.script.WriteRawImage("/dtbo", "dtbo.img")
+
+def IncrementalOTA_InstallEnd(info):
+  # copy the vbmeta and dtbo into the package.
+  try:
+    vbmeta_img = common.GetBootableImage(
+        "vbmeta.img", "vbmeta.img", OPTIONS.input_tmp, "VBMETA")
+    dtbo_img = common.GetBootableImage(
+        "dtbo.img", "dtbo.img", OPTIONS.input_tmp, "DTBO")
+  except KeyError:
+    print("no vbmeta or dtbo images in target_files; skipping install")
+    return
+  # copy the vbmeta into the package.
+  common.ZipWriteStr(info.output_zip, "vbmeta.img", vbmeta_img.data)
+
+  # emit the script code to trigger the vbmeta updater on the device
+  info.script.WriteRawImage("/vbmeta", "vbmeta.img")
+
+  # copy the dtbo into the package.
+  common.ZipWriteStr(info.output_zip, "dtbo.img", dtbo_img.data)
+
+  # emit the script code to trigger the dtbo updater on the device
+  info.script.WriteRawImage("/dtbo", "dtbo.img")
