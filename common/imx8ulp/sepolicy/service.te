@@ -1,3 +1,0 @@
-type hal_secureime_service, protected_service, hal_service_type, service_manager_type;
-type external_camera_service,       service_manager_type;
-type dek_extractor_service,         service_manager_type;

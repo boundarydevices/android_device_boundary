@@ -1,3 +1,0 @@
-get_prop(audioserver, vendor_public_default_prop)
-
-allow audioserver rootfs:lnk_file { getattr };

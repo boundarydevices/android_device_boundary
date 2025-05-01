@@ -1,1 +1,0 @@
-allow hwservicemanager securedisplayd:binder {transfer};

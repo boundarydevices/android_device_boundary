@@ -1,2 +1,0 @@
-allow hal_audio_default sysfs_wake_lock:file { open read write };
-allow hal_audio_default hal_audio_default:capability2 { block_suspend };

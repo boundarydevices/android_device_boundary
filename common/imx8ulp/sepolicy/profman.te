@@ -1,2 +1,0 @@
-allow profman runtime_event_log_tags_file:file {map};
-allow profman apk_data_file:file {map};

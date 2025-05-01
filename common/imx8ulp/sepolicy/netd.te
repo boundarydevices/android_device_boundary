@@ -1,2 +1,0 @@
-allow netd netd:capability { sys_module };
-allow netd proc_net:file { create };
