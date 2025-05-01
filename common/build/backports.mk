@@ -18,7 +18,6 @@ backports: $(BACKPORTS_PATH)
 	fi ;
 	# use custom defconfig for our devices
 	if [ ! -e $(BACKPORTS_PATH)/.config ]; then \
-		cp -v $(realpath device/ezurio/common/wifi/bdimx8) $(BACKPORTS_PATH)/defconfigs/ ;\
 		$(kernel_build_shell_env) $(MAKE) $(backports_build_make_env) defconfig-bdimx8 ; \
 	fi ;
 	$(kernel_build_shell_env) $(MAKE) $(backports_build_make_env)
