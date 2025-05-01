@@ -1,4 +1,4 @@
-BACKPORTS_PATH ?= $(ANDROID_BUILD_TOP)/vendor/boundary/backports/backport
+BACKPORTS_PATH ?= $(ANDROID_BUILD_TOP)/vendor/ezurio/backports/backport
 BACKPORTS_OUT  ?= $(TARGET_OUT_INTERMEDIATES)/BACKPORTS_OBJ
 
 backports_build_make_env = KLIB_BUILD=$(realpath $(KERNEL_OUT)) ARCH=$(KERNEL_ARCH) \
@@ -18,7 +18,7 @@ backports: $(BACKPORTS_PATH)
 	fi ;
 	# use custom defconfig for our devices
 	if [ ! -e $(BACKPORTS_PATH)/.config ]; then \
-		cp -v $(realpath device/boundary/common/wifi/bdimx8) $(BACKPORTS_PATH)/defconfigs/ ;\
+		cp -v $(realpath device/ezurio/common/wifi/bdimx8) $(BACKPORTS_PATH)/defconfigs/ ;\
 		$(kernel_build_shell_env) $(MAKE) $(backports_build_make_env) defconfig-bdimx8 ; \
 	fi ;
 	$(kernel_build_shell_env) $(MAKE) $(backports_build_make_env)

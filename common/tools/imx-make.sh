@@ -110,7 +110,7 @@ export AARCH64_GCC_CROSS_COMPILE=$TOP/prebuilts/toolchains/gcc-arm-10.3-2021.07-
 
 product_makefile=`pwd`/`find device -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
 product_path=${product_makefile%/*}
-nxp_git_path=`pwd`/device/boundary
+nxp_git_path=`pwd`/device/ezurio
 soc_path=${nxp_git_path}/common/imx8m
 
 # process of the arguments

@@ -149,7 +149,7 @@ KERNEL_CONFIG_SRC := $(KERNEL_CONFIG_DEFAULT) \
   $(KERNEL_CONFIG_GKI)
 
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
-KERNEL_MERGE_CONFIG := $(realpath device/boundary/common/tools/merge_config.sh)
+KERNEL_MERGE_CONFIG := $(realpath device/ezurio/common/tools/merge_config.sh)
 
 KERNEL_HEADERS_INSTALL := $(KERNEL_OUT)/usr
 #KERNEL_MODULES_INSTALL := $(TARGET_OUT)/lib/modules

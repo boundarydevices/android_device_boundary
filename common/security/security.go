@@ -12,5 +12,5 @@ import (
 )
 
 func init() {
-    allowlists.Bp2buildKeepExistingBuildFile["device/boundary/common/security"] = false
+    allowlists.Bp2buildKeepExistingBuildFile["device/ezurio/common/security"] = false
 }

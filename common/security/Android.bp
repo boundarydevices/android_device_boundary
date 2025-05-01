@@ -7,7 +7,7 @@
 
 bootstrap_go_package {
     name: "soong-security",
-    pkgPath: "android/soong/device/boundary/common/security",
+    pkgPath: "android/soong/device/ezurio/common/security",
 
     srcs: [
         "security.go",

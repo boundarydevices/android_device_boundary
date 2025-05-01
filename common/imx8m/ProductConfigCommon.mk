@@ -31,7 +31,7 @@ PRODUCT_PACKAGES += \
 # -------@block_common_config-------
 # overrides
 PRODUCT_BRAND := Android
-PRODUCT_MANUFACTURER := boundary
+PRODUCT_MANUFACTURER := ezurio
 
 # related to the definition and load of library modules
 TARGET_BOARD_PLATFORM := imx
@@ -171,8 +171,8 @@ PRODUCT_PACKAGES += \
     FSLOta
 
 PRODUCT_COPY_FILES += \
-    device/boundary/common/ota/com.fsl.android.ota.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/com.fsl.android.ota.xml \
-    device/boundary/common/ota/ota.conf:$(TARGET_COPY_OUT_VENDOR)/etc/ota.conf
+    device/ezurio/common/ota/com.fsl.android.ota.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/com.fsl.android.ota.xml \
+    device/ezurio/common/ota/ota.conf:$(TARGET_COPY_OUT_VENDOR)/etc/ota.conf
 endif
 
 # Support Dynamic partition userspace fastboot

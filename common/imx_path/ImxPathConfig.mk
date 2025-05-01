@@ -23,9 +23,9 @@ MXMWIFI_PATH := vendor/nxp-opensource/nxp-mwifiex
 RESTRICTED_APP_PATH := vendor/nxp-private
 IMX_SECURITY_PATH := vendor/nxp-private/security
 
-ATF_IMX_PATH := vendor/boundary
-KERNEL_IMX_PATH := vendor/boundary
-UBOOT_IMX_PATH := vendor/boundary
+ATF_IMX_PATH := vendor/ezurio
+KERNEL_IMX_PATH := vendor/ezurio
+UBOOT_IMX_PATH := vendor/ezurio
 IMX_LIB_PATH := vendor/nxp-opensource
 IMX_MKIMAGE_PATH := vendor/nxp-opensource
 IMX_PATH := vendor/nxp-opensource
