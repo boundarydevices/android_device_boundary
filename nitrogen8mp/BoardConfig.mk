@@ -6,7 +6,7 @@
 AB_OTA_UPDATER ?= false
 BOARD_HAVE_PREBOOTIMAGE := true
 BOARD_USES_SYSTEM_EXTIMAGE := false
-IMX_DEVICE_PATH := device/boundary/nitrogen8mp
+IMX_DEVICE_PATH := device/ezurio/nitrogen8mp
 
 include $(CONFIG_REPO_PATH)/common/imx8m/BoardConfigCommon.mk
 

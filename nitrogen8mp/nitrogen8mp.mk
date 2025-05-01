@@ -1,5 +1,5 @@
 # -------@block_infrastructure-------
-CONFIG_REPO_PATH := device/boundary
+CONFIG_REPO_PATH := device/ezurio
 CURRENT_FILE_PATH :=  $(lastword $(MAKEFILE_LIST))
 IMX_DEVICE_PATH := $(strip $(patsubst %/, %, $(dir $(CURRENT_FILE_PATH))))
 
@@ -29,7 +29,7 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
-PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=boundary
+PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=ezurio
 PRODUCT_VENDOR_PROPERTIES += ro.soc.model=IMX8MP
 PRODUCT_VENDOR_PROPERTIES += ro.crypto.metadata_init_delete_all_keys.enabled=true
 # -------@block_treble-------
@@ -387,7 +387,7 @@ PRODUCT_PACKAGES += \
     wificond
 
 # BD-SDMAC Firmware files
-BDSDMAC_FW_PATH := vendor/boundary/radio_firmware/laird-bdsdmac-firmware/lib/firmware
+BDSDMAC_FW_PATH := vendor/ezurio/radio_firmware/laird-bdsdmac-firmware/lib/firmware
 PRODUCT_COPY_FILES += \
     $(BDSDMAC_FW_PATH)/bdwlan30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/bdwlan30.bin \
     $(BDSDMAC_FW_PATH)/otp30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/otp30.bin \
@@ -399,7 +399,7 @@ PRODUCT_COPY_FILES += \
     $(BDSDMAC_FW_PATH)/qca/tfbtnv11.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/qca/nvm_00230302.bin
 
 # LWB5+ Firmware files
-LWB5P_FW_PATH := vendor/boundary/radio_firmware/laird-lwb5plus-sdio-sa-firmware/lib/firmware
+LWB5P_FW_PATH := vendor/ezurio/radio_firmware/laird-lwb5plus-sdio-sa-firmware/lib/firmware
 PRODUCT_COPY_FILES += \
     $(LWB5P_FW_PATH)/brcm/BCM4373A0.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/BCM4373A0.hcd \
     $(LWB5P_FW_PATH)/brcm/brcmfmac4373-sdio.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/brcmfmac4373-sdio.bin \
@@ -407,7 +407,7 @@ PRODUCT_COPY_FILES += \
     $(LWB5P_FW_PATH)/brcm/brcmfmac4373-sdio.clm_blob:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/brcmfmac4373-sdio.clm_blob
 
 # Sona IF573 Firmware files
-IF573_FW_PATH := vendor/boundary/radio_firmware/laird-if573-sdio-firmware/lib/firmware
+IF573_FW_PATH := vendor/ezurio/radio_firmware/laird-if573-sdio-firmware/lib/firmware
 PRODUCT_COPY_FILES += \
     $(IF573_FW_PATH)/cypress/cyfmac55572-sdio.clm_blob:$(TARGET_COPY_OUT_VENDOR)/firmware/cypress/cyfmac55572-sdio.clm_blob \
     $(IF573_FW_PATH)/cypress/cyfmac55572-sdio.trxse:$(TARGET_COPY_OUT_VENDOR)/firmware/cypress/cyfmac55572-sdio.trxse \

@@ -1,6 +1,6 @@
 # -------@block_infrastructure-------
 
-CONFIG_REPO_PATH := device/boundary
+CONFIG_REPO_PATH := device/ezurio
 CURRENT_FILE_PATH :=  $(lastword $(MAKEFILE_LIST))
 IMX_DEVICE_PATH := $(strip $(patsubst %/, %, $(dir $(CURRENT_FILE_PATH))))
 
@@ -27,11 +27,11 @@ PRODUCT_CHARACTERISTICS := tablet
 
 DEVICE_PACKAGE_OVERLAYS := \
     $(IMX_DEVICE_PATH)/overlay \
-    device/boundary/common/overlay
+    device/ezurio/common/overlay
 
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
-PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=boundary
+PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=ezurio
 PRODUCT_VENDOR_PROPERTIES += ro.soc.model=IMX8MQ
 PRODUCT_VENDOR_PROPERTIES += ro.crypto.metadata_init_delete_all_keys.enabled=true
 # -------@block_treble-------
@@ -349,7 +349,7 @@ PRODUCT_PACKAGES += \
     wificond
 
 # BD-SDMAC Firmware files
-BDSDMAC_FW_PATH := vendor/boundary/radio_firmware/laird-bdsdmac-firmware/lib/firmware
+BDSDMAC_FW_PATH := vendor/ezurio/radio_firmware/laird-bdsdmac-firmware/lib/firmware
 PRODUCT_COPY_FILES += \
     $(BDSDMAC_FW_PATH)/bdwlan30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/bdwlan30.bin \
     $(BDSDMAC_FW_PATH)/otp30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/otp30.bin \

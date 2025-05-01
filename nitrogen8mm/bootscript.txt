@@ -71,7 +71,7 @@ ${devtype} read ${a_fdtbo} ${dtbo_start} ${dtbo_size}
 adtimg addr ${a_fdtbo}
 
 # Look for matching compatible
-setenv dtexp boundary,imx8mm-${board}${m4}
+setenv dtexp ezurio,imx8mm-${board}${m4}
 setenv index 0
 setenv cont 1
 setenv dtfound 0
