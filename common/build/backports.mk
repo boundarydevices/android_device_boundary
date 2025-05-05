@@ -12,9 +12,9 @@ backports: $(BACKPORTS_PATH)
 	fi ;
 	mkdir -p $(BACKPORTS_OUT) ;
 	# workaround qcacld needing stdarg.h header
-	if [ ! -e $(BACKPORTS_PATH)/drivers/net/wireless/laird/qcacld/CORE/VOSS/inc/stdarg.h ]; then \
+	if [ ! -e $(BACKPORTS_PATH)/drivers/net/wireless/summit/qcacld/CORE/VOSS/inc/stdarg.h ]; then \
 		cp -v $(realpath $(TARGET_KERNEL_SRC)/include/linux/stdarg.h) \
-			$(BACKPORTS_PATH)/drivers/net/wireless/laird/qcacld/CORE/VOSS/inc/ ; \
+			$(BACKPORTS_PATH)/drivers/net/wireless/summit/qcacld/CORE/VOSS/inc/ ; \
 	fi ;
 	# use custom defconfig for our devices
 	if [ ! -e $(BACKPORTS_PATH)/.config ]; then \
