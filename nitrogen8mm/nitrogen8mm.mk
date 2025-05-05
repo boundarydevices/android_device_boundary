@@ -340,7 +340,7 @@ PRODUCT_PACKAGES += \
     wificond
 
 # BD-SDMAC Firmware files
-BDSDMAC_FW_PATH := vendor/ezurio/radio_firmware/laird-bdsdmac-firmware/lib/firmware
+BDSDMAC_FW_PATH := vendor/ezurio/radio_firmware/summit-bdsdmac-firmware/lib/firmware
 PRODUCT_COPY_FILES += \
     $(BDSDMAC_FW_PATH)/bdwlan30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/bdwlan30.bin \
     $(BDSDMAC_FW_PATH)/otp30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/otp30.bin \
@@ -352,7 +352,7 @@ PRODUCT_COPY_FILES += \
     $(BDSDMAC_FW_PATH)/qca/tfbtnv11.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/qca/nvm_00230302.bin
 
 # Sona IF573 Firmware files
-IF573_FW_PATH := vendor/ezurio/radio_firmware/laird-if573-sdio-firmware/lib/firmware
+IF573_FW_PATH := vendor/ezurio/radio_firmware/summit-if573-sdio-firmware/lib/firmware
 PRODUCT_COPY_FILES += \
     $(IF573_FW_PATH)/cypress/cyfmac55572-sdio.clm_blob:$(TARGET_COPY_OUT_VENDOR)/firmware/cypress/cyfmac55572-sdio.clm_blob \
     $(IF573_FW_PATH)/cypress/cyfmac55572-sdio.trxse:$(TARGET_COPY_OUT_VENDOR)/firmware/cypress/cyfmac55572-sdio.trxse \

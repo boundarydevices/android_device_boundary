@@ -349,7 +349,7 @@ PRODUCT_PACKAGES += \
     wificond
 
 # BD-SDMAC Firmware files
-BDSDMAC_FW_PATH := vendor/ezurio/radio_firmware/laird-bdsdmac-firmware/lib/firmware
+BDSDMAC_FW_PATH := vendor/ezurio/radio_firmware/summit-bdsdmac-firmware/lib/firmware
 PRODUCT_COPY_FILES += \
     $(BDSDMAC_FW_PATH)/bdwlan30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/bdwlan30.bin \
     $(BDSDMAC_FW_PATH)/otp30.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/otp30.bin \
