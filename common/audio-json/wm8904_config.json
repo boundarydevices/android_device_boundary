@@ -1,0 +1,11 @@
+{
+  "driver_name": "wm8904-audio",
+  "supported_out_devices": ["speaker", "wired_headphone", "wired_headset"],
+  "supported_in_devices": ["builtin_mic", "wired_headset"],
+
+  "init_ctl": [
+    {"name": "Capture Volume", "type": "int", "val": 31},
+    {"name": "Capture Switch", "type": "int", "val": 1},
+    {"name": "Left Capture Inverting Mux", "type": "str", "val": "IN2L"}
+  ]
+}

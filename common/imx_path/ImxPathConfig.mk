@@ -15,6 +15,7 @@ LINUX_FIRMWARE_IMX_PATH := vendor/nxp
 IMX_MCU_SDK_PATH := vendor/nxp
 IMX_ANDROID_MM_PATH := vendor/nxp
 IMX_MEDIA_CODEC_XML_PATH:= vendor/nxp/imx_android_mm
+IMX_WSI_ALLOC_PATH := vendor/nxp/wsialloc
 
 FSL_RESTRICTED_CODEC_PATH := vendor/nxp-private
 GPU_VIV6_PATH := vendor/nxp-private

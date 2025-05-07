@@ -11,6 +11,8 @@
     {"name": "0 DAC4 Playback Volume", "type": "int", "val": 172}
   ],
 
+  "out_period_size": 1024,
+  "out_period_count": 2,
   "out_volume_min": 170,
   "out_volume_max": 255,
   "out_volume_ctl": [

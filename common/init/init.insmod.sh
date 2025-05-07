@@ -16,6 +16,10 @@ if [ -f $cfg_file ]; then
       "insmod") insmod $name $value $arg1 $arg2 $arg3 $arg4 $arg5 $arg6 $arg7 $arg8 $arg9 ;;
       "setprop") setprop $name $value ;;
       "modprobe")
+                 if [ -f /system/lib/modules/modules.load ]; then
+                     arg="$(ls /system/lib/modules/)"
+                     modprobe -a -d /system/lib/modules/ $arg
+                 fi
                  if [ -f  /vendor/lib/modules/modules.load ]; then
                      arg="$(cat /vendor/lib/modules/modules.load | grep -v wlan)"
                      modprobe -a -d /vendor/lib/modules $arg

@@ -1,9 +1,0 @@
-# device specific syscalls
-mmap: 1
-getuid: 1
-getrlimit: 1
-fstat: 1
-newfstatat: 1
-fstatfs: 1
-sysinfo: 1
-readv: 1

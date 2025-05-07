@@ -1,0 +1,10 @@
+{
+  "driver_name": "cs42448",
+  "supported_out_devices": ["speaker", "line"],
+  "supported_in_devices": ["builtin_mic"],
+  "support_multi_chn": 1,
+
+  "out_volume_ctl": [
+    "DAC1 Playback Volume"
+  ]
+}

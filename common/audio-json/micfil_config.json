@@ -3,14 +3,14 @@
   "supported_in_devices": ["builtin_mic"],
 
   "init_ctl": [
-    {"name": "CH0 Volume", "type": "int", "val": 15},
-    {"name": "CH1 Volume", "type": "int", "val": 15},
-    {"name": "CH2 Volume", "type": "int", "val": 15},
-    {"name": "CH3 Volume", "type": "int", "val": 15},
-    {"name": "CH4 Volume", "type": "int", "val": 15},
-    {"name": "CH5 Volume", "type": "int", "val": 15},
-    {"name": "CH6 Volume", "type": "int", "val": 15},
-    {"name": "CH7 Volume", "type": "int", "val": 15}
+    {"name": "CH0 Volume", "type": "int", "val": 13},
+    {"name": "CH1 Volume", "type": "int", "val": 13},
+    {"name": "CH2 Volume", "type": "int", "val": 13},
+    {"name": "CH3 Volume", "type": "int", "val": 13},
+    {"name": "CH4 Volume", "type": "int", "val": 13},
+    {"name": "CH5 Volume", "type": "int", "val": 13},
+    {"name": "CH6 Volume", "type": "int", "val": 13},
+    {"name": "CH7 Volume", "type": "int", "val": 13}
   ]
 
 }

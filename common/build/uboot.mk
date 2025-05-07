@@ -126,6 +126,16 @@ $(UBOOTENVSH): | $(UBOOT_OUT)
 	else \
 		echo 'export ROLLBACK_INDEX_IN_FIT=' > $@; \
 		echo 'export ROLLBACK_INDEX_IN_CONTAINER=' >> $@; \
+	fi; \
+	if [ "$(USE_TEE_COMPRESS)" = "true" ]; then \
+		echo 'export TEE_COMPRESS_ENABLE=$(USE_TEE_COMPRESS)' >> $@; \
+	else \
+		echo 'export TEE_COMPRESS_ENABLE=' >> $@; \
+	fi
+	if [ "$(BUILD_ENCRYPTED_BOOT)" = "true" ]; then \
+		dd if=/dev/zero of=${IMX_MKIMAGE_PATH}/imx-mkimage/iMX8M/dek_blob_fit_dummy.bin bs=96 count=1 && sync; \
+	else \
+		rm -f ${IMX_MKIMAGE_PATH}/imx-mkimage/iMX8M/dek_blob_fit_dummy.bin; \
 	fi
 
 $(UBOOT_BIN): $(UBOOTENVSH) | $(UBOOT_COLLECTION) $(UBOOT_OUT)
@@ -166,6 +176,9 @@ $(UBOOT_BIN): $(UBOOTENVSH) | $(UBOOT_COLLECTION) $(UBOOT_OUT)
 .PHONY: bootloader $(UBOOT_BIN) $(UBOOTENVSH)
 
 bootloader: $(UBOOT_BIN)
+	if [ -n "$(BOARD_OTA_BOOTLOADERIMAGE)" ]; then \
+		cp -fp $(UBOOT_COLLECTION)/$(BOARD_OTA_BOOTLOADERIMAGE) $(PRODUCT_OUT)/bootloader.img; \
+	fi
 
 ifneq ($(TARGET_UBOOT_ENV),)
 $(UBOOT_ENV_OUT): $(TARGET_UBOOT_ENV) | $(UBOOT_BIN)
