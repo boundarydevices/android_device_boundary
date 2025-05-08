@@ -18,8 +18,14 @@
 <permissions>
     <privapp-permissions package="com.google.android.gms">
         <permission name="android.permission.WRITE_DEVICE_CONFIG" />
+        <permission name="android.permission.THREAD_NETWORK_PRIVILEGED" />
+        <permission name="android.permission.READ_DROPBOX_DATA" />
     </privapp-permissions>
     <privapp-permissions package="com.google.android.googlequicksearchbox">
         <permission name="android.permission.SCHEDULE_EXACT_ALARM" />
+        <permission name="android.permission.RECEIVE_SANDBOX_TRIGGER_AUDIO" />
+    </privapp-permissions>
+    <privapp-permissions package="com.google.android.apps.carrier.carrierwifi">
+        <permission name="android.permission.MODIFY_PHONE_STATE" />
     </privapp-permissions>
 </permissions>

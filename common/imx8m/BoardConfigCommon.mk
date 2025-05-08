@@ -4,11 +4,8 @@ ENABLE_DMABUF_HEAP := true
 SOONG_CONFIG_NAMESPACES += IMXPLUGIN
 SOONG_CONFIG_IMXPLUGIN += BOARD_PLATFORM \
 NUM_FRAMEBUFFER_SURFACE_BUFFERS \
-BOARD_USE_SENSOR_FUSION \
 BOARD_SOC_CLASS \
 HAVE_FSL_IMX_GPU3D \
-TARGET_HWCOMPOSER_VERSION \
-TARGET_GRALLOC_VERSION \
 PREBUILT_FSL_IMX_GPU \
 PREBUILT_FSL_IMX_ISP \
 BOARD_SOC_TYPE \
@@ -20,7 +17,6 @@ POWERSAVE \
 ENABLE_DMABUF_HEAP
 
 SOONG_CONFIG_IMXPLUGIN_BOARD_PLATFORM = imx8
-SOONG_CONFIG_IMXPLUGIN_BOARD_USE_SENSOR_FUSION = true
 SOONG_CONFIG_IMXPLUGIN_BOARD_SOC_CLASS = IMX8
 SOONG_CONFIG_IMXPLUGIN_HAVE_FSL_IMX_GPU3D = true
 SOONG_CONFIG_IMXPLUGIN_ENABLE_DMABUF_HEAP = true
@@ -88,7 +84,7 @@ TARGET_BOARD_KERNEL_HEADERS := $(CONFIG_REPO_PATH)/common/kernel-headers
 
 TARGET_IMX_KERNEL ?= true
 ifeq ($(TARGET_IMX_KERNEL),false)
-BOARD_PREBUILT_BOOTIMAGE := vendor/nxp/fsl-proprietary/gki/boot.img
+BOARD_PREBUILT_BOOTIMAGE := vendor/nxp-opensource/imx-gki/boot.img
 TARGET_NO_KERNEL := true
 endif
 
@@ -104,17 +100,14 @@ endif
 
 # -------@block_storage-------
 ifeq ($(AB_OTA_UPDATER),true)
+PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := lz4
 ifeq ($(IMX_NO_PRODUCT_PARTITION),true)
-ifeq ($(BOARD_USES_SYSTEM_EXTIMAGE),false)
-AB_OTA_PARTITIONS += dtbo boot system vendor vbmeta
-else
-AB_OTA_PARTITIONS += dtbo boot system system_ext vendor vbmeta
-endif
+AB_OTA_PARTITIONS += dtbo boot system system_dlkm system_ext vendor vendor_dlkm vbmeta
 else
 ifeq ($(TARGET_USE_VENDOR_BOOT),true)
-AB_OTA_PARTITIONS += dtbo boot vendor_boot system system_ext vendor vbmeta product
+AB_OTA_PARTITIONS += dtbo boot init_boot vendor_boot system system_dlkm system_ext vendor vendor_dlkm vbmeta product
 else
-AB_OTA_PARTITIONS += dtbo boot system system_ext vendor vbmeta product
+AB_OTA_PARTITIONS += dtbo boot system system_dlkm system_ext vendor vendor_dlkm vbmeta product
 endif
 endif
 endif
@@ -126,6 +119,7 @@ endif
 BOARD_DTBOIMG_PARTITION_SIZE := 4194304
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 ifeq ($(TARGET_USE_VENDOR_BOOT),true)
+BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE := 8388608
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
 endif
 
@@ -138,11 +132,24 @@ ifneq ($(IMX_NO_PRODUCT_PARTITION),true)
   TARGET_COPY_OUT_PRODUCT := product
 endif
 
-ifeq ($(BOARD_USES_SYSTEM_EXTIMAGE),)
+ifeq ($(BOARD_USES_SYSTEM_EXTIMAGE),true)
 # Build a separate system_ext.img partition
 BOARD_USES_SYSTEM_EXTIMAGE := true
 BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+endif
+
+ifeq ($(AB_OTA_UPDATER),true)
+# Build a separate vendor_dlkm partition
+BOARD_USES_VENDOR_DLKMIMAGE := true
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
+
+# Build a separate system_dlkm partition
+BOARD_USES_SYSTEM_DLKMIMAGE := true
+BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
+BOARD_SYSTEM_KERNEL_MODULES += $(wildcard vendor/nxp-opensource/imx-gki/system_dlkm_staging/flatten/lib/modules/*.ko)
 endif
 
 BOARD_FLASH_BLOCK_SIZE := 4096
@@ -155,12 +162,18 @@ ifeq ($(TARGET_USE_DYNAMIC_PARTITIONS),true)
     ifeq ($(BOARD_USES_SYSTEM_EXTIMAGE),false)
     BOARD_NXP_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor
     else
-    BOARD_NXP_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor
+    BOARD_NXP_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_dlkm system_ext vendor vendor_dlkm
     endif
   else
-    BOARD_NXP_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext vendor product
+    BOARD_NXP_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_dlkm system_ext vendor vendor_dlkm product
 
   endif
+  BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 0
+  BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE := 0
+  BOARD_SYSTEM_DLKMIMAGE_PARTITION_RESERVED_SIZE := 0
+  BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 0
+  BOARD_VENDOR_DLKMIMAGE_PARTITION_RESERVED_SIZE := 0
+  BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 0
 else
   BOARD_VENDORIMAGE_PARTITION_SIZE := 805306368
   BOARD_SYSTEM_EXTIMAGE_PARTITION_SIZE := 134217728
@@ -180,21 +193,16 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_IMX_CAMERA := true
 
 # -------@block_display-------
-TARGET_GRALLOC_VERSION := v4
-TARGET_HWCOMPOSER_VERSION := v2.0
-
 SOONG_CONFIG_IMXPLUGIN_NUM_FRAMEBUFFER_SURFACE_BUFFERS = 3
-SOONG_CONFIG_IMXPLUGIN_TARGET_HWCOMPOSER_VERSION = v2.0
-SOONG_CONFIG_IMXPLUGIN_TARGET_GRALLOC_VERSION = v4
-
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_UI_LIB := librecovery_ui_imx
-
 
 # -------@block_gpu-------
 # Indicate use vivante drm based egl and gralloc
 BOARD_GPU_DRIVERS := vivante
+
+# Not build mesa3d to avoid conflict with imx
+BOARD_USE_CUSTOMIZED_MESA := true
 
 # Indicate use NXP libdrm-imx or Android external/libdrm
 BOARD_GPU_LIBDRM := libdrm_imx
@@ -218,16 +226,11 @@ ifneq (,$(filter ISP ALL,$(DISABLE_FSL_PREBUILT)))
     SOONG_CONFIG_IMXPLUGIN_PREBUILT_FSL_IMX_ISP = false
 endif
 
-# -------@block_sensor-------
-PREBUILT_FSL_IMX_SENSOR_FUSION := true
-
-# override some prebuilt setting if DISABLE_FSL_PREBUILT is define
-ifneq (,$(filter SENSOR_FUSION ALL,$(DISABLE_FSL_PREBUILT)))
-    PREBUILT_FSL_IMX_SENSOR_FUSION := false
-endif
-
 # -------@block_treble-------
 BOARD_VNDK_VERSION := current
+
+# -------@block_build-------
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 
 # -------@block_multimedia_codec-------
 

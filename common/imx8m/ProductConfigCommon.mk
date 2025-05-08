@@ -23,6 +23,8 @@ endif
 $(call inherit-product, $(TOPDIR)frameworks/base/data/sounds/AllAudio.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
+include $(CONFIG_REPO_PATH)/common/soong/imx_namespaces.mk
+
 # Installs gsi keys into ramdisk.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 PRODUCT_PACKAGES += \
@@ -36,9 +38,12 @@ PRODUCT_MANUFACTURER := ezurio
 # related to the definition and load of library modules
 TARGET_BOARD_PLATFORM := imx
 
-PRODUCT_SHIPPING_API_LEVEL := 34
+PRODUCT_SHIPPING_API_LEVEL := 35
 
 # -------@block_app-------
+PRODUCT_PACKAGES += \
+    imx-chip-tool \
+
 PRODUCT_PROPERTY_OVERRIDES += \
     pm.dexopt.boot=quicken
 
@@ -112,7 +117,7 @@ PRODUCT_PACKAGES += \
 
 # imx c2 codec binary
 PRODUCT_PACKAGES += \
-    android.hardware.media.c2@1.0-service \
+    android.hardware.media.c2.service.imx \
     codec2.vendor.base.policy \
     codec2.vendor.ext.policy \
     libsfplugin_ccodec \
@@ -156,7 +161,7 @@ PRODUCT_COPY_FILES += \
 
 # A/B OTA
 PRODUCT_PACKAGES += \
-    android.hardware.boot-service.default \
+    com.android.hardware.boot \
     android.hardware.boot-service.default_recovery \
     update_engine \
     update_engine_client \
@@ -214,6 +219,7 @@ PRODUCT_PACKAGES += \
     libimxcamerahwl_impl \
     libimageprocess
 
+# external camera, AIDL
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider-V1-external-service \
     android.hardware.camera.metadata-V1-ndk.so \
@@ -222,6 +228,11 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider-V1-ndk.so \
     android.hardware.camera.provider-V1-external-impl.so \
     camera.device-external-imx-impl.so
+
+# Foreground service DeviceAsCamera
+PRODUCT_PACKAGES += \
+    DeviceAsWebcam
+
 endif
 endif
 
@@ -229,18 +240,12 @@ endif
 ifneq ($(PRODUCT_IMX_CAR),true)
 PRODUCT_PACKAGES += \
     CubeLiveWallpapers \
-    LiveWallpapersPicker
+    LiveWallpapersPicker \
+    WallpaperPicker
 endif
 
 PRODUCT_PACKAGES += \
-    libedid
-
-PRODUCT_PACKAGES += \
     libdrm_android \
-    libdisplayutils \
-    libfsldisplay
-
-PRODUCT_SOONG_NAMESPACES += external/mesa3d
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.0
@@ -288,10 +293,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # -------@block_audio-------
 PRODUCT_PACKAGES += \
-    android.hardware.audio@7.1-impl \
-    android.hardware.audio.service \
-    android.hardware.audio.effect@7.0-impl:32 \
-    android.hardware.bluetooth.audio@2.1-impl
+    com.android.hardware.audio
 
 ifneq ($(PRODUCT_IMX_CAR),true)
 PRODUCT_PACKAGES += \
@@ -299,7 +301,6 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth.audio-impl \
     audio.bluetooth.default \
     audio.primary.imx \
     audio.r_submix.default \
@@ -317,6 +318,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_in_audio_policy_configuration_7_0.xml \
     frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration_7_0.xml \
     frameworks/av/services/audiopolicy/config/bluetooth_with_le_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_with_le_audio_policy_configuration_7_0.xml \
+    vendor/nxp-opensource/imx/audio/default/audio_effects_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects_config.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
 
 # compress offload audio playback support
@@ -354,10 +356,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libldacBT_enc \
     libldacBT_abr
-
-# -------@block_sensor-------
-PRODUCT_PACKAGES += \
-    fsl_sensor_fusion
 
 # -------@block_input-------
 
@@ -398,6 +396,10 @@ endif
 # vndservicemanager
 PRODUCT_PACKAGES += \
     vndservicemanager
+
+PRODUCT_HIDL_ENABLED := true
+PRODUCT_PACKAGES += \
+    hwservicemanager
 
 # Restore hwrotation capability
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

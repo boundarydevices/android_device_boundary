@@ -1,0 +1,2 @@
+dontaudit charger_vendor default_prop:file r_file_perms;
+dontaudit charger_vendor sysfs:file r_file_perms;

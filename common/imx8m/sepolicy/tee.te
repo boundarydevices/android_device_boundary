@@ -18,3 +18,5 @@ allow tee gsi_metadata_file:dir { search };
 
 allow tee dek_extractor_service:service_manager { add };
 allow tee servicemanager:binder { call transfer };
+
+set_prop(tee, vendor_trusty_storage_prop)

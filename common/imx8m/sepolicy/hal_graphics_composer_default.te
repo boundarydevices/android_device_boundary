@@ -13,4 +13,8 @@ allow hal_graphics_composer_default hal_graphics_allocator_default_tmpfs:file { 
 allow hal_graphics_composer_default tee_device:chr_file { open read write ioctl };
 allow hal_graphics_composer_default dmabuf_system_heap_device:chr_file { read open ioctl };
 allow hal_graphics_composer_default dmabuf_system_secure_heap_device:chr_file { read open ioctl };
+# allow HWC to write log/dump file
+allow hal_graphics_composer_default vendor_hwc_file:dir rw_dir_perms;
+allow hal_graphics_composer_default vendor_hwc_file:file create_file_perms;
+
 set_prop(hal_graphics_composer_default, vendor_public_default_prop)
