@@ -36,7 +36,7 @@ while [ $# -gt 0 ]; do
 	shift
 done
 case $gpt_size in
-	0*) gpt=partition-table-default.img;;
+	0*) gpt=partition-table.img;;
 	8*) gpt=partition-table-8GB.img;;
 	16*) gpt=partition-table-16GB.img;;
 	32*) gpt=partition-table-32GB.img;;
