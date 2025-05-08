@@ -1,0 +1,3 @@
+<resources>
+    <string translatable="false" name="config_ethernet_iface_regex">eth\\d+</string>
+</resources>

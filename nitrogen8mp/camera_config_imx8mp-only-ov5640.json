@@ -23,7 +23,14 @@
       "FocalLength": "3.37",
       "MaxJpegSize": "8388608",
       "MinFrameDuration": "33333333",
-      "MaxFrameDuration": "300000000"
+      "MaxFrameDuration": "300000000",
+      "OmitFrame": [
+          {
+              "width": "2592",
+              "height": "1944",
+              "omit_num": "1"
+          }
+      ]
     }
   ]
 }

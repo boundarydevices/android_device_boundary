@@ -199,6 +199,9 @@ ifeq ($(PRODUCT_IMX_TRUSTY),true)
 #Oemlock HAL support
 PRODUCT_PACKAGES += \
     android.hardware.oemlock-service.imx
+else
+PRODUCT_PACKAGES += \
+    android.hardware.oemlock-service-software.imx
 endif
 
 # Add Trusty OS backed gatekeeper and secure storage proxy
@@ -208,6 +211,15 @@ PRODUCT_PACKAGES += \
     storageproxyd \
     imx_dek_extractor \
     imx_dek_inserter
+endif
+
+# Secretkeeper HAL
+PRODUCT_PACKAGES += \
+    com.android.hardware.security.secretkeeper
+
+ifeq ($(PRODUCT_IMX_TRUSTY),true)
+PRODUCT_PACKAGES += \
+    android.hardware.security.secretkeeper.trusty
 endif
 
 # Specify rollback index for boot and vbmeta partitions
@@ -242,7 +254,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey \
     libwvdrmcryptoplugin \
-    libwvaidl \
     liboemcrypto
 
 TARGET_BUILD_WIDEVINE :=
@@ -297,7 +308,12 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi xhdpi xxhdpi
 
-# HWC2 HAL
+# -----some limiataion of overlay/g2d in hwcomposer3 --------
+SOONG_CONFIG_NAMESPACES += nxp_hwc
+SOONG_CONFIG_nxp_hwc += g2d_ip
+SOONG_CONFIG_nxp_hwc_g2d_ip := VIV
+
+# HWC3 HAL
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer3-service.imx
 
@@ -305,18 +321,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3
 
-# disable frame rate override
+# set game default frame rate override
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.enable_frame_rate_override=false
+    ro.surface_flinger.game_default_frame_rate_override=60
 
 # Gralloc HAL
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.mapper@4.0-impl.imx \
-    android.hardware.graphics.allocator-service.imx
-
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
+    android.hardware.graphics.allocator-service.imx \
+    mapper.imx
 
 # 2d test
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
@@ -346,17 +358,14 @@ PRODUCT_PACKAGES += \
     libvulkan_VIVANTE \
     vulkan.$(TARGET_BOARD_PLATFORM) \
     libCLC \
-    libLLVM_viv \
     libOpenCL \
     libg2d-viv \
     libOpenVX \
     libOpenVXU \
     libNNVXCBinary-evis \
     libNNVXCBinary-evis2 \
-    libNNVXCBinary-lite \
     libOvx12VXCBinary-evis \
     libOvx12VXCBinary-evis2 \
-    libOvx12VXCBinary-lite \
     libNNGPUBinary-evis \
     libNNGPUBinary-evis2 \
     libNNGPUBinary-lite \
@@ -462,21 +471,14 @@ PRODUCT_PACKAGES += \
 # dsp decoder
 PRODUCT_PACKAGES += \
     media_codecs_c2_dsp.xml \
-    media_codecs_c2_dsp_aacp.xml \
-    media_codecs_c2_dsp_wma.xml \
-    lib_dsp_aac_dec \
     lib_dsp_bsac_dec \
     lib_dsp_codec_wrap \
     lib_dsp_mp3_dec \
     lib_dsp_wrap_arm12_android \
     lib_dsp_mp3_dec_ext \
     lib_dsp_codec_wrap_ext \
-    lib_aacd_wrap_dsp \
     lib_mp3d_wrap_dsp \
-    lib_wma10d_wrap_dsp \
-    c2_component_register_dsp \
-    c2_component_register_dsp_wma \
-    c2_component_register_dsp_aacp
+    c2_component_register_dsp
 
 ifeq ($(PREBUILT_FSL_IMX_CODEC),true)
 ifneq ($(IMX_BUILD_32BIT_ROOTFS),true)
@@ -538,7 +540,7 @@ endif
 
 # Display Device Config
 PRODUCT_COPY_FILES += \
-    $(CONFIG_REPO_PATH)/common/imx8m/displayconfig/display_id_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_0.xml
+    device/ezurio/common/imx8m/displayconfig/display_port_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_port_1.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.output.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.output.xml \
@@ -553,8 +555,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-0.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_3.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
-    frameworks/native/data/etc/android.software.opengles.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2024-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2024-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
@@ -568,7 +570,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml \
     frameworks/native/data/etc/android.software.voice_recognizers.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.voice_recognizers.xml \
     frameworks/native/data/etc/android.software.activities_on_secondary_displays.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.activities_on_secondary_displays.xml \
-    frameworks/native/data/etc/android.software.picture_in_picture.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.picture_in_picture.xml
+    frameworks/native/data/etc/android.software.picture_in_picture.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.picture_in_picture.xml \
+    frameworks/native/data/etc/android.software.credentials.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.credentials.xml
 
 # trusty loadable apps
 PRODUCT_COPY_FILES += \
@@ -579,8 +582,15 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
 
 # Included GMS package
+ifeq ($(filter TRUE true 1,$(IMX_BUILD_32BIT_ROOTFS) $(IMX_BUILD_32BIT_64BIT_ROOTFS)),)
+$(call inherit-product-if-exists, vendor/partner_gms/products/gms_64bit_only.mk)
+else
 $(call inherit-product-if-exists, vendor/partner_gms/products/gms.mk)
+endif
 PRODUCT_SOONG_NAMESPACES += vendor/partner_gms
+
+PRODUCT_PACKAGES += \
+    privapp_whitelist_com.android.emergency
 
 # isp block
 # lib
@@ -595,10 +605,6 @@ PRODUCT_PACKAGES += \
     libaflt \
     libaf \
     libahdr \
-    libappshell_ebase \
-    libappshell_hal \
-    libappshell_ibd \
-    libappshell_oslayer \
     libavs \
     libawb \
     libawdr3 \
@@ -658,15 +664,6 @@ PRODUCT_PACKAGES += \
 
 # make sure /vendor/etc/configs/isp/ is created
 PRODUCT_PACKAGES += hollow
-
-# libgpiod tools
-PRODUCT_PACKAGES += \
-    gpiodetect \
-    gpiofind \
-    gpioget \
-    gpioinfo \
-    gpiomon \
-    gpioset
 
 # can-utils tools
 PRODUCT_PACKAGES += \

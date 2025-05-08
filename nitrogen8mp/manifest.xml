@@ -1,4 +1,4 @@
-<manifest version="1.0" type="device" target-level="8">
+<manifest version="1.0" type="device" target-level="202404">
     <hal format="aidl">
         <name>android.hardware.gatekeeper</name>
         <version>1</version>
@@ -7,60 +7,10 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.graphics.mapper</name>
-        <transport arch="32+64">passthrough</transport>
-        <impl level="generic"></impl>
-        <version>4.0</version>
-        <interface>
-            <name>IMapper</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.renderscript</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IDevice</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.media.c2</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IComponentStore</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.audio</name>
-        <transport>hwbinder</transport>
-        <version>7.1</version>
-        <interface>
-            <name>IDevicesFactory</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.audio.effect</name>
-        <transport>hwbinder</transport>
-		<version>7.0</version>
-        <interface>
-            <name>IEffectsFactory</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.bluetooth</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IBluetoothHci</name>
-            <instance>default</instance>
-        </interface>
+        <version>1</version>
+        <fqname>IComponentStore/default</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.camera.provider</name>
@@ -87,5 +37,14 @@
     <hal format="aidl">
        <name>android.hardware.security.sharedsecret</name>
        <fqname>ISharedSecret/default</fqname>
+    </hal>
+    <hal format="aidl">
+       <name>android.hardware.oemlock</name>
+       <fqname>IOemLock/default</fqname>
+    </hal>
+    <hal format="aidl">
+       <name>android.hardware.security.secretkeeper</name>
+       <version>1</version>
+       <fqname>ISecretkeeper/default</fqname>
     </hal>
 </manifest>

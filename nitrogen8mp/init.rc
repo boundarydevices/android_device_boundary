@@ -67,13 +67,13 @@ on init && property:vendor.skip.charger_not_need=0 && property:ro.boot.powersave
 
 on late-fs && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
     start storageproxyd
-    start vendor.oemlock-1-0
     start vendor.confirmationui_default
 
 on late-fs && property:vendor.skip.charger_not_need=0
-    # Start keymaster/gatekeeper service
+    # Start keymaster/gatekeeper/oemlock service
     start vendor.gatekeeper-${ro.boot.keystore}
     start vendor.keymint-${ro.boot.keystore}
+    start vendor.oemlock-1-0-${ro.boot.keystore}
     setprop vendor.powerhal.init 1
 
     # Wait for keymaster
@@ -98,6 +98,7 @@ on early-boot && property:vendor.skip.charger_not_need=0
     # fsl omx graphic manager media framework property
     setprop vendor.rw.VIDEO_RENDER_NAME video_render.surface
     setprop vendor.media.fsl_codec.flag 7
+    setprop media.c2.hal.selection aidl
 
     setprop camera.disable_zsl_mode 1
 
@@ -179,6 +180,8 @@ on post-fs-data && property:vendor.skip.charger_not_need=0
     # tmp dir for opencl Compiler
     setprop vendor.TMPDIR /data/vendor/.opencl-cache
     mkdir /data/vendor/.opencl-cache 0771 system camera
+    # HWC data
+    mkdir /data/vendor/hwc 0771 system graphics
 
 on zygote-start && property:vendor.skip.charger_not_need=0
     # Create the directories used by the Wireless subsystem
@@ -216,6 +219,7 @@ on property:ro.boot.powersave.usb=true
 
     #enable platform/32f10108.usb runtime_pm
     write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/power/control auto
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/power/autosuspend_delay_ms 0
     write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.0.auto/power/control auto
     write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.1.auto/power/control auto
     write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.2.auto/power/control auto
@@ -258,3 +262,6 @@ on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty
 on property:sys.boot_completed=1
     # Turn on swap
     swapon_all /vendor/etc/fstab.nxp
+
+on property:sys.boot_completed=1
+    start vendor.secretkeeper.${ro.boot.keystore}
