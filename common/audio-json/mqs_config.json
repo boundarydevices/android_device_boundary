@@ -1,0 +1,4 @@
+{
+  "driver_name": "mqs",
+  "supported_out_devices": ["speaker"],
+}
