@@ -1,0 +1,1 @@
+allow installd vendor_configs_file:file { map };

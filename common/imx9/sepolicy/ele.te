@@ -1,0 +1,16 @@
+##
+# i.MX EdgeLock Enclave (ele) daemon
+#
+type ele, domain;
+
+# Device node used for communicating with ELE
+type ele_device, dev_type;
+
+type ele_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(ele)
+
+allow ele vendor_data_file:dir { write add_name };
+allow ele vendor_data_file:file { open write create read };
+allow ele fingerprint_vendor_data_file:dir rw_dir_perms;
+allow ele fingerprint_vendor_data_file:file create_file_perms;
+allow ele ele_device:chr_file { open read write ioctl };

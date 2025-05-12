@@ -1,0 +1,20 @@
+vndbinder_use(hal_graphics_composer_default);
+hal_client_domain(hal_graphics_composer_default, hal_graphics_allocator);
+
+allow hal_graphics_composer_default hal_graphics_mapper_hwservice:hwservice_manager find;
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow hal_graphics_composer_default gpu_device:dir { search read open watch };
+allow hal_graphics_composer_default sysfs:dir { read open };
+allow hal_graphics_composer_default sysfs:file { read open getattr write };
+allow hal_graphics_composer_default ion_device:chr_file { write };
+allow hal_graphics_composer_default sysfs_leds:dir { search };
+allow hal_graphics_composer_default sysfs_leds:file { getattr open read write };
+allow hal_graphics_composer_default hal_graphics_allocator_default_tmpfs:file { read write map };
+allow hal_graphics_composer_default tee_device:chr_file { open read write ioctl };
+allow hal_graphics_composer_default dmabuf_system_heap_device:chr_file { read write open ioctl };
+allow hal_graphics_composer_default dmabuf_system_secure_heap_device:chr_file { read open ioctl };
+# allow HWC to write log/dump file
+allow hal_graphics_composer_default vendor_hwc_file:dir rw_dir_perms;
+allow hal_graphics_composer_default vendor_hwc_file:file create_file_perms;
+
+set_prop(hal_graphics_composer_default, vendor_public_default_prop)

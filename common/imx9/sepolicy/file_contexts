@@ -1,0 +1,137 @@
+/dev/mxc_asrc                   u:object_r:audio_device:s0
+/dev/mxc_hdmi                   u:object_r:video_device:s0
+/dev/mxc_hifi4                  u:object_r:audio_device:s0
+/dev/rpmsg0                     u:object_r:audio_device:s0
+/dev/rpmsg1                     u:object_r:audio_device:s0
+/dev/dma_heap/reserved          u:object_r:dmabuf_system_heap_device:s0
+/dev/dma_heap/reserved-uncached          u:object_r:dmabuf_system_heap_device:s0
+/dev/dma_heap/dsp               u:object_r:dmabuf_heap_device:s0
+/dev/imxdpu                     u:object_r:gpu_device:s0
+/dev/caam_kb                    u:object_r:caam_device:s0
+/dev/dri                        u:object_r:gpu_device:s0
+/dev/dri/card0                  u:object_r:graphics_device:s0
+/dev/dri/card1                  u:object_r:graphics_device:s0
+/dev/dri/card2                  u:object_r:graphics_device:s0
+/dev/dri/controlD64             u:object_r:graphics_device:s0
+/dev/dri/controlD65             u:object_r:graphics_device:s0
+/dev/dri/renderD128             u:object_r:gpu_device:s0
+/dev/dri/renderD129             u:object_r:gpu_device:s0
+/vendor/bin/hw/android\.hardware\.usb-service\.imx                 u:object_r:hal_usb_impl_exec:s0
+/vendor/bin/hw/android\.hardware\.usb\.gadget-service\.imx         u:object_r:hal_usb_impl_exec:s0
+/dev/diag                       u:object_r:diag_device:s0
+/vendor/app(/.*)?               u:object_r:same_process_hal_file:s0
+/data/vendor/ss(/.*)?           u:object_r:tee_data_file:s0
+/data/vendor/.opencl-cache(/.*)?       u:object_r:opencl_cache_file:s0
+/data/vendor/hwc(/.*)?                 u:object_r:vendor_hwc_file:s0
+
+###############################################
+# same-process HAL files and their dependencies
+#
+/vendor/lib(64)?/libdrm_android\.so         u:object_r:same_process_hal_file:s0
+
+/vendor/lib(64)?/libGLSLC\.so               u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libVSC\.so                 u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libGAL\.so                 u:object_r:same_process_hal_file:s0
+
+/vendor/lib(64)?/hw/vulkan\.imx\.so        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/gralloc_viv\.imx\.so   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libdrm_vivante\.so         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libvulkan_VIVANTE\.so      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSPIRV_viv\.so           u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libCLC\.so                 u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libLLVM_viv\.so            u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libOpenCL\.so              u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libopencl-2d\.so           u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/lib(64)?/hw/mapper\.imx\.so u:object_r:same_process_hal_file:s0
+
+/vendor/lib(64)?/lib_aac_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_amr_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_asf_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_avi_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_dsf_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_flac_parser_arm11_elinux\.3\.0\.so      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_flv_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mkv_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mp3_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mp3_parser_v2_arm11_elinux\.so          u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mp4_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_mpg2_parser_arm11_elinux\.3\.0\.so      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_ogg_parser_arm11_elinux\.3\.0\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_rm_parser_arm11_elinux\.3\.0\.so        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/extractors/libimxextractor\.so              u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.keymaster@4\.0-service.trusty u:object_r:hal_keymaster_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.keymaster@4\.0-service-imx u:object_r:hal_keymaster_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.security\.keymint-service\.trusty u:object_r:hal_keymint_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.security\.keymint-service-imx u:object_r:hal_keymint_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.security\.keymint-service\.rust\.trusty u:object_r:hal_keymint_default_exec:s0
+/vendor/bin/hw/android\.hardware\.gatekeeper-service-imx    u:object_r:hal_gatekeeper_default_exec:s0
+/vendor/bin/hw/android\.hardware\.gatekeeper-service\.trusty    u:object_r:hal_gatekeeper_default_exec:s0
+/vendor/bin/hw/nxp\.hardware\.secure-enclave    u:object_r:hal_secure_enclave_default_exec:s0
+/vendor/bin/hw/android\.hardware\.security\.secretkeeper\.trusty            u:object_r:hal_secretkeeper_default_exec:s0
+
+/vendor/bin/hw/android\.hardware\.power-service\.imx         u:object_r:hal_power_default_exec:s0
+/dev/socket/pps                                              u:object_r:pps_socket:s0
+
+# trusty ipc target
+/dev/trusty-ipc-dev0        u:object_r:tee_device:s0
+/dev/trusty-log0            u:object_r:logbuffer_device:s0
+
+# mmc rpmb
+/dev/mmcblk2rpmb      u:object_r:mmc_rpmb_char_device:s0
+/dev/mmcblk0rpmb      u:object_r:mmc_rpmb_char_device:s0
+
+# secure os storage
+/vendor/bin/storageproxyd   u:object_r:tee_exec:s0
+/vendor/bin/trusty_apploader u:object_r:tee_exec:s0
+/vendor/bin/hw/imx_dek_extractor u:object_r:tee_exec:s0
+/vendor/bin/firmware_loader u:object_r:tee_exec:s0
+/vendor/bin/secure_dpu       u:object_r:tee_exec:s0
+/postinstall/bin/imx_dek_inserter u:object_r:system_file:s0
+
+# ele target
+/dev/hsm1_ch0	u:object_r:ele_device:s0
+/dev/hsm1_ch1	u:object_r:ele_device:s0
+/vendor/bin/hw/nvmd u:object_r:ele_exec:s0
+
+/vendor/bin/init\.insmod\.sh                u:object_r:init-insmod-sh_exec:s0
+/vendor/etc/early\.init\.cfg                  u:object_r:init-insmod-sh_exec:s0
+
+/vendor/bin/hw/android\.hardware\.drm\-service\.widevine u:object_r:hal_drm_widevine_aidl_exec:s0
+/vendor/bin/hw/android\.hardware\.drm\-service\.clearkey u:object_r:hal_drm_clearkey_aidl_exec:s0
+/data/vendor/mediadrm(/.*)? u:object_r:mediadrm_vendor_data_file:s0
+/vendor/bin/hw/android\.hardware\.dumpstate-service\.imx      u:object_r:hal_dumpstate_impl_exec:s0
+/dev/cpu_dma_latency u:object_r:latency_device:s0
+/vendor/bin/hw/android\.hardware\.oemlock-service\.imx      u:object_r:hal_oemlock_impl_exec:s0
+/vendor/bin/hw/android\.hardware\.oemlock-service-software\.imx      u:object_r:hal_oemlock_impl_exec:s0
+/vendor/bin/hw/android\.hardware\.confirmationui-service\.trusty     u:object_r:hal_confirmationui_impl_exec:s0
+
+# partitions of boot device
+/dev/block/by-name/vendor_boot_[ab]          u:object_r:boot_block_device:s0
+/dev/block/by-name/dtbo_[ab]                 u:object_r:dtbo_block_device:s0
+/dev/block/by-name/boot_[ab]                 u:object_r:boot_block_device:s0
+/dev/block/by-name/init_boot_[ab]            u:object_r:boot_block_device:s0
+/dev/block/by-name/system_[ab]               u:object_r:system_block_device:s0
+/dev/block/by-name/vendor_[ab]               u:object_r:system_block_device:s0
+/dev/block/by-name/product_[ab]              u:object_r:system_block_device:s0
+/dev/block/by-name/misc                      u:object_r:misc_block_device:s0
+/dev/block/by-name/metadata                  u:object_r:metadata_block_device:s0
+/dev/block/by-name/presistdata               u:object_r:frp_block_device:s0
+/dev/block/by-name/userdata                  u:object_r:userdata_block_device:s0
+/dev/block/by-name/vbmeta_[ab]               u:object_r:vbmeta_block_device:s0
+/dev/block/by-name/super                     u:object_r:super_block_device:s0
+/dev/block/by-name/bootloader_[ab]           u:object_r:bootloader_block_device:s0
+/dev/block/by-name/fbmisc                    u:object_r:fbmisc_block_device:s0
+
+/vendor/bin/hw/android\.hardware\.camera\.provider@2\.7-service-google       u:object_r:hal_camera_default_exec:s0
+
+/vendor/bin/hw/android\.hardware\.graphics\.composer3-service\.imx  u:object_r:hal_graphics_composer_default_exec:s0
+
+# allocator AIDL version
+/(vendor|system/vendor)/bin/hw/android\.hardware\.graphics\.allocator-service\.imx   u:object_r:hal_graphics_allocator_default_exec:s0
+
+# memtrack
+/(vendor|system/vendor)/bin/hw/android\.hardware\.memtrack-service\.imx       u:object_r:hal_memtrack_default_exec:s0
+
+
+/dev/dmabuf_imx                               u:object_r:ion_device:s0
+/dev/dma_heap/secure                          u:object_r:dmabuf_system_secure_heap_device:s0

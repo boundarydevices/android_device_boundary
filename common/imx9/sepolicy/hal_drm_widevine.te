@@ -1,0 +1,16 @@
+type hal_drm_widevine_aidl, domain;
+hal_server_domain(hal_drm_widevine_aidl, hal_drm)
+hal_client_domain(hal_drm_widevine_aidl, hal_power)
+
+type hal_drm_widevine_aidl_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_drm_widevine_aidl)
+
+allow hal_drm_widevine_aidl mediadrm_vendor_data_file:dir create_dir_perms;
+allow hal_drm_widevine_aidl mediadrm_vendor_data_file:file create_file_perms;
+allow hal_drm_widevine_aidl vndbinder_device:chr_file { open read write ioctl map };
+allow hal_drm_widevine_aidl { appdomain -isolated_app }:fd use;
+allow hal_drm_widevine_aidl mediacodec:fd use;
+allow hal_drm_widevine_aidl hal_allocator_server:fd use;
+allow hal_drm_widevine_aidl dmabuf_system_heap_device:chr_file {read open ioctl write};
+
+allow hal_drm_widevine_aidl hal_drm_service:service_manager {add};

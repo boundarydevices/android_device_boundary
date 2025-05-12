@@ -1,0 +1,4 @@
+allow toolbox init:fifo_file { write };
+allow toolbox init:fifo_file { getattr };
+allow toolbox ram_device:blk_file { write read open getattr };
+

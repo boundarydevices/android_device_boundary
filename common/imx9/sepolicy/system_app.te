@@ -1,0 +1,16 @@
+allow system_app system_app_data_file:notdevfile_class_set rw_file_perms;
+allow system_app cache_recovery_file:dir { search write add_name };
+allow system_app cache_recovery_file:file { create write open };
+allow system_app cache_file:dir { rw_file_perms add_name create };
+allow system_app cache_file:file  { rw_file_perms create };
+allow system_app caam_device:chr_file  rw_file_perms;
+allow system_app net_radio_prop:property_service  { set };
+allow system_app net_radio_prop:property_service  { set };
+allow system_app ctl_default_prop:property_service  { set };
+allow system_app dhcp_prop:property_service  { set };
+allow system_app update_engine:binder { call transfer };
+allow system_app fs_bpf:dir { search };
+allow system_app hal_graphics_allocator_default_tmpfs:file { read write map };
+allow system_app hal_secure_enclave_default:binder { call transfer };
+
+get_prop(system_app, vendor_public_default_prop)

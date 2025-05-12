@@ -1,0 +1,19 @@
+allow kernel self:capability { mknod };
+allow kernel fuse:file rw_file_perms;
+allow kernel fuse:dir rw_dir_perms;
+allow kernel device:dir  { add_name write create remove_name rmdir };
+allow kernel device:chr_file  { create setattr getattr unlink };
+allow kernel sysfs:blk_file  { create setattr };
+allow kernel sysfs_devices_system_cpu:file  { write };
+allow kernel mediaprovider:fd use;
+allow kernel vendor_file:file { read open map getattr };
+allow kernel vendor_file:dir { read };
+allow kernel rootfs:file { execute };
+allow kernel vendor_configs_file:file { map };
+allow kernel vold_data_file:file { write };
+dontaudit kernel device:blk_file { create };
+
+allow kernel shell_exec:file { read open execute map getattr };
+domain_auto_trans(kernel, shell_exec, ueventd)
+allow ueventd kernel:fd { use };
+allow kernel init-insmod-sh:key { search };

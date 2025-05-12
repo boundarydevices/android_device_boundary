@@ -1,0 +1,13 @@
+type hal_secure_enclave_default, domain;
+hal_server_domain(hal_secure_enclave_default, hal_secure_enclave)
+
+type hal_secure_enclave_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_secure_enclave_default)
+
+add_service(hal_secure_enclave_default, hal_secure_enclave_service)
+
+binder_use(hal_secure_enclave_service)
+binder_call(hal_secure_enclave_service, servicemanager)
+
+allow hal_secure_enclave_default ele_device:chr_file { read write open ioctl };
+allow hal_secure_enclave_default vndbinder_device:chr_file { read write open ioctl map };

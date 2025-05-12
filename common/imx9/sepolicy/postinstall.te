@@ -1,0 +1,20 @@
+# to access ro.boot.soc_type and ro.boot.boot_device_root
+# and ro.boot.soc_rev
+get_prop(postinstall, vendor_public_default_prop);
+
+# to search block device files under /dev/block directory
+allow postinstall block_device:dir { search };
+
+allow postinstall emmc_boot0:blk_file { rw_file_perms };
+allow postinstall sdcard:blk_file { rw_file_perms };
+
+allow postinstall sysfs_block_devices:dir { search };
+allow postinstall sysfs_block_devices:file { rw_file_perms };
+
+allow postinstall proc:dir { search };
+allow postinstall proc_drop_caches:file { w_file_perms };
+
+allow postinstall bootloader_block_device:blk_file { open read write ioctl getattr };
+
+allow postinstall dek_extractor_service:service_manager { find };
+allow postinstall tee:binder { call };

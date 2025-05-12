@@ -1,0 +1,4 @@
+get_prop(zygote, vendor_public_default_prop)
+
+allow zygote gpu_device:chr_file { read write open ioctl getattr };
+allow zygote storage_file:dir { getattr };

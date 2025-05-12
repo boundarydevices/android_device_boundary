@@ -1,0 +1,7 @@
+get_prop(mediaserver, vendor_public_default_prop)
+
+allow mediaserver tmpfs:dir rw_dir_perms;
+allow mediaserver tmpfs:file rw_file_perms;
+allow mediaserver mediaserver:netlink_kobject_uevent_socket { create setopt bind read };
+allow mediaserver sysfs_soc:file r_file_perms;
+allow mediaserver sysfs_soc:dir { read open search };

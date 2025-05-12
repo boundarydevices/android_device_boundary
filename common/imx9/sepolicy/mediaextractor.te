@@ -1,0 +1,4 @@
+allow mediaextractor system_server:fifo_file { write };
+allow mediaextractor sdcardfs:file { read getattr};
+allow mediaextractor vendor_file:dir { read open };
+allow mediaextractor vfat:file rw_file_perms;

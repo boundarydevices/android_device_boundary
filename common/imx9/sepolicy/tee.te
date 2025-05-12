@@ -1,0 +1,25 @@
+# secure-os storage-daemon
+
+allow tee self:capability { setuid setgid sys_rawio };
+
+# secure os communication
+# in global tee.te
+
+# rpmb operations
+allow tee block_device:dir { search };
+allow tee mmc_rpmb_char_device:chr_file rw_file_perms;
+allow tee tee_data_file:dir create_dir_perms;
+
+# trusty_apploader operations
+allow tee vendor_file:file { read open map };
+allow tee dmabuf_system_heap_device:chr_file { read open ioctl };
+allow tee dmabuf_system_secure_heap_device:chr_file { read open ioctl };
+allow tee metadata_file:dir { search };
+allow tee gsi_metadata_file:dir { search };
+
+allow tee dek_extractor_service:service_manager { add };
+allow tee servicemanager:binder { call transfer };
+
+allow tee video_device:chr_file { open read write };
+
+set_prop(tee, vendor_trusty_storage_prop)
