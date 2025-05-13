@@ -47,13 +47,6 @@ $(error If TARGET_UBOOT_ENV is set TARGET_UBOOT_ENV_SIZE must also be set. See\
 endif
 endif
 
-# Check if we can sign u-boot image.
-# For this CST_BIN, SIGN_KEY, IMG_KEY and SRK_TABLE must all be defined.
-ifneq ($(and $(CST_BIN),$(SIGN_KEY),$(IMG_KEY),$(SRK_TABLE)),)
-$(info u-boot will be signed)
-UBOOT_SIGN := true
-endif
-
 # TARGET_UBOOT_BUILD_TARGET may be assigned in target BoardConfig.mk.
 TARGET_UBOOT_BUILD_TARGET ?= u-boot.imx
 
@@ -140,7 +133,8 @@ $(UBOOTENVSH): | $(UBOOT_OUT)
 
 $(UBOOT_BIN): $(UBOOTENVSH) | $(UBOOT_COLLECTION) $(UBOOT_OUT)
 	$(hide) echo "Building $(UBOOT_ARCH) $(UBOOT_VERSION) U-Boot ..."
-	$(hide) $(call build_m4_image)
+		. ${product_path}/AndroidUboot.sh; \
+		build_pre_image
 	$(hide) for ubootplat in $(TARGET_BOOTLOADER_CONFIG); do \
 		UBOOT_PLATFORM=`echo $$ubootplat | cut -d':' -f1`; \
 		UBOOT_CONFIG=`echo $$ubootplat | cut -d':' -f2`; \
@@ -152,25 +146,15 @@ $(UBOOT_BIN): $(UBOOTENVSH) | $(UBOOT_COLLECTION) $(UBOOT_OUT)
 		if [ "$(UBOOT_POST_PROCESS)" = "true" ]; then \
 			echo "build post process" ; \
 			. $(UBOOTENVSH); \
-		    $(call build_imx_uboot, $(TARGET_BOOTLOADER_POSTFIX), $$UBOOT_PLATFORM) \
-		    echo "===================Finish building `echo $$ubootplat | cut -d':' -f2` ==================="; \
+			. ${product_path}/AndroidUboot.sh; \
+		    build_imx_uboot $(TARGET_BOOTLOADER_POSTFIX) $$UBOOT_PLATFORM; \
+		    echo "===================Finish building `echo $$ubootplat` ==================="; \
 		else \
 			install -D $(UBOOT_OUT)/u-boot$(TARGET_DTB_POSTFIX).$(TARGET_BOOTLOADER_POSTFIX) $(UBOOT_COLLECTION)/u-boot-$$UBOOT_PLATFORM.imx; \
-		fi; \
-		if [ "$(PRODUCT_IMX_DRM)" = "true" ]; then \
-		    echo "build post process with tee" ; \
-		    $(call build_uboot_w_tee,  $(TARGET_BOOTLOADER_POSTFIX), $$UBOOT_PLATFORM) \
 		fi; \
 		install -D $(UBOOT_COLLECTION)/flash.bin $(UBOOT_BIN); \
 		UBOOT_BD_NAME=`echo u-boot.$$UBOOT_CONFIG | sed 's/_defconfig//'`; \
 		install -D $(UBOOT_COLLECTION)/flash.bin $(PRODUCT_OUT)/preboot/$$UBOOT_BD_NAME; \
-		if [ "$(UBOOT_SIGN)" = "true" ]; then \
-			echo "Signing $$UBOOT_BD_NAME"; \
-			cd $(UBOOT_OUT); \
-			$(ANDROID_BUILD_TOP)/$(UBOOT_IMX_PATH)/uboot-imx/sign_hab_imx8m.sh; \
-			cd -; \
-			install -D $(UBOOT_OUT)/signed_flash.bin $(PRODUCT_OUT)/preboot/$$UBOOT_BD_NAME; \
-		fi; \
 	done
 
 .PHONY: bootloader $(UBOOT_BIN) $(UBOOTENVSH)
