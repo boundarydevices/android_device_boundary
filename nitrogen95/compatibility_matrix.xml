@@ -1,0 +1,6 @@
+<compatibility-matrix version="1.0" type="device">
+    <hal format="native" optional="false">
+        <name>netutils-wrapper</name>
+        <version>1.0</version>
+    </hal>
+</compatibility-matrix>

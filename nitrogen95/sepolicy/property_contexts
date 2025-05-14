@@ -1,0 +1,3 @@
+ro.vendor.arm.gralloc.                  u:object_r:vendor_public_default_prop:s0
+ro.vendor.arm.egl.configs.              u:object_r:vendor_public_default_prop:s0
+vendor.mali.                            u:object_r:vendor_public_default_prop:s0

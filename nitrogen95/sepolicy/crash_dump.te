@@ -1,0 +1,1 @@
+allow crash_dump profiling_mali_gpu:file  { read open getattr map };

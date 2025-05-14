@@ -1,0 +1,2 @@
+type sysfs_mali_gpu, fs_type, sysfs_type;
+type profiling_mali_gpu, vendor_file_type, file_type;

@@ -1,0 +1,29 @@
+{
+  "__readme": [
+    "Basic Camera HAL v3 configuration."
+  ],
+
+  "hal_version": "3",
+  "cam_blit_copy": "DPU",
+  "cam_blit_csc": "DPU",
+
+  "camera_metadata": [
+    {
+      "camera_type": "back",
+      "camera_name": "ap1302",
+      "orientation": "0",
+      "mplane": "1",
+      "buffer_type": "dma",
+      "ActiveArrayWidth": "1280",
+      "ActiveArrayHeight": "800",
+      "PixelArrayWidth": "1280",
+      "PixelArrayHeight": "800",
+      "PhysicalWidth": "3.84",
+      "PhysicalHeight": "2.4",
+      "FocalLength": "3.29",
+      "MaxJpegSize": "4000000",
+      "MinFrameDuration": "16666666",
+      "MaxFrameDuration": "300000000"
+    }
+  ]
+}

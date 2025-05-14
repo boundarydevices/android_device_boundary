@@ -1,0 +1,1 @@
+allow { appdomain -isolated_app_all } npu_device:chr_file rw_file_perms;

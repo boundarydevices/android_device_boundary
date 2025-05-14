@@ -1,0 +1,1 @@
+allow shell profiling_mali_gpu:file { read open getattr map execute };

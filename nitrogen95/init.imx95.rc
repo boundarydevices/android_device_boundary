@@ -1,0 +1,58 @@
+on early-boot
+
+    # Set OpenGLES version
+    setprop ro.opengles.version 196610
+
+    # Hwui RenderPipelineType default is skiagl, change to use skiavk
+    setprop debug.hwui.renderer skiavk
+
+    # Threaded RenderEngine with SkiaVK Backend
+    setprop debug.renderengine.backend skiavkthreaded
+
+    # change for FSL specific service
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+    chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+    chown root system /sys/devices/system/cpu/cpu2/online
+    chmod 0664 /sys/devices/system/cpu/cpu2/online
+    chown root system /sys/devices/system/cpu/cpu3/online
+    chmod 0664 /sys/devices/system/cpu/cpu3/online
+
+on property:sys.boot_completed=1
+    # Set default CPU frequency governor
+    # configure governor settings for little cluster
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "schedutil"
+    # The rate-limit tunable in the schedutil governor applies to transitions to both lower and higher frequencies
+    # Set up and down limit to 200us/200us
+    write /sys/devices/system/cpu/cpufreq/schedutil/rate_limit_us 200
+    write /proc/sys/kernel/sched_util_clamp_min_rt_default 512
+    write /sys/devices/platform/soc@0/30c00000.bus/30e20000.audio-blk-ctrl/power/control auto
+    write /sys/devices/platform/soc@0/32c00000.bus/32ec0000.media-blk-ctrl/power/control auto
+    write /sys/devices/platform/soc@0/30c00000.bus/32fc0000.hdmi-blk-ctrl/power/control auto
+    write /sys/clk_ctrl/enable_clk_disable_unused 1
+    chown mediacodec mediacodec /sys/class/remoteproc/remoteproc0/state
+    chmod 0660 /sys/class/remoteproc/remoteproc0/state
+    chown mediacodec mediacodec /sys/class/remoteproc/remoteproc0/name
+    chmod 0660 /sys/class/remoteproc/remoteproc0/name
+
+on property:sys.boot_completed=1
+    # update cpuset now that processors are up
+    write /dev/cpuset/foreground/cpus 0-5
+
+    # top-app gets all cpus
+    write /dev/cpuset/top-app/cpus 0-5
+
+    #background contains a small subset (generally one little core)
+    write /dev/cpuset/background/cpus 0
+
+    # add system-background cpuset, a new cpuset for system services
+    # that should not run on larger cores
+    # system-background is for system tasks that should only run on
+    # little cores, not on bigs to be used only by init
+    write /dev/cpuset/system-background/cpus 0-4

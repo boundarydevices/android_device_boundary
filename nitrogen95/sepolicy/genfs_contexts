@@ -1,0 +1,23 @@
+genfscon sysfs /devices/platform/soc@0/30000000.bus/30370000.snvs/30370000.snvs:snvs-rtc-lp/rtc/rtc0/hctosys     u:object_r:sysfs_rtc:s0
+genfscon sysfs /devices/platform/soc/42800000.bus/42850000.mmc/mmc_host/mmc0/mmc0:0001/block/mmcblk0 u:object_r:sysfs_block_devices:s0
+genfscon sysfs /devices/platform/soc/42800000.bus/42860000.mmc/mmc_host/mmc1/mmc1:aaaa/block/mmcblk1 u:object_r:sysfs_block_devices:s0
+genfscon sysfs /devices/platform/soc@0/30800000.bus/30bb0000.spi/spi_master/spi0/spi0.0/mtd/mtd0/mtdblock0 u:object_r:sysfs_block_devices:s0
+
+#sys/class/net
+genfscon sysfs /devices/platform/soc/42000000.bus/425b0000.can/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/42800000.bus/428b0000.mmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:1/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc@0/30800000.bus/30be0000.ethernet/net                u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc@0/30800000.bus/30bf0000.ethernet/net                u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc@0/33800000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net  u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/4ca00000.pcie/pci0002:00/0002:00:08.0/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/4ca00000.pcie/pci0002:00/0002:00:10.0/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/4ca00000.pcie/pci0002:00/0002:00:00.0/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/4c300000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/4c300000.pcie/pci0000:00/0000:00:00.0/0000:01:00.1/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/4ca00000.pcie/pci0001:00/0001:00:00.0/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/soc/4ca00000.pcie/pci0001:00/0001:00:08.0/net u:object_r:sysfs_net:s0
+
+genfscon sysfs /devices/platform/soc@0/30800000.bus/30a30000.i2c/i2c-1/1-0050/extcon u:object_r:sysfs_extcon:s0
+
+# for dumpstate to access the stat file
+genfscon sysfs /devices/platform/94400000.pmem/ndbus0/region0/namespace0.0/block/pmem0                                       u:object_r:sysfs_block_devices:s0

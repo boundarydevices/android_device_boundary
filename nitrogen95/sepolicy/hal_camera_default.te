@@ -1,0 +1,4 @@
+set_prop(hal_camera_default, vendor_camera_hal_prop)
+get_prop(hal_camera_default, vendor_camera_hal_prop)
+allow hal_camera_default dmabuf_cma_heap_device:chr_file r_file_perms;
+allow hal_camera_default hal_graphics_allocator_default_tmpfs:file { read write map };

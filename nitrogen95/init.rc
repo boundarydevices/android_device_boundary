@@ -1,0 +1,275 @@
+import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
+import /vendor/etc/init/hw/init.${ro.hardware}.${ro.boot.soc_type}.rc
+
+on early-init
+    # mount the debugfs
+    mount debugfs none /sys/kernel/debug/ mode=0755
+
+on early-init
+    start early_init_sh
+    # Set the host name which used in console
+    export HOSTNAME nitrogen95
+
+    # Due keymaster start very early so set prop here
+    # Also gatekeeper share same role for keymaster
+    setprop ro.hardware.keystore ${ro.boot.keystore}
+    setprop ro.hardware.gatekeeper ${ro.boot.keystore}
+    setprop vendor.storageproxyd ${ro.boot.keystore}
+
+    # Use ro.boot.lcd_density to override ro.sf.lcd_density
+    setprop ro.sf.lcd_density ${ro.boot.lcd_density}
+
+# Skip charger_not_need trigger for charger mode
+on early-init && property:ro.boot.mode=charger
+    setprop vendor.skip.charger_not_need 1
+
+on init && property:vendor.skip.charger_not_need=0
+    start watchdogd
+
+    # disable cursor blink for fbcon, if no splash screen support
+    write /sys/class/graphics/fbcon/cursor_blink 0
+
+    # deattch the fbcon as hdmi hotplug conflict with fbcon
+    write /sys/class/vtconsole/vtcon1/bind 0
+
+    chown system system /dev/cpuctl/top-app/cpu.uclamp.min
+    chmod 664 /dev/cpuctl/top-app/cpu.uclamp.min
+    chown system system /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+    chmod 664 /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+    chown system system /dev/cpuctl/foreground/cpu.uclamp.min
+    chmod 664 /dev/cpuctl/foreground/cpu.uclamp.min
+    chown system system /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive
+    chmod 664 /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive
+    chown system system /dev/cpuctl/rt/cpu.uclamp.min
+    chmod 664 /dev/cpuctl/rt/cpu.uclamp.min
+    chown system system /dev/cpuctl/rt/cpu.uclamp.latency_sensitive
+    chmod 664 /dev/cpuctl/rt/cpu.uclamp.latency_sensitive
+    chown system system /dev/cpuctl/background/cpu.uclamp.max
+    chmod 664 /dev/cpuctl/background/cpu.uclamp.max
+
+    # set default uclamp value for foreground/top-app/rt/background (only affects EAS)
+    write /dev/cpuctl/foreground/cpu.uclamp.min 20
+    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/top-app/cpu.uclamp.min 50
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/rt/cpu.uclamp.min 60
+    write /dev/cpuctl/rt/cpu.uclamp.latency_sensitive 1
+    write /dev/cpuctl/background/cpu.uclamp.max 50
+
+service vpu_firmware_load /vendor/bin/firmware_loader /vendor/firmware/wave633c_codec_fw.bin.signed
+    user root
+    group root system
+    disabled
+    oneshot
+
+# setenv append_bootargs androidboot.powersave.uclamp=true
+on init && property:vendor.skip.charger_not_need=0 && property:ro.boot.powersave.uclamp=true
+    write /dev/cpuctl/foreground/cpu.uclamp.min 0
+    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 0
+    write /dev/cpuctl/top-app/cpu.uclamp.min 0
+    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 0
+    write /dev/cpuctl/rt/cpu.uclamp.min 0
+    write /dev/cpuctl/rt/cpu.uclamp.latency_sensitive 0
+
+on late-fs && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
+    start storageproxyd
+    start vendor.confirmationui_default
+    start securedpu_daemon
+
+on late-fs && property:vendor.skip.charger_not_need=0
+    # Start keymaster/gatekeeper/oemlock service
+    start vendor.gatekeeper-${ro.boot.keystore}
+    start vendor.keymint-${ro.boot.keystore}
+    start vendor.oemlock-1-0-${ro.boot.keystore}
+    setprop vendor.powerhal.init 1
+
+    # Wait for keymaster
+    exec_start wait_for_keymaster
+
+    mount_all /vendor/etc/fstab.nxp --late
+    start vpu_firmware_load
+
+on early-boot && property:vendor.skip.charger_not_need=0
+    # For evk_95, when swap used about 400M, upgrade the level.
+    setprop ro.lmk.upgrade_pressure 93
+    setprop ro.lmk.downgrade_pressure 99
+    setprop ro.lmk.critical_upgrade true
+
+    setprop vendor.hwc.stretch.filter  1
+
+    # Default g2d [dpu|pxp|viv] lib to be used
+    setprop vendor.imx.default-g2d dpu
+
+    # fsl omx graphic manager media framework property
+    setprop vendor.rw.VIDEO_RENDER_NAME video_render.surface
+    setprop vendor.media.fsl_codec.flag 7
+    setprop media.c2.hal.selection aidl
+
+    setprop camera.disable_zsl_mode 1
+
+   # Tweak the mmc device read ahead buffer size
+    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk2/queue/read_ahead_kb 2048
+
+    # Prepare for wifi
+    setprop wifi.interface wlan0
+    setprop wifi.direct.interface p2p0
+    setprop wifi.concurrent.interface wlan1
+
+    # Set tracefs permission to 755
+    chmod 0755 /sys/kernel/debug/tracing
+
+    # Set sw_sync group to graphics and set permission to 664
+    chown root graphics /sys/kernel/debug/sync/sw_sync
+    chmod 0664 /sys/kernel/debug/sync/sw_sync
+
+    # Default backlight device
+    setprop vendor.hw.backlight.dev "backlight-mipi"
+    chown system system /sys/class/backlight/${vendor.hw.backlight.dev}/brightness
+    chmod 0660 /sys/class/backlight/${vendor.hw.backlight.dev}/brightness
+
+    # Backup backlight device
+    setprop vendor.hw.backlight_backup.dev "backlight-lvds"
+    chown system system /sys/class/backlight/${vendor.hw.backlight_backup.dev}/brightness
+    chmod 0660 /sys/class/backlight/${vendor.hw.backlight_backup.dev}/brightness
+
+    # Allow DSD file(duration larger than 10s) can play
+    setprop audio.offload.min.duration.secs 10
+
+    # Enlarge limition of audio buffer allocation
+    setprop ro.af.client_heap_size_kbyte 32768
+
+# Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
+service watchdogd /system/bin/watchdogd 10 20
+    class core
+    seclabel u:r:watchdogd:s0
+
+# bugreport is triggered by holding down volume down, volume up and power
+service bugreport /system/bin/dumpstate -d -p -z
+    class main
+    disabled
+    oneshot
+    keycodes 114 115 116
+
+
+on boot && property:vendor.skip.charger_not_need=0
+    start audioserver
+    start mediadrm
+    start media
+    start drm
+
+on fs && property:vendor.skip.charger_not_need=0
+# mount ext4 partitions
+    mount_all /vendor/etc/fstab.nxp --early
+
+    # Adjust parameters for dm-verity device
+    write /sys/block/dm-0/queue/read_ahead_kb 4096
+
+    # Update dm-verity state and set partition.*.verified properties
+    verity_update_state
+
+on post-fs && property:vendor.skip.charger_not_need=0
+    # Set netd memlock rlimit to 8MB
+    setrlimit 8 8388608 8388608
+
+    # Turn on swap
+    swapon_all /vendor/etc/fstab.nxp
+
+    # Swap in only 1 page at a time
+    write /proc/sys/vm/page-cluster 0
+
+    # Grant permission for fetching available_pages info of statsd
+    chown system system /proc/pagetypeinfo
+    chmod 0440 /proc/pagetypeinfo
+
+on post-fs-data && property:vendor.skip.charger_not_need=0
+    setprop vold.post_fs_data_done 1
+
+    # tmp dir for opencl Compiler
+    setprop vendor.TMPDIR /data/vendor/.opencl-cache
+    mkdir /data/vendor/.opencl-cache 0771 system camera
+    # HWC data
+    mkdir /data/vendor/hwc 0771 system graphics
+
+on zygote-start && property:vendor.skip.charger_not_need=0
+    # Create the directories used by the Wireless subsystem
+    mkdir /data/vendor/wifi 0771 wifi wifi
+    mkdir /data/vendor/wifi/wifi_dumps 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+
+service early_init_sh /vendor/bin/init.insmod.sh /vendor/etc/early.init.cfg vendor.all.early_init.ready
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
+on post-fs-data && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
+    # create temp node for secure storage proxy
+    mkdir /data/vendor/ss 0700 system system
+    restart storageproxyd
+
+service storageproxyd /vendor/bin/storageproxyd -p /data/vendor/ss -r /dev/mmcblk0rpmb -d /dev/trusty-ipc-dev0
+   group system
+
+service securedpu_daemon /vendor/bin/secure_dpu
+   group system
+
+on property:ro.boot.vendor.sysrq=1 && property:vendor.skip.charger_not_need=0
+    write /proc/sys/kernel/sysrq 1
+
+# setenv append_bootargs androidboot.usb.debugging=1
+on property:ro.boot.usb.debugging=1
+    setprop persist.sys.usb.config adb
+
+# setenv append_bootargs androidboot.powersave.usb=true
+on property:ro.boot.powersave.usb=true
+    # enable platform/32f10100.usb runtime_pm
+    write /sys/devices/platform/soc@0/32f10100.usb/38100000.usb/power/control auto
+
+    #enable platform/32f10108.usb runtime_pm
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/power/control auto
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.0.auto/power/control auto
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.1.auto/power/control auto
+    write /sys/devices/platform/soc@0/32f10108.usb/38200000.usb/xhci-hcd.2.auto/power/control auto
+
+# setenv append_bootargs androidboot.lpa.enable=1
+on property:ro.boot.lpa.enable=1
+    setprop vendor.audio.lpa.hold_second 20
+    setprop vendor.audio.lpa.period_ms 500
+    setprop vendor.audio.lpa.enable 1
+
+# setenv append_bootargs androidboot.powersave.lpa=true
+on property:ro.boot.lpa.enable=1 && property:ro.boot.powersave.lpa=true
+    write /sys/lpa_ctrl/lpa 1
+
+service confirmationui_ta_load /vendor/bin/trusty_apploader /vendor/firmware/tee/confirmationui.app
+    user root
+    group root system
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
+    start confirmationui_ta_load
+
+service imx_dek_extractor /vendor/bin/hw/imx_dek_extractor
+    user system
+    group system
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty
+    start imx_dek_extractor
+
+on property:ro.boot.camera.layout=ap1302
+    setprop ro.media.xml_variant.profiles _95-ap1302
+
+on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty
+    # create node for secure enclave
+    mkdir /data/vendor/ele 0700 system system
+    start nvmd
+    start vendor.secure-enclave
+
+on property:sys.boot_completed=1
+    start vendor.secretkeeper.${ro.boot.keystore}

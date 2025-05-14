@@ -1,0 +1,51 @@
+/dev/block/mmcblk0boot0                      u:object_r:emmc_boot0:s0
+/dev/block/mmcblk1                           u:object_r:sdcard:s0
+
+#peripheral
+/dev/ttyLP[0-9]*                u:object_r:tty_device:s0
+/dev/sda[0-8]*                  u:object_r:fuse:s0
+
+#Thermal HAL service
+/vendor/bin/hw/android\.hardware\.thermal@2\.0-service.imx         u:object_r:hal_thermal_default_exec:s0
+/vendor/bin/hw/android\.hardware\.thermal-service\.imx             u:object_r:hal_thermal_default_exec:s0
+
+#Neural Network HAL service
+/vendor/bin/hw/android\.hardware\.neuralnetworks-shell-service-imx             u:object_r:hal_neuralnetworks_imx_exec:s0
+
+# Media Codec2 service
+/vendor/bin/hw/android\.hardware\.media\.c2\.service\.imx    u:object_r:mediacodec_exec:s0
+
+/dev/block/pmem0  u:object_r:rebootescrow_device:s0
+
+# libcamera related
+/dev/v4l-subdev[0-9]*                       u:object_r:video_device:s0
+/dev/media[0-9]*                            u:object_r:video_device:s0
+
+#Bluetootn HAL service
+/vendor/bin/hw/android\.hardware\.bluetooth-service.default.nxp            u:object_r:hal_bluetooth_default_exec:s0
+
+# android.system.suspend@1.0-service
+/sys/devices/virtual/wakeup/wakeup[0-9]*(/.*)?                                                                                                        u:object_r:sysfs_wakeup:s0
+/sys/devices/virtual/power_supply/battery/wakeup[0-9]*(/.*)?                                                                                          u:object_r:sysfs_wakeup:s0
+/sys/devices/virtual/power_supply/usb/wakeup[0-9]*(/.*)?                                                                                              u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/firmware:scmi/scmi_dev.[0-9]*(/.*)?/wakeup[0-9]*(/.*)?                                                                          u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/firmware:scmi/scmi_dev.[0-9]*(/.*)?/rtc/rtc[0-9]*(/.*)?/alarmtimer.[0-9]*(/.*)?.auto/wakeup[0-9]*(/.*)?                         u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/soc/42000000.bus/426d0000.i2c/i2c-6/6-0050/power_supply/tcpm-source-psy-6-0050/wakeup[0-9]*(/.*)?                               u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/soc/4c300000.pcie/pci0000:00/0000:00:00.0/0000:01:00.[0-9]*(/.*)?/wakeup[0-9]*(/.*)?                                            u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/soc/42000000.bus/42530000.i2c/i2c-2/2-0050/power_supply/tcpm-source-psy-2-0050/wakeup[0-9]*(/.*)?                               u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/soc/42800000.bus/428b0000.mmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:1/wakeup[0-9]*(/.*)?                                            u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/soc/42000000.bus/426d0000.i2c/i2c-6/6-0052/power_supply/tcpm-source-psy-6-0052/wakeup[0-9]*(/.*)?                               u:object_r:sysfs_wakeup:s0
+
+# mali gpu related
+/dev/mali0                                    u:object_r:gpu_device:s0
+/dev/dma_heap/linux,cma                       u:object_r:dmabuf_cma_heap_device:s0
+/vendor/lib(64)?/arm\.mali\.platform-V2-ndk\.so                                             u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/arm\.graphics-V5-ndk\.so                                                   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libdrm\.so                                                                 u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/lib(64)?/hw/mapper\.arm\.so                                         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/hw/vulkan\.mali\.so                                                        u:object_r:same_process_hal_file:s0
+/sys/module/mali_kbase/parameters/large_page_conf                                           u:object_r:sysfs_mali_gpu:s0
+/vendor/lib(64)?/libgpudataproducer\.so                                                     u:object_r:profiling_mali_gpu:s0
+
+# neutron npu
+/dev/neutron0                                 u:object_r:npu_device:s0

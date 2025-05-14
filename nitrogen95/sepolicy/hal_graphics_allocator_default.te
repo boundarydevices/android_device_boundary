@@ -1,0 +1,3 @@
+allow hal_graphics_allocator_default dmabuf_cma_heap_device:chr_file r_file_perms;
+allow { hal_graphics_allocator_client -isolated_app_all } hal_graphics_allocator_default_tmpfs:file { getattr read write map };
+allow { hal_graphics_allocator_client -isolated_app_all } sysfs_mali_gpu:file { getattr read open };

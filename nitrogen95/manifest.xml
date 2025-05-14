@@ -1,0 +1,50 @@
+<manifest version="1.0" type="device" target-level="202404">
+    <hal format="aidl">
+        <name>android.hardware.gatekeeper</name>
+        <version>1</version>
+        <interface>
+            <name>IGatekeeper</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.media.c2</name>
+        <version>1</version>
+        <fqname>IComponentStore/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.camera.provider</name>
+        <version>1</version>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>external/0</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+       <name>android.hardware.security.keymint</name>
+       <version>3</version>
+       <fqname>IKeyMintDevice/default</fqname>
+    </hal>
+    <hal format="aidl">
+       <name>android.hardware.security.keymint</name>
+       <version>3</version>
+       <fqname>IRemotelyProvisionedComponent/default</fqname>
+    </hal>
+    <hal format="aidl">
+       <name>android.hardware.security.secureclock</name>
+       <fqname>ISecureClock/default</fqname>
+    </hal>
+    <hal format="aidl">
+       <name>android.hardware.security.sharedsecret</name>
+       <fqname>ISharedSecret/default</fqname>
+    </hal>
+    <hal format="aidl">
+       <name>android.hardware.oemlock</name>
+       <fqname>IOemLock/default</fqname>
+    </hal>
+    <hal format="aidl">
+       <name>android.hardware.security.secretkeeper</name>
+       <version>1</version>
+       <fqname>ISecretkeeper/default</fqname>
+    </hal>
+</manifest>

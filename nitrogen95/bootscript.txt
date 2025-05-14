@@ -1,0 +1,200 @@
+a_base=0x90000000
+setexpr a_Image   ${a_base} + 0x10000000
+setexpr a_fdt     ${a_base} + 0x04000000
+setexpr a_fdtbo   ${a_base} + 0x05000000
+
+setenv apart boot
+setenv ramdisk ${a_Image}
+setenv bootmode normal
+setenv bootargs ''
+setenv mcore ''
+setenv abtest ''
+setenv slot_suffix ''
+
+# standard BCB (boot control block) management
+part number ${devtype} ${devnum} misc bcbindex
+
+# check if we use A/B partitioning
+part number ${devtype} ${devnum} boot_a abtest
+if itest.s "x${abtest}" != "x"; then
+	ab_select slot_name mmc ${devnum}:${bcbindex};
+	setenv slot_suffix _${slot_name};
+	setenv bootargs $bootargs androidboot.slot_suffix=${slot_suffix}
+fi
+
+if bcb load ${devnum} ${bcbindex}; then
+	if bcb test command = bootonce-bootloader; then
+		echo "Android: Bootloader boot..."
+		bcb clear command; bcb store;
+		fastboot 0
+	elif bcb test command = boot-recovery; then
+		echo "Android: Recovery boot..."
+		if itest.s "x${abtest}" == "x"; then
+			setenv apart recovery
+		fi
+		setenv bootmode recovery
+	elif bcb test command = boot-fastboot; then
+		echo "Android: fastbootd boot..."
+		setenv bootmode recovery
+	else
+		echo "Android: Normal boot..."
+		setenv bootargs $bootargs androidboot.force_normal_boot=1
+	fi
+else
+	echo "Warning: BCB is corrupted or does not exist";
+	echo "Android: Normal boot...";
+fi
+
+# First check AVB status
+setenv avb_verify 'avb init ${devnum}; avb verify ${slot_suffix};'
+if run avb_verify; then
+	echo AVB verification OK. Continue boot;
+else
+	echo AVB verification failed;
+	exit;
+fi;
+
+if itest.s "x1" == "x$mcore_enabled" ; then
+	if test ! -z "${mcoreboot}"; then
+		run mcoreboot;
+	fi
+	setenv bootargs $bootargs $mcore_bootargs
+	setenv mcore "-rpmsg";
+fi
+
+if itest.s "x" == "x${board}" ; then
+	echo "!!!! Error: Your u-boot is outdated. Please upgrade.";
+	exit;
+fi
+
+# Load dtbo partition
+part start ${devtype} ${devnum} dtbo${slot_suffix} dtbo_start
+part size ${devtype} ${devnum} dtbo${slot_suffix} dtbo_size
+${devtype} read ${a_fdtbo} ${dtbo_start} ${dtbo_size}
+adtimg addr ${a_fdtbo}
+
+# Look for matching compatible
+setenv dtexp ezurio,imx95-${board}${mcore}
+setenv index 0
+setenv cont 1
+setenv dtfound 0
+setenv fdt_high 0xffffffffffffffff
+while itest.s "${cont}" == "1" ; do
+	if adtimg get dt --index=0x${index} a_fdtbo s_fdtbo ; then
+		fdt addr ${a_fdtbo}
+		fdt get value dtcomp / compatible
+		if itest.s "${dtcomp}" == "${dtexp}" ; then
+			setenv cont 0
+			setenv dtfound 1
+		else
+			setexpr index ${index} + 1
+		fi
+	else
+		setenv cont 0
+	fi
+done
+if itest.s "${dtfound}" == "0"; then
+	echo "Could not find DT ${dtexp}!"
+	exit
+fi
+# copy dtb found to a properly aligned address
+cp ${a_fdtbo} ${a_fdt} ${s_fdtbo}
+fdt addr ${a_fdt}
+fdt resize
+
+# apply dtbos (default to LVDS1 + NX611)
+if itest.s "x" == "x${adtbo_idx}" ; then
+	adtbo_idx="7 8"
+fi
+for c in ${adtbo_idx}; do
+	echo "applying dtbo ${c}...";
+	adtimg get dt --index=0x${c} a_fdtbo;
+	fdt apply ${a_fdtbo};
+done
+
+if itest.s "x" != "x${cmd_board}" ; then
+	run cmd_board
+fi
+
+if itest.s "x" != "x${cmd_custom}" ; then
+	run cmd_custom
+fi
+
+setenv bootargs $bootargs console=${console},115200 androidboot.mode=${bootmode} androidboot.soc_type=imx95
+setenv bootargs $bootargs androidboot.dtbo_idx=${index} androidboot.keystore=software
+setenv bootargs $bootargs androidboot.primary_display=imx-drm
+
+if itest.s "xmmc" == "x$devtype" ; then
+	if itest.s "x0" == "x$devnum" ; then
+		bootdev=soc/42800000.bus/42850000.mmc
+		devroot=mmcblk0
+	elif itest.s "x1" == "x$devnum" ; then
+		bootdev=soc/42800000.bus/42860000.mmc
+		devroot=mmcblk1
+	elif itest.s "x2" == "x$devnum" ; then
+		bootdev=soc/42800000.bus/428b0000.mmc
+		devroot=mmcblk2
+	fi
+fi
+setenv bootargs $bootargs androidboot.boot_device=$bootdev androidboot.boot_device_root=$devroot
+if itest.s "x${abtest}" == "x"; then
+fdt set /firmware/android/fstab/system dev /dev/block/platform/${bootdev}/by-name/system
+fdt set /firmware/android/fstab/vendor dev /dev/block/platform/${bootdev}/by-name/vendor
+else
+fdt set /firmware/android/fstab/system dev system
+fdt set /firmware/android/fstab/vendor dev vendor
+fdt set /firmware/android/fstab/system fsmgr_flags wait,slotselect,avb,logical,first_stage_mount
+fdt set /firmware/android/fstab/vendor fsmgr_flags wait,slotselect,avb,logical,first_stage_mount
+fi
+
+if itest.s "x" != "x$selinux" ; then
+	setenv bootargs $bootargs androidboot.selinux=$selinux
+fi
+
+if itest.s "x" != "x${camera_layout}" ; then
+	setenv bootargs $bootargs androidboot.camera.layout=${camera_layout}
+fi
+
+if itest.s "x" != "x${lcd_density}" ; then
+	setenv bootargs $bootargs androidboot.lcd_density=${lcd_density}
+else
+	setenv bootargs $bootargs androidboot.lcd_density=213
+fi
+
+if itest.s "x" != "x${serial#}" ; then
+	setenv bootargs $bootargs androidboot.serialno="${serial#}"
+fi
+
+if itest.s "x" != "x$hwrotation" ; then
+	setenv bootargs $bootargs androidboot.hwrotation=$hwrotation
+fi
+
+if itest.s "x" == "x$cma" ; then
+	cma=992M
+fi
+setenv bootargs $bootargs cma=$cma
+
+if itest.s "x" != "x${loglevel}" ; then
+	setenv bootargs ${bootargs} loglevel=${loglevel}
+else
+	setenv bootargs ${bootargs} quiet
+fi
+
+if itest.s "x" != "x$show_fdt" ; then
+	fdt print /
+fi
+
+if itest.s "x" != "x$show_env" ; then
+	printenv
+fi
+
+# Load Android bootimage and boot it
+setenv bootargs $bootargs "$avb_bootargs "
+part start ${devtype} ${devnum} ${apart}${slot_suffix} boot_start
+part size  ${devtype} ${devnum} ${apart}${slot_suffix} boot_size
+if ${devtype} read ${a_Image} ${boot_start} ${boot_size} ; then
+	abootimg addr ${a_Image}
+	bootm ${a_Image} ${ramdisk} ${a_fdt} ;
+fi
+
+echo "Error loading the OS"
