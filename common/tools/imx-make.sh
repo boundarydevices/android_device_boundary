@@ -106,6 +106,7 @@ clean_build=0
 TOP=`pwd`
 
 # Force the use of toolchains provided by BD
+export AARCH32_GCC_CROSS_COMPILE=$TOP/prebuilts/toolchains/arm-gnu-toolchain-12.2.mpacbti-rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-
 export AARCH64_GCC_CROSS_COMPILE=$TOP/prebuilts/toolchains/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-
 
 product_makefile=`pwd`/`find device -maxdepth 4 -name "${TARGET_PRODUCT}.mk"`;
