@@ -47,6 +47,12 @@ $(error If TARGET_UBOOT_ENV is set TARGET_UBOOT_ENV_SIZE must also be set. See\
 endif
 endif
 
+ifneq ($(TARGET_PRODUCT),nitrogen95)
+UBOOT_IMX_FULL_PATH := $(UBOOT_IMX_PATH)/uboot-imx
+else
+UBOOT_IMX_FULL_PATH := $(UBOOT_IMX_PATH)/uboot-imx9
+endif
+
 # TARGET_UBOOT_BUILD_TARGET may be assigned in target BoardConfig.mk.
 TARGET_UBOOT_BUILD_TARGET ?= u-boot.imx
 
@@ -79,7 +85,6 @@ else
 $(error U-boot arch not supported at present)
 endif
 
-
 # Allow caller to override toolchain.
 TARGET_UBOOT_CROSS_COMPILE_PREFIX := $(strip $(TARGET_UBOOT_CROSS_COMPILE_PREFIX))
 ifneq ($(TARGET_UBOOT_CROSS_COMPILE_PREFIX),)
@@ -105,7 +110,7 @@ export UBOOT_OUT
 export UBOOT_COLLECTION
 
 # Figure out which U-Boot version is being built (disregard -stable version).
-UBOOT_VERSION := $(shell $(MAKE) -j1 --no-print-directory -C $(UBOOT_IMX_PATH)/uboot-imx -s SUBLEVEL="" ubootversion)
+UBOOT_VERSION := $(shell $(MAKE) -j1 --no-print-directory -C $(UBOOT_IMX_FULL_PATH) -s SUBLEVEL="" ubootversion)
 
 $(UBOOT_COLLECTION) $(UBOOT_OUT):
 	mkdir -p $@
@@ -139,10 +144,10 @@ $(UBOOT_BIN): $(UBOOTENVSH) | $(UBOOT_COLLECTION) $(UBOOT_OUT)
 		UBOOT_PLATFORM=`echo $$ubootplat | cut -d':' -f1`; \
 		UBOOT_CONFIG=`echo $$ubootplat | cut -d':' -f2`; \
 		if [ ${clean_build} = 1 ]; then \
-			$(MAKE) -C $(UBOOT_IMX_PATH)/uboot-imx/ CROSS_COMPILE="$(UBOOT_CROSS_COMPILE_WRAPPER)" O=$(realpath $(UBOOT_OUT)) mrproper; \
+			$(MAKE) -C $(UBOOT_IMX_FULL_PATH) CROSS_COMPILE="$(UBOOT_CROSS_COMPILE_WRAPPER)" O=$(realpath $(UBOOT_OUT)) mrproper; \
 		fi; \
-		$(MAKE) -C $(UBOOT_IMX_PATH)/uboot-imx/ CROSS_COMPILE="$(UBOOT_CROSS_COMPILE_WRAPPER)" O=$(realpath $(UBOOT_OUT)) $$UBOOT_CONFIG; \
-		$(MAKE) -s -C $(UBOOT_IMX_PATH)/uboot-imx/ CROSS_COMPILE="$(UBOOT_CROSS_COMPILE_WRAPPER)" O=$(realpath $(UBOOT_OUT)) || exit 1; \
+		$(MAKE) -C $(UBOOT_IMX_FULL_PATH) CROSS_COMPILE="$(UBOOT_CROSS_COMPILE_WRAPPER)" O=$(realpath $(UBOOT_OUT)) $$UBOOT_CONFIG; \
+		$(MAKE) -s -C $(UBOOT_IMX_FULL_PATH) CROSS_COMPILE="$(UBOOT_CROSS_COMPILE_WRAPPER)" O=$(realpath $(UBOOT_OUT)) || exit 1; \
 		if [ "$(UBOOT_POST_PROCESS)" = "true" ]; then \
 			echo "build post process" ; \
 			. $(UBOOTENVSH); \
