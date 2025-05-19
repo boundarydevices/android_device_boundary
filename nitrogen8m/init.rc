@@ -58,13 +58,13 @@ on init && property:vendor.skip.charger_not_need=0
 
 on late-fs && property:vendor.storageproxyd=trusty && property:vendor.skip.charger_not_need=0
     start storageproxyd
-    start vendor.oemlock-1-0
     start vendor.confirmationui_default
 
 on late-fs && property:vendor.skip.charger_not_need=0
-    # Start keymaster/gatekeeper service
+    # Start keymaster/gatekeeper/oemlock service
     start vendor.gatekeeper-${ro.boot.keystore}
     start vendor.keymint-${ro.boot.keystore}
+    start vendor.oemlock-1-0-${ro.boot.keystore}
     setprop vendor.powerhal.init 1
 
     # Wait for keymaster
@@ -86,6 +86,7 @@ on early-boot && property:vendor.skip.charger_not_need=0
     # fsl omx graphic manager media framework property
     setprop vendor.rw.VIDEO_RENDER_NAME video_render.surface
     setprop vendor.media.fsl_codec.flag 7
+    setprop media.c2.hal.selection aidl
 
     setprop camera.disable_zsl_mode 1
 
@@ -121,6 +122,8 @@ on early-boot && property:vendor.skip.charger_not_need=0
 
     # Set external camera mjpeg decoder type
     setprop vendor.camera.mjpg.decoder hardware
+
+    setprop vendor.hdcp_status_path "/sys/devices/platform/soc@0/32c00000.bus/32c00000.hdmi/HDCPTX_Status"
 
 service vsidaemon /vendor/bin/vsidaemon
     class main
@@ -171,6 +174,8 @@ on post-fs-data && property:vendor.skip.charger_not_need=0
     # tmp dir for opencl Compiler
     setprop vendor.TMPDIR /data/vendor/.opencl-cache
     mkdir /data/vendor/.opencl-cache 0771 system camera
+    # HWC data
+    mkdir /data/vendor/hwc 0771 system graphics
 
 on zygote-start && property:vendor.skip.charger_not_need=0
     # Create the directories used by the Wireless subsystem
@@ -223,3 +228,6 @@ on property:sys.boot_completed=1 && property:vendor.storageproxyd=trusty
 on property:sys.boot_completed=1
     # Turn on swap
     swapon_all /vendor/etc/fstab.nxp
+
+on property:sys.boot_completed=1
+    start vendor.secretkeeper.${ro.boot.keystore}

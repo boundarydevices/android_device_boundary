@@ -27,5 +27,7 @@
             <Limit width="1920" height="1080" fpsBound="30.0"/>
             <!-- image size larger than the last entry will not be supported-->
         </FpsList>
+        <HardwareDecDevice list="C920;C93"/>
+        <BlitEngine engine="GPU_3D"/>
     </Device>
 </ExternalCamera>

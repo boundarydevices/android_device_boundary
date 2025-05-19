@@ -86,18 +86,29 @@ BOARD_AVB_ENABLE := true
 BOARD_AVB_ALGORITHM := SHA256_RSA4096
 # The testkey_rsa4096.pem is copied from external/avb/test/data/testkey_rsa4096.pem
 BOARD_AVB_KEY_PATH := $(CONFIG_REPO_PATH)/common/security/testkey_rsa4096.pem
-BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
-BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA2048
+ifeq ($(AB_OTA_UPDATER),false)
+BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 0
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 3
-BOARD_AVB_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
-BOARD_AVB_BOOT_ALGORITHM := SHA256_RSA2048
+else
+# Enable chained vbmeta for init_boot images
+BOARD_AVB_INIT_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_INIT_BOOT_ALGORITHM := SHA256_RSA4096
+BOARD_AVB_INIT_BOOT_ROLLBACK_INDEX_LOCATION := 3
+endif
+
+BOARD_AVB_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_BOOT_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 2
 
+# Use sha256 hashtree
 BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 BOARD_AVB_SYSTEM_EXT_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 BOARD_AVB_PRODUCT_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_SYSTEM_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 
 # -------@block_treble-------
 # Vendor Interface manifest and compatibility
@@ -115,17 +126,9 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 BOARD_HAVE_BLUETOOTH         := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(IMX_DEVICE_PATH)/bluetooth
 
-# -------@block_sensor-------
-BOARD_USE_SENSOR_FUSION := false
-
 # -------@block_kernel_bootimg-------
 BOARD_KERNEL_BASE := 0x40400000
 
-ifeq ($(PRODUCT_IMX_DRM),true)
-CMASIZE=736M
-else
-CMASIZE=1280M
-endif
 BOARD_KERNEL_CMDLINE := init=/init androidboot.hardware=nxp firmware_class.path=/vendor/firmware loop.max_part=7
 
 # memory config
@@ -141,10 +144,10 @@ endif
 TARGET_BOARD_DTS_CONFIG ?= \
 	imx8mq:imx8mq-nitrogen8m.dtb \
 	imx8mq:imx8mq-nitrogen8m-edp.dtb \
-	imx8mq:imx8mq-nitrogen8m-m4.dtb \
+	imx8mq:imx8mq-nitrogen8m-rpmsg.dtb \
 	imx8mq:imx8mq-nitrogen8m_som.dtb \
 	imx8mq:imx8mq-nitrogen8m_som-sd.dtb \
-	imx8mq:imx8mq-nitrogen8m_som-m4.dtb \
+	imx8mq:imx8mq-nitrogen8m_som-rpmsg.dtb \
 
 ALL_DEFAULT_INSTALLED_MODULES += $(BOARD_VENDOR_KERNEL_MODULES)
 
@@ -153,3 +156,4 @@ BOARD_SEPOLICY_DIRS := \
        $(CONFIG_REPO_PATH)/common/imx8m/sepolicy \
        $(IMX_DEVICE_PATH)/sepolicy
 
+HAS_SYSTEM_EXT_SEPOLICY := false

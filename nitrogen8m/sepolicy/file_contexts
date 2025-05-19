@@ -34,7 +34,6 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.tv\.hdmi.connection-service.imx    u:object_r:hal_tv_hdmi_connection_default_exec:s0
 
 #peripheral
-/vendor/bin/fsl_sensor_fusion   u:object_r:sensors_exec:s0
 /dev/ttymxc[0-9]*               u:object_r:tty_device:s0
 /dev/sda[0-8]*                  u:object_r:fuse:s0
 
@@ -45,7 +44,7 @@
 /vendor/bin/hw/android\.hardware\.thermal@2\.0-service.imx         u:object_r:hal_thermal_default_exec:s0
 /vendor/bin/hw/android\.hardware\.thermal-service\.imx             u:object_r:hal_thermal_default_exec:s0
 
-/vendor/bin/hw/android\.hardware\.media\.c2@1\.0-service    u:object_r:mediacodec_exec:s0
+/vendor/bin/hw/android\.hardware\.media\.c2\.service\.imx    u:object_r:mediacodec_exec:s0
 
 # android.system.suspend@1.0-service
 /sys/devices/platform/gpio-keys/wakeup/wakeup[0-9]*(/.*)?                                                                                         u:object_r:sysfs_wakeup:s0

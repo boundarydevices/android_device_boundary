@@ -199,6 +199,18 @@ ifeq ($(PRODUCT_IMX_TRUSTY),true)
 #Oemlock HAL support
 PRODUCT_PACKAGES += \
     android.hardware.oemlock-service.imx
+else
+PRODUCT_PACKAGES += \
+    android.hardware.oemlock-service-software.imx
+endif
+
+# Secretkeeper HAL
+PRODUCT_PACKAGES += \
+    com.android.hardware.security.secretkeeper
+
+ifeq ($(PRODUCT_IMX_TRUSTY),true)
+PRODUCT_PACKAGES += \
+    android.hardware.security.secretkeeper.trusty
 endif
 
 # Specify rollback index for boot and vbmeta partitions
@@ -214,13 +226,18 @@ else
 BOARD_AVB_BOOT_ROLLBACK_INDEX := 0
 endif
 
+ifneq ($(AVB_INIT_BOOT_RBINDEX),)
+BOARD_AVB_INIT_BOOT_ROLLBACK_INDEX := $(AVB_INIT_BOOT_RBINDEX)
+else
+BOARD_AVB_INIT_BOOT_ROLLBACK_INDEX := 0
+endif
+
 $(call  inherit-product-if-exists, vendor/nxp-private/security/nxp_security.mk)
 
 #DRM Widevine L1 1.4 support
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey \
     libwvdrmcryptoplugin \
-    libwvaidl \
     liboemcrypto
 
 TARGET_BUILD_WIDEVINE :=
@@ -250,10 +267,18 @@ PRODUCT_COPY_FILES += \
 PRODUCT_SOONG_NAMESPACES += hardware/google/camera
 PRODUCT_SOONG_NAMESPACES += vendor/nxp-opensource/imx/camera
 
+# Add WebCam option in settings
+PRODUCT_VENDOR_PROPERTIES += ro.usb.uvc.enabled=true
+
 # -------@block_display-------
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi xhdpi xxhdpi
 
-# HWC2 HAL
+# -----some limiataion of overlay/g2d in hwcomposer3 --------
+SOONG_CONFIG_NAMESPACES += nxp_hwc
+SOONG_CONFIG_nxp_hwc += overlay_ip
+SOONG_CONFIG_nxp_hwc_overlay_ip := DCSS
+
+# HWC3 HAL
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer3-service.imx
 
@@ -263,16 +288,12 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # disable frame rate override
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.enable_frame_rate_override=false
+    ro.surface_flinger.game_default_frame_rate_override=60
 
 # Gralloc HAL
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.mapper@4.0-impl.imx \
-    android.hardware.graphics.allocator-service.imx
-
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
+    android.hardware.graphics.allocator-service.imx \
+    mapper.imx
 
 # 2d test
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
@@ -302,17 +323,14 @@ PRODUCT_PACKAGES += \
         libvulkan_VIVANTE \
         vulkan.$(TARGET_BOARD_PLATFORM) \
         libCLC \
-        libLLVM_viv \
         libOpenCL \
         libg2d-viv \
         libOpenVX \
         libOpenVXU \
         libNNVXCBinary-evis \
         libNNVXCBinary-evis2 \
-        libNNVXCBinary-lite \
         libOvx12VXCBinary-evis \
         libOvx12VXCBinary-evis2 \
-        libOvx12VXCBinary-lite \
         libNNGPUBinary-evis \
         libNNGPUBinary-evis2 \
         libNNGPUBinary-lite \
@@ -330,13 +348,6 @@ PRODUCT_COPY_FILES += \
 
 # GPU openCL SDK header file
 -include $(FSL_PROPRIETARY_PATH)/fsl-proprietary/include/CL/cl_sdk.mk
-
-# GPU openVX SDK header file
--include $(FSL_PROPRIETARY_PATH)/fsl-proprietary/include/nnxc_kernels/nnxc_kernels.mk
-
-# GPU openCL icdloader config file
--include $(FSL_PROPRIETARY_PATH)/fsl-proprietary/gpu-viv/icdloader/icdloader.mk
-
 
 # -------@block_wifi-------
 PRODUCT_COPY_FILES += \
@@ -436,13 +447,12 @@ endif
 
 # Display Device Config
 PRODUCT_COPY_FILES += \
-    $(CONFIG_REPO_PATH)/common/imx8m/displayconfig/display_id_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_0.xml
+    device/ezurio/common/imx8m/displayconfig/display_port_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_port_1.xml
 
 # ONLY devices that meet the CDD's requirements may declare these features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.output.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.output.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/android.hardware.camera.external.xml:vendor/etc/permissions/android.hardware.camera.external.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ethernet.xml \
@@ -455,8 +465,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level-0.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_3.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
-    frameworks/native/data/etc/android.software.opengles.deqp.level-2023-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2024-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
+    frameworks/native/data/etc/android.software.opengles.deqp.level-2024-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
@@ -470,7 +480,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml \
     frameworks/native/data/etc/android.software.voice_recognizers.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.voice_recognizers.xml \
     frameworks/native/data/etc/android.software.activities_on_secondary_displays.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.activities_on_secondary_displays.xml \
-    frameworks/native/data/etc/android.software.picture_in_picture.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.picture_in_picture.xml
+    frameworks/native/data/etc/android.software.picture_in_picture.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.picture_in_picture.xml \
+    frameworks/native/data/etc/android.software.credentials.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.credentials.xml
+
+PERMISSION_EXTCAM ?= true
+ifeq ($(PERMISSION_EXTCAM),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.camera.external.xml:vendor/etc/permissions/android.hardware.camera.external.xml
+endif
 
 # Set CCodec property in default
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -484,14 +501,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
 
-# libgpiod tools
-PRODUCT_PACKAGES += \
-    gpiodetect \
-    gpiofind \
-    gpioget \
-    gpioinfo \
-    gpiomon \
-    gpioset
+# Add Virtualization support
+$(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
+
+# Add imx private apps
+$(call inherit-product-if-exists, vendor/nxp-private/imx-apps/imx-private-app.mk)
 
 # libubootenv tools
 PRODUCT_PACKAGES += \
