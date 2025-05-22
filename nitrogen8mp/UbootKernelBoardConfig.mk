@@ -1,7 +1,7 @@
 TARGET_BOOTLOADER_POSTFIX := bin
 UBOOT_POST_PROCESS := true
 
-TARGET_BOOTLOADER_CONFIG := imx8mp-trusty:nitrogen8mp_2gr0_defconfig imx8mp-trusty:nitrogen8mp_4g_defconfig imx8mp-trusty:imx8mp_nitrogen_smarc_2gr0_defconfig
+TARGET_BOOTLOADER_CONFIG := imx8mp:nitrogen8mp_2gr0_defconfig imx8mp:nitrogen8mp_4g_defconfig imx8mp:imx8mp_nitrogen_smarc_2gr0_defconfig
 TARGET_BOOTLOADER_PREBUILT := nitrogen8mp_2gr0 nitrogen8mp_4g imx8mp_nitrogen_smarc_2gr0
 
 TARGET_KERNEL_DEFCONFIG := ezurio_android_defconfig
