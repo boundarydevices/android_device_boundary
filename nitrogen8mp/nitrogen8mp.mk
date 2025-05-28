@@ -415,6 +415,17 @@ PRODUCT_COPY_FILES += \
     $(LWB5P_FW_PATH)/brcm/brcmfmac4373-sdio.txt:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/brcmfmac4373-sdio.txt \
     $(LWB5P_FW_PATH)/brcm/brcmfmac4373-sdio.clm_blob:$(TARGET_COPY_OUT_VENDOR)/firmware/brcm/brcmfmac4373-sdio.clm_blob
 
+# Sona NX611 Firmware files
+NX611_FW_PATH := vendor/ezurio/radio_firmware/summit-nx61x-firmware/lib/firmware
+PRODUCT_COPY_FILES += \
+    $(NX611_FW_PATH)/nxp/rgpower_CA.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/nxp/rgpower_CA.bin \
+    $(NX611_FW_PATH)/nxp/rgpower_DE.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/nxp/rgpower_DE.bin \
+    $(NX611_FW_PATH)/nxp/rgpower_US.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/nxp/rgpower_US.bin \
+    $(NX611_FW_PATH)/nxp/rgpower_WW.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/nxp/rgpower_WW.bin \
+    $(NX611_FW_PATH)/nxp/sd_w61x_v1.bin.se:$(TARGET_COPY_OUT_VENDOR)/firmware/nxp/sd_w61x_v1.bin.se \
+    $(NX611_FW_PATH)/nxp/uartspi_n61x_v1.bin.se:$(TARGET_COPY_OUT_VENDOR)/firmware/nxp/uartspi_n61x_v1.bin.se \
+    $(NX611_FW_PATH)/nxp/wifi_prod_serdev_params.conf:$(TARGET_COPY_OUT_VENDOR)/firmware/nxp/wifi_prod_serdev_params.conf \
+
 # Sona IF573 Firmware files
 IF573_FW_PATH := vendor/ezurio/radio_firmware/summit-if573-sdio-firmware/lib/firmware
 PRODUCT_COPY_FILES += \
