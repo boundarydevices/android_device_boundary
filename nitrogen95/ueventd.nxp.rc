@@ -43,6 +43,10 @@
 /sys/devices/virtual/thermal/thermal_zone* trip_point_0_hyst 0660 system system
 /sys/devices/virtual/thermal/thermal_zone* trip_point_1_hyst 0660 system system
 
+/sys/devices/virtual/bluetooth/hci* state       0660  bluetooth bluetooth
+/sys/devices/platform/soc/42000000.bus/425a0000.serial/serial0/serial0-0/bluetooth/hci0/rfkill* state 0660 bluetooth bluetooth
+/sys/devices/platform/soc/42000000.bus/425a0000.serial/serial0/serial0-0/bluetooth/hci0/rfkill* type  0660 bluetooth bluetooth
+
 /dev/dmabuf_imx           0664   system     system
 /dev/neutron0             0666   system     graphics
 /sys/class/backlight/* brightness 0660 system system
