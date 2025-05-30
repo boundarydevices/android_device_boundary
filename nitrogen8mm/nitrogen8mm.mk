@@ -378,7 +378,7 @@ PRODUCT_COPY_FILES += \
 # -------@block_bluetooth-------
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.1-service.btlinux \
+    android.hardware.bluetooth-service.default \
     android.hardware.bluetooth.audio@2.0-impl \
     audio.bluetooth.default \
 
