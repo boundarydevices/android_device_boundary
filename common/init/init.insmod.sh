@@ -21,7 +21,10 @@ if [ -f $cfg_file ]; then
                      modprobe -a -d /system/lib/modules/ $arg
                  fi
                  if [ -f  /vendor/lib/modules/modules.load ]; then
-                     arg="$(cat /vendor/lib/modules/modules.load | grep -v wlan)"
+                     arg="$(grep -v -e wlan -e bluetooth -e bt -e hci /vendor/lib/modules/modules.load)"
+                     modprobe -a -d /vendor/lib/modules $arg
+                     sleep 1
+                     arg="$(grep -e bluetooth -e bt -e hci /vendor/lib/modules/modules.load)"
                      modprobe -a -d /vendor/lib/modules $arg
                      if grep -q wlan /vendor/lib/modules/modules.load; then
                          modprobe -a -d /vendor/lib/modules wlan
