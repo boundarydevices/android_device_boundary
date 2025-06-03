@@ -1,6 +1,18 @@
 /dev/block/mmcblk0boot0                      u:object_r:emmc_boot0:s0
 /dev/block/mmcblk1                           u:object_r:sdcard:s0
 
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/dtbo        u:object_r:dtbo_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/boot        u:object_r:boot_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/recovery    u:object_r:recovery_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/system      u:object_r:system_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/vendor      u:object_r:system_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/cache       u:object_r:cache_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/misc        u:object_r:misc_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/metadata    u:object_r:metadata_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/frp         u:object_r:frp_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/userdata    u:object_r:userdata_block_device:s0
+/dev/block/platform/soc/42800000\.bus/42850000\.mmc/by-name/vbmeta      u:object_r:vbmeta_block_device:s0
+
 #peripheral
 /dev/ttyLP[0-9]*                u:object_r:tty_device:s0
 /dev/sda[0-8]*                  u:object_r:fuse:s0
@@ -30,11 +42,9 @@
 /sys/devices/virtual/power_supply/usb/wakeup[0-9]*(/.*)?                                                                                              u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/firmware:scmi/scmi_dev.[0-9]*(/.*)?/wakeup[0-9]*(/.*)?                                                                          u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/firmware:scmi/scmi_dev.[0-9]*(/.*)?/rtc/rtc[0-9]*(/.*)?/alarmtimer.[0-9]*(/.*)?.auto/wakeup[0-9]*(/.*)?                         u:object_r:sysfs_wakeup:s0
-/sys/devices/platform/soc/42000000.bus/426d0000.i2c/i2c-6/6-0050/power_supply/tcpm-source-psy-6-0050/wakeup[0-9]*(/.*)?                               u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/soc/4c300000.pcie/pci0000:00/0000:00:00.0/0000:01:00.[0-9]*(/.*)?/wakeup[0-9]*(/.*)?                                            u:object_r:sysfs_wakeup:s0
-/sys/devices/platform/soc/42000000.bus/42530000.i2c/i2c-2/2-0050/power_supply/tcpm-source-psy-2-0050/wakeup[0-9]*(/.*)?                               u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/soc/42800000.bus/428b0000.mmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:1/wakeup[0-9]*(/.*)?                                            u:object_r:sysfs_wakeup:s0
-/sys/devices/platform/soc/42000000.bus/426d0000.i2c/i2c-6/6-0052/power_supply/tcpm-source-psy-6-0052/wakeup[0-9]*(/.*)?                               u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/soc/42000000.bus/42530000.i2c/i2c-2/i2c-14/i2c-15/15-0052/wakeup/wakeup[0-9]*(/.*)?                                             u:object_r:sysfs_wakeup:s0
 
 # mali gpu related
 /dev/mali0                                    u:object_r:gpu_device:s0
