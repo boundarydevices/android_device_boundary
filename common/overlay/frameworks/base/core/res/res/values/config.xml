@@ -218,4 +218,7 @@
 
     <!-- show global actions menu when long press power button -->
     <integer name="config_longPressOnPowerBehavior">1</integer>
+
+    <!-- select gesture navigation by default -->
+    <integer name="config_navBarInteractionMode">2</integer>
 </resources>
