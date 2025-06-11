@@ -100,7 +100,7 @@ fi
 # copy dtb found to a properly aligned address
 cp ${a_fdtbo} ${a_fdt} ${s_fdtbo}
 fdt addr ${a_fdt}
-fdt resize
+fdt resize 20000
 
 # apply dtbos (default to LVDS1 + NX611)
 if itest.s "x" == "x${adtbo_idx}" ; then
